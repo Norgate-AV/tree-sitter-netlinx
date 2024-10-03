@@ -1,0 +1,28 @@
+{
+    "grammars": [
+        {
+            "name": "netlinx",
+            "camelcase": "NetLinx",
+            "scope": "source.netlinx",
+            "path": ".",
+            "file-types": ["axs", "axi", "lib"],
+            "injection-regex": "^(axs|axi|lib)$"
+        }
+    ],
+    "metadata": {
+        "version": "0.1.0",
+        "license": "MIT",
+        "description": "NetLinx grammar for tree-sitter",
+        "links": {
+            "repository": "https://github.com/Norgate-AV/tree-sitter-netlinx"
+        }
+    },
+    "bindings": {
+        "c": true,
+        "go": true,
+        "node": true,
+        "python": true,
+        "rust": true,
+        "swift": true
+    }
+}

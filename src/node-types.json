@@ -1,0 +1,151 @@
+[
+  {
+    "type": "combine_definition",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "define_device_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "device_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "device_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "device_dps",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "device_dps",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "number_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "program_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "define_device_section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "program_name",
+          "named": true
+        },
+        {
+          "type": "section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "string_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "number_literal",
+    "named": true
+  }
+]
