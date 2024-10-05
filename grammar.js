@@ -7,6 +7,7 @@
 // @ts-check
 
 const keywords = require("./keywords");
+// const netlinx = require("./netlinx");
 
 const PRECEDENCE = {
     PAREN_DECLARATOR: -10,
@@ -31,10 +32,8 @@ module.exports = grammar({
     name: "netlinx",
 
     conflicts: ($) => [
-        [$.type_specifier, $._declarator],
-        [$.type_specifier, $.expression],
-        [$.function_declarator, $._function_declaration_declarator],
-        [$._block_item, $.statement],
+        [$.constant_definition, $.type_specifier],
+        [$.return_statement],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -64,7 +63,11 @@ module.exports = grammar({
         source_file: ($) => seq($.program_name, repeat($.section)),
 
         program_name: ($) =>
-            seq(choice(/program_name/i, /module_name/i), "=", $.string_literal),
+            seq(
+                choice(keywords.program_name, keywords.module_name),
+                "=",
+                $.string_literal,
+            ),
 
         _block_item: ($) =>
             choice(
@@ -113,7 +116,7 @@ module.exports = grammar({
         combine_definition: ($) => seq("(", commaSep1($.identifier), ")"),
 
         define_constant_section: ($) =>
-            seq(/define_constant/i, repeat($.constant_definition)),
+            seq(keywords.define_constant, repeat($.constant_definition)),
 
         constant_definition: ($) =>
             // seq(
@@ -164,9 +167,10 @@ module.exports = grammar({
             ),
 
         define_function_section: ($) =>
-            seq(/define_function/i, $.function_definition),
+            seq(keywords.define_function, $.function_definition),
 
-        define_start_section: ($) => seq(/define_start/i, repeat($.statement)),
+        define_start_section: ($) =>
+            seq(keywords.define_start, repeat($.statement)),
 
         init_declarator: ($) =>
             seq(
@@ -178,10 +182,16 @@ module.exports = grammar({
         compound_statement: ($) => seq("{", repeat($._block_item), "}"),
         // compound_statement: ($) => seq("{", "}"),
 
-        storage_class_specifier: (_) => choice("local_var", "stack_var"),
+        storage_class_specifier: (_) =>
+            choice(keywords.local_var, keywords.stack_var),
 
         type_qualifier: ($) =>
-            choice("constant", "volatile", "non_volatile", "persistent"),
+            choice(
+                keywords.constant,
+                keywords.volatile,
+                keywords.non_volatile,
+                keywords.persistent,
+            ),
 
         type_specifier: ($) =>
             choice($.struct_specifier, $.primitive_type, $._type_identifier),
@@ -210,14 +220,14 @@ module.exports = grammar({
         primitive_type: (_) =>
             token(
                 choice(
-                    /char/i,
-                    /widechar/i,
-                    /integer/i,
-                    /sinteger/i,
-                    /long/i,
-                    /slong/i,
-                    /float/i,
-                    /double/i,
+                    keywords.char,
+                    keywords.widechar,
+                    keywords.integer,
+                    keywords.sinteger,
+                    keywords.long,
+                    keywords.slong,
+                    keywords.float,
+                    keywords.double,
                 ),
             ),
 

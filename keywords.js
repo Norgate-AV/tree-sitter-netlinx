@@ -20,6 +20,39 @@ module.exports = {
     define_type: /define_type/i,
 
     /**
+     * Global Storage Classes
+     */
+    constant: /constant/i,
+    non_volatile: /non_volatile/i,
+    persistent: /persistent/i,
+    volatile: /volatile/i,
+
+    /**
+     * Local Storage Classes
+     */
+    local_var: /local_var/i,
+    stack_var: /stack_var/i,
+
+    /**
+     * Primitive Data Types
+     */
+    char: /char/i,
+    widechar: /widechar/i,
+    integer: /integer/i,
+    sinteger: /sinteger/i,
+    long: /long/i,
+    slong: /slong/i,
+    float: /float/i,
+    double: /double/i,
+
+    /**
+     * Structered Types
+     */
+    dev: /dev/i,
+    devchan: /devchan/i,
+    devlev: /devlev/i,
+
+    /**
      * Event Handlers
      */
     button_event: /button_event/i,
@@ -30,81 +63,33 @@ module.exports = {
     timeline_event: /timeline_event/i,
 
     /**
+     * Button Events
+     */
+    push: /push/i,
+    hold: /hold/i,
+    release: /release/i,
+
+    /**
+     * Channel Events
+     */
+    on: /on/i,
+    off: /off/i,
+
+    /**
+     * Data Events
+     */
+    online: /online/i,
+    offline: /offline/i,
+    command: /command/i,
+    string: /string/i,
+    standby: /standby/i,
+    awake: /awake/i,
+    onerror: /onerror/i,
+
+    /**
      * NetLinx Commands
      */
     send_command: /send_command/i,
     send_level: /send_level/i,
     send_string: /send_string/i,
-
-    /**
-     * NetLinx Library Functions
-     */
-    atoi: /atoi/i,
-    atol: /atol/i,
-    atof: /atof/i,
-    date_to_day: /date_to_day/i,
-    date_to_month: /date_to_month/i,
-    date_to_year: /date_to_year/i,
-    day_of_week: /day_of_week/i,
-    file_close: /file_close/i,
-    file_copy: /file_copy/i,
-    file_create_dir: /file_create_dir/i,
-    file_delete: /file_delete/i,
-    file_dir: /file_dir/i,
-    file_getdir: /file_getdir/i,
-    file_open: /file_open/i,
-    file_read: /file_read/i,
-    file_read_line: /file_read_line/i,
-    file_remove_dir: /file_remove_dir/i,
-    file_rename: /file_rename/i,
-    file_seek: /file_seek/i,
-    file_setdir: /file_setdir/i,
-    file_write: /file_write/i,
-    file_write_line: /file_write_line/i,
-    find_string: /find_string/i,
-    ftoa: /ftoa/i,
-    get_last: /get_last/i,
-    hextoi: /hextoi/i,
-    ip_client_close: /ip_client_close/i,
-    ip_client_open: /ip_client_open/i,
-    ip_server_close: /ip_server_close/i,
-    ip_server_open: /ip_server_open/i,
-    itoa: /itoa/i,
-    itohex: /itohex/i,
-    left_string: /left_string/i,
-    length_array: /length_array/i,
-    length_string: /length_string/i,
-    load_duet_module: /load_duet_module/i,
-    lower_string: /lower_string/i,
-    max_length_array: /max_length_array/i,
-    max_length_string: /max_length_string/i,
-    mid_string: /mid_string/i,
-    random_number: /random_number/i,
-    remove_string: /remove_string/i,
-    right_string: /right_string/i,
-    set_length_array: /set_length_array/i,
-    set_length_string: /set_length_string/i,
-    time_to_hour: /time_to_hour/i,
-    time_to_minute: /time_to_minute/i,
-    time_to_second: /time_to_second/i,
-    unload_duet_module: /unload_duet_module/i,
-    upper_string: /upper_string/i,
-
-    compare_string: /compare_string/i,
-    ip_mc_server_open: /ip_mc_server_open/i,
-    format: /format/i,
-    timeline_create: /timeline_create/i,
-    timeline_kill: /timeline_kill/i,
-    timeline_reload: /timeline_reload/i,
-    timeline_pause: /timeline_pause/i,
-    timeline_restart: /timeline_restart/i,
-    timeline_set: /timeline_set/i,
-    timeline_get: /timeline_get/i,
-    timeline_active: /timeline_active/i,
-    timeline_dynamic_id: /timeline_dynamic_id/i,
-    get_buffer_char: /get_buffer_char/i,
-    get_multi_buffer_string: /get_multi_buffer_string/i,
-    get_buffer_string: /get_buffer_string/i,
-    device_id: /device_id/i,
-    device_id_string: /device_id_string/i,
 };
