@@ -8,6 +8,7 @@
 
 const keywords = require("./keywords");
 // const netlinx = require("./netlinx");
+// const directives = require("./directives");
 
 const PRECEDENCE = {
     PAREN_DECLARATOR: -10,
@@ -32,8 +33,8 @@ module.exports = grammar({
     name: "netlinx",
 
     conflicts: ($) => [
-        [$.constant_definition, $.type_specifier],
-        [$.return_statement],
+        // [$.constant_definition, $.type_specifier],
+        // [$.return_statement],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -98,17 +99,8 @@ module.exports = grammar({
         define_device_section: ($) =>
             seq(keywords.define_device, repeat($.device_definition)),
 
-        device_definition: ($) => seq($.identifier, "=", $.device_dps),
-
-        device_dps: ($) =>
-            seq(
-                $.number_literal,
-                ":",
-                $.number_literal,
-                ":",
-                $.number_literal,
-                optional(";"),
-            ),
+        device_definition: ($) =>
+            seq($.identifier, "=", $.device_literal, optional(";")),
 
         define_combine_section: ($) =>
             seq(keywords.define_combine, repeat($.combine_definition)),
@@ -199,7 +191,7 @@ module.exports = grammar({
         struct_specifier: ($) =>
             prec.right(
                 seq(
-                    /struct(ure)?/i,
+                    keywords.struct,
                     choice(
                         seq(
                             field("name", $._type_identifier),
@@ -303,10 +295,6 @@ module.exports = grammar({
                     $.parenthesized_declarator,
                 ),
                 $._type_identifier,
-                // alias(
-                //     choice("signed", "unsigned", "long", "short"),
-                //     $.primitive_type,
-                // ),
                 $.primitive_type,
             ),
 
@@ -381,7 +369,7 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._declarator),
                     "[",
-                    repeat(choice($.type_qualifier, "static")),
+                    repeat(choice($.type_qualifier)),
                     field("size", optional(choice($.expression, "*"))),
                     "]",
                 ),
@@ -417,7 +405,7 @@ module.exports = grammar({
                 seq(
                     field("declarator", optional($._abstract_declarator)),
                     "[",
-                    repeat(choice($.type_qualifier, "static")),
+                    repeat(choice($.type_qualifier)),
                     field("size", optional(choice($.expression, "*"))),
                     "]",
                 ),
@@ -472,18 +460,18 @@ module.exports = grammar({
         if_statement: ($) =>
             prec.right(
                 seq(
-                    "if",
+                    keywords.if,
                     field("condition", $.parenthesized_expression),
                     field("consequence", $.statement),
                     optional(field("alternative", $.else_clause)),
                 ),
             ),
 
-        else_clause: ($) => seq("else", $.statement),
+        else_clause: ($) => seq(keywords.else, $.statement),
 
         switch_statement: ($) =>
             seq(
-                "switch",
+                keywords.switch,
                 field("condition", $.parenthesized_expression),
                 field("body", $.compound_statement),
             ),
@@ -492,8 +480,8 @@ module.exports = grammar({
             prec.right(
                 seq(
                     choice(
-                        seq("case", field("value", $.expression)),
-                        "default",
+                        seq(keywords.case, field("value", $.expression)),
+                        keywords.default,
                     ),
                     ":",
                     repeat(choice($._non_case_statement, $.declaration)),
@@ -502,14 +490,14 @@ module.exports = grammar({
 
         while_statement: ($) =>
             seq(
-                "while",
+                keywords.while,
                 field("condition", $.parenthesized_expression),
                 field("body", $.statement),
             ),
 
         for_statement: ($) =>
             seq(
-                "for",
+                keywords.for,
                 "(",
                 $._for_statement_body,
                 ")",
@@ -541,18 +529,18 @@ module.exports = grammar({
 
         return_statement: ($) =>
             seq(
-                "return",
+                keywords.return,
                 optional(choice($.expression, $.comma_expression)),
                 optional(";"),
             ),
         // choice(
-        //     seq("return", optional($.expression), optional(";")),
-        //     seq("return", optional(";")),
+        //     seq(keywords.return, optional($.expression), optional(";")),
+        //     seq(keywords.return, optional(";")),
         // ),
 
-        break_statement: (_) => seq("break", optional(";")),
+        break_statement: (_) => seq(keywords.break, optional(";")),
 
-        continue_statement: (_) => seq("continue", optional(";")),
+        continue_statement: (_) => seq(keywords.continue, optional(";")),
 
         /**
          * Expressions
@@ -728,37 +716,26 @@ module.exports = grammar({
 
         field_designator: ($) => seq(".", $._field_identifier),
 
+        string_expression: ($) => seq('"', /[^"]*/, '"'),
+
         literal: ($) => choice($.number_literal, $.string_literal),
 
+        device_literal: ($) =>
+            seq(
+                $.decimal_literal,
+                ":",
+                $.decimal_literal,
+                ":",
+                $.decimal_literal,
+            ),
+
+        number_literal: ($) => choice($.decimal_literal, $.hex_literal),
+
+        decimal_literal: (_) => /[-+]?\d+/,
+
+        hex_literal: (_) => /\$[0-9a-fA-F]+/,
+
         string_literal: (_) => seq("'", /[^']*/, "'"),
-
-        number_literal: (_) => /[-+]?\d+/,
-
-        // number_literal: (_) => {
-        //     const hex = /\$[0-9a-fA-F]/;
-        //     const decimal = /[0-9]/;
-        //     // const hexDigits = seq(
-        //     //     repeat1(hex),
-        //     //     repeat(seq(separator, repeat1(hex))),
-        //     // );
-        //     const decimalDigits = repeat1(decimal);
-        //     return token(
-        //         seq(
-        //             optional(/[-\+]/),
-        //             choice(
-        //                 seq(
-        //                     choice(
-        //                         decimalDigits,
-        //                         seq(/0[bB]/, decimalDigits),
-        //                         seq(/0[xX]/, hex),
-        //                     ),
-        //                     optional(seq(".", optional(hex))),
-        //                 ),
-        //                 seq(".", decimalDigits),
-        //             ),
-        //         ),
-        //     );
-        // },
 
         identifier: (_) => /[_a-zA-Z]\w*/,
 

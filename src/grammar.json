@@ -107,32 +107,7 @@
                 },
                 {
                     "type": "SYMBOL",
-                    "name": "device_dps"
-                }
-            ]
-        },
-        "device_dps": {
-            "type": "SEQ",
-            "members": [
-                {
-                    "type": "SYMBOL",
-                    "name": "number_literal"
-                },
-                {
-                    "type": "STRING",
-                    "value": ":"
-                },
-                {
-                    "type": "SYMBOL",
-                    "name": "number_literal"
-                },
-                {
-                    "type": "STRING",
-                    "value": ":"
-                },
-                {
-                    "type": "SYMBOL",
-                    "name": "number_literal"
+                    "name": "device_literal"
                 },
                 {
                     "type": "CHOICE",
@@ -1082,10 +1057,6 @@
                                 {
                                     "type": "SYMBOL",
                                     "name": "type_qualifier"
-                                },
-                                {
-                                    "type": "STRING",
-                                    "value": "static"
                                 }
                             ]
                         }
@@ -1280,10 +1251,6 @@
                                 {
                                     "type": "SYMBOL",
                                     "name": "type_qualifier"
-                                },
-                                {
-                                    "type": "STRING",
-                                    "value": "static"
                                 }
                             ]
                         }
@@ -1514,8 +1481,9 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "STRING",
-                        "value": "if"
+                        "type": "PATTERN",
+                        "value": "if",
+                        "flags": "i"
                     },
                     {
                         "type": "FIELD",
@@ -1556,8 +1524,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "else"
+                    "type": "PATTERN",
+                    "value": "else",
+                    "flags": "i"
                 },
                 {
                     "type": "SYMBOL",
@@ -1569,8 +1538,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "switch"
+                    "type": "PATTERN",
+                    "value": "switch",
+                    "flags": "i"
                 },
                 {
                     "type": "FIELD",
@@ -1603,8 +1573,9 @@
                                 "type": "SEQ",
                                 "members": [
                                     {
-                                        "type": "STRING",
-                                        "value": "case"
+                                        "type": "PATTERN",
+                                        "value": "case",
+                                        "flags": "i"
                                     },
                                     {
                                         "type": "FIELD",
@@ -1617,8 +1588,9 @@
                                 ]
                             },
                             {
-                                "type": "STRING",
-                                "value": "default"
+                                "type": "PATTERN",
+                                "value": "default",
+                                "flags": "i"
                             }
                         ]
                     },
@@ -1649,8 +1621,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "while"
+                    "type": "PATTERN",
+                    "value": "while",
+                    "flags": "i"
                 },
                 {
                     "type": "FIELD",
@@ -1674,8 +1647,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "for"
+                    "type": "PATTERN",
+                    "value": "for",
+                    "flags": "i"
                 },
                 {
                     "type": "STRING",
@@ -1801,8 +1775,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "return"
+                    "type": "PATTERN",
+                    "value": "return",
+                    "flags": "i"
                 },
                 {
                     "type": "CHOICE",
@@ -1843,8 +1818,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "break"
+                    "type": "PATTERN",
+                    "value": "break",
+                    "flags": "i"
                 },
                 {
                     "type": "CHOICE",
@@ -1864,8 +1840,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "STRING",
-                    "value": "continue"
+                    "type": "PATTERN",
+                    "value": "continue",
+                    "flags": "i"
                 },
                 {
                     "type": "CHOICE",
@@ -3064,6 +3041,23 @@
                 }
             ]
         },
+        "string_expression": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "STRING",
+                    "value": "\""
+                },
+                {
+                    "type": "PATTERN",
+                    "value": "[^\"]*"
+                },
+                {
+                    "type": "STRING",
+                    "value": "\""
+                }
+            ]
+        },
         "literal": {
             "type": "CHOICE",
             "members": [
@@ -3076,6 +3070,52 @@
                     "name": "string_literal"
                 }
             ]
+        },
+        "device_literal": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "SYMBOL",
+                    "name": "number_literal"
+                },
+                {
+                    "type": "STRING",
+                    "value": ":"
+                },
+                {
+                    "type": "SYMBOL",
+                    "name": "number_literal"
+                },
+                {
+                    "type": "STRING",
+                    "value": ":"
+                },
+                {
+                    "type": "SYMBOL",
+                    "name": "number_literal"
+                }
+            ]
+        },
+        "number_literal": {
+            "type": "CHOICE",
+            "members": [
+                {
+                    "type": "SYMBOL",
+                    "name": "decimal_literal"
+                },
+                {
+                    "type": "SYMBOL",
+                    "name": "hex_literal"
+                }
+            ]
+        },
+        "decimal_literal": {
+            "type": "PATTERN",
+            "value": "[-+]?\\d+"
+        },
+        "hex_literal": {
+            "type": "PATTERN",
+            "value": "\\$[0-9a-fA-F]+"
         },
         "string_literal": {
             "type": "SEQ",
@@ -3093,10 +3133,6 @@
                     "value": "'"
                 }
             ]
-        },
-        "number_literal": {
-            "type": "PATTERN",
-            "value": "[-+]?\\d+"
         },
         "identifier": {
             "type": "PATTERN",
@@ -3195,10 +3231,7 @@
             "name": "comment"
         }
     ],
-    "conflicts": [
-        ["constant_definition", "type_specifier"],
-        ["return_statement"]
-    ],
+    "conflicts": [],
     "precedences": [],
     "externals": [],
     "inline": [

@@ -48,6 +48,7 @@ module.exports = {
     /**
      * Structered Types
      */
+    struct: /struct(ure)?/i,
     dev: /dev/i,
     devchan: /devchan/i,
     devlev: /devlev/i,
@@ -92,4 +93,23 @@ module.exports = {
     send_command: /send_command/i,
     send_level: /send_level/i,
     send_string: /send_string/i,
+
+    /**
+     * Language Elements
+     */
+    for: /for/i,
+    if: /if/i,
+    else: /else/i,
+    while: /while/i,
+    break: /break/i,
+    continue: /continue/i,
+    return: /return/i,
+    case: /case/i,
+    switch: /switch/i,
+    default: /default/i,
+    select: /select/i,
+    active: /active/i,
+    wait: /wait/i,
+    wait_until: /wait_until/i,
+    call: /call/i,
 };
