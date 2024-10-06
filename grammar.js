@@ -61,13 +61,17 @@ module.exports = grammar({
     word: ($) => $.identifier,
 
     rules: {
-        source_file: ($) => seq($.program_name, repeat($.section)),
+        source_file: ($) =>
+            seq(choice($.program_name, $.module_name), repeat($.section)),
 
-        program_name: ($) =>
+        program_name: ($) => seq(keywords.program_name, "=", $.string_literal),
+
+        module_name: ($) =>
             seq(
-                choice(keywords.program_name, keywords.module_name),
+                keywords.module_name,
                 "=",
                 $.string_literal,
+                optional($.argument_list),
             ),
 
         _block_item: ($) =>
@@ -557,8 +561,8 @@ module.exports = grammar({
                 $.field_expression,
                 // $.compound_literal_expression,
                 $.identifier,
-                $.number_literal,
-                $.string_literal,
+                $.literal,
+                $.string_expression,
                 // $.true,
                 // $.false,
                 // $.char_literal,
@@ -634,7 +638,8 @@ module.exports = grammar({
             const operator = field("operator", choice("--", "++"));
             return prec.right(
                 PRECEDENCE.UNARY,
-                choice(seq(operator, argument), seq(argument, operator)),
+                // choice(seq(operator, argument), seq(argument, operator)),
+                seq(argument, operator),
             );
         },
 
@@ -716,7 +721,7 @@ module.exports = grammar({
 
         field_designator: ($) => seq(".", $._field_identifier),
 
-        string_expression: ($) => seq('"', /[^"]*/, '"'),
+        string_expression: ($) => seq('"', commaSep1($.expression), '"'),
 
         literal: ($) => choice($.number_literal, $.string_literal),
 

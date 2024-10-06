@@ -7,8 +7,17 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "SYMBOL",
-                    "name": "program_name"
+                    "type": "CHOICE",
+                    "members": [
+                        {
+                            "type": "SYMBOL",
+                            "name": "program_name"
+                        },
+                        {
+                            "type": "SYMBOL",
+                            "name": "module_name"
+                        }
+                    ]
                 },
                 {
                     "type": "REPEAT",
@@ -23,19 +32,9 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "CHOICE",
-                    "members": [
-                        {
-                            "type": "PATTERN",
-                            "value": "program_name",
-                            "flags": "i"
-                        },
-                        {
-                            "type": "PATTERN",
-                            "value": "module_name",
-                            "flags": "i"
-                        }
-                    ]
+                    "type": "PATTERN",
+                    "value": "program_name",
+                    "flags": "i"
                 },
                 {
                     "type": "STRING",
@@ -44,6 +43,36 @@
                 {
                     "type": "SYMBOL",
                     "name": "string_literal"
+                }
+            ]
+        },
+        "module_name": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "PATTERN",
+                    "value": "module_name",
+                    "flags": "i"
+                },
+                {
+                    "type": "STRING",
+                    "value": "="
+                },
+                {
+                    "type": "SYMBOL",
+                    "name": "string_literal"
+                },
+                {
+                    "type": "CHOICE",
+                    "members": [
+                        {
+                            "type": "SYMBOL",
+                            "name": "argument_list"
+                        },
+                        {
+                            "type": "BLANK"
+                        }
+                    ]
                 }
             ]
         },
@@ -1900,11 +1929,11 @@
                 },
                 {
                     "type": "SYMBOL",
-                    "name": "number_literal"
+                    "name": "literal"
                 },
                 {
                     "type": "SYMBOL",
-                    "name": "string_literal"
+                    "name": "string_expression"
                 },
                 {
                     "type": "SYMBOL",
@@ -3049,8 +3078,29 @@
                     "value": "\""
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "[^\"]*"
+                    "type": "SEQ",
+                    "members": [
+                        {
+                            "type": "SYMBOL",
+                            "name": "expression"
+                        },
+                        {
+                            "type": "REPEAT",
+                            "content": {
+                                "type": "SEQ",
+                                "members": [
+                                    {
+                                        "type": "STRING",
+                                        "value": ","
+                                    },
+                                    {
+                                        "type": "SYMBOL",
+                                        "name": "expression"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
                 },
                 {
                     "type": "STRING",
@@ -3076,7 +3126,7 @@
             "members": [
                 {
                     "type": "SYMBOL",
-                    "name": "number_literal"
+                    "name": "decimal_literal"
                 },
                 {
                     "type": "STRING",
@@ -3084,7 +3134,7 @@
                 },
                 {
                     "type": "SYMBOL",
-                    "name": "number_literal"
+                    "name": "decimal_literal"
                 },
                 {
                     "type": "STRING",
@@ -3092,7 +3142,7 @@
                 },
                 {
                     "type": "SYMBOL",
-                    "name": "number_literal"
+                    "name": "decimal_literal"
                 }
             ]
         },
