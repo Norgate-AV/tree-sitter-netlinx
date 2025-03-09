@@ -1,115 +1,69 @@
+/**
+ * @file NetLinx keywords for tree-sitter
+ * @license MIT
+ */
+
 module.exports = {
-    program_name: /program_name/i,
-    module_name: /module_name/i,
+    // Program and module names
+    program_name: 'PROGRAM_NAME',
+    module_name: 'MODULE_NAME',
 
-    /**
-     * Define Sections
-     */
-    define_device: /define_device/i,
-    define_combine: /define_combine/i,
-    define_connect_level: /define_connect_level/i,
-    define_constant: /define_constant/i,
-    define_device: /define_device/i,
-    define_event: /define_event/i,
-    define_function: /define_function/i,
-    define_latching: /define_latching/i,
-    define_mutually_exclusive: /define_mutually_exclusive/i,
-    define_program: /define_program/i,
-    define_start: /define_start/i,
-    define_toggling: /define_toggling/i,
-    define_type: /define_type/i,
+    // Section headers
+    define_device: 'DEFINE_DEVICE',
+    define_combine: 'DEFINE_COMBINE',
+    define_constant: 'DEFINE_CONSTANT',
+    define_type: 'DEFINE_TYPE',
+    define_variable: 'DEFINE_VARIABLE',
+    define_connect_level: 'DEFINE_CONNECT_LEVEL',
+    define_latching: 'DEFINE_LATCHING',
+    define_mutually_exclusive: 'DEFINE_MUTUALLY_EXCLUSIVE',
+    define_toggling: 'DEFINE_TOGGLING',
+    define_call: 'DEFINE_CALL',
+    define_function: 'DEFINE_FUNCTION',
+    define_start: 'DEFINE_START',
+    define_event: 'DEFINE_EVENT',
+    define_program: 'DEFINE_PROGRAM',
 
-    /**
-     * Global Storage Classes
-     */
-    constant: /constant/i,
-    non_volatile: /non_volatile/i,
-    persistent: /persistent/i,
-    volatile: /volatile/i,
+    // Types
+    char: 'CHAR',
+    widechar: 'WIDECHAR',
+    integer: 'INTEGER',
+    sinteger: 'SINTEGER',
+    long: 'LONG',
+    slong: 'SLONG',
+    float: 'FLOAT',
+    double: 'DOUBLE',
 
-    /**
-     * Local Storage Classes
-     */
-    local_var: /local_var/i,
-    stack_var: /stack_var/i,
+    // Type qualifiers
+    constant: 'CONSTANT',
+    volatile: 'VOLATILE',
+    non_volatile: 'NON_VOLATILE',
+    persistent: 'PERSISTENT',
 
-    /**
-     * Primitive Data Types
-     */
-    char: /char/i,
-    widechar: /widechar/i,
-    integer: /integer/i,
-    sinteger: /sinteger/i,
-    long: /long/i,
-    slong: /slong/i,
-    float: /float/i,
-    double: /double/i,
+    // Storage classes
+    local_var: 'LOCAL_VAR',
+    stack_var: 'STACK_VAR',
 
-    /**
-     * Structered Types
-     */
-    struct: /struct(ure)?/i,
-    dev: /dev/i,
-    devchan: /devchan/i,
-    devlev: /devlev/i,
+    // Control flow
+    if: 'IF',
+    else: 'ELSE',
+    switch: 'SWITCH',
+    case: 'CASE',
+    default: 'DEFAULT',
+    while: 'WHILE',
+    for: 'FOR',
+    break: 'BREAK',
+    continue: 'CONTINUE',
+    return: 'RETURN',
 
-    /**
-     * Event Handlers
-     */
-    button_event: /button_event/i,
-    channel_event: /channel_event/i,
-    custom_event: /custom_event/i,
-    data_event: /data_event/i,
-    level_event: /level_event/i,
-    timeline_event: /timeline_event/i,
+    // Structure
+    struct: 'STRUCTURE',
+    structure: 'STRUCTURE',
 
-    /**
-     * Button Events
-     */
-    push: /push/i,
-    hold: /hold/i,
-    release: /release/i,
-
-    /**
-     * Channel Events
-     */
-    on: /on/i,
-    off: /off/i,
-
-    /**
-     * Data Events
-     */
-    online: /online/i,
-    offline: /offline/i,
-    command: /command/i,
-    string: /string/i,
-    standby: /standby/i,
-    awake: /awake/i,
-    onerror: /onerror/i,
-
-    /**
-     * NetLinx Commands
-     */
-    send_command: /send_command/i,
-    send_level: /send_level/i,
-    send_string: /send_string/i,
-
-    /**
-     * Language Elements
-     */
-    for: /for/i,
-    if: /if/i,
-    else: /else/i,
-    while: /while/i,
-    break: /break/i,
-    continue: /continue/i,
-    return: /return/i,
-    case: /case/i,
-    switch: /switch/i,
-    default: /default/i,
-    select: /select/i,
-    active: /active/i,
-    wait: /wait/i,
-    wait_until: /wait_until/i,
-    call: /call/i,
+    // Events
+    button_event: 'BUTTON_EVENT',
+    channel_event: 'CHANNEL_EVENT',
+    level_event: 'LEVEL_EVENT',
+    data_event: 'DATA_EVENT',
+    timeline_event: 'TIMELINE_EVENT',
 };
