@@ -1666,7 +1666,7 @@
                   },
                   {
                     "type": "PREC_RIGHT",
-                    "value": 5,
+                    "value": 6,
                     "content": {
                       "type": "SEQ",
                       "members": [
@@ -5200,7 +5200,7 @@
     },
     "function_reference": {
       "type": "PREC_DYNAMIC",
-      "value": 19,
+      "value": 20,
       "content": {
         "type": "ALIAS",
         "content": {
@@ -5321,7 +5321,7 @@
     },
     "structure_declaration_content": {
       "type": "PREC_RIGHT",
-      "value": 6,
+      "value": 8,
       "content": {
         "type": "REPEAT1",
         "content": {
@@ -5341,7 +5341,7 @@
     },
     "structure_declaration": {
       "type": "PREC_RIGHT",
-      "value": 8,
+      "value": 10,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5391,7 +5391,7 @@
     },
     "structure_body": {
       "type": "PREC_RIGHT",
-      "value": 7,
+      "value": 9,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5420,7 +5420,7 @@
     },
     "structure_field": {
       "type": "PREC_RIGHT",
-      "value": 7,
+      "value": 8,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5524,7 +5524,7 @@
     },
     "netlinx_custom_function_with_colon": {
       "type": "PREC_RIGHT",
-      "value": 22,
+      "value": 23,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5840,6 +5840,28 @@
     [
       "structure_field",
       "array_declarator"
+    ],
+    [
+      "structure_declaration",
+      "_declarator"
+    ],
+    [
+      "structure_body",
+      "compound_statement"
+    ],
+    [
+      "structure_declaration",
+      "identifier",
+      "compound_statement"
+    ],
+    [
+      "function_reference",
+      "field_expression",
+      "netlinx_custom_function_with_colon"
+    ],
+    [
+      "netlinx_custom_function_with_colon",
+      "expression_statement"
     ]
   ],
   "precedences": [],
