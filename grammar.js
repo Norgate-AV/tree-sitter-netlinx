@@ -122,14 +122,17 @@ module.exports = grammar({
             seq(keywords.define_constant, repeat($.constant_definition)),
 
         constant_definition: ($) =>
-            seq(
-                optional($.type_qualifier),
-                optional($.type_specifier),
-                $.identifier,
-                optional($.array_declarator),
-                "=",
-                $.expression,
-                optional(";"),
+            prec.right(
+                1, // Add explicit precedence higher than type_specifier (0)
+                seq(
+                    optional($.type_qualifier),
+                    optional($.type_specifier),
+                    $.identifier,
+                    optional($.array_declarator),
+                    "=",
+                    $.expression,
+                    optional(";"),
+                ),
             ),
 
         define_function_section: ($) =>
@@ -858,29 +861,44 @@ module.exports = grammar({
             ),
 
         event_type: ($) =>
-            prec(
-                PRECEDENCE.CALL + 6, // Even higher precedence for event types
+            prec.right(
+                100, // Extremely high precedence to ensure this takes priority
                 choice(
                     seq(
                         keywords.button_event,
-                        field("device", $.expression),
-                        field("channel", $.expression),
+                        // Use simple expressions that can't be confused with binary operations
+                        field("device", $._event_param_expression),
+                        field("channel", $._event_param_expression),
                     ),
                     seq(
                         keywords.channel_event,
-                        field("device", $.expression),
-                        field("channel", $.expression),
+                        field("device", $._event_param_expression),
+                        field("channel", $._event_param_expression),
                     ),
                     seq(
                         keywords.level_event,
-                        field("device", $.expression),
-                        field("level", $.expression),
+                        field("device", $._event_param_expression),
+                        field("level", $._event_param_expression),
                     ),
-                    seq(keywords.data_event, field("device", $.expression)),
+                    seq(
+                        keywords.data_event,
+                        field("device", $._event_param_expression),
+                    ),
                     seq(
                         keywords.timeline_event,
-                        field("timeline", $.expression),
+                        field("timeline", $._event_param_expression),
                     ),
+                ),
+            ),
+
+        // Special rule for expressions in event parameters that prevents binary operation conflicts
+        _event_param_expression: ($) =>
+            prec(
+                90, // High precedence but lower than event_type itself
+                choice(
+                    alias($.identifier, $.event_identifier),
+                    alias($.decimal_literal, $.event_literal),
+                    alias($.parenthesized_expression, $.event_expression),
                 ),
             ),
 

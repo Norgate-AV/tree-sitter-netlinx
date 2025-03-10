@@ -279,69 +279,73 @@
       ]
     },
     "constant_definition": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "type_qualifier"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "type_specifier"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "array_declarator"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": ";"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "type_qualifier"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "type_specifier"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "array_declarator"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "SYMBOL",
+            "name": "expression"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "define_function_section": {
       "type": "SEQ",
@@ -3910,8 +3914,8 @@
       ]
     },
     "event_type": {
-      "type": "PREC",
-      "value": 23,
+      "type": "PREC_RIGHT",
+      "value": 100,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -3927,7 +3931,7 @@
                 "name": "device",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               },
               {
@@ -3935,7 +3939,7 @@
                 "name": "channel",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               }
             ]
@@ -3952,7 +3956,7 @@
                 "name": "device",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               },
               {
@@ -3960,7 +3964,7 @@
                 "name": "channel",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               }
             ]
@@ -3977,7 +3981,7 @@
                 "name": "device",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               },
               {
@@ -3985,7 +3989,7 @@
                 "name": "level",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               }
             ]
@@ -4002,7 +4006,7 @@
                 "name": "device",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               }
             ]
@@ -4019,10 +4023,46 @@
                 "name": "timeline",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "_event_param_expression"
                 }
               }
             ]
+          }
+        ]
+      }
+    },
+    "_event_param_expression": {
+      "type": "PREC",
+      "value": 90,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            "named": true,
+            "value": "event_identifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "decimal_literal"
+            },
+            "named": true,
+            "value": "event_literal"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "parenthesized_expression"
+            },
+            "named": true,
+            "value": "event_expression"
           }
         ]
       }

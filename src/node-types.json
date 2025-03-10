@@ -1227,6 +1227,25 @@
     }
   },
   {
+    "type": "event_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "comma_expression",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "event_type",
     "named": true,
     "fields": {
@@ -1235,7 +1254,15 @@
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "event_expression",
+            "named": true
+          },
+          {
+            "type": "event_identifier",
+            "named": true
+          },
+          {
+            "type": "event_literal",
             "named": true
           }
         ]
@@ -1245,7 +1272,15 @@
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "event_expression",
+            "named": true
+          },
+          {
+            "type": "event_identifier",
+            "named": true
+          },
+          {
+            "type": "event_literal",
             "named": true
           }
         ]
@@ -1255,7 +1290,15 @@
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "event_expression",
+            "named": true
+          },
+          {
+            "type": "event_identifier",
+            "named": true
+          },
+          {
+            "type": "event_literal",
             "named": true
           }
         ]
@@ -1265,7 +1308,15 @@
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "event_expression",
+            "named": true
+          },
+          {
+            "type": "event_identifier",
+            "named": true
+          },
+          {
+            "type": "event_literal",
             "named": true
           }
         ]
@@ -2980,6 +3031,14 @@
   },
   {
     "type": "decimal_literal",
+    "named": true
+  },
+  {
+    "type": "event_identifier",
+    "named": true
+  },
+  {
+    "type": "event_literal",
     "named": true
   },
   {
