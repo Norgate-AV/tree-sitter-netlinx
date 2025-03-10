@@ -621,7 +621,7 @@ module.exports = grammar({
 
         expression_statement: ($) =>
             prec.right(
-                4, // Increased from 3 for better conflict resolution
+                5, // Increased from 4 for even better conflict resolution
                 choice(
                     seq(
                         choice(
@@ -630,7 +630,7 @@ module.exports = grammar({
                             $.netlinx_custom_function,
                             // Special case for function references with semicolons/colons with higher precedence
                             prec.right(
-                                6, // Higher precedence than regular expression_statement
+                                8, // Increased from 6 to ensure it gets higher priority
                                 seq(
                                     field("function", $.function_reference),
                                     field("separator", choice(":", ";")),
@@ -1366,7 +1366,7 @@ module.exports = grammar({
         // Add the missing function_reference rule
         function_reference: ($) =>
             prec.dynamic(
-                PRECEDENCE.FUNCTION_REF + 5, // Increased from 4
+                PRECEDENCE.FUNCTION_REF + 7, // Increased from 5 to give even higher precedence
                 alias($.identifier, $.function_identifier),
             ),
 
@@ -1405,12 +1405,15 @@ module.exports = grammar({
 
         // More explicit structure content rule with higher precedence
         structure_declaration_content: ($) =>
-            prec.right(8, repeat1(choice($.structure_field, $.comment))),
+            prec.right(
+                10, // Increased from 8 to match the new structure precedence levels
+                repeat1(choice($.structure_field, $.comment)),
+            ),
 
-        // Enhanced structure declaration with higher precedence for better resolution
+        // Enhanced structure declaration with higher precedence for better parsing
         structure_declaration: ($) =>
             prec.right(
-                10, // Increased from 8 to give it clear priority over other rules
+                12, // Increased from 10 to give it even higher priority
                 seq(
                     optional(field("qualifier", $.type_qualifier)),
                     field("keyword", keywords.structure),
@@ -1419,17 +1422,17 @@ module.exports = grammar({
                 ),
             ),
 
-        // Dedicated structure body rule with explicit precedence
+        // Dedicated structure body rule with enhanced precedence control
         structure_body: ($) =>
             prec.right(
-                9, // Higher than field declarations but lower than structure_declaration
+                11, // Increased from 9 to match the higher structure_declaration precedence
                 seq("{", optional($.structure_declaration_content), "}"),
             ),
 
-        // Enhanced structure field with better precedence control
+        // Enhanced structure field with better precedence
         structure_field: ($) =>
             prec.right(
-                8, // Increased from 7
+                10, // Increased from 8 to match content rule
                 seq(
                     optional($.type_qualifier),
                     field("type", $.type_specifier),
@@ -1452,10 +1455,10 @@ module.exports = grammar({
                 $.netlinx_custom_function_with_colon,
             ),
 
-        // Add a specific rule for NetLinx functions that use a colon
+        // Modified NetLinx custom function with colon syntax with much higher precedence
         netlinx_custom_function_with_colon: ($) =>
             prec.right(
-                PRECEDENCE.CALL + 6, // Increased from 5
+                PRECEDENCE.CALL + 8, // Increased from 6 to match the other increases
                 seq(
                     field("function", $.function_reference),
                     field("separator", choice(":", ";")),
