@@ -2118,7 +2118,7 @@
     },
     "binary_expression": {
       "type": "PREC_DYNAMIC",
-      "value": 1,
+      "value": 0,
       "content": {
         "type": "CHOICE",
         "members": [
