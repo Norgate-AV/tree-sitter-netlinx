@@ -1693,6 +1693,25 @@
     }
   },
   {
+    "type": "function_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_declarator",
     "named": true,
     "fields": {
@@ -2250,46 +2269,14 @@
     "fields": {
       "body": {
         "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "compound_statement",
-            "named": true
-          }
-        ]
-      },
-      "function": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "function_reference",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "netlinx_custom_function_with_colon",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "netlinx_custom_function_with_colon",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
         "required": true,
         "types": [
           {
             "type": "compound_statement",
+            "named": true
+          },
+          {
+            "type": "function_body",
             "named": true
           }
         ]
@@ -2808,21 +2795,6 @@
     }
   },
   {
-    "type": "structure_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "structure_declaration_content",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "structure_declaration",
     "named": true,
     "fields": {
@@ -2831,7 +2803,7 @@
         "required": true,
         "types": [
           {
-            "type": "structure_body",
+            "type": "structure_definition_body",
             "named": true
           }
         ]
@@ -2859,12 +2831,12 @@
     }
   },
   {
-    "type": "structure_declaration_content",
+    "type": "structure_definition_body",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "comment",

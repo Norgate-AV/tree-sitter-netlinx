@@ -62,7 +62,6 @@ module.exports = grammar({
             $.field_expression,
             $.device_ref_expression,
         ],
-        [$.netlinx_custom_function_with_colon, $.field_expression],
         [$.identifier, $.structure_declaration],
         [$.field_expression], // Add this line to resolve the field_expression conflict
         [$.type_specifier, $.structure_declaration], // Add this line for the new conflict
@@ -72,11 +71,7 @@ module.exports = grammar({
         [$.structure_field, $.primitive_type, $.type_specifier],
         [$.netlinx_custom_function, $.expression],
         // Add conflict to resolve function_reference + semicolon issue
-        [
-            $.expression_statement,
-            $.expression,
-            $.netlinx_custom_function_with_colon,
-        ],
+        [$.expression_statement, $.expression, $.netlinx_custom_function],
         [$.function_reference, $.expression_statement],
         // Add conflict to resolve type_specifier vs expression vs function_reference
         [$.type_specifier, $.expression, $.function_reference],
@@ -130,22 +125,10 @@ module.exports = grammar({
         [$.field_expression, $.function_reference],
 
         // Add related conflicts to ensure comprehensive resolution
-        [
-            $.field_expression,
-            $.function_reference,
-            $.netlinx_custom_function_with_colon,
-        ],
+        [$.field_expression, $.function_reference],
         // Add more specific conflicts for NetLinx custom functions with colon
-        [
-            $.netlinx_custom_function_with_colon,
-            $.field_expression,
-            $.identifier,
-        ],
-        [
-            $.netlinx_custom_function_with_colon,
-            $.function_reference,
-            $.field_expression,
-        ],
+        [$.field_expression, $.identifier],
+        [$.field_expression, $.function_reference],
 
         // Add structure content conflicts with higher specificity
         [$.structure_declaration, $.structure_field, $.identifier],
@@ -156,9 +139,9 @@ module.exports = grammar({
         [$.structure_field, $.primitive_type],
 
         // Add conflicts specifically for NetLinx custom function colon syntax
-        [$.netlinx_custom_function_with_colon, $.field_expression],
+        [$.field_expression],
         [$.function_reference, $.field_expression, $.identifier],
-        [$.netlinx_custom_function_with_colon, $.function_reference],
+        [$.function_reference],
 
         // Enhanced structure-related conflicts with higher specificity
         [$.structure_declaration, $.structure_field],
@@ -168,9 +151,9 @@ module.exports = grammar({
         [$.structure_declaration, $.identifier],
 
         // Better resolution for NetLinx custom functions
-        [$.netlinx_custom_function_with_colon, $.field_expression],
+        [$.field_expression],
         [$.function_reference, $.field_expression, $.identifier],
-        [$.netlinx_custom_function_with_colon, $.function_reference],
+        [$.function_reference],
 
         // Add missing conflicts for field expression and function handling
         [$.field_expression, $.expression_statement],
@@ -182,12 +165,15 @@ module.exports = grammar({
         [$.structure_declaration, $.identifier, $.compound_statement],
 
         // More specific conflicts for NetLinx custom functions
-        [
-            $.function_reference,
-            $.field_expression,
-            $.netlinx_custom_function_with_colon,
-        ],
-        [$.netlinx_custom_function_with_colon, $.expression_statement],
+        [$.function_reference, $.field_expression],
+        [$.expression_statement],
+
+        // Add these new conflicts to resolve structure_field_declaration issues
+        [$.structure_field_declaration],
+        [$.structure_field_declaration, $.type_specifier, $.identifier],
+        [$.structure_field_declaration, $.array_declarator],
+        [$.structure_field_declaration, $.array_declarator, $.type_specifier],
+        [$.structure_field_declaration, $.structure_declaration_content],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -621,17 +607,15 @@ module.exports = grammar({
 
         expression_statement: ($) =>
             prec.right(
-                8,
+                10,
                 choice(
+                    // Standard expression statements
                     seq(
-                        choice(
-                            $.expression,
-                            $.comma_expression,
-                            // Custom functions handled separately with clear precedence
-                            prec.right(10, $.netlinx_custom_function),
-                        ),
+                        choice($.expression, $.comma_expression),
                         optional(";"),
                     ),
+                    // Dedicated handling for NetLinx custom functions as statements
+                    prec.dynamic(15, $.netlinx_custom_function),
                     ";",
                 ),
             ),
@@ -1352,7 +1336,7 @@ module.exports = grammar({
         // Enhanced function reference with special handling of colons
         function_reference: ($) =>
             prec.dynamic(
-                PRECEDENCE.FUNCTION_REF + 15, // Much higher precedence
+                PRECEDENCE.FUNCTION_REF + 20, // Very high precedence
                 alias($.identifier, $.function_identifier),
             ),
 
@@ -1403,23 +1387,38 @@ module.exports = grammar({
 
         // Enhanced structure declaration with significantly higher precedence
         structure_declaration: ($) =>
-            prec.right(
-                20, // Much higher precedence than any competing rule
+            prec.dynamic(
+                30, // Very high precedence to ensure it takes priority
                 seq(
                     optional(field("qualifier", $.type_qualifier)),
                     field("keyword", keywords.structure),
                     field("name", $.identifier),
-                    field("body", $.structure_body),
+                    field(
+                        "body",
+                        alias($.structure_body, $.structure_definition_body),
+                    ),
                 ),
             ),
 
         // Dedicated structure body rule with higher precedence
         structure_body: ($) =>
-            prec.right(
-                19,
+            prec.dynamic(
+                28,
                 seq(
                     token.immediate("{"), // Use immediate to force brace attachment
-                    optional($.structure_declaration_content),
+                    optional(
+                        seq(
+                            repeat(
+                                choice(
+                                    alias(
+                                        $.structure_field_declaration,
+                                        $.structure_field,
+                                    ),
+                                    $.comment,
+                                ),
+                            ),
+                        ),
+                    ),
                     "}",
                 ),
             ),
@@ -1439,8 +1438,9 @@ module.exports = grammar({
 
         // Completely separate field declaration rule for structures to avoid conflicts
         structure_field_declaration: ($) =>
-            prec.right(
-                18,
+            prec.left(
+                // Change from prec.dynamic to prec.left to specify associativity
+                26,
                 seq(
                     optional($.type_qualifier),
                     field("type", $.type_specifier),
@@ -1454,25 +1454,24 @@ module.exports = grammar({
         netlinx_custom_function: ($) =>
             choice(
                 // Regular custom function (no colon)
-                prec(
-                    PRECEDENCE.CALL + 10,
+                prec.dynamic(
+                    PRECEDENCE.CALL + 12,
                     seq(
                         field("function", choice($.function_reference)),
                         field("body", $.compound_statement),
                     ),
                 ),
                 // Custom function with colon syntax (higher precedence)
-                $.netlinx_custom_function_with_colon,
-            ),
-
-        // Modified NetLinx custom function with colon syntax with significantly higher precedence
-        netlinx_custom_function_with_colon: ($) =>
-            prec.right(
-                PRECEDENCE.CALL + 15,
-                seq(
-                    field("function", $.function_reference),
-                    field("separator", token.immediate(choice(":", ";"))), // Force immediate attachment
-                    field("body", $.compound_statement),
+                prec.dynamic(
+                    PRECEDENCE.CALL + 15,
+                    seq(
+                        field("function", $.function_reference),
+                        field("separator", token.immediate(choice(":", ";"))), // Force immediate attachment
+                        field(
+                            "body",
+                            alias($.compound_statement, $.function_body),
+                        ),
+                    ),
                 ),
             ),
     },
