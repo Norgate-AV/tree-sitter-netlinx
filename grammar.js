@@ -169,6 +169,9 @@ module.exports = grammar({
         [$.structure_field_declaration, $.array_declarator],
         [$.structure_field_declaration, $.array_declarator, $.type_specifier],
         [$.structure_field_declaration, $.structure_declaration_content],
+
+        // Add this conflict to resolve the device_reference_expression issue
+        [$.device_reference_expression],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -897,6 +900,8 @@ module.exports = grammar({
                     ),
                     // Special case for NetLinX data field access
                     $.data_field_access,
+                    // Add device reference pattern
+                    $.device_reference_expression,
                 ),
             ),
 
@@ -1445,6 +1450,17 @@ module.exports = grammar({
                     "[",
                     field("index", optional($.expression)),
                     "]",
+                ),
+            ),
+
+        // Add a new device_reference_expression rule that was previously missing
+        device_reference_expression: ($) =>
+            prec.left(
+                PRECEDENCE.FIELD, // Use field precedence
+                seq(
+                    field("device", $.expression),
+                    choice(":", "."),
+                    field("reference", $.expression),
                 ),
             ),
     },

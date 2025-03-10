@@ -1174,6 +1174,32 @@
     }
   },
   {
+    "type": "device_reference_expression",
+    "named": true,
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "reference": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "directive",
     "named": true,
     "fields": {},
@@ -1508,6 +1534,10 @@
       "types": [
         {
           "type": "data_field_access",
+          "named": true
+        },
+        {
+          "type": "device_reference_expression",
           "named": true
         }
       ]
@@ -1981,6 +2011,10 @@
       "types": [
         {
           "type": "data_field_access",
+          "named": true
+        },
+        {
+          "type": "device_reference_expression",
           "named": true
         }
       ]

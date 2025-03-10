@@ -3237,6 +3237,10 @@
           {
             "type": "SYMBOL",
             "name": "data_field_access"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "device_reference_expression"
           }
         ]
       }
@@ -5510,6 +5514,44 @@
           }
         ]
       }
+    },
+    "device_reference_expression": {
+      "type": "PREC_LEFT",
+      "value": 16,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "device",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ":"
+              },
+              {
+                "type": "STRING",
+                "value": "."
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "reference",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          }
+        ]
+      }
     }
   },
   "extras": [
@@ -5812,6 +5854,9 @@
     [
       "structure_field_declaration",
       "structure_declaration_content"
+    ],
+    [
+      "device_reference_expression"
     ]
   ],
   "precedences": [],
