@@ -1,7 +1,7 @@
 PROGRAM_NAME='Sample NetLinX Program'
 
-#INCLUDE 'amx-device-control'
-#DEFINE DEBUG_MODE 1
+#INCLUDE 'amx-device-control.axi'
+#DEFINE DEBUG_MODE
 
 /*
  * This is a sample NetLinX program to test the grammar
@@ -31,16 +31,10 @@ VOLATILE DeviceStatus primaryDevice
 VOLATILE INTEGER powerState
 VOLATILE CHAR buffer[1024]
 
-DEFINE_LATCHING
-(dvTP, BTN_POWER)
-
-DEFINE_MUTUALLY_EXCLUSIVE
-(dvTP, BTN_VOLUME_UP, BTN_VOLUME_DOWN)
-
 DEFINE_FUNCTION CHAR[100] FormatStatus(DeviceStatus status) {
     STACK_VAR CHAR result[100]
 
-    result = "Device: '${status.name}', Power: ${ITOA(status.isPowered)}, Volume: ${ITOA(status.volume)}"
+    result = "'Device: ', status.name, 'Power: ', ITOA(status.isPowered), 'Volume: ', ITOA(status.volume)"
 
     RETURN result
 }
@@ -49,8 +43,6 @@ DEFINE_START {
     primaryDevice.name = 'Main Display'
     primaryDevice.isPowered = FALSE
     primaryDevice.volume = 50
-
-    CREATE_BUFFER buffer
 }
 
 DEFINE_EVENT
