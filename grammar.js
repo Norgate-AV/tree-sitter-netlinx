@@ -628,15 +628,18 @@ module.exports = grammar({
                             $.expression,
                             $.comma_expression,
                             $.netlinx_custom_function,
-                            // Special case for functions with semicolons/colons using higher precedence
+                            // Special case for function references with semicolons/colons
                             prec.right(
-                                6, // Higher than the regular expression_statement
+                                6, // Higher precedence than regular expression_statement
                                 seq(
-                                    $.function_reference,
-                                    choice(":", ";"),
-                                    alias(
-                                        $.compound_statement,
-                                        $.function_body,
+                                    field("function", $.function_reference),
+                                    field("separator", choice(":", ";")),
+                                    field(
+                                        "body",
+                                        alias(
+                                            $.compound_statement,
+                                            $.function_body,
+                                        ),
                                     ),
                                 ),
                             ),
@@ -1407,7 +1410,7 @@ module.exports = grammar({
         // Improve structure support for constant declarations
         structure_declaration: ($) =>
             prec.right(
-                10, // Increase precedence significantly to resolve conflicts
+                10, // Increased from 8 to give it clear priority
                 seq(
                     optional(field("qualifier", $.type_qualifier)),
                     field("keyword", keywords.structure),

@@ -2178,6 +2178,7 @@ static const TSMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [41] = {.index = 45, .length = 3},
   [42] = {.index = 45, .length = 3},
   [43] = {.index = 45, .length = 3},
+  [44] = {.index = 51, .length = 3},
   [45] = {.index = 51, .length = 3},
   [46] = {.index = 54, .length = 2},
   [47] = {.index = 56, .length = 2},
