@@ -35,20 +35,15 @@ module.exports = grammar({
     name: "netlinx",
 
     conflicts: ($) => [
-        [$.constant_definition, $.type_specifier],
-        [$.return_statement],
-        [$.declaration, $.expression_statement],
-        [$.parameter_declaration, $.identifier],
-        [$.call_expression],
-        [$.if_directive, $.call_expression],
-        [$.call_expression, $.array_access_expression],
-        [$.unary_expression, $.call_expression],
-        [$.assignment_expression, $.expression],
-        [$.device_assignment, $.array_access_expression],
-        [$.string_interpolation, $.expression],
-        [$.string_expression, $.string_literal], // Add explicit conflict resolution
-        [$.variable_definition, $.type_specifier], // Add explicit conflict for variable definitions
-        [$.type_specifier, $.expression], // Add conflict between type_specifier and expression
+        // Keep only the necessary conflicts that can't be resolved with precedence
+        [$.declaration, $.expression_statement], // For semicolon-terminated statements
+        [$.call_expression, $.array_access_expression], // For complex expressions like foo(args)[index]
+        [$.unary_expression, $.call_expression], // For expressions like -foo()
+        [$.device_assignment, $.array_access_expression], // NetLinx-specific syntax ambiguity
+        [$.variable_definition, $.type_specifier], // For variable declarations in DEFINE_VARIABLE
+        [$.binary_expression, $.event_type], // NetLinX event syntax resolution
+        [$.argument_list, $.parenthesized_expression], // For nested expressions
+        [$.parameter_list, $.parenthesized_expression], // Similar to above
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -213,18 +208,20 @@ module.exports = grammar({
             ),
 
         declaration: ($) =>
-            seq(
-                $._declaration_specifiers,
-                commaSep1(
-                    field(
-                        "declarator",
-                        choice(
-                            seq($._declaration_declarator),
-                            $.init_declarator,
+            prec.right(
+                seq(
+                    $._declaration_specifiers,
+                    commaSep1(
+                        field(
+                            "declarator",
+                            choice(
+                                seq($._declaration_declarator),
+                                $.init_declarator,
+                            ),
                         ),
                     ),
+                    optional(";"),
                 ),
-                optional(";"),
             ),
 
         _declaration_modifiers: ($) =>
@@ -240,22 +237,28 @@ module.exports = grammar({
             ),
 
         _declarator: ($) =>
-            choice(
-                $.function_declarator,
-                $.array_declarator,
-                $.parenthesized_declarator,
-                $.identifier,
+            prec(
+                1, // Add precedence
+                choice(
+                    $.function_declarator,
+                    $.array_declarator,
+                    $.parenthesized_declarator,
+                    $.identifier,
+                ),
             ),
 
         _declaration_declarator: ($) =>
-            choice(
-                alias(
-                    $._function_declaration_declarator,
-                    $.function_declarator,
+            prec(
+                2, // Higher precedence than _declarator
+                choice(
+                    alias(
+                        $._function_declaration_declarator,
+                        $.function_declarator,
+                    ),
+                    $.array_declarator,
+                    $.parenthesized_declarator,
+                    $.identifier,
                 ),
-                $.array_declarator,
-                $.parenthesized_declarator,
-                $.identifier,
             ),
 
         _field_declarator: ($) =>
@@ -298,7 +301,7 @@ module.exports = grammar({
 
         _function_declaration_declarator: ($) =>
             prec.right(
-                1,
+                2, // Higher precedence than function_declarator
                 seq(
                     field("declarator", $._declarator),
                     field("parameters", $.parameter_list),
@@ -393,13 +396,16 @@ module.exports = grammar({
             ),
 
         parameter_list: ($) =>
-            seq(
-                "(",
-                choice(
-                    commaSep(choice($.parameter_declaration)),
-                    $.compound_statement,
+            prec.left(
+                PRECEDENCE.CALL + 1,
+                seq(
+                    "(",
+                    choice(
+                        commaSep(choice($.parameter_declaration)),
+                        $.compound_statement,
+                    ),
+                    ")",
                 ),
-                ")",
             ),
 
         parameter_declaration: ($) =>
@@ -599,14 +605,17 @@ module.exports = grammar({
                 [">>", PRECEDENCE.SHIFT],
             ];
 
-            return choice(
-                ...table.map(([operator, precedence]) =>
-                    prec.left(
-                        precedence,
-                        seq(
-                            field("left", $.expression),
-                            field("operator", operator), // Fixed: Use the destructured operator variable
-                            field("right", $.expression),
+            return prec.dynamic(
+                1, // Add dynamic precedence to help resolve conflicts
+                choice(
+                    ...table.map(([operator, precedence]) =>
+                        prec.left(
+                            precedence,
+                            seq(
+                                field("left", $.expression),
+                                field("operator", operator),
+                                field("right", $.expression),
+                            ),
                         ),
                     ),
                 ),
@@ -632,14 +641,25 @@ module.exports = grammar({
             ),
 
         comma_expression: ($) =>
-            seq(
-                field("left", $.expression),
-                ",",
-                field("right", choice($.expression, $.comma_expression)),
+            prec.right(
+                // Change to right associativity
+                PRECEDENCE.DEFAULT, // Lower precedence than argument_list
+                seq(
+                    field("left", $.expression),
+                    ",",
+                    field("right", choice($.expression, $.comma_expression)),
+                ),
             ),
 
         argument_list: ($) =>
-            seq("(", commaSep(choice($.expression, $.compound_statement)), ")"),
+            prec.left(
+                PRECEDENCE.CALL + 2, // Increase precedence for argument lists
+                seq(
+                    "(",
+                    commaSep(choice($.expression, $.compound_statement)),
+                    ")",
+                ),
+            ),
 
         field_expression: ($) =>
             choice(
@@ -657,7 +677,10 @@ module.exports = grammar({
             ),
 
         parenthesized_expression: ($) =>
-            seq("(", choice($.expression, $.comma_expression), ")"),
+            prec.left(
+                PRECEDENCE.CALL, // Keep at CALL precedence but lower than argument_list
+                seq("(", choice($.expression, $.comma_expression), ")"),
+            ),
 
         initializer_list: ($) =>
             seq(
@@ -835,24 +858,30 @@ module.exports = grammar({
             ),
 
         event_type: ($) =>
-            choice(
-                seq(
-                    keywords.button_event,
-                    field("device", $.expression),
-                    field("channel", $.expression),
+            prec(
+                PRECEDENCE.CALL + 6, // Even higher precedence for event types
+                choice(
+                    seq(
+                        keywords.button_event,
+                        field("device", $.expression),
+                        field("channel", $.expression),
+                    ),
+                    seq(
+                        keywords.channel_event,
+                        field("device", $.expression),
+                        field("channel", $.expression),
+                    ),
+                    seq(
+                        keywords.level_event,
+                        field("device", $.expression),
+                        field("level", $.expression),
+                    ),
+                    seq(keywords.data_event, field("device", $.expression)),
+                    seq(
+                        keywords.timeline_event,
+                        field("timeline", $.expression),
+                    ),
                 ),
-                seq(
-                    keywords.channel_event,
-                    field("device", $.expression),
-                    field("channel", $.expression),
-                ),
-                seq(
-                    keywords.level_event,
-                    field("device", $.expression),
-                    field("level", $.expression),
-                ),
-                seq(keywords.data_event, field("device", $.expression)),
-                seq(keywords.timeline_event, field("timeline", $.expression)),
             ),
 
         define_program_section: ($) =>
@@ -862,13 +891,16 @@ module.exports = grammar({
             ),
 
         device_assignment: ($) =>
-            seq(
-                "[",
-                field("device", $.expression),
-                optional(seq(",", field("channel", $.expression))),
-                "]",
-                "=",
-                field("value", $.parenthesized_expression),
+            prec(
+                PRECEDENCE.CALL + 3, // Higher precedence than other expression types
+                seq(
+                    "[",
+                    field("device", $.expression),
+                    optional(seq(",", field("channel", $.expression))),
+                    "]",
+                    "=",
+                    field("value", $.parenthesized_expression),
+                ),
             ),
 
         // Compiler directives
@@ -995,24 +1027,32 @@ module.exports = grammar({
         timeline_function: ($) => choice($.timeline_create, $.timeline_kill),
 
         timeline_create: ($) =>
-            seq(
-                "TIMELINE_CREATE",
-                field("timeline", $.expression),
-                ",",
-                field("events", $.argument_list),
-                optional(
-                    seq(
-                        ",",
-                        field(
-                            "mode",
-                            choice("TIMELINE_ABSOLUTE", "TIMELINE_RELATIVE"),
-                        ),
-                        optional(
-                            seq(
-                                ",",
-                                field(
-                                    "repeat",
-                                    choice("TIMELINE_REPEAT", "TIMELINE_ONCE"),
+            prec.right(
+                seq(
+                    "TIMELINE_CREATE",
+                    field("timeline", $.expression),
+                    ",",
+                    field("events", $.argument_list),
+                    optional(
+                        seq(
+                            ",",
+                            field(
+                                "mode",
+                                choice(
+                                    "TIMELINE_ABSOLUTE",
+                                    "TIMELINE_RELATIVE",
+                                ),
+                            ),
+                            optional(
+                                seq(
+                                    ",",
+                                    field(
+                                        "repeat",
+                                        choice(
+                                            "TIMELINE_REPEAT",
+                                            "TIMELINE_ONCE",
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),
@@ -1025,7 +1065,7 @@ module.exports = grammar({
 
         // Array access expression
         array_access_expression: ($) =>
-            prec(
+            prec.left(
                 PRECEDENCE.ARRAY_ACCESS,
                 seq(
                     field("array", $.expression),
