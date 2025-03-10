@@ -621,16 +621,16 @@ module.exports = grammar({
 
         expression_statement: ($) =>
             prec.right(
-                5, // Increased from 4 for even better conflict resolution
+                6, // Increased from 5
                 choice(
                     seq(
                         choice(
                             $.expression,
                             $.comma_expression,
                             $.netlinx_custom_function,
-                            // Special case for function references with semicolons/colons with higher precedence
+                            // Special case for function references with semicolons/colons with much higher precedence
                             prec.right(
-                                8, // Increased from 6 to ensure it gets higher priority
+                                10, // Significantly increased from 8
                                 seq(
                                     field("function", $.function_reference),
                                     field("separator", choice(":", ";")),
@@ -1363,10 +1363,10 @@ module.exports = grammar({
                 ),
             ),
 
-        // Add the missing function_reference rule
+        // Enhanced function reference with much higher precedence to resolve colon syntax issues
         function_reference: ($) =>
             prec.dynamic(
-                PRECEDENCE.FUNCTION_REF + 7, // Increased from 5 to give even higher precedence
+                PRECEDENCE.FUNCTION_REF + 10, // Significantly increased from 7
                 alias($.identifier, $.function_identifier),
             ),
 
@@ -1406,14 +1406,14 @@ module.exports = grammar({
         // More explicit structure content rule with higher precedence
         structure_declaration_content: ($) =>
             prec.right(
-                10, // Increased from 8 to match the new structure precedence levels
+                13, // Increased from 10
                 repeat1(choice($.structure_field, $.comment)),
             ),
 
-        // Enhanced structure declaration with higher precedence for better parsing
+        // Enhanced structure declaration with significantly higher precedence
         structure_declaration: ($) =>
             prec.right(
-                12, // Increased from 10 to give it even higher priority
+                15, // Increased from 12 to give it much higher priority than any other rule
                 seq(
                     optional(field("qualifier", $.type_qualifier)),
                     field("keyword", keywords.structure),
@@ -1422,17 +1422,17 @@ module.exports = grammar({
                 ),
             ),
 
-        // Dedicated structure body rule with enhanced precedence control
+        // Dedicated structure body rule with higher precedence
         structure_body: ($) =>
             prec.right(
-                11, // Increased from 9 to match the higher structure_declaration precedence
+                14, // Increased from 11 to stay just below structure_declaration
                 seq("{", optional($.structure_declaration_content), "}"),
             ),
 
-        // Enhanced structure field with better precedence
+        // Enhanced structure field with higher precedence
         structure_field: ($) =>
             prec.right(
-                10, // Increased from 8 to match content rule
+                13, // Increased from 10 to match content rule
                 seq(
                     optional($.type_qualifier),
                     field("type", $.type_specifier),
@@ -1455,10 +1455,10 @@ module.exports = grammar({
                 $.netlinx_custom_function_with_colon,
             ),
 
-        // Modified NetLinx custom function with colon syntax with much higher precedence
+        // Modified NetLinx custom function with colon syntax with significantly higher precedence
         netlinx_custom_function_with_colon: ($) =>
             prec.right(
-                PRECEDENCE.CALL + 8, // Increased from 6 to match the other increases
+                PRECEDENCE.CALL + 12, // Significantly increased from 8
                 seq(
                     field("function", $.function_reference),
                     field("separator", choice(":", ";")),

@@ -1642,7 +1642,7 @@
     },
     "expression_statement": {
       "type": "PREC_RIGHT",
-      "value": 5,
+      "value": 6,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -1666,7 +1666,7 @@
                   },
                   {
                     "type": "PREC_RIGHT",
-                    "value": 8,
+                    "value": 10,
                     "content": {
                       "type": "SEQ",
                       "members": [
@@ -5212,7 +5212,7 @@
     },
     "function_reference": {
       "type": "PREC_DYNAMIC",
-      "value": 22,
+      "value": 25,
       "content": {
         "type": "ALIAS",
         "content": {
@@ -5333,7 +5333,7 @@
     },
     "structure_declaration_content": {
       "type": "PREC_RIGHT",
-      "value": 10,
+      "value": 13,
       "content": {
         "type": "REPEAT1",
         "content": {
@@ -5353,7 +5353,7 @@
     },
     "structure_declaration": {
       "type": "PREC_RIGHT",
-      "value": 12,
+      "value": 15,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5403,7 +5403,7 @@
     },
     "structure_body": {
       "type": "PREC_RIGHT",
-      "value": 11,
+      "value": 14,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5432,7 +5432,7 @@
     },
     "structure_field": {
       "type": "PREC_RIGHT",
-      "value": 10,
+      "value": 13,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5536,7 +5536,7 @@
     },
     "netlinx_custom_function_with_colon": {
       "type": "PREC_RIGHT",
-      "value": 25,
+      "value": 29,
       "content": {
         "type": "SEQ",
         "members": [
