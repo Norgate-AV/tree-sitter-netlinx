@@ -1642,7 +1642,7 @@
     },
     "expression_statement": {
       "type": "PREC_RIGHT",
-      "value": 6,
+      "value": 8,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -1661,54 +1661,11 @@
                     "name": "comma_expression"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "netlinx_custom_function"
-                  },
-                  {
                     "type": "PREC_RIGHT",
                     "value": 10,
                     "content": {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "FIELD",
-                          "name": "function",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "function_reference"
-                          }
-                        },
-                        {
-                          "type": "FIELD",
-                          "name": "separator",
-                          "content": {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ":"
-                              },
-                              {
-                                "type": "STRING",
-                                "value": ";"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "type": "FIELD",
-                          "name": "body",
-                          "content": {
-                            "type": "ALIAS",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "compound_statement"
-                            },
-                            "named": true,
-                            "value": "function_body"
-                          }
-                        }
-                      ]
+                      "type": "SYMBOL",
+                      "name": "netlinx_custom_function"
                     }
                   }
                 ]
@@ -5212,7 +5169,7 @@
     },
     "function_reference": {
       "type": "PREC_DYNAMIC",
-      "value": 25,
+      "value": 30,
       "content": {
         "type": "ALIAS",
         "content": {
@@ -5333,15 +5290,20 @@
     },
     "structure_declaration_content": {
       "type": "PREC_RIGHT",
-      "value": 13,
+      "value": 18,
       "content": {
         "type": "REPEAT1",
         "content": {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "structure_field"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "structure_field_declaration"
+              },
+              "named": true,
+              "value": "structure_field"
             },
             {
               "type": "SYMBOL",
@@ -5353,7 +5315,7 @@
     },
     "structure_declaration": {
       "type": "PREC_RIGHT",
-      "value": 15,
+      "value": 20,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5403,13 +5365,16 @@
     },
     "structure_body": {
       "type": "PREC_RIGHT",
-      "value": 14,
+      "value": 19,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "{"
+            "type": "IMMEDIATE_TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "{"
+            }
           },
           {
             "type": "CHOICE",
@@ -5495,12 +5460,77 @@
         ]
       }
     },
+    "structure_field_declaration": {
+      "type": "PREC_RIGHT",
+      "value": 18,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "type_qualifier"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "type",
+            "content": {
+              "type": "SYMBOL",
+              "name": "type_specifier"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "array",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "array_declarator"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "netlinx_custom_function": {
       "type": "CHOICE",
       "members": [
         {
           "type": "PREC",
-          "value": 17,
+          "value": 27,
           "content": {
             "type": "SEQ",
             "members": [
@@ -5536,7 +5566,7 @@
     },
     "netlinx_custom_function_with_colon": {
       "type": "PREC_RIGHT",
-      "value": 29,
+      "value": 32,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5552,17 +5582,20 @@
             "type": "FIELD",
             "name": "separator",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": ":"
-                },
-                {
-                  "type": "STRING",
-                  "value": ";"
-                }
-              ]
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ":"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": ";"
+                  }
+                ]
+              }
             }
           },
           {

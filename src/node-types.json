@@ -1433,42 +1433,7 @@
   {
     "type": "expression_statement",
     "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "function_body",
-            "named": true
-          }
-        ]
-      },
-      "function": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "function_reference",
-            "named": true
-          }
-        ]
-      },
-      "separator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": ";",
-            "named": false
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": false,
       "required": false,
@@ -1725,25 +1690,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "function_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "declaration",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2355,20 +2301,6 @@
           {
             "type": "function_reference",
             "named": true
-          }
-        ]
-      },
-      "separator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": ";",
-            "named": false
           }
         ]
       }
