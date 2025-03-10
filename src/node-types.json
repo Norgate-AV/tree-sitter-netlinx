@@ -1161,16 +1161,37 @@
   {
     "type": "device_literal",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "decimal_literal",
-          "named": true
-        }
-      ]
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "decimal_literal",
+            "named": true
+          }
+        ]
+      },
+      "port": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "decimal_literal",
+            "named": true
+          }
+        ]
+      },
+      "system": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "decimal_literal",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1184,6 +1205,20 @@
           {
             "type": "expression",
             "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
           }
         ]
       },

@@ -949,13 +949,17 @@ module.exports = grammar({
 
         literal: ($) => choice($.number_literal, $.string_literal),
 
+        // Update device_literal to use a more specific pattern that prevents ambiguity
         device_literal: ($) =>
-            seq(
-                $.decimal_literal,
-                ":",
-                $.decimal_literal,
-                ":",
-                $.decimal_literal,
+            prec.right(
+                PRECEDENCE.FIELD + 2, // Higher precedence than device_reference_expression
+                seq(
+                    field("device", $.decimal_literal),
+                    token.immediate(":"), // Use immediate attachment for colon
+                    field("port", $.decimal_literal),
+                    token.immediate(":"), // Use immediate attachment for colon
+                    field("system", $.decimal_literal),
+                ),
             ),
 
         number_literal: ($) => choice($.decimal_literal, $.hex_literal),
@@ -1453,13 +1457,13 @@ module.exports = grammar({
                 ),
             ),
 
-        // Add a new device_reference_expression rule that was previously missing
+        // Modify device_reference_expression to have higher precedence and be more specific
         device_reference_expression: ($) =>
             prec.left(
-                PRECEDENCE.FIELD, // Use field precedence
+                PRECEDENCE.FIELD, // Keep field precedence
                 seq(
                     field("device", $.expression),
-                    choice(":", "."),
+                    field("operator", choice(".", ":")),
                     field("reference", $.expression),
                 ),
             ),
