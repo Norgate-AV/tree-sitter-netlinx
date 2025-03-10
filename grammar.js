@@ -183,6 +183,26 @@ module.exports = grammar({
         [$.string_element, $.literal],
         [$.string_element, $.string_literal],
         // [$.string_expression_repeat1, $.literal],
+
+        // Additional conflicts to resolve string expressions and structure fields
+        [$.string_expression, $.string_literal, $.expression],
+        [$.string_element, $.expression, $.string_literal],
+        [$.define_constant_section, $.constant_definition],
+        [$.structure_field, $.array_declarator, $.expression],
+
+        // Add these additional conflicts specifically to address structure parsing
+        // Add specific structure field array conflicts
+        [$.structure_field_declaration, $.array_declarator, $.identifier],
+        [$.structure_field, $.expression, $.identifier],
+        [$.array_declarator, $.expression, $.identifier],
+
+        // Add specific conflicts for structure fields
+        [$.structure_field_declaration, $.structure_field_array_declarator],
+        [$.structure_field_array_declarator, $.expression],
+
+        // Add specific conflicts for string expression parsing
+        [$.string_expression, $.string_element],
+        [$.string_expression, $.first_string_element],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -952,21 +972,22 @@ module.exports = grammar({
 
         string_literal: ($) =>
             prec.left(
-                PRECEDENCE.CALL + 15, // Higher precedence to resolve conflicts
+                PRECEDENCE.CALL + 20, // Increased precedence from 15 to 20
                 // Single-quoted string (common in NetLinx) - explicit token without internal parsing
                 token(seq("'", /[^']*/, "'")),
             ),
 
         string_expression: ($) =>
-            prec.left(
+            prec.dynamic(
+                // Change from prec.left to prec.dynamic for better conflict resolution
                 PRECEDENCE.CALL - 1, // Lower precedence than string_literal
                 seq(
                     '"',
                     field(
                         "first_element",
-                        choice(
-                            $.string_literal, // Allow string literals inside expressions
-                            $.expression, // Allow expressions inside string expressions
+                        alias(
+                            choice($.string_literal, $.expression),
+                            $.first_string_element,
                         ),
                     ),
                     repeat(
@@ -975,10 +996,7 @@ module.exports = grammar({
                             field(
                                 "element",
                                 alias(
-                                    choice(
-                                        $.string_literal, // Allow string literals inside expressions
-                                        $.expression, // Allow expressions inside string expressions
-                                    ),
+                                    choice($.string_literal, $.expression),
                                     $.string_element,
                                 ),
                             ),
@@ -988,7 +1006,18 @@ module.exports = grammar({
                 ),
             ),
 
-        string_element: ($) => choice($.string_literal, $.expression),
+        // Add separate rule for first element in string expression
+        first_string_element: ($) =>
+            prec.dynamic(
+                PRECEDENCE.CALL,
+                choice($.string_literal, $.expression),
+            ),
+
+        string_element: ($) =>
+            prec.dynamic(
+                PRECEDENCE.CALL,
+                choice($.string_literal, $.expression),
+            ),
 
         // Removed string_expression_repeat1 rule as it's no longer needed
         // Instead we're explicitly handling the first element and additional elements separately
@@ -1006,13 +1035,22 @@ module.exports = grammar({
         // Update device_literal to properly support constants in expressions
         device_literal: ($) =>
             prec.right(
-                PRECEDENCE.FIELD + 2, // Higher precedence than regular expressions
+                PRECEDENCE.FIELD + 10, // Even higher precedence
                 seq(
-                    field("device", $.expression),
+                    field(
+                        "device",
+                        prec.dynamic(PRECEDENCE.FIELD + 5, $.expression),
+                    ),
                     ":",
-                    field("port", $.expression),
+                    field(
+                        "port",
+                        prec.dynamic(PRECEDENCE.FIELD + 5, $.expression),
+                    ),
                     ":",
-                    field("system", $.expression),
+                    field(
+                        "system",
+                        prec.dynamic(PRECEDENCE.FIELD + 5, $.expression),
+                    ),
                 ),
             ),
 
@@ -1045,12 +1083,15 @@ module.exports = grammar({
 
         // Section definitions
         define_type_section: ($) =>
-            seq(keywords.define_type, repeat($.type_definition)),
+            prec.dynamic(
+                PRECEDENCE.SECTION_DEFINITION + 5, // Higher precedence than other sections
+                seq(keywords.define_type, repeat1($.type_definition)),
+            ),
 
         type_definition: ($) =>
-            seq(
-                // Change this to directly use structure_declaration instead of a separate struct keyword
-                $.structure_declaration,
+            prec.dynamic(
+                PRECEDENCE.SECTION_DEFINITION + 3,
+                seq($.structure_declaration),
             ),
 
         define_variable_section: ($) =>
@@ -1379,7 +1420,7 @@ module.exports = grammar({
         // First, let's define the structure_declaration rule correctly
         structure_declaration: ($) =>
             prec.dynamic(
-                30, // Very high precedence to ensure it takes priority
+                40, // Increased precedence from 30 to 40 for better priority
                 seq(
                     // Use the correct syntax for the keyword - use struct which handles both STRUCT and STRUCTURE
                     field("keyword", keywords.struct),
@@ -1394,12 +1435,12 @@ module.exports = grammar({
         // Dedicated structure body rule with higher precedence
         structure_body: ($) =>
             prec.dynamic(
-                28,
+                35, // Increased from 28 to 35
                 seq(
                     token.immediate("{"), // Use immediate to force brace attachment
                     optional(
                         seq(
-                            repeat(
+                            repeat1(
                                 choice(
                                     alias(
                                         $.structure_field_declaration,
@@ -1414,14 +1455,12 @@ module.exports = grammar({
                 ),
             ),
 
-        // Enhanced structure field with higher precedence but no qualifiers
+        // Enhanced structure field with higher priority and better field annotations
         structure_field: ($) =>
             prec.right(
-                13, // Increased from 10 to match content rule
+                15, // Increased from 13 to help with conflicts
                 seq(
-                    // Remove the optional qualifier
                     field("type", $.type_specifier),
-                    // Use identifier directly
                     field("name", $.identifier),
                     optional(field("array", $.array_declarator)),
                     optional(";"),
@@ -1430,14 +1469,20 @@ module.exports = grammar({
 
         // Completely separate field declaration rule for structures to avoid conflicts
         structure_field_declaration: ($) =>
-            prec.left(
-                // Change from prec.dynamic to prec.left to specify associativity
-                26,
+            prec.dynamic(
+                30, // Increased from 26
                 seq(
-                    // Remove the optional qualifier
                     field("type", $.type_specifier),
                     field("name", $.identifier),
-                    optional(field("array", $.array_declarator)),
+                    optional(
+                        field(
+                            "array",
+                            choice(
+                                $.array_declarator,
+                                $.structure_field_array_declarator,
+                            ),
+                        ),
+                    ),
                     optional(";"),
                 ),
             ),
@@ -1511,6 +1556,17 @@ module.exports = grammar({
                             // Add other device properties as needed
                         ),
                     ),
+                ),
+            ),
+
+        // Add a special higher precedence version of array_declarator specifically for structure fields
+        structure_field_array_declarator: ($) =>
+            prec.dynamic(
+                25, // High precedence
+                seq(
+                    token.immediate("["),
+                    field("size", optional($.decimal_literal)), // Only allow simple numeric literals
+                    token.immediate("]"),
                 ),
             ),
     },

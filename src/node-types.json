@@ -1075,7 +1075,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "type_definition",
@@ -1545,6 +1545,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "first_string_element",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "for_statement",
@@ -2568,11 +2573,7 @@
         "required": true,
         "types": [
           {
-            "type": "expression",
-            "named": true
-          },
-          {
-            "type": "string_literal",
+            "type": "first_string_element",
             "named": true
           }
         ]
@@ -2666,6 +2667,10 @@
           {
             "type": "array_declarator",
             "named": true
+          },
+          {
+            "type": "structure_field_array_declarator",
+            "named": true
           }
         ]
       },
@@ -2685,6 +2690,22 @@
         "types": [
           {
             "type": "type_specifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "structure_field_array_declarator",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "decimal_literal",
             "named": true
           }
         ]
