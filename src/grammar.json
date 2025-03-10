@@ -3240,7 +3240,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "device_reference_expression"
+            "name": "device_field_access"
           }
         ]
       }
@@ -3519,37 +3519,31 @@
             "name": "device",
             "content": {
               "type": "SYMBOL",
-              "name": "decimal_literal"
+              "name": "expression"
             }
           },
           {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": ":"
-            }
+            "type": "STRING",
+            "value": ":"
           },
           {
             "type": "FIELD",
             "name": "port",
             "content": {
               "type": "SYMBOL",
-              "name": "decimal_literal"
+              "name": "expression"
             }
           },
           {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": ":"
-            }
+            "type": "STRING",
+            "value": ":"
           },
           {
             "type": "FIELD",
             "name": "system",
             "content": {
               "type": "SYMBOL",
-              "name": "decimal_literal"
+              "name": "expression"
             }
           }
         ]
@@ -5537,9 +5531,9 @@
         ]
       }
     },
-    "device_reference_expression": {
-      "type": "PREC_LEFT",
-      "value": 16,
+    "device_field_access": {
+      "type": "PREC",
+      "value": 17,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5552,28 +5546,31 @@
             }
           },
           {
+            "type": "STRING",
+            "value": "."
+          },
+          {
             "type": "FIELD",
-            "name": "operator",
+            "name": "field",
             "content": {
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "."
+                  "type": "PATTERN",
+                  "value": "NUMBER",
+                  "flags": "i"
                 },
                 {
-                  "type": "STRING",
-                  "value": ":"
+                  "type": "PATTERN",
+                  "value": "PORT",
+                  "flags": "i"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "SYSTEM",
+                  "flags": "i"
                 }
               ]
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "reference",
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
             }
           }
         ]
@@ -5880,9 +5877,6 @@
     [
       "structure_field_declaration",
       "structure_declaration_content"
-    ],
-    [
-      "device_reference_expression"
     ]
   ],
   "precedences": [],

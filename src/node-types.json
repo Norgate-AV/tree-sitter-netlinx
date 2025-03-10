@@ -1159,7 +1159,7 @@
     }
   },
   {
-    "type": "device_literal",
+    "type": "device_field_access",
     "named": true,
     "fields": {
       "device": {
@@ -1167,27 +1167,7 @@
         "required": true,
         "types": [
           {
-            "type": "decimal_literal",
-            "named": true
-          }
-        ]
-      },
-      "port": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "decimal_literal",
-            "named": true
-          }
-        ]
-      },
-      "system": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "decimal_literal",
+            "type": "expression",
             "named": true
           }
         ]
@@ -1195,7 +1175,7 @@
     }
   },
   {
-    "type": "device_reference_expression",
+    "type": "device_literal",
     "named": true,
     "fields": {
       "device": {
@@ -1208,21 +1188,17 @@
           }
         ]
       },
-      "operator": {
+      "port": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": ".",
-            "named": false
-          },
-          {
-            "type": ":",
-            "named": false
+            "type": "expression",
+            "named": true
           }
         ]
       },
-      "reference": {
+      "system": {
         "multiple": false,
         "required": true,
         "types": [
@@ -1572,7 +1548,7 @@
           "named": true
         },
         {
-          "type": "device_reference_expression",
+          "type": "device_field_access",
           "named": true
         }
       ]
@@ -2049,7 +2025,7 @@
           "named": true
         },
         {
-          "type": "device_reference_expression",
+          "type": "device_field_access",
           "named": true
         }
       ]

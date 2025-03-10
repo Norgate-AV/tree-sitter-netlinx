@@ -169,9 +169,6 @@ module.exports = grammar({
         [$.structure_field_declaration, $.array_declarator],
         [$.structure_field_declaration, $.array_declarator, $.type_specifier],
         [$.structure_field_declaration, $.structure_declaration_content],
-
-        // Add this conflict to resolve the device_reference_expression issue
-        [$.device_reference_expression],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -900,8 +897,8 @@ module.exports = grammar({
                     ),
                     // Special case for NetLinX data field access
                     $.data_field_access,
-                    // Add device reference pattern
-                    $.device_reference_expression,
+                    // Device field access
+                    $.device_field_access,
                 ),
             ),
 
@@ -949,16 +946,16 @@ module.exports = grammar({
 
         literal: ($) => choice($.number_literal, $.string_literal),
 
-        // Update device_literal to use a more specific pattern that prevents ambiguity
+        // Update device_literal to properly support constants in expressions
         device_literal: ($) =>
             prec.right(
-                PRECEDENCE.FIELD + 2, // Higher precedence than device_reference_expression
+                PRECEDENCE.FIELD + 2, // Higher precedence than regular expressions
                 seq(
-                    field("device", $.decimal_literal),
-                    token.immediate(":"), // Use immediate attachment for colon
-                    field("port", $.decimal_literal),
-                    token.immediate(":"), // Use immediate attachment for colon
-                    field("system", $.decimal_literal),
+                    field("device", $.expression),
+                    ":",
+                    field("port", $.expression),
+                    ":",
+                    field("system", $.expression),
                 ),
             ),
 
@@ -1457,14 +1454,22 @@ module.exports = grammar({
                 ),
             ),
 
-        // Modify device_reference_expression to have higher precedence and be more specific
-        device_reference_expression: ($) =>
-            prec.left(
-                PRECEDENCE.FIELD, // Keep field precedence
+        // Add device_field_access for proper property access
+        device_field_access: ($) =>
+            prec(
+                PRECEDENCE.FIELD + 1,
                 seq(
                     field("device", $.expression),
-                    field("operator", choice(".", ":")),
-                    field("reference", $.expression),
+                    ".",
+                    field(
+                        "field",
+                        choice(
+                            /NUMBER/i,
+                            /PORT/i,
+                            /SYSTEM/i,
+                            // Add other device properties as needed
+                        ),
+                    ),
                 ),
             ),
     },
