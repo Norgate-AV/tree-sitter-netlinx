@@ -45,3 +45,6 @@ dist/
 *.tkn
 *.tko
 *.mf
+
+# Parse logs
+*.log

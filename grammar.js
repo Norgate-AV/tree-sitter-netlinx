@@ -99,6 +99,82 @@ module.exports = grammar({
             $.type_specifier,
             $.structure_declaration_content,
         ],
+        // Add more specific conflict entries to resolve structure content parsing issues
+        [$.structure_field, $.identifier, $.primitive_type],
+        [$.structure_field, $.array_declarator],
+        [$.structure_field, $.structure_declaration],
+
+        // Add conflicts specifically for array access in complex contexts
+        [$.array_access_expression, $.field_expression, $.expression],
+
+        // Add conflict for parameterized expressions
+        [$.parameter_list, $.argument_list, $.parenthesized_expression],
+
+        // Add more specific structure field conflicts
+        [$.structure_field, $.structure_declaration_content],
+        [$.structure_field, $.type_specifier, $.identifier],
+        [$.structure_field, $.primitive_type, $.array_declarator],
+
+        // Better handling of array access expressions
+        [$.array_access_expression, $.field_expression],
+        [$.array_access_expression, $.expression, $.identifier],
+
+        // Better field expression conflict resolution
+        [$.field_expression, $.expression, $.identifier],
+        [$.field_expression, $.call_expression],
+
+        // Explicit handling of multi-level field expressions
+        [$.field_expression, $.field_expression, $.expression],
+
+        // Add this specific conflict to resolve the parse error
+        [$.field_expression, $.function_reference],
+
+        // Add related conflicts to ensure comprehensive resolution
+        [
+            $.field_expression,
+            $.function_reference,
+            $.netlinx_custom_function_with_colon,
+        ],
+        // Add more specific conflicts for NetLinx custom functions with colon
+        [
+            $.netlinx_custom_function_with_colon,
+            $.field_expression,
+            $.identifier,
+        ],
+        [
+            $.netlinx_custom_function_with_colon,
+            $.function_reference,
+            $.field_expression,
+        ],
+
+        // Add structure content conflicts with higher specificity
+        [$.structure_declaration, $.structure_field, $.identifier],
+
+        // Add more specific conflicts for structure and field handling
+        [$.structure_declaration, $.structure_field],
+        [$.structure_field, $.field_declaration],
+        [$.structure_field, $.primitive_type],
+
+        // Add conflicts specifically for NetLinx custom function colon syntax
+        [$.netlinx_custom_function_with_colon, $.field_expression],
+        [$.function_reference, $.field_expression, $.identifier],
+        [$.netlinx_custom_function_with_colon, $.function_reference],
+
+        // Enhanced structure-related conflicts with higher specificity
+        [$.structure_declaration, $.structure_field],
+        [$.structure_field, $.field_declaration],
+        [$.structure_field, $.primitive_type],
+        [$.structure_field, $.identifier],
+        [$.structure_declaration, $.identifier],
+
+        // Better resolution for NetLinx custom functions
+        [$.netlinx_custom_function_with_colon, $.field_expression],
+        [$.function_reference, $.field_expression, $.identifier],
+        [$.netlinx_custom_function_with_colon, $.function_reference],
+
+        // Add missing conflicts for field expression and function handling
+        [$.field_expression, $.expression_statement],
+        [$.structure_field, $.array_declarator],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -532,18 +608,24 @@ module.exports = grammar({
 
         expression_statement: ($) =>
             prec.right(
-                2, // Increase from default to 2 to resolve conflicts
+                4, // Increased from 3
                 choice(
                     seq(
                         choice(
                             $.expression,
                             $.comma_expression,
                             $.netlinx_custom_function,
-                            // Keep special case for functions with semicolons
-                            seq(
-                                $.function_reference,
-                                choice(":", ";"),
-                                alias($.compound_statement, $.function_body),
+                            // Special case for functions with semicolons/colons using higher precedence
+                            prec.right(
+                                5, // Higher than the regular expression_statement
+                                seq(
+                                    $.function_reference,
+                                    choice(":", ";"),
+                                    alias(
+                                        $.compound_statement,
+                                        $.function_body,
+                                    ),
+                                ),
                             ),
                         ),
                         optional(";"),
@@ -781,26 +863,32 @@ module.exports = grammar({
             ),
 
         field_expression: ($) =>
-            choice(
-                seq(
-                    prec(
-                        PRECEDENCE.FIELD,
-                        seq(
-                            field(
-                                "argument",
-                                choice(
-                                    $.identifier,
-                                    $.call_expression,
+            prec.dynamic(
+                PRECEDENCE.FIELD,
+                choice(
+                    // Standard field access
+                    seq(
+                        field(
+                            "object",
+                            choice(
+                                $.identifier,
+                                alias($.call_expression, $.method_object),
+                                alias(
                                     $.array_access_expression,
-                                    $.parenthesized_expression,
+                                    $.indexed_object,
                                 ),
+                                $.parenthesized_expression,
                             ),
-                            field("operator", choice(".", ":")), // Add colon as operator
+                        ),
+                        field("operator", choice(".", ":")),
+                        field(
+                            "field",
+                            choice($._field_identifier, $.identifier),
                         ),
                     ),
-                    field("field", choice($._field_identifier, $.identifier)), // Allow regular identifiers too
+                    // Special case for NetLinX data field access
+                    $.data_field_access,
                 ),
-                $.data_field_access,
             ),
 
         parenthesized_expression: ($) =>
@@ -1213,15 +1301,16 @@ module.exports = grammar({
 
         // Array access expression
         array_access_expression: ($) =>
-            prec.left(
-                PRECEDENCE.ARRAY_ACCESS, // Using the increased precedence
+            prec.dynamic(
+                PRECEDENCE.ARRAY_ACCESS,
                 seq(
                     field(
                         "array",
                         choice(
-                            $.identifier,
-                            $.field_expression,
-                            $.call_expression,
+                            // Make array base more explicit
+                            alias($.identifier, $.array_identifier),
+                            alias($.field_expression, $.field_array),
+                            alias($.call_expression, $.call_array),
                             $.parenthesized_expression,
                         ),
                     ),
@@ -1261,7 +1350,7 @@ module.exports = grammar({
         // Add the missing function_reference rule
         function_reference: ($) =>
             prec.dynamic(
-                PRECEDENCE.FUNCTION_REF + 1, // Increase precedence to resolve ambiguities
+                PRECEDENCE.FUNCTION_REF + 4, // Increased from 3
                 alias($.identifier, $.function_identifier),
             ),
 
@@ -1298,53 +1387,38 @@ module.exports = grammar({
                 ),
             ),
 
-        // Fix the structure_declaration_content rule to never match empty string
+        // Fix structure_declaration_content to require at least one item
         structure_declaration_content: ($) =>
-            prec(
-                3, // Add explicit precedence to make it higher than type_specifier and _declarator
-                choice(
-                    // At least one item
-                    repeat1(
-                        choice(
-                            prec.right(4, $.structure_field), // Increase precedence of structure_field
-                            $.comment,
-                            $.structure_declaration,
-                            prec.right(3, $.identifier), // Give identifier higher precedence in this context
-                            $.array_declarator,
-                            $.primitive_type,
-                        ),
-                    ),
-                    // For empty structures, use a special placeholder token
-                    $.structure_placeholder,
-                ),
-            ),
-
-        // Add a placeholder for empty structures that won't match empty string
-        structure_placeholder: (_) => token(prec(1, "/* empty */")),
+            prec.right(6, repeat1(choice($.structure_field, $.comment))),
 
         // Improve structure support for constant declarations
         structure_declaration: ($) =>
             prec.right(
-                3,
+                8, // Increase precedence even higher (was 7)
                 seq(
-                    optional($.type_qualifier),
-                    keywords.structure,
-                    $.identifier,
-                    "{",
-                    $.structure_declaration_content,
-                    "}",
+                    optional(field("qualifier", $.type_qualifier)),
+                    field("keyword", keywords.structure),
+                    field("name", $.identifier),
+                    field("body", $.structure_body),
                 ),
+            ),
+
+        // New rule specifically for structure body to handle braces better
+        structure_body: ($) =>
+            prec.right(
+                7, // Add explicit precedence (higher than field declarations)
+                seq("{", optional($.structure_declaration_content), "}"),
             ),
 
         // Modify structure_field to use right associativity for resolving conflicts
         structure_field: ($) =>
             prec.right(
-                3, // Increase from 2 to 3 to be higher than type_specifier
+                7, // Increased from 6 for better precedence over normal fields
                 seq(
                     optional($.type_qualifier),
-                    $.type_specifier,
-                    $.identifier,
-                    optional($.array_declarator),
+                    field("type", $.type_specifier),
+                    field("name", $.identifier),
+                    optional(field("array", $.array_declarator)),
                     optional(";"),
                 ),
             ),
@@ -1365,10 +1439,10 @@ module.exports = grammar({
         // Add a specific rule for NetLinx functions that use a colon
         netlinx_custom_function_with_colon: ($) =>
             prec.right(
-                PRECEDENCE.CALL + 2, // Increase to be higher than expression
+                PRECEDENCE.CALL + 5, // Increased from 4 to resolve ambiguity with field expressions
                 seq(
-                    field("function", choice($.function_reference)),
-                    choice(":", ";"), // Allow both colon and semicolon
+                    field("function", $.function_reference),
+                    field("separator", choice(":", ";")),
                     field("body", $.compound_statement),
                 ),
             ),
