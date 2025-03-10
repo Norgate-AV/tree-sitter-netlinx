@@ -262,16 +262,16 @@ module.exports = grammar({
 
         constant_definition: ($) =>
             prec.right(
-                1, // Add explicit precedence higher than type_specifier (0)
+                3, // Increase precedence from 1 to 3 to better handle array cases
                 choice(
                     // Standard constant definition
                     seq(
                         optional($.type_qualifier),
                         optional($.type_specifier),
-                        $.identifier,
-                        optional($.array_declarator),
+                        field("name", $.identifier),
+                        optional(field("array_declarator", $.array_declarator)),
                         "=",
-                        $.expression,
+                        field("value", $.expression),
                         optional(";"),
                     ),
                     // Structure constant definition
@@ -504,14 +504,23 @@ module.exports = grammar({
 
         array_declarator: ($) =>
             choice(
-                // With declarator
+                // With declarator (normal case)
                 prec(
-                    1,
+                    3, // Increase precedence from 1 to 3 to resolve ambiguities
                     seq(
                         field("declarator", $._declarator),
                         "[",
                         repeat(choice($.type_qualifier)),
                         field("size", optional(choice($.expression, "*"))),
+                        "]",
+                    ),
+                ),
+                // Empty array declaration with higher precedence
+                prec(
+                    4, // Even higher precedence for empty array declarations
+                    seq(
+                        field("declarator", $._declarator),
+                        token.immediate("["), // Force immediate attachment of opening bracket
                         "]",
                     ),
                 ),

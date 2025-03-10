@@ -285,7 +285,7 @@
     },
     "constant_definition": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 3,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -317,15 +317,23 @@
                 ]
               },
               {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
               },
               {
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "array_declarator"
+                    "type": "FIELD",
+                    "name": "array_declarator",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "array_declarator"
+                    }
                   },
                   {
                     "type": "BLANK"
@@ -337,8 +345,12 @@
                 "value": "="
               },
               {
-                "type": "SYMBOL",
-                "name": "expression"
+                "type": "FIELD",
+                "name": "value",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
               },
               {
                 "type": "CHOICE",
@@ -1173,7 +1185,7 @@
       "members": [
         {
           "type": "PREC",
-          "value": 1,
+          "value": 3,
           "content": {
             "type": "SEQ",
             "members": [
@@ -1224,6 +1236,34 @@
                       "type": "BLANK"
                     }
                   ]
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "]"
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC",
+          "value": 4,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "declarator",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_declarator"
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "["
                 }
               },
               {
