@@ -605,18 +605,19 @@ module.exports = grammar({
             ];
 
             return prec.dynamic(
-                1, // Add dynamic precedence to help resolve conflicts
+                PRECEDENCE.DEFAULT,
                 choice(
-                    ...table.map(([operator, precedence]) =>
-                        prec.left(
+                    ...table.map(([operator, precedence]) => {
+                        return prec.left(
                             precedence,
                             seq(
                                 field("left", $.expression),
+                                // @ts-ignore
                                 field("operator", operator),
                                 field("right", $.expression),
                             ),
-                        ),
-                    ),
+                        );
+                    }),
                 ),
             );
         },
