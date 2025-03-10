@@ -169,6 +169,20 @@ module.exports = grammar({
         [$.structure_field_declaration, $.array_declarator],
         [$.structure_field_declaration, $.array_declarator, $.type_specifier],
         [$.structure_field_declaration, $.structure_declaration_content],
+
+        // Add this conflict to resolve string expression vs literal interpretation
+        [$.string_expression, $.literal],
+
+        // Also add these more specific conflicts to help with string expressions
+        [$.string_expression, $.string_literal],
+
+        // Remove references to string_expression_repeat1 which no longer exists
+        // [$.string_expression_repeat1, $.string_literal],
+
+        // Add conflict between string content and literals specifically
+        [$.string_element, $.literal],
+        [$.string_element, $.string_literal],
+        // [$.string_expression_repeat1, $.literal],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -266,19 +280,15 @@ module.exports = grammar({
         constant_definition: ($) =>
             prec.right(
                 5, // Increase precedence even higher
-                choice(
-                    // Standard constant definition with explicit string literal support
-                    seq(
-                        optional($.type_qualifier),
-                        optional($.type_specifier),
-                        field("name", $.identifier),
-                        optional(field("array_declarator", $.array_declarator)),
-                        "=",
-                        field("value", choice($.expression, $.string_literal)),
-                        optional(";"),
-                    ),
-                    // Structure constant definition
-                    seq(optional($.type_qualifier), $.structure_declaration),
+                // Remove the structure constant definition since structs can only be in define_type section
+                seq(
+                    optional($.type_qualifier),
+                    optional($.type_specifier),
+                    field("name", $.identifier),
+                    optional(field("array_declarator", $.array_declarator)),
+                    "=",
+                    field("value", choice($.expression, $.string_literal)),
+                    optional(";"),
                 ),
             ),
 
@@ -320,7 +330,8 @@ module.exports = grammar({
                 choice(
                     $.struct_specifier,
                     $.primitive_type,
-                    $._type_identifier,
+                    // Use identifier directly instead of _type_identifier
+                    $.identifier,
                 ),
             ),
 
@@ -330,7 +341,8 @@ module.exports = grammar({
                     keywords.struct,
                     choice(
                         seq(
-                            field("name", $._type_identifier),
+                            // Change this line to use identifier directly instead of _type_identifier
+                            field("name", $.identifier),
                             field("body", optional($.field_declaration_list)),
                         ),
                     ),
@@ -938,10 +950,55 @@ module.exports = grammar({
 
         field_designator: ($) => seq(".", $._field_identifier),
 
+        string_literal: ($) =>
+            prec.left(
+                PRECEDENCE.CALL + 15, // Higher precedence to resolve conflicts
+                // Single-quoted string (common in NetLinx) - explicit token without internal parsing
+                token(seq("'", /[^']*/, "'")),
+            ),
+
         string_expression: ($) =>
             prec.left(
                 PRECEDENCE.CALL - 1, // Lower precedence than string_literal
-                seq('"', commaSep1($.expression), '"'),
+                seq(
+                    '"',
+                    field(
+                        "first_element",
+                        choice(
+                            $.string_literal, // Allow string literals inside expressions
+                            $.expression, // Allow expressions inside string expressions
+                        ),
+                    ),
+                    repeat(
+                        seq(
+                            ",",
+                            field(
+                                "element",
+                                alias(
+                                    choice(
+                                        $.string_literal, // Allow string literals inside expressions
+                                        $.expression, // Allow expressions inside string expressions
+                                    ),
+                                    $.string_element,
+                                ),
+                            ),
+                        ),
+                    ),
+                    '"',
+                ),
+            ),
+
+        string_element: ($) => choice($.string_literal, $.expression),
+
+        // Removed string_expression_repeat1 rule as it's no longer needed
+        // Instead we're explicitly handling the first element and additional elements separately
+
+        string_interpolation: ($) =>
+            prec(
+                PRECEDENCE.CALL + 1,
+                // In NetLinX, this is essentially a string expression (with commas)
+                // but we'll keep the name string_interpolation as requested
+                alias($.string_expression, $.interpolated_string),
             ),
 
         literal: ($) => choice($.number_literal, $.string_literal),
@@ -964,26 +1021,6 @@ module.exports = grammar({
         decimal_literal: (_) => /[-+]?\d+/,
 
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
-
-        string_literal: ($) =>
-            prec.left(
-                PRECEDENCE.CALL + 15, // Higher precedence to resolve conflicts
-                choice(
-                    // Single-quoted string (common in NetLinx) - explicit token without internal parsing
-                    token(seq("'", /[^']*/, "'")),
-                    // Double-quoted string with possible interpolation
-                    seq(
-                        '"',
-                        repeat(
-                            choice(/[^$"\\]+/, $.string_interpolation, /\\./),
-                        ),
-                        '"',
-                    ),
-                ),
-            ),
-
-        string_interpolation: ($) =>
-            prec(PRECEDENCE.CALL + 1, seq("${", $.expression, "}")),
 
         identifier: (_) => /[_a-zA-Z]\w*/,
 
@@ -1011,7 +1048,10 @@ module.exports = grammar({
             seq(keywords.define_type, repeat($.type_definition)),
 
         type_definition: ($) =>
-            seq(keywords.struct, $.identifier, $.field_declaration_list),
+            seq(
+                // Change this to directly use structure_declaration instead of a separate struct keyword
+                $.structure_declaration,
+            ),
 
         define_variable_section: ($) =>
             seq(keywords.define_variable, repeat($.variable_definition)),
@@ -1336,12 +1376,12 @@ module.exports = grammar({
                 ),
             ),
 
-        // First, let's define the structure_declaration rule earlier in the file
+        // First, let's define the structure_declaration rule correctly
         structure_declaration: ($) =>
             prec.dynamic(
                 30, // Very high precedence to ensure it takes priority
                 seq(
-                    optional(field("qualifier", $.type_qualifier)),
+                    // Use the correct syntax for the keyword - use struct which handles both STRUCT and STRUCTURE
                     field("keyword", keywords.struct),
                     field("name", $.identifier),
                     field(
@@ -1374,13 +1414,14 @@ module.exports = grammar({
                 ),
             ),
 
-        // Enhanced structure field with higher precedence
+        // Enhanced structure field with higher precedence but no qualifiers
         structure_field: ($) =>
             prec.right(
                 13, // Increased from 10 to match content rule
                 seq(
-                    optional($.type_qualifier),
+                    // Remove the optional qualifier
                     field("type", $.type_specifier),
+                    // Use identifier directly
                     field("name", $.identifier),
                     optional(field("array", $.array_declarator)),
                     optional(";"),
@@ -1393,7 +1434,7 @@ module.exports = grammar({
                 // Change from prec.dynamic to prec.left to specify associativity
                 26,
                 seq(
-                    optional($.type_qualifier),
+                    // Remove the optional qualifier
                     field("type", $.type_specifier),
                     field("name", $.identifier),
                     optional(field("array", $.array_declarator)),
