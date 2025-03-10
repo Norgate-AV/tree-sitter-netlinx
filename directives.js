@@ -8,22 +8,11 @@
  */
 module.exports = {
     // Compiler control directives
-    INCLUDE: "#INCLUDE",
-    DEFINE: "#DEFINE",
-    IF: "#IF",
-    IFDEF: "#IFDEF",
-    IFNDEF: "#IFNDEF",
-    ELSE: "#ELSE",
-    ENDIF: "#ENDIF",
-    UNDEF: "#UNDEF",
-
-    // Pragma directives
-    PRAGMA: "#PRAGMA",
-
-    // Common pragma options
-    PRAGMA_OPTIONS: [
-        "ENABLE_DYNAMIC_COMPILATION",
-        "DISABLE_STANDARD_DRAG_DROP",
-        "ENABLE_STANDARD_DRAG_DROP",
-    ],
+    INCLUDE: /#INCLUDE/i,
+    WARN: /#WARN/i,
+    DEFINE: /#DEFINE/i,
+    IF_DEFINED: /#IF_DEFINED/i,
+    IF_NOT_DEFINED: /#IF_NOT_DEFINED/i,
+    ELSE: /#ELSE/i,
+    END_IF: /#END_IF/i,
 };

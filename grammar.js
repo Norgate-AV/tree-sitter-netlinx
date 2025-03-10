@@ -49,7 +49,6 @@ module.exports = grammar({
         [$.array_function_declarator], // Add this line to resolve the self-conflict
         [$.array_declarator, $.abstract_array_declarator], // Add this line to resolve the new conflict
         [$.array_declarator, $.field_declaration],
-        [$.device_ref_expression, $.field_expression],
         [$.structure_field], // Add this line to resolve the structure field conflict
         [$.structure_declaration], // Add this line to resolve the structure declaration conflict
         // Add these new conflicts for complex interactions
@@ -57,11 +56,7 @@ module.exports = grammar({
         [$.field_expression, $.netlinx_custom_function],
         [$.compound_statement, $.netlinx_custom_function],
         // Add these conflicts to resolve remaining issues
-        [
-            $.netlinx_custom_function,
-            $.field_expression,
-            $.device_ref_expression,
-        ],
+        [$.netlinx_custom_function, $.field_expression],
         [$.identifier, $.structure_declaration],
         [$.field_expression], // Add this line to resolve the field_expression conflict
         [$.type_specifier, $.structure_declaration], // Add this line for the new conflict
@@ -213,7 +208,15 @@ module.exports = grammar({
                 repeat($.section),
             ),
 
-        program_name: ($) => seq(keywords.program_name, "=", $.string_literal),
+        program_name: ($) =>
+            prec.right(
+                PRECEDENCE.DIRECTIVE + 10, // Even higher precedence than directives
+                seq(
+                    keywords.program_name, // Keep using the standard keyword
+                    "=",
+                    $.string_literal,
+                ),
+            ),
 
         module_name: ($) =>
             seq(
@@ -262,16 +265,16 @@ module.exports = grammar({
 
         constant_definition: ($) =>
             prec.right(
-                3, // Increase precedence from 1 to 3 to better handle array cases
+                5, // Increase precedence even higher
                 choice(
-                    // Standard constant definition
+                    // Standard constant definition with explicit string literal support
                     seq(
                         optional($.type_qualifier),
                         optional($.type_specifier),
                         field("name", $.identifier),
                         optional(field("array_declarator", $.array_declarator)),
                         "=",
-                        field("value", $.expression),
+                        field("value", choice($.expression, $.string_literal)),
                         optional(";"),
                     ),
                     // Structure constant definition
@@ -390,6 +393,17 @@ module.exports = grammar({
                 ),
             ),
 
+        // Function that returns an array - moved earlier in the file
+        array_function_declarator: ($) =>
+            prec.right(
+                PRECEDENCE.ARRAY_FUNCTION, // Use higher precedence than _declarator
+                seq(
+                    field("type_specifier", optional($.type_specifier)),
+                    field("array_spec", $.array_declarator),
+                    field("parameters", $.parameter_list),
+                ),
+            ),
+
         _declarator: ($) =>
             prec(
                 2, // Increase from 1 to 2 to be higher than type_specifier
@@ -504,9 +518,18 @@ module.exports = grammar({
 
         array_declarator: ($) =>
             choice(
-                // With declarator (normal case)
+                // Empty array declaration with highest precedence
                 prec(
-                    3, // Increase precedence from 1 to 3 to resolve ambiguities
+                    15, // Extremely high precedence for empty arrays
+                    seq(
+                        field("declarator", $._declarator),
+                        token.immediate("["), // Force immediate attachment
+                        token.immediate("]"), // Force immediate attachment
+                    ),
+                ),
+                // With declarator - normal case with size expression
+                prec(
+                    5,
                     seq(
                         field("declarator", $._declarator),
                         "[",
@@ -515,16 +538,7 @@ module.exports = grammar({
                         "]",
                     ),
                 ),
-                // Empty array declaration with higher precedence
-                prec(
-                    4, // Even higher precedence for empty array declarations
-                    seq(
-                        field("declarator", $._declarator),
-                        token.immediate("["), // Force immediate attachment of opening bracket
-                        "]",
-                    ),
-                ),
-                // Without declarator (for empty array declarations)
+                // Without declarator (for declarations like char[] = 'something')
                 prec(
                     1,
                     seq(
@@ -947,9 +961,11 @@ module.exports = grammar({
 
         string_literal: ($) =>
             prec.left(
-                PRECEDENCE.CALL, // Higher precedence than string_expression
+                PRECEDENCE.CALL + 15, // Higher precedence to resolve conflicts
                 choice(
-                    seq("'", /[^']*/, "'"),
+                    // Single-quoted string (common in NetLinx) - explicit token without internal parsing
+                    token(seq("'", /[^']*/, "'")),
+                    // Double-quoted string with possible interpolation
                     seq(
                         '"',
                         repeat(
@@ -1074,25 +1090,28 @@ module.exports = grammar({
 
         event_type: ($) =>
             prec.right(
-                PRECEDENCE.EVENT_TYPE, // Use named constant instead of raw number
+                PRECEDENCE.EVENT_TYPE,
                 choice(
                     seq(
+                        // Replace the conditional with direct reference to keywords
                         keywords.button_event,
-                        // Use simple expressions that can't be confused with binary operations
                         field("device", $._event_param_expression),
                         field("channel", $._event_param_expression),
                     ),
                     seq(
+                        // Replace the conditional with direct reference to keywords
                         keywords.channel_event,
                         field("device", $._event_param_expression),
                         field("channel", $._event_param_expression),
                     ),
                     seq(
+                        // Replace the conditional with direct reference to keywords
                         keywords.level_event,
                         field("device", $._event_param_expression),
                         field("level", $._event_param_expression),
                     ),
                     seq(
+                        // Replace the conditional with direct reference to keywords
                         keywords.data_event,
                         field("device", $._event_param_expression),
                     ),
@@ -1138,13 +1157,11 @@ module.exports = grammar({
             choice(
                 $.include_directive,
                 $.define_directive,
-                $.if_directive,
-                $.ifdef_directive,
-                $.ifndef_directive,
+                $.if_defined_directive,
+                $.if_not_defined_directive,
                 $.else_directive,
-                $.endif_directive,
-                $.undef_directive,
-                $.pragma_directive,
+                $.end_if_directive,
+                $.warn_directive,
             ),
 
         include_directive: ($) =>
@@ -1152,7 +1169,8 @@ module.exports = grammar({
                 PRECEDENCE.DIRECTIVE,
                 seq(
                     directives.INCLUDE,
-                    choice(seq("'", /[^']*/, "'"), seq('"', /[^"]*/, '"')),
+                    // Only allow single-quoted strings for NetLinx
+                    token(seq("'", /[^']*/, "'")),
                 ),
             ),
 
@@ -1166,31 +1184,29 @@ module.exports = grammar({
                 ),
             ),
 
-        if_directive: ($) =>
-            prec.right(
+        if_defined_directive: ($) =>
+            prec(
                 PRECEDENCE.DIRECTIVE,
-                seq(directives.IF, field("condition", $.expression)),
+                seq(directives.IF_DEFINED, $.identifier),
             ),
 
-        ifdef_directive: ($) =>
-            prec(PRECEDENCE.DIRECTIVE, seq(directives.IFDEF, $.identifier)),
-
-        ifndef_directive: ($) =>
-            prec(PRECEDENCE.DIRECTIVE, seq(directives.IFNDEF, $.identifier)),
+        if_not_defined_directive: ($) =>
+            prec(
+                PRECEDENCE.DIRECTIVE,
+                seq(directives.IF_NOT_DEFINED, $.identifier),
+            ),
 
         else_directive: ($) => prec(PRECEDENCE.DIRECTIVE, directives.ELSE),
 
-        endif_directive: ($) => prec(PRECEDENCE.DIRECTIVE, directives.ENDIF),
+        end_if_directive: ($) => prec(PRECEDENCE.DIRECTIVE, directives.END_IF),
 
-        undef_directive: ($) =>
-            prec(PRECEDENCE.DIRECTIVE, seq(directives.UNDEF, $.identifier)),
-
-        pragma_directive: ($) =>
+        warn_directive: ($) =>
             prec(
                 PRECEDENCE.DIRECTIVE,
                 seq(
-                    directives.PRAGMA,
-                    choice(...directives.PRAGMA_OPTIONS, $.identifier),
+                    directives.WARN,
+                    // Only allow single-quoted strings for NetLinx
+                    token(seq("'", /[^']*/, "'")),
                 ),
             ),
 
@@ -1211,7 +1227,7 @@ module.exports = grammar({
 
         send_command: ($) =>
             seq(
-                /SEND_COMMAND/i,
+                keywords.send_command,
                 field("device", $.expression),
                 ",",
                 field("command", choice($.string_literal, $.identifier)),
@@ -1219,7 +1235,7 @@ module.exports = grammar({
 
         send_string: ($) =>
             seq(
-                /SEND_STRING/i,
+                keywords.send_string,
                 field("device", $.expression),
                 ",",
                 field("string", choice($.string_literal, $.identifier)),
@@ -1227,7 +1243,7 @@ module.exports = grammar({
 
         send_level: ($) =>
             seq(
-                /SEND_LEVEL/i,
+                keywords.send_level,
                 field("device", $.expression),
                 ",",
                 field("level", $.expression),
@@ -1238,18 +1254,18 @@ module.exports = grammar({
         create_buffer: ($) =>
             prec.right(
                 seq(
-                    /CREATE_BUFFER/i,
+                    keywords.create_buffer,
                     field("buffer", $.identifier),
                     optional(seq(",", field("size", $.expression))),
                 ),
             ),
 
         clear_buffer: ($) =>
-            seq(/CLEAR_BUFFER/i, field("buffer", $.identifier)),
+            seq(keywords.clear_buffer, field("buffer", $.identifier)),
 
         set_length_array: ($) =>
             seq(
-                /SET_LENGTH_ARRAY/i,
+                netlinx.set_length_array,
                 field("array", $.identifier),
                 ",",
                 field("size", $.expression),
@@ -1260,7 +1276,7 @@ module.exports = grammar({
         timeline_create: ($) =>
             prec.right(
                 seq(
-                    /TIMELINE_CREATE/i,
+                    netlinx.timeline_create,
                     field("timeline", $.expression),
                     ",",
                     field("events", $.argument_list),
@@ -1270,8 +1286,8 @@ module.exports = grammar({
                             field(
                                 "mode",
                                 choice(
-                                    /TIMELINE_ABSOLUTE/i,
-                                    /TIMELINE_RELATIVE/i,
+                                    netlinx.timeline_absolute,
+                                    netlinx.timeline_relative,
                                 ),
                             ),
                             optional(
@@ -1280,8 +1296,8 @@ module.exports = grammar({
                                     field(
                                         "repeat",
                                         choice(
-                                            /TIMELINE_REPEAT/i,
-                                            /TIMELINE_ONCE/i,
+                                            netlinx.timeline_repeat,
+                                            netlinx.timeline_once,
                                         ),
                                     ),
                                 ),
@@ -1292,42 +1308,14 @@ module.exports = grammar({
             ),
 
         timeline_kill: ($) =>
-            seq(/TIMELINE_KILL/i, field("timeline", $.expression)),
-
-        // Array access expression
-        array_access_expression: ($) =>
-            prec.dynamic(
-                PRECEDENCE.ARRAY_ACCESS,
-                seq(
-                    field(
-                        "array",
-                        choice(
-                            // Make array base more explicit
-                            alias($.identifier, $.array_identifier),
-                            alias($.field_expression, $.field_array),
-                            alias($.call_expression, $.call_array),
-                            $.parenthesized_expression,
-                        ),
-                    ),
-                    "[",
-                    choice(
-                        field("index", $.expression),
-                        seq(
-                            field("index1", $.expression),
-                            ",",
-                            field("index2", $.expression),
-                        ),
-                    ),
-                    "]",
-                ),
-            ),
+            seq(netlinx.timeline_kill, field("timeline", $.expression)),
 
         // DATA structure field access
         data_field_access: ($) =>
             prec(
                 PRECEDENCE.FIELD + 1,
                 seq(
-                    /DATA/i,
+                    netlinx.data,
                     ".",
                     field(
                         "field",
@@ -1342,59 +1330,7 @@ module.exports = grammar({
                 ),
             ),
 
-        // Enhanced function reference with special handling of colons
-        function_reference: ($) =>
-            prec.dynamic(
-                PRECEDENCE.FUNCTION_REF + 20, // Very high precedence
-                alias($.identifier, $.function_identifier),
-            ),
-
-        // Add special handling for colon-separated expressions often seen in NetLinX
-        device_ref_expression: ($) =>
-            prec(
-                PRECEDENCE.FIELD,
-                seq(
-                    field("arg1", $.expression),
-                    ":",
-                    field("arg2", $.expression),
-                ),
-            ),
-
-        // Function that returns an array
-        array_function_declarator: ($) =>
-            prec.right(
-                PRECEDENCE.ARRAY_FUNCTION, // Use higher precedence than _declarator
-                seq(
-                    field("type_specifier", optional($.type_specifier)),
-                    field("array_spec", $.array_declarator),
-                    field("parameters", $.parameter_list),
-                ),
-            ),
-
-        // Add special handling for NetLinx dot notation in device literals
-        dot_notation: ($) =>
-            prec(
-                PRECEDENCE.FIELD,
-                seq(
-                    field("object", choice($.identifier, $.device_literal)),
-                    ".",
-                    field("property", $.expression),
-                ),
-            ),
-
-        // More explicit structure content rule with higher precedence
-        structure_declaration_content: ($) =>
-            prec.right(
-                18,
-                repeat1(
-                    choice(
-                        alias($.structure_field_declaration, $.structure_field),
-                        $.comment,
-                    ),
-                ),
-            ),
-
-        // Enhanced structure declaration with significantly higher precedence
+        // First, let's define the structure_declaration rule earlier in the file
         structure_declaration: ($) =>
             prec.dynamic(
                 30, // Very high precedence to ensure it takes priority
@@ -1459,7 +1395,23 @@ module.exports = grammar({
                 ),
             ),
 
-        // Add a special rule for NetLinx custom functions with compound statements
+        // More explicit structure content rule with higher precedence
+        structure_declaration_content: ($) =>
+            prec.right(
+                18,
+                repeat1(
+                    choice(
+                        alias($.structure_field_declaration, $.structure_field),
+                        $.comment,
+                    ),
+                ),
+            ),
+
+        // Function reference without calling it
+        function_reference: ($) =>
+            prec.right(PRECEDENCE.FUNCTION_REF, $.identifier),
+
+        // Add the missing netlinx_custom_function rule
         netlinx_custom_function: ($) =>
             choice(
                 // Regular custom function (no colon)
@@ -1481,6 +1433,18 @@ module.exports = grammar({
                             alias($.compound_statement, $.function_body),
                         ),
                     ),
+                ),
+            ),
+
+        // Add array_access_expression rule which is referenced but missing
+        array_access_expression: ($) =>
+            prec(
+                PRECEDENCE.ARRAY_ACCESS,
+                seq(
+                    field("array", $.expression),
+                    "[",
+                    field("index", optional($.expression)),
+                    "]",
                 ),
             ),
     },

@@ -465,35 +465,4 @@ module.exports = {
      * Get Master Build
      */
     get_master_build: /get_master_build/i,
-
-    /**
-     * NetLinX specific constructs and patterns
-     */
-    D_INFO: "D_INFO",
-    D_WARN: "D_WARN",
-    D_ERROR: "D_ERROR",
-    D_DEBUG: "D_DEBUG",
-
-    // Common NetLinX patterns
-    DEVICE_PATTERN: /\d+:\d+:\d+/,
-
-    // Common NetLinX system constants
-    DEVICE_ID: 0,
-    SYSTEM_CHANNEL: 0,
-
-    // Common NetLinX functions
-    COMMON_FUNCTIONS: [
-        "SEND_COMMAND",
-        "SEND_STRING",
-        "SEND_LEVEL",
-        "CREATE_BUFFER",
-        "CLEAR_BUFFER",
-        "SET_LENGTH_ARRAY",
-        "TIMELINE_CREATE",
-        "TIMELINE_KILL",
-        "BUTTON_EVENT",
-        "CHANNEL_EVENT",
-        "LEVEL_EVENT",
-        "DATA_EVENT",
-    ],
 };
