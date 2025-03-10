@@ -1005,7 +1005,7 @@ module.exports = grammar({
             seq(keywords.define_type, repeat($.type_definition)),
 
         type_definition: ($) =>
-            seq(keywords.structure, $.identifier, $.field_declaration_list),
+            seq(keywords.struct, $.identifier, $.field_declaration_list),
 
         define_variable_section: ($) =>
             seq(keywords.define_variable, repeat($.variable_definition)),
@@ -1336,7 +1336,7 @@ module.exports = grammar({
                 30, // Very high precedence to ensure it takes priority
                 seq(
                     optional(field("qualifier", $.type_qualifier)),
-                    field("keyword", keywords.structure),
+                    field("keyword", keywords.struct),
                     field("name", $.identifier),
                     field(
                         "body",

@@ -561,7 +561,7 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "STRUCT",
+            "value": "STRUCT(URE)?",
             "flags": "i"
           },
           {
@@ -3745,7 +3745,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "STRUCTURE",
+          "value": "STRUCT(URE)?",
           "flags": "i"
         },
         {
@@ -5140,7 +5140,7 @@
             "name": "keyword",
             "content": {
               "type": "PATTERN",
-              "value": "STRUCTURE",
+              "value": "STRUCT(URE)?",
               "flags": "i"
             }
           },
