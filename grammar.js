@@ -46,6 +46,9 @@ module.exports = grammar({
         [$.assignment_expression, $.expression],
         [$.device_assignment, $.array_access_expression],
         [$.string_interpolation, $.expression],
+        [$.string_expression, $.string_literal], // Add explicit conflict resolution
+        [$.variable_definition, $.type_specifier], // Add explicit conflict for variable definitions
+        [$.type_specifier, $.expression], // Add conflict between type_specifier and expression
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -161,7 +164,14 @@ module.exports = grammar({
             ),
 
         type_specifier: ($) =>
-            choice($.struct_specifier, $.primitive_type, $._type_identifier),
+            prec(
+                0, // Lower precedence than variable_definition
+                choice(
+                    $.struct_specifier,
+                    $.primitive_type,
+                    $._type_identifier,
+                ),
+            ),
 
         struct_specifier: ($) =>
             prec.right(
@@ -422,9 +432,14 @@ module.exports = grammar({
             ),
 
         expression_statement: ($) =>
-            seq(
-                optional(choice($.expression, $.comma_expression)),
-                optional(";"),
+            choice(
+                prec.right(
+                    seq(
+                        choice($.expression, $.comma_expression),
+                        optional(";"),
+                    ),
+                ),
+                ";",
             ),
 
         if_statement: ($) =>
@@ -497,21 +512,28 @@ module.exports = grammar({
             ),
 
         return_statement: ($) =>
-            seq(
-                keywords.return,
-                optional(choice($.expression, $.comma_expression)),
-                optional(";"),
+            prec.right(
+                seq(
+                    keywords.return,
+                    optional(choice($.expression, $.comma_expression)),
+                    optional(";"),
+                ),
             ),
 
-        break_statement: (_) => seq(keywords.break, optional(";")),
+        // Add explicit right associativity to resolve the semicolon ambiguity
+        break_statement: (_) => prec.right(seq(keywords.break, optional(";"))),
 
-        continue_statement: (_) => seq(keywords.continue, optional(";")),
+        continue_statement: (_) =>
+            prec.right(seq(keywords.continue, optional(";"))),
 
         /**
          * Expressions
          */
         expression: ($) =>
-            choice($._expression_not_binary, $.binary_expression),
+            prec(
+                1, // Higher precedence than type_specifier for resolving conflicts
+                choice($._expression_not_binary, $.binary_expression),
+            ),
 
         _expression_not_binary: ($) =>
             choice(
@@ -578,18 +600,16 @@ module.exports = grammar({
             ];
 
             return choice(
-                ...table.map(([operator, precedence]) => {
-                    return prec.left(
-                        precedence < PRECEDENCE.ASSIGNMENT
-                            ? precedence
-                            : precedence,
+                ...table.map(([operator, precedence]) =>
+                    prec.left(
+                        precedence,
                         seq(
                             field("left", $.expression),
-                            field("operator", operator),
+                            field("operator", operator), // Fixed: Use the destructured operator variable
                             field("right", $.expression),
                         ),
-                    );
-                }),
+                    ),
+                ),
             );
         },
 
@@ -669,7 +689,11 @@ module.exports = grammar({
 
         field_designator: ($) => seq(".", $._field_identifier),
 
-        string_expression: ($) => seq('"', commaSep1($.expression), '"'),
+        string_expression: ($) =>
+            prec.left(
+                PRECEDENCE.CALL - 1, // Lower precedence than string_literal
+                seq('"', commaSep1($.expression), '"'),
+            ),
 
         literal: ($) => choice($.number_literal, $.string_literal),
 
@@ -689,12 +713,17 @@ module.exports = grammar({
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
 
         string_literal: ($) =>
-            choice(
-                seq("'", /[^']*/, "'"),
-                seq(
-                    '"',
-                    repeat(choice(/[^$"\\]+/, $.string_interpolation, /\\./)),
-                    '"',
+            prec.left(
+                PRECEDENCE.CALL, // Higher precedence than string_expression
+                choice(
+                    seq("'", /[^']*/, "'"),
+                    seq(
+                        '"',
+                        repeat(
+                            choice(/[^$"\\]+/, $.string_interpolation, /\\./),
+                        ),
+                        '"',
+                    ),
                 ),
             ),
 
@@ -728,13 +757,16 @@ module.exports = grammar({
             seq(keywords.define_variable, repeat($.variable_definition)),
 
         variable_definition: ($) =>
-            seq(
-                optional($.type_qualifier),
-                optional($.type_specifier),
-                $.identifier,
-                optional($.array_declarator),
-                optional(seq("=", $.expression)),
-                optional(";"),
+            prec.right(
+                1, // Keep higher precedence than type_specifier
+                seq(
+                    optional($.type_qualifier),
+                    optional($.type_specifier),
+                    $.identifier,
+                    optional($.array_declarator),
+                    optional(seq("=", $.expression)),
+                    optional(";"),
+                ),
             ),
 
         define_connect_level_section: ($) =>
@@ -942,10 +974,12 @@ module.exports = grammar({
             ),
 
         create_buffer: ($) =>
-            seq(
-                "CREATE_BUFFER",
-                field("buffer", $.identifier),
-                optional(seq(",", field("size", $.expression))),
+            prec.right(
+                seq(
+                    "CREATE_BUFFER",
+                    field("buffer", $.identifier),
+                    optional(seq(",", field("size", $.expression))),
+                ),
             ),
 
         clear_buffer: ($) => seq("CLEAR_BUFFER", field("buffer", $.identifier)),
