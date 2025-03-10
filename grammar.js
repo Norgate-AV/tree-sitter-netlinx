@@ -621,14 +621,14 @@ module.exports = grammar({
 
         expression_statement: ($) =>
             prec.right(
-                4, // Increased from 3
+                4, // Increased from 3 for better conflict resolution
                 choice(
                     seq(
                         choice(
                             $.expression,
                             $.comma_expression,
                             $.netlinx_custom_function,
-                            // Special case for function references with semicolons/colons
+                            // Special case for function references with semicolons/colons with higher precedence
                             prec.right(
                                 6, // Higher precedence than regular expression_statement
                                 seq(
@@ -1403,14 +1403,14 @@ module.exports = grammar({
                 ),
             ),
 
-        // Fix structure_declaration_content to require at least one item
+        // More explicit structure content rule with higher precedence
         structure_declaration_content: ($) =>
             prec.right(8, repeat1(choice($.structure_field, $.comment))),
 
-        // Improve structure support for constant declarations
+        // Enhanced structure declaration with higher precedence for better resolution
         structure_declaration: ($) =>
             prec.right(
-                10, // Increased from 8 to give it clear priority
+                10, // Increased from 8 to give it clear priority over other rules
                 seq(
                     optional(field("qualifier", $.type_qualifier)),
                     field("keyword", keywords.structure),
@@ -1419,17 +1419,17 @@ module.exports = grammar({
                 ),
             ),
 
-        // New rule specifically for structure body to handle braces better
+        // Dedicated structure body rule with explicit precedence
         structure_body: ($) =>
             prec.right(
                 9, // Higher than field declarations but lower than structure_declaration
                 seq("{", optional($.structure_declaration_content), "}"),
             ),
 
-        // Modify structure_field to use right associativity for resolving conflicts
+        // Enhanced structure field with better precedence control
         structure_field: ($) =>
             prec.right(
-                8, // Increased from 7 for better precedence over normal fields
+                8, // Increased from 7
                 seq(
                     optional($.type_qualifier),
                     field("type", $.type_specifier),
