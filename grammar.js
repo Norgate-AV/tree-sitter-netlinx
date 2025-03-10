@@ -29,21 +29,17 @@ const PRECEDENCE = {
     ARRAY_ACCESS: 16,
     FIELD: 16,
     DIRECTIVE: 20,
+    EVENT_PARAM: 90, // Add this constant for event parameter expressions
+    EVENT_TYPE: 100, // Add this constant for event type expressions
 };
 
 module.exports = grammar({
     name: "netlinx",
 
+    // All the previously listed conflicts are now warned as unnecessary
+    // This means our precedence rules have successfully addressed these ambiguities
     conflicts: ($) => [
-        // Keep only the necessary conflicts that can't be resolved with precedence
-        [$.declaration, $.expression_statement], // For semicolon-terminated statements
-        [$.call_expression, $.array_access_expression], // For complex expressions like foo(args)[index]
-        [$.unary_expression, $.call_expression], // For expressions like -foo()
-        [$.device_assignment, $.array_access_expression], // NetLinx-specific syntax ambiguity
-        [$.variable_definition, $.type_specifier], // For variable declarations in DEFINE_VARIABLE
-        [$.binary_expression, $.event_type], // NetLinX event syntax resolution
-        [$.argument_list, $.parenthesized_expression], // For nested expressions
-        [$.parameter_list, $.parenthesized_expression], // Similar to above
+        // Empty - our precedence rules and grammar structure have resolved the ambiguities
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -862,7 +858,7 @@ module.exports = grammar({
 
         event_type: ($) =>
             prec.right(
-                100, // Extremely high precedence to ensure this takes priority
+                PRECEDENCE.EVENT_TYPE, // Use named constant instead of raw number
                 choice(
                     seq(
                         keywords.button_event,
@@ -894,7 +890,7 @@ module.exports = grammar({
         // Special rule for expressions in event parameters that prevents binary operation conflicts
         _event_param_expression: ($) =>
             prec(
-                90, // High precedence but lower than event_type itself
+                PRECEDENCE.EVENT_PARAM, // Use named constant instead of raw number
                 choice(
                     alias($.identifier, $.event_identifier),
                     alias($.decimal_literal, $.event_literal),

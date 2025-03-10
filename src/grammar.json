@@ -4874,40 +4874,7 @@
       "name": "comment"
     }
   ],
-  "conflicts": [
-    [
-      "declaration",
-      "expression_statement"
-    ],
-    [
-      "call_expression",
-      "array_access_expression"
-    ],
-    [
-      "unary_expression",
-      "call_expression"
-    ],
-    [
-      "device_assignment",
-      "array_access_expression"
-    ],
-    [
-      "variable_definition",
-      "type_specifier"
-    ],
-    [
-      "binary_expression",
-      "event_type"
-    ],
-    [
-      "argument_list",
-      "parenthesized_expression"
-    ],
-    [
-      "parameter_list",
-      "parenthesized_expression"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [
