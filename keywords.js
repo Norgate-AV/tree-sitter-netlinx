@@ -74,4 +74,9 @@ module.exports = {
     send_command: /send_command/i,
     clear_buffer: /clear_buffer/i,
     create_buffer: /create_buffer/i,
+
+    // Built-in Structured Types
+    dev: /dev/i,
+    devaddr: /devaddr/i,
+    devchan: /devchan/i,
 };

@@ -263,7 +263,7 @@
     "fields": {
       "declarator": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "_declarator",
@@ -273,7 +273,7 @@
       },
       "dimensions": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "array_dimension",

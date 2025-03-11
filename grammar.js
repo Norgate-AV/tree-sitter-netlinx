@@ -362,9 +362,20 @@ module.exports = grammar({
         array_declarator: ($) =>
             prec.right(
                 10,
-                seq(
-                    field("declarator", $._declarator),
-                    field("dimensions", repeat1($.array_dimension)),
+                choice(
+                    // Direct array declarator with no declarator prefix
+                    // For cases like: CHAR ON_CMD[] = 'PWR-ON'
+                    seq(
+                        token.immediate("["), // Force immediate attachment
+                        token.immediate("]"), // Force immediate attachment
+                    ),
+
+                    // Normal array declarator with declarator prefix
+                    // For most other array declarations
+                    seq(
+                        field("declarator", $._declarator),
+                        field("dimensions", repeat1($.array_dimension)),
+                    ),
                 ),
             ),
 
@@ -591,6 +602,16 @@ module.exports = grammar({
                     keywords.slong,
                     keywords.float,
                     keywords.double,
+                    // Add NetLinx structured types
+                    keywords.dev,
+                    keywords.devaddr,
+                    keywords.devchan,
+                    netlinx.tdata,
+                    netlinx.tchannel,
+                    netlinx.tlevel,
+                    netlinx.tbutton,
+                    netlinx.ttimeline,
+                    netlinx.tcustom,
                 ),
             ),
 

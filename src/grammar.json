@@ -397,26 +397,50 @@
       "type": "PREC_RIGHT",
       "value": 10,
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "FIELD",
-            "name": "declarator",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_declarator"
-            }
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "["
+                }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "]"
+                }
+              }
+            ]
           },
           {
-            "type": "FIELD",
-            "name": "dimensions",
-            "content": {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "array_dimension"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "declarator",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_declarator"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "dimensions",
+                "content": {
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "array_dimension"
+                  }
+                }
               }
-            }
+            ]
           }
         ]
       }
@@ -1224,6 +1248,51 @@
           {
             "type": "PATTERN",
             "value": "DOUBLE",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "dev",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "devaddr",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "devchan",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "tdata",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "tchannel",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "tlevel",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "tbutton",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "ttimeline",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "tcustom",
             "flags": "i"
           }
         ]
