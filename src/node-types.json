@@ -284,6 +284,16 @@
             "named": true
           }
         ]
+      },
+      "size_identifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -331,6 +341,56 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "array_initializer",
+    "named": true,
+    "fields": {
+      "elements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "array_initializer_elements",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_initializer_elements",
+    "named": true,
+    "fields": {
+      "elements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "array_initializer_elements",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_initializer",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -727,12 +787,26 @@
           {
             "type": "array_declarator",
             "named": true
+          },
+          {
+            "type": "multi_dimensional_array_declarator",
+            "named": true
+          }
+        ]
+      },
+      "declaration": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "multi_dimensional_char_array_declarator",
+            "named": true
           }
         ]
       },
       "name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -744,6 +818,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array_initializer",
+            "named": true
+          },
           {
             "type": "expression",
             "named": true
@@ -2087,6 +2165,118 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "multi_dimensional_array_declarator",
+    "named": true,
+    "fields": {
+      "declarator": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_declarator",
+            "named": true
+          }
+        ]
+      },
+      "last_dimension_size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "size": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "size1": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "size2": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "size3": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multi_dimensional_char_array_declarator",
+    "named": true,
+    "fields": {
+      "last_dimension_size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type_specifier": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "primitive_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

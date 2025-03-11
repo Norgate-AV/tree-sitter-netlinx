@@ -203,6 +203,28 @@ module.exports = grammar({
         // Add specific conflicts for string expression parsing
         [$.string_expression, $.string_element],
         [$.string_expression, $.first_string_element],
+
+        // Add these conflicts for array initializers
+        [$.array_initializer, $.literal],
+        [$.array_initializer, $.string_literal],
+        [$.array_initializer_repeat1, $.string_literal],
+        [$.array_initializer_repeat1, $.expression],
+        [$.array_initializer, $.expression],
+
+        // Add conflicts for array declarators with identifiers as dimensions
+        [$.multi_dimensional_array_declarator, $.identifier],
+        [$.multi_dimensional_array_declarator, $.array_declarator],
+        [$.multi_dimensional_array_declarator, $.expression],
+
+        // Add conflicts for array declarator interactions
+        [$.array_declarator, $.multi_dimensional_array_declarator],
+        [$.array_declarator, $.multi_dimensional_char_array_declarator],
+        [
+            $.multi_dimensional_array_declarator,
+            $.multi_dimensional_char_array_declarator,
+        ],
+        [$.multi_dimensional_char_array_declarator, $.primitive_type],
+        [$.multi_dimensional_char_array_declarator, $.type_specifier],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -299,16 +321,217 @@ module.exports = grammar({
 
         constant_definition: ($) =>
             prec.right(
-                5, // Increase precedence even higher
-                // Remove the structure constant definition since structs can only be in define_type section
+                5, // High precedence for constant definitions
                 seq(
                     optional($.type_qualifier),
                     optional($.type_specifier),
-                    field("name", $.identifier),
-                    optional(field("array_declarator", $.array_declarator)),
-                    "=",
-                    field("value", choice($.expression, $.string_literal)),
+                    choice(
+                        // Special case for char multi-dimensional arrays
+                        seq(
+                            field(
+                                "declaration",
+                                $.multi_dimensional_char_array_declarator,
+                            ),
+                            "=",
+                            field("value", prec.right(9, $.array_initializer)),
+                        ),
+                        // Regular case with standard declarators
+                        seq(
+                            field("name", $.identifier),
+                            optional(
+                                field(
+                                    "array_declarator",
+                                    choice(
+                                        $.array_declarator,
+                                        $.multi_dimensional_array_declarator,
+                                    ),
+                                ),
+                            ),
+                            "=",
+                            field(
+                                "value",
+                                choice(
+                                    prec.right(4, $.expression),
+                                    prec.right(4, $.string_literal),
+                                    prec.right(9, $.array_initializer),
+                                ),
+                            ),
+                        ),
+                    ),
                     optional(";"),
+                ),
+            ),
+
+        // Use separate rules for different array declaration patterns - keeping only one implementation
+
+        // 1. Single-dimension array declarator (all types, optional size)
+        array_declarator: ($) =>
+            choice(
+                // Empty array declaration with highest precedence
+                prec(
+                    15, // Extremely high precedence for empty arrays
+                    seq(
+                        field("declarator", $._declarator),
+                        token.immediate("["), // Force immediate attachment
+                        token.immediate("]"), // Force immediate attachment
+                    ),
+                ),
+                // With declarator and identifier-based size
+                prec(
+                    6, // Higher precedence than numeric array sizes
+                    seq(
+                        field("declarator", $._declarator),
+                        "[",
+                        repeat(choice($.type_qualifier)),
+                        field("size_identifier", $.identifier),
+                        "]",
+                    ),
+                ),
+                // With declarator - normal case with size expression
+                prec(
+                    5,
+                    seq(
+                        field("declarator", $._declarator),
+                        "[",
+                        repeat(choice($.type_qualifier)),
+                        field("size", optional(choice($.expression, "*"))),
+                        "]",
+                    ),
+                ),
+                // Without declarator (for declarations like char[] = 'something')
+                prec(
+                    1,
+                    seq(
+                        "[",
+                        repeat(choice($.type_qualifier)),
+                        field("size", optional(choice($.expression, "*"))),
+                        "]",
+                    ),
+                ),
+            ),
+
+        // Multi-dimensional array handling with consolidated functionality
+        multi_dimensional_array_declarator: ($) =>
+            prec.right(
+                25, // Higher precedence
+                choice(
+                    // Specialized pattern for [][IDENTIFIER] common in NetLinx
+                    seq("[", "]", "[", $.identifier, "]"),
+
+                    // Standard numeric dimensions
+                    seq(
+                        // First dimension
+                        "[",
+                        field("size1", optional($.expression)),
+                        "]",
+                        // Second dimension
+                        "[",
+                        field("size2", optional($.expression)),
+                        "]",
+                        // Optional third dimension
+                        optional(
+                            seq(
+                                "[",
+                                field("size3", optional($.expression)),
+                                "]",
+                            ),
+                        ),
+                    ),
+
+                    // Empty dimensions followed by identifier dimension (for char arrays)
+                    seq(
+                        // One or more empty dimensions
+                        repeat1(seq("[", "]")),
+                        // Last dimension with size
+                        "[",
+                        field("last_dimension_size", $.expression),
+                        "]",
+                    ),
+
+                    // General case for array of arrays with optional sizes
+                    seq(
+                        field("declarator", $.array_declarator),
+                        repeat1(
+                            seq(
+                                "[",
+                                field("size", optional($.expression)),
+                                "]",
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+
+        // Multi-dimensional char array declarator remains separate for semantic clarity
+        multi_dimensional_char_array_declarator: ($) =>
+            prec.right(
+                15, // High precedence for clarity
+                seq(
+                    // First check if this is a char array
+                    field(
+                        "type_specifier",
+                        choice(
+                            alias(token(keywords.char), $.primitive_type),
+                            alias(token(keywords.widechar), $.primitive_type),
+                        ),
+                    ),
+                    field("name", $.identifier),
+                    // One or more empty dimensions
+                    repeat1(seq("[", "]")),
+                    // Last dimension must have a size
+                    "[",
+                    field("last_dimension_size", $.expression),
+                    "]",
+                ),
+            ),
+
+        // REMOVE duplicate multi_dimensional_array_declarator rule that was around line 539
+
+        // REMOVE duplicate array_declarator rule that was around line 575
+
+        // Add specialized array initializer for arrays of constants
+        array_initializer: ($) =>
+            prec.right(
+                10, // Increase precedence from 6 to 10
+                seq(
+                    "{",
+                    field(
+                        "elements",
+                        optional(
+                            alias(
+                                seq(
+                                    choice(
+                                        $.expression,
+                                        $.string_literal,
+                                        $.array_initializer, // Support nested arrays
+                                    ),
+                                    repeat(
+                                        seq(
+                                            ",",
+                                            choice(
+                                                $.expression,
+                                                $.string_literal,
+                                                $.array_initializer,
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                                $.array_initializer_elements,
+                            ),
+                        ),
+                    ),
+                    optional(","), // Allow trailing comma
+                    "}",
+                ),
+            ),
+
+        // Create specific rule for array initializer elements
+        array_initializer_repeat1: ($) =>
+            prec.left(
+                8, // Lower precedence than array_initializer
+                seq(
+                    ",",
+                    choice($.expression, $.string_literal, $.array_initializer),
                 ),
             ),
 
@@ -545,40 +768,6 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._type_declarator),
                     field("parameters", $.parameter_list),
-                ),
-            ),
-
-        array_declarator: ($) =>
-            choice(
-                // Empty array declaration with highest precedence
-                prec(
-                    15, // Extremely high precedence for empty arrays
-                    seq(
-                        field("declarator", $._declarator),
-                        token.immediate("["), // Force immediate attachment
-                        token.immediate("]"), // Force immediate attachment
-                    ),
-                ),
-                // With declarator - normal case with size expression
-                prec(
-                    5,
-                    seq(
-                        field("declarator", $._declarator),
-                        "[",
-                        repeat(choice($.type_qualifier)),
-                        field("size", optional(choice($.expression, "*"))),
-                        "]",
-                    ),
-                ),
-                // Without declarator (for declarations like char[] = 'something')
-                prec(
-                    1,
-                    seq(
-                        "[",
-                        repeat(choice($.type_qualifier)),
-                        field("size", optional(choice($.expression, "*"))),
-                        "]",
-                    ),
                 ),
             ),
 
@@ -1035,7 +1224,7 @@ module.exports = grammar({
         // Update device_literal to properly support constants in expressions
         device_literal: ($) =>
             prec.right(
-                PRECEDENCE.FIELD + 10, // Even higher precedence
+                PRECEDENCE.FIELD + 10, // High precedence
                 seq(
                     field(
                         "device",
@@ -1060,7 +1249,7 @@ module.exports = grammar({
 
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
 
-        identifier: (_) => /[_a-zA-Z]\w*/,
+        identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 
         _type_identifier: ($) =>
             prec.right(
