@@ -263,7 +263,7 @@
     "fields": {
       "declarator": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "_declarator",
@@ -271,14 +271,26 @@
           }
         ]
       },
+      "dimensions": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "array_dimension",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_dimension",
+    "named": true,
+    "fields": {
       "size": {
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "*",
-            "named": false
-          },
           {
             "type": "expression",
             "named": true
@@ -295,16 +307,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_qualifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -787,26 +789,12 @@
           {
             "type": "array_declarator",
             "named": true
-          },
-          {
-            "type": "multi_dimensional_array_declarator",
-            "named": true
-          }
-        ]
-      },
-      "declaration": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "multi_dimensional_char_array_declarator",
-            "named": true
           }
         ]
       },
       "name": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -2168,118 +2156,6 @@
     }
   },
   {
-    "type": "multi_dimensional_array_declarator",
-    "named": true,
-    "fields": {
-      "declarator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_declarator",
-            "named": true
-          }
-        ]
-      },
-      "last_dimension_size": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "size": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "size1": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "size2": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "size3": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "multi_dimensional_char_array_declarator",
-    "named": true,
-    "fields": {
-      "last_dimension_size": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type_specifier": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "primitive_type",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "mutually_exclusive_definition",
     "named": true,
     "fields": {},
@@ -2850,16 +2726,12 @@
     "type": "structure_field",
     "named": true,
     "fields": {
-      "array": {
+      "array_declarator": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "array_declarator",
-            "named": true
-          },
-          {
-            "type": "structure_field_array_declarator",
             "named": true
           }
         ]
@@ -2880,22 +2752,6 @@
         "types": [
           {
             "type": "type_specifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "structure_field_array_declarator",
-    "named": true,
-    "fields": {
-      "size": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "decimal_literal",
             "named": true
           }
         ]
@@ -3119,15 +2975,32 @@
   {
     "type": "variable_definition",
     "named": true,
-    "fields": {},
+    "fields": {
+      "array_declarator": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_declarator",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "array_declarator",
-          "named": true
-        },
         {
           "type": "expression",
           "named": true

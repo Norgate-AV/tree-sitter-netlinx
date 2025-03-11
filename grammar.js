@@ -225,6 +225,22 @@ module.exports = grammar({
         ],
         [$.multi_dimensional_char_array_declarator, $.primitive_type],
         [$.multi_dimensional_char_array_declarator, $.type_specifier],
+
+        // Fix: Remove references to the undefined symbol char_2d_array_declaration
+        [$.constant_char_2d_array, $.constant_definition],
+        // [$.char_2d_array_declaration, $.constant_definition],  // REMOVE THIS LINE
+        // [$.char_2d_array_declaration, $.expression],           // REMOVE THIS LINE
+        [
+            $.multi_dimensional_array_declarator,
+            $.identifier,
+            $.constant_char_2d_array,
+        ],
+
+        // Array handling conflicts
+        [$.array_dimension, $.identifier],
+        [$.array_dimension, $.expression],
+        [$.array_declarator, $.expression],
+        [$.array_declarator, $.identifier],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -325,37 +341,15 @@ module.exports = grammar({
                 seq(
                     optional($.type_qualifier),
                     optional($.type_specifier),
-                    choice(
-                        // Special case for char multi-dimensional arrays
-                        seq(
-                            field(
-                                "declaration",
-                                $.multi_dimensional_char_array_declarator,
-                            ),
-                            "=",
-                            field("value", prec.right(9, $.array_initializer)),
-                        ),
-                        // Regular case with standard declarators
-                        seq(
-                            field("name", $.identifier),
-                            optional(
-                                field(
-                                    "array_declarator",
-                                    choice(
-                                        $.array_declarator,
-                                        $.multi_dimensional_array_declarator,
-                                    ),
-                                ),
-                            ),
-                            "=",
-                            field(
-                                "value",
-                                choice(
-                                    prec.right(4, $.expression),
-                                    prec.right(4, $.string_literal),
-                                    prec.right(9, $.array_initializer),
-                                ),
-                            ),
+                    field("name", $.identifier),
+                    optional(field("array_declarator", $.array_declarator)),
+                    "=",
+                    field(
+                        "value",
+                        choice(
+                            prec.right(4, $.expression),
+                            prec.right(4, $.string_literal),
+                            prec.right(9, $.array_initializer),
                         ),
                     ),
                     optional(";"),
@@ -366,47 +360,11 @@ module.exports = grammar({
 
         // 1. Single-dimension array declarator (all types, optional size)
         array_declarator: ($) =>
-            choice(
-                // Empty array declaration with highest precedence
-                prec(
-                    15, // Extremely high precedence for empty arrays
-                    seq(
-                        field("declarator", $._declarator),
-                        token.immediate("["), // Force immediate attachment
-                        token.immediate("]"), // Force immediate attachment
-                    ),
-                ),
-                // With declarator and identifier-based size
-                prec(
-                    6, // Higher precedence than numeric array sizes
-                    seq(
-                        field("declarator", $._declarator),
-                        "[",
-                        repeat(choice($.type_qualifier)),
-                        field("size_identifier", $.identifier),
-                        "]",
-                    ),
-                ),
-                // With declarator - normal case with size expression
-                prec(
-                    5,
-                    seq(
-                        field("declarator", $._declarator),
-                        "[",
-                        repeat(choice($.type_qualifier)),
-                        field("size", optional(choice($.expression, "*"))),
-                        "]",
-                    ),
-                ),
-                // Without declarator (for declarations like char[] = 'something')
-                prec(
-                    1,
-                    seq(
-                        "[",
-                        repeat(choice($.type_qualifier)),
-                        field("size", optional(choice($.expression, "*"))),
-                        "]",
-                    ),
+            prec.right(
+                10,
+                seq(
+                    field("declarator", $._declarator),
+                    field("dimensions", repeat1($.array_dimension)),
                 ),
             ),
 
@@ -482,6 +440,30 @@ module.exports = grammar({
                     "[",
                     field("last_dimension_size", $.expression),
                     "]",
+                ),
+            ),
+
+        // Special case rule for char 2D arrays with constant in second dimension
+        constant_char_2d_array: ($) =>
+            prec.right(
+                30, // Highest precedence of all array rules
+                seq(
+                    field("type_qualifier", optional($.type_qualifier)),
+                    field(
+                        "type",
+                        choice(
+                            alias(token(keywords.char), $.primitive_type),
+                            alias(token(keywords.widechar), $.primitive_type),
+                        ),
+                    ),
+                    field("name", $.identifier),
+                    "[",
+                    "]", // First dimension empty
+                    "[",
+                    $.identifier,
+                    "]", // Second dimension is identifier
+                    "=",
+                    field("value", $.array_initializer),
                 ),
             ),
 
@@ -1292,8 +1274,8 @@ module.exports = grammar({
                 seq(
                     optional($.type_qualifier),
                     optional($.type_specifier),
-                    $.identifier,
-                    optional($.array_declarator),
+                    field("name", $.identifier),
+                    optional(field("array_declarator", $.array_declarator)),
                     optional(seq("=", $.expression)),
                     optional(";"),
                 ),
@@ -1651,7 +1633,7 @@ module.exports = grammar({
                 seq(
                     field("type", $.type_specifier),
                     field("name", $.identifier),
-                    optional(field("array", $.array_declarator)),
+                    optional(field("array_declarator", $.array_declarator)),
                     optional(";"),
                 ),
             ),
@@ -1663,15 +1645,7 @@ module.exports = grammar({
                 seq(
                     field("type", $.type_specifier),
                     field("name", $.identifier),
-                    optional(
-                        field(
-                            "array",
-                            choice(
-                                $.array_declarator,
-                                $.structure_field_array_declarator,
-                            ),
-                        ),
-                    ),
+                    optional(field("array_declarator", $.array_declarator)),
                     optional(";"),
                 ),
             ),
@@ -1756,6 +1730,24 @@ module.exports = grammar({
                     token.immediate("["),
                     field("size", optional($.decimal_literal)), // Only allow simple numeric literals
                     token.immediate("]"),
+                ),
+            ),
+
+        // Redesigned array handling for consistent behavior across contexts
+
+        // Array dimension - handles empty [], identifier-based [NAV_MAX_CHARS], or expression-based [10] dimensions
+        array_dimension: ($) =>
+            prec.right(
+                5,
+                seq(
+                    "[",
+                    optional(
+                        choice(
+                            field("size_identifier", $.identifier),
+                            field("size", $.expression),
+                        ),
+                    ),
+                    "]",
                 ),
             ),
     },
