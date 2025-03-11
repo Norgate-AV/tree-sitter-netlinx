@@ -108,12 +108,12 @@ constant dev DVA_DISPLAYS[]    =    {
 	vdvDisplay_1
 }
 
-// constant char DISPLAY_INPUT_FOR_SOURCE[][NAV_MAX_CHARS]    =    {
-// 	'DIGITAL_LINK,1',
-// 	'DIGITAL_LINK,1',
-// 	'DIGITAL_LINK,1',
-// 	'DIGITAL_LINK,1'
-// }
+constant char DISPLAY_INPUT_FOR_SOURCE[][NAV_MAX_CHARS]    =    {
+	'DIGITAL_LINK,1',
+	'DIGITAL_LINK,1',
+	'DIGITAL_LINK,1',
+	'DIGITAL_LINK,1'
+}
 
 
 /////////////////////////////////////////////////////////////
@@ -132,17 +132,17 @@ constant dev DVA_REPEATERS[]    =   {
 	vdvRepeater_2
 }
 
-// constant char REPEATER_INPUT_FOR_SOURCE[][NAV_MAX_CHARS]    =   {
-// 	'HDMI,1',
-// 	'HDMI,1',
-// 	'HDMI,1',
-// 	'HDMI,1'
-// }
+constant char REPEATER_INPUT_FOR_SOURCE[][NAV_MAX_CHARS]    =   {
+	'HDMI,1',
+	'HDMI,1',
+	'HDMI,1',
+	'HDMI,1'
+}
 
-// constant char REPEATER_IP_PORT_FOR_REPEATER[][NAV_MAX_CHARS]    =   {
-// 	'2002',
-// 	'2003'
-// }
+constant char REPEATER_IP_PORT_FOR_REPEATER[][NAV_MAX_CHARS]    =   {
+	'2002',
+	'2003'
+}
 
 
 /////////////////////////////////////////////////////////////
@@ -156,10 +156,10 @@ constant integer SWITCHER_INPUT_MATRIX      = 01
 
 constant integer SWITCHER_OUTPUT_MAIN       = 01
 constant integer SWITCHER_OUTPUT_MONITOR    = 02
-// constant integer SWITCHER_OUTPUTS[][]   =   {
-// 	{ 01, 02 },
-// 	{ 01 }
-// }
+constant integer SWITCHER_OUTPUTS[][]   =   {
+	{ 01, 02 },
+	{ 01 }
+}
 
 
 /////////////////////////////////////////////////////////////
@@ -182,15 +182,15 @@ constant dev DVA_MATRIX[]    =  {
 	dvMatrix_Port_14
 }
 
-// constant integer MATRIX_INPUT_FOR_SOURCE[][]    =   {
-// 	{ 01, 02, 01, 03 },
-// 	{ 01, 02, 01, 03 }
-// }
+constant integer MATRIX_INPUT_FOR_SOURCE[][]    =   {
+	{ 01, 02, 01, 03 },
+	{ 01, 02, 01, 03 }
+}
 
-// constant integer MATRIX_INPUT_FOR_SOURCE_LAPTOP[][]    =    {
-// 	{ 01, 01 },
-// 	{ 01, 01 }
-// }
+constant integer MATRIX_INPUT_FOR_SOURCE_LAPTOP[][]    =    {
+	{ 01, 01 },
+	{ 01, 01 }
+}
 
 
 constant integer MATRIX_VID_OUTPUT_LECTURE_CAPTURE      = 1
@@ -201,12 +201,12 @@ constant integer MATRIX_AUD_OUTPUT_DSP      = 1
 constant integer MATRIX_AUD_OUTPUT_PROGRAM  = 2
 constant integer MATRIX_AUD_OUTPUT_PATCH    = 3
 constant integer MATRIX_AUD_OUTPUT_DANTE    = 4
-// constant integer MATRIX_OUTPUTS[][]    =    {
-// 	{ 01, 02, 03, 04 },
-// 	{ 01, 02, 03, 04 }
-// }
+constant integer MATRIX_OUTPUTS[][]    =    {
+	{ 01, 02, 03, 04 },
+	{ 01, 02, 03, 04 }
+}
 
-// constant integer MATRIX_MONITOR_SOURCE_FOR_SOURCE[]    = { 07, 07, 07, 08, 07 }
+constant integer MATRIX_MONITOR_SOURCE_FOR_SOURCE[]    = { 07, 07, 07, 08, 07 }
 
 constant integer MATRIX_VIDEO_OUT_MUTE_CHANNEL = 210
 
@@ -226,12 +226,12 @@ constant integer PAGE_LOGO              = 1
 constant integer PAGE_MAIN              = 2
 constant integer PAGE_STARTING_UP       = 3
 constant integer PAGE_SHUTTING_DOWN     = 4
-// constant char PAGE_NAMES[][NAV_MAX_CHARS]   =   {
-// 	'Logo',
-// 	'Main',
-// 	'Starting Up',
-// 	'Shutting Down'
-// }
+constant char PAGE_NAMES[][NAV_MAX_CHARS]   =   {
+	'Logo',
+	'Main',
+	'Starting Up',
+	'Shutting Down'
+}
 
 // DEFINE_TYPE
 // STRUCTURE DeviceStatus {
@@ -312,6 +312,13 @@ constant integer PAGE_SHUTTING_DOWN     = 4
 // DEFINE_PROGRAM {
 // 	[dvTP, BTN_POWER] = (primaryDevice.isPowered)
 // }
+
+
+
+
+
+
+
 
 
 
