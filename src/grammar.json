@@ -1120,7 +1120,7 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "STRUCT(URE)?",
+            "value": "struct",
             "flags": "i"
           },
           {
@@ -5634,7 +5634,7 @@
             "name": "keyword",
             "content": {
               "type": "PATTERN",
-              "value": "STRUCT(URE)?",
+              "value": "struct",
               "flags": "i"
             }
           },

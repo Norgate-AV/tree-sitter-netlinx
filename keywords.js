@@ -59,7 +59,7 @@ module.exports = {
     active: /ACTIVE/i,
 
     // Struct
-    struct: /STRUCT(URE)?/i,
+    struct: /struct(ure)?/i,
 
     // Events
     button_event: /BUTTON_EVENT/i,
