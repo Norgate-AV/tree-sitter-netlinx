@@ -113,55 +113,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "define_combine_section"
-        },
-        {
-          "type": "SYMBOL",
           "name": "define_constant_section"
         },
         {
           "type": "SYMBOL",
           "name": "define_type_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_variable_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_connect_level_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_latching_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_mutually_exclusive_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_toggling_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_call_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_function_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_start_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_event_section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "define_program_section"
         }
       ]
     },
@@ -1120,7 +1076,7 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "struct",
+            "value": "STRUCT",
             "flags": "i"
           },
           {
@@ -4238,11 +4194,19 @@
             "flags": "i"
           },
           {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SYMBOL",
-              "name": "type_definition"
-            }
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "type_definition"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         ]
       }
@@ -5633,9 +5597,19 @@
             "type": "FIELD",
             "name": "keyword",
             "content": {
-              "type": "PATTERN",
-              "value": "struct",
-              "flags": "i"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "STRUCT",
+                  "flags": "i"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "STRUCTURE",
+                  "flags": "i"
+                }
+              ]
             }
           },
           {
@@ -5669,43 +5643,32 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "IMMEDIATE_TOKEN",
-            "content": {
-              "type": "STRING",
-              "value": "{"
-            }
+            "type": "STRING",
+            "value": "{"
           },
           {
-            "type": "CHOICE",
+            "type": "SEQ",
             "members": [
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "REPEAT1",
-                    "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "structure_field_declaration"
-                          },
-                          "named": true,
-                          "value": "structure_field"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "comment"
-                        }
-                      ]
+                "type": "REPEAT1",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "structure_field_declaration"
+                      },
+                      "named": true,
+                      "value": "structure_field"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "comment"
                     }
-                  }
-                ]
-              },
-              {
-                "type": "BLANK"
+                  ]
+                }
               }
             ]
           },

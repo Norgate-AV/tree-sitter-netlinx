@@ -9,6 +9,7 @@
 const keywords = require("./keywords");
 const netlinx = require("./netlinx");
 const directives = require("./directives");
+const functions = require("./functions");
 
 // Add a new precedence level for array function declarations
 const PRECEDENCE = {
@@ -303,19 +304,19 @@ module.exports = grammar({
         section: ($) =>
             choice(
                 $.define_device_section,
-                $.define_combine_section,
+                // $.define_combine_section,
                 $.define_constant_section,
                 $.define_type_section,
-                $.define_variable_section,
-                $.define_connect_level_section,
-                $.define_latching_section,
-                $.define_mutually_exclusive_section,
-                $.define_toggling_section,
-                $.define_call_section,
-                $.define_function_section,
-                $.define_start_section,
-                $.define_event_section,
-                $.define_program_section,
+                // $.define_variable_section,
+                // $.define_connect_level_section,
+                // $.define_latching_section,
+                // $.define_mutually_exclusive_section,
+                // $.define_toggling_section,
+                // $.define_call_section,
+                // $.define_function_section,
+                // $.define_start_section,
+                // $.define_event_section,
+                // $.define_program_section,
             ),
 
         define_device_section: ($) =>
@@ -1277,7 +1278,7 @@ module.exports = grammar({
         define_type_section: ($) =>
             prec.dynamic(
                 PRECEDENCE.SECTION_DEFINITION + 5, // Higher precedence than other sections
-                seq(keywords.define_type, repeat1($.type_definition)),
+                seq(keywords.define_type, optional(repeat1($.type_definition))),
             ),
 
         type_definition: ($) =>
@@ -1542,52 +1543,10 @@ module.exports = grammar({
         clear_buffer: ($) =>
             seq(keywords.clear_buffer, field("buffer", $.identifier)),
 
-        set_length_array: ($) =>
-            seq(
-                netlinx.set_length_array,
-                field("array", $.identifier),
-                ",",
-                field("size", $.expression),
-            ),
-
-        timeline_function: ($) => choice($.timeline_create, $.timeline_kill),
-
-        timeline_create: ($) =>
-            prec.right(
-                seq(
-                    netlinx.timeline_create,
-                    field("timeline", $.expression),
-                    ",",
-                    field("events", $.argument_list),
-                    optional(
-                        seq(
-                            ",",
-                            field(
-                                "mode",
-                                choice(
-                                    netlinx.timeline_absolute,
-                                    netlinx.timeline_relative,
-                                ),
-                            ),
-                            optional(
-                                seq(
-                                    ",",
-                                    field(
-                                        "repeat",
-                                        choice(
-                                            netlinx.timeline_repeat,
-                                            netlinx.timeline_once,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-
-        timeline_kill: ($) =>
-            seq(netlinx.timeline_kill, field("timeline", $.expression)),
+        set_length_array: functions.set_length_array,
+        timeline_function: functions.timeline_function,
+        timeline_create: functions.timeline_create,
+        timeline_kill: functions.timeline_kill,
 
         // DATA structure field access
         data_field_access: ($) =>
@@ -1614,8 +1573,10 @@ module.exports = grammar({
             prec.dynamic(
                 40, // Increased precedence from 30 to 40 for better priority
                 seq(
-                    // Use the correct syntax for the keyword - use struct which handles both STRUCT and STRUCTURE
-                    field("keyword", keywords.struct),
+                    field(
+                        "keyword",
+                        choice(keywords.struct, keywords.structure),
+                    ),
                     field("name", $.identifier),
                     field(
                         "body",
@@ -1629,17 +1590,15 @@ module.exports = grammar({
             prec.dynamic(
                 35, // Increased from 28 to 35
                 seq(
-                    token.immediate("{"), // Use immediate to force brace attachment
-                    optional(
-                        seq(
-                            repeat1(
-                                choice(
-                                    alias(
-                                        $.structure_field_declaration,
-                                        $.structure_field,
-                                    ),
-                                    $.comment,
+                    "{", // Use immediate to force brace attachment
+                    seq(
+                        repeat1(
+                            choice(
+                                alias(
+                                    $.structure_field_declaration,
+                                    $.structure_field,
                                 ),
+                                $.comment,
                             ),
                         ),
                     ),

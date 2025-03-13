@@ -557,25 +557,6 @@
     "fields": {}
   },
   {
-    "type": "call_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "argument_list",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "call_expression",
     "named": true,
     "fields": {
@@ -696,21 +677,6 @@
     }
   },
   {
-    "type": "combine_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "comma_expression",
     "named": true,
     "fields": {
@@ -754,25 +720,6 @@
         },
         {
           "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "connect_level_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "decimal_literal",
-          "named": true
-        },
-        {
-          "type": "device_literal",
           "named": true
         }
       ]
@@ -929,51 +876,6 @@
     }
   },
   {
-    "type": "define_call_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "call_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_combine_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "combine_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_connect_level_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "connect_level_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "define_constant_section",
     "named": true,
     "fields": {},
@@ -1027,178 +929,18 @@
     }
   },
   {
-    "type": "define_event_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "event_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_function_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "function_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_latching_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "latching_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_mutually_exclusive_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "mutually_exclusive_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_program_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "device_assignment",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_start_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_toggling_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "toggling_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "define_type_section",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "type_definition",
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "define_variable_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "variable_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "device_assignment",
-    "named": true,
-    "fields": {
-      "channel": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "device": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -1335,144 +1077,6 @@
     "type": "end_if_directive",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "event_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "subevent_handler",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "event_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "event_block",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "event_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "event_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "comma_expression",
-          "named": true
-        },
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "event_type",
-    "named": true,
-    "fields": {
-      "channel": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "event_expression",
-            "named": true
-          },
-          {
-            "type": "event_identifier",
-            "named": true
-          },
-          {
-            "type": "event_literal",
-            "named": true
-          }
-        ]
-      },
-      "device": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "event_expression",
-            "named": true
-          },
-          {
-            "type": "event_identifier",
-            "named": true
-          },
-          {
-            "type": "event_literal",
-            "named": true
-          }
-        ]
-      },
-      "level": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "event_expression",
-            "named": true
-          },
-          {
-            "type": "event_identifier",
-            "named": true
-          },
-          {
-            "type": "event_literal",
-            "named": true
-          }
-        ]
-      },
-      "timeline": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "event_expression",
-            "named": true
-          },
-          {
-            "type": "event_identifier",
-            "named": true
-          },
-          {
-            "type": "event_literal",
-            "named": true
-          }
-        ]
-      }
-    }
   },
   {
     "type": "expression_statement",
@@ -1714,32 +1318,6 @@
         "types": [
           {
             "type": "parameter_list",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "function_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "compound_statement",
-            "named": true
-          }
-        ]
-      },
-      "declarator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "_declarator",
             "named": true
           }
         ]
@@ -1991,21 +1569,6 @@
     }
   },
   {
-    "type": "latching_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "literal",
     "named": true,
     "fields": {},
@@ -2150,21 +1713,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "mutually_exclusive_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
           "named": true
         }
       ]
@@ -2398,18 +1946,6 @@
       "required": true,
       "types": [
         {
-          "type": "define_call_section",
-          "named": true
-        },
-        {
-          "type": "define_combine_section",
-          "named": true
-        },
-        {
-          "type": "define_connect_level_section",
-          "named": true
-        },
-        {
           "type": "define_constant_section",
           "named": true
         },
@@ -2418,39 +1954,7 @@
           "named": true
         },
         {
-          "type": "define_event_section",
-          "named": true
-        },
-        {
-          "type": "define_function_section",
-          "named": true
-        },
-        {
-          "type": "define_latching_section",
-          "named": true
-        },
-        {
-          "type": "define_mutually_exclusive_section",
-          "named": true
-        },
-        {
-          "type": "define_program_section",
-          "named": true
-        },
-        {
-          "type": "define_start_section",
-          "named": true
-        },
-        {
-          "type": "define_toggling_section",
-          "named": true
-        },
-        {
           "type": "define_type_section",
-          "named": true
-        },
-        {
-          "type": "define_variable_section",
           "named": true
         }
       ]
@@ -2709,7 +2213,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "comment",
@@ -2757,30 +2261,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "subevent_handler",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "compound_statement",
-          "named": true
-        },
-        {
-          "type": "subevent_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "subevent_type",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "switch_statement",
@@ -2867,21 +2347,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "toggling_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2973,50 +2438,6 @@
     }
   },
   {
-    "type": "variable_definition",
-    "named": true,
-    "fields": {
-      "array_declarator": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_declarator",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        },
-        {
-          "type": "type_qualifier",
-          "named": true
-        },
-        {
-          "type": "type_specifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "warn_directive",
     "named": true,
     "fields": {}
@@ -3104,10 +2525,6 @@
     "named": false
   },
   {
-    "type": "->",
-    "named": false
-  },
-  {
     "type": ".",
     "named": false
   },
@@ -3174,14 +2591,6 @@
   },
   {
     "type": "decimal_literal",
-    "named": true
-  },
-  {
-    "type": "event_identifier",
-    "named": true
-  },
-  {
-    "type": "event_literal",
     "named": true
   },
   {
