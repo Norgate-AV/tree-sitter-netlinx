@@ -16,4 +16,3 @@ DEFINE_VARIABLE
 VOLATILE DeviceStatus primaryDevice
 VOLATILE INTEGER powerState
 VOLATILE CHAR buffer[1024]
-

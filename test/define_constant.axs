@@ -58,10 +58,10 @@ constant integer SOURCE_PC          = 3
 constant integer SOURCE_WIRELESS    = 4
 
 constant char SOURCE_NAME[][NAV_MAX_CHARS]  =   {
-	'Laptop',
-	'Visualiser',
-	'PC',
-	'BYOD'
+    'Laptop',
+    'Visualiser',
+    'PC',
+    'BYOD'
 }
 
 constant integer SOURCE_DEFAULT     = SOURCE_PC
@@ -79,14 +79,14 @@ constant integer NUMBER_OF_DISPLAYS    = 1
 constant integer DISPLAY_1             = 1
 
 constant dev DVA_DISPLAYS[]    =    {
-	vdvDisplay_1
+    vdvDisplay_1
 }
 
 constant char DISPLAY_INPUT_FOR_SOURCE[][NAV_MAX_CHARS]    =    {
-	'DIGITAL_LINK,1',
-	'DIGITAL_LINK,1',
-	'DIGITAL_LINK,1',
-	'DIGITAL_LINK,1'
+    'DIGITAL_LINK,1',
+    'DIGITAL_LINK,1',
+    'DIGITAL_LINK,1',
+    'DIGITAL_LINK,1'
 }
 
 
@@ -102,20 +102,20 @@ constant integer REPEATER_MODE_LOCAL_HDMI   = 2
 constant integer REPEATER_MODE_LOCAL_VGA    = 3
 
 constant dev DVA_REPEATERS[]    =   {
-	vdvRepeater_1,
-	vdvRepeater_2
+    vdvRepeater_1,
+    vdvRepeater_2
 }
 
 constant char REPEATER_INPUT_FOR_SOURCE[][NAV_MAX_CHARS]    =   {
-	'HDMI,1',
-	'HDMI,1',
-	'HDMI,1',
-	'HDMI,1'
+    'HDMI,1',
+    'HDMI,1',
+    'HDMI,1',
+    'HDMI,1'
 }
 
 constant char REPEATER_IP_PORT_FOR_REPEATER[][NAV_MAX_CHARS]    =   {
-	'2002',
-	'2003'
+    '2002',
+    '2003'
 }
 
 
@@ -131,8 +131,8 @@ constant integer SWITCHER_INPUT_MATRIX      = 01
 constant integer SWITCHER_OUTPUT_MAIN       = 01
 constant integer SWITCHER_OUTPUT_MONITOR    = 02
 constant integer SWITCHER_OUTPUTS[][]   =   {
-	{ 01, 02 },
-	{ 01 }
+    { 01, 02 },
+    { 01 }
 }
 
 
@@ -140,30 +140,30 @@ constant integer SWITCHER_OUTPUTS[][]   =   {
 // Matrix Defs
 /////////////////////////////////////////////////////////////
 constant dev DVA_MATRIX[]    =  {
-	dvMatrix_Port_1,
-	dvMatrix_Port_2,
-	dvMatrix_Port_3,
-	dvMatrix_Port_4,
-	dvMatrix_Port_5,
-	dvMatrix_Port_6,
-	dvMatrix_Port_7,
-	dvMatrix_Port_8,
-	dvMatrix_Port_9,
-	dvMatrix_Port_10,
-	dvMatrix_Port_11,
-	dvMatrix_Port_12,
-	dvMatrix_Port_13,
-	dvMatrix_Port_14
+    dvMatrix_Port_1,
+    dvMatrix_Port_2,
+    dvMatrix_Port_3,
+    dvMatrix_Port_4,
+    dvMatrix_Port_5,
+    dvMatrix_Port_6,
+    dvMatrix_Port_7,
+    dvMatrix_Port_8,
+    dvMatrix_Port_9,
+    dvMatrix_Port_10,
+    dvMatrix_Port_11,
+    dvMatrix_Port_12,
+    dvMatrix_Port_13,
+    dvMatrix_Port_14
 }
 
 constant integer MATRIX_INPUT_FOR_SOURCE[][]    =   {
-	{ 01, 02, 01, 03 },
-	{ 01, 02, 01, 03 }
+    { 01, 02, 01, 03 },
+    { 01, 02, 01, 03 }
 }
 
 constant integer MATRIX_INPUT_FOR_SOURCE_LAPTOP[][]    =    {
-	{ 01, 01 },
-	{ 01, 01 }
+    { 01, 01 },
+    { 01, 01 }
 }
 
 
@@ -176,8 +176,8 @@ constant integer MATRIX_AUD_OUTPUT_PROGRAM  = 2
 constant integer MATRIX_AUD_OUTPUT_PATCH    = 3
 constant integer MATRIX_AUD_OUTPUT_DANTE    = 4
 constant integer MATRIX_OUTPUTS[][]    =    {
-	{ 01, 02, 03, 04 },
-	{ 01, 02, 03, 04 }
+    { 01, 02, 03, 04 },
+    { 01, 02, 03, 04 }
 }
 
 constant integer MATRIX_MONITOR_SOURCE_FOR_SOURCE[]    = { 07, 07, 07, 08, 07 }
@@ -201,8 +201,8 @@ constant integer PAGE_MAIN              = 2
 constant integer PAGE_STARTING_UP       = 3
 constant integer PAGE_SHUTTING_DOWN     = 4
 constant char PAGE_NAMES[][NAV_MAX_CHARS]   =   {
-	'Logo',
-	'Main',
-	'Starting Up',
-	'Shutting Down'
+    'Logo',
+    'Main',
+    'Starting Up',
+    'Shutting Down'
 }

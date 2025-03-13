@@ -9,10 +9,10 @@
 const keywords = require("./keywords");
 const netlinx = require("./netlinx");
 const directives = require("./directives");
-const functions = require("./functions");
+// const functions = require("./functions");
 
 // Add a new precedence level for array function declarations
-const PRECEDENCE = {
+const PREC = {
     PAREN_DECLARATOR: -10,
     ASSIGNMENT: -2,
     DEFAULT: 0,
@@ -44,204 +44,12 @@ module.exports = grammar({
     // Add this option for case insensitivity globally
     word: ($) => $.identifier,
 
-    // Update conflicts to include the conflict between array_declarator and abstract_array_declarator
     conflicts: ($) => [
-        [$.array_function_declarator, $._declarator],
-        [$.array_function_declarator], // Add this line to resolve the self-conflict
-        [$.array_declarator, $.abstract_array_declarator], // Add this line to resolve the new conflict
-        [$.array_declarator, $.field_declaration],
-        [$.structure_field], // Add this line to resolve the structure field conflict
-        [$.structure_declaration], // Add this line to resolve the structure declaration conflict
-        // Add these new conflicts for complex interactions
-        [$._declarator, $.structure_field],
-        [$.field_expression, $.netlinx_custom_function],
-        [$.compound_statement, $.netlinx_custom_function],
-        // Add these conflicts to resolve remaining issues
-        [$.netlinx_custom_function, $.field_expression],
-        [$.identifier, $.structure_declaration],
-        [$.field_expression], // Add this line to resolve the field_expression conflict
-        [$.type_specifier, $.structure_declaration], // Add this line for the new conflict
-        [$.type_specifier, $._declarator], // Add this line to resolve the conflict between type_specifier and _declarator
-        [$.type_specifier, $._declarator, $._declaration_declarator], // Add this to resolve three-way conflict
-        // Add additional conflicts to resolve parsing issues
-        [$.structure_field, $.primitive_type, $.type_specifier],
-        [$.netlinx_custom_function, $.expression],
-        // Add conflict to resolve function_reference + semicolon issue
-        [$.expression_statement, $.expression, $.netlinx_custom_function],
-        [$.function_reference, $.expression_statement],
-        // Add conflict to resolve type_specifier vs expression vs function_reference
-        [$.type_specifier, $.expression, $.function_reference],
-        [$._type_identifier, $.identifier, $.function_reference],
-        // Add conflict for structure_declaration content
-        [$.type_specifier, $._declarator, $.structure_declaration_content],
-        // Remove the problematic reference to structure_declaration_repeat1
-        [
-            $.identifier,
-            $.type_specifier,
-            $._declarator,
-            // $.structure_declaration_repeat1,  <-- This line was causing the problem
-        ],
-        // Add a simpler conflict that doesn't reference the undefined symbol
-        [$.identifier, $.type_specifier, $.structure_declaration],
-        // Add conflict specifically for content inside structures
-        [
-            $.identifier,
-            $._declarator,
-            $.type_specifier,
-            $.structure_declaration_content,
-        ],
-        // Add more specific conflict entries to resolve structure content parsing issues
-        [$.structure_field, $.identifier, $.primitive_type],
-        [$.structure_field, $.array_declarator],
-        [$.structure_field, $.structure_declaration],
-
-        // Add conflicts specifically for array access in complex contexts
-        [$.array_access_expression, $.field_expression, $.expression],
-
-        // Add conflict for parameterized expressions
-        [$.parameter_list, $.argument_list, $.parenthesized_expression],
-
-        // Add more specific structure field conflicts
-        [$.structure_field, $.structure_declaration_content],
-        [$.structure_field, $.type_specifier, $.identifier],
-        [$.structure_field, $.primitive_type, $.array_declarator],
-
-        // Better handling of array access expressions
-        [$.array_access_expression, $.field_expression],
-        [$.array_access_expression, $.expression, $.identifier],
-
-        // Better field expression conflict resolution
-        [$.field_expression, $.expression, $.identifier],
-        [$.field_expression, $.call_expression],
-
-        // Explicit handling of multi-level field expressions
-        [$.field_expression, $.field_expression, $.expression],
-
-        // Add this specific conflict to resolve the parse error
-        [$.field_expression, $.function_reference],
-
-        // Add related conflicts to ensure comprehensive resolution
-        [$.field_expression, $.function_reference],
-        // Add more specific conflicts for NetLinx custom functions with colon
-        [$.field_expression, $.identifier],
-        [$.field_expression, $.function_reference],
-
-        // Add structure content conflicts with higher specificity
-        [$.structure_declaration, $.structure_field, $.identifier],
-
-        // Add more specific conflicts for structure and field handling
-        [$.structure_declaration, $.structure_field],
-        [$.structure_field, $.field_declaration],
-        [$.structure_field, $.primitive_type],
-
-        // Add conflicts specifically for NetLinx custom function colon syntax
-        [$.field_expression],
-        [$.function_reference, $.field_expression, $.identifier],
-        [$.function_reference],
-
-        // Enhanced structure-related conflicts with higher specificity
-        [$.structure_declaration, $.structure_field],
-        [$.structure_field, $.field_declaration],
-        [$.structure_field, $.primitive_type],
-        [$.structure_field, $.identifier],
-        [$.structure_declaration, $.identifier],
-
-        // Better resolution for NetLinx custom functions
-        [$.field_expression],
-        [$.function_reference, $.field_expression, $.identifier],
-        [$.function_reference],
-
-        // Add missing conflicts for field expression and function handling
-        [$.field_expression, $.expression_statement],
-        [$.structure_field, $.array_declarator],
-
-        // Add more explicit conflicts for structure declarations
-        [$.structure_declaration, $._declarator],
-        [$.structure_body, $.compound_statement],
-        [$.structure_declaration, $.identifier, $.compound_statement],
-
-        // More specific conflicts for NetLinx custom functions
-        [$.function_reference, $.field_expression],
-        [$.expression_statement],
-
-        // Add these new conflicts to resolve structure_field_declaration issues
-        [$.structure_field_declaration],
-        [$.structure_field_declaration, $.type_specifier, $.identifier],
-        [$.structure_field_declaration, $.array_declarator],
-        [$.structure_field_declaration, $.array_declarator, $.type_specifier],
-        [$.structure_field_declaration, $.structure_declaration_content],
-
-        // Add this conflict to resolve string expression vs literal interpretation
-        [$.string_expression, $.literal],
-
-        // Also add these more specific conflicts to help with string expressions
-        [$.string_expression, $.string_literal],
-
-        // Remove references to string_expression_repeat1 which no longer exists
-        // [$.string_expression_repeat1, $.string_literal],
-
-        // Add conflict between string content and literals specifically
-        [$.string_element, $.literal],
-        [$.string_element, $.string_literal],
-        // [$.string_expression_repeat1, $.literal],
-
-        // Additional conflicts to resolve string expressions and structure fields
-        [$.string_expression, $.string_literal, $.expression],
-        [$.string_element, $.expression, $.string_literal],
-        [$.define_constant_section, $.constant_definition],
-        [$.structure_field, $.array_declarator, $.expression],
-
-        // Add these additional conflicts specifically to address structure parsing
-        // Add specific structure field array conflicts
-        [$.structure_field_declaration, $.array_declarator, $.identifier],
-        [$.structure_field, $.expression, $.identifier],
-        [$.array_declarator, $.expression, $.identifier],
-
-        // Add specific conflicts for structure fields
-        [$.structure_field_declaration, $.structure_field_array_declarator],
-        [$.structure_field_array_declarator, $.expression],
-
-        // Add specific conflicts for string expression parsing
-        [$.string_expression, $.string_element],
-        [$.string_expression, $.first_string_element],
-
-        // Add these conflicts for array initializers
-        [$.array_initializer, $.literal],
-        [$.array_initializer, $.string_literal],
-        [$.array_initializer_repeat1, $.string_literal],
-        [$.array_initializer_repeat1, $.expression],
-        [$.array_initializer, $.expression],
-
-        // Add conflicts for array declarators with identifiers as dimensions
-        [$.multi_dimensional_array_declarator, $.identifier],
-        [$.multi_dimensional_array_declarator, $.array_declarator],
-        [$.multi_dimensional_array_declarator, $.expression],
-
-        // Add conflicts for array declarator interactions
-        [$.array_declarator, $.multi_dimensional_array_declarator],
-        [$.array_declarator, $.multi_dimensional_char_array_declarator],
-        [
-            $.multi_dimensional_array_declarator,
-            $.multi_dimensional_char_array_declarator,
-        ],
-        [$.multi_dimensional_char_array_declarator, $.primitive_type],
-        [$.multi_dimensional_char_array_declarator, $.type_specifier],
-
-        // Fix: Remove references to the undefined symbol char_2d_array_declaration
-        [$.constant_char_2d_array, $.constant_definition],
-        // [$.char_2d_array_declaration, $.constant_definition],  // REMOVE THIS LINE
-        // [$.char_2d_array_declaration, $.expression],           // REMOVE THIS LINE
-        [
-            $.multi_dimensional_array_declarator,
-            $.identifier,
-            $.constant_char_2d_array,
-        ],
-
-        // Array handling conflicts
-        [$.array_dimension, $.identifier],
-        [$.array_dimension, $.expression],
-        [$.array_declarator, $.expression],
-        [$.array_declarator, $.identifier],
+        // [$.type_specifier, $._declarator],
+        // [$.type_specifier, $.expression],
+        // [$.function_declarator, $._function_declaration_declarator],
+        // [$._block_item, $.statement],
+        // [$.char_array_function_declarator],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -268,22 +76,20 @@ module.exports = grammar({
     rules: {
         source_file: ($) =>
             seq(
-                // Allow program_name/module_name and directives in any order
                 repeat(
                     choice(
-                        $.directive,
+                        $.preproc_directive,
                         $.program_name,
                         $.module_name,
                         $.comment,
                     ),
                 ),
-                // Then parse all the sections
                 repeat($.section),
             ),
 
         program_name: ($) =>
             prec.right(
-                PRECEDENCE.DIRECTIVE + 10, // Even higher precedence than directives
+                PREC.DIRECTIVE + 10, // Even higher precedence than directives
                 seq(
                     keywords.program_name, // Keep using the standard keyword
                     "=",
@@ -301,245 +107,190 @@ module.exports = grammar({
 
         _block_item: ($) => choice($.declaration, $.statement),
 
+        // Pre-processor
+        // Compiler directives
+        preproc_directive: ($) =>
+            choice(
+                $.preproc_include,
+                $.preproc_define,
+                $.preproc_if_defined,
+                $.preproc_if_not_defined,
+                $.preproc_else,
+                $.preproc_end_if,
+                $.preproc_warn,
+            ),
+
+        preproc_include: ($) =>
+            prec(
+                PREC.DIRECTIVE,
+                seq(
+                    directives.INCLUDE,
+                    // Only allow single-quoted strings for NetLinx
+                    token(seq("'", /[^']*/, "'")),
+                ),
+            ),
+
+        preproc_define: ($) =>
+            prec(
+                PREC.DIRECTIVE,
+                seq(
+                    directives.DEFINE,
+                    $.identifier,
+                    optional(choice($.number_literal, $.string_literal)),
+                ),
+            ),
+
+        preproc_if_defined: ($) =>
+            prec(PREC.DIRECTIVE, seq(directives.IF_DEFINED, $.identifier)),
+
+        preproc_if_not_defined: ($) =>
+            prec(PREC.DIRECTIVE, seq(directives.IF_NOT_DEFINED, $.identifier)),
+
+        preproc_else: ($) => prec(PREC.DIRECTIVE, directives.ELSE),
+
+        preproc_end_if: ($) => prec(PREC.DIRECTIVE, directives.END_IF),
+
+        preproc_warn: ($) =>
+            prec(
+                PREC.DIRECTIVE,
+                seq(directives.WARN, token(seq("'", /[^']*/, "'"))),
+            ),
+
+        // Main Grammar
+
         section: ($) =>
             choice(
                 $.define_device_section,
-                // $.define_combine_section,
                 $.define_constant_section,
                 $.define_type_section,
-                // $.define_variable_section,
-                // $.define_connect_level_section,
-                // $.define_latching_section,
-                // $.define_mutually_exclusive_section,
-                // $.define_toggling_section,
-                // $.define_call_section,
-                // $.define_function_section,
-                // $.define_start_section,
-                // $.define_event_section,
-                // $.define_program_section,
+                $.define_variable_section,
+                $.define_function_section,
             ),
 
         define_device_section: ($) =>
             prec(
-                PRECEDENCE.SECTION_DEFINITION,
+                PREC.SECTION_DEFINITION,
                 seq(keywords.define_device, repeat($.device_definition)),
             ),
 
         device_definition: ($) =>
             seq($.identifier, "=", $.device_literal, optional(";")),
 
-        define_combine_section: ($) =>
-            seq(keywords.define_combine, repeat($.combine_definition)),
-
-        combine_definition: ($) => seq("(", commaSep1($.identifier), ")"),
-
         define_constant_section: ($) =>
             seq(keywords.define_constant, repeat($.constant_definition)),
 
         constant_definition: ($) =>
             prec.right(
-                5, // High precedence for constant definitions
+                5,
                 seq(
                     optional($.type_qualifier),
                     optional($.type_specifier),
                     field("name", $.identifier),
-                    optional(field("array_declarator", $.array_declarator)),
+                    optional(
+                        field(
+                            "dimensions",
+                            repeat1(seq("[", optional($.expression), "]")),
+                        ),
+                    ),
                     "=",
                     field(
                         "value",
                         choice(
-                            prec.right(4, $.expression),
-                            prec.right(4, $.string_literal),
-                            prec.right(9, $.array_initializer),
+                            $.expression,
+                            $.string_literal,
+                            $.initializer_list,
                         ),
                     ),
                     optional(";"),
                 ),
             ),
 
-        // Use separate rules for different array declaration patterns - keeping only one implementation
+        define_type_section: ($) =>
+            seq(keywords.define_type, optional(repeat1($.type_specifier))),
 
-        // 1. Single-dimension array declarator (all types, optional size)
-        array_declarator: ($) =>
+        define_variable_section: ($) =>
+            seq(keywords.define_variable, repeat($.global_variable_definition)),
+
+        global_variable_definition: ($) =>
             prec.right(
-                10,
-                choice(
-                    // Direct array declarator with no declarator prefix
-                    // For cases like: CHAR ON_CMD[] = 'PWR-ON'
-                    seq(
-                        token.immediate("["), // Force immediate attachment
-                        token.immediate("]"), // Force immediate attachment
-                    ),
-
-                    // Normal array declarator with declarator prefix
-                    // For most other array declarations
-                    seq(
-                        field("declarator", $._declarator),
-                        field("dimensions", repeat1($.array_dimension)),
-                    ),
-                ),
-            ),
-
-        // Multi-dimensional array handling with consolidated functionality
-        multi_dimensional_array_declarator: ($) =>
-            prec.right(
-                25, // Higher precedence
-                choice(
-                    // Specialized pattern for [][IDENTIFIER] common in NetLinx
-                    seq("[", "]", "[", $.identifier, "]"),
-
-                    // Standard numeric dimensions
-                    seq(
-                        // First dimension
-                        "[",
-                        field("size1", optional($.expression)),
-                        "]",
-                        // Second dimension
-                        "[",
-                        field("size2", optional($.expression)),
-                        "]",
-                        // Optional third dimension
-                        optional(
-                            seq(
-                                "[",
-                                field("size3", optional($.expression)),
-                                "]",
-                            ),
-                        ),
-                    ),
-
-                    // Empty dimensions followed by identifier dimension (for char arrays)
-                    seq(
-                        // One or more empty dimensions
-                        repeat1(seq("[", "]")),
-                        // Last dimension with size
-                        "[",
-                        field("last_dimension_size", $.expression),
-                        "]",
-                    ),
-
-                    // General case for array of arrays with optional sizes
-                    seq(
-                        field("declarator", $.array_declarator),
-                        repeat1(
-                            seq(
-                                "[",
-                                field("size", optional($.expression)),
-                                "]",
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-
-        // Multi-dimensional char array declarator remains separate for semantic clarity
-        multi_dimensional_char_array_declarator: ($) =>
-            prec.right(
-                15, // High precedence for clarity
+                5,
                 seq(
-                    // First check if this is a char array
-                    field(
-                        "type_specifier",
-                        choice(
-                            alias(token(keywords.char), $.primitive_type),
-                            alias(token(keywords.widechar), $.primitive_type),
-                        ),
-                    ),
+                    optional($.type_qualifier),
+                    optional($.type_specifier),
                     field("name", $.identifier),
-                    // One or more empty dimensions
-                    repeat1(seq("[", "]")),
-                    // Last dimension must have a size
-                    "[",
-                    field("last_dimension_size", $.expression),
-                    "]",
-                ),
-            ),
-
-        // Special case rule for char 2D arrays with constant in second dimension
-        constant_char_2d_array: ($) =>
-            prec.right(
-                30, // Highest precedence of all array rules
-                seq(
-                    field("type_qualifier", optional($.type_qualifier)),
-                    field(
-                        "type",
-                        choice(
-                            alias(token(keywords.char), $.primitive_type),
-                            alias(token(keywords.widechar), $.primitive_type),
+                    optional(
+                        field(
+                            "dimensions",
+                            repeat1(seq("[", optional($.expression), "]")),
                         ),
                     ),
-                    field("name", $.identifier),
-                    "[",
-                    "]", // First dimension empty
-                    "[",
-                    $.identifier,
-                    "]", // Second dimension is identifier
-                    "=",
-                    field("value", $.array_initializer),
-                ),
-            ),
-
-        // REMOVE duplicate multi_dimensional_array_declarator rule that was around line 539
-
-        // REMOVE duplicate array_declarator rule that was around line 575
-
-        // Add specialized array initializer for arrays of constants
-        array_initializer: ($) =>
-            prec.right(
-                10, // Increase precedence from 6 to 10
-                seq(
-                    "{",
-                    field(
-                        "elements",
-                        optional(
-                            alias(
-                                seq(
-                                    choice(
-                                        $.expression,
-                                        $.string_literal,
-                                        $.array_initializer, // Support nested arrays
-                                    ),
-                                    repeat(
-                                        seq(
-                                            ",",
-                                            choice(
-                                                $.expression,
-                                                $.string_literal,
-                                                $.array_initializer,
-                                            ),
-                                        ),
-                                    ),
-                                ),
-                                $.array_initializer_elements,
+                    optional("="),
+                    optional(
+                        field(
+                            "value",
+                            choice(
+                                $.expression,
+                                $.string_literal,
+                                $.initializer_list,
                             ),
                         ),
                     ),
-                    optional(","), // Allow trailing comma
-                    "}",
-                ),
-            ),
-
-        // Create specific rule for array initializer elements
-        array_initializer_repeat1: ($) =>
-            prec.left(
-                8, // Lower precedence than array_initializer
-                seq(
-                    ",",
-                    choice($.expression, $.string_literal, $.array_initializer),
+                    optional(";"),
                 ),
             ),
 
         define_function_section: ($) =>
-            seq(
-                keywords.define_function,
-                prec.right(
-                    2, // Use higher precedence to resolve conflicts
-                    $.function_definition,
+            seq(keywords.define_function, $.function_definition),
+
+        _abstract_declarator: ($) => choice($.abstract_array_declarator),
+
+        array_declarator: ($) =>
+            prec(
+                1,
+                seq(
+                    field("declarator", $._declarator),
+                    "[",
+                    repeat(choice($.type_qualifier, "static")),
+                    field("size", optional(choice($.expression, "*"))),
+                    "]",
                 ),
             ),
 
-        define_start_section: ($) =>
-            seq(keywords.define_start, repeat($.statement)),
+        array_field_declarator: ($) =>
+            prec(
+                1,
+                seq(
+                    field("declarator", $._field_declarator),
+                    "[",
+                    repeat(choice($.type_qualifier, "static")),
+                    field("size", optional(choice($.expression, "*"))),
+                    "]",
+                ),
+            ),
+
+        array_type_declarator: ($) =>
+            prec(
+                1,
+                seq(
+                    field("declarator", $._type_declarator),
+                    "[",
+                    repeat(choice($.type_qualifier, "static")),
+                    field("size", optional(choice($.expression, "*"))),
+                    "]",
+                ),
+            ),
+
+        abstract_array_declarator: ($) =>
+            prec(
+                1,
+                seq(
+                    field("declarator", optional($._abstract_declarator)),
+                    "[",
+                    repeat(choice($.type_qualifier, "static")),
+                    field("size", optional(choice($.expression, "*"))),
+                    "]",
+                ),
+            ),
 
         init_declarator: ($) =>
             seq(
@@ -562,35 +313,34 @@ module.exports = grammar({
             ),
 
         type_specifier: ($) =>
-            prec.right(
-                1, // Increase from 0 to 1 to resolve conflict with structure_declaration
-                choice(
-                    $.struct_specifier,
-                    $.primitive_type,
-                    // Use identifier directly instead of _type_identifier
-                    $.identifier,
-                ),
-            ),
+            choice($.struct_specifier, $.primitive_type, $.identifier),
 
         struct_specifier: ($) =>
-            prec.right(
-                seq(
-                    keywords.struct,
-                    choice(
-                        seq(
-                            // Change this line to use identifier directly instead of _type_identifier
-                            field("name", $.identifier),
-                            field("body", optional($.field_declaration_list)),
-                        ),
+            seq(
+                choice(keywords.struct, keywords.structure),
+                choice(
+                    seq(
+                        field("name", $.identifier),
+                        field("body", $.field_declaration_list),
                     ),
                 ),
             ),
 
         field_declaration_list: ($) =>
-            seq("{", repeat($.field_declaration), "}"),
+            seq("{", repeat1($.field_declaration), "}"),
 
         field_declaration: ($) =>
-            seq($.type_specifier, $.identifier, optional(";")),
+            seq(
+                field("type", $.type_specifier),
+                field("name", $.identifier),
+                optional(
+                    field(
+                        "dimensions",
+                        repeat1(seq("[", optional($.expression), "]")),
+                    ),
+                ),
+                optional(";"),
+            ),
 
         primitive_type: (_) =>
             token(
@@ -618,7 +368,19 @@ module.exports = grammar({
 
         function_definition: ($) =>
             seq(
-                field("declarator", $._declarator),
+                optional(
+                    choice(
+                        $.type_specifier,
+                        seq(
+                            alias(keywords.char, $.primitive_type),
+                            "[",
+                            field("size", $.expression),
+                            "]",
+                        ),
+                    ),
+                ),
+                field("name", $.identifier),
+                field("parameters", $.parameter_list),
                 field("body", $.compound_statement),
             ),
 
@@ -652,13 +414,18 @@ module.exports = grammar({
                 ),
             ),
 
-        // Function that returns an array - moved earlier in the file
-        array_function_declarator: ($) =>
+        char_array_function_declarator: ($) =>
             prec.right(
-                PRECEDENCE.ARRAY_FUNCTION, // Use higher precedence than _declarator
+                PREC.ARRAY_FUNCTION, // Use higher precedence than _declarator
                 seq(
-                    field("type_specifier", optional($.type_specifier)),
-                    field("array_spec", $.array_declarator),
+                    field(
+                        "return_type",
+                        alias(keywords.char, $.primitive_type),
+                    ),
+                    "[",
+                    field("size", $.expression),
+                    "]",
+                    field("name", $.identifier),
                     field("parameters", $.parameter_list),
                 ),
             ),
@@ -671,7 +438,7 @@ module.exports = grammar({
                     $.array_declarator,
                     $.parenthesized_declarator,
                     $.identifier,
-                    $.array_function_declarator,
+                    $.char_array_function_declarator,
                 ),
             ),
 
@@ -712,17 +479,12 @@ module.exports = grammar({
                 $.primitive_type,
             ),
 
-        _abstract_declarator: ($) =>
-            choice(
-                $.abstract_array_declarator,
-                $.abstract_parenthesized_declarator,
-            ),
-
         function_declarator: ($) =>
             prec.right(
                 1,
                 seq(
-                    field("declarator", $._declarator),
+                    field("return_type", optional($.type_specifier)),
+                    field("name", $.identifier),
                     field("parameters", $.parameter_list),
                 ),
             ),
@@ -737,20 +499,17 @@ module.exports = grammar({
             ),
 
         parenthesized_declarator: ($) =>
-            prec.dynamic(
-                PRECEDENCE.PAREN_DECLARATOR,
-                seq("(", $._declarator, ")"),
-            ),
+            prec.dynamic(PREC.PAREN_DECLARATOR, seq("(", $._declarator, ")")),
 
         parenthesized_field_declarator: ($) =>
             prec.dynamic(
-                PRECEDENCE.PAREN_DECLARATOR,
+                PREC.PAREN_DECLARATOR,
                 seq("(", optional($._field_declarator), ")"),
             ),
 
         parenthesized_type_declarator: ($) =>
             prec.dynamic(
-                PRECEDENCE.PAREN_DECLARATOR,
+                PREC.PAREN_DECLARATOR,
                 seq("(", optional($._type_declarator), ")"),
             ),
 
@@ -775,45 +534,9 @@ module.exports = grammar({
                 ),
             ),
 
-        array_field_declarator: ($) =>
-            prec(
-                1,
-                seq(
-                    field("declarator", $._field_declarator),
-                    "[",
-                    repeat(choice($.type_qualifier)),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
-                ),
-            ),
-
-        array_type_declarator: ($) =>
-            prec(
-                1,
-                seq(
-                    field("declarator", $._type_declarator),
-                    "[",
-                    repeat(choice($.type_qualifier)),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
-                ),
-            ),
-
-        abstract_array_declarator: ($) =>
-            prec(
-                1,
-                seq(
-                    field("declarator", optional($._abstract_declarator)),
-                    "[",
-                    repeat(choice($.type_qualifier)),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
-                ),
-            ),
-
         parameter_list: ($) =>
             prec.left(
-                PRECEDENCE.CALL + 1,
+                PREC.CALL + 1,
                 seq(
                     "(",
                     choice(
@@ -838,18 +561,18 @@ module.exports = grammar({
         /**
          * Statements
          */
-        statement: ($) => choice($.case_statement, $._non_case_statement),
+        statement: ($) => choice(/*$.case_statement,*/ $._non_case_statement),
 
         _non_case_statement: ($) =>
             choice(
-                $.compound_statement,
-                $.if_statement,
-                $.switch_statement,
-                $.while_statement,
-                $.for_statement,
-                $.return_statement,
-                $.break_statement,
-                $.continue_statement,
+                // $.compound_statement,
+                // $.if_statement,
+                // $.switch_statement,
+                // $.while_statement,
+                // $.for_statement,
+                // $.return_statement,
+                // $.break_statement,
+                // $.continue_statement,
                 $.expression_statement,
             ),
 
@@ -863,94 +586,10 @@ module.exports = grammar({
                         optional(";"),
                     ),
                     // Dedicated handling for NetLinx custom functions as statements
-                    prec.dynamic(15, $.netlinx_custom_function),
+                    // prec.dynamic(15, $.netlinx_custom_function),
                     ";",
                 ),
             ),
-
-        if_statement: ($) =>
-            prec.right(
-                seq(
-                    keywords.if,
-                    field("condition", $.parenthesized_expression),
-                    field("consequence", $.statement),
-                    optional(field("alternative", $.else_clause)),
-                ),
-            ),
-
-        else_clause: ($) => seq(keywords.else, $.statement),
-
-        switch_statement: ($) =>
-            seq(
-                keywords.switch,
-                field("condition", $.parenthesized_expression),
-                field("body", $.compound_statement),
-            ),
-
-        case_statement: ($) =>
-            prec.right(
-                seq(
-                    choice(
-                        seq(keywords.case, field("value", $.expression)),
-                        keywords.default,
-                    ),
-                    ":",
-                    repeat(choice($._non_case_statement, $.declaration)),
-                ),
-            ),
-
-        while_statement: ($) =>
-            seq(
-                keywords.while,
-                field("condition", $.parenthesized_expression),
-                field("body", $.statement),
-            ),
-
-        for_statement: ($) =>
-            seq(
-                keywords.for,
-                "(",
-                $._for_statement_body,
-                ")",
-                field("body", $.statement),
-            ),
-
-        _for_statement_body: ($) =>
-            seq(
-                choice(
-                    seq(
-                        field(
-                            "initializer",
-                            optional(choice($.expression, $.comma_expression)),
-                        ),
-                        ";",
-                    ),
-                ),
-                field(
-                    "condition",
-                    optional(choice($.expression, $.comma_expression)),
-                ),
-                ";",
-                field(
-                    "update",
-                    optional(choice($.expression, $.comma_expression)),
-                ),
-            ),
-
-        return_statement: ($) =>
-            prec.right(
-                seq(
-                    keywords.return,
-                    optional(choice($.expression, $.comma_expression)),
-                    optional(";"),
-                ),
-            ),
-
-        // Add explicit right associativity to resolve the semicolon ambiguity
-        break_statement: (_) => prec.right(seq(keywords.break, optional(";"))),
-
-        continue_statement: (_) =>
-            prec.right(seq(keywords.continue, optional(";"))),
 
         /**
          * Expressions
@@ -968,9 +607,9 @@ module.exports = grammar({
                 $.update_expression,
                 $.call_expression,
                 // Add simple identifier as a function reference without calling it
-                $.function_reference,
+                // $.function_reference,
                 $.field_expression,
-                $.array_access_expression,
+                // $.array_access_expression,
                 $.identifier,
                 $.literal,
                 $.string_expression,
@@ -979,7 +618,7 @@ module.exports = grammar({
 
         assignment_expression: ($) =>
             prec.right(
-                PRECEDENCE.ASSIGNMENT,
+                PREC.ASSIGNMENT,
                 seq(
                     field("left", $._assignment_left_expression),
                     field("operator", "="),
@@ -992,13 +631,13 @@ module.exports = grammar({
                 $.identifier,
                 $.call_expression,
                 $.field_expression,
-                $.array_access_expression,
+                // $.array_access_expression,
                 $.parenthesized_expression,
             ),
 
         unary_expression: ($) =>
             prec.right(
-                PRECEDENCE.UNARY,
+                PREC.UNARY,
                 seq(
                     field("operator", choice("!", "~", "-", "+")),
                     field("argument", $.expression),
@@ -1007,70 +646,52 @@ module.exports = grammar({
 
         binary_expression: ($) => {
             const table = [
-                ["+", PRECEDENCE.ADD],
-                ["-", PRECEDENCE.ADD],
-                ["*", PRECEDENCE.MULTIPLY],
-                ["/", PRECEDENCE.MULTIPLY],
-                ["%", PRECEDENCE.MULTIPLY],
-                ["||", PRECEDENCE.LOGICAL_OR],
-                ["&&", PRECEDENCE.LOGICAL_AND],
-                ["|", PRECEDENCE.INCLUSIVE_OR],
-                ["^", PRECEDENCE.EXCLUSIVE_OR],
-                ["&", PRECEDENCE.BITWISE_AND],
-                ["==", PRECEDENCE.EQUAL],
-                ["!=", PRECEDENCE.EQUAL],
-                [">", PRECEDENCE.RELATIONAL],
-                [">=", PRECEDENCE.RELATIONAL],
-                ["<=", PRECEDENCE.RELATIONAL],
-                ["<", PRECEDENCE.RELATIONAL],
-                ["<<", PRECEDENCE.SHIFT],
-                [">>", PRECEDENCE.SHIFT],
+                ["+", PREC.ADD],
+                ["-", PREC.ADD],
+                ["*", PREC.MULTIPLY],
+                ["/", PREC.MULTIPLY],
+                ["%", PREC.MULTIPLY],
+                ["||", PREC.LOGICAL_OR],
+                ["&&", PREC.LOGICAL_AND],
+                ["|", PREC.INCLUSIVE_OR],
+                ["^", PREC.EXCLUSIVE_OR],
+                ["&", PREC.BITWISE_AND],
+                ["==", PREC.EQUAL],
+                ["!=", PREC.EQUAL],
+                [">", PREC.RELATIONAL],
+                [">=", PREC.RELATIONAL],
+                ["<=", PREC.RELATIONAL],
+                ["<", PREC.RELATIONAL],
+                ["<<", PREC.SHIFT],
+                [">>", PREC.SHIFT],
             ];
 
-            return prec.dynamic(
-                PRECEDENCE.DEFAULT,
-                choice(
-                    ...table.map(([operator, precedence]) => {
-                        return prec.left(
-                            precedence,
-                            seq(
-                                field("left", $.expression),
-                                // @ts-ignore
-                                field("operator", operator),
-                                field("right", $.expression),
-                            ),
-                        );
-                    }),
-                ),
+            return choice(
+                ...table.map(([operator, precedence]) => {
+                    return prec.left(
+                        precedence,
+                        seq(
+                            field("left", $.expression),
+                            // @ts-ignore
+                            field("operator", operator),
+                            field("right", $.expression),
+                        ),
+                    );
+                }),
             );
         },
 
         update_expression: ($) => {
             const argument = field("argument", $.expression);
             const operator = field("operator", choice("--", "++"));
-            return prec.right(PRECEDENCE.UNARY, seq(argument, operator));
+            return prec.right(PREC.UNARY, seq(argument, operator));
         },
 
         call_expression: ($) =>
-            prec.left(
-                PRECEDENCE.CALL,
+            prec(
+                PREC.CALL,
                 seq(
-                    field(
-                        "function",
-                        choice(
-                            $.netlinx_function_call,
-                            $.identifier,
-                            alias(
-                                $.parenthesized_expression,
-                                $.function_expression,
-                            ),
-                            alias($.field_expression, $.method_expression),
-                            alias(
-                                $.array_access_expression,
-                                $.indexed_function,
-                            ),
-                        ),
-                    ),
+                    field("function", $.expression),
                     field("arguments", $.argument_list),
                 ),
             ),
@@ -1078,7 +699,7 @@ module.exports = grammar({
         comma_expression: ($) =>
             prec.right(
                 // Change to right associativity
-                PRECEDENCE.DEFAULT, // Lower precedence than argument_list
+                PREC.DEFAULT, // Lower precedence than argument_list
                 seq(
                     field("left", $.expression),
                     ",",
@@ -1088,7 +709,7 @@ module.exports = grammar({
 
         argument_list: ($) =>
             prec.left(
-                PRECEDENCE.CALL + 2, // Increase precedence for argument lists
+                // PREC.CALL + 2, // Increase precedence for argument lists
                 seq(
                     "(",
                     commaSep(choice($.expression, $.compound_statement)),
@@ -1097,41 +718,28 @@ module.exports = grammar({
             ),
 
         field_expression: ($) =>
-            prec.dynamic(
-                PRECEDENCE.FIELD,
-                choice(
-                    // Standard field access
+            seq(
+                prec(
+                    PREC.FIELD,
                     seq(
-                        field(
-                            "object",
-                            choice(
-                                $.identifier,
-                                alias($.call_expression, $.method_object),
-                                alias(
-                                    $.array_access_expression,
-                                    $.indexed_object,
-                                ),
-                                $.parenthesized_expression,
-                            ),
-                        ),
-                        field("operator", choice(".", ":")),
-                        field(
-                            "field",
-                            choice($._field_identifier, $.identifier),
-                        ),
+                        field("argument", $.expression),
+                        // field("operator", choice(".", "->")),
+                        // No arrow pointers in NetLinx, only dot notation
+                        field("operator", choice(".")),
                     ),
-                    // Special case for NetLinX data field access
-                    $.data_field_access,
-                    // Device field access
-                    $.device_field_access,
                 ),
+                field("field", $._field_identifier),
             ),
 
         parenthesized_expression: ($) =>
-            prec.left(
-                PRECEDENCE.CALL, // Keep at CALL precedence but lower than argument_list
-                seq("(", choice($.expression, $.comma_expression), ")"),
+            seq(
+                "(",
+                choice($.expression, $.comma_expression, $.compound_statement),
+                ")",
             ),
+
+        // String Expressions in NetLinx are like an interpolated string
+        string_expression: ($) => seq('"', commaSep1($.expression), '"'),
 
         initializer_list: ($) =>
             seq(
@@ -1150,7 +758,16 @@ module.exports = grammar({
         initializer_pair: ($) =>
             choice(
                 seq(
-                    field("designator", repeat1(choice($.field_designator))),
+                    field(
+                        "designator",
+                        repeat1(
+                            choice(
+                                // $.subscript_designator,
+                                $.field_designator,
+                                // $.subscript_range_designator,
+                            ),
+                        ),
+                    ),
                     "=",
                     field("value", choice($.expression, $.initializer_list)),
                 ),
@@ -1164,86 +781,23 @@ module.exports = grammar({
         field_designator: ($) => seq(".", $._field_identifier),
 
         string_literal: ($) =>
-            prec.left(
-                PRECEDENCE.CALL + 20, // Increased precedence from 15 to 20
-                // Single-quoted string (common in NetLinx) - explicit token without internal parsing
-                token(seq("'", /[^']*/, "'")),
-            ),
-
-        string_expression: ($) =>
-            prec.dynamic(
-                // Change from prec.left to prec.dynamic for better conflict resolution
-                PRECEDENCE.CALL - 1, // Lower precedence than string_literal
-                seq(
-                    '"',
-                    field(
-                        "first_element",
-                        alias(
-                            choice($.string_literal, $.expression),
-                            $.first_string_element,
-                        ),
-                    ),
-                    repeat(
-                        seq(
-                            ",",
-                            field(
-                                "element",
-                                alias(
-                                    choice($.string_literal, $.expression),
-                                    $.string_element,
-                                ),
-                            ),
-                        ),
-                    ),
-                    '"',
-                ),
-            ),
-
-        // Add separate rule for first element in string expression
-        first_string_element: ($) =>
-            prec.dynamic(
-                PRECEDENCE.CALL,
-                choice($.string_literal, $.expression),
-            ),
-
-        string_element: ($) =>
-            prec.dynamic(
-                PRECEDENCE.CALL,
-                choice($.string_literal, $.expression),
-            ),
-
-        // Removed string_expression_repeat1 rule as it's no longer needed
-        // Instead we're explicitly handling the first element and additional elements separately
-
-        string_interpolation: ($) =>
-            prec(
-                PRECEDENCE.CALL + 1,
-                // In NetLinX, this is essentially a string expression (with commas)
-                // but we'll keep the name string_interpolation as requested
-                alias($.string_expression, $.interpolated_string),
+            seq(
+                "'",
+                alias(token.immediate(prec(1, /[^'\n]*/)), $.string_content),
+                "'",
             ),
 
         literal: ($) => choice($.number_literal, $.string_literal),
 
-        // Update device_literal to properly support constants in expressions
         device_literal: ($) =>
             prec.right(
-                PRECEDENCE.FIELD + 10, // High precedence
+                PREC.FIELD + 10, // High precedence
                 seq(
-                    field(
-                        "device",
-                        prec.dynamic(PRECEDENCE.FIELD + 5, $.expression),
-                    ),
+                    field("device", prec.dynamic(PREC.FIELD + 5, $.expression)),
                     ":",
-                    field(
-                        "port",
-                        prec.dynamic(PRECEDENCE.FIELD + 5, $.expression),
-                    ),
+                    field("port", prec.dynamic(PREC.FIELD + 5, $.expression)),
                     ":",
-                    field(
-                        "system",
-                        prec.dynamic(PRECEDENCE.FIELD + 5, $.expression),
-                    ),
+                    field("system", prec.dynamic(PREC.FIELD + 5, $.expression)),
                 ),
             ),
 
@@ -1252,6 +806,9 @@ module.exports = grammar({
         decimal_literal: (_) => /[-+]?\d+/,
 
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
+
+        true: (_) => token(choice("TRUE", "true")),
+        false: (_) => token(choice("FALSE", "false")),
 
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 
@@ -1271,463 +828,6 @@ module.exports = grammar({
                     seq("//", /(\\+(.|\r?\n)|[^\\\n])*/),
                     seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
                     seq("(*", /[^*]*\*+([^\(*][^*]*\*+)*/, ")"),
-                ),
-            ),
-
-        // Section definitions
-        define_type_section: ($) =>
-            prec.dynamic(
-                PRECEDENCE.SECTION_DEFINITION + 5, // Higher precedence than other sections
-                seq(keywords.define_type, optional(repeat1($.type_definition))),
-            ),
-
-        type_definition: ($) =>
-            prec.dynamic(
-                PRECEDENCE.SECTION_DEFINITION + 3,
-                seq($.structure_declaration),
-            ),
-
-        define_variable_section: ($) =>
-            seq(keywords.define_variable, repeat($.variable_definition)),
-
-        variable_definition: ($) =>
-            prec.right(
-                1, // Keep higher precedence than type_specifier
-                seq(
-                    optional($.type_qualifier),
-                    optional($.type_specifier),
-                    field("name", $.identifier),
-                    optional(field("array_declarator", $.array_declarator)),
-                    optional(seq("=", $.expression)),
-                    optional(";"),
-                ),
-            ),
-
-        define_connect_level_section: ($) =>
-            seq(
-                keywords.define_connect_level,
-                repeat($.connect_level_definition),
-            ),
-
-        connect_level_definition: ($) =>
-            seq(
-                $.device_literal,
-                ".",
-                $.decimal_literal,
-                "->",
-                $.device_literal,
-                ".",
-                $.decimal_literal,
-            ),
-
-        define_latching_section: ($) =>
-            seq(keywords.define_latching, repeat($.latching_definition)),
-
-        latching_definition: ($) => seq("(", commaSep1($.identifier), ")"),
-
-        define_mutually_exclusive_section: ($) =>
-            seq(
-                keywords.define_mutually_exclusive,
-                repeat($.mutually_exclusive_definition),
-            ),
-
-        mutually_exclusive_definition: ($) =>
-            seq("(", commaSep1($.identifier), ")"),
-
-        define_toggling_section: ($) =>
-            seq(keywords.define_toggling, repeat($.toggling_definition)),
-
-        toggling_definition: ($) => seq("(", commaSep1($.identifier), ")"),
-
-        define_call_section: ($) =>
-            seq(keywords.define_call, repeat($.call_definition)),
-
-        call_definition: ($) => seq($.identifier, $.argument_list),
-
-        define_event_section: ($) =>
-            seq(keywords.define_event, repeat($.event_definition)),
-
-        event_definition: ($) =>
-            seq($.event_type, field("body", $.event_block)),
-
-        event_block: ($) => prec(1, seq("{", repeat($.subevent_handler), "}")),
-
-        subevent_handler: ($) =>
-            prec(1, seq($.subevent_type, ":", $.compound_statement)),
-
-        subevent_type: (_) =>
-            choice(
-                /ONLINE/i,
-                /OFFLINE/i,
-                /STRING/i,
-                /COMMAND/i,
-                /ERROR/i,
-                /ONERROR/i,
-                /PUSH/i,
-                /RELEASE/i,
-                /HOLD/i,
-            ),
-
-        event_type: ($) =>
-            prec.right(
-                PRECEDENCE.EVENT_TYPE,
-                choice(
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.button_event,
-                        field("device", $._event_param_expression),
-                        field("channel", $._event_param_expression),
-                    ),
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.channel_event,
-                        field("device", $._event_param_expression),
-                        field("channel", $._event_param_expression),
-                    ),
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.level_event,
-                        field("device", $._event_param_expression),
-                        field("level", $._event_param_expression),
-                    ),
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.data_event,
-                        field("device", $._event_param_expression),
-                    ),
-                    seq(
-                        keywords.timeline_event,
-                        field("timeline", $._event_param_expression),
-                    ),
-                ),
-            ),
-
-        // Special rule for expressions in event parameters that prevents binary operation conflicts
-        _event_param_expression: ($) =>
-            prec(
-                PRECEDENCE.EVENT_PARAM, // Use named constant instead of raw number
-                choice(
-                    alias($.identifier, $.event_identifier),
-                    alias($.decimal_literal, $.event_literal),
-                    alias($.parenthesized_expression, $.event_expression),
-                ),
-            ),
-
-        define_program_section: ($) =>
-            seq(
-                keywords.define_program,
-                repeat(choice($.statement, $.device_assignment)),
-            ),
-
-        device_assignment: ($) =>
-            prec(
-                PRECEDENCE.CALL + 3, // Higher precedence than other expression types
-                seq(
-                    "[",
-                    field("device", $.expression),
-                    optional(seq(",", field("channel", $.expression))),
-                    "]",
-                    "=",
-                    field("value", $.parenthesized_expression),
-                ),
-            ),
-
-        // Compiler directives
-        directive: ($) =>
-            choice(
-                $.include_directive,
-                $.define_directive,
-                $.if_defined_directive,
-                $.if_not_defined_directive,
-                $.else_directive,
-                $.end_if_directive,
-                $.warn_directive,
-            ),
-
-        include_directive: ($) =>
-            prec(
-                PRECEDENCE.DIRECTIVE,
-                seq(
-                    directives.INCLUDE,
-                    // Only allow single-quoted strings for NetLinx
-                    token(seq("'", /[^']*/, "'")),
-                ),
-            ),
-
-        define_directive: ($) =>
-            prec(
-                PRECEDENCE.DIRECTIVE,
-                seq(
-                    directives.DEFINE,
-                    $.identifier,
-                    optional(choice($.number_literal, $.string_literal)),
-                ),
-            ),
-
-        if_defined_directive: ($) =>
-            prec(
-                PRECEDENCE.DIRECTIVE,
-                seq(directives.IF_DEFINED, $.identifier),
-            ),
-
-        if_not_defined_directive: ($) =>
-            prec(
-                PRECEDENCE.DIRECTIVE,
-                seq(directives.IF_NOT_DEFINED, $.identifier),
-            ),
-
-        else_directive: ($) => prec(PRECEDENCE.DIRECTIVE, directives.ELSE),
-
-        end_if_directive: ($) => prec(PRECEDENCE.DIRECTIVE, directives.END_IF),
-
-        warn_directive: ($) =>
-            prec(
-                PRECEDENCE.DIRECTIVE,
-                seq(
-                    directives.WARN,
-                    // Only allow single-quoted strings for NetLinx
-                    token(seq("'", /[^']*/, "'")),
-                ),
-            ),
-
-        // NetLinX specific functions
-        netlinx_function_call: ($) =>
-            prec(
-                PRECEDENCE.CALL,
-                choice(
-                    $.send_command,
-                    $.send_string,
-                    $.send_level,
-                    $.create_buffer,
-                    $.clear_buffer,
-                    $.set_length_array,
-                    $.timeline_function,
-                ),
-            ),
-
-        send_command: ($) =>
-            seq(
-                keywords.send_command,
-                field("device", $.expression),
-                ",",
-                field("command", choice($.string_literal, $.identifier)),
-            ),
-
-        send_string: ($) =>
-            seq(
-                keywords.send_string,
-                field("device", $.expression),
-                ",",
-                field("string", choice($.string_literal, $.identifier)),
-            ),
-
-        send_level: ($) =>
-            seq(
-                keywords.send_level,
-                field("device", $.expression),
-                ",",
-                field("level", $.expression),
-                ",",
-                field("value", $.expression),
-            ),
-
-        create_buffer: ($) =>
-            prec.right(
-                seq(
-                    keywords.create_buffer,
-                    field("buffer", $.identifier),
-                    optional(seq(",", field("size", $.expression))),
-                ),
-            ),
-
-        clear_buffer: ($) =>
-            seq(keywords.clear_buffer, field("buffer", $.identifier)),
-
-        set_length_array: functions.set_length_array,
-        timeline_function: functions.timeline_function,
-        timeline_create: functions.timeline_create,
-        timeline_kill: functions.timeline_kill,
-
-        // DATA structure field access
-        data_field_access: ($) =>
-            prec(
-                PRECEDENCE.FIELD + 1,
-                seq(
-                    netlinx.data,
-                    ".",
-                    field(
-                        "field",
-                        choice(
-                            /TEXT/i,
-                            /ONLINE/i,
-                            /OFFLINE/i,
-                            /COMMAND/i,
-                            /VALUE/i,
-                        ),
-                    ),
-                ),
-            ),
-
-        // First, let's define the structure_declaration rule correctly
-        structure_declaration: ($) =>
-            prec.dynamic(
-                40, // Increased precedence from 30 to 40 for better priority
-                seq(
-                    field(
-                        "keyword",
-                        choice(keywords.struct, keywords.structure),
-                    ),
-                    field("name", $.identifier),
-                    field(
-                        "body",
-                        alias($.structure_body, $.structure_definition_body),
-                    ),
-                ),
-            ),
-
-        // Dedicated structure body rule with higher precedence
-        structure_body: ($) =>
-            prec.dynamic(
-                35, // Increased from 28 to 35
-                seq(
-                    "{", // Use immediate to force brace attachment
-                    seq(
-                        repeat1(
-                            choice(
-                                alias(
-                                    $.structure_field_declaration,
-                                    $.structure_field,
-                                ),
-                                $.comment,
-                            ),
-                        ),
-                    ),
-                    "}",
-                ),
-            ),
-
-        // Enhanced structure field with higher priority and better field annotations
-        structure_field: ($) =>
-            prec.right(
-                15, // Increased from 13 to help with conflicts
-                seq(
-                    field("type", $.type_specifier),
-                    field("name", $.identifier),
-                    optional(field("array_declarator", $.array_declarator)),
-                    optional(";"),
-                ),
-            ),
-
-        // Completely separate field declaration rule for structures to avoid conflicts
-        structure_field_declaration: ($) =>
-            prec.dynamic(
-                30, // Increased from 26
-                seq(
-                    field("type", $.type_specifier),
-                    field("name", $.identifier),
-                    optional(field("array_declarator", $.array_declarator)),
-                    optional(";"),
-                ),
-            ),
-
-        // More explicit structure content rule with higher precedence
-        structure_declaration_content: ($) =>
-            prec.right(
-                18,
-                repeat1(
-                    choice(
-                        alias($.structure_field_declaration, $.structure_field),
-                        $.comment,
-                    ),
-                ),
-            ),
-
-        // Function reference without calling it
-        function_reference: ($) =>
-            prec.right(PRECEDENCE.FUNCTION_REF, $.identifier),
-
-        // Add the missing netlinx_custom_function rule
-        netlinx_custom_function: ($) =>
-            choice(
-                // Regular custom function (no colon)
-                prec.dynamic(
-                    PRECEDENCE.CALL + 12,
-                    seq(
-                        field("function", choice($.function_reference)),
-                        field("body", $.compound_statement),
-                    ),
-                ),
-                // Custom function with colon syntax (higher precedence)
-                prec.dynamic(
-                    PRECEDENCE.CALL + 15,
-                    seq(
-                        field("function", $.function_reference),
-                        field("separator", token.immediate(choice(":", ";"))), // Force immediate attachment
-                        field(
-                            "body",
-                            alias($.compound_statement, $.function_body),
-                        ),
-                    ),
-                ),
-            ),
-
-        // Add array_access_expression rule which is referenced but missing
-        array_access_expression: ($) =>
-            prec(
-                PRECEDENCE.ARRAY_ACCESS,
-                seq(
-                    field("array", $.expression),
-                    "[",
-                    field("index", optional($.expression)),
-                    "]",
-                ),
-            ),
-
-        // Add device_field_access for proper property access
-        device_field_access: ($) =>
-            prec(
-                PRECEDENCE.FIELD + 1,
-                seq(
-                    field("device", $.expression),
-                    ".",
-                    field(
-                        "field",
-                        choice(
-                            /NUMBER/i,
-                            /PORT/i,
-                            /SYSTEM/i,
-                            // Add other device properties as needed
-                        ),
-                    ),
-                ),
-            ),
-
-        // Add a special higher precedence version of array_declarator specifically for structure fields
-        structure_field_array_declarator: ($) =>
-            prec.dynamic(
-                25, // High precedence
-                seq(
-                    token.immediate("["),
-                    field("size", optional($.decimal_literal)), // Only allow simple numeric literals
-                    token.immediate("]"),
-                ),
-            ),
-
-        // Redesigned array handling for consistent behavior across contexts
-
-        // Array dimension - handles empty [], identifier-based [NAV_MAX_CHARS], or expression-based [10] dimensions
-        array_dimension: ($) =>
-            prec.right(
-                5,
-                seq(
-                    "[",
-                    optional(
-                        choice(
-                            field("size_identifier", $.identifier),
-                            field("size", $.expression),
-                        ),
-                    ),
-                    "]",
                 ),
             ),
     },
@@ -1754,3 +854,7 @@ function commaSep(rule) {
 function commaSep1(rule) {
     return seq(rule, repeat(seq(",", rule)));
 }
+
+module.exports.PREC = PREC;
+module.exports.commaSep = commaSep;
+module.exports.commaSep1 = commaSep1;

@@ -12,8 +12,7 @@ PROGRAM_NAME='define_start'
  */
 
 DEFINE_START {
-	primaryDevice.name = 'Main Display'
-	primaryDevice.isPowered = FALSE
-	primaryDevice.volume = 50
+    primaryDevice.name = 'Main Display'
+    primaryDevice.isPowered = FALSE
+    primaryDevice.volume = 50
 }
-

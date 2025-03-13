@@ -12,5 +12,5 @@ PROGRAM_NAME='define_program'
  */
 
 DEFINE_PROGRAM {
-	[dvTP, BTN_POWER] = (primaryDevice.isPowered)
+    [dvTP, BTN_POWER] = (primaryDevice.isPowered)
 }
