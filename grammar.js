@@ -161,6 +161,7 @@ module.exports = grammar({
         section: ($) =>
             choice(
                 $.define_device_section,
+                $.define_combine_section,
                 $.define_constant_section,
                 $.define_type_section,
                 $.define_variable_section,
@@ -176,6 +177,12 @@ module.exports = grammar({
 
         device_definition: ($) =>
             seq($.identifier, "=", $.device_literal, optional(";")),
+
+        define_combine_section: ($) =>
+            seq(keywords.define_combine, repeat($.combine_definition)),
+
+        combine_definition: ($) =>
+            seq("(", commaSep1($.expression), ")", optional(";")),
 
         define_constant_section: ($) =>
             seq(keywords.define_constant, repeat($.constant_definition)),

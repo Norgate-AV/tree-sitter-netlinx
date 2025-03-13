@@ -441,6 +441,21 @@
     }
   },
   {
+    "type": "combine_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comma_expression",
     "named": true,
     "fields": {
@@ -606,6 +621,21 @@
         },
         {
           "type": "type_qualifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_combine_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "combine_definition",
           "named": true
         }
       ]
@@ -1469,6 +1499,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "define_combine_section",
+          "named": true
+        },
         {
           "type": "define_constant_section",
           "named": true
