@@ -505,6 +505,21 @@
     }
   },
   {
+    "type": "connect_level_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "constant_definition",
     "named": true,
     "fields": {
@@ -636,6 +651,21 @@
       "types": [
         {
           "type": "combine_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_connect_level_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "connect_level_definition",
           "named": true
         }
       ]
@@ -1501,6 +1531,10 @@
       "types": [
         {
           "type": "define_combine_section",
+          "named": true
+        },
+        {
+          "type": "define_connect_level_section",
           "named": true
         },
         {
