@@ -1,4 +1,4 @@
-PROGRAM_NAME='define_variable'
+PROGRAM_NAME='define_function'
 
 DEFINE_FUNCTION CHAR[100] FormatStatus(DeviceStatus status) {
     // STACK_VAR CHAR result[100]

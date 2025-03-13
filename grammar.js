@@ -27,10 +27,10 @@ const PREC = {
     ADD: 10,
     MULTIPLY: 11,
     UNARY: 14,
-    FUNCTION_REF: 15, // Add this line - lower precedence than array access
+    FUNCTION_REF: 15,
     CALL: 17,
-    ARRAY_ACCESS: 18, // Increase this from 16 to be higher than function_ref
-    ARRAY_FUNCTION: 19, // Add this line - higher precedence than array access
+    SUBSCRIPT: 18,
+    ARRAY_FUNCTION: 19,
     FIELD: 16,
     DIRECTIVE: 20,
     EVENT_PARAM: 90,
@@ -165,6 +165,7 @@ module.exports = grammar({
                 $.define_type_section,
                 $.define_variable_section,
                 $.define_function_section,
+                $.define_module_section,
             ),
 
         define_device_section: ($) =>
@@ -241,6 +242,17 @@ module.exports = grammar({
 
         define_function_section: ($) =>
             seq(keywords.define_function, $.function_definition),
+
+        define_module_section: ($) =>
+            seq(keywords.define_module, repeat($.module_definition)),
+
+        module_definition: ($) =>
+            seq(
+                field("module_name", $.string_literal),
+                field("instance_name", $.identifier),
+                field("parameters", $.argument_list),
+                optional(";"),
+            ),
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
@@ -609,7 +621,7 @@ module.exports = grammar({
                 // Add simple identifier as a function reference without calling it
                 // $.function_reference,
                 $.field_expression,
-                // $.array_access_expression,
+                $.subscript_expression,
                 $.identifier,
                 $.literal,
                 $.string_expression,
@@ -631,7 +643,7 @@ module.exports = grammar({
                 $.identifier,
                 $.call_expression,
                 $.field_expression,
-                // $.array_access_expression,
+                $.subscript_expression,
                 $.parenthesized_expression,
             ),
 
@@ -686,6 +698,17 @@ module.exports = grammar({
             const operator = field("operator", choice("--", "++"));
             return prec.right(PREC.UNARY, seq(argument, operator));
         },
+
+        subscript_expression: ($) =>
+            prec(
+                PREC.SUBSCRIPT,
+                seq(
+                    field("argument", $.expression),
+                    "[",
+                    field("index", $.expression),
+                    "]",
+                ),
+            ),
 
         call_expression: ($) =>
             prec(

@@ -23,6 +23,7 @@ module.exports = {
     define_start: /DEFINE_START/i,
     define_event: /DEFINE_EVENT/i,
     define_program: /DEFINE_PROGRAM/i,
+    define_module: /DEFINE_MODULE/i,
 
     // Types
     char: /CHAR/i,

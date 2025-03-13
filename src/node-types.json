@@ -72,6 +72,10 @@
         "named": true
       },
       {
+        "type": "subscript_expression",
+        "named": true
+      },
+      {
         "type": "unary_expression",
         "named": true
       },
@@ -230,6 +234,10 @@
           },
           {
             "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
             "named": true
           }
         ]
@@ -643,6 +651,21 @@
       "types": [
         {
           "type": "function_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_module_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "module_definition",
           "named": true
         }
       ]
@@ -1137,6 +1160,42 @@
     }
   },
   {
+    "type": "module_definition",
+    "named": true,
+    "fields": {
+      "instance_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "module_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "module_name",
     "named": true,
     "fields": {},
@@ -1423,6 +1482,10 @@
           "named": true
         },
         {
+          "type": "define_module_section",
+          "named": true
+        },
+        {
           "type": "define_type_section",
           "named": true
         },
@@ -1520,6 +1583,32 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "subscript_expression",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
             "named": true
           }
         ]
