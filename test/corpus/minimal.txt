@@ -1,6 +1,5 @@
 ===========
 Minimal Test
-:skip
 ===========
 
 PROGRAM_NAME='Minimal Test'
@@ -12,18 +11,19 @@ dvTP = 10001:1:0
 
 (source_file
   (program_name
-    (string_literal))
+    (string_literal
+      (string_content)))
   (section
     (define_device_section
       (device_definition
         (identifier)
         (device_literal
-          (expression
+          device: (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          port: (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          system: (literal
             (number_literal
               (decimal_literal))))))))

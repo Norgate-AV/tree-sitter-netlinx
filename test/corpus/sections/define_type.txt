@@ -1,6 +1,5 @@
 =================
 Define Type Test
-:skip
 =================
 
 PROGRAM_NAME='StructureTests'
@@ -16,23 +15,22 @@ STRUCTURE DeviceStatus {
 
 (source_file
   (program_name
-    (string_literal))
+    (string_literal
+      (string_content)))
   (section
     (define_type_section
-      (type_specifier
-        (struct_specifier
-          (identifier)
-          (field_declaration_list
-            (field_declaration
-              (type_specifier
-                (primitive_type))
-              (identifier)
-              (dimensions))
-            (field_declaration
-              (type_specifier
-                (primitive_type))
-              (identifier))
-            (field_declaration
-              (type_specifier
-                (primitive_type))
-              (identifier))))))))
+      (struct_specifier
+        name: (identifier)
+        body: (field_declaration_list
+          (field_declaration
+            type: (primitive_type)
+            name: (identifier)
+            dimensions: (literal
+              (number_literal
+                (decimal_literal))))
+          (field_declaration
+            type: (primitive_type)
+            name: (identifier))
+          (field_declaration
+            type: (primitive_type)
+            name: (identifier)))))))

@@ -1,6 +1,5 @@
 =============
 Include Test
-:skip
 =============
 
 PROGRAM_NAME='Include Test'
@@ -12,10 +11,9 @@ PROGRAM_NAME='Include Test'
 
 (source_file
   (program_name
-    (string_literal))
+    (string_literal
+      (string_content)))
   (preproc_directive
-    (preproc_include
-      (string_literal)))
+    (preproc_include))
   (preproc_directive
-    (preproc_include
-      (string_literal))))
+    (preproc_include)))

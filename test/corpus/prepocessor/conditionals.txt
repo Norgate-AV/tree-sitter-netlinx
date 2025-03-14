@@ -1,6 +1,5 @@
 ======================
 Conditional Directives
-:skip
 ======================
 
 PROGRAM_NAME='Conditionals Test'
@@ -13,7 +12,8 @@ PROGRAM_NAME='Conditionals Test'
 
 (source_file
   (program_name
-    (string_literal))
+    (string_literal
+      (string_content)))
   (preproc_directive
     (preproc_if_not_defined
       (identifier)))
