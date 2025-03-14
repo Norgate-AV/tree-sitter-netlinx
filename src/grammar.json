@@ -3032,6 +3032,10 @@
         {
           "type": "SYMBOL",
           "name": "device_channel_reference_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "device_operation_expression"
         }
       ]
     },
@@ -4001,6 +4005,69 @@
         }
       ]
     },
+    "device_operation_keyword": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "on",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "off",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "to",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "min_to",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "total_off",
+            "flags": "i"
+          },
+          {
+            "type": "PATTERN",
+            "value": "pulse",
+            "flags": "i"
+          }
+        ]
+      }
+    },
+    "device_operation_expression": {
+      "type": "PREC_RIGHT",
+      "value": 31,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operation",
+            "content": {
+              "type": "SYMBOL",
+              "name": "device_operation_keyword"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "target",
+            "content": {
+              "type": "SYMBOL",
+              "name": "device_channel_reference_expression"
+            }
+          }
+        ]
+      }
+    },
     "device_channel_assignment_expression": {
       "type": "PREC_RIGHT",
       "value": -2,
@@ -4032,13 +4099,16 @@
     },
     "device_channel_reference_expression": {
       "type": "PREC_DYNAMIC",
-      "value": -10,
+      "value": 28,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "["
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": "["
+            }
           },
           {
             "type": "FIELD",
@@ -4532,12 +4602,7 @@
       "name": "comment"
     }
   ],
-  "conflicts": [
-    [
-      "array_declarator",
-      "device_channel_reference_expression"
-    ]
-  ],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [

@@ -1,10 +1,20 @@
-PROGRAM_NAME='Start Test'
+PROGRAM_NAME='Test'
 
-DEFINE_START {
-    primaryDevice.name = 'Main Display'
-    primaryDevice.isPowered = FALSE
-    primaryDevice.volume = 50
+define_function char[100] CharArrayFunction() {
+    stack_var char result[100]
+    return result
 }
 
-DEFINE_START
-primaryDevice.isPowered = true;
+define_function char CharFunction() {
+    return true
+}
+
+DEFINE_START {
+    on[vdvObject, 15]
+    off[vdvObject, 16]
+    pulse[vdvObject, 17]
+}
+
+DEFINE_PROGRAM
+
+[dvTP, VOL_MUTE] = (mute == true)

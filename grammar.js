@@ -766,6 +766,7 @@ module.exports = grammar({
                 $.parenthesized_expression,
                 $.device_channel_assignment_expression,
                 $.device_channel_reference_expression,
+                $.device_operation_expression,
             ),
 
         assignment_expression: ($) =>
@@ -897,6 +898,27 @@ module.exports = grammar({
                 ")",
             ),
 
+        device_operation_keyword: (_) =>
+            token(
+                choice(
+                    keywords.devchan_on,
+                    keywords.devchan_off,
+                    keywords.devchan_to,
+                    keywords.devchan_min_to,
+                    keywords.devchan_total_off,
+                    keywords.devchan_pulse,
+                ),
+            ),
+
+        device_operation_expression: ($) =>
+            prec.right(
+                PREC.FIELD + 15,
+                seq(
+                    field("operation", $.device_operation_keyword),
+                    field("target", $.device_channel_reference_expression),
+                ),
+            ),
+
         // When setting a channel: [device, channel] = value
         device_channel_assignment_expression: ($) =>
             prec.right(
@@ -911,7 +933,7 @@ module.exports = grammar({
         // When reading a channel: value = [device, channel]
         device_channel_reference_expression: ($) =>
             prec.dynamic(
-                -10,
+                PREC.FIELD + 12,
                 seq(
                     token("["),
                     field("device", $.expression),
