@@ -1,56 +1,67 @@
+; Identifiers
 (identifier) @variable
 
-((identifier) @constant
- (#match? @constant "^[A-Z][A-Z\\d_]*$"))
+; Types
+(primitive_type) @type
 
-"active" @keyword
-"break" @keyword
-"case" @keyword
-"constant" @keyword
-"continue" @keyword
-"default" @keyword
-"else" @keyword
-"for" @keyword
-"if" @keyword
-"local_var" @keyword
-"non_volatile" @keyword
-"persistent" @keyword
-"return" @keyword
-"select" @keyword
-"stack_var" @keyword
-"struct" @keyword
-"structure" @keyword
-"switch" @keyword
-"volatile" @keyword
-"while" @keyword
+; Keywords - match the actual section nodes instead of text
+(define_device_section) @keyword
+(define_constant_section) @keyword
+(define_type_section) @keyword
+(define_variable_section) @keyword
+(define_function_section) @keyword
+(define_module_section) @keyword
+;(define_program_section) @keyword
 
-"#define" @keyword
-"#else" @keyword
-"#end_if" @keyword
-"#if_defined" @keyword
-"#if_not_defined" @keyword
-"#include" @keyword
+; Structure definitions
+(struct_specifier) @keyword
 
-"--" @operator
-"-" @operator
-"=" @operator
-"!=" @operator
-"*" @operator
-"&" @operator
-"&&" @operator
-"+" @operator
-"++" @operator
-"<" @operator
-"==" @operator
-">" @operator
-"||" @operator
+; Control flow - use node types not text literals
+; Currently commented out until we implement these nodes
+; (if_statement) @keyword.control
+; (else_clause) @keyword.control
+; (for_statement) @keyword.control
+; (while_statement) @keyword.control
+; (switch_statement) @keyword.control
+; (case_statement) @keyword.control
+; (break_statement) @keyword.control
+; (continue_statement) @keyword.control
+; (return_statement) @keyword.control
+; (select_statement) @keyword.control
+; (active_statement) @keyword.control
 
-"." @delimiter
-";" @delimiter
+; Type qualifiers
+(type_qualifier) @keyword.modifier
 
-(string_literal) @string
+; Storage classes
+(storage_class_specifier) @keyword.modifier
 
+; Program name
+(program_name) @keyword
+(module_name) @keyword
+
+; Literals
+(string_content) @string
 (number_literal) @number
-(char_literal) @number
+(decimal_literal) @number
+(hex_literal) @number
+(device_literal) @number
 
+; Comments
 (comment) @comment
+
+; Function calls and definitions
+(call_expression
+  function: (identifier) @function.call)
+
+(function_definition
+  name: (identifier) @function)
+
+; Preprocessor directives
+(preproc_directive) @preproc
+(preproc_include) @preproc.include
+(preproc_define) @preproc.define
+(preproc_if_defined) @preproc.directive
+(preproc_if_not_defined) @preproc.directive
+(preproc_else) @preproc.directive
+(preproc_end_if) @preproc.directive
