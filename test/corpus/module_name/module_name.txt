@@ -1,0 +1,19 @@
+==================
+Module Name Test
+==================
+
+MODULE_NAME='MyModule' (dev vdvObject, dev dvPort)
+
+---
+
+(source_file
+  (module_name
+    (string_literal
+      (string_content))
+    parameters: (parameter_list
+      (parameter_declaration
+        type: (primitive_type)
+        declarator: (identifier))
+      (parameter_declaration
+        type: (primitive_type)
+        declarator: (identifier)))))

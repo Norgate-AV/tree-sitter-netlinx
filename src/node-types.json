@@ -1258,15 +1258,22 @@
   {
     "type": "module_name",
     "named": true,
-    "fields": {},
+    "fields": {
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "argument_list",
-          "named": true
-        },
         {
           "type": "string_literal",
           "named": true

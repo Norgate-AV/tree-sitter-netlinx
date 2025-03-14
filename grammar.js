@@ -76,12 +76,11 @@ module.exports = grammar({
     rules: {
         source_file: ($) =>
             seq(
-                repeat(
-                    choice(
-                        $.preproc_directive,
-                        $.program_name,
-                        $.module_name,
-                        $.comment,
+                repeat(choice($.preproc_directive, $.comment)),
+                optional(
+                    seq(
+                        choice($.program_name, $.module_name),
+                        repeat(choice($.preproc_directive, $.comment)),
                     ),
                 ),
                 repeat($.section),
@@ -102,7 +101,7 @@ module.exports = grammar({
                 keywords.module_name,
                 "=",
                 $.string_literal,
-                optional($.argument_list),
+                optional(field("parameters", $.parameter_list)),
             ),
 
         _block_item: ($) => choice($.declaration, $.statement),
@@ -384,7 +383,7 @@ module.exports = grammar({
                     keywords.double,
                     // Add NetLinx structured types
                     keywords.dev,
-                    keywords.devaddr,
+                    keywords.devlev,
                     keywords.devchan,
                     netlinx.tdata,
                     netlinx.tchannel,
@@ -748,14 +747,10 @@ module.exports = grammar({
             ),
 
         argument_list: ($) =>
-            prec.left(
-                // PREC.CALL + 2, // Increase precedence for argument lists
-                seq(
-                    "(",
-                    commaSep(choice($.expression, $.compound_statement)),
-                    ")",
-                ),
-            ),
+            // prec.left(
+            // PREC.CALL + 2, // Increase precedence for argument lists
+            seq("(", commaSep(choice($.expression, $.compound_statement)), ")"),
+        // ),
 
         field_expression: ($) =>
             seq(

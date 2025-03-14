@@ -79,6 +79,6 @@ module.exports = {
 
     // Built-in Structured Types
     dev: /dev/i,
-    devaddr: /devaddr/i,
+    devlev: /devlev/i,
     devchan: /devchan/i,
 };
