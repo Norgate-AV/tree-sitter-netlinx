@@ -1,0 +1,38 @@
+=================
+Define Type Test
+:skip
+=================
+
+PROGRAM_NAME='StructureTests'
+
+DEFINE_TYPE
+STRUCTURE DeviceStatus {
+    CHAR name[50]
+    INTEGER isPowered
+    INTEGER volume
+}
+
+---
+
+(source_file
+  (program_name
+    (string_literal))
+  (section
+    (define_type_section
+      (type_specifier
+        (struct_specifier
+          (identifier)
+          (field_declaration_list
+            (field_declaration
+              (type_specifier
+                (primitive_type))
+              (identifier)
+              (dimensions))
+            (field_declaration
+              (type_specifier
+                (primitive_type))
+              (identifier))
+            (field_declaration
+              (type_specifier
+                (primitive_type))
+              (identifier))))))))

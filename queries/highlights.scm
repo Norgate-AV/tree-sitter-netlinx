@@ -13,7 +13,7 @@
 "for" @keyword
 "if" @keyword
 "local_var" @keyword
-"nonvolatile" @keyword
+"non_volatile" @keyword
 "persistent" @keyword
 "return" @keyword
 "select" @keyword

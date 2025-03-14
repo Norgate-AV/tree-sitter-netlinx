@@ -1,0 +1,29 @@
+===========
+Minimal Test
+:skip
+===========
+
+PROGRAM_NAME='Minimal Test'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0
+
+---
+
+(source_file
+  (program_name
+    (string_literal))
+  (section
+    (define_device_section
+      (device_definition
+        (identifier)
+        (device_literal
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal))))))))

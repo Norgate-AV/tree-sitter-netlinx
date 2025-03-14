@@ -1,0 +1,21 @@
+=============
+Include Test
+:skip
+=============
+
+PROGRAM_NAME='Include Test'
+
+#INCLUDE 'amx-device-control.axi'
+#include 'Functions.axi'
+
+---
+
+(source_file
+  (program_name
+    (string_literal))
+  (preproc_directive
+    (preproc_include
+      (string_literal)))
+  (preproc_directive
+    (preproc_include
+      (string_literal))))

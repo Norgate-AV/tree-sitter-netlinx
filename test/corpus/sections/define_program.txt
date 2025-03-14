@@ -1,0 +1,27 @@
+==================
+Define Program Test
+:skip
+==================
+
+PROGRAM_NAME='Program Test'
+
+DEFINE_PROGRAM {
+    [dvTP, BTN_POWER] = (primaryDevice.isPowered)
+}
+
+---
+
+(source_file
+  (program_name
+    (string_literal))
+  (section
+    (define_program_section
+      (device_assignment
+        (expression
+          (identifier))
+        (expression
+          (identifier))
+        (parenthesized_expression
+          (field_expression
+            (identifier)
+            (identifier)))))))

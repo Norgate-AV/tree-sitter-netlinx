@@ -1,0 +1,36 @@
+=====================
+Define Constant Test
+=====================
+
+PROGRAM_NAME='Constant Test'
+
+DEFINE_CONSTANT
+INTEGER BTN_POWER = 1
+INTEGER BTN_VOLUME_UP = 2
+CHAR ON_CMD[] = 'PWR-ON'
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_constant_section
+      (constant_definition
+        (primitive_type)
+        name: (identifier)
+        value: (literal
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (primitive_type)
+        name: (identifier)
+        value: (literal
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (primitive_type)
+        name: (identifier)
+        value: (string_literal
+          (string_content))))))

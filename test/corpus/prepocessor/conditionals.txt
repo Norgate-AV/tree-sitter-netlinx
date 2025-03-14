@@ -1,0 +1,24 @@
+======================
+Conditional Directives
+:skip
+======================
+
+PROGRAM_NAME='Conditionals Test'
+
+#IF_NOT_DEFINED DEBUG_MODE
+#DEFINE DEBUG_MODE
+#END_IF
+
+---
+
+(source_file
+  (program_name
+    (string_literal))
+  (preproc_directive
+    (preproc_if_not_defined
+      (identifier)))
+  (preproc_directive
+    (preproc_define
+      (identifier)))
+  (preproc_directive
+    (preproc_end_if)))

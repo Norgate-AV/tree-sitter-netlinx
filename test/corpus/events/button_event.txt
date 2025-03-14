@@ -1,0 +1,44 @@
+=================
+Button Event Test
+:skip
+=================
+
+PROGRAM_NAME='Button Event Test'
+
+DEFINE_EVENT
+BUTTON_EVENT[dvTP, BTN_POWER] {
+    PUSH: {
+        SEND_COMMAND dvDevice, ON_CMD
+    }
+    RELEASE: {
+        // Do nothing
+    }
+}
+
+---
+
+# DISABLED TEST - Fix parse tree issues before enabling
+# (source_file
+#   (program_name
+#     (string_literal))
+#   (section
+#     (define_event_section
+#       (event_definition
+#         (event_type
+#           (subscript_expression
+#             (identifier)
+#             (identifier)))
+#         (event_block
+#           (subevent_handler
+#             (subevent_type)
+#             (compound_statement
+#               (expression_statement
+#                 (call_expression
+#                   (identifier)
+#                   (argument_list
+#                     (identifier)
+#                     (identifier))))))
+#           (subevent_handler
+#             (subevent_type)
+#             (compound_statement
+#               (comment))))))))

@@ -1,0 +1,12 @@
+==================
+Program Name Test
+:skip
+==================
+
+PROGRAM_NAME='Basic Test'
+
+---
+
+(source_file
+  (program_name
+    (string_literal)))

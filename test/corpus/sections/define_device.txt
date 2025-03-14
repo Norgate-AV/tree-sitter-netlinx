@@ -1,0 +1,32 @@
+===================
+Define Device Test
+:skip
+===================
+
+PROGRAM_NAME='Device Test'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0   // Touch panel
+dvDisplay = 5001:1:0  // Display
+
+---
+
+(source_file
+  (program_name
+    (string_literal))
+  (section
+    (define_device_section
+      (device_definition
+        (identifier)
+        (device_literal
+          (decimal_literal)
+          (decimal_literal)
+          (decimal_literal))
+        (comment))
+      (device_definition
+        (identifier)
+        (device_literal
+          (decimal_literal)
+          (decimal_literal)
+          (decimal_literal))
+        (comment)))))
