@@ -63,13 +63,28 @@ module.exports = {
     struct: /struct/i,
     structure: /structure/i,
 
-    // Events
+    // Events Handlers
     button_event: /button_event/i,
     channel_event: /channel_event/i,
     level_event: /level_event/i,
     data_event: /data_event/i,
     timeline_event: /timeline_event/i,
     custom_event: /custom_event/i,
+
+    // Events
+    push: /push/i,
+    release: /release/i,
+    hold: /hold/i,
+    on: /on/i,
+    off: /off/i,
+    online: /online/i,
+    offline: /offline/i,
+    onerror: /onerror/i,
+    string: /string/i,
+    command: /command/i,
+    standby: /standby/i,
+    awake: /awake/i,
+    repeat: /repeat/i,
 
     // Add special function keywords needed for the parser
     send_level: /send_level/i,
@@ -82,4 +97,42 @@ module.exports = {
     dev: /dev/i,
     devlev: /devlev/i,
     devchan: /devchan/i,
+
+    // Devchan operations
+    devchan_on: /on/i,
+    devchan_off: /off/i,
+    devchan_to: /to/i,
+    devchan_min_to: /min_to/i,
+    devchan_total_off: /total_off/i,
+    devchan_pulse: /pulse/i,
+
+    // Objects
+    channel: /channel/i,
+    device: /device/i,
+    number: /number/i,
+    port: /port/i,
+    system: /system/i,
+    sourcedev: /sourcedev/i,
+    button: /button/i,
+    input: /input/i,
+    holdtime: /holdtime/i,
+    level: /level/i,
+    value: /value/i,
+    data: /data/i,
+    text: /text/i,
+    sourceipaddress: /sourceipaddress/i,
+    serveripaddress: /serveripaddress/i,
+    sourceport: /sourceport/i,
+    custom: /custom/i,
+    id: /id/i,
+    type: /type/i,
+    flag: /flag/i,
+    value1: /value1/i,
+    value2: /value2/i,
+    value3: /value3/i,
+    encode: /encode/i,
+
+    // Waits
+    wait: /wait/i,
+    wait_until: /wait_until/i,
 };

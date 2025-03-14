@@ -1,6 +1,5 @@
 ==================
 Define Program Test
-:skip
 ==================
 
 PROGRAM_NAME='Program Test'

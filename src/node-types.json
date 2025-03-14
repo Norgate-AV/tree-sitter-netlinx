@@ -48,6 +48,14 @@
         "named": true
       },
       {
+        "type": "device_channel_assignment_expression",
+        "named": true
+      },
+      {
+        "type": "device_channel_reference_expression",
+        "named": true
+      },
+      {
         "type": "field_expression",
         "named": true
       },
@@ -889,6 +897,68 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "device_channel_assignment_expression",
+    "named": true,
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "device_channel_reference_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "device_channel_reference_expression",
+    "named": true,
+    "fields": {
+      "channel": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

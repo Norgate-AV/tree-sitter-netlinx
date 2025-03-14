@@ -764,8 +764,8 @@ module.exports = grammar({
                 $.literal,
                 $.string_expression,
                 $.parenthesized_expression,
-                // $.device_channel_assignment_expression,
-                // $.device_channel_reference_expression,
+                $.device_channel_assignment_expression,
+                $.device_channel_reference_expression,
             ),
 
         assignment_expression: ($) =>
@@ -897,29 +897,29 @@ module.exports = grammar({
                 ")",
             ),
 
-        // // When setting a channel: [device, channel] = value
-        // device_channel_assignment_expression: ($) =>
-        //     prec.right(
-        //         PREC.ASSIGNMENT,
-        //         seq(
-        //             $.device_channel_reference_expression,
-        //             field("operator", "="),
-        //             field("value", $.expression),
-        //         ),
-        //     ),
+        // When setting a channel: [device, channel] = value
+        device_channel_assignment_expression: ($) =>
+            prec.right(
+                PREC.ASSIGNMENT,
+                seq(
+                    $.device_channel_reference_expression,
+                    field("operator", "="),
+                    field("value", $.expression),
+                ),
+            ),
 
-        // // When reading a channel: value = [device, channel]
-        // device_channel_reference_expression: ($) =>
-        //     prec.dynamic(
-        //         -10,
-        //         seq(
-        //             "[",
-        //             field("device", $.expression),
-        //             ",",
-        //             field("channel", $.expression),
-        //             "]",
-        //         ),
-        //     ),
+        // When reading a channel: value = [device, channel]
+        device_channel_reference_expression: ($) =>
+            prec.dynamic(
+                -10,
+                seq(
+                    token("["),
+                    field("device", $.expression),
+                    ",",
+                    field("channel", $.expression),
+                    "]",
+                ),
+            ),
 
         // String Expressions in NetLinx are like an interpolated string
         string_expression: ($) => seq('"', commaSep1($.expression), '"'),
