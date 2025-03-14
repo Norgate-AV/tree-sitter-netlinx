@@ -122,11 +122,7 @@ module.exports = grammar({
         preproc_include: ($) =>
             prec(
                 PREC.DIRECTIVE,
-                seq(
-                    directives.INCLUDE,
-                    // Only allow single-quoted strings for NetLinx
-                    token(seq("'", /[^']*/, "'")),
-                ),
+                seq(directives.INCLUDE, token(seq("'", /[^']*/, "'"))),
             ),
 
         preproc_define: ($) =>
@@ -414,28 +410,50 @@ module.exports = grammar({
                 ),
             ),
 
-        debug_char: ($) => alias(keywords.char, $.primitive_type),
-
         function_definition: ($) =>
-            seq(
-                optional(
+            choice(
+                // No return type (void)
+                seq(
+                    field("name", $.identifier),
+                    field("parameters", $.parameter_list),
+                    field("body", $.compound_statement),
+                ),
+
+                // Char array return type
+                seq(
+                    field(
+                        "return_type",
+                        seq(
+                            token(keywords.char),
+                            token.immediate("["),
+                            field("size", $.expression),
+                            "]",
+                        ),
+                    ),
+                    field("name", $.identifier),
+                    field("parameters", $.parameter_list),
+                    field("body", $.compound_statement),
+                ),
+
+                // Simple primitive return type
+                seq(
                     field(
                         "return_type",
                         choice(
-                            $.debug_char,
-                            $.primitive_type,
-                            seq(
-                                alias(keywords.char, $.primitive_type),
-                                "[",
-                                field("size", $.expression),
-                                "]",
-                            ),
+                            token(keywords.char),
+                            token(keywords.widechar),
+                            token(keywords.integer),
+                            token(keywords.sinteger),
+                            token(keywords.long),
+                            token(keywords.slong),
+                            token(keywords.float),
+                            token(keywords.double),
                         ),
                     ),
+                    field("name", $.identifier),
+                    field("parameters", $.parameter_list),
+                    field("body", $.compound_statement),
                 ),
-                field("name", $.identifier),
-                field("parameters", $.parameter_list),
-                field("body", $.compound_statement),
             ),
 
         declaration: ($) =>

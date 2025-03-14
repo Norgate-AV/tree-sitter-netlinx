@@ -678,21 +678,6 @@
     "fields": {}
   },
   {
-    "type": "debug_char",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "primitive_type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "declaration",
     "named": true,
     "fields": {
@@ -1254,14 +1239,6 @@
           {
             "type": "]",
             "named": false
-          },
-          {
-            "type": "debug_char",
-            "named": true
-          },
-          {
-            "type": "primitive_type",
-            "named": true
           }
         ]
       },

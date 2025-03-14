@@ -92,7 +92,6 @@ define_function char TestSelectActive(integer a, integer b) {
   (section
     (define_function_section
       (function_definition
-        return_type: (primitive_type)
         size: (literal
           (number_literal
             (decimal_literal)))
@@ -329,7 +328,6 @@ define_function char TestSelectActive(integer a, integer b) {
   (section
     (define_function_section
       (function_definition
-        return_type: (primitive_type)
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
@@ -354,8 +352,6 @@ define_function char TestSelectActive(integer a, integer b) {
   (section
     (define_function_section
       (function_definition
-        return_type: (debug_char
-          (primitive_type))
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
