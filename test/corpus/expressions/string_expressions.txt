@@ -1,60 +1,31 @@
 ======================
 String Expressions Test
-:skip
 ======================
 
-PROGRAM_NAME='String Expressions'
-
-DEFINE_FUNCTION CHAR[100] FormatStatus() {
-    STACK_VAR CHAR result[100]
-
-    result = "'Device: ', status.name, ' Power: ', ITOA(status.isPowered)"
-
-    RETURN result
-}
+DEFINE_START
+result = "'Device: ', status.name, ' Power: ', ITOA(status.isPowered)"
 
 ---
 
 (source_file
-  (program_name
-    (string_literal))
   (section
-    (define_function_section
-      (function_definition
-        (type_specifier
-          (primitive_type))
-        (dimensions
-          (expression))
-        (identifier)
-        (parameter_list)
-        (compound_statement
-          (declaration
-            (storage_class_specifier)
-            (type_specifier
-              (primitive_type))
-            (identifier)
-            (dimensions
-              (expression)))
-          (expression_statement
-            (assignment_expression
-              (identifier)
-              (string_expression
-                (expression
-                  (string_literal))
-                (expression
-                  (field_expression
-                    (identifier)
-                    (identifier)))
-                (expression
-                  (string_literal))
-                (expression
-                  (call_expression
-                    (identifier)
-                    (argument_list
-                      (expression
-                        (field_expression
-                          (identifier)
-                          (identifier)))))))))
-          (return_statement
-            (expression
-              (identifier))))))))
+    (define_start_section
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (string_expression
+            (literal
+              (string_literal
+                (string_content)))
+            (field_expression
+              argument: (identifier)
+              field: (field_identifier))
+            (literal
+              (string_literal
+                (string_content)))
+            (call_expression
+              function: (identifier)
+              arguments: (argument_list
+                (field_expression
+                  argument: (identifier)
+                  field: (field_identifier))))))))))

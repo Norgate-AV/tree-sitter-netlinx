@@ -13,15 +13,17 @@ DEFINE_PROGRAM {
 
 (source_file
   (program_name
-    (string_literal))
+    (string_literal
+      (string_content)))
   (section
     (define_program_section
-      (device_assignment
-        (expression
-          (identifier))
-        (expression
-          (identifier))
-        (parenthesized_expression
-          (field_expression
-            (identifier)
-            (identifier)))))))
+      (compound_statement
+        (expression_statement
+          (device_channel_assignment_expression
+            (device_channel_reference_expression
+              device: (identifier)
+              channel: (identifier))
+            value: (parenthesized_expression
+              (field_expression
+                argument: (identifier)
+                field: (field_identifier)))))))))

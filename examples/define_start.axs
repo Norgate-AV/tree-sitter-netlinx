@@ -16,3 +16,6 @@ DEFINE_START {
     primaryDevice.isPowered = FALSE
     primaryDevice.volume = 50
 }
+
+DEFINE_START
+primaryDevice.isPowered = true;

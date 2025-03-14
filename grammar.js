@@ -49,7 +49,7 @@ module.exports = grammar({
         // [$.type_specifier, $.expression],
         // [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
-        // [$.char_array_function_declarator],
+        // [$.array_declarator, $.device_channel_reference_expression],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -167,6 +167,8 @@ module.exports = grammar({
                 $.define_variable_section,
                 $.define_function_section,
                 $.define_module_section,
+                $.define_start_section,
+                $.define_program_section,
             ),
 
         define_device_section: ($) =>
@@ -268,6 +270,24 @@ module.exports = grammar({
                 field("instance_name", $.identifier),
                 field("parameters", $.argument_list),
                 optional(";"),
+            ),
+
+        define_start_section: ($) =>
+            prec(
+                PREC.SECTION_DEFINITION,
+                seq(
+                    keywords.define_start,
+                    choice(repeat($._block_item), $.compound_statement),
+                ),
+            ),
+
+        define_program_section: ($) =>
+            prec(
+                PREC.SECTION_DEFINITION,
+                seq(
+                    keywords.define_program,
+                    choice(repeat($._block_item), $.compound_statement),
+                ),
             ),
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
@@ -394,16 +414,22 @@ module.exports = grammar({
                 ),
             ),
 
+        debug_char: ($) => alias(keywords.char, $.primitive_type),
+
         function_definition: ($) =>
             seq(
                 optional(
-                    choice(
-                        $.type_specifier,
-                        seq(
-                            alias(keywords.char, $.primitive_type),
-                            "[",
-                            field("size", $.expression),
-                            "]",
+                    field(
+                        "return_type",
+                        choice(
+                            $.debug_char,
+                            $.primitive_type,
+                            seq(
+                                alias(keywords.char, $.primitive_type),
+                                "[",
+                                field("size", $.expression),
+                                "]",
+                            ),
                         ),
                     ),
                 ),
@@ -442,22 +468,6 @@ module.exports = grammar({
                 ),
             ),
 
-        char_array_function_declarator: ($) =>
-            prec.right(
-                PREC.ARRAY_FUNCTION, // Use higher precedence than _declarator
-                seq(
-                    field(
-                        "return_type",
-                        alias(keywords.char, $.primitive_type),
-                    ),
-                    "[",
-                    field("size", $.expression),
-                    "]",
-                    field("name", $.identifier),
-                    field("parameters", $.parameter_list),
-                ),
-            ),
-
         _declarator: ($) =>
             prec(
                 2, // Increase from 1 to 2 to be higher than type_specifier
@@ -466,7 +476,6 @@ module.exports = grammar({
                     $.array_declarator,
                     $.parenthesized_declarator,
                     $.identifier,
-                    $.char_array_function_declarator,
                 ),
             ),
 
@@ -589,18 +598,19 @@ module.exports = grammar({
         /**
          * Statements
          */
-        statement: ($) => choice(/*$.case_statement,*/ $._non_case_statement),
+        statement: ($) => choice($.case_statement, $._non_case_statement),
 
         _non_case_statement: ($) =>
             choice(
-                // $.compound_statement,
-                // $.if_statement,
-                // $.switch_statement,
-                // $.while_statement,
-                // $.for_statement,
-                // $.return_statement,
-                // $.break_statement,
-                // $.continue_statement,
+                $.compound_statement,
+                $.if_statement,
+                $.switch_statement,
+                $.select_statement,
+                $.while_statement,
+                $.for_statement,
+                $.return_statement,
+                $.break_statement,
+                $.continue_statement,
                 $.expression_statement,
             ),
 
@@ -618,6 +628,100 @@ module.exports = grammar({
                     ";",
                 ),
             ),
+
+        if_statement: ($) =>
+            prec.right(
+                seq(
+                    keywords.if,
+                    field("condition", $.parenthesized_expression),
+                    field("consequence", $.statement),
+                    optional(field("alternative", $.else_clause)),
+                ),
+            ),
+
+        else_clause: ($) => seq(keywords.else, $.statement),
+
+        switch_statement: ($) =>
+            seq(
+                keywords.switch,
+                field("condition", $.parenthesized_expression),
+                field("body", $.compound_statement),
+            ),
+
+        case_statement: ($) =>
+            prec.right(
+                seq(
+                    choice(
+                        seq(keywords.case, field("value", $.expression)),
+                        keywords.default,
+                    ),
+                    ":",
+                    repeat(choice($._non_case_statement, $.declaration)),
+                ),
+            ),
+
+        while_statement: ($) =>
+            seq(
+                keywords.while,
+                field("condition", $.parenthesized_expression),
+                field("body", $.statement),
+            ),
+
+        for_statement: ($) =>
+            seq(
+                keywords.for,
+                "(",
+                $._for_statement_body,
+                ")",
+                field("body", $.statement),
+            ),
+
+        _for_statement_body: ($) =>
+            seq(
+                choice(
+                    seq(
+                        field(
+                            "initializer",
+                            optional(choice($.expression, $.comma_expression)),
+                        ),
+                        ";",
+                    ),
+                ),
+                field(
+                    "condition",
+                    optional(choice($.expression, $.comma_expression)),
+                ),
+                ";",
+                field(
+                    "update",
+                    optional(choice($.expression, $.comma_expression)),
+                ),
+            ),
+
+        select_statement: ($) =>
+            seq(keywords.select, "{", repeat1($.active_block), "}"),
+
+        active_block: ($) =>
+            seq(
+                keywords.active,
+                field("condition", $.parenthesized_expression),
+                ":",
+                field("body", $.statement),
+            ),
+
+        return_statement: ($) =>
+            prec.right(
+                seq(
+                    keywords.return,
+                    optional(choice($.expression, $.comma_expression)),
+                    optional(";"),
+                ),
+            ),
+
+        break_statement: (_) => prec.right(seq(keywords.break, optional(";"))),
+
+        continue_statement: (_) =>
+            prec.right(seq(keywords.continue, optional(";"))),
 
         /**
          * Expressions
@@ -642,6 +746,8 @@ module.exports = grammar({
                 $.literal,
                 $.string_expression,
                 $.parenthesized_expression,
+                // $.device_channel_assignment_expression,
+                // $.device_channel_reference_expression,
             ),
 
         assignment_expression: ($) =>
@@ -772,6 +878,30 @@ module.exports = grammar({
                 choice($.expression, $.comma_expression, $.compound_statement),
                 ")",
             ),
+
+        // // When setting a channel: [device, channel] = value
+        // device_channel_assignment_expression: ($) =>
+        //     prec.right(
+        //         PREC.ASSIGNMENT,
+        //         seq(
+        //             $.device_channel_reference_expression,
+        //             field("operator", "="),
+        //             field("value", $.expression),
+        //         ),
+        //     ),
+
+        // // When reading a channel: value = [device, channel]
+        // device_channel_reference_expression: ($) =>
+        //     prec.dynamic(
+        //         -10,
+        //         seq(
+        //             "[",
+        //             field("device", $.expression),
+        //             ",",
+        //             field("channel", $.expression),
+        //             "]",
+        //         ),
+        //     ),
 
         // String Expressions in NetLinx are like an interpolated string
         string_expression: ($) => seq('"', commaSep1($.expression), '"'),
