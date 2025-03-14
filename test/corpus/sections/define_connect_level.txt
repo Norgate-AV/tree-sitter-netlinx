@@ -1,0 +1,37 @@
+=================
+Define Connect Level Test
+:skip
+=================
+
+PROGRAM_NAME='StructureTests'
+
+DEFINE_TYPE
+STRUCTURE DeviceStatus {
+    CHAR name[50]
+    INTEGER isPowered
+    INTEGER volume
+}
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_type_section
+      (struct_specifier
+        name: (identifier)
+        body: (field_declaration_list
+          (field_declaration
+            type: (primitive_type)
+            name: (identifier)
+            dimensions: (literal
+              (number_literal
+                (decimal_literal))))
+          (field_declaration
+            type: (primitive_type)
+            name: (identifier))
+          (field_declaration
+            type: (primitive_type)
+            name: (identifier)))))))

@@ -1,0 +1,77 @@
+=================
+Define Module Test
+=================
+
+PROGRAM_NAME='Module Tests'
+
+define_module 'MyModule1' MyModuleInstance1(vdvObject, dvObject)
+define_module 'MyModule2' MyModuleInstance2(dvObject)
+define_module 'MyModule3' MyModuleInstance3()
+define_module 'MyModule4' MyModuleInstance4(vdvObject[1], dvObject)
+define_module 'MyModule5' MyModuleInstance5(vdvObject, CONST_ARRAY, dvObject)
+define_module 'MyModule6' MyModuleInstance6(vdvObject, dvObject, foo, bar)
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_module_section
+      (module_definition
+        module_name: (string_literal
+          (string_content))
+        instance_name: (identifier)
+        parameters: (argument_list
+          (identifier)
+          (identifier)))))
+  (section
+    (define_module_section
+      (module_definition
+        module_name: (string_literal
+          (string_content))
+        instance_name: (identifier)
+        parameters: (argument_list
+          (identifier)))))
+  (section
+    (define_module_section
+      (module_definition
+        module_name: (string_literal
+          (string_content))
+        instance_name: (identifier)
+        parameters: (argument_list))))
+  (section
+    (define_module_section
+      (module_definition
+        module_name: (string_literal
+          (string_content))
+        instance_name: (identifier)
+        parameters: (argument_list
+          (subscript_expression
+            argument: (identifier)
+            index: (literal
+              (number_literal
+                (decimal_literal))))
+          (identifier)))))
+  (section
+    (define_module_section
+      (module_definition
+        module_name: (string_literal
+          (string_content))
+        instance_name: (identifier)
+        parameters: (argument_list
+          (identifier)
+          (identifier)
+          (identifier)))))
+  (section
+    (define_module_section
+      (module_definition
+        module_name: (string_literal
+          (string_content))
+        instance_name: (identifier)
+        parameters: (argument_list
+          (identifier)
+          (identifier)
+          (identifier)
+          (identifier))))))

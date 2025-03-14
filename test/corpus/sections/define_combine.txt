@@ -1,0 +1,39 @@
+=================
+Define Combine Test
+=================
+
+PROGRAM_NAME='Combine Tests'
+
+DEFINE_COMBINE
+
+(vdvObject, dvObject1, dvObject2)
+(vdvObject, DVA_OBJECT)
+(vdvObject, DVA_OBJECT[1], DVA_OBJECT[2])
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_combine_section
+      (combine_definition
+        (identifier)
+        (identifier)
+        (identifier))
+      (combine_definition
+        (identifier)
+        (identifier))
+      (combine_definition
+        (identifier)
+        (subscript_expression
+          argument: (identifier)
+          index: (literal
+            (number_literal
+              (decimal_literal))))
+        (subscript_expression
+          argument: (identifier)
+          index: (literal
+            (number_literal
+              (decimal_literal))))))))

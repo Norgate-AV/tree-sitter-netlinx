@@ -1,0 +1,35 @@
+=================
+Define Variable Test
+=================
+
+PROGRAM_NAME='Global VariableTests'
+
+DEFINE_VARIABLE
+
+VOLATILE DeviceStatus primaryDevice
+VOLATILE INTEGER powerState
+VOLATILE CHAR buffer[1024]
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_variable_section
+      (global_variable_definition
+        (type_qualifier)
+        name: (identifier)
+        value: (identifier))
+      (global_variable_definition
+        (type_qualifier)
+        (primitive_type)
+        name: (identifier))
+      (global_variable_definition
+        (type_qualifier)
+        (primitive_type)
+        name: (identifier)
+        dimensions: (literal
+          (number_literal
+            (decimal_literal)))))))

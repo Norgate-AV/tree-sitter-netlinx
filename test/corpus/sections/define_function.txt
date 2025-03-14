@@ -1,0 +1,51 @@
+=================
+Define Function Test
+=================
+
+PROGRAM_NAME='Function Tests'
+
+DEFINE_FUNCTION CHAR[100] FormatStatus(DeviceStatus status) {}
+
+define_function TestFunc1() {}
+
+define_function integer TestFunc1(integer a, integer, b) {}
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_function_section
+      (function_definition
+        (primitive_type)
+        size: (literal
+          (number_literal
+            (decimal_literal)))
+        name: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            type: (identifier)
+            declarator: (identifier)))
+        body: (compound_statement))))
+  (section
+    (define_function_section
+      (function_definition
+        name: (identifier)
+        parameters: (parameter_list)
+        body: (compound_statement))))
+  (section
+    (define_function_section
+      (function_definition
+        (primitive_type)
+        name: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            type: (primitive_type)
+            declarator: (identifier))
+          (parameter_declaration
+            type: (primitive_type))
+          (parameter_declaration
+            type: (identifier)))
+        body: (compound_statement)))))
