@@ -103,7 +103,8 @@ define_function char TestSelectActive(integer a, integer b) {
             declarator: (identifier)))
         body: (compound_statement
           (local_variable_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier)
             size: (literal
               (number_literal
@@ -148,7 +149,8 @@ define_function char TestSelectActive(integer a, integer b) {
         parameters: (parameter_list)
         body: (compound_statement
           (local_variable_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier))
           (expression_statement
             (assignment_expression
@@ -204,7 +206,8 @@ define_function char TestSelectActive(integer a, integer b) {
         parameters: (parameter_list)
         body: (compound_statement
           (local_variable_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier))
           (expression_statement
             (assignment_expression
@@ -244,7 +247,8 @@ define_function char TestSelectActive(integer a, integer b) {
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             declarator: (identifier)))
         body: (compound_statement
           (switch_statement
@@ -329,14 +333,17 @@ define_function char TestSelectActive(integer a, integer b) {
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             declarator: (identifier))
           (parameter_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             declarator: (identifier)))
         body: (compound_statement
           (local_variable_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier))
           (expression_statement
             (assignment_expression
@@ -352,10 +359,12 @@ define_function char TestSelectActive(integer a, integer b) {
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             declarator: (identifier))
           (parameter_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             declarator: (identifier)))
         body: (compound_statement
           (select_statement

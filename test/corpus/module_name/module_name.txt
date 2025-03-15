@@ -12,8 +12,10 @@ MODULE_NAME='MyModule' (dev vdvObject, dev dvPort)
       (string_content))
     parameters: (parameter_list
       (parameter_declaration
-        type: (primitive_type)
+        type: (primitive_type
+          (structured_type))
         declarator: (identifier))
       (parameter_declaration
-        type: (primitive_type)
+        type: (primitive_type
+          (structured_type))
         declarator: (identifier)))))

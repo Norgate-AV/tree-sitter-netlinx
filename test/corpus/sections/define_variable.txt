@@ -24,11 +24,13 @@ VOLATILE CHAR buffer[1024]
         value: (identifier))
       (global_variable_definition
         (type_qualifier)
-        (primitive_type)
+        (primitive_type
+          (intrinsic_type))
         name: (identifier))
       (global_variable_definition
         (type_qualifier)
-        (primitive_type)
+        (primitive_type
+          (intrinsic_type))
         name: (identifier)
         dimensions: (literal
           (number_literal

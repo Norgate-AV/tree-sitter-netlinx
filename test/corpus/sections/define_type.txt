@@ -23,14 +23,17 @@ STRUCTURE DeviceStatus {
         name: (identifier)
         body: (field_declaration_list
           (field_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier)
             dimensions: (literal
               (number_literal
                 (decimal_literal))))
           (field_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier))
           (field_declaration
-            type: (primitive_type)
+            type: (primitive_type
+              (intrinsic_type))
             name: (identifier)))))))

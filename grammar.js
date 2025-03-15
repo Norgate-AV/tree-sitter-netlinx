@@ -51,6 +51,8 @@ module.exports = grammar({
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         [$.local_variable_declaration],
+        // [$.device_channel_reference_expression, $.subscript_expression],
+        // [$.assignment_expression, $.device_channel_assignment_expression],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -392,7 +394,9 @@ module.exports = grammar({
                 optional(";"),
             ),
 
-        primitive_type: (_) =>
+        primitive_type: ($) => choice($.intrinsic_type, $.structured_type),
+
+        intrinsic_type: (_) =>
             token(
                 choice(
                     keywords.char,
@@ -403,16 +407,21 @@ module.exports = grammar({
                     keywords.slong,
                     keywords.float,
                     keywords.double,
-                    // Add NetLinx structured types
+                ),
+            ),
+
+        structured_type: (_) =>
+            token(
+                choice(
                     keywords.dev,
                     keywords.devlev,
                     keywords.devchan,
-                    netlinx.tdata,
-                    netlinx.tchannel,
-                    netlinx.tlevel,
-                    netlinx.tbutton,
-                    netlinx.ttimeline,
-                    netlinx.tcustom,
+                    // netlinx.tdata,
+                    // netlinx.tchannel,
+                    // netlinx.tlevel,
+                    // netlinx.tbutton,
+                    // netlinx.ttimeline,
+                    // netlinx.tcustom,
                 ),
             ),
 
@@ -822,6 +831,7 @@ module.exports = grammar({
                 $.field_expression,
                 $.subscript_expression,
                 $.parenthesized_expression,
+                // $.device_channel_reference_expression,
             ),
 
         unary_expression: ($) =>

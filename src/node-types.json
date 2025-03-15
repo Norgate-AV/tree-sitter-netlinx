@@ -1885,6 +1885,25 @@
     "fields": {}
   },
   {
+    "type": "primitive_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "intrinsic_type",
+          "named": true
+        },
+        {
+          "type": "structured_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "program_name",
     "named": true,
     "fields": {},
@@ -2374,11 +2393,15 @@
     "named": true
   },
   {
-    "type": "primitive_type",
+    "type": "intrinsic_type",
     "named": true
   },
   {
     "type": "string_content",
+    "named": true
+  },
+  {
+    "type": "structured_type",
     "named": true
   },
   {

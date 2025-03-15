@@ -1420,6 +1420,19 @@
       ]
     },
     "primitive_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "intrinsic_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "structured_type"
+        }
+      ]
+    },
+    "intrinsic_type": {
       "type": "TOKEN",
       "content": {
         "type": "CHOICE",
@@ -1463,7 +1476,15 @@
             "type": "PATTERN",
             "value": "double",
             "flags": "i"
-          },
+          }
+        ]
+      }
+    },
+    "structured_type": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
           {
             "type": "PATTERN",
             "value": "dev",
@@ -1477,36 +1498,6 @@
           {
             "type": "PATTERN",
             "value": "devchan",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "tdata",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "tchannel",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "tlevel",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "tbutton",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "ttimeline",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "tcustom",
             "flags": "i"
           }
         ]
