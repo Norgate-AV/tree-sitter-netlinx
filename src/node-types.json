@@ -1323,6 +1323,10 @@
           {
             "type": "char_array_return_type",
             "named": true
+          },
+          {
+            "type": "intrinsic_type",
+            "named": true
           }
         ]
       }

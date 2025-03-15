@@ -445,21 +445,9 @@ module.exports = grammar({
                     field("body", $.compound_statement),
                 ),
 
-                // Simple primitive return type
+                // Simple intrinsic return type
                 seq(
-                    field(
-                        "return_type",
-                        choice(
-                            token(keywords.char),
-                            token(keywords.widechar),
-                            token(keywords.integer),
-                            token(keywords.sinteger),
-                            token(keywords.long),
-                            token(keywords.slong),
-                            token(keywords.float),
-                            token(keywords.double),
-                        ),
-                    ),
+                    field("return_type", $.intrinsic_type),
                     field("name", $.identifier),
                     field("parameters", $.parameter_list),
                     field("body", $.compound_statement),
