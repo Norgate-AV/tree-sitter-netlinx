@@ -180,25 +180,11 @@
         "required": false,
         "types": [
           {
-            "type": "*",
-            "named": false
-          },
-          {
             "type": "expression",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_qualifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -265,25 +251,11 @@
         "required": false,
         "types": [
           {
-            "type": "*",
-            "named": false
-          },
-          {
             "type": "expression",
             "named": true
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_qualifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -540,6 +512,22 @@
     }
   },
   {
+    "type": "char_array_return_type",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "combine_definition",
     "named": true,
     "fields": {},
@@ -593,7 +581,7 @@
       "required": false,
       "types": [
         {
-          "type": "declaration",
+          "type": "local_variable_declaration",
           "named": true
         },
         {
@@ -844,7 +832,7 @@
       "required": false,
       "types": [
         {
-          "type": "declaration",
+          "type": "local_variable_declaration",
           "named": true
         },
         {
@@ -863,7 +851,7 @@
       "required": false,
       "types": [
         {
-          "type": "declaration",
+          "type": "local_variable_declaration",
           "named": true
         },
         {
@@ -1329,25 +1317,11 @@
         ]
       },
       "return_type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          }
-        ]
-      },
-      "size": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "char_array_return_type",
             "named": true
           }
         ]
@@ -1560,6 +1534,60 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "local_variable_declaration",
+    "named": true,
+    "fields": {
+      "dimensions": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "[",
+            "named": false
+          },
+          {
+            "type": "]",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "size": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_specifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2348,10 +2376,6 @@
   {
     "type": "primitive_type",
     "named": true
-  },
-  {
-    "type": "static",
-    "named": false
   },
   {
     "type": "string_content",

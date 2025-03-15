@@ -92,23 +92,22 @@ define_function char TestSelectActive(integer a, integer b) {
   (section
     (define_function_section
       (function_definition
-        size: (literal
-          (number_literal
-            (decimal_literal)))
+        return_type: (char_array_return_type
+          size: (literal
+            (number_literal
+              (decimal_literal))))
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
             type: (identifier)
             declarator: (identifier)))
         body: (compound_statement
-          (declaration
-            (storage_class_specifier)
+          (local_variable_declaration
             type: (primitive_type)
-            declarator: (array_declarator
-              declarator: (identifier)
-              size: (literal
-                (number_literal
-                  (decimal_literal)))))
+            name: (identifier)
+            size: (literal
+              (number_literal
+                (decimal_literal))))
           (comment)
           (expression_statement
             (assignment_expression
@@ -148,10 +147,9 @@ define_function char TestSelectActive(integer a, integer b) {
         name: (identifier)
         parameters: (parameter_list)
         body: (compound_statement
-          (declaration
-            (storage_class_specifier)
+          (local_variable_declaration
             type: (primitive_type)
-            declarator: (identifier))
+            name: (identifier))
           (expression_statement
             (assignment_expression
               left: (identifier)
@@ -205,9 +203,9 @@ define_function char TestSelectActive(integer a, integer b) {
         name: (identifier)
         parameters: (parameter_list)
         body: (compound_statement
-          (declaration
+          (local_variable_declaration
             type: (primitive_type)
-            declarator: (identifier))
+            name: (identifier))
           (expression_statement
             (assignment_expression
               left: (identifier)
@@ -337,10 +335,9 @@ define_function char TestSelectActive(integer a, integer b) {
             type: (primitive_type)
             declarator: (identifier)))
         body: (compound_statement
-          (declaration
-            (storage_class_specifier)
+          (local_variable_declaration
             type: (primitive_type)
-            declarator: (identifier))
+            name: (identifier))
           (expression_statement
             (assignment_expression
               left: (identifier)

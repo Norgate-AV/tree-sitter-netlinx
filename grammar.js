@@ -50,6 +50,7 @@ module.exports = grammar({
         // [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
+        [$.local_variable_declaration],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -104,7 +105,7 @@ module.exports = grammar({
                 optional(field("parameters", $.parameter_list)),
             ),
 
-        _block_item: ($) => choice($.declaration, $.statement),
+        _block_item: ($) => choice($.local_variable_declaration, $.statement),
 
         // Pre-processor
         // Compiler directives
@@ -273,7 +274,15 @@ module.exports = grammar({
                 PREC.SECTION_DEFINITION,
                 seq(
                     keywords.define_start,
-                    choice(repeat($._block_item), $.compound_statement),
+                    // choice(repeat($._block_item), $.compound_statement),
+                    // repeat($.compound_statement),
+                    choice(
+                        $.compound_statement,
+                        seq(
+                            repeat($.local_variable_declaration), // declarations first
+                            repeat($.statement), // then statements
+                        ),
+                    ),
                 ),
             ),
 
@@ -282,46 +291,39 @@ module.exports = grammar({
                 PREC.SECTION_DEFINITION,
                 seq(
                     keywords.define_program,
-                    choice(repeat($._block_item), $.compound_statement),
+                    // choice(repeat($._block_item), $.compound_statement),
+                    // repeat($.compound_statement),
+                    choice(
+                        $.compound_statement,
+                        seq(
+                            repeat($.local_variable_declaration), // declarations first
+                            repeat($.statement), // then statements
+                        ),
+                    ),
                 ),
             ),
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
+        _array_brackets: ($) =>
+            seq("[", field("size", optional($.expression)), "]"),
+
         array_declarator: ($) =>
-            prec(
-                1,
-                seq(
-                    field("declarator", $._declarator),
-                    "[",
-                    repeat(choice($.type_qualifier, "static")),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
-                ),
-            ),
+            prec(1, seq(field("declarator", $._declarator), $._array_brackets)),
 
         array_field_declarator: ($) =>
             prec(
                 1,
                 seq(
                     field("declarator", $._field_declarator),
-                    "[",
-                    repeat(choice($.type_qualifier, "static")),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
+                    $._array_brackets,
                 ),
             ),
 
         array_type_declarator: ($) =>
             prec(
                 1,
-                seq(
-                    field("declarator", $._type_declarator),
-                    "[",
-                    repeat(choice($.type_qualifier, "static")),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
-                ),
+                seq(field("declarator", $._type_declarator), $._array_brackets),
             ),
 
         abstract_array_declarator: ($) =>
@@ -329,10 +331,7 @@ module.exports = grammar({
                 1,
                 seq(
                     field("declarator", optional($._abstract_declarator)),
-                    "[",
-                    repeat(choice($.type_qualifier, "static")),
-                    field("size", optional(choice($.expression, "*"))),
-                    "]",
+                    $._array_brackets,
                 ),
             ),
 
@@ -343,7 +342,14 @@ module.exports = grammar({
                 field("value", choice($.initializer_list, $.expression)),
             ),
 
-        compound_statement: ($) => seq("{", repeat($._block_item), "}"),
+        // compound_statement: ($) => seq("{", repeat($._block_item), "}"),
+        compound_statement: ($) =>
+            seq(
+                "{",
+                repeat($.local_variable_declaration),
+                repeat($.statement),
+                "}",
+            ),
 
         storage_class_specifier: (_) =>
             choice(keywords.local_var, keywords.stack_var),
@@ -410,6 +416,9 @@ module.exports = grammar({
                 ),
             ),
 
+        char_array_return_type: ($) =>
+            seq(token(keywords.char), "[", field("size", $.expression), "]"),
+
         function_definition: ($) =>
             choice(
                 // No return type (void)
@@ -421,15 +430,7 @@ module.exports = grammar({
 
                 // Char array return type
                 seq(
-                    field(
-                        "return_type",
-                        seq(
-                            token(keywords.char),
-                            token.immediate("["),
-                            field("size", $.expression),
-                            "]",
-                        ),
-                    ),
+                    field("return_type", $.char_array_return_type),
                     field("name", $.identifier),
                     field("parameters", $.parameter_list),
                     field("body", $.compound_statement),
@@ -610,6 +611,41 @@ module.exports = grammar({
                         "declarator",
                         choice($._declarator, $._abstract_declarator),
                     ),
+                ),
+            ),
+
+        local_variable_declaration: ($) =>
+            prec.right(
+                10, // Higher precedence than general declarations
+                seq(
+                    optional(
+                        field(
+                            "storage",
+                            choice(
+                                token(keywords.stack_var),
+                                token(keywords.local_var),
+                            ),
+                        ),
+                    ),
+                    field("type", $.type_specifier),
+                    commaSep1(
+                        seq(
+                            field("name", $.identifier),
+                            optional(
+                                field(
+                                    "dimensions",
+                                    repeat1(
+                                        seq(
+                                            "[",
+                                            field("size", $.expression),
+                                            "]",
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                    optional(";"),
                 ),
             ),
 
