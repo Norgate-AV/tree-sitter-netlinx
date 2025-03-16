@@ -397,32 +397,28 @@ module.exports = grammar({
         primitive_type: ($) => choice($.intrinsic_type, $.structured_type),
 
         intrinsic_type: (_) =>
-            token(
-                choice(
-                    keywords.char,
-                    keywords.widechar,
-                    keywords.integer,
-                    keywords.sinteger,
-                    keywords.long,
-                    keywords.slong,
-                    keywords.float,
-                    keywords.double,
-                ),
+            choice(
+                keywords.char,
+                keywords.widechar,
+                keywords.integer,
+                keywords.sinteger,
+                keywords.long,
+                keywords.slong,
+                keywords.float,
+                keywords.double,
             ),
 
         structured_type: (_) =>
-            token(
-                choice(
-                    keywords.dev,
-                    keywords.devlev,
-                    keywords.devchan,
-                    // netlinx.tdata,
-                    // netlinx.tchannel,
-                    // netlinx.tlevel,
-                    // netlinx.tbutton,
-                    // netlinx.ttimeline,
-                    // netlinx.tcustom,
-                ),
+            choice(
+                keywords.dev,
+                keywords.devlev,
+                keywords.devchan,
+                // netlinx.tdata,
+                // netlinx.tchannel,
+                // netlinx.tlevel,
+                // netlinx.tbutton,
+                // netlinx.ttimeline,
+                // netlinx.tcustom,
             ),
 
         char_array_return_type: ($) =>

@@ -330,6 +330,7 @@ define_function char TestSelectActive(integer a, integer b) {
   (section
     (define_function_section
       (function_definition
+        return_type: (intrinsic_type)
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
@@ -356,6 +357,7 @@ define_function char TestSelectActive(integer a, integer b) {
   (section
     (define_function_section
       (function_definition
+        return_type: (intrinsic_type)
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration

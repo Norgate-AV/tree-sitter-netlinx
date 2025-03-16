@@ -1522,6 +1522,11 @@
     }
   },
   {
+    "type": "intrinsic_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "literal",
     "named": true,
     "fields": {},
@@ -2101,6 +2106,11 @@
     }
   },
   {
+    "type": "structured_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "subscript_expression",
     "named": true,
     "fields": {
@@ -2397,15 +2407,7 @@
     "named": true
   },
   {
-    "type": "intrinsic_type",
-    "named": true
-  },
-  {
     "type": "string_content",
-    "named": true
-  },
-  {
-    "type": "structured_type",
     "named": true
   },
   {
