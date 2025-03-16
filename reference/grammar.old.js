@@ -106,14 +106,6 @@ module.exports = grammar({
 
         call_definition: ($) => seq($.identifier, $.argument_list),
 
-        define_event_section: ($) =>
-            seq(keywords.define_event, repeat($.event_definition)),
-
-        event_definition: ($) =>
-            seq($.event_type, field("body", $.event_block)),
-
-        event_block: ($) => prec(1, seq("{", repeat($.subevent_handler), "}")),
-
         subevent_handler: ($) =>
             prec(1, seq($.subevent_type, ":", $.compound_statement)),
 
@@ -128,40 +120,6 @@ module.exports = grammar({
                 /PUSH/i,
                 /RELEASE/i,
                 /HOLD/i,
-            ),
-
-        event_type: ($) =>
-            prec.right(
-                PRECEDENCE.EVENT_TYPE,
-                choice(
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.button_event,
-                        field("device", $._event_param_expression),
-                        field("channel", $._event_param_expression),
-                    ),
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.channel_event,
-                        field("device", $._event_param_expression),
-                        field("channel", $._event_param_expression),
-                    ),
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.level_event,
-                        field("device", $._event_param_expression),
-                        field("level", $._event_param_expression),
-                    ),
-                    seq(
-                        // Replace the conditional with direct reference to keywords
-                        keywords.data_event,
-                        field("device", $._event_param_expression),
-                    ),
-                    seq(
-                        keywords.timeline_event,
-                        field("timeline", $._event_param_expression),
-                    ),
-                ),
             ),
 
         // Special rule for expressions in event parameters that prevents binary operation conflicts

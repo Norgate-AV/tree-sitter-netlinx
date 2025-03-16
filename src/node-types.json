@@ -420,6 +420,139 @@
     "fields": {}
   },
   {
+    "type": "button_event_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "button_event_handler",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "button_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "button_event_block",
+            "named": true
+          }
+        ]
+      },
+      "devchan": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "button_event_device_channel_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "button_event_device_channel_reference",
+    "named": true,
+    "fields": {
+      "channel": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "devchan": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "device": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "device_literal",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "button_event_handler",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "button_event_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "button_event_type",
+    "named": true,
+    "fields": {
+      "repeat": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "repeat",
+            "named": false
+          }
+        ]
+      },
+      "time": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "call_expression",
     "named": true,
     "fields": {
@@ -693,6 +826,97 @@
     "fields": {}
   },
   {
+    "type": "data_event_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "data_event_handler",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "data_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "data_event_block",
+            "named": true
+          }
+        ]
+      },
+      "device": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "data_event_device_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "data_event_device_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "device_literal",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "data_event_handler",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "data_event_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "data_event_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "declaration",
     "named": true,
     "fields": {
@@ -803,6 +1027,21 @@
       "types": [
         {
           "type": "device_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_event_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "event_definition",
           "named": true
         }
       ]
@@ -1109,6 +1348,29 @@
       "types": [
         {
           "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "event_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "button_event_definition",
+          "named": true
+        },
+        {
+          "type": "data_event_definition",
+          "named": true
+        },
+        {
+          "type": "timeline_event_definition",
           "named": true
         }
       ]
@@ -2029,6 +2291,10 @@
           "named": true
         },
         {
+          "type": "define_event_section",
+          "named": true
+        },
+        {
           "type": "define_function_section",
           "named": true
         },
@@ -2230,6 +2496,47 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "timeline_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "id": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "timeline_event_id_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "timeline_event_id_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2490,6 +2797,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "repeat",
+    "named": false
   },
   {
     "type": "string_content",
