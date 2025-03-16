@@ -168,6 +168,7 @@ module.exports = grammar({
                 $.define_toggling_section,
                 $.define_variable_section,
                 $.define_function_section,
+                $.define_call_section,
                 $.define_module_section,
                 $.define_start_section,
                 $.define_event_section,
@@ -318,6 +319,9 @@ module.exports = grammar({
 
         define_function_section: ($) =>
             seq(keywords.define_function, $.function_definition),
+
+        define_call_section: ($) =>
+            seq(keywords.define_call, $.call_definition),
 
         define_module_section: ($) =>
             seq(keywords.define_module, repeat($.module_definition)),
@@ -777,6 +781,13 @@ module.exports = grammar({
                     field("parameters", $.parameter_list),
                     field("body", $.compound_statement),
                 ),
+            ),
+
+        call_definition: ($) =>
+            seq(
+                field("name", $.string_literal),
+                optional(field("parameters", $.parameter_list)),
+                field("body", $.compound_statement),
             ),
 
         declaration: ($) =>
