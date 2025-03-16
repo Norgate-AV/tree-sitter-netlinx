@@ -53,87 +53,12 @@ module.exports = grammar({
     supertypes: ($) => [],
 
     rules: {
-        string_expression: ($) =>
-            prec.dynamic(
-                // Change from prec.left to prec.dynamic for better conflict resolution
-                PRECEDENCE.CALL - 1, // Lower precedence than string_literal
-                seq(
-                    '"',
-                    field(
-                        "first_element",
-                        alias(
-                            choice($.string_literal, $.expression),
-                            $.first_string_element,
-                        ),
-                    ),
-                    repeat(
-                        seq(
-                            ",",
-                            field(
-                                "element",
-                                alias(
-                                    choice($.string_literal, $.expression),
-                                    $.string_element,
-                                ),
-                            ),
-                        ),
-                    ),
-                    '"',
-                ),
-            ),
-
-        // Add separate rule for first element in string expression
-        first_string_element: ($) =>
-            prec.dynamic(
-                PRECEDENCE.CALL,
-                choice($.string_literal, $.expression),
-            ),
-
-        string_element: ($) =>
-            prec.dynamic(
-                PRECEDENCE.CALL,
-                choice($.string_literal, $.expression),
-            ),
-
-        string_interpolation: ($) =>
-            prec(
-                PRECEDENCE.CALL + 1,
-                alias($.string_expression, $.interpolated_string),
-            ),
-
         define_call_section: ($) =>
             seq(keywords.define_call, repeat($.call_definition)),
 
         call_definition: ($) => seq($.identifier, $.argument_list),
 
-        subevent_handler: ($) =>
-            prec(1, seq($.subevent_type, ":", $.compound_statement)),
-
-        subevent_type: (_) =>
-            choice(
-                /ONLINE/i,
-                /OFFLINE/i,
-                /STRING/i,
-                /COMMAND/i,
-                /ERROR/i,
-                /ONERROR/i,
-                /PUSH/i,
-                /RELEASE/i,
-                /HOLD/i,
-            ),
-
-        // Special rule for expressions in event parameters that prevents binary operation conflicts
-        _event_param_expression: ($) =>
-            prec(
-                PRECEDENCE.EVENT_PARAM, // Use named constant instead of raw number
-                choice(
-                    alias($.identifier, $.event_identifier),
-                    alias($.decimal_literal, $.event_literal),
-                    alias($.parenthesized_expression, $.event_expression),
-                ),
-            ),
-
-        // NetLinX specific functions
+        // NetLinx specific functions
         netlinx_function_call: ($) =>
             prec(
                 PRECEDENCE.CALL,
@@ -256,17 +181,6 @@ module.exports = grammar({
                             // Add other device properties as needed
                         ),
                     ),
-                ),
-            ),
-
-        // Add a special higher precedence version of array_declarator specifically for structure fields
-        structure_field_array_declarator: ($) =>
-            prec.dynamic(
-                25, // High precedence
-                seq(
-                    token.immediate("["),
-                    field("size", optional($.decimal_literal)), // Only allow simple numeric literals
-                    token.immediate("]"),
                 ),
             ),
     },

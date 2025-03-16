@@ -1,4 +1,4 @@
-PROGRAM_NAME='Sample NetLinX Program'
+PROGRAM_NAME='Sample NetLinx Program'
 
 INCLUDE 'amx-device-control.axi'
 #include 'Functions.axi'
@@ -8,7 +8,7 @@ INCLUDE 'amx-device-control.axi'
 #END_IF
 
 /**
- * This is a sample NetLinX program to test the grammar
+ * This is a sample NetLinx program to test the grammar
  */
 
 DEFINE_DEVICE
