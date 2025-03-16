@@ -86,6 +86,16 @@ module.exports = grammar({
                 repeat($.section),
             ),
 
+        _top_level_item: ($) =>
+            choice(
+                $.section,
+                $.comment,
+                $.preproc_directive,
+                $.constant_definition,
+                $.global_variable_definition,
+                $.expression_statement,
+            ),
+
         program_name: ($) =>
             prec.right(
                 PREC.DIRECTIVE + 10, // Even higher precedence than directives
@@ -122,33 +132,44 @@ module.exports = grammar({
         preproc_include: ($) =>
             prec(
                 PREC.DIRECTIVE,
-                seq(directives.INCLUDE, token(seq("'", /[^']*/, "'"))),
+                seq(directives.include, token(seq("'", /[^']*/, "'"))),
             ),
 
         preproc_define: ($) =>
             prec(
                 PREC.DIRECTIVE,
                 seq(
-                    directives.DEFINE,
+                    directives.define,
                     $.identifier,
                     optional(choice($.number_literal, $.string_literal)),
                 ),
             ),
 
+        // preproc_conditional_block: ($) =>
+        //     prec.right(
+        //         PREC.DIRECTIVE + 1,
+        //         seq(
+        //             choice($.preproc_if_defined, $.preproc_if_not_defined),
+        //             repeat(),
+        //             optional(seq($.preproc_else, repeat())),
+        //             $.preproc_end_if,
+        //         ),
+        //     ),
+
         preproc_if_defined: ($) =>
-            prec(PREC.DIRECTIVE, seq(directives.IF_DEFINED, $.identifier)),
+            prec(PREC.DIRECTIVE, seq(directives.if_defined, $.identifier)),
 
         preproc_if_not_defined: ($) =>
-            prec(PREC.DIRECTIVE, seq(directives.IF_NOT_DEFINED, $.identifier)),
+            prec(PREC.DIRECTIVE, seq(directives.if_not_defined, $.identifier)),
 
-        preproc_else: ($) => prec(PREC.DIRECTIVE, directives.ELSE),
+        preproc_else: ($) => prec(PREC.DIRECTIVE, directives.else),
 
-        preproc_end_if: ($) => prec(PREC.DIRECTIVE, directives.END_IF),
+        preproc_end_if: ($) => prec(PREC.DIRECTIVE, directives.end_if),
 
         preproc_warn: ($) =>
             prec(
                 PREC.DIRECTIVE,
-                seq(directives.WARN, token(seq("'", /[^']*/, "'"))),
+                seq(directives.warn, token(seq("'", /[^']*/, "'"))),
             ),
 
         // Main Grammar
@@ -1360,13 +1381,87 @@ module.exports = grammar({
         comment: (_) =>
             token(
                 choice(
-                    seq("//", /(\\+(.|\r?\n)|[^\\\n])*/),
-                    seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
-                    seq("(*", /[^*]*\*+([^\(*][^*]*\*+)*/, ")"),
+                    seq("//", /(\\+(.|\r?\n)|[^\\\n])*/), // Single-line comments
+                    seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"), // C-style multi-line comments
+                    seq("(*", /.*/, "*)"), // Pascal-style comments
                 ),
             ),
     },
 });
+
+/**
+ * Creates preprocessor conditional rules
+ *
+ * @param {string} suffix
+ * @param {RuleBuilder<string>} content
+ * @param {number} precedence
+ *
+ * @returns {RuleBuilders<string, string>}
+ */
+function preprocIf(suffix, content, precedence = 0) {
+    /**
+     *
+     * @param {GrammarSymbols<string>} $
+     *
+     * @returns {ChoiceRule}
+     */
+    function alternativeBlock($) {
+        return choice(
+            suffix
+                ? alias($["preproc_else" + suffix], $.preproc_else)
+                : $.preproc_else,
+        );
+    }
+
+    return {
+        ["preproc_if_defined" + suffix]: ($) =>
+            prec(
+                precedence,
+                seq(
+                    preprocessor(directives.if_defined),
+                    field("name", $.identifier),
+                    "\n",
+                    repeat(content($)),
+                    field("alternative", optional(alternativeBlock($))),
+                    preprocessor(directives.end_if),
+                ),
+            ),
+
+        ["preproc_if_not_defined" + suffix]: ($) =>
+            prec(
+                precedence,
+                seq(
+                    preprocessor(directives.if_not_defined),
+                    field("name", $.identifier),
+                    repeat(content($)),
+                    field("alternative", optional(alternativeBlock($))),
+                    preprocessor(directives.end_if),
+                ),
+            ),
+
+        ["preproc_else" + suffix]: ($) =>
+            prec(
+                precedence,
+                seq(preprocessor(directives.else), repeat(content($))),
+            ),
+    };
+}
+
+/**
+ * Creates a preprocessor regex rule
+ *
+ * @param {RegExp | Rule | string} command
+ *
+ * @returns {AliasRule}
+ */
+function preprocessor(command) {
+    if (command === directives.include) {
+        // Allow for optional # at the start of include
+        return alias(new RegExp("#?" + command, "i"), "#" + command);
+    }
+
+    return alias(new RegExp("#" + command, "i"), "#" + command);
+}
 
 /**
  * Creates a rule to optionally match one or more of the rules separated by a comma

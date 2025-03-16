@@ -3118,6 +3118,18 @@
     "named": true
   },
   {
+    "type": "define",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "end_if",
+    "named": false
+  },
+  {
     "type": "field_identifier",
     "named": true
   },
@@ -3130,12 +3142,28 @@
     "named": true
   },
   {
+    "type": "if_defined",
+    "named": false
+  },
+  {
+    "type": "if_not_defined",
+    "named": false
+  },
+  {
+    "type": "include",
+    "named": false
+  },
+  {
     "type": "repeat",
     "named": false
   },
   {
     "type": "string_content",
     "named": true
+  },
+  {
+    "type": "warn",
+    "named": false
   },
   {
     "type": "{",

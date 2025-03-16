@@ -73,6 +73,35 @@
         }
       ]
     },
+    "_top_level_item": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "preproc_directive"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "constant_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "global_variable_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expression_statement"
+        }
+      ]
+    },
     "program_name": {
       "type": "PREC_RIGHT",
       "value": 30,
@@ -182,9 +211,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "#?include",
-            "flags": "i"
+            "type": "STRING",
+            "value": "include"
           },
           {
             "type": "TOKEN",
@@ -216,9 +244,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "#define",
-            "flags": "i"
+            "type": "STRING",
+            "value": "define"
           },
           {
             "type": "SYMBOL",
@@ -255,9 +282,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "#if_defined",
-            "flags": "i"
+            "type": "STRING",
+            "value": "if_defined"
           },
           {
             "type": "SYMBOL",
@@ -273,9 +299,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "#if_not_defined",
-            "flags": "i"
+            "type": "STRING",
+            "value": "if_not_defined"
           },
           {
             "type": "SYMBOL",
@@ -288,18 +313,16 @@
       "type": "PREC",
       "value": 20,
       "content": {
-        "type": "PATTERN",
-        "value": "#else",
-        "flags": "i"
+        "type": "STRING",
+        "value": "else"
       }
     },
     "preproc_end_if": {
       "type": "PREC",
       "value": 20,
       "content": {
-        "type": "PATTERN",
-        "value": "#end_if",
-        "flags": "i"
+        "type": "STRING",
+        "value": "end_if"
       }
     },
     "preproc_warn": {
@@ -309,9 +332,8 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "PATTERN",
-            "value": "#warn",
-            "flags": "i"
+            "type": "STRING",
+            "value": "warn"
           },
           {
             "type": "TOKEN",
@@ -5710,11 +5732,11 @@
               },
               {
                 "type": "PATTERN",
-                "value": "[^*]*\\*+([^\\(*][^*]*\\*+)*"
+                "value": ".*"
               },
               {
                 "type": "STRING",
-                "value": ")"
+                "value": "*)"
               }
             ]
           }
