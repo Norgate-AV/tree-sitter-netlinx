@@ -361,6 +361,18 @@
         },
         {
           "type": "SYMBOL",
+          "name": "define_mutually_exclusive_section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define_latching_section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define_toggling_section"
+        },
+        {
+          "type": "SYMBOL",
           "name": "define_variable_section"
         },
         {
@@ -724,6 +736,214 @@
           ]
         }
       ]
+    },
+    "define_mutually_exclusive_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "define_mutually_exclusive",
+          "flags": "i"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "mutually_exclusive_definition"
+          }
+        }
+      ]
+    },
+    "mutually_exclusive_definition": {
+      "type": "PREC_RIGHT",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "device_channel_reference_expression"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "channel_range_expression"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
+                ]
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "device_channel_reference_expression"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "channel_range_expression"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "channel_range_expression": {
+      "type": "PREC_DYNAMIC",
+      "value": 16,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "device_channel_reference_expression"
+          },
+          {
+            "type": "STRING",
+            "value": ".."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "device_channel_reference_expression"
+          }
+        ]
+      }
+    },
+    "define_latching_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "define_latching",
+          "flags": "i"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "latching_definition"
+          }
+        }
+      ]
+    },
+    "latching_definition": {
+      "type": "PREC_RIGHT",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "device_channel_reference_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "channel_range_expression"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "define_toggling_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "define_toggling",
+          "flags": "i"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "toggling_definition"
+          }
+        }
+      ]
+    },
+    "toggling_definition": {
+      "type": "PREC_RIGHT",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "device_channel_reference_expression"
+              }
+            ]
+          }
+        ]
+      }
     },
     "define_variable_section": {
       "type": "SEQ",

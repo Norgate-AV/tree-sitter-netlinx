@@ -163,6 +163,9 @@ module.exports = grammar({
                 $.define_connect_level_section,
                 $.define_constant_section,
                 $.define_type_section,
+                $.define_mutually_exclusive_section,
+                $.define_latching_section,
+                $.define_toggling_section,
                 $.define_variable_section,
                 $.define_function_section,
                 $.define_module_section,
@@ -225,6 +228,61 @@ module.exports = grammar({
 
         define_type_section: ($) =>
             seq(keywords.define_type, optional(repeat1($.type_specifier))),
+
+        define_mutually_exclusive_section: ($) =>
+            seq(
+                keywords.define_mutually_exclusive,
+                repeat($.mutually_exclusive_definition),
+            ),
+
+        mutually_exclusive_definition: ($) =>
+            prec.right(
+                5,
+                seq(
+                    "(",
+                    commaSep1(
+                        choice(
+                            $.device_channel_reference_expression,
+                            $.channel_range_expression,
+                            $.identifier,
+                        ),
+                    ),
+                    ")",
+                    optional(";"),
+                ),
+            ),
+
+        channel_range_expression: ($) =>
+            prec.dynamic(
+                PREC.FIELD,
+                seq(
+                    $.device_channel_reference_expression,
+                    "..",
+                    $.device_channel_reference_expression,
+                ),
+            ),
+
+        define_latching_section: ($) =>
+            seq(keywords.define_latching, repeat($.latching_definition)),
+
+        latching_definition: ($) =>
+            prec.right(
+                5,
+                seq(
+                    choice(
+                        $.device_channel_reference_expression,
+                        $.channel_range_expression,
+                        $.identifier,
+                    ),
+                    optional(";"),
+                ),
+            ),
+
+        define_toggling_section: ($) =>
+            seq(keywords.define_toggling, repeat($.toggling_definition)),
+
+        toggling_definition: ($) =>
+            prec.right(5, seq(choice($.device_channel_reference_expression))),
 
         define_variable_section: ($) =>
             seq(keywords.define_variable, repeat($.global_variable_definition)),
