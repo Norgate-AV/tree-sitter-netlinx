@@ -7,7 +7,6 @@
             "path": ".",
             "file-types": ["axs", "axi", "axb", "lib"],
             "highlights": "queries/highlights.scm",
-            "tags": "queries/tags.scm",
             "injection-regex": "^(axs|axi|axb|lib)$"
         }
     ],
