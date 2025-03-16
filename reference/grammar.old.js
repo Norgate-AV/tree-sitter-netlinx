@@ -53,11 +53,6 @@ module.exports = grammar({
     supertypes: ($) => [],
 
     rules: {
-        define_call_section: ($) =>
-            seq(keywords.define_call, repeat($.call_definition)),
-
-        call_definition: ($) => seq($.identifier, $.argument_list),
-
         // NetLinx specific functions
         netlinx_function_call: ($) =>
             prec(

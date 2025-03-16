@@ -11,7 +11,6 @@ const keywords = require("./keywords");
 const directives = require("./directives");
 // const functions = require("./functions");
 
-// Add a new precedence level for array function declarations
 const PREC = {
     PAREN_DECLARATOR: -10,
     ASSIGNMENT: -2,
@@ -33,8 +32,6 @@ const PREC = {
     ARRAY_FUNCTION: 19,
     FIELD: 16,
     DIRECTIVE: 20,
-    // EVENT_PARAM: 90,
-    // EVENT_TYPE: 100,
     SECTION_DEFINITION: 110,
 };
 
