@@ -5,8 +5,10 @@
             "camelcase": "NetLinx",
             "scope": "source.netlinx",
             "path": ".",
-            "file-types": ["axs", "axi", "lib"],
-            "injection-regex": "^(axs|axi|lib)$"
+            "file-types": ["axs", "axi", "axb", "lib"],
+            "highlights": "queries/highlights.scm",
+            "tags": "queries/tags.scm",
+            "injection-regex": "^(axs|axi|axb|lib)$"
         }
     ],
     "metadata": {
@@ -23,6 +25,7 @@
         "node": true,
         "python": true,
         "rust": true,
-        "swift": true
+        "swift": true,
+        "zig": true
     }
 }
