@@ -1,6 +1,6 @@
 PROGRAM_NAME='Sample NetLinX Program'
 
-#INCLUDE 'amx-device-control.axi'
+INCLUDE 'amx-device-control.axi'
 #include 'Functions.axi'
 
 #IF_NOT_DEFINED DEBUG_MODE
