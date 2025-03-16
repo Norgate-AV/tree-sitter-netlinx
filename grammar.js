@@ -1029,41 +1029,10 @@ module.exports = grammar({
         initializer_list: ($) =>
             seq(
                 "{",
-                commaSep(
-                    choice(
-                        $.initializer_pair,
-                        $.expression,
-                        $.initializer_list,
-                    ),
-                ),
+                commaSep(choice($.expression, $.initializer_list)),
                 optional(","),
                 "}",
             ),
-
-        initializer_pair: ($) =>
-            choice(
-                seq(
-                    field(
-                        "designator",
-                        repeat1(
-                            choice(
-                                // $.subscript_designator,
-                                $.field_designator,
-                                // $.subscript_range_designator,
-                            ),
-                        ),
-                    ),
-                    "=",
-                    field("value", choice($.expression, $.initializer_list)),
-                ),
-                seq(
-                    field("designator", $._field_identifier),
-                    ":",
-                    field("value", choice($.expression, $.initializer_list)),
-                ),
-            ),
-
-        field_designator: ($) => seq(".", $._field_identifier),
 
         string_literal: ($) =>
             seq(
