@@ -2037,27 +2037,6 @@
         ]
       }
     },
-    "abstract_parenthesized_declarator": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "("
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_abstract_declarator"
-          },
-          {
-            "type": "STRING",
-            "value": ")"
-          }
-        ]
-      }
-    },
     "function_field_declarator": {
       "type": "PREC",
       "value": 1,
@@ -4429,38 +4408,6 @@
     "hex_literal": {
       "type": "PATTERN",
       "value": "\\$[0-9a-fA-F]+"
-    },
-    "true": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "TRUE"
-          },
-          {
-            "type": "STRING",
-            "value": "true"
-          }
-        ]
-      }
-    },
-    "false": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "FALSE"
-          },
-          {
-            "type": "STRING",
-            "value": "false"
-          }
-        ]
-      }
     },
     "identifier": {
       "type": "PATTERN",

@@ -7,7 +7,7 @@
 // @ts-check
 
 const keywords = require("./keywords");
-const netlinx = require("./netlinx");
+// const netlinx = require("./netlinx");
 const directives = require("./directives");
 // const functions = require("./functions");
 
@@ -33,8 +33,8 @@ const PREC = {
     ARRAY_FUNCTION: 19,
     FIELD: 16,
     DIRECTIVE: 20,
-    EVENT_PARAM: 90,
-    EVENT_TYPE: 100,
+    // EVENT_PARAM: 90,
+    // EVENT_TYPE: 100,
     SECTION_DEFINITION: 110,
 };
 
@@ -562,9 +562,6 @@ module.exports = grammar({
                 seq("(", optional($._type_declarator), ")"),
             ),
 
-        abstract_parenthesized_declarator: ($) =>
-            prec(1, seq("(", $._abstract_declarator, ")")),
-
         function_field_declarator: ($) =>
             prec(
                 1,
@@ -1037,8 +1034,8 @@ module.exports = grammar({
 
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
 
-        true: (_) => token(choice("TRUE", "true")),
-        false: (_) => token(choice("FALSE", "false")),
+        // true: (_) => token(choice("TRUE", "true")),
+        // false: (_) => token(choice("FALSE", "false")),
 
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 
