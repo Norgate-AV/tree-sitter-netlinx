@@ -919,7 +919,7 @@ module.exports = grammar({
                         field("argument", $.expression),
                         // field("operator", choice(".", "->")),
                         // No arrow pointers in NetLinx, only dot notation
-                        field("operator", choice(".")),
+                        field("operator", "."),
                     ),
                 ),
                 field("field", $._field_identifier),
