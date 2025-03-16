@@ -6,10 +6,9 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const keywords = require("./keywords");
-const netlinx = require("./netlinx");
-const directives = require("./directives");
-const functions = require("./functions");
+const keywords = require("../keywords");
+const netlinx = require("../netlinx");
+const functions = require("../functions");
 
 // Add a new precedence level for array function declarations
 const PRECEDENCE = {
