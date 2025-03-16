@@ -21,6 +21,9 @@ importers:
       eslint:
         specifier: ^9.17.0
         version: 9.22.0
+      eslint-config-prettier:
+        specifier: ^10.1.1
+        version: 10.1.1(eslint@9.22.0)
       eslint-config-treesitter:
         specifier: ^1.0.2
         version: 1.0.2(eslint@9.22.0)
@@ -245,6 +248,12 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+
+  eslint-config-prettier@10.1.1:
+    resolution: {integrity: sha512-4EQQr6wXwS+ZJSzaR5ZCrYgLxqvUjdXctaEtBqHcbkW944B1NQyO4qpdHQbXBONfwxXdkAY81HH4+LUfrg+zPw==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
 
   eslint-config-treesitter@1.0.2:
     resolution: {integrity: sha512-OkzjA0oaNgYUFkGmo9T2cvRE7cxzh1dgSt0laO8Hdcypp9di8lebldoPivALXFusRb7s54J5exIw1w7l+g85Rg==}
@@ -905,6 +914,10 @@ snapshots:
   es-module-lexer@1.6.0: {}
 
   escape-string-regexp@4.0.0: {}
+
+  eslint-config-prettier@10.1.1(eslint@9.22.0):
+    dependencies:
+      eslint: 9.22.0
 
   eslint-config-treesitter@1.0.2(eslint@9.22.0):
     dependencies:

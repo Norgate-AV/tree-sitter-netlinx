@@ -697,6 +697,7 @@ module.exports = grammar({
         /**
          * Statements
          */
+
         statement: ($) => choice($.case_statement, $._non_case_statement),
 
         _non_case_statement: ($) =>
@@ -825,6 +826,7 @@ module.exports = grammar({
         /**
          * Expressions
          */
+
         expression: ($) =>
             prec(
                 2, // Increase from 1 to 2
