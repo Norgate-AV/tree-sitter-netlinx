@@ -1,0 +1,11 @@
+PROGRAM_NAME='define_latching'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0
+
+DEFINE_LATCHING
+[dvTP,1]
+[dvTP,2]
+[dvTP,11]..[dvTP,15]
+POWER_BTN
+MODE_BTN

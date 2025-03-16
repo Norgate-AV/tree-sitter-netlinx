@@ -1,0 +1,138 @@
+===============
+Combined Definitions Test
+===============
+
+PROGRAM_NAME='combined_definitions'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0
+dvTP2 = 10002:1:0
+
+DEFINE_CONSTANT
+// Define button constants
+INTEGER SOURCE_1_BTN = 1
+INTEGER SOURCE_2_BTN = 2
+INTEGER SOURCE_3_BTN = 3
+INTEGER POWER_BTN = 10
+
+DEFINE_MUTUALLY_EXCLUSIVE
+([dvTP,SOURCE_1_BTN],[dvTP,SOURCE_2_BTN],[dvTP,SOURCE_3_BTN])
+([dvTP2,1]..[dvTP2,5])
+
+DEFINE_LATCHING
+[dvTP,POWER_BTN]
+SOURCE_TOGGLE_BTN
+
+DEFINE_TOGGLING
+[dvTP,20]
+[dvTP,21]
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_device_section
+      (device_definition
+        (identifier)
+        (device_literal
+          device: (literal
+            (number_literal
+              (decimal_literal)))
+          port: (literal
+            (number_literal
+              (decimal_literal)))
+          system: (literal
+            (number_literal
+              (decimal_literal)))))
+      (device_definition
+        (identifier)
+        (device_literal
+          device: (literal
+            (number_literal
+              (decimal_literal)))
+          port: (literal
+            (number_literal
+              (decimal_literal)))
+          system: (literal
+            (number_literal
+              (decimal_literal)))))))
+  (section
+    (define_constant_section
+      (comment)
+      (constant_definition
+        (primitive_type
+          (intrinsic_type))
+        name: (identifier)
+        value: (literal
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (primitive_type
+          (intrinsic_type))
+        name: (identifier)
+        value: (literal
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (primitive_type
+          (intrinsic_type))
+        name: (identifier)
+        value: (literal
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (primitive_type
+          (intrinsic_type))
+        name: (identifier)
+        value: (literal
+          (number_literal
+            (decimal_literal))))))
+  (section
+    (define_mutually_exclusive_section
+      (mutually_exclusive_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (identifier))
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (identifier))
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (identifier)))
+      (mutually_exclusive_definition
+        (channel_range_expression
+          (device_channel_reference_expression
+            device: (identifier)
+            channel: (literal
+              (number_literal
+                (decimal_literal))))
+          (device_channel_reference_expression
+            device: (identifier)
+            channel: (literal
+              (number_literal
+                (decimal_literal))))))))
+  (section
+    (define_latching_section
+      (latching_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (identifier)))
+      (latching_definition
+        (identifier))))
+  (section
+    (define_toggling_section
+      (toggling_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (literal
+            (number_literal
+              (decimal_literal)))))
+      (toggling_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (literal
+            (number_literal
+              (decimal_literal))))))))

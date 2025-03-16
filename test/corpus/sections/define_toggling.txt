@@ -1,0 +1,54 @@
+===============
+Define Toggling Test
+===============
+
+PROGRAM_NAME='define_toggling'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0
+
+DEFINE_TOGGLING
+[dvTP,1]
+[dvTP,2]
+[dvTP,3]
+
+---
+
+(source_file
+  (program_name
+    (string_literal
+      (string_content)))
+  (section
+    (define_device_section
+      (device_definition
+        (identifier)
+        (device_literal
+          device: (literal
+            (number_literal
+              (decimal_literal)))
+          port: (literal
+            (number_literal
+              (decimal_literal)))
+          system: (literal
+            (number_literal
+              (decimal_literal)))))))
+  (section
+    (define_toggling_section
+      (toggling_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (literal
+            (number_literal
+              (decimal_literal)))))
+      (toggling_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (literal
+            (number_literal
+              (decimal_literal)))))
+      (toggling_definition
+        (device_channel_reference_expression
+          device: (identifier)
+          channel: (literal
+            (number_literal
+              (decimal_literal))))))))

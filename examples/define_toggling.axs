@@ -1,0 +1,9 @@
+PROGRAM_NAME='define_toggling'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0
+
+DEFINE_TOGGLING
+[dvTP,1]
+[dvTP,2]
+[dvTP,3]

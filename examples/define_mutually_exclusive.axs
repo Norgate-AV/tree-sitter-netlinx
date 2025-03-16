@@ -1,0 +1,9 @@
+PROGRAM_NAME='define_mutually_exclusive'
+
+DEFINE_DEVICE
+dvTP = 10001:1:0
+
+DEFINE_MUTUALLY_EXCLUSIVE
+([dvTP,1],[dvTP,2],[dvTP,3])
+([dvTP,11]..[dvTP,15])
+(DVD_PLAY_BTN, DVD_STOP_BTN, DVD_PAUSE_BTN)
