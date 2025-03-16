@@ -645,6 +645,118 @@
     }
   },
   {
+    "type": "channel_event_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "channel_event_handler",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "channel_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "channel_event_block",
+            "named": true
+          }
+        ]
+      },
+      "devchan": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "channel_event_device_channel_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "channel_event_device_channel_reference",
+    "named": true,
+    "fields": {
+      "channel": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "devchan": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "device": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "device_literal",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "channel_event_handler",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "channel_event_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "channel_event_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "channel_range_expression",
     "named": true,
     "fields": {},
@@ -824,6 +936,92 @@
     "type": "continue_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "custom_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "reference": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "custom_event_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "custom_event_reference",
+    "named": true,
+    "fields": {
+      "devchan": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "device": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "device_literal",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "eventid": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "id": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "data_event_block",
@@ -1366,7 +1564,19 @@
           "named": true
         },
         {
+          "type": "channel_event_definition",
+          "named": true
+        },
+        {
+          "type": "custom_event_definition",
+          "named": true
+        },
+        {
           "type": "data_event_definition",
+          "named": true
+        },
+        {
+          "type": "level_event_definition",
           "named": true
         },
         {
@@ -1821,6 +2031,72 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "level_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "devlev": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "level_event_device_level_reference",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "level_event_device_level_reference",
+    "named": true,
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "device_literal",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "devlev": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "level": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

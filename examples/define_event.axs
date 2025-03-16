@@ -74,3 +74,34 @@ BUTTON_EVENT[dvTP, BTN_VOLUME_DOWN] {
     }
     release: {}
 }
+
+level_event[dvTP, 1]
+level_event[dvTP, 2] {
+
+}
+
+level_event[dvTP,1] {}
+
+channel_event[dvIO,1]
+channel_event[dvIO,2] {
+    on: {}
+    off: {}
+}
+
+channel_event[dvIO, 0] {
+    on: {}
+    off: {}
+}
+
+custom_event[dvTP, 1, 1001] {}
+
+custom_event[dvTP, 1002] {}
+
+custom_event[dvTP, 1, 1001]
+custom_event[dvTP, 1, 1002] {}
+
+custom_event[dvTP, 1001]
+custom_event[dvTP, 1002] {}
+
+custom_event[dvTP, 1, 1001]
+custom_event[dvTP, 1002] {}

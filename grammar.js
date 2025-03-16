@@ -353,11 +353,11 @@ module.exports = grammar({
         event_definition: ($) =>
             choice(
                 $.button_event_definition,
-                // $.channel_event_definition,
-                // $.level_event_definition,
+                $.channel_event_definition,
+                $.level_event_definition,
                 $.data_event_definition,
                 $.timeline_event_definition,
-                // $.custom_event_definition,
+                $.custom_event_definition,
             ),
 
         data_event_definition: ($) =>
@@ -493,6 +493,138 @@ module.exports = grammar({
                         ),
                     ),
                 ),
+            ),
+
+        level_event_definition: ($) =>
+            seq(
+                seq(
+                    keywords.level_event,
+                    field("devlev", $.level_event_device_level_reference),
+                ),
+                repeat(
+                    seq(
+                        keywords.level_event,
+                        field("devlev", $.level_event_device_level_reference),
+                    ),
+                ),
+                field("body", $.compound_statement),
+            ),
+
+        level_event_device_level_reference: ($) =>
+            seq(
+                "[",
+                choice(
+                    seq(
+                        field(
+                            "device",
+                            choice(
+                                $.device_literal,
+                                $.identifier,
+                                $.expression,
+                            ),
+                        ),
+                        ",",
+                        field("level", choice($.identifier, $.expression)),
+                    ),
+                    field("devlev", choice($.identifier, $.expression)),
+                ),
+                "]",
+            ),
+
+        channel_event_definition: ($) =>
+            seq(
+                seq(
+                    keywords.channel_event,
+                    field("devchan", $.channel_event_device_channel_reference),
+                ),
+                repeat(
+                    seq(
+                        keywords.channel_event,
+                        field(
+                            "devchan",
+                            $.channel_event_device_channel_reference,
+                        ),
+                    ),
+                ),
+                field("body", $.channel_event_block),
+            ),
+
+        channel_event_device_channel_reference: ($) =>
+            seq(
+                "[",
+                choice(
+                    seq(
+                        field(
+                            "device",
+                            choice(
+                                $.device_literal,
+                                $.identifier,
+                                $.expression,
+                            ),
+                        ),
+                        ",",
+                        field("channel", choice($.identifier, $.expression)),
+                    ),
+                    field("devchan", choice($.identifier, $.expression)),
+                ),
+                "]",
+            ),
+
+        channel_event_block: ($) =>
+            seq("{", repeat1($.channel_event_handler), "}"),
+
+        channel_event_handler: ($) =>
+            seq(
+                field("type", $.channel_event_type),
+                ":",
+                field("body", $.compound_statement),
+            ),
+
+        channel_event_type: (_) => choice(keywords.on, keywords.off),
+
+        custom_event_definition: ($) =>
+            seq(
+                seq(
+                    keywords.custom_event,
+                    field("reference", $.custom_event_reference),
+                ),
+                repeat(
+                    seq(
+                        keywords.custom_event,
+                        field("reference", $.custom_event_reference),
+                    ),
+                ),
+                field("body", $.compound_statement),
+            ),
+
+        custom_event_reference: ($) =>
+            seq(
+                "[",
+                choice(
+                    // Format 1: [DEVICE,ID,TYPE]
+                    seq(
+                        field(
+                            "device",
+                            choice(
+                                $.device_literal,
+                                $.identifier,
+                                $.expression,
+                            ),
+                        ),
+                        ",",
+                        field("id", $.expression),
+                        ",",
+                        field("type", $.expression),
+                    ),
+
+                    // Format 2: [DEVCHAN,EVENTID]
+                    seq(
+                        field("devchan", choice($.identifier, $.expression)),
+                        ",",
+                        field("eventid", $.expression),
+                    ),
+                ),
+                "]",
             ),
 
         define_program_section: ($) =>
