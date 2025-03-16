@@ -18,8 +18,8 @@ def __getattr__(name):
         return _get_query("HIGHLIGHTS_QUERY", "highlights.scm")
     # if name == "INJECTIONS_QUERY":
     #     return _get_query("INJECTIONS_QUERY", "injections.scm")
-    # if name == "LOCALS_QUERY":
-    #     return _get_query("LOCALS_QUERY", "locals.scm")
+    if name == "LOCALS_QUERY":
+        return _get_query("LOCALS_QUERY", "locals.scm")
     if name == "TAGS_QUERY":
         return _get_query("TAGS_QUERY", "tags.scm")
 
@@ -28,10 +28,10 @@ def __getattr__(name):
 
 __all__ = [
     "language",
-    # "HIGHLIGHTS_QUERY",
+    "HIGHLIGHTS_QUERY",
     # "INJECTIONS_QUERY",
-    # "LOCALS_QUERY",
-    # "TAGS_QUERY",
+    "LOCALS_QUERY",
+    "TAGS_QUERY",
 ]
 
 

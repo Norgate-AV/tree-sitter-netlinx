@@ -8,6 +8,7 @@
             "file-types": ["axs", "axi", "axb", "lib"],
             "highlights": "queries/highlights.scm",
             "tags": "queries/tags.scm",
+            "locals": "queries/locals.scm",
             "injection-regex": "^(axs|axi|axb|lib)$"
         }
     ],
