@@ -422,7 +422,7 @@ module.exports = grammar({
             ),
 
         char_array_return_type: ($) =>
-            seq(token(keywords.char), "[", field("size", $.expression), "]"),
+            seq(keywords.char, "[", field("size", $.expression), "]"),
 
         function_definition: ($) =>
             choice(
@@ -614,10 +614,7 @@ module.exports = grammar({
                     optional(
                         field(
                             "storage",
-                            choice(
-                                token(keywords.stack_var),
-                                token(keywords.local_var),
-                            ),
+                            choice(keywords.stack_var, keywords.local_var),
                         ),
                     ),
                     field("type", $.type_specifier),
@@ -929,15 +926,13 @@ module.exports = grammar({
             ),
 
         device_operation_keyword: (_) =>
-            token(
-                choice(
-                    keywords.devchan_on,
-                    keywords.devchan_off,
-                    keywords.devchan_to,
-                    keywords.devchan_min_to,
-                    keywords.devchan_total_off,
-                    keywords.devchan_pulse,
-                ),
+            choice(
+                keywords.devchan_on,
+                keywords.devchan_off,
+                keywords.devchan_to,
+                keywords.devchan_min_to,
+                keywords.devchan_total_off,
+                keywords.devchan_pulse,
             ),
 
         device_operation_expression: ($) =>

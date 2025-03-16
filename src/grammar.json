@@ -1501,12 +1501,9 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "char",
-            "flags": "i"
-          }
+          "type": "PATTERN",
+          "value": "char",
+          "flags": "i"
         },
         {
           "type": "STRING",
@@ -2230,20 +2227,14 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "stack_var",
-                        "flags": "i"
-                      }
+                      "type": "PATTERN",
+                      "value": "stack_var",
+                      "flags": "i"
                     },
                     {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "local_var",
-                        "flags": "i"
-                      }
+                      "type": "PATTERN",
+                      "value": "local_var",
+                      "flags": "i"
                     }
                   ]
                 }
@@ -3979,42 +3970,39 @@
       ]
     },
     "device_operation_keyword": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "on",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "off",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "to",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "min_to",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "total_off",
-            "flags": "i"
-          },
-          {
-            "type": "PATTERN",
-            "value": "pulse",
-            "flags": "i"
-          }
-        ]
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "on",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "off",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "to",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "min_to",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "total_off",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "pulse",
+          "flags": "i"
+        }
+      ]
     },
     "device_operation_expression": {
       "type": "PREC_RIGHT",

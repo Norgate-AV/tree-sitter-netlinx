@@ -1035,6 +1035,11 @@
     }
   },
   {
+    "type": "device_operation_keyword",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "else_clause",
     "named": true,
     "fields": {},
@@ -2388,10 +2393,6 @@
   },
   {
     "type": "decimal_literal",
-    "named": true
-  },
-  {
-    "type": "device_operation_keyword",
     "named": true
   },
   {
