@@ -1,0 +1,159 @@
+==================
+Basic Constants
+==================
+
+DEFINE_CONSTANT
+INTEGER MY_CONSTANT = 100
+CHAR CH_CONSTANT = 'A'
+INTEGER ARRAY_SIZE = 10
+
+---
+
+(source_file
+  (section
+    (define_constant_section
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (expression
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (string_literal
+          (string_content)))
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (expression
+          (number_literal
+            (decimal_literal)))))))
+
+==================
+Array Constants
+==================
+
+DEFINE_CONSTANT
+INTEGER DAYS[] = { 1, 2, 3, 4, 5, 6, 7 }
+CHAR NAMES[2][10] = {{ 'User1', 'User2' }}
+
+---
+
+(source_file
+  (section
+    (define_constant_section
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (dimensions
+          (sequence
+            (token)
+            (token)))
+        (initializer_list
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))
+          (expression
+            (number_literal
+              (decimal_literal)))))
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (dimensions
+          (sequence
+            (token)
+            (expression
+              (number_literal
+                (decimal_literal)))
+            (token))
+          (sequence
+            (token)
+            (expression
+              (number_literal
+                (decimal_literal)))
+            (token)))
+        (initializer_list
+          (initializer_list
+            (string_literal
+              (string_content))
+            (string_literal
+              (string_content))))))))
+
+==================
+Constants with Qualifiers
+==================
+
+DEFINE_CONSTANT
+CONSTANT INTEGER MAX_VALUE = 1000
+VOLATILE INTEGER COUNTER = 0
+
+---
+
+(source_file
+  (section
+    (define_constant_section
+      (constant_definition
+        (type_qualifier)
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (expression
+          (number_literal
+            (decimal_literal))))
+      (constant_definition
+        (type_qualifier)
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (expression
+          (number_literal
+            (decimal_literal)))))))
+
+==================
+Hex Constants
+==================
+
+DEFINE_CONSTANT
+INTEGER HEX_VALUE = $FF
+INTEGER RGB_COLOR = $00FFCC
+
+---
+
+(source_file
+  (section
+    (define_constant_section
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (expression
+          (number_literal
+            (hex_literal))))
+      (constant_definition
+        (type_specifier
+          (intrinsic_type))
+        (identifier)
+        (expression
+          (number_literal
+            (hex_literal)))))))

@@ -1,0 +1,220 @@
+==================
+Basic Arithmetic
+==================
+
+x = 5 + 3
+y = x * 2
+z = (x + y) / 4
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (binary_expression
+              (left
+                (number_literal
+                  (decimal_literal)))
+              (operator)
+              (right
+                (number_literal
+                  (decimal_literal)))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (binary_expression
+              (left
+                (identifier))
+              (operator)
+              (right
+                (number_literal
+                  (decimal_literal)))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (binary_expression
+              (left
+                (parenthesized_expression
+                  (expression
+                    (binary_expression
+                      (left
+                        (identifier))
+                      (operator)
+                      (right
+                        (identifier))))))
+              (operator)
+              (right
+                (number_literal
+                  (decimal_literal))))))))))
+
+==================
+Logical Expressions
+==================
+
+flag = (x > 10) && (y < 5)
+result = (a || b) && !c
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (binary_expression
+              (left
+                (parenthesized_expression
+                  (expression
+                    (binary_expression
+                      (left
+                        (identifier))
+                      (operator)
+                      (right
+                        (number_literal
+                          (decimal_literal)))))))
+              (operator)
+              (right
+                (parenthesized_expression
+                  (expression
+                    (binary_expression
+                      (left
+                        (identifier))
+                      (operator)
+                      (right
+                        (number_literal
+                          (decimal_literal)))))))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (binary_expression
+              (left
+                (parenthesized_expression
+                  (expression
+                    (binary_expression
+                      (left
+                        (identifier))
+                      (operator)
+                      (right
+                        (identifier))))))
+              (operator)
+              (right
+                (unary_expression
+                  (operator)
+                  (argument
+                    (identifier)))))))))))
+
+==================
+String Expressions
+==================
+
+message = "Hello, World!"
+combined = "Value: ,x"
+command = "COMMAND-,CMD_TYPE,,PARAM"
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (string_expression
+              (expression
+                (string_literal
+                  (string_content)))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (string_expression
+              (expression
+                (string_literal
+                  (string_content)))
+              (expression
+                (identifier))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (string_expression
+              (expression
+                (string_literal
+                  (string_content)))
+              (expression
+                (identifier))
+              (expression
+                (string_literal
+                  (string_content))))))))))
+
+==================
+Update Expressions
+==================
+
+counter++
+value--
+count = value++
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (update_expression
+        (argument
+          (identifier))
+        (operator))))
+  (expression_statement
+    (expression
+      (update_expression
+        (argument
+          (identifier))
+        (operator))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (update_expression
+              (argument
+                (identifier))
+              (operator))))))))

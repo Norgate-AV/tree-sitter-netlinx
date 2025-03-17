@@ -1,0 +1,88 @@
+==================
+Include Directives
+==================
+
+#include 'common_api'
+INCLUDE 'button_constants'
+
+---
+
+(source_file
+  (preproc_directive
+    (preproc_include
+      (string_literal
+        (string_content))))
+  (preproc_directive
+    (preproc_include
+      (string_literal
+        (string_content)))))
+
+==================
+Define Directives
+==================
+
+#DEFINE DEBUG_MODE
+#define MAX_ATTEMPTS 5
+#define DEVICE_NAME 'Touch Panel'
+
+---
+
+(source_file
+  (preproc_directive
+    (preproc_define
+      (identifier)))
+  (preproc_directive
+    (preproc_define
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (preproc_directive
+    (preproc_define
+      (identifier)
+      (string_literal
+        (string_content)))))
+
+==================
+Conditional Directives
+==================
+
+#IF_DEFINED DEBUG
+STACK_VAR INTEGER debug_level
+#ELSE
+CONSTANT INTEGER debug_level
+#END_IF
+
+---
+
+(source_file
+  (preproc_if_defined
+    (name
+      (identifier))
+    (local_variable_declaration
+      (storage
+        (storage_class_specifier))
+      (type
+        (type_specifier
+          (intrinsic_type)))
+      (name
+        (identifier)))
+    (preproc_else
+      (constant_definition
+        (type_qualifier)
+        (type_specifier
+          (intrinsic_type))
+        (identifier)))))
+
+==================
+Warning Directive
+==================
+
+#WARN 'This API will be deprecated in v2.0'
+
+---
+
+(source_file
+  (preproc_directive
+    (preproc_warn
+      (string_literal
+        (string_content)))))

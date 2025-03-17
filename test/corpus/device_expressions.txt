@@ -1,0 +1,217 @@
+==================
+Device Reference
+==================
+
+[dvTP, 1]
+[dvTP, BUTTON_1]
+[vdvDevice, CHANNEL_ON]
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (device_channel_reference_expression
+        (expression
+          (identifier))
+        (expression
+          (number_literal
+            (decimal_literal))))))
+  (expression_statement
+    (expression
+      (device_channel_reference_expression
+        (expression
+          (identifier))
+        (expression
+          (identifier)))))
+  (expression_statement
+    (expression
+      (device_channel_reference_expression
+        (expression
+          (identifier))
+        (expression
+          (identifier))))))
+
+==================
+Device Assignment
+==================
+
+[dvTP, 1] = ON_STATE
+[dvTP, LCD_BRIGHTNESS] = value * 255 / 100
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (device_channel_assignment_expression
+        (device_channel_reference_expression
+          (expression
+            (identifier))
+          (expression
+            (number_literal
+              (decimal_literal))))
+        (expression
+          (identifier)))))
+  (expression_statement
+    (expression
+      (device_channel_assignment_expression
+        (device_channel_reference_expression
+          (expression
+            (identifier))
+          (expression
+            (identifier)))
+        (expression
+          (binary_expression
+            (left
+              (binary_expression
+                (left
+                  (identifier))
+                (operator)
+                (right
+                  (number_literal
+                    (decimal_literal)))))
+            (operator)
+            (right
+              (number_literal
+                (decimal_literal)))))))))
+
+==================
+Device Operations
+==================
+
+ON[dvTP, 1]
+OFF[dvTP, 2]
+TO[dvTP, 3] = 127
+PULSE[dvTP, 4]
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (device_operation_expression
+        (device_operation_keyword)
+        (device_channel_reference_expression
+          (expression
+            (identifier))
+          (expression
+            (number_literal
+              (decimal_literal)))))))
+  (expression_statement
+    (expression
+      (device_operation_expression
+        (device_operation_keyword)
+        (device_channel_reference_expression
+          (expression
+            (identifier))
+          (expression
+            (number_literal
+              (decimal_literal)))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (device_operation_expression
+            (device_operation_keyword)
+            (device_channel_reference_expression
+              (expression
+                (identifier))
+              (expression
+                (number_literal
+                  (decimal_literal))))))
+        (operator)
+        (right
+          (expression
+            (number_literal
+              (decimal_literal)))))))
+  (expression_statement
+    (expression
+      (device_operation_expression
+        (device_operation_keyword)
+        (device_channel_reference_expression
+          (expression
+            (identifier))
+          (expression
+            (number_literal
+              (decimal_literal))))))))
+
+==================
+Device Literals
+==================
+
+dvTP = 10001:1:0
+ipDevice = 192.168.1.100:1:0
+deviceVar = TYPE_ID:1:0
+
+---
+
+(source_file
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (device_literal
+              (expression
+                (number_literal
+                  (decimal_literal)))
+              (expression
+                (number_literal
+                  (decimal_literal)))
+              (expression
+                (number_literal
+                  (decimal_literal)))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (device_literal
+              (expression
+                (field_expression
+                  (argument
+                    (field_expression
+                      (argument
+                        (field_expression
+                          (argument
+                            (number_literal
+                              (decimal_literal)))
+                          (operator)
+                          (field
+                            (identifier))))
+                      (operator)
+                      (field
+                        (identifier))))
+                  (operator)
+                  (field
+                    (identifier))))
+              (expression
+                (number_literal
+                  (decimal_literal)))
+              (expression
+                (number_literal
+                  (decimal_literal)))))))))
+  (expression_statement
+    (expression
+      (assignment_expression
+        (left
+          (identifier))
+        (operator)
+        (right
+          (expression
+            (device_literal
+              (expression
+                (identifier))
+              (expression
+                (number_literal
+                  (decimal_literal)))
+              (expression
+                (number_literal
+                  (decimal_literal))))))))))

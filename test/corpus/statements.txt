@@ -1,0 +1,310 @@
+==================
+If Statement
+==================
+
+IF (x > 5) {
+    doSomething()
+}
+ELSE IF (x < 0) {
+    handleNegative()
+}
+ELSE {
+    handleDefault()
+}
+
+---
+
+(source_file
+  (statement
+    (if_statement
+      (condition
+        (parenthesized_expression
+          (expression
+            (binary_expression
+              (left
+                (identifier))
+              (operator)
+              (right
+                (number_literal
+                  (decimal_literal)))))))
+      (consequence
+        (statement
+          (compound_statement
+            (statement
+              (expression_statement
+                (expression
+                  (call_expression
+                    (function
+                      (identifier))
+                    (arguments
+                      (argument_list)))))))))
+      (alternative
+        (else_clause
+          (statement
+            (if_statement
+              (condition
+                (parenthesized_expression
+                  (expression
+                    (binary_expression
+                      (left
+                        (identifier))
+                      (operator)
+                      (right
+                        (number_literal
+                          (decimal_literal)))))))
+              (consequence
+                (statement
+                  (compound_statement
+                    (statement
+                      (expression_statement
+                        (expression
+                          (call_expression
+                            (function
+                              (identifier))
+                            (arguments
+                              (argument_list)))))))))
+              (alternative
+                (else_clause
+                  (statement
+                    (compound_statement
+                      (statement
+                        (expression_statement
+                          (expression
+                            (call_expression
+                              (function
+                                (identifier))
+                              (arguments
+                                (argument_list)))))))))))))))))))
+
+==================
+Switch Statement
+==================
+
+SWITCH (value) {
+    CASE 1: {
+        doAction1()
+    }
+    CASE 2: {
+        doAction2()
+    }
+    DEFAULT: {
+        doDefault()
+    }
+}
+
+---
+
+(source_file
+  (statement
+    (switch_statement
+      (condition
+        (parenthesized_expression
+          (expression
+            (identifier))))
+      (body
+        (compound_statement
+          (statement
+            (case_statement
+              (value
+                (expression
+                  (number_literal
+                    (decimal_literal))))
+              (statement
+                (compound_statement
+                  (statement
+                    (expression_statement
+                      (expression
+                        (call_expression
+                          (function
+                            (identifier))
+                          (arguments
+                            (argument_list))))))))))
+          (statement
+            (case_statement
+              (value
+                (expression
+                  (number_literal
+                    (decimal_literal))))
+              (statement
+                (compound_statement
+                  (statement
+                    (expression_statement
+                      (expression
+                        (call_expression
+                          (function
+                            (identifier))
+                          (arguments
+                            (argument_list))))))))))
+          (statement
+            (case_statement
+              (statement
+                (compound_statement
+                  (statement
+                    (expression_statement
+                      (expression
+                        (call_expression
+                          (function
+                            (identifier))
+                          (arguments
+                            (argument_list)))))))))))))))
+
+==================
+For Loop
+==================
+
+FOR (i = 0; i < 10; i++) {
+    processItem(items[i])
+}
+
+---
+
+(source_file
+  (statement
+    (for_statement
+      (initializer
+        (expression
+          (assignment_expression
+            (left
+              (identifier))
+            (operator)
+            (right
+              (expression
+                (number_literal
+                  (decimal_literal)))))))
+      (condition
+        (expression
+          (binary_expression
+            (left
+              (identifier))
+            (operator)
+            (right
+              (number_literal
+                (decimal_literal))))))
+      (update
+        (expression
+          (update_expression
+            (argument
+              (identifier))
+            (operator))))
+      (body
+        (statement
+          (compound_statement
+            (statement
+              (expression_statement
+                (expression
+                  (call_expression
+                    (function
+                      (identifier))
+                    (arguments
+                      (argument_list
+                        (expression
+                          (subscript_expression
+                            (argument
+                              (identifier))
+                            (index
+                              (identifier))))))))))))))))))
+
+==================
+While Loop
+==================
+
+WHILE (condition) {
+    processData()
+    condition = checkStatus()
+}
+
+---
+
+(source_file
+  (statement
+    (while_statement
+      (condition
+        (parenthesized_expression
+          (expression
+            (identifier))))
+      (body
+        (statement
+          (compound_statement
+            (statement
+              (expression_statement
+                (expression
+                  (call_expression
+                    (function
+                      (identifier))
+                    (arguments
+                      (argument_list))))))
+            (statement
+              (expression_statement
+                (expression
+                  (assignment_expression
+                    (left
+                      (identifier))
+                    (operator)
+                    (right
+                      (expression
+                        (call_expression
+                          (function
+                            (identifier))
+                          (arguments
+                            (argument_list))))))))))))))))))
+
+==================
+Select Statement
+==================
+
+SELECT {
+    ACTIVE(btnMode == MODE_NORMAL): {
+        processNormal()
+    }
+    ACTIVE(btnMode == MODE_ADMIN): {
+        processAdmin()
+    }
+}
+
+---
+
+(source_file
+  (statement
+    (select_statement
+      (active_block
+        (condition
+          (parenthesized_expression
+            (expression
+              (binary_expression
+                (left
+                  (identifier))
+                (operator)
+                (right
+                  (identifier))))))
+        (body
+          (statement
+            (compound_statement
+              (statement
+                (expression_statement
+                  (expression
+                    (call_expression
+                      (function
+                        (identifier))
+                      (arguments
+                        (argument_list))))))))))
+      (active_block
+        (condition
+          (parenthesized_expression
+            (expression
+              (binary_expression
+                (left
+                  (identifier))
+                (operator)
+                (right
+                  (identifier))))))
+        (body
+          (statement
+            (compound_statement
+              (statement
+                (expression_statement
+                  (expression
+                    (call_expression
+                      (function
+                        (identifier))
+                      (arguments
+                        (argument_list)))))))))))))
