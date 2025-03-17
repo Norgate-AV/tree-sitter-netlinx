@@ -125,23 +125,28 @@ module.exports = grammar({
                 $.preproc_if_defined,
                 $.preproc_if_not_defined,
                 $.preproc_else,
-                $.preproc_end_if,
+                // $.preproc_end_if,
                 $.preproc_warn,
             ),
 
         preproc_include: ($) =>
             prec(
                 PREC.DIRECTIVE,
-                seq(directives.include, token(seq("'", /[^']*/, "'"))),
+                seq(
+                    preprocessor(directives.include),
+                    token(seq("'", /[^']*/, "'")),
+                    token.immediate(/\r?\n/),
+                ),
             ),
 
         preproc_define: ($) =>
             prec(
                 PREC.DIRECTIVE,
                 seq(
-                    directives.define,
+                    preprocessor(directives.define),
                     $.identifier,
                     optional(choice($.number_literal, $.string_literal)),
+                    token.immediate(/\r?\n/),
                 ),
             ),
 
@@ -156,21 +161,27 @@ module.exports = grammar({
         //         ),
         //     ),
 
-        preproc_if_defined: ($) =>
-            prec(PREC.DIRECTIVE, seq(directives.if_defined, $.identifier)),
+        // preproc_if_defined: ($) =>
+        //     prec(PREC.DIRECTIVE, seq(directives.if_defined, $.identifier)),
 
-        preproc_if_not_defined: ($) =>
-            prec(PREC.DIRECTIVE, seq(directives.if_not_defined, $.identifier)),
+        // preproc_if_not_defined: ($) =>
+        //     prec(PREC.DIRECTIVE, seq(directives.if_not_defined, $.identifier)),
 
-        preproc_else: ($) => prec(PREC.DIRECTIVE, directives.else),
+        // preproc_else: ($) => prec(PREC.DIRECTIVE, directives.else),
 
-        preproc_end_if: ($) => prec(PREC.DIRECTIVE, directives.end_if),
+        // preproc_end_if: ($) => prec(PREC.DIRECTIVE, directives.end_if),
 
         preproc_warn: ($) =>
             prec(
                 PREC.DIRECTIVE,
-                seq(directives.warn, token(seq("'", /[^']*/, "'"))),
+                seq(
+                    preprocessor(directives.warn),
+                    token(seq("'", /[^']*/, "'")),
+                    token.immediate(/\r?\n/),
+                ),
             ),
+
+        ...preprocIf("", ($) => $._top_level_item),
 
         // Main Grammar
 
@@ -1433,6 +1444,7 @@ function preprocIf(suffix, content, precedence = 0) {
                 seq(
                     preprocessor(directives.if_not_defined),
                     field("name", $.identifier),
+                    "\n",
                     repeat(content($)),
                     field("alternative", optional(alternativeBlock($))),
                     preprocessor(directives.end_if),
