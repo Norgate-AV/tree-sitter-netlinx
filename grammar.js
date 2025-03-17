@@ -88,13 +88,15 @@ module.exports = grammar({
 
         _top_level_item: ($) =>
             choice(
+                $.preproc_directive,
                 $.section,
                 $.comment,
-                $.preproc_directive,
                 $.constant_definition,
                 $.global_variable_definition,
                 $.expression_statement,
             ),
+
+        _block_item: ($) => choice($.local_variable_declaration, $.statement),
 
         program_name: ($) =>
             prec.right(
@@ -114,8 +116,6 @@ module.exports = grammar({
                 optional(field("parameters", $.parameter_list)),
             ),
 
-        _block_item: ($) => choice($.local_variable_declaration, $.statement),
-
         // Pre-processor
         // Compiler directives
         preproc_directive: ($) =>
@@ -124,8 +124,6 @@ module.exports = grammar({
                 $.preproc_define,
                 $.preproc_if_defined,
                 $.preproc_if_not_defined,
-                $.preproc_else,
-                // $.preproc_end_if,
                 $.preproc_warn,
             ),
 
@@ -149,27 +147,6 @@ module.exports = grammar({
                     token.immediate(/\r?\n/),
                 ),
             ),
-
-        // preproc_conditional_block: ($) =>
-        //     prec.right(
-        //         PREC.DIRECTIVE + 1,
-        //         seq(
-        //             choice($.preproc_if_defined, $.preproc_if_not_defined),
-        //             repeat(),
-        //             optional(seq($.preproc_else, repeat())),
-        //             $.preproc_end_if,
-        //         ),
-        //     ),
-
-        // preproc_if_defined: ($) =>
-        //     prec(PREC.DIRECTIVE, seq(directives.if_defined, $.identifier)),
-
-        // preproc_if_not_defined: ($) =>
-        //     prec(PREC.DIRECTIVE, seq(directives.if_not_defined, $.identifier)),
-
-        // preproc_else: ($) => prec(PREC.DIRECTIVE, directives.else),
-
-        // preproc_end_if: ($) => prec(PREC.DIRECTIVE, directives.end_if),
 
         preproc_warn: ($) =>
             prec(
@@ -1409,7 +1386,7 @@ module.exports = grammar({
  *
  * @returns {RuleBuilders<string, string>}
  */
-function preprocIf(suffix, content, precedence = 0) {
+function preprocIf(suffix, content, precedence = PREC.SECTION_DEFINITION + 10) {
     /**
      *
      * @param {GrammarSymbols<string>} $

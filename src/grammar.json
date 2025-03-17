@@ -78,15 +78,15 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "preproc_directive"
+        },
+        {
+          "type": "SYMBOL",
           "name": "section"
         },
         {
           "type": "SYMBOL",
           "name": "comment"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "preproc_directive"
         },
         {
           "type": "SYMBOL",
@@ -99,6 +99,19 @@
         {
           "type": "SYMBOL",
           "name": "expression_statement"
+        }
+      ]
+    },
+    "_block_item": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "local_variable_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "statement"
         }
       ]
     },
@@ -158,19 +171,6 @@
         }
       ]
     },
-    "_block_item": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "local_variable_declaration"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "statement"
-        }
-      ]
-    },
     "preproc_directive": {
       "type": "CHOICE",
       "members": [
@@ -189,10 +189,6 @@
         {
           "type": "SYMBOL",
           "name": "preproc_if_not_defined"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "preproc_else"
         },
         {
           "type": "SYMBOL",
@@ -345,7 +341,7 @@
     },
     "preproc_if_defined": {
       "type": "PREC",
-      "value": 0,
+      "value": 120,
       "content": {
         "type": "SEQ",
         "members": [
@@ -414,7 +410,7 @@
     },
     "preproc_if_not_defined": {
       "type": "PREC",
-      "value": 0,
+      "value": 120,
       "content": {
         "type": "SEQ",
         "members": [
@@ -483,7 +479,7 @@
     },
     "preproc_else": {
       "type": "PREC",
-      "value": 0,
+      "value": 120,
       "content": {
         "type": "SEQ",
         "members": [
