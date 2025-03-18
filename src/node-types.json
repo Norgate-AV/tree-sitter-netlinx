@@ -148,15 +148,11 @@
     "named": true,
     "subtypes": [
       {
-        "type": "identifier",
+        "type": "custom_type",
         "named": true
       },
       {
         "type": "primitive_type",
-        "named": true
-      },
-      {
-        "type": "struct_specifier",
         "named": true
       }
     ]
@@ -934,6 +930,16 @@
           }
         ]
       },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_specifier",
+            "named": true
+          }
+        ]
+      },
       "value": {
         "multiple": false,
         "required": true,
@@ -952,20 +958,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_qualifier",
-          "named": true
-        },
-        {
-          "type": "type_specifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1057,6 +1049,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "custom_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "custom_type",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1418,7 +1425,7 @@
       "required": false,
       "types": [
         {
-          "type": "type_specifier",
+          "type": "struct_definition",
           "named": true
         }
       ]
@@ -2846,7 +2853,7 @@
     }
   },
   {
-    "type": "struct_specifier",
+    "type": "struct_definition",
     "named": true,
     "fields": {
       "body": {

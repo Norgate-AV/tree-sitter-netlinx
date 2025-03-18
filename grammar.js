@@ -48,6 +48,7 @@ module.exports = grammar({
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         [$.local_variable_declaration],
+        [$._type_identifier, $.identifier],
         // [$.device_channel_reference_expression, $.subscript_expression],
         // [$.assignment_expression, $.device_channel_assignment_expression],
     ],
@@ -289,7 +290,7 @@ module.exports = grammar({
             ),
 
         define_type_section: ($) =>
-            seq(keywords.define_type, optional(repeat1($.type_specifier))),
+            seq(keywords.define_type, repeat($.struct_definition)),
 
         define_mutually_exclusive_section: ($) =>
             seq(
@@ -767,10 +768,11 @@ module.exports = grammar({
                 keywords.persistent,
             ),
 
-        type_specifier: ($) =>
-            choice($.struct_specifier, $.primitive_type, $.identifier),
+        type_specifier: ($) => choice($.primitive_type, $.custom_type),
 
-        struct_specifier: ($) =>
+        custom_type: ($) => alias($.identifier, $.custom_type),
+
+        struct_definition: ($) =>
             seq(
                 choice(keywords.struct, keywords.structure),
                 choice(

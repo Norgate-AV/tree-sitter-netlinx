@@ -773,8 +773,9 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "type_qualifier"
+                "type": "PATTERN",
+                "value": "constant",
+                "flags": "i"
               },
               {
                 "type": "BLANK"
@@ -782,16 +783,20 @@
             ]
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "type_specifier"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "FIELD",
+            "name": "type",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "type_specifier"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
           },
           {
             "type": "FIELD",
@@ -890,19 +895,11 @@
           "flags": "i"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "type_specifier"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "struct_definition"
+          }
         }
       ]
     },
@@ -2716,19 +2713,24 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "struct_specifier"
-        },
-        {
-          "type": "SYMBOL",
           "name": "primitive_type"
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "custom_type"
         }
       ]
     },
-    "struct_specifier": {
+    "custom_type": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "named": true,
+      "value": "custom_type"
+    },
+    "struct_definition": {
       "type": "SEQ",
       "members": [
         {
@@ -5892,6 +5894,10 @@
   "conflicts": [
     [
       "local_variable_declaration"
+    ],
+    [
+      "_type_identifier",
+      "identifier"
     ]
   ],
   "precedences": [],
