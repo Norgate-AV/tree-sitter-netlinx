@@ -266,8 +266,8 @@ module.exports = grammar({
             prec.right(
                 5,
                 seq(
-                    optional($.type_qualifier),
-                    optional($.type_specifier),
+                    optional(keywords.constant),
+                    field("type", optional($.type_specifier)),
                     field("name", $.identifier),
                     optional(
                         field(
