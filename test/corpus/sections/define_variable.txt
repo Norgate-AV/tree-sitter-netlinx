@@ -32,6 +32,7 @@ VOLATILE CHAR buffer[1024]
         type: (primitive_type
           (intrinsic_type))
         name: (identifier)
-        size: (literal
-          (number_literal
-            (decimal_literal)))))))
+        dimensions: (array_dimension
+          size: (literal
+            (number_literal
+              (decimal_literal))))))))

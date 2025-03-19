@@ -48,7 +48,13 @@ module.exports = grammar({
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         [$.local_variable_declaration],
+        [$.array_dimension],
         [$._type_identifier, $.identifier],
+        [
+            $.constant_definition,
+            $.global_variable_definition,
+            $.assignment_expression,
+        ],
         // [$.device_channel_reference_expression, $.subscript_expression],
         // [$.assignment_expression, $.device_channel_assignment_expression],
     ],
@@ -97,6 +103,23 @@ module.exports = grammar({
                 $.comment,
                 $.section,
             ),
+
+        // _non_top_level_item: ($) =>
+        //     choice(
+        //         $.device_definition,
+        //         $.constant_definition,
+        //         $.global_variable_definition,
+        //         $.local_variable_declaration,
+        //         $.combine_definition,
+        //         $.connect_level_definition,
+        //         $.mutually_exclusive_definition,
+        //         $.struct_definition,
+        //         $.toggling_definition,
+        //         $.latching_definition,
+        //         $.compound_statement,
+        //         $.statement,
+        //         $.expression,
+        //     ),
 
         _block_item: ($) =>
             choice(
@@ -165,51 +188,46 @@ module.exports = grammar({
                 ),
             ),
 
-        preproc_if_defined: ($) =>
-            seq(
-                preprocessor(directives.if_defined),
-                field("name", $.identifier),
-                "\n",
-                repeat($._top_level_item),
-                optional($.preproc_else),
-                $.preproc_end_if,
-            ),
-
-        preproc_if_not_defined: ($) =>
-            seq(
-                preprocessor(directives.if_not_defined),
-                field("name", $.identifier),
-                "\n",
-                repeat($._top_level_item),
-                optional($.preproc_else),
-                $.preproc_end_if,
-            ),
-
-        preproc_else: ($) =>
-            seq(preprocessor(directives.else), repeat($._top_level_item)),
-
-        preproc_end_if: (_) => preprocessor(directives.end_if),
-
-        // ...preprocIf("", ($) =>
-        //     choice(
-        //         $.preproc_define,
-        //         $.preproc_include,
-        //         $.preproc_warn,
-        //         $._top_level_item,
-        //         $.section,
-        //         $.constant_definition,
-        //         $.global_variable_definition,
-        //         $.local_variable_declaration,
-        //         $.combine_definition,
-        //         $.connect_level_definition,
-        //         $.type_specifier,
-        //         $.module_definition,
-        //         $.toggling_definition,
-        //         $.latching_definition,
-        //         $.statement,
-        //         $.identifier,
+        // preproc_if_defined: ($) =>
+        //     seq(
+        //         preprocessor(directives.if_defined),
+        //         field("name", $.identifier),
+        //         "\n",
+        //         repeat($._top_level_item),
+        //         optional($.preproc_else),
+        //         $.preproc_end_if,
         //     ),
-        // ),
+
+        // preproc_if_not_defined: ($) =>
+        //     seq(
+        //         preprocessor(directives.if_not_defined),
+        //         field("name", $.identifier),
+        //         "\n",
+        //         repeat($._top_level_item),
+        //         optional($.preproc_else),
+        //         $.preproc_end_if,
+        //     ),
+
+        // preproc_else: ($) =>
+        //     seq(preprocessor(directives.else), repeat($._top_level_item)),
+
+        // preproc_end_if: (_) => preprocessor(directives.end_if),
+
+        ...preprocIf("", ($) =>
+            choice(
+                $._top_level_item,
+                $.expression,
+                $.literal,
+                $.constant_definition,
+                $.global_variable_definition,
+            ),
+        ),
+
+        ...preprocIf("_in_section", ($) => choice($.expression, $.literal)),
+
+        ...preprocIf("_in_block", ($) =>
+            choice($._block_item, $.expression, $.literal),
+        ),
 
         // preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
 
@@ -235,7 +253,7 @@ module.exports = grammar({
             ),
 
         define_device_section: ($) =>
-            prec(
+            prec.right(
                 PREC.SECTION_DEFINITION,
                 seq(keywords.define_device, repeat($.device_definition)),
             ),
@@ -244,42 +262,37 @@ module.exports = grammar({
             seq($.identifier, "=", $.device_literal, optional(";")),
 
         define_combine_section: ($) =>
-            seq(keywords.define_combine, repeat($.combine_definition)),
+            prec.right(
+                seq(keywords.define_combine, repeat($.combine_definition)),
+            ),
 
         combine_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
         define_connect_level_section: ($) =>
-            seq(
-                keywords.define_connect_level,
-                repeat($.connect_level_definition),
+            prec.right(
+                seq(
+                    keywords.define_connect_level,
+                    repeat($.connect_level_definition),
+                ),
             ),
 
         connect_level_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
         define_constant_section: ($) =>
-            seq(keywords.define_constant, repeat($.constant_definition)),
+            prec.right(
+                seq(keywords.define_constant, repeat($.constant_definition)),
+            ),
 
         constant_definition: ($) =>
             prec.right(
                 10,
                 seq(
                     optional(keywords.constant),
-                    field("type", optional($.type_specifier)),
+                    optional(field("type", $.type_specifier)),
                     field("name", $.identifier),
-                    optional(
-                        field(
-                            "dimensions",
-                            repeat1(
-                                seq(
-                                    "[",
-                                    field("size", optional($.expression)),
-                                    "]",
-                                ),
-                            ),
-                        ),
-                    ),
+                    optional(field("dimensions", $.array_dimension)),
                     "=",
                     field(
                         "value",
@@ -294,12 +307,14 @@ module.exports = grammar({
             ),
 
         define_type_section: ($) =>
-            seq(keywords.define_type, repeat($.struct_definition)),
+            prec.right(seq(keywords.define_type, repeat($.struct_definition))),
 
         define_mutually_exclusive_section: ($) =>
-            seq(
-                keywords.define_mutually_exclusive,
-                repeat($.mutually_exclusive_definition),
+            prec.right(
+                seq(
+                    keywords.define_mutually_exclusive,
+                    repeat($.mutually_exclusive_definition),
+                ),
             ),
 
         mutually_exclusive_definition: ($) =>
@@ -330,7 +345,9 @@ module.exports = grammar({
             ),
 
         define_latching_section: ($) =>
-            seq(keywords.define_latching, repeat($.latching_definition)),
+            prec.right(
+                seq(keywords.define_latching, repeat($.latching_definition)),
+            ),
 
         latching_definition: ($) =>
             prec.right(
@@ -346,39 +363,37 @@ module.exports = grammar({
             ),
 
         define_toggling_section: ($) =>
-            seq(keywords.define_toggling, repeat($.toggling_definition)),
+            prec.right(
+                seq(keywords.define_toggling, repeat($.toggling_definition)),
+            ),
 
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.device_channel_reference_expression))),
 
         define_variable_section: ($) =>
-            seq(keywords.define_variable, repeat($.global_variable_definition)),
+            prec.right(
+                seq(
+                    keywords.define_variable,
+                    repeat($.global_variable_definition),
+                ),
+            ),
 
         global_variable_definition: ($) =>
             prec.right(
                 5,
                 seq(
-                    field("qualifier", optional($.type_qualifier)),
-                    field(
-                        "type",
-                        choice(
-                            prec(3, optional($.primitive_type)),
-                            prec(2, optional($.custom_type)),
-                        ),
-                    ),
-                    field("name", prec(1, $.identifier)),
+                    optional(field("qualifier", $.type_qualifier)),
                     optional(
                         field(
-                            "dimensions",
-                            repeat1(
-                                seq(
-                                    "[",
-                                    field("size", optional($.expression)),
-                                    "]",
-                                ),
+                            "type",
+                            choice(
+                                prec(3, $.primitive_type),
+                                prec(2, $.custom_type),
                             ),
                         ),
                     ),
+                    field("name", prec(1, $.identifier)),
+                    optional(field("dimensions", $.array_dimension)),
                     optional("="),
                     optional(
                         field(
@@ -401,7 +416,9 @@ module.exports = grammar({
             seq(keywords.define_call, $.call_definition),
 
         define_module_section: ($) =>
-            seq(keywords.define_module, repeat($.module_definition)),
+            prec.right(
+                seq(keywords.define_module, repeat($.module_definition)),
+            ),
 
         module_definition: ($) =>
             seq(
@@ -412,7 +429,7 @@ module.exports = grammar({
             ),
 
         define_start_section: ($) =>
-            prec(
+            prec.right(
                 PREC.SECTION_DEFINITION,
                 seq(
                     keywords.define_start,
@@ -709,7 +726,7 @@ module.exports = grammar({
             ),
 
         define_program_section: ($) =>
-            prec(
+            prec.right(
                 PREC.SECTION_DEFINITION,
                 seq(
                     keywords.define_program,
@@ -727,11 +744,32 @@ module.exports = grammar({
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
+        array_dimension: ($) =>
+            repeat1(
+                choice(
+                    seq("[", "]"),
+                    seq("[", field("size", $.expression), "]"),
+                ),
+            ),
+
         _array_brackets: ($) =>
             seq("[", field("size", optional($.expression)), "]"),
 
         array_declarator: ($) =>
-            prec(1, seq(field("declarator", $._declarator), $._array_brackets)),
+            prec(
+                1,
+                choice(
+                    // Empty brackets case (variable-length arrays)
+                    seq(field("declarator", $._declarator), "[", "]"),
+                    // Standard case with optional size expression
+                    seq(
+                        field("declarator", $._declarator),
+                        "[",
+                        field("size", optional($.expression)),
+                        "]",
+                    ),
+                ),
+            ),
 
         array_field_declarator: ($) =>
             prec(
@@ -1445,55 +1483,57 @@ module.exports = grammar({
  *
  * @returns {RuleBuilders<string, string>}
  */
-// function preprocIf(suffix, content, precedence = PREC.SECTION_DEFINITION + 10) {
-//     /**
-//      *
-//      * @param {GrammarSymbols<string>} $
-//      *
-//      * @returns {ChoiceRule}
-//      */
-//     function alternativeBlock($) {
-//         return choice(
-//             suffix
-//                 ? alias($["preproc_else" + suffix], $.preproc_else)
-//                 : $.preproc_else,
-//         );
-//     }
+function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
+    /**
+     *
+     * @param {GrammarSymbols<string>} $
+     *
+     * @returns {ChoiceRule}
+     */
+    function alternativeBlock($) {
+        return choice(
+            suffix
+                ? alias($["preproc_else" + suffix], $.preproc_else)
+                : $.preproc_else,
+        );
+    }
 
-//     return {
-//         ["preproc_if_defined" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.if_defined),
-//                     field("name", $.identifier),
-//                     "\n",
-//                     repeat(content($)),
-//                     field("alternative", optional(alternativeBlock($))),
-//                     preprocessor(directives.end_if),
-//                 ),
-//             ),
+    return {
+        ["preproc_if_defined" + suffix]: ($) =>
+            prec(
+                precedence,
+                seq(
+                    preprocessor(directives.if_defined),
+                    field("name", $.identifier),
+                    "\n",
+                    repeat(content($)),
+                    field("alternative", optional(alternativeBlock($))),
+                    $.preproc_end_if,
+                ),
+            ),
 
-//         ["preproc_if_not_defined" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.if_not_defined),
-//                     field("name", $.identifier),
-//                     "\n",
-//                     repeat(content($)),
-//                     field("alternative", optional(alternativeBlock($))),
-//                     preprocessor(directives.end_if),
-//                 ),
-//             ),
+        ["preproc_if_not_defined" + suffix]: ($) =>
+            prec(
+                precedence,
+                seq(
+                    preprocessor(directives.if_not_defined),
+                    field("name", $.identifier),
+                    "\n",
+                    repeat(content($)),
+                    field("alternative", optional(alternativeBlock($))),
+                    $.preproc_end_if,
+                ),
+            ),
 
-//         ["preproc_else" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(preprocessor(directives.else), repeat(content($))),
-//             ),
-//     };
-// }
+        ["preproc_else" + suffix]: ($) =>
+            prec(
+                precedence,
+                seq(preprocessor(directives.else), repeat(content($))),
+            ),
+
+        ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
+    };
+}
 
 /**
  * Creates a preprocessor regex rule

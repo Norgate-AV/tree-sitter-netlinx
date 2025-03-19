@@ -3395,10 +3395,7 @@ INTEGER DUET_RAMPING_REPEAT = 3
 //   RETURN "";
 // }
 
-#END_IF
-
-
-//  __SNAPI_CONST__
+#END_IF //  __SNAPI_CONST__
 (***********************************************************)
 (*                     END OF PROGRAM                      *)
 (*        DO NOT PUT ANY CODE BELOW THIS COMMENT           *)

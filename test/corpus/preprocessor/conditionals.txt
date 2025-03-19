@@ -16,9 +16,7 @@ PROGRAM_NAME='Conditionals Test'
       (string_content)))
   (preproc_directive
     (preproc_if_not_defined
-      (identifier)))
-  (preproc_directive
-    (preproc_define
-      (identifier)))
-  (preproc_directive
-    (preproc_end_if)))
+      (identifier)
+      (preproc_define
+        (identifier))
+      (preproc_end_if))))

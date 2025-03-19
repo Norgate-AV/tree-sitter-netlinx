@@ -35,5 +35,6 @@ CHAR ON_CMD[] = 'PWR-ON'
         type: (primitive_type
           (intrinsic_type))
         name: (identifier)
+        dimensions: (array_dimension)
         value: (string_literal
           (string_content))))))

@@ -255,6 +255,22 @@
     }
   },
   {
+    "type": "array_dimension",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "assignment_expression",
     "named": true,
     "fields": {
@@ -903,19 +919,11 @@
     "named": true,
     "fields": {
       "dimensions": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "expression",
+            "type": "array_dimension",
             "named": true
           }
         ]
@@ -926,16 +934,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "size": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
             "named": true
           }
         ]
@@ -1927,19 +1925,11 @@
     "named": true,
     "fields": {
       "dimensions": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "expression",
+            "type": "array_dimension",
             "named": true
           }
         ]
@@ -1960,16 +1950,6 @@
         "types": [
           {
             "type": "type_qualifier",
-            "named": true
-          }
-        ]
-      },
-      "size": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
             "named": true
           }
         ]
@@ -2532,6 +2512,18 @@
           "named": true
         },
         {
+          "type": "constant_definition",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "global_variable_definition",
+          "named": true
+        },
+        {
           "type": "preproc_define",
           "named": true
         },
@@ -2567,6 +2559,16 @@
     "type": "preproc_if_defined",
     "named": true,
     "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "preproc_else",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -2587,11 +2589,19 @@
           "named": true
         },
         {
-          "type": "preproc_define",
+          "type": "constant_definition",
           "named": true
         },
         {
-          "type": "preproc_else",
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "global_variable_definition",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
           "named": true
         },
         {
@@ -2625,6 +2635,16 @@
     "type": "preproc_if_not_defined",
     "named": true,
     "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "preproc_else",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -2645,11 +2665,19 @@
           "named": true
         },
         {
-          "type": "preproc_define",
+          "type": "constant_definition",
           "named": true
         },
         {
-          "type": "preproc_else",
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "global_variable_definition",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
           "named": true
         },
         {

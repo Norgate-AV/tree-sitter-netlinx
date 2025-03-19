@@ -50,6 +50,7 @@ CHAR NAMES[2][10] = {{ 'User1', 'User2' }}
         type: (primitive_type
           (intrinsic_type))
         name: (identifier)
+        dimensions: (array_dimension)
         value: (initializer_list
           (literal
             (number_literal
@@ -76,12 +77,13 @@ CHAR NAMES[2][10] = {{ 'User1', 'User2' }}
         type: (primitive_type
           (intrinsic_type))
         name: (identifier)
-        size: (literal
-          (number_literal
-            (decimal_literal)))
-        size: (literal
-          (number_literal
-            (decimal_literal)))
+        dimensions: (array_dimension
+          size: (literal
+            (number_literal
+              (decimal_literal)))
+          size: (literal
+            (number_literal
+              (decimal_literal))))
         value: (initializer_list
           (initializer_list
             (literal
