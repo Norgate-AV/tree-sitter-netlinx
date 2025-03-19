@@ -47,58 +47,49 @@ CHAR NAMES[2][10] = {{ 'User1', 'User2' }}
   (section
     (define_constant_section
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (dimensions
-          (sequence
-            (token)
-            (token)))
-        (initializer_list
-          (expression
+        name: (identifier)
+        value: (initializer_list
+          (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          (literal
             (number_literal
               (decimal_literal)))
-          (expression
+          (literal
             (number_literal
               (decimal_literal)))))
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (dimensions
-          (sequence
-            (token)
-            (expression
-              (number_literal
-                (decimal_literal)))
-            (token))
-          (sequence
-            (token)
-            (expression
-              (number_literal
-                (decimal_literal)))
-            (token)))
-        (initializer_list
+        name: (identifier)
+        size: (literal
+          (number_literal
+            (decimal_literal)))
+        size: (literal
+          (number_literal
+            (decimal_literal)))
+        value: (initializer_list
           (initializer_list
-            (string_literal
-              (string_content))
-            (string_literal
-              (string_content))))))))
+            (literal
+              (string_literal
+                (string_content)))
+            (literal
+              (string_literal
+                (string_content)))))))))
 
 ==================
 Constants with Qualifiers
@@ -114,19 +105,17 @@ CONSTANT INTEGER COUNTER = 0
   (section
     (define_constant_section
       (constant_definition
-        (type_qualifier)
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (expression
+        name: (identifier)
+        value: (literal
           (number_literal
             (decimal_literal))))
       (constant_definition
-        (type_qualifier)
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (expression
+        name: (identifier)
+        value: (literal
           (number_literal
             (decimal_literal)))))))
 
@@ -144,16 +133,16 @@ INTEGER RGB_COLOR = $00FFCC
   (section
     (define_constant_section
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (expression
+        name: (identifier)
+        value: (literal
           (number_literal
             (hex_literal))))
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (expression
+        name: (identifier)
+        value: (literal
           (number_literal
             (hex_literal)))))))

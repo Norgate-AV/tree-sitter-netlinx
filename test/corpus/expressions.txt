@@ -3,7 +3,6 @@ Basic Arithmetic
 ==================
 
 DEFINE_START
-
 x = 5 + 3
 y = x * 2
 z = (x + y) / 4
@@ -11,133 +10,83 @@ z = (x + y) / 4
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (binary_expression
-              (left
-                (number_literal
-                  (decimal_literal)))
-              (operator)
-              (right
-                (number_literal
-                  (decimal_literal)))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (binary_expression
-              (left
-                (identifier))
-              (operator)
-              (right
-                (number_literal
-                  (decimal_literal)))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (binary_expression
-              (left
-                (parenthesized_expression
-                  (expression
-                    (binary_expression
-                      (left
-                        (identifier))
-                      (operator)
-                      (right
-                        (identifier))))))
-              (operator)
-              (right
-                (number_literal
-                  (decimal_literal))))))))))
+  (section
+    (define_start_section
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (binary_expression
+            left: (literal
+              (number_literal
+                (decimal_literal)))
+            right: (literal
+              (number_literal
+                (decimal_literal))))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (binary_expression
+            left: (identifier)
+            right: (literal
+              (number_literal
+                (decimal_literal))))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (binary_expression
+            left: (parenthesized_expression
+              (binary_expression
+                left: (identifier)
+                right: (identifier)))
+            right: (literal
+              (number_literal
+                (decimal_literal)))))))))
 
 ==================
 Logical Expressions
 ==================
 
 DEFINE_START
-
 flag = (x > 10) && (y < 5)
 result = (a || b) && !c
 
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (binary_expression
-              (left
-                (parenthesized_expression
-                  (expression
-                    (binary_expression
-                      (left
-                        (identifier))
-                      (operator)
-                      (right
-                        (number_literal
-                          (decimal_literal)))))))
-              (operator)
-              (right
-                (parenthesized_expression
-                  (expression
-                    (binary_expression
-                      (left
-                        (identifier))
-                      (operator)
-                      (right
-                        (number_literal
-                          (decimal_literal)))))))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (binary_expression
-              (left
-                (parenthesized_expression
-                  (expression
-                    (binary_expression
-                      (left
-                        (identifier))
-                      (operator)
-                      (right
-                        (identifier))))))
-              (operator)
-              (right
-                (unary_expression
-                  (operator)
-                  (argument
-                    (identifier)))))))))))
+  (section
+    (define_start_section
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (binary_expression
+            left: (parenthesized_expression
+              (binary_expression
+                left: (identifier)
+                right: (literal
+                  (number_literal
+                    (decimal_literal)))))
+            right: (parenthesized_expression
+              (binary_expression
+                left: (identifier)
+                right: (literal
+                  (number_literal
+                    (decimal_literal))))))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (binary_expression
+            left: (parenthesized_expression
+              (binary_expression
+                left: (identifier)
+                right: (identifier)))
+            right: (unary_expression
+              argument: (identifier))))))))
 
 ==================
 String Expressions
 ==================
 
 DEFINE_START
-
 message = "'Hello, World!'"
 combined = "'Value: ',x"
 command = "'COMMAND-',CMD_TYPE,',',PARAM"
@@ -145,83 +94,52 @@ command = "'COMMAND-',CMD_TYPE,',',PARAM"
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (string_expression
-              (expression
-                (string_literal
-                  (string_content)))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (string_expression
-              (expression
-                (string_literal
-                  (string_content)))
-              (expression
-                (identifier))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (string_expression
-              (expression
-                (string_literal
-                  (string_content)))
-              (expression
-                (identifier))
-              (expression
-                (string_literal
-                  (string_content))))))))))
+  (section
+    (define_start_section
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (string_expression
+            (literal
+              (string_literal
+                (string_content))))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (string_expression
+            (literal
+              (string_literal
+                (string_content)))
+            (identifier))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (string_expression
+            (literal
+              (string_literal
+                (string_content)))
+            (identifier)
+            (literal
+              (string_literal
+                (string_content)))
+            (identifier)))))))
 
 ==================
 Update Expressions
 ==================
 
 DEFINE_START
-
 counter++
 value--
 
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (update_expression
-        (argument
-          (identifier))
-        (operator))))
-  (expression_statement
-    (expression
-      (update_expression
-        (argument
-          (identifier))
-        (operator))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (update_expression
-              (argument
-                (identifier))
-              (operator))))))))
+  (section
+    (define_start_section
+      (expression_statement
+        (update_expression
+          argument: (identifier)))
+      (expression_statement
+        (update_expression
+          argument: (identifier))))))

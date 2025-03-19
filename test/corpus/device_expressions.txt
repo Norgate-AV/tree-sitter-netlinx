@@ -3,35 +3,35 @@ Device Reference
 ==================
 
 DEFINE_START
-[dvTP, 1]
-[dvTP, BUTTON_1]
-[vdvDevice, CHANNEL_ON]
+state = [dvTP, 1]
+state = [dvTP, BUTTON_1]
+state = [vdvDevice, CHANNEL_ON]
 
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (device_channel_reference_expression
-        (expression
-          (identifier))
-        (expression
-          (number_literal
-            (decimal_literal))))))
-  (expression_statement
-    (expression
-      (device_channel_reference_expression
-        (expression
-          (identifier))
-        (expression
-          (identifier)))))
-  (expression_statement
-    (expression
-      (device_channel_reference_expression
-        (expression
-          (identifier))
-        (expression
-          (identifier))))))
+  (section
+    (define_start_section
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (device_channel_reference_expression
+            device: (identifier)
+            channel: (literal
+              (number_literal
+                (decimal_literal))))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (device_channel_reference_expression
+            device: (identifier)
+            channel: (identifier))))
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (device_channel_reference_expression
+            device: (identifier)
+            channel: (identifier)))))))
 
 ==================
 Device Assignment
@@ -43,39 +43,16 @@ DEFINE_START
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (device_channel_assignment_expression
-        (device_channel_reference_expression
-          (expression
-            (identifier))
-          (expression
-            (number_literal
-              (decimal_literal))))
-        (expression
-          (identifier)))))
-  (expression_statement
-    (expression
-      (device_channel_assignment_expression
-        (device_channel_reference_expression
-          (expression
-            (identifier))
-          (expression
-            (identifier)))
-        (expression
-          (binary_expression
-            (left
-              (binary_expression
-                (left
-                  (identifier))
-                (operator)
-                (right
-                  (number_literal
-                    (decimal_literal)))))
-            (operator)
-            (right
+  (section
+    (define_start_section
+      (expression_statement
+        (device_channel_assignment_expression
+          (device_channel_reference_expression
+            device: (identifier)
+            channel: (literal
               (number_literal
-                (decimal_literal)))))))))
+                (decimal_literal))))
+          value: (identifier))))))
 
 ==================
 Device Operations
@@ -142,77 +119,34 @@ PULSE[dvTP, 4]
 Device Literals
 ==================
 
+DEFINE_DEVICE
 dvTP = 10001:1:0
 deviceVar = TYPE_ID:1:0
 
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (device_literal
-              (expression
-                (number_literal
-                  (decimal_literal)))
-              (expression
-                (number_literal
-                  (decimal_literal)))
-              (expression
-                (number_literal
-                  (decimal_literal)))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (device_literal
-              (expression
-                (field_expression
-                  (argument
-                    (field_expression
-                      (argument
-                        (field_expression
-                          (argument
-                            (number_literal
-                              (decimal_literal)))
-                          (operator)
-                          (field
-                            (identifier))))
-                      (operator)
-                      (field
-                        (identifier))))
-                  (operator)
-                  (field
-                    (identifier))))
-              (expression
-                (number_literal
-                  (decimal_literal)))
-              (expression
-                (number_literal
-                  (decimal_literal)))))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (device_literal
-              (expression
-                (identifier))
-              (expression
-                (number_literal
-                  (decimal_literal)))
-              (expression
-                (number_literal
-                  (decimal_literal))))))))))
+  (section
+    (define_device_section
+      (device_definition
+        (identifier)
+        (device_literal
+          device: (literal
+            (number_literal
+              (decimal_literal)))
+          port: (literal
+            (number_literal
+              (decimal_literal)))
+          system: (literal
+            (number_literal
+              (decimal_literal)))))
+      (device_definition
+        (identifier)
+        (device_literal
+          device: (identifier)
+          port: (literal
+            (number_literal
+              (decimal_literal)))
+          system: (literal
+            (number_literal
+              (decimal_literal))))))))

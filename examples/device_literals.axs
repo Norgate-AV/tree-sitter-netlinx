@@ -1,0 +1,3 @@
+DEFINE_DEVICE
+dvTP = 10001:1:0
+deviceVar = TYPE_ID:1:0
