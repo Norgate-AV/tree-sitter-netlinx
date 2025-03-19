@@ -237,24 +237,8 @@
             "value": "#include"
           },
           {
-            "type": "TOKEN",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "'"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[^']*"
-                },
-                {
-                  "type": "STRING",
-                  "value": "'"
-                }
-              ]
-            }
+            "type": "SYMBOL",
+            "name": "string_literal"
           },
           {
             "type": "IMMEDIATE_TOKEN",
@@ -334,24 +318,8 @@
             "value": "#warn"
           },
           {
-            "type": "TOKEN",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "'"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "[^']*"
-                },
-                {
-                  "type": "STRING",
-                  "value": "'"
-                }
-              ]
-            }
+            "type": "SYMBOL",
+            "name": "string_literal"
           },
           {
             "type": "IMMEDIATE_TOKEN",

@@ -143,7 +143,7 @@ module.exports = grammar({
                 PREC.DIRECTIVE,
                 seq(
                     preprocessor(directives.include),
-                    token(seq("'", /[^']*/, "'")),
+                    $.string_literal,
                     token.immediate(/\r?\n/),
                 ),
             ),
@@ -164,7 +164,7 @@ module.exports = grammar({
                 PREC.DIRECTIVE,
                 seq(
                     preprocessor(directives.warn),
-                    token(seq("'", /[^']*/, "'")),
+                    $.string_literal,
                     token.immediate(/\r?\n/),
                 ),
             ),
@@ -1320,10 +1320,7 @@ module.exports = grammar({
             ),
 
         argument_list: ($) =>
-            // prec.left(
-            // PREC.CALL + 2, // Increase precedence for argument lists
             seq("(", commaSep(choice($.expression, $.compound_statement)), ")"),
-        // ),
 
         field_expression: ($) =>
             seq(
@@ -1331,8 +1328,6 @@ module.exports = grammar({
                     PREC.FIELD,
                     seq(
                         field("argument", $.expression),
-                        // field("operator", choice(".", "->")),
-                        // No arrow pointers in NetLinx, only dot notation
                         field("operator", "."),
                     ),
                 ),

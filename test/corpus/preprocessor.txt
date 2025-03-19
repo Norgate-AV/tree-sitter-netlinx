@@ -43,35 +43,22 @@ Define Directives
         (string_content)))))
 
 ==================
-Conditional Directives
+Basic Conditional Directives
 ==================
 
-#IF_DEFINED DEBUG
-STACK_VAR INTEGER debug_level
-#ELSE
-CONSTANT INTEGER debug_level
+#IF_NOT_DEFINED DEBUG_MODE
+#DEFINE DEBUG_MODE
 #END_IF
 
 ---
 
 (source_file
-  (preproc_if_defined
-    (name
-      (identifier))
-    (local_variable_declaration
-      (storage
-        (storage_class_specifier))
-      (type
-        (type_specifier
-          (intrinsic_type)))
-      (name
-        (identifier)))
-    (preproc_else
-      (constant_definition
-        (type_qualifier)
-        (type_specifier
-          (intrinsic_type))
-        (identifier)))))
+  (preproc_directive
+    (preproc_if_not_defined
+      name: (identifier)
+      (preproc_define
+        (identifier))
+      (preproc_end_if))))
 
 ==================
 Warning Directive

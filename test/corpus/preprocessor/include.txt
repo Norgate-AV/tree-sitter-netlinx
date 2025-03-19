@@ -2,18 +2,17 @@
 Include Test
 =============
 
-PROGRAM_NAME='Include Test'
-
 #INCLUDE 'amx-device-control.axi'
 #include 'Functions.axi'
 
 ---
 
 (source_file
-  (program_name
-    (string_literal
-      (string_content)))
   (preproc_directive
-    (preproc_include))
+    (preproc_include
+      (string_literal
+        (string_content))))
   (preproc_directive
-    (preproc_include)))
+    (preproc_include
+      (string_literal
+        (string_content)))))
