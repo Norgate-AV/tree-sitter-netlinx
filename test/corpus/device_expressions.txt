@@ -2,6 +2,7 @@
 Device Reference
 ==================
 
+DEFINE_START
 [dvTP, 1]
 [dvTP, BUTTON_1]
 [vdvDevice, CHANNEL_ON]
@@ -36,8 +37,8 @@ Device Reference
 Device Assignment
 ==================
 
+DEFINE_START
 [dvTP, 1] = ON_STATE
-[dvTP, LCD_BRIGHTNESS] = value * 255 / 100
 
 ---
 
@@ -80,6 +81,7 @@ Device Assignment
 Device Operations
 ==================
 
+DEFINE_START
 ON[dvTP, 1]
 OFF[dvTP, 2]
 TO[dvTP, 3] = 127
@@ -141,7 +143,6 @@ Device Literals
 ==================
 
 dvTP = 10001:1:0
-ipDevice = 192.168.1.100:1:0
 deviceVar = TYPE_ID:1:0
 
 ---

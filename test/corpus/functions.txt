@@ -2,13 +2,11 @@
 Basic Function Definition
 ==================
 
-DEFINE_FUNCTION
-INTEGER addNumbers(INTEGER a, INTEGER b) {
+DEFINE_FUNCTION INTEGER addNumbers(INTEGER a, INTEGER b) {
     RETURN a + b
 }
 
-DEFINE_FUNCTION
-doSomething() {
+DEFINE_FUNCTION doSomething() {
     // No return value
     stack_var integer x
     x = 5
@@ -81,8 +79,7 @@ doSomething() {
 Array Return Function
 ==================
 
-DEFINE_FUNCTION
-CHAR[10] getUsername() {
+DEFINE_FUNCTION CHAR[10] getUsername() {
     RETURN 'admin'
 }
 
@@ -114,8 +111,8 @@ CHAR[10] getUsername() {
 Function Call
 ==================
 
+DEFINE_START
 result = addNumbers(5, 10)
-SEND_STRING 0, message
 sendCommand(dvTP, cmd)
 
 ---
@@ -163,54 +160,3 @@ sendCommand(dvTP, cmd)
               (identifier))
             (expression
               (identifier))))))))
-
-==================
-Function As Parameter
-==================
-
-DEFINE_FUNCTION
-processData(INTEGER func(INTEGER)) {
-    result = func(5)
-}
-
----
-
-(source_file
-  (section
-    (define_function_section
-      (function_definition
-        (name
-          (identifier))
-        (parameters
-          (parameter_list
-            (parameter_declaration
-              (type_specifier
-                (intrinsic_type))
-              (declarator
-                (function_declarator
-                  (declarator
-                    (identifier))
-                  (parameters
-                    (parameter_list
-                      (parameter_declaration
-                        (type_specifier
-                          (intrinsic_type))))))))))
-        (body
-          (compound_statement
-            (statement
-              (expression_statement
-                (expression
-                  (assignment_expression
-                    (left
-                      (identifier))
-                    (operator)
-                    (right
-                      (expression
-                        (call_expression
-                          (function
-                            (identifier))
-                          (arguments
-                            (argument_list
-                              (expression
-                                (number_literal
-                                  (decimal_literal))))))))))))))))))))

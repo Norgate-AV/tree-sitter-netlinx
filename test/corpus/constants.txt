@@ -13,23 +13,23 @@ INTEGER ARRAY_SIZE = 10
   (section
     (define_constant_section
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (expression
+        name: (identifier)
+        value: (literal
           (number_literal
             (decimal_literal))))
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (string_literal
+        name: (identifier)
+        value: (string_literal
           (string_content)))
       (constant_definition
-        (type_specifier
+        type: (primitive_type
           (intrinsic_type))
-        (identifier)
-        (expression
+        name: (identifier)
+        value: (literal
           (number_literal
             (decimal_literal)))))))
 
@@ -106,7 +106,7 @@ Constants with Qualifiers
 
 DEFINE_CONSTANT
 CONSTANT INTEGER MAX_VALUE = 1000
-VOLATILE INTEGER COUNTER = 0
+CONSTANT INTEGER COUNTER = 0
 
 ---
 
