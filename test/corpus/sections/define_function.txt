@@ -99,7 +99,8 @@ define_function char TestSelectActive(integer a, integer b) {
         name: (identifier)
         parameters: (parameter_list
           (parameter_declaration
-            type: (identifier)
+            type: (custom_type
+              (custom_type))
             declarator: (identifier)))
         body: (compound_statement
           (local_variable_declaration

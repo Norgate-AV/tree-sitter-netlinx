@@ -19,7 +19,7 @@ STRUCTURE DeviceStatus {
       (string_content)))
   (section
     (define_type_section
-      (struct_specifier
+      (struct_definition
         name: (identifier)
         body: (field_declaration_list
           (field_declaration

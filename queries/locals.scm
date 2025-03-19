@@ -43,7 +43,7 @@
 ; Exclude certain kinds of identifiers from being treated as references
 ; For example, field names or type names
 (field_expression
-  field: (field_identifier) !@local.reference)
+  field: (field_identifier) @local.reference)
 
 (type_specifier
-  (identifier) !@local.reference)
+  (identifier) @local.reference)

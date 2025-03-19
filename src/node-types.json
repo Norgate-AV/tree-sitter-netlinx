@@ -930,6 +930,16 @@
           }
         ]
       },
+      "size": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
       "type": {
         "multiple": false,
         "required": false,
@@ -1944,6 +1954,40 @@
           }
         ]
       },
+      "qualifier": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_qualifier",
+            "named": true
+          }
+        ]
+      },
+      "size": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "custom_type",
+            "named": true
+          },
+          {
+            "type": "primitive_type",
+            "named": true
+          }
+        ]
+      },
       "value": {
         "multiple": false,
         "required": false,
@@ -1962,20 +2006,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "type_qualifier",
-          "named": true
-        },
-        {
-          "type": "type_specifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2529,6 +2559,11 @@
     }
   },
   {
+    "type": "preproc_end_if",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "preproc_if_defined",
     "named": true,
     "fields": {
@@ -2545,7 +2580,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "comment",
@@ -2557,6 +2592,10 @@
         },
         {
           "type": "preproc_else",
+          "named": true
+        },
+        {
+          "type": "preproc_end_if",
           "named": true
         },
         {
@@ -2599,7 +2638,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "comment",
@@ -2611,6 +2650,10 @@
         },
         {
           "type": "preproc_else",
+          "named": true
+        },
+        {
+          "type": "preproc_end_if",
           "named": true
         },
         {

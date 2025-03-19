@@ -14,7 +14,7 @@
 ;(define_program_section) @keyword
 
 ; Structure definitions
-(struct_specifier) @keyword
+(struct_definition) @keyword
 
 ; Control flow - use node types not text literals
 ; Currently commented out until we implement these nodes

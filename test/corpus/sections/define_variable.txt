@@ -19,19 +19,19 @@ VOLATILE CHAR buffer[1024]
   (section
     (define_variable_section
       (global_variable_definition
-        (type_qualifier)
+        qualifier: (type_qualifier)
         name: (identifier)
         value: (identifier))
       (global_variable_definition
-        (type_qualifier)
-        (primitive_type
+        qualifier: (type_qualifier)
+        type: (primitive_type
           (intrinsic_type))
         name: (identifier))
       (global_variable_definition
-        (type_qualifier)
-        (primitive_type
+        qualifier: (type_qualifier)
+        type: (primitive_type
           (intrinsic_type))
         name: (identifier)
-        dimensions: (literal
+        size: (literal
           (number_literal
             (decimal_literal)))))))

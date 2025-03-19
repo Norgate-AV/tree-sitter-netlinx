@@ -11,7 +11,7 @@
   name: (identifier) @name) @definition.constant
 
 ; Structs
-(struct_specifier
+(struct_definition
   name: (identifier) @name) @definition.struct
 
 ; Module definitions

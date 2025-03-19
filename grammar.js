@@ -176,7 +176,7 @@ module.exports = grammar({
                 "\n",
                 repeat($._top_level_item),
                 optional($.preproc_else),
-                preprocessor(directives.end_if),
+                $.preproc_end_if,
             ),
 
         preproc_if_not_defined: ($) =>
@@ -186,11 +186,13 @@ module.exports = grammar({
                 "\n",
                 repeat($._top_level_item),
                 optional($.preproc_else),
-                preprocessor(directives.end_if),
+                $.preproc_end_if,
             ),
 
         preproc_else: ($) =>
             seq(preprocessor(directives.else), repeat($._top_level_item)),
+
+        preproc_end_if: (_) => preprocessor(directives.end_if),
 
         // ...preprocIf("", ($) =>
         //     choice(
@@ -265,7 +267,7 @@ module.exports = grammar({
 
         constant_definition: ($) =>
             prec.right(
-                5,
+                10,
                 seq(
                     optional(keywords.constant),
                     field("type", optional($.type_specifier)),
@@ -273,7 +275,13 @@ module.exports = grammar({
                     optional(
                         field(
                             "dimensions",
-                            repeat1(seq("[", optional($.expression), "]")),
+                            repeat1(
+                                seq(
+                                    "[",
+                                    field("size", optional($.expression)),
+                                    "]",
+                                ),
+                            ),
                         ),
                     ),
                     "=",
@@ -354,13 +362,25 @@ module.exports = grammar({
             prec.right(
                 5,
                 seq(
-                    optional($.type_qualifier),
-                    optional($.type_specifier),
-                    field("name", $.identifier),
+                    field("qualifier", optional($.type_qualifier)),
+                    field(
+                        "type",
+                        choice(
+                            prec(3, optional($.primitive_type)),
+                            prec(2, optional($.custom_type)),
+                        ),
+                    ),
+                    field("name", prec(1, $.identifier)),
                     optional(
                         field(
                             "dimensions",
-                            repeat1(seq("[", optional($.expression), "]")),
+                            repeat1(
+                                seq(
+                                    "[",
+                                    field("size", optional($.expression)),
+                                    "]",
+                                ),
+                            ),
                         ),
                     ),
                     optional("="),
