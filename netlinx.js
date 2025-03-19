@@ -1,3 +1,8 @@
+/**
+ * @file NetLinx AXI definitions for tree-sitter
+ * @license MIT
+ */
+
 module.exports = {
     __netlinx__: /__netlinx__/i,
 
