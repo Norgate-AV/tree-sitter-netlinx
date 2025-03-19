@@ -19,40 +19,24 @@ BUTTON_EVENT[dvTP, BTN_HOME] {
     (define_event_section
       (event_definition
         (button_event_definition
-          (devchan
-            (button_event_device_channel_reference
-              (device
-                (identifier))
-              (channel
-                (identifier))))
-          (body
-            (button_event_block
-              (button_event_handler
-                (type
-                  (push))
-                (body
-                  (compound_statement
-                    (statement
-                      (expression_statement
-                        (expression
-                          (call_expression
-                            (function
-                              (identifier))
-                            (arguments
-                              (argument_list)))))))))
-              (button_event_handler
-                (type
-                  (release))
-                (body
-                  (compound_statement
-                    (statement
-                      (expression_statement
-                        (expression
-                          (call_expression
-                            (function
-                              (identifier))
-                            (arguments
-                              (argument_list))))))))))))))))))
+          devchan: (button_event_device_channel_reference
+            device: (identifier)
+            channel: (identifier))
+          body: (button_event_block
+            (button_event_handler
+              type: (button_event_type)
+              body: (compound_statement
+                (expression_statement
+                  (call_expression
+                    function: (identifier)
+                    arguments: (argument_list)))))
+            (button_event_handler
+              type: (button_event_type)
+              body: (compound_statement
+                (expression_statement
+                  (call_expression
+                    function: (identifier)
+                    arguments: (argument_list)))))))))))
 
 ==================
 Channel Event
@@ -126,7 +110,7 @@ Data Event
 DEFINE_EVENT
 DATA_EVENT[dvDevice] {
     ONLINE: {
-        SEND_STRING dvDevice, "'CONNECTED'"
+
     }
     STRING: {
         processResponse(DATA.TEXT)
@@ -140,46 +124,19 @@ DATA_EVENT[dvDevice] {
     (define_event_section
       (event_definition
         (data_event_definition
-          (device
-            (data_event_device_reference
-              (identifier)))
-          (body
-            (data_event_block
-              (data_event_handler
-                (type
-                  (online))
-                (body
-                  (compound_statement
-                    (statement
-                      (expression_statement
-                        (expression
-                          (call_expression
-                            (function
-                              (identifier))
-                            (arguments
-                              (argument_list
-                                (expression
-                                  (identifier))
-                                (expression
-                                  (string_literal
-                                    (string_content))))))))))))
-              (data_event_handler
-                (type
-                  (string))
-                (body
-                  (compound_statement
-                    (statement
-                      (expression_statement
-                        (expression
-                          (call_expression
-                            (function
-                              (identifier))
-                            (arguments
-                              (argument_list
-                                (expression
-                                  (field_expression
-                                    (argument
-                                      (identifier))
-                                    (operator)
-                                    (field
-                                      (identifier))))))))))))))))))))))
+          device: (data_event_device_reference
+            (identifier))
+          body: (data_event_block
+            (data_event_handler
+              type: (data_event_type)
+              body: (compound_statement))
+            (data_event_handler
+              type: (data_event_type)
+              body: (compound_statement
+                (expression_statement
+                  (call_expression
+                    function: (identifier)
+                    arguments: (argument_list
+                      (field_expression
+                        argument: (identifier)
+                        field: (field_identifier)))))))))))))

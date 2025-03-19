@@ -63,28 +63,28 @@ DEFINE_TOGGLING
     (define_constant_section
       (comment)
       (constant_definition
-        (primitive_type
+        type: (primitive_type
           (intrinsic_type))
         name: (identifier)
         value: (literal
           (number_literal
             (decimal_literal))))
       (constant_definition
-        (primitive_type
+        type: (primitive_type
           (intrinsic_type))
         name: (identifier)
         value: (literal
           (number_literal
             (decimal_literal))))
       (constant_definition
-        (primitive_type
+        type: (primitive_type
           (intrinsic_type))
         name: (identifier)
         value: (literal
           (number_literal
             (decimal_literal))))
       (constant_definition
-        (primitive_type
+        type: (primitive_type
           (intrinsic_type))
         name: (identifier)
         value: (literal

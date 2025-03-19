@@ -18,62 +18,39 @@ DEFINE_FUNCTION doSomething() {
   (section
     (define_function_section
       (function_definition
-        (return_type
-          (intrinsic_type))
-        (name
-          (identifier))
-        (parameters
-          (parameter_list
-            (parameter_declaration
-              (type_specifier
-                (intrinsic_type))
-              (declarator
-                (identifier)))
-            (parameter_declaration
-              (type_specifier
-                (intrinsic_type))
-              (declarator
-                (identifier)))))
-        (body
-          (compound_statement
-            (statement
-              (return_statement
-                (expression
-                  (binary_expression
-                    (left
-                      (identifier))
-                    (operator)
-                    (right
-                      (identifier)))))))))))
+        return_type: (intrinsic_type)
+        name: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            type: (primitive_type
+              (intrinsic_type))
+            declarator: (identifier))
+          (parameter_declaration
+            type: (primitive_type
+              (intrinsic_type))
+            declarator: (identifier)))
+        body: (compound_statement
+          (return_statement
+            (binary_expression
+              left: (identifier)
+              right: (identifier)))))))
   (section
     (define_function_section
       (function_definition
-        (name
-          (identifier))
-        (parameters
-          (parameter_list))
-        (body
-          (compound_statement
-            (comment)
-            (local_variable_declaration
-              (storage
-                (storage_class_specifier))
-              (type
-                (type_specifier
-                  (intrinsic_type)))
-              (name
-                (identifier)))
-            (statement
-              (expression_statement
-                (expression
-                  (assignment_expression
-                    (left
-                      (identifier))
-                    (operator)
-                    (right
-                      (expression
-                        (number_literal
-                          (decimal_literal))))))))))))))
+        name: (identifier)
+        parameters: (parameter_list)
+        body: (compound_statement
+          (comment)
+          (local_variable_declaration
+            type: (primitive_type
+              (intrinsic_type))
+            name: (identifier))
+          (expression_statement
+            (assignment_expression
+              left: (identifier)
+              right: (literal
+                (number_literal
+                  (decimal_literal))))))))))
 
 ==================
 Array Return Function
@@ -89,23 +66,17 @@ DEFINE_FUNCTION CHAR[10] getUsername() {
   (section
     (define_function_section
       (function_definition
-        (return_type
-          (char_array_return_type
-            (intrinsic_type)
-            (size
-              (expression
-                (number_literal
-                  (decimal_literal))))))
-        (name
-          (identifier))
-        (parameters
-          (parameter_list))
-        (body
-          (compound_statement
-            (statement
-              (return_statement
-                (string_literal
-                  (string_content))))))))))
+        return_type: (char_array_return_type
+          size: (literal
+            (number_literal
+              (decimal_literal))))
+        name: (identifier)
+        parameters: (parameter_list)
+        body: (compound_statement
+          (return_statement
+            (literal
+              (string_literal
+                (string_content)))))))))
 
 ==================
 Function Call
@@ -118,45 +89,23 @@ sendCommand(dvTP, cmd)
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (identifier))
-        (operator)
-        (right
-          (expression
-            (call_expression
-              (function
-                (identifier))
-              (arguments
-                (argument_list
-                  (expression
-                    (number_literal
-                      (decimal_literal)))
-                  (expression
-                    (number_literal
-                      (decimal_literal)))))))))))
-  (expression_statement
-    (expression
-      (call_expression
-        (function
-          (identifier))
-        (arguments
-          (argument_list
-            (expression
-              (number_literal
-                (decimal_literal)))
-            (expression
-              (identifier)))))))
-  (expression_statement
-    (expression
-      (call_expression
-        (function
-          (identifier))
-        (arguments
-          (argument_list
-            (expression
-              (identifier))
-            (expression
-              (identifier))))))))
+  (section
+    (define_start_section
+      (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (call_expression
+            function: (identifier)
+            arguments: (argument_list
+              (literal
+                (number_literal
+                  (decimal_literal)))
+              (literal
+                (number_literal
+                  (decimal_literal)))))))
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (identifier)
+            (identifier)))))))
