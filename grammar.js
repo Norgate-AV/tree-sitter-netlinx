@@ -111,12 +111,8 @@ module.exports = grammar({
 
         program_name: ($) =>
             prec.right(
-                PREC.DIRECTIVE + 10, // Even higher precedence than directives
-                seq(
-                    keywords.program_name, // Keep using the standard keyword
-                    "=",
-                    $.string_literal,
-                ),
+                PREC.DIRECTIVE + 10,
+                seq(keywords.program_name, "=", $.string_literal),
             ),
 
         module_name: ($) =>
@@ -425,8 +421,8 @@ module.exports = grammar({
                     choice(
                         $.compound_statement,
                         seq(
-                            repeat($.local_variable_declaration), // declarations first
-                            repeat($.statement), // then statements
+                            repeat($.local_variable_declaration),
+                            repeat($.statement),
                         ),
                     ),
                 ),
@@ -722,8 +718,8 @@ module.exports = grammar({
                     choice(
                         $.compound_statement,
                         seq(
-                            repeat($.local_variable_declaration), // declarations first
-                            repeat($.statement), // then statements
+                            repeat($.local_variable_declaration),
+                            repeat($.statement),
                         ),
                     ),
                 ),
@@ -874,7 +870,7 @@ module.exports = grammar({
 
         declaration: ($) =>
             prec.right(
-                2, // Increase precedence to resolve conflicts with statements
+                2,
                 seq(
                     $._declaration_specifiers,
                     commaSep1(
@@ -904,7 +900,7 @@ module.exports = grammar({
 
         _declarator: ($) =>
             prec(
-                2, // Increase from 1 to 2 to be higher than type_specifier
+                2,
                 choice(
                     $.function_declarator,
                     $.array_declarator,
@@ -915,7 +911,7 @@ module.exports = grammar({
 
         _declaration_declarator: ($) =>
             prec(
-                3, // Increase from 2 to 3 to be higher than _declarator
+                3,
                 choice(
                     alias(
                         $._function_declaration_declarator,
@@ -962,7 +958,7 @@ module.exports = grammar({
 
         _function_declaration_declarator: ($) =>
             prec.right(
-                2, // Higher precedence than function_declarator
+                2,
                 seq(
                     field("declarator", $._declarator),
                     field("parameters", $.parameter_list),
@@ -1028,7 +1024,7 @@ module.exports = grammar({
 
         local_variable_declaration: ($) =>
             prec.right(
-                10, // Higher precedence than general declarations
+                10,
                 seq(
                     optional(
                         field(
@@ -1089,7 +1085,6 @@ module.exports = grammar({
                     ),
                     // Dedicated handling for NetLinx custom functions as statements
                     // prec.dynamic(15, $.netlinx_custom_function),
-                    // ";",
                 ),
             ),
 
@@ -1192,10 +1187,7 @@ module.exports = grammar({
          */
 
         expression: ($) =>
-            prec(
-                2, // Increase from 1 to 2
-                choice($._expression_not_binary, $.binary_expression),
-            ),
+            prec(2, choice($._expression_not_binary, $.binary_expression)),
 
         _expression_not_binary: ($) =>
             choice(
@@ -1310,8 +1302,7 @@ module.exports = grammar({
 
         comma_expression: ($) =>
             prec.right(
-                // Change to right associativity
-                PREC.DEFAULT, // Lower precedence than argument_list
+                PREC.DEFAULT,
                 seq(
                     field("left", $.expression),
                     ",",
@@ -1406,7 +1397,7 @@ module.exports = grammar({
 
         device_literal: ($) =>
             prec.right(
-                PREC.FIELD + 10, // High precedence
+                PREC.FIELD + 10,
                 seq(
                     field("device", prec.dynamic(PREC.FIELD + 5, $.expression)),
                     ":",
@@ -1428,10 +1419,7 @@ module.exports = grammar({
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 
         _type_identifier: ($) =>
-            prec.right(
-                2, // Higher than regular identifier
-                alias($.identifier, $.type_identifier),
-            ),
+            prec.right(2, alias($.identifier, $.type_identifier)),
 
         _field_identifier: ($) => alias($.identifier, $.field_identifier),
         _statement_identifier: ($) =>
