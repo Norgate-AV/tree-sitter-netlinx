@@ -14,9 +14,9 @@
 (select_statement) @local.scope
 
 ; Event blocks are scopes
-(button_event_block) @local.scope
-(channel_event_block) @local.scope
-(data_event_block) @local.scope
+;; (button_event_block) @local.scope
+;; (channel_event_block) @local.scope
+;; (data_event_block) @local.scope
 
 ; Definitions
 ; ===========

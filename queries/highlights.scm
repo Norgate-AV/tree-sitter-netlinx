@@ -9,8 +9,8 @@
 (define_constant_section) @keyword
 (define_type_section) @keyword
 (define_variable_section) @keyword
-(define_function_section) @keyword
-(define_module_section) @keyword
+;; (define_function_section) @keyword
+;; (define_module_section) @keyword
 ;(define_program_section) @keyword
 
 ; Structure definitions
@@ -41,7 +41,7 @@
 (module_name) @keyword
 
 ; Literals
-(string_content) @string
+(string_literal) @string
 (number_literal) @number
 (decimal_literal) @number
 (hex_literal) @number
@@ -65,3 +65,6 @@
 (preproc_if_not_defined) @preproc.directive
 (preproc_else) @preproc.directive
 (preproc_end_if) @preproc.directive
+
+; Operators
+["=" "+" "-" "*" "/" ":" ";"] @operator

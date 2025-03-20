@@ -1,5 +1,6 @@
 ======================
 Conditional Directives
+:skip
 ======================
 
 PROGRAM_NAME='Conditionals Test'

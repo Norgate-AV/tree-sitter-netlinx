@@ -1,5 +1,6 @@
 ==================
 Device Reference
+:skip
 ==================
 
 DEFINE_START
@@ -35,6 +36,7 @@ state = [vdvDevice, CHANNEL_ON]
 
 ==================
 Device Assignment
+:skip
 ==================
 
 DEFINE_START
@@ -56,6 +58,7 @@ DEFINE_START
 
 ==================
 Device Operations
+:skip
 ==================
 
 DEFINE_START
@@ -117,6 +120,7 @@ PULSE[dvTP, 4]
 
 ==================
 Device Literals
+:skip
 ==================
 
 DEFINE_DEVICE

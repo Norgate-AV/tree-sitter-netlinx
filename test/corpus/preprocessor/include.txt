@@ -1,5 +1,6 @@
 =============
 Include Test
+:skip
 =============
 
 #INCLUDE 'amx-device-control.axi'

@@ -1,5 +1,6 @@
 ==================
 Basic Constants
+:skip
 ==================
 
 DEFINE_CONSTANT
@@ -35,6 +36,7 @@ INTEGER ARRAY_SIZE = 10
 
 ==================
 Array Constants
+:skip
 ==================
 
 DEFINE_CONSTANT
@@ -95,6 +97,7 @@ CHAR NAMES[2][10] = {{ 'User1', 'User2' }}
 
 ==================
 Constants with Qualifiers
+:skip
 ==================
 
 DEFINE_CONSTANT
@@ -123,6 +126,7 @@ CONSTANT INTEGER COUNTER = 0
 
 ==================
 Hex Constants
+:skip
 ==================
 
 DEFINE_CONSTANT

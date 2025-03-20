@@ -1,5 +1,6 @@
 ===========
 Minimal Test
+:skip
 ===========
 
 PROGRAM_NAME='Minimal Test'

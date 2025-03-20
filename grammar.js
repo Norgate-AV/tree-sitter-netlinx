@@ -45,18 +45,30 @@ module.exports = grammar({
         // [$.type_specifier, $._declarator],
         // [$.type_specifier, $.expression],
         // [$.function_declarator, $._function_declaration_declarator],
-        // [$._block_item, $.statement],
+        [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         [$.local_variable_declaration],
         [$.array_dimension],
         [$._type_identifier, $.identifier],
-        [
-            $.constant_definition,
-            $.global_variable_definition,
-            $.assignment_expression,
-        ],
+        // [
+        //     $.constant_definition,
+        //     $.global_variable_definition,
+        //     $.assignment_expression,
+        // ],
+        // [$.preproc_if_defined, $.section],
+        // [$.preproc_if_not_defined, $.section],
+        // [$.preproc_else, $.section],
         // [$.device_channel_reference_expression, $.subscript_expression],
         // [$.assignment_expression, $.device_channel_assignment_expression],
+        // [$._top_level_item, $.section],
+        [$.global_variable_definition, $.latching_definition],
+        [$.latching_definition, $.toggling_definition],
+        [
+            $.device_definition,
+            $.constant_definition,
+            $.global_variable_definition,
+        ],
+        [$.combine_definition, $.connect_level_definition],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -81,55 +93,83 @@ module.exports = grammar({
     ],
 
     rules: {
-        source_file: ($) =>
-            seq(
-                repeat(choice($.preproc_directive, $.comment)),
-                optional(
-                    seq(
-                        choice($.program_name, $.module_name),
-                        repeat(choice($.preproc_directive, $.comment)),
-                    ),
-                ),
-                repeat($.section),
-            ),
+        // source_file: ($) =>
+        //     seq(
+        //         repeat(choice($.preproc_directive, $.comment)),
+        //         optional(
+        //             seq(
+        //                 choice($.program_name, $.module_name),
+        //                 repeat(choice($.preproc_directive, $.comment)),
+        //             ),
+        //         ),
+        //         repeat($.section),
+        //     ),
+        source_file: ($) => repeat($._top_level_item),
 
+        // Top-level context - matches <module section list>
         _top_level_item: ($) =>
             choice(
-                $.preproc_include,
-                $.preproc_if_defined,
-                $.preproc_if_not_defined,
-                $.preproc_define,
-                $.preproc_warn,
+                // Preprocessor
+                $.preproc_directive,
                 $.comment,
+
+                // Sections
                 $.section,
+                $.program_name,
+                $.module_name,
+                $.define_function,
+                $.define_call,
+                $.define_module,
+
+                // Top-Level Declarations
+                $.constant_definition,
+                $.global_variable_definition,
+                $.struct_definition,
+                $.device_definition,
+                $.combine_definition,
+                $.connect_level_definition,
+                $.mutually_exclusive_definition,
+                $.toggling_definition,
+                $.latching_definition,
             ),
 
-        // _non_top_level_item: ($) =>
-        //     choice(
-        //         $.device_definition,
-        //         $.constant_definition,
-        //         $.global_variable_definition,
-        //         $.local_variable_declaration,
-        //         $.combine_definition,
-        //         $.connect_level_definition,
-        //         $.mutually_exclusive_definition,
-        //         $.struct_definition,
-        //         $.toggling_definition,
-        //         $.latching_definition,
-        //         $.compound_statement,
-        //         $.statement,
-        //         $.expression,
-        //     ),
+        // Section-level context - matches <language statement list>
+        _section_item: ($) =>
+            choice(
+                // Preprocessor
+                $.preproc_directive,
+                $.comment,
 
+                // Declarations and definitions
+                $.constant_definition,
+                $.global_variable_definition,
+                $.function_definition,
+                $.declaration,
+                $.struct_definition,
+
+                // Statements
+                // $.local_variable_declaration,
+                $.statement,
+                $.compound_statement,
+                $.expression_statement,
+            ),
+
+        // program_block: ($) => repeat($._block_item),
+
+        // Block-level context - matches <compound statement inside {}>
         _block_item: ($) =>
             choice(
-                $.local_variable_declaration,
-                $.statement,
-                $.preproc_if_defined,
-                $.preproc_if_not_defined,
-                $.preproc_define,
-                $.preproc_warn,
+                // Preprocessor
+                $.preproc_directive,
                 $.comment,
+
+                // Block-level declarations
+                $.local_variable_declaration,
+
+                // Statements
+                $.statement,
+                $.expression_statement,
+                $.compound_statement,
             ),
 
         program_name: ($) =>
@@ -139,15 +179,16 @@ module.exports = grammar({
             ),
 
         module_name: ($) =>
-            seq(
-                keywords.module_name,
-                "=",
-                $.string_literal,
-                optional(field("parameters", $.parameter_list)),
+            prec.right(
+                seq(
+                    keywords.module_name,
+                    "=",
+                    $.string_literal,
+                    optional(field("parameters", $.parameter_list)),
+                ),
             ),
 
-        // Pre-processor
-        // Compiler directives
+        // Preprocessor
         preproc_directive: ($) =>
             choice(
                 $.preproc_include,
@@ -213,21 +254,57 @@ module.exports = grammar({
 
         // preproc_end_if: (_) => preprocessor(directives.end_if),
 
-        ...preprocIf("", ($) =>
-            choice(
-                $._top_level_item,
-                $.expression,
-                $.literal,
-                $.constant_definition,
-                $.global_variable_definition,
-            ),
-        ),
+        // ...preprocIf("", ($) =>
+        //     choice(
+        //         $._top_level_item,
+        //         $.expression,
+        //         $.literal,
+        //         $.constant_definition,
+        //         $.global_variable_definition,
+        //         $.define_function_section,
+        //         $.function_definition,
+        //         $.declaration,
+        //         $.struct_definition,
+        //         $.local_variable_declaration,
+        //         $.statement,
+        //         $.compound_statement,
+        //         $.device_definition,
+        //         $.combine_definition,
+        //         $.connect_level_definition,
+        //         $.mutually_exclusive_definition,
+        //         $.toggling_definition,
+        //         $.latching_definition,
+        //     ),
+        // ),
 
-        ...preprocIf("_in_section", ($) => choice($.expression, $.literal)),
+        // ...preprocIf("_in_section", ($) =>
+        //     choice(
+        //         $.expression,
+        //         $.literal,
+        //         $.constant_definition,
+        //         $.global_variable_definition,
+        //         $.function_definition,
+        //         $.statement,
+        //         $.compound_statement,
+        //         $.local_variable_declaration,
+        //     ),
+        // ),
 
-        ...preprocIf("_in_block", ($) =>
-            choice($._block_item, $.expression, $.literal),
-        ),
+        // ...preprocIf("_in_block", ($) =>
+        //     choice(
+        //         $._block_item,
+        //         $.expression,
+        //         $.literal,
+        //         $.constant_definition,
+        //         $.global_variable_definition,
+        //         $.function_definition,
+        //         $.compound_statement,
+        //     ),
+        // ),
+
+        ...preprocIf(""),
+        ...preprocIf("_in_section"),
+        ...preprocIf("_in_block"),
 
         // preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
 
@@ -244,46 +321,72 @@ module.exports = grammar({
                 $.define_latching_section,
                 $.define_toggling_section,
                 $.define_variable_section,
-                $.define_function_section,
-                $.define_call_section,
-                $.define_module_section,
                 $.define_start_section,
                 $.define_event_section,
                 $.define_program_section,
             ),
 
-        define_device_section: ($) =>
+        // define_device_section: ($) =>
+        //     prec.right(
+        //         PREC.SECTION_DEFINITION,
+        //         seq(keywords.define_device, repeat($.device_definition)),
+        //     ),
+        define_device_section: (_) => keywords.define_device,
+        define_combine_section: (_) => keywords.define_combine,
+        define_connect_level_section: (_) => keywords.define_connect_level,
+        define_constant_section: (_) => keywords.define_constant,
+        define_type_section: (_) => keywords.define_type,
+        define_mutually_exclusive_section: (_) =>
+            keywords.define_mutually_exclusive,
+        define_latching_section: (_) => keywords.define_latching,
+        define_toggling_section: (_) => keywords.define_toggling,
+        define_variable_section: (_) => keywords.define_variable,
+        // define_function_section: (_) => keywords.define_function,
+        // define_call_section: (_) => keywords.define_call,
+        // define_module_section: (_) => keywords.define_module,
+        define_event_section: (_) => keywords.define_event,
+        define_start_section: ($) =>
             prec.right(
                 PREC.SECTION_DEFINITION,
-                seq(keywords.define_device, repeat($.device_definition)),
+                seq(keywords.define_start, repeat($._block_item)),
             ),
+        define_program_section: ($) =>
+            prec.right(
+                PREC.SECTION_DEFINITION,
+                seq(keywords.define_program, repeat($._block_item)),
+            ),
+
+        define_function: ($) =>
+            seq(keywords.define_function, $.function_definition),
+        define_call: ($) => seq(keywords.define_call, $.call_definition),
+        define_module: ($) => seq(keywords.define_module, $.module_definition),
 
         device_definition: ($) =>
             seq($.identifier, "=", $.device_literal, optional(";")),
 
-        define_combine_section: ($) =>
-            prec.right(
-                seq(keywords.define_combine, repeat($.combine_definition)),
-            ),
+        // define_combine_section: ($) =>
+        //     prec.right(
+        //         seq(keywords.define_combine, repeat($.combine_definition)),
+        //     ),
 
         combine_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
-        define_connect_level_section: ($) =>
-            prec.right(
-                seq(
-                    keywords.define_connect_level,
-                    repeat($.connect_level_definition),
-                ),
-            ),
+        // define_connect_level_section: ($) =>
+        //     prec.right(
+        //         seq(
+        //             keywords.define_connect_level,
+        //             repeat($.connect_level_definition),
+        //         ),
+        //     ),
 
         connect_level_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
-        define_constant_section: ($) =>
-            prec.right(
-                seq(keywords.define_constant, repeat($.constant_definition)),
-            ),
+        // define_constant_section: ($) =>
+        //     prec.right(
+        //         seq(keywords.define_constant, repeat($.constant_definition)),
+        //     ),
 
         constant_definition: ($) =>
             prec.right(
@@ -306,16 +409,16 @@ module.exports = grammar({
                 ),
             ),
 
-        define_type_section: ($) =>
-            prec.right(seq(keywords.define_type, repeat($.struct_definition))),
+        // define_type_section: ($) =>
+        //     prec.right(seq(keywords.define_type, repeat($.struct_definition))),
 
-        define_mutually_exclusive_section: ($) =>
-            prec.right(
-                seq(
-                    keywords.define_mutually_exclusive,
-                    repeat($.mutually_exclusive_definition),
-                ),
-            ),
+        // define_mutually_exclusive_section: ($) =>
+        //     prec.right(
+        //         seq(
+        //             keywords.define_mutually_exclusive,
+        //             repeat($.mutually_exclusive_definition),
+        //         ),
+        //     ),
 
         mutually_exclusive_definition: ($) =>
             prec.right(
@@ -344,10 +447,10 @@ module.exports = grammar({
                 ),
             ),
 
-        define_latching_section: ($) =>
-            prec.right(
-                seq(keywords.define_latching, repeat($.latching_definition)),
-            ),
+        // define_latching_section: ($) =>
+        //     prec.right(
+        //         seq(keywords.define_latching, repeat($.latching_definition)),
+        //     ),
 
         latching_definition: ($) =>
             prec.right(
@@ -362,21 +465,21 @@ module.exports = grammar({
                 ),
             ),
 
-        define_toggling_section: ($) =>
-            prec.right(
-                seq(keywords.define_toggling, repeat($.toggling_definition)),
-            ),
+        // define_toggling_section: ($) =>
+        //     prec.right(
+        //         seq(keywords.define_toggling, repeat($.toggling_definition)),
+        //     ),
 
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.device_channel_reference_expression))),
 
-        define_variable_section: ($) =>
-            prec.right(
-                seq(
-                    keywords.define_variable,
-                    repeat($.global_variable_definition),
-                ),
-            ),
+        // define_variable_section: ($) =>
+        //     prec.right(
+        //         seq(
+        //             keywords.define_variable,
+        //             repeat($.global_variable_definition),
+        //         ),
+        //     ),
 
         global_variable_definition: ($) =>
             prec.right(
@@ -428,25 +531,25 @@ module.exports = grammar({
                 optional(";"),
             ),
 
-        define_start_section: ($) =>
-            prec.right(
-                PREC.SECTION_DEFINITION,
-                seq(
-                    keywords.define_start,
-                    // choice(repeat($._block_item), $.compound_statement),
-                    // repeat($.compound_statement),
-                    choice(
-                        $.compound_statement,
-                        seq(
-                            repeat($.local_variable_declaration),
-                            repeat($.statement),
-                        ),
-                    ),
-                ),
-            ),
+        // define_start_section: ($) =>
+        //     prec.right(
+        //         PREC.SECTION_DEFINITION,
+        //         seq(
+        //             keywords.define_start,
+        //             // choice(repeat($._block_item), $.compound_statement),
+        //             // repeat($.compound_statement),
+        //             choice(
+        //                 $.compound_statement,
+        //                 seq(
+        //                     repeat($.local_variable_declaration),
+        //                     repeat($.statement),
+        //                 ),
+        //             ),
+        //         ),
+        //     ),
 
-        define_event_section: ($) =>
-            seq(keywords.define_event, repeat($.event_definition)),
+        // define_event_section: ($) =>
+        //     seq(keywords.define_event, repeat($.event_definition)),
 
         event_definition: ($) =>
             choice(
@@ -725,22 +828,22 @@ module.exports = grammar({
                 "]",
             ),
 
-        define_program_section: ($) =>
-            prec.right(
-                PREC.SECTION_DEFINITION,
-                seq(
-                    keywords.define_program,
-                    // choice(repeat($._block_item), $.compound_statement),
-                    // repeat($.compound_statement),
-                    choice(
-                        $.compound_statement,
-                        seq(
-                            repeat($.local_variable_declaration),
-                            repeat($.statement),
-                        ),
-                    ),
-                ),
-            ),
+        // define_program_section: ($) =>
+        //     prec.right(
+        //         PREC.SECTION_DEFINITION,
+        //         seq(
+        //             keywords.define_program,
+        //             // choice(repeat($._block_item), $.compound_statement),
+        //             // repeat($.compound_statement),
+        //             choice(
+        //                 $.compound_statement,
+        //                 seq(
+        //                     repeat($.local_variable_declaration),
+        //                     repeat($.statement),
+        //                 ),
+        //             ),
+        //         ),
+        //     ),
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
@@ -1474,28 +1577,93 @@ module.exports = grammar({
     },
 });
 
+// /**
+//  * Creates preprocessor conditional rules
+//  *
+//  * @param {string} suffix
+//  * @param {RuleBuilder<string>} content
+//  * @param {number} precedence
+//  *
+//  * @returns {RuleBuilders<string, string>}
+//  */
+// function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
+//     /**
+//      *
+//      * @param {GrammarSymbols<string>} $
+//      *
+//      * @returns {ChoiceRule}
+//      */
+//     function alternativeBlock($) {
+//         return choice(
+//             suffix
+//                 ? alias($["preproc_else" + suffix], $.preproc_else)
+//                 : $.preproc_else,
+//         );
+//     }
+
+//     return {
+//         ["preproc_if_defined" + suffix]: ($) =>
+//             prec(
+//                 precedence,
+//                 seq(
+//                     preprocessor(directives.if_defined),
+//                     field("name", $.identifier),
+//                     "\n",
+//                     repeat(content($)),
+//                     field("alternative", optional(alternativeBlock($))),
+//                     $.preproc_end_if,
+//                 ),
+//             ),
+
+//         ["preproc_if_not_defined" + suffix]: ($) =>
+//             prec(
+//                 precedence,
+//                 seq(
+//                     preprocessor(directives.if_not_defined),
+//                     field("name", $.identifier),
+//                     "\n",
+//                     repeat(content($)),
+//                     field("alternative", optional(alternativeBlock($))),
+//                     $.preproc_end_if,
+//                 ),
+//             ),
+
+//         ["preproc_else" + suffix]: ($) =>
+//             prec(
+//                 precedence,
+//                 seq(preprocessor(directives.else), repeat(content($))),
+//             ),
+
+//         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
+//     };
+// }
+
 /**
  * Creates preprocessor conditional rules
  *
  * @param {string} suffix
- * @param {RuleBuilder<string>} content
  * @param {number} precedence
  *
  * @returns {RuleBuilders<string, string>}
  */
-function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
+function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
     /**
      *
      * @param {GrammarSymbols<string>} $
      *
-     * @returns {ChoiceRule}
+     * @returns {Rule}
      */
-    function alternativeBlock($) {
-        return choice(
-            suffix
-                ? alias($["preproc_else" + suffix], $.preproc_else)
-                : $.preproc_else,
-        );
+    function contentForContext($) {
+        switch (suffix) {
+            case "":
+                return $._top_level_item;
+            case "_in_section":
+                return $._section_item;
+            case "_in_block":
+                return $._block_item;
+            default:
+                return $._top_level_item;
+        }
     }
 
     return {
@@ -1506,8 +1674,8 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
                     preprocessor(directives.if_defined),
                     field("name", $.identifier),
                     "\n",
-                    repeat(content($)),
-                    field("alternative", optional(alternativeBlock($))),
+                    repeat(contentForContext($)),
+                    field("alternative", optional($.preproc_else)),
                     $.preproc_end_if,
                 ),
             ),
@@ -1519,8 +1687,8 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
                     preprocessor(directives.if_not_defined),
                     field("name", $.identifier),
                     "\n",
-                    repeat(content($)),
-                    field("alternative", optional(alternativeBlock($))),
+                    repeat(contentForContext($)),
+                    field("alternative", optional($.preproc_else)),
                     $.preproc_end_if,
                 ),
             ),
@@ -1528,7 +1696,10 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
         ["preproc_else" + suffix]: ($) =>
             prec(
                 precedence,
-                seq(preprocessor(directives.else), repeat(content($))),
+                seq(
+                    preprocessor(directives.else),
+                    repeat(contentForContext($)),
+                ),
             ),
 
         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),

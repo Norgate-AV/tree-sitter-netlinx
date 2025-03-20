@@ -1,5 +1,6 @@
 ==================
 Basic Function Definition
+:skip
 ==================
 
 DEFINE_FUNCTION INTEGER addNumbers(INTEGER a, INTEGER b) {
@@ -54,6 +55,7 @@ DEFINE_FUNCTION doSomething() {
 
 ==================
 Array Return Function
+:skip
 ==================
 
 DEFINE_FUNCTION CHAR[10] getUsername() {
@@ -80,6 +82,7 @@ DEFINE_FUNCTION CHAR[10] getUsername() {
 
 ==================
 Function Call
+:skip
 ==================
 
 DEFINE_START

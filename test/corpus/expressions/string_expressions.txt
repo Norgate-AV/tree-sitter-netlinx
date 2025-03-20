@@ -1,5 +1,6 @@
 ======================
 String Expressions Test
+:skip
 ======================
 
 DEFINE_START

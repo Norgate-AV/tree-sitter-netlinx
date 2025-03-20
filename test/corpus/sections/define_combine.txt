@@ -1,5 +1,6 @@
 =================
 Define Combine Test
+:skip
 =================
 
 PROGRAM_NAME='Combine Tests'

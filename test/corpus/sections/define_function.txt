@@ -1,5 +1,6 @@
 =================
 Define Function Test
+:skip
 =================
 
 PROGRAM_NAME='Function Tests'

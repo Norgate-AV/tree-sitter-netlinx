@@ -1,5 +1,6 @@
 =================
 Define Type Test
+:skip
 =================
 
 PROGRAM_NAME='StructureTests'

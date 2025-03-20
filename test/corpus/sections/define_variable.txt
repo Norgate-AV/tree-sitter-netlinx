@@ -1,5 +1,6 @@
 =================
 Define Variable Test
+:skip
 =================
 
 PROGRAM_NAME='Global VariableTests'

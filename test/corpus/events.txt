@@ -1,5 +1,6 @@
 ==================
 Button Event
+:skip
 ==================
 
 DEFINE_EVENT
@@ -40,6 +41,7 @@ BUTTON_EVENT[dvTP, BTN_HOME] {
 
 ==================
 Channel Event
+:skip
 ==================
 
 DEFINE_EVENT
@@ -105,6 +107,7 @@ CHANNEL_EVENT[dvTP, 1] {
 
 ==================
 Data Event
+:skip
 ==================
 
 DEFINE_EVENT

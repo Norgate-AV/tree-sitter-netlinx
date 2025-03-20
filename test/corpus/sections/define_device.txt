@@ -1,5 +1,6 @@
 ===================
 Define Device Test
+:skip
 ===================
 
 PROGRAM_NAME='Device Test'

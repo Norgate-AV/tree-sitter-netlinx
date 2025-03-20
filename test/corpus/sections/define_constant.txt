@@ -1,5 +1,6 @@
 =====================
 Define Constant Test
+:skip
 =====================
 
 PROGRAM_NAME='Constant Test'

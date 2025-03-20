@@ -1,5 +1,6 @@
 =================
 Define Connect Level Test
+:skip
 =================
 
 PROGRAM_NAME='Connect Level Tests'

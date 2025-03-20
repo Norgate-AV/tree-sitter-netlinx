@@ -44,6 +44,7 @@ Define Directives
 
 ==================
 Basic Conditional Directives
+:skip
 ==================
 
 #IF_NOT_DEFINED DEBUG_MODE

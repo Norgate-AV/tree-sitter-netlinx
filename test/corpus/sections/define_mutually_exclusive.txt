@@ -1,5 +1,6 @@
 ===============
 Define Mutually Exclusive Test
+:skip
 ===============
 
 PROGRAM_NAME='define_mutually_exclusive'

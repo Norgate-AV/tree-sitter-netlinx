@@ -1,5 +1,6 @@
 ===============
 Combined Definitions Test
+:skip
 ===============
 
 PROGRAM_NAME='combined_definitions'

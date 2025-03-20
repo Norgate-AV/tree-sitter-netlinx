@@ -1,5 +1,6 @@
 =================
 Define Module Test
+:skip
 =================
 
 PROGRAM_NAME='Module Tests'

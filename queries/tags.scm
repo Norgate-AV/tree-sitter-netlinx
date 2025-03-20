@@ -19,9 +19,9 @@
   instance_name: (identifier) @name) @definition.module
 
 ; Data/Button/Timeline event definitions
-(data_event_definition) @definition.event
-(button_event_definition) @definition.event
-(timeline_event_definition) @definition.event
+;; (data_event_definition) @definition.event
+;; (button_event_definition) @definition.event
+;; (timeline_event_definition) @definition.event
 
 ; Function parameters (references)
 (parameter_declaration

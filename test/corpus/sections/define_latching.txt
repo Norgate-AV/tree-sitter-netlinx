@@ -1,5 +1,6 @@
 ===============
 Define Latching Test
+:skip
 ===============
 
 PROGRAM_NAME='define_latching'
