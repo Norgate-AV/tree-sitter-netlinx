@@ -644,7 +644,15 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "local_variable_declaration",
+          "named": true
+        },
+        {
+          "type": "preproc_directive",
           "named": true
         },
         {

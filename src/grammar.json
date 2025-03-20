@@ -2881,14 +2881,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "local_variable_declaration"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "statement"
+            "name": "_block_item"
           }
         },
         {
@@ -6018,6 +6011,16 @@
     "hex_literal": {
       "type": "PATTERN",
       "value": "\\$[0-9a-fA-F]+"
+    },
+    "true": {
+      "type": "PATTERN",
+      "value": "true",
+      "flags": "i"
+    },
+    "false": {
+      "type": "PATTERN",
+      "value": "false",
+      "flags": "i"
     },
     "identifier": {
       "type": "PATTERN",

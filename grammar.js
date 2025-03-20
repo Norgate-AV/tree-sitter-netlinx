@@ -7,7 +7,7 @@
 // @ts-check
 
 const keywords = require("./keywords");
-// const netlinx = require("./netlinx");
+const netlinx = require("./netlinx");
 const directives = require("./directives");
 // const functions = require("./functions");
 
@@ -93,17 +93,6 @@ module.exports = grammar({
     ],
 
     rules: {
-        // source_file: ($) =>
-        //     seq(
-        //         repeat(choice($.preproc_directive, $.comment)),
-        //         optional(
-        //             seq(
-        //                 choice($.program_name, $.module_name),
-        //                 repeat(choice($.preproc_directive, $.comment)),
-        //             ),
-        //         ),
-        //         repeat($.section),
-        //     ),
         source_file: ($) => repeat($._top_level_item),
 
         // Top-level context - matches <module section list>
@@ -153,8 +142,6 @@ module.exports = grammar({
                 $.compound_statement,
                 $.expression_statement,
             ),
-
-        // program_block: ($) => repeat($._block_item),
 
         // Block-level context - matches <compound statement inside {}>
         _block_item: ($) =>
@@ -254,54 +241,6 @@ module.exports = grammar({
 
         // preproc_end_if: (_) => preprocessor(directives.end_if),
 
-        // ...preprocIf("", ($) =>
-        //     choice(
-        //         $._top_level_item,
-        //         $.expression,
-        //         $.literal,
-        //         $.constant_definition,
-        //         $.global_variable_definition,
-        //         $.define_function_section,
-        //         $.function_definition,
-        //         $.declaration,
-        //         $.struct_definition,
-        //         $.local_variable_declaration,
-        //         $.statement,
-        //         $.compound_statement,
-        //         $.device_definition,
-        //         $.combine_definition,
-        //         $.connect_level_definition,
-        //         $.mutually_exclusive_definition,
-        //         $.toggling_definition,
-        //         $.latching_definition,
-        //     ),
-        // ),
-
-        // ...preprocIf("_in_section", ($) =>
-        //     choice(
-        //         $.expression,
-        //         $.literal,
-        //         $.constant_definition,
-        //         $.global_variable_definition,
-        //         $.function_definition,
-        //         $.statement,
-        //         $.compound_statement,
-        //         $.local_variable_declaration,
-        //     ),
-        // ),
-
-        // ...preprocIf("_in_block", ($) =>
-        //     choice(
-        //         $._block_item,
-        //         $.expression,
-        //         $.literal,
-        //         $.constant_definition,
-        //         $.global_variable_definition,
-        //         $.function_definition,
-        //         $.compound_statement,
-        //     ),
-        // ),
-
         ...preprocIf(""),
         ...preprocIf("_in_section"),
         ...preprocIf("_in_block"),
@@ -326,11 +265,6 @@ module.exports = grammar({
                 $.define_program_section,
             ),
 
-        // define_device_section: ($) =>
-        //     prec.right(
-        //         PREC.SECTION_DEFINITION,
-        //         seq(keywords.define_device, repeat($.device_definition)),
-        //     ),
         define_device_section: (_) => keywords.define_device,
         define_combine_section: (_) => keywords.define_combine,
         define_connect_level_section: (_) => keywords.define_connect_level,
@@ -341,9 +275,6 @@ module.exports = grammar({
         define_latching_section: (_) => keywords.define_latching,
         define_toggling_section: (_) => keywords.define_toggling,
         define_variable_section: (_) => keywords.define_variable,
-        // define_function_section: (_) => keywords.define_function,
-        // define_call_section: (_) => keywords.define_call,
-        // define_module_section: (_) => keywords.define_module,
         define_event_section: (_) => keywords.define_event,
         define_start_section: ($) =>
             prec.right(
@@ -364,29 +295,11 @@ module.exports = grammar({
         device_definition: ($) =>
             seq($.identifier, "=", $.device_literal, optional(";")),
 
-        // define_combine_section: ($) =>
-        //     prec.right(
-        //         seq(keywords.define_combine, repeat($.combine_definition)),
-        //     ),
-
         combine_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
-        // define_connect_level_section: ($) =>
-        //     prec.right(
-        //         seq(
-        //             keywords.define_connect_level,
-        //             repeat($.connect_level_definition),
-        //         ),
-        //     ),
-
         connect_level_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
-
-        // define_constant_section: ($) =>
-        //     prec.right(
-        //         seq(keywords.define_constant, repeat($.constant_definition)),
-        //     ),
 
         constant_definition: ($) =>
             prec.right(
@@ -408,17 +321,6 @@ module.exports = grammar({
                     optional(";"),
                 ),
             ),
-
-        // define_type_section: ($) =>
-        //     prec.right(seq(keywords.define_type, repeat($.struct_definition))),
-
-        // define_mutually_exclusive_section: ($) =>
-        //     prec.right(
-        //         seq(
-        //             keywords.define_mutually_exclusive,
-        //             repeat($.mutually_exclusive_definition),
-        //         ),
-        //     ),
 
         mutually_exclusive_definition: ($) =>
             prec.right(
@@ -447,11 +349,6 @@ module.exports = grammar({
                 ),
             ),
 
-        // define_latching_section: ($) =>
-        //     prec.right(
-        //         seq(keywords.define_latching, repeat($.latching_definition)),
-        //     ),
-
         latching_definition: ($) =>
             prec.right(
                 5,
@@ -465,21 +362,8 @@ module.exports = grammar({
                 ),
             ),
 
-        // define_toggling_section: ($) =>
-        //     prec.right(
-        //         seq(keywords.define_toggling, repeat($.toggling_definition)),
-        //     ),
-
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.device_channel_reference_expression))),
-
-        // define_variable_section: ($) =>
-        //     prec.right(
-        //         seq(
-        //             keywords.define_variable,
-        //             repeat($.global_variable_definition),
-        //         ),
-        //     ),
 
         global_variable_definition: ($) =>
             prec.right(
@@ -530,26 +414,6 @@ module.exports = grammar({
                 field("parameters", $.argument_list),
                 optional(";"),
             ),
-
-        // define_start_section: ($) =>
-        //     prec.right(
-        //         PREC.SECTION_DEFINITION,
-        //         seq(
-        //             keywords.define_start,
-        //             // choice(repeat($._block_item), $.compound_statement),
-        //             // repeat($.compound_statement),
-        //             choice(
-        //                 $.compound_statement,
-        //                 seq(
-        //                     repeat($.local_variable_declaration),
-        //                     repeat($.statement),
-        //                 ),
-        //             ),
-        //         ),
-        //     ),
-
-        // define_event_section: ($) =>
-        //     seq(keywords.define_event, repeat($.event_definition)),
 
         event_definition: ($) =>
             choice(
@@ -828,23 +692,6 @@ module.exports = grammar({
                 "]",
             ),
 
-        // define_program_section: ($) =>
-        //     prec.right(
-        //         PREC.SECTION_DEFINITION,
-        //         seq(
-        //             keywords.define_program,
-        //             // choice(repeat($._block_item), $.compound_statement),
-        //             // repeat($.compound_statement),
-        //             choice(
-        //                 $.compound_statement,
-        //                 seq(
-        //                     repeat($.local_variable_declaration),
-        //                     repeat($.statement),
-        //                 ),
-        //             ),
-        //         ),
-        //     ),
-
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
         array_dimension: ($) =>
@@ -905,14 +752,14 @@ module.exports = grammar({
                 field("value", choice($.initializer_list, $.expression)),
             ),
 
-        // compound_statement: ($) => seq("{", repeat($._block_item), "}"),
-        compound_statement: ($) =>
-            seq(
-                "{",
-                repeat($.local_variable_declaration),
-                repeat($.statement),
-                "}",
-            ),
+        compound_statement: ($) => seq("{", repeat($._block_item), "}"),
+        // compound_statement: ($) =>
+        //     seq(
+        //         "{",
+        //         repeat($.local_variable_declaration),
+        //         repeat($.statement),
+        //         "}",
+        //     ),
 
         storage_class_specifier: (_) =>
             choice(keywords.local_var, keywords.stack_var),
@@ -1554,8 +1401,8 @@ module.exports = grammar({
 
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
 
-        // true: (_) => token(choice("TRUE", "true")),
-        // false: (_) => token(choice("FALSE", "false")),
+        true: (_) => netlinx.true,
+        false: (_) => netlinx.false,
 
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 
