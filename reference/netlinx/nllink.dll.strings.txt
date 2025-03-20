@@ -1,0 +1,759 @@
+!This program cannot be run in DOS mode.
+<Rich
+.text
+`.rdata
+@.data
+.rsrc
+@.reloc
+j(PQ
+D$+3
+L$ PQ
+_^[d
+D$0h0k
+_^][
+L$,Q
+D$$;
+_^][
+L$(P
+T$&Q
+_^][
+D$,h0k
+L$$P
+D$0Q
+D$0P
+T$$Q
+T$8h0k
+D$8h0k
+QSUV
+D$ H
+D$ u
+|$ W
+_^][
+QWVR
+D$$RPW
+L$(VQ
+T$,_^]
+T$$QRW
+D$,VP
+L$,_^]
+t$UW
+t5;:u$UW
+}$UW
+98u-
+D$$_^]
+QSUVW
+_^][Y
+SUVW
+2;5T
+_^]d
+L$@_^][d
+SUVW
+_^]3
+^][Y
+SUVW
+SUVW
+PQRj
+D$$SUV
+L$$_^][d
+^][Y
+D$$SUV
+L$$_^][d
+^][Y
+D$$SUV
+L$$_^][d
+uchH
+SWPh
+ClhX
+u[hH
+_^]2
+SUVW
+_^][
+L$(QV
+D$$u
+D$ VP
+L$ u
+D$$UP
+L$$u
+D$ _^
+D$ t
+|$(j
+_^][
+_^][
+_^][
+_^][
+_^][
+_^][d
+u.jp
+u!jp
+_^][
+u.jp
+D$ h
+T$(h0k
+QPhd
+PQhd
+T$(h0k
+_^][d
+D$PVh
+T$ QRP
+L$TRQPh
+EDQP
+L$@S
+L$Th
+L$ RQP
+T$PQRPh
+T$TQR
+D$@WP
+L$ RQP
+PWSh
+L$8PQ
+D$.P
+D$,P
+L$ QS
+T$(PR
+D$0}
+T$.R
+T$,R
+_^][d
+SUVW
+|$03
+\$(;
+l$ t
+L$,WQSV
+D$0R
+\$(Rj
+L$0P
+D$(}
+D$0_^][d
+_^[Y
+D$$3
+D$Hh0k
+_^][
+SUVW
+_^][
+T$$f
+_^][
+_^][
+D$(}
+L$0Q
+_^][
+SUVW
+D$4h
+L$ h
+L$0R
+D$Dh0k
+_^][d
+SUVW
+_^][
+_^][
+D$4h
+D$0RPj
+_^][
+_^][
+_^][
+_^][
+_^][
+_^][
+_^][
+_^][
+_^][
+_^]2
+_^]2
+tMHt!
+tgUV
+_^]2
+_^]2
+_^]2
+u?h$
+T$,SU
+\$<tz
+VWSQ
+_^][
+UVWj
+WRPQ
+WRPQ
+|$ hxo
+L$$Q
+~ PQ
+F*PQ
+V(RP
+V$PQ
+V(RP
+F*PQ
+V(RP
+^(SP
+_^][
+QWPR
+QQSV
+_^[d
+_^[d
+SVWj
+QSVW
+QQSVWd
+4SVW
+PhYY
+X_^[]
+SVWUj
+]_^[
+t.;t$$t(
+w.j
+u;j
+t	VP
+uSj
+Y</Yt
+tD+E
+^_[3
+QSVW
+t7)E
+QSVW
+t	WVS
+NWVS
+u7WPS
+u&WVS
+_^[]
+8csm
+u,9x
+X_^]
+ub9~
+YY_^[
+QQVW
+sO;>|C;~
+u Vj
+8csm
+u SW
+_^[]
+?csm
+8csm
+YYPW
+QQSVW
+t:jtj
+Yt)V
+u?jtj
+Yt&V
+QQSVW
+9p`t
+QQSVW
+SVWj
+j@Y3
+Wj@Y3
+t7SW
+
+@AA;
+_9=@
+YYh`
+(SVW
+wLVSP
+uSVj
+uf9=
+uFj
+uFj
+u>Wj
+t&:a
+8MZu
+Ph8c
+Ph c
+t>j,P
+Yt0@
+WufS3
+uiSj
+uY;]
+pD#U
+j #M
+j?^;
+X_^[
+SUVWu
+_^][
+QQSV
+6;5(
+sN;E
+u%C@
+VC20XC00U
+SVWU
+tEVU
+t3x<
+]_^[
+8csm
+Yt	V
+Yu!j
+_WPS
+HHtpHHtl
+t:	U
+ Yt	f
+'N9t$
+eYt,F
+80t<
+_^[]
+QQSV
+btHHt.
+SVWj
+u!PV
+YYF;5
+~&WP
+SVWj
+tYPV
+YYF;5
+t%WV
+u";U
+t%WV
+t%WV
+SVW3
+HSVWh
+t9UW
+?=t"U
+QQS3
+PSSW
+8"uD
+8"uF@
+8"u,
+@@f9
+@@f9
+SS@SSPVSS
+t#SSUP
+t$$VSS
+_^][YY
+w|j
+uA;5,
+w9j
+u>Vj
+uFWWj
+[Sh$g
+"WWSh g
+9} u
+E WW
+tMWWS
+t@9}
+VSh
+^Vh$g
+PVh g
+QQSVWj
+PSj?
+PSj?
+>:uNFV
+>:u#FV
+Y_^[
+SVW3
+Qf9=
+WQPWS
+,f9=<
+WWWj
+WWSj
+WWWj
+<Xt
+u,9u
+^[_3
+_^[]
+tzVS
+GIt%
+t/Ku
+SVWu
+^}%95@
+SVWj
+t!CS
+SVWj
+1_^[
+PPPP
+PPPP
+@PWV
+_^[]
+SVWf
+1t*;
+QQSUVWj
+_^][YY
+VWsr
+t/SWV
+t$ V
+VWuBh
+HSVHWtgHHtF
+NTuI
+SUVW
+_^][
+<8=u
+\SVW
++ttHHtd
+	j	XO
+H}Fj
+QSUV
+WWWWj
+t/WWUPj
+_^][Y
+PPPPPPPP
+PPPPPPPP
+tAVW
+0SVW
+_u@W
+PWPSS
+PWPSS
+9] u
+t	9]
+tySS
+t-VW
+QQSVW3
+tUj=
+t@9u
+uT9}
+89=(
+8<=t
+^][_
+FGQPS
+u	Iu
+string too long
+invalid string position
+Unknown exception
+__GLOBAL_HEAP_SELECTED
+__MSVCRT_HEAP_SELECT
+ (8PX
+700WP
+`h````
+ppxxxx
+(null)
+GAIsProcessorFeaturePresent
+KERNEL32
+e+000
+runtime error
+TLOSS error
+SING error
+DOMAIN error
+R6028
+- unable to initialize heap
+R6027
+- not enough space for lowio initialization
+R6026
+- not enough space for stdio initialization
+R6025
+- pure virtual function call
+R6024
+- not enough space for _onexit/atexit table
+R6019
+- unable to open console device
+R6018
+- unexpected heap error
+R6017
+- unexpected multithread lock error
+R6016
+- not enough space for thread data
+abnormal program termination
+R6009
+- not enough space for environment
+R6008
+- not enough space for arguments
+R6002
+- floating point not loaded
+Microsoft Visual C++ Runtime Library
+Runtime Error!
+Program:
+<program name unknown>
+SunMonTueWedThuFriSat
+JanFebMarAprMayJunJulAugSepOctNovDec
+GetLastActivePopup
+GetActiveWindow
+MessageBoxA
+user32.dll
+1#QNAN
+1#INF
+1#IND
+1#SNAN
+H:mm:ss
+dddd, MMMM dd, yyyy
+M/d/yy
+December
+November
+October
+September
+August
+July
+June
+April
+March
+February
+January
+Saturday
+Friday
+Thursday
+Wednesday
+Tuesday
+Monday
+Sunday
+DeleteFileA
+MoveFileA
+GetFileAttributesA
+FindFirstFileA
+KERNEL32.dll
+cppFindFileInPath
+nlpp.dll
+dzip
+DZIP32.dll
+dunzip
+DUNZIP32.dll
+EnterCriticalSection
+Sleep
+InitializeCriticalSection
+InterlockedExchange
+DeleteCriticalSection
+LeaveCriticalSection
+RtlUnwind
+GetTimeZoneInformation
+GetSystemTime
+GetLocalTime
+HeapAlloc
+RaiseException
+HeapFree
+GetLastError
+GetCommandLineA
+GetVersion
+GetCurrentThreadId
+TlsSetValue
+TlsAlloc
+TlsFree
+SetLastError
+TlsGetValue
+GetCPInfo
+GetACP
+GetOEMCP
+ExitProcess
+TerminateProcess
+GetCurrentProcess
+HeapReAlloc
+HeapSize
+GetModuleHandleA
+GetModuleFileNameA
+GetEnvironmentVariableA
+GetVersionExA
+HeapDestroy
+HeapCreate
+VirtualFree
+VirtualAlloc
+IsBadWritePtr
+SetUnhandledExceptionFilter
+GetProcAddress
+CloseHandle
+ReadFile
+SetFilePointer
+WriteFile
+SetHandleCount
+GetStdHandle
+GetFileType
+GetStartupInfoA
+FreeEnvironmentStringsA
+FreeEnvironmentStringsW
+WideCharToMultiByte
+GetEnvironmentStrings
+GetEnvironmentStringsW
+IsBadReadPtr
+IsBadCodePtr
+MultiByteToWideChar
+LCMapStringA
+LCMapStringW
+GetStringTypeA
+GetStringTypeW
+InterlockedDecrement
+InterlockedIncrement
+CreateFileA
+SetStdHandle
+FlushFileBuffers
+LoadLibraryA
+SetEndOfFile
+CompareStringA
+CompareStringW
+SetEnvironmentVariableA
+nllink.dll
+AXLAppendDuetModulePath
+AXLAppendModulePath
+AXLClearDuetModulePaths
+AXLClearModulePaths
+AXLLink
+AXLSetDependencyBuilder
+AXLSetDependencyError
+AXLSetDependencyHandler
+AXLSetOutputPath
+AXLSetStatusCallback
+.?AVAXLink_error@@
+NetLinx
+%s.tkt
+.?AUUFF_error@@
+PROG
+%s\%s
+%.4x
+%s.tko
+%s.jar
+NetLinx Compiler
+DEVCHAN
+DEVLEV
+UNKNOWN TYPE
+STRUCTURE
+VARIANT ARRAY
+VARIANT
+CHAN
+string
+WIDECHAR
+CHAR
+DOUBLE
+FLOAT
+LONG
+SLONG
+INTEGER
+SINTEGER
+UNKNOWN UDT
+.?AVexception@@
+.?AVlogic_error@std@@
+.?AVlength_error@std@@
+.?AVout_of_range@std@@
+.?AVtype_info@@
+kU'9
+HMXB
+?Zd;
+?/L[
+S;uD
+z?aUY
+D?$?
+U>c{
+zc%C1
+.:3q
+-64OS
+NKeb
+011d1h1l1p1t1x1|1
+<U<s<
+>&>,>S>
+3a3y5
+:!;x;
+<L<T<[<f<m<
+>5?}?
+20@0Q0c0
+9X:\:`:d:s:
+606Y6
+7B7O7
+7%8w8
+8"9/9Q9_9
+#2f2
+4!414S4g4
+4A5c5
+7 717H7
+879J9p9
+; ;1;C;C=]=
+1!2Z2
+525Y9s<
+1R2`2q2
+6P8r:
+> >$>(>,>0>4>8><>c>j>
+? ?$?c?j?
+0T1X1\1`1
+2 2g2n2
+3#3)3/353;3A3G3M3S3Y3_3e3k3
+3*4E4q4
+545J5
+8i8q8
+9$9W9a9k9
+:!:G:Q:w:
+0y1	2
+5@6D6H6L6P6T6X6\6`6d6h6l6p6t6x6|6
+:<<V<
+0B2H2N2^2|2
+3#3;3F3X3
+435g5
+6#6/6;6A6L6T6]6j6p6z6
+9F:`:i:
+;*;3;8;
+183P3W3_3d3h3l3
+3B4H4L4P4T4
+5;5m5t5x5|5
+5I6W6]6a6f6l6p6v6z6
+<-<5<;<~<
+=2=_=
+?5?[?u?|?
+Z0e0
+1 1$1(1,101z1
+10555_6d6
+7h9m9D:L:f:l:}:
+;);B;
+;/<4<S<
+<,=>=M=n=t=
+>2>>>H>S>]>g>m>
+>W?]?{?
+0*0<0J0Y0j0t0
+1&1+171<1Y1_1
+3.444M4
+5&6H6b6s6y6
+7D7_7o7u7
+8+8m8
+:=:I:Q:Y:i:
+::=H=N=h=m=|=
+>'>,><>B>
+1$1,1?1E1[1b1h1r1x1}1
+6J6T6\6b6j6s6|6
+757;7E7K7e7k7s7
+7'8A8
+>5>z>
+?(?:?C?_?
+Q0^0
+1i1v1'262L2
+3=4G5
+5W6K9O9S9W9[9_9c9g9F:c:
+:U;^;y;
+<d<_=k=
+01\1h1
+3%474[4n4
+455?5
+7Q8d8
+9J;];
+<W=]=
+>>>S>w>
+?9?H?W?
+0!0&0,0
+2L2T2n2z2
+3,3j3
+4)484z4
+6*6B6V6[6
+6B7H7V7
+808M8e8
+:-:4:F:N:^:o:
+;";>;N;];
+<$<-<<<C<J<Z<e<u<|<
+===d=l=
+>2>:>F>S>[>b>j>r>|>
+?H?M?
+D0L0d0m0
+0/1G1
+2.2I4Q4z4
+5,545:5B5
+5X9g9
+9.:f:x:
+:Z>p>
+1&222G2R2
+4j4y4
+575d5x5
+6(686j6t6
+6c7p7
+8'8l8q8y8~8
+84999V9\9
+:@:T:
+;";(;.;o;
+<<>S>
+?.?^?
+131w2{2
+2U3o3
+;$;2;g;
+=*=n=|=
+I0y0
+0F1f1
+122A2b2
+2#393Y3y3>4b4
+5G5\5
+6!616E6Y6m6
+H1L1P1\1`1d1h1l1p1t1x1|1
+2H2T2X2\2`2|2
+7,70787<7D7H7
+809H9`9x9|9
+:,:0:8:P:d:t:x:|:
+;,;<;H;d;p;
+<$<,<4<<<H<d<p<
+=$=,=4=<=D=L=T=\=d=
+>$>,>4><>H>d>l>t>|>
+?$?0?L?T?t?
+ 0,040@0H0x0
+0(141<1H1P1
+2 2<2H2d2l2p2|2
+3$3(3,343<3H3d3p3
+0 0$0(0,080<0@0D0P0\0p0
+282h2
+2<4\4l4|4
+9 9$9(9,90949d9l9t9|9
+;0;4;
+? ?$?(?,?0?4?8?<?@?P?T?X?\?`?d?h?l?p?t?

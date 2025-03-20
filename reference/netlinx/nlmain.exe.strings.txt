@@ -1,0 +1,985 @@
+!This program cannot be run in DOS mode.
+/(Richf
+.text
+`.rdata
+@.data
+.rsrc
+_^][
+SUVW
+D$(U
+u%j\
+K&j/Q
+_^][
+_^][
+D$@VW3
+|$ +
+L$P3
+D$H_^
+L$H_^
+_^[]
+\$$UVW
+L$ _
+\$(3
+L$tVf
+QVVR
+T$tPR
+t$4Q
+L$xQ
+D$lRP
+_^][d
+^][Y
+D$$SUV
+L$$_^][d
+\$$UVW
+L$ _
+T$ QR
+D$ }
+WWWV
+`t j
+t$UW
+;:u$UW
+}$UW
+L$(QV
+D$$u
+D$ VP
+L$ u
+D$$UP
+L$$u
+D$ _^
+D$ t
+|$(j
+_^][
+o,j0
+][_Y
+_^][
+_^][
+_^][
+SUVW
+9z,u
+9z,u
+2;5(
+_^][
+_^][d
+QSUV
+t$ W
+u'QU
+_^][
+_^][d
+Pjeh@
+Vh`S@
+$SVW
+|$8;
+T$8Rhh
+OSSjdh@
+jdh@
+V 9=@
+SVW3
+SUVW
+<'uo
+_^]3
+_^][
+8'u=
+_^]3
+?%uX
+SVW3
+<'u}Q
+8'u	P
+<'u}Q
+8'u	P
+<'u}Q
+8'u	P
+;=u=S
+;{u:S
+<'u}Q
+8'u	P
+<'uxQ
+8'u	P
+<'u}Q
+8'u	P
+?=u=W
+;{u.
+D$ Q
+L$ R
+T$ P
+D$ Q
+L$ Rj
+D$4RPWQ
+L$$Q
+L$4PQWR
+_^[d
+8'u	P
+6w!3
+8'u@
+_^][
+VWj$
+_][^
+SUVW
+L$ t$
+L$$_^][d
+SVWP
+SVWP
+3_^]3
+QSWR
+_^][
+3_^]3
+SUVWh
+T$,A
+L$0H
+_^][d
+_^][d
+SUVW
+_^][
+SVW3
+SUVW
+D$ ;
+D$0V
+_^][
+D$8+
+|$4J
+L$4QP
+T$0A
+_^][
+D$$P
+D$$P
+D$$P
+D$$P
+_^][
+3_^]3
+QSWR
+_^][
+3_^]3
+98u-
+9X,uM
+j9X,uN
+9y,uK
+9y,uI
+D$$_^]
+L$ _^[d
+;0ue;
+0^][
+3_^]3
+QSWR
+_^][
+3_^]3
+\$,]
+D$$P
+98u@
+L$$u1
+_^][d
+RUWP
+_^][
+_^]3
+\$ t
+|$(t
+t$,tq
+D$ t,
+_^][d
+3_^]3
+QSWR
+_^][
+3_^]3
+UWh\
+L$<f
+D$(Pf
+l$$t
+L$ QU
+T$ 3
+D$<;
+T$Dj
+\$$;
+D$(P
+t*h\
+_]^[d
+\$ t
+|$(t
+t$,tq
+D$ t,
+_^][d
+D$,;
+D$4;
+D$0R
+D$4RP
+D$43
+L$(;
+|$0;
+|$0W
+_^][
+SUVW
+_^][
+SUV3
+_^][
+_^][
+_^][
+_^][
+L$ PQ
+_][d
+D$LUPUUQ
+D$ ;
+L$LRQ
+T$(R
+L$<;
+D$@+
+d$0P
+d$hP
+L$ P
+l$<;
+D$<;
+t$$3
+69l$ t0
+t$,;
+t$,V
+L$LQ
+_^]d
+DSUV
+D$d3
+L$dU
+L$ U
+l$Pw
+IQhl
+D$tRhh
+d$,P
+T$dQhh
+d$,R
+L$$;
+D$ P
+t$03
+D$,P
+\$0t
+\$h;
+\$pt
+_^]d
+SUVW
+D$X0
+IQh,
+IQh,
+d$dR3
+D$(RWP
+L$(Q
+IQht
+L$(P
+L$(Pj
+T$(Qj
+IQht
+D$(R
+D$(Rj
+L$(Pj
+d$$j
+L$LPj
+d$$j
+L$(Pj
+L$@U
+L$,3
+L$L;
+t$$t
+L$Lj
+D$8RP
+L$XQ
+D$Xj
+D$P_^]d
+SUVW
+T$4Qh
+d$(R
+D$$RSP
+\$ t
+L$$_
+hSUVW
+L$(j
+L$(Rj
+IQht
+T$(Q
+D$\RP
+d$$j
+D$8Rj
+L$<V
+T$(Q
+D$lRP
+T$(Q
+D$,3
+D$ P
+D$$t
+_^]d
+SUVW
+L$(V
+IQh,
+IQh,
+L$ PQ
+D$ RP
+L$(Q
+L$0RP
+T$ QR
+D$4P
+t$8j
+d$8R
+d$dP
+IQht
+L$<P
+IQVh
+d$dP
+T$<PR
+D$TRj
+T$<PR
+IQhl
+L$dPj
+IQPh
+IQht
+D$dR
+D$hP
+IQhl
+L$\P
+D$@;
+D$@;
+D$@;
+T$LVR
+L$ PQ
+D$(P
+T$LVR
+T$4R
+t$8t
+_^]d
+_^][
+SUVW
+d$0S
+D$4RSP
+d$0S
+D$4RSP
+d$0S
+D$4RSP
+d$0S
+D$4RSP
+d$0S
+D$4RSP
+d$0S
+D$4RSP
+T$4PSR
+d$0S
+T$4QSR
+D$4RSP
+d$0S
+D$4RSP
+L$(;
+_^]d
+SUVW
+D$43
+\$(u
+L$@UWQP
+D$Lt$
+9|$Lu
+T$HRS
+\$,UV
+NUPW
+)PRQ
+_^][d
+\$,UVW
+D$8WRP
+)PRQ
+_^][d
+4SUV
+|$X3
+D$8RP
+L$(PQ
+D$(;
+\$(;
+\$Lt
+_^][d
+SUVW
+UPht
+L$ ;
+t$ +
+_^][Y
+NWQS
+_^]+
+_^][
+t8S3
+QSUV
+t$ W
+tiSV3
+QSUVW
+_^][Y
+u\9]
+^][_
+D$$
+_^][d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SUVW
+D$ ;
+u]9k
+t$$j
+_^]d
+SPQ2
+PQRS
+SPWVQ
+l$H3
+L$0d
+L$0d
+\$D;
+L$0S
+L$0RSV
+L$8S
+L$4U
+D$4;
+\$Ht
+_9] t
+9]$u
+L$(;
+D$LtA
+\$(R
+9t$Lu
+D$ P
+\$(3
+L$<^]3
+SVWj
+QRWP
+RPWQ
+RPWQ
+QRWP
+_^][
+D$(PQ
+L$ Q
+l$H3
+D$,W
+\$H;
+D$8+
+L$$;
+8\$Xt
+QWRU
+PWQSSSU
+D$4;
+D$4P
+L$8][d
+\$0jd
+T$0R
+D$Pf
+9\$Pt
+L$Tf
+9\$Tt
+T$dS
+L$4S
+T$(QRj
+\$Ht
+T$0R
+_^][d
+QQSV
+_^[d
+_^[d
+SVWj
+QSVW
+QQSVWd
+4SVW
+PhYY
+X_^[]
+SVWUj
+]_^[
+t.;t$$t(
+tD+E
+Y</Yt
+QQSVW
+8csm
+VWjtj
+Yt;V
+FLVh
+u;j
+t	VP
+uSj
+w.j
+(SVW
+wLVSP
+uSVj
+uf9=
+SVW3
+SUVW
+_^][
+tlHt.
+t>Hu
+XSVW
+8csm
+u,9x
+X_^]
+ub9~
+YY_^[
+QQVW
+sO;>|C;~
+u Vj
+u SW
+_^[]
+?csm
+8csm
+YYPW
+QQSVW
+t:jtj
+Yt)V
+u?jtj
+Yt&V
+QQSVW
+9p`t
+QQSVW
+SVWj
+j@Y3
+Wj@Y3
+t7SW
+
+@AA;
+_9=l
+YYhT
+uFj
+uFj
+'N9t$
+VC20XC00U
+SVWU
+tEVU
+t3x<
+]_^[
+w|j
+uA;5
+w9j
+u>Vj
+~XY_
+8MZu
+t>j,P
+Yt0@
+uiSj
+uY;]
+pD#U
+j #M
+j?^;
+X_^[
+SUVWu
+_^][
+QQSV
+sN;E
+u%C@
+u>Wj
+Yu!j
+QQSV
+btHHt.
+SVWj
+u!PV
+YYF;5
+~&WP
+SVWj
+tYPV
+YYF;5
+_WPS
+HHtpHHtl
+t:	U
+ Yt	f
+^Vhp
+PVhl
+X_[^
+QSVW
+<"u%
+F<"t
+t9UW
+?=t"U
+QQS3
+PSSW
+8"uD
+8"uF@
+8"u,
+@@f9
+@@f9
+SS@SSPVSS
+t#SSUP
+t$$VSS
+_^][YY
+HSVWh
+t&:a
+8csm
+Yt	V
+h4rA
+uFWWj
+[Shp
+"WWShl
+9} u
+E WW
+tMWWS
+t@9}
+VSh
+tzVS
+GIt%
+t/Ku
+<Xt
+u,9u
+^_[3
+^[_3
+1t*;
+QQSUVWj
+_^][YY
+VWsr
+t%WV
+SVW3
+t%WV
+_^[]
+VWuBh
+HSVHWtgHHtF
+NTuI
+H}Fj
+PPPPPPPP
+PPPPPPPP
+FGQPS
+u	Iu
+SVWu
+^}%95
+string too long
+invalid string position
+Unknown exception
+__GLOBAL_HEAP_SELECTED
+__MSVCRT_HEAP_SELECT
+ (8PX
+700WP
+`h````
+ppxxxx
+(null)
+runtime error
+TLOSS error
+SING error
+DOMAIN error
+R6028
+- unable to initialize heap
+R6027
+- not enough space for lowio initialization
+R6026
+- not enough space for stdio initialization
+R6025
+- pure virtual function call
+R6024
+- not enough space for _onexit/atexit table
+R6019
+- unable to open console device
+R6018
+- unexpected heap error
+R6017
+- unexpected multithread lock error
+R6016
+- not enough space for thread data
+abnormal program termination
+R6009
+- not enough space for environment
+R6008
+- not enough space for arguments
+R6002
+- floating point not loaded
+Microsoft Visual C++ Runtime Library
+Runtime Error!
+Program:
+<program name unknown>
+GetLastActivePopup
+GetActiveWindow
+MessageBoxA
+user32.dll
+H:mm:ss
+dddd, MMMM dd, yyyy
+M/d/yy
+December
+November
+October
+September
+August
+July
+June
+April
+March
+February
+January
+Saturday
+Friday
+Thursday
+Wednesday
+Tuesday
+Monday
+Sunday
+SunMonTueWedThuFriSat
+JanFebMarAprMayJunJulAugSepOctNovDec
+WideCharToMultiByte
+lstrlenW
+SetEvent
+InterlockedDecrement
+CloseHandle
+WaitForSingleObject
+CreateEventA
+HeapDestroy
+DeleteCriticalSection
+Sleep
+lstrcmpiA
+GetCurrentThreadId
+GetCommandLineA
+MultiByteToWideChar
+lstrlenA
+GetShortPathNameA
+GetModuleHandleA
+GetModuleFileNameA
+FreeLibrary
+SizeofResource
+LoadResource
+FindResourceA
+GetLastError
+LoadLibraryExA
+lstrcpynA
+IsDBCSLeadByte
+InitializeCriticalSection
+GetProcAddress
+LoadLibraryA
+lstrcpyA
+lstrcatA
+InterlockedIncrement
+LeaveCriticalSection
+EnterCriticalSection
+DeleteFileA
+KERNEL32.dll
+PostThreadMessageA
+CharNextA
+DispatchMessageA
+GetMessageA
+LoadStringA
+USER32.dll
+RegDeleteValueA
+RegDeleteKeyA
+RegEnumKeyExA
+RegCloseKey
+RegCreateKeyExA
+RegOpenKeyExA
+RegSetValueExA
+RegQueryInfoKeyA
+RegEnumValueA
+ADVAPI32.dll
+CoUninitialize
+CoRevokeClassObject
+CoRegisterClassObject
+CoInitialize
+CoTaskMemFree
+CoTaskMemAlloc
+CoTaskMemRealloc
+CoCreateInstance
+ole32.dll
+OLEAUT32.dll
+cppGetDisabledWarnings
+Ax2pp
+Ax2ppSetOutputPath
+Ax2ppAppendIncludePath
+Ax2ppClearIncludePath
+Ax2ppAppendLibraryPath
+Ax2ppClearLibraryPath
+Ax2ppSetStatusCallback
+cppFindFileInPath
+nlpp.dll
+Ax2CSetOption
+Ax2CCompile
+Ax2CSetStatusCallback
+nlc.dll
+AXLAppendDuetModulePath
+AXLLink
+AXLSetOutputPath
+AXLAppendModulePath
+AXLClearDuetModulePaths
+AXLClearModulePaths
+AXLSetDependencyError
+AXLSetDependencyBuilder
+AXLSetDependencyHandler
+AXLSetStatusCallback
+nllink.dll
+?Ax2AppendDuetModulePath@Ax2Walker@@QAEXPAD@Z
+?AX2Walk@Ax2Walker@@QAEJPBD0@Z
+?Ax2AppendModulePath@Ax2Walker@@QAEXPAD@Z
+?Ax2ClearDuetModulePaths@Ax2Walker@@QAEXXZ
+?Ax2ClearModulePaths@Ax2Walker@@QAEXXZ
+?Ax2SetDependencyError@Ax2Walker@@QAEJP6AJPAXKHPAPBD@Z0@Z
+?Ax2SetDependencyBuilder@Ax2Walker@@QAEJP6AJPAXPBD@Z0@Z
+?Ax2SetDependencyHandler@Ax2Walker@@QAEJP6AJPAXPBDHH@Z0@Z
+?Ax2SetStatusCallback@Ax2Walker@@QAEJP6AJPAXPBDHHKHPAPBD@Z0@Z
+??1Ax2Walker@@UAE@XZ
+??0Ax2Walker@@QAE@XZ
+nlwk.dll
+DZIP32.dll
+dunzip
+DUNZIP32.dll
+InterlockedExchange
+RtlUnwind
+CreateThread
+TlsSetValue
+TlsGetValue
+ExitThread
+HeapFree
+HeapAlloc
+HeapReAlloc
+GetStartupInfoA
+GetVersion
+ExitProcess
+RaiseException
+TlsAlloc
+SetLastError
+GetCPInfo
+GetACP
+GetOEMCP
+TerminateProcess
+GetCurrentProcess
+HeapSize
+UnhandledExceptionFilter
+GetEnvironmentVariableA
+GetVersionExA
+HeapCreate
+VirtualFree
+VirtualAlloc
+IsBadWritePtr
+GetStringTypeA
+GetStringTypeW
+FreeEnvironmentStringsA
+FreeEnvironmentStringsW
+GetEnvironmentStrings
+GetEnvironmentStringsW
+SetHandleCount
+GetStdHandle
+GetFileType
+WriteFile
+SetUnhandledExceptionFilter
+IsBadReadPtr
+IsBadCodePtr
+LCMapStringA
+LCMapStringW
+CreateFileA
+SetStdHandle
+FlushFileBuffers
+SetFilePointer
+SetEndOfFile
+ReadFile
+TYPELIB
+CLSID
+Delete
+NoRemove
+ForceRemove
+.tko
+RegServer
+UnregServer
+HKEY_CURRENT_CONFIG
+HKEY_DYN_DATA
+HKEY_PERFORMANCE_DATA
+HKEY_USERS
+HKEY_LOCAL_MACHINE
+HKEY_CURRENT_USER
+HKEY_CLASSES_ROOT
+HKCC
+HKDD
+HKPD
+HKLM
+HKCU
+HKCR
+UnRegisterTypeLib
+oleaut32.dll
+.tlb
+TOKEN
+DEVICE-REVISION
+SPECIFICATION-VERSION
+AMX-TYPE
+FILE-DEPENDENCIES
+BUNDLE-COPYRIGHT
+BUNDLE-VERSION
+BUNDLE-VENDOR
+BUNDLE-ACTIVATOR
+CREATED-BY
+BUNDLE-DESCRIPTION
+BUNDLE-NAME
+MANIFEST-VERSION
+$end
+META-INF\MANIFEST.MF
+%s.jar
+1.0.0
+.jar
+%d:
+ERROR%s
+.?AVexception@@
+.?AVlogic_error@std@@
+.?AVlength_error@std@@
+.?AVout_of_range@std@@
+.?AVtype_info@@
+HKCR
+	NoRemove AppID
+		{7ED72260-8C79-11D3-A27F-00C04F5890BD} = s 'Ax2CompilerObj'
+		'Ax2CompilerObj.EXE'
+			val AppID = s {7ED72260-8C79-11D3-A27F-00C04F5890BD}
+HKCR
+	Ax2CompilerObj.Ax2Com.1 = s 'Ax2Com Class'
+		CLSID = s '{7ED7226C-8C79-11D3-A27F-00C04F5890BD}'
+	Ax2CompilerObj.Ax2Com = s 'Ax2Com Class'
+		CLSID = s '{7ED7226C-8C79-11D3-A27F-00C04F5890BD}'
+		CurVer = s 'Ax2CompilerObj.Ax2Com.1'
+	NoRemove CLSID
+		ForceRemove {7ED7226C-8C79-11D3-A27F-00C04F5890BD} = s 'Ax2Com Class'
+			ProgID = s 'Ax2CompilerObj.Ax2Com.1'
+			VersionIndependentProgID = s 'Ax2CompilerObj.Ax2Com'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '{7ED72260-8C79-11D3-A27F-00C04F5890BD}'
+			'TypeLib' = s '{7ED7225F-8C79-11D3-A27F-00C04F5890BD}'
+MSFT
+stdole2.tlbWWW
+zAX2COMPILEROBJLibWWW
+_IAx2ComEventsWW
+CompilerStatusWW
+bstrStatusTextWW
+bstrReferencedFileWW
+)nLineWWW
+nColumnW
+!nStatusTypeW
+nStatusCodeWd
+Ax2ComWW
+IAx2ComW
+Ax2CompileWW
+varFileNames
+TvarIncludePathWW
+varLibraryPathWW
+varLinkPathW
+rpbstrWorkfilePathWWW
+pbstrOutputPathW
+3YpSuccess
+Ax2SetCompilerOption
+UnCodeWWW
+varOptionWWW
+Ax2GenerateDebugInfo
+varbIsEnabledWWW
+9Ax2WalkW
+Ax2CompilerObj 1.0 Type LibraryWWW
+_IAx2ComEvents InterfaceWW
+method CompilerStatusW
+Ax2Com ClassWW
+IAx2Com InterfaceW
+method Ax2CompileW
+method Ax2SetCompilerOptionWWW
+method Ax2GenerateDebugInfoWWW
+method Ax2Walk

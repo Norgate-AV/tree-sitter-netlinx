@@ -1,0 +1,1063 @@
+!This program cannot be run in DOS mode.
+Rich
+.text
+`.rdata
+@.data
+.rsrc
+@.reloc
+PQVW
+PQSVW
+Y_^[
+PQSVW
+VQRW
+Y_^[
+Y_^[
+8_^]
+Y_^[
+Y_^[
+Y_^[
+;8u/
+Y_^[
+Y_^[
+TVWQ
+arTokens
+strFile
+strMessage
+strOutput
+xSVW
+Y_^[
+(SVWQ
+Y_^[
+_Ptr
+szFileSpec
+strAXSFileName
+strTKNOutputFileName
+arTokens
+arTokens
+strExtra
+strValue
+strKey
+strLine
+strSingleAXSFile
+stdfile
+dwBufLen
+szFileName
+hKey
+strDefaultPath
+split
+_$AllocaPad$
+pbstr
+saBound
+strTempDir
+buffer
+szBuffer
+dwRead
+Qh$%C
+Ph8%C
+RhL%C
+Y_^[
+csZipFile
+strFile
+it_end
+strDecrypted
+strPassword
+strAxsFile
+mapSrcFiles
+unzip
+strDuetTempDir
+strTempDir
+mapSrcFiles
+strZipPathName
+filestatus
+lStatus
+arrMangledFilesToCompile
+arrOutputFiles
+strWcFile
+strTempFile
+strTempDir
+vflag
+lStatus
+lSuccess
+lSuccess
+bstrTempPath
+varOutputPath
+bstrOutputPath
+pSAModule
+pSALib
+pSAInclude
+pSASrc
+varModulePath
+varLibPath
+varIncludePath
+varSrc
+strOutputPathName
+strDefaultPath
+spAXSFile
+strAXSFileName
+dwCookie
+CompilerSink
+pIAx2Compiler
+mapDefaultPaths
+strVersionNumber
+strOutput
+strMsg
+strDir
+NetLinxOptions
+strErr
+auto_CoInit
+subBlock
+uLen
+lpFixedProductInfo
+dwHandle
+strVersionNumber
+csPath
+h$%C
+h8%C
+hL%C
+strTempFile
+strTKNOutputFileName
+csArgs
+strAXSFileName
+strConfigurationFile
+strSingleFile
+/t`ht
+spPath
+strFixupPath
+Y_^[
+SVWQ
+Y_^[
+_Next
+SVWQ
+Y_^[
+_Where
+_Where
+_Tmp
+_AtlSafeAllocaManager
+0SVWQ
+Y_^[
+_Pnode
+(SVWQ
+Y_^[
+_Where
+_Where
+strName
+strName
+strName
+strName
+strName
+strName
+regKey
+regKey
+regKey
+XZ_^
+szBuffer
+dwSize
+time
+SVWQ
+Y_^[
+lstAlreadyDeleted
+pubDataArray
+puwModuleList
+uwModuleLength
+hPEA
+pubDataArray
+puwModuleList
+uwModuleLength
+pubDataArray
+puwModuleList
+uwModuleLength
+h@FA
+pubDataArray
+puwModuleList
+uwModuleLength
+h`GA
+pubDataArray
+puwModuleList
+uwModuleLength
+hpHA
+pubDataArray
+puwModuleList
+uwModuleLength
+pubDataArray
+puwModuleList
+uwModuleLength
+4VWQ
+}Jj4
+hPEA
+0VWQ
+pubTemp
+Y_^[
+_Cat
+_Mid
+_Count
+_Tmp
+t6hPEA
+t6hpHA
+Y_^[
+_Next
+XVWQ
+XZ_^
+_Mid2
+_Last2
+_First2
+_Last1
+_First1
+_Binlist
+_Templist
+_Next
+,VWQ
+XZ_^
+_Where
+H j\
+lstIndices
+bValid
+strVarName
+strRoot
+tkStruct
+listit
+tkStruct
+lstIndices
+bValid
+strVarName
+strRoot
+XZ_^
+szName2Find
+szExt
+szFName
+8VWQ
+strFileName
+uwModule
+uwID
+uwModule
+uwID
+uwModule
+uwID
+strVariableName
+tknvar
+strVarScope
+strVarName
+strScope
+strName
+tknvar
+lstIndices
+strMember
+bValid
+Struct
+Array
+szFormatArray
+String
+Array
+XZ_^
+szBuffer
+Y_^[
+_Cat
+_Alval
+_Tmp
+_Tmp
+strOffset
+Y_^[
+_Alval
+Y_^[
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+|SVWQ
+Y_^[
+strTemp
+pbTemp
+SVWQ
+Y_^[
+pbTemp
+tokens
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+pbTemp
+plgTemp
+4VWQ
+Q 9U
+8VWQ
+pbDataArray
+pwModuleList
+wModuleLength
+pbDataArray
+pwModuleList
+wModuleLength
+pbDataArray
+pwModuleList
+wModuleLength
+4VWQ
+;HLs
+Y_^[
+Y_^[
+Y_^[
+(SVWQ
+Y_^[
+SVWQ
+Y_^[
+_Next
+SVWQ
+Y_^[
+_Next
+SVWQ
+Y_^[
+_Where
+SVWQ
+Y_^[
+_Where
+Y_^[
+_Where
+_Where
+0SVWQ
+Y_^[
+_Pnode
+(SVWQ
+Y_^[
+_Where
+=H)C
+5H)C
+5H)C
+5D)C
+2_^[]
+QQSVW
+9;~A
+93~?W
+PRSVWj
+YY_^[ZX
+t%Wh
+8csm
+F95<)C
+5<)C
+95<)C
+=@)C
+h@)C
+Y__^[
+j$hx
+s Vh
+8csm
+_^[]
+Y_^[
+Y_^[
+VVVVV
+r5If9
+u*j\Xf9
+;0r
+=))C
+=$)C
+=()C
+QVVV
+PWWW
+WWW%
+t SWj
+t(VW
+u	_[3
+@PWj
+SVWP
+Y_^[
+SVWP
+Y_^[
+Y_^[
+Y_^[
+PQSVW
+Y_^[
+PQVW
+PSVW
+Y_^[
+Y_^[
+CNetLinxCompilerCmdLineSink
+OnCompilerStatus
+generic
+unknown error
+iostream
+iostream stream error
+string too long
+invalid string position
+  ERROR: %s(%d)%s
+  WARNING: %s(%d)%s
+TOKENCOUNT:
+BuildWithSource
+BuildWithDebugInfo
+PasswordProtect
+Password
+EnableWC
+---- NetLinx Compiler Command Line Program Options V3.1----
+NLRC.exe "AXS_FileName.axs" "-IInclude Path"  "-LLibrary Path" "-MModule Path"  "-xOutput Log File"
+AXS_FileName.axs - File name to compile. Must be in double quotes
+Include Path (optional) - Additional path(s) to includes for this project, separate by ;
+Library Path (optional) - Additional path(s) to libraries for this project, separate by ;
+Module Path (optional) - Additional path(s) to modules for this project, separate by ;
+Output Log File  - Optional. If NOT present, then all output goes to the
+                   command window. If present, the file name must be in
+                   double quotes and contain one of the
+                   following indicators:
+                    "-AC:\Output.txt" - Append status to the output file.
+                    "-NC:\Output.txt" - Create a new output file.
+  ----------------- or ------------------
+Pass in a configuration file (.CFG) to invoke the compiler
+NLRC.exe -CFG"C:\AMXProjects\MainCampusProject.cfg"
+Please read the NLRC_Readme.txt file for more information.
+Press enter to exit
+>>>> ERROR: Could not find file: %s
+.tkn
+>>>> ERROR: Missing either the -A or -N option for the Log File Name: %s
+>>>> ERROR: Could not open log file: %s
+  >>>> ERROR: Failed to Initialize the NetLinx Compiler-Processed Stopped.
+  ---- Starting NetLinx Compile - Version[%s] [%02d-%02d-%4d %02d:%02d:%02d] -----
+  >>>> ERROR: Could not start the NetLinx Compiler-Processed Stopped.
+  >>>> ERROR: Could not activate the NetLinx Sink Object-Processed Stopped
+  >>>> ERROR: Could not advise the NetLinx Compiler-Processed Stopped
+  >>>> ERROR: Memory exception during Compilation!
+  >>>> ERROR: Failed to initialize the NetLinx compiler! Please check your installation.
+  >>>> ERROR: Failed to generate debug information.
+  >>>> ERROR: NetLinx Compiler failed with code = 0x%X
+  %s
+  %d error(s), %d warning(s)
+  Token and Variable Count....:%8d (Maximum is %d)
+  Compiled Code...(with Debug):%8d bytes of memory
+  Compiled Code...............:%8d bytes of memory
+%sDuetTemp%d
+PROG.TKN
+\PROG.TKN
+  >>>> ERROR: Could not add source code file [%s] to compress.
+  >>>> ERROR: Could not get source code file names from the TKN file.
+  Created SRC file............: %s
+  >>>> ERROR: Failed to create SRC file: %s
+  ---- NetLinx Compile Complete [%02d-%02d-%4d %02d:%02d:%02d] -------------------------
+ >>>> ERROR: Faile ot Unadvise NetLinx Compiler
+%d.%d.%d.%d
+CLSID\{7ED7226C-8C79-11D3-A27F-00C04F5890BD}\LocalServer32
+Fatal Error: MFC initialization failed
+AMX Corp.
+NetLinx Studio
+-cfg
+.axs
+  ------ NLRC.EXE - V3.2 ------------------------------------------------------
+  Using Configuration File:
+            Using AXS File:
+  Using Command Line Arguements:
+
+  ------  End of NLRC.EXE - V3.2  ----------------------------------------------
+APWFile
+MainAXSRootDirectory
+AXSFile
+ProjectSystem
+OutputLogFile
+OutputLogFileOption
+OutputLogConsoleOption
+BuildWithDebugInformation
+BUILDWITHSOURCE
+BUILDWITHWC
+AdditionalIncludePath
+AdditionalLibraryPath
+AdditionalModulePath
+system
+RegDeleteKeyTransactedA
+RegDeleteKeyExA
+NLXCompiler_Includes
+NLXCompiler_Libs
+NLXCompiler_Modules
+NLXCompiler_Options
+IncludeDirectory%03d
+LibraryDirectory%03d
+ModuleDirectory%03d
+---------------------------------------------------------------------------
+-- CSymbol::DebugPrintSymbol
+-- Module Names = %d
+-- %4d  Name is %s
+-- %4d  (has no name loaded)
+-- File Names = %d
+-- %4d  %s
+-- Function Names = %d
+--    ID  FILE   LINE  TABLE  NAME
+-- %5d  %4d  %5d  %5d  %s
+-- %5d  (has no name loaded)
+-- Stucture Names = %d
+--   ID   CNT  NAME              MEMBER  NAME
+-- %4d  %4d  %s
+--                                 %4d  %s
+-- Global Local Names    Count = %d
+--    ID  GL  TYPE  FILE   LINE  TABLE  NAME
+-- %5d  %2X  %4d  %4d  %5d  %5d  %s
+-- Stack Parameter Names    Count = %d
+-- STACK  PR  FILE   LINE  TABLE  NAME
+-- %5d  %2X  %4d  %5d  %5d  %s
+-- Break Points    Count = %d (Printing BreakPoints %d to %d )
+--  INDEX  FILE   LINE  COUNT  TABLES (up to first 8)
+-- %6X  %4d  %5d  %5d
+-- Debug Print Done
+-- Program Name Info
+-- Module Count = %d
+    %4d  Name is %s
+    %4d  (has no name loaded)
+    %6d  %s
+    %6d  (has no name loaded)
+list<T> bad splice
+list<T> too long
+vector<T> too long
+No debug information was available!
+Variable syntax is invalid!
+Variable index is invalid!
+Struct variable syntax is invalid!
+Struct member is invalid!
+Array dimension is invalid!
+Failed to retrieve variable instances!
+Failed to retrieve variable from TKN!
+Variable retrieved from TKN is not a valid Array!
+Variable retrieved from TKN is not a valid struct!
+Unknown error code!
+[%d]
+%s is not a valid member!
+Indices are invalid for array %s of %s
+Member %s of %s is invalid
+NCUR_PAN_RANGE_MIN
+<CONST>
+Stack around the variable '
+' was corrupted.
+The variable '
+' is being used without being initialized.
+The value of ESP was not properly saved across a function call.  This is usually a result of calling a function declared with one calling convention with a function pointer declared with a different calling convention.
+A cast to a smaller data type has caused a loss of data.  If this was intentional, you should mask the source of the cast with the appropriate bitmask.  For example:
+	char c = (i & 0xFF);
+Changing the code in this way will not affect the quality of the resulting optimized code.
+Stack memory was corrupted
+A local variable was used before it was initialized
+Stack memory around _alloca was corrupted
+Unknown Runtime Check Error
+Unknown Filename
+Unknown Module Name
+Run-Time Check Failure #%d - %s
+Stack corrupted near unknown variable
+%.2X
+wsprintfA
+Stack area around _alloca memory reserved by this function is corrupted
+Data: <
+Allocation number within this function:
+Size:
+Address: 0x
+Stack area around _alloca memory reserved by this function is corrupted
+%s%s%p%s%ld%s%d%s
+%s%s%s%s
+Stack pointer corruption
+Cast to smaller type causing loss of data
+Stack memory corruption
+Local variable used before initialization
+Stack around _alloca corrupted
+RegOpenKeyExW
+RegQueryValueExW
+RegCloseKey
+PDBOpenValidate5
+510864898005648025435048991288743
+SOFTWARE\%s\%s\%s\
+software
+invalid map/set<T> iterator
+map/set<T> too long
+Advapi32.dll
+RegOpenKeyTransactedA
+GetFileVersionInfoSizeA
+GetFileVersionInfoA
+VerQueryValueA
+VERSION.dll
+dzip
+DZIP32.dll
+dunzip
+DUNZIP32.dll
+?ProcessFile@@YAHPBD0@Z
+wc.dll
+mfc110.dll
+_purecall
+memcpy
+strlen
+memmove
+atol
+_CxxThrowException
+__CxxFrameHandler3
+memset
+_strdup
+getchar
+free
+_localtime64_s
+_time64
+_access
+fgetc
+fseek
+ftell
+fclose
+fopen
+fprintf
+isdigit
+memchr
+memcmp
+strcpy
+_vsnprintf
+sprintf
+atoi
+_splitpath
+setlocale
+atof
+feof
+sscanf
+strncpy
+strncmp
+strstr
+_strnset
+MSVCR110.dll
+_lock
+_unlock
+_calloc_crt
+__dllonexit
+_onexit
+??1type_info@@UAE@XZ
+?terminate@@YAXXZ
+_XcptFilter
+_amsg_exit
+__getmainargs
+__set_app_type
+exit
+_exit
+_cexit
+_configthreadlocale
+__setusermatherr
+_initterm_e
+_initterm
+__initenv
+_fmode
+_commode
+_crt_debugger_hook
+__crtUnhandledException
+__crtTerminateProcess
+_except_handler4_common
+__crtSetUnhandledExceptionFilter
+_invoke_watson
+_controlfp_s
+GetCommandLineA
+CreateDirectoryA
+CreateFileA
+DeleteFileA
+ReadFile
+RemoveDirectoryA
+SetFileAttributesA
+CloseHandle
+GetModuleHandleA
+GlobalAlloc
+GlobalLock
+GlobalUnlock
+GlobalFree
+lstrlenA
+GetTempPathA
+MultiByteToWideChar
+GetProcAddress
+lstrcmpiA
+lstrcatA
+GetPrivateProfileStringA
+WritePrivateProfileStringA
+EncodePointer
+DecodePointer
+IsDebuggerPresent
+IsProcessorFeaturePresent
+RaiseException
+GetLastError
+LoadLibraryExW
+LoadLibraryW
+WideCharToMultiByte
+QueryPerformanceCounter
+GetCurrentProcessId
+GetCurrentThreadId
+GetSystemTimeAsFileTime
+HeapAlloc
+HeapFree
+GetProcessHeap
+VirtualQuery
+FreeLibrary
+GetModuleFileNameW
+KERNEL32.dll
+RegOpenKeyExA
+RegQueryValueExA
+RegCloseKey
+RegDeleteKeyA
+RegEnumKeyExA
+RegCreateKeyExA
+RegDeleteValueA
+RegSetValueExA
+ADVAPI32.dll
+CoCreateInstance
+CoInitializeEx
+CoUninitialize
+ole32.dll
+OLEAUT32.dll
+?uncaught_exception@std@@YA_NXZ
+?_Xbad_alloc@std@@YAXXZ
+?_Xlength_error@std@@YAXPBD@Z
+?_Xout_of_range@std@@YAXPBD@Z
+?_Syserror_map@std@@YAPBDH@Z
+?good@ios_base@std@@QBE_NXZ
+?flags@ios_base@std@@QBEHXZ
+?width@ios_base@std@@QBE_JXZ
+?width@ios_base@std@@QAE_J_J@Z
+?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z
+?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z
+?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z
+?tie@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_ostream@DU?$char_traits@D@std@@@2@XZ
+?rdbuf@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_streambuf@DU?$char_traits@D@std@@@2@XZ
+?fill@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDXZ
+?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ
+??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z
+?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ
+?endl@std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@1@AAV21@@Z
+?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+?cerr@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A
+??0id@locale@std@@QAE@I@Z
+?_Winerror_map@std@@YAPBDH@Z
+?_Swap_all@_Container_base0@std@@QAEXAAU12@@Z
+?_Orphan_all@_Container_base0@std@@QAEXXZ
+MSVCP110.dll
+.?AVCObject@@
+.?AVCCmdTarget@@
+.?AVerror_category@std@@
+.?AV_Generic_error_category@std@@
+.?AV_Iostream_error_category@std@@
+.?AVCNetLinxCompilerCmdLineSink@@
+.?AVCEncryptable@Zip@@
+.?AVCZip@Zip@@
+.?AVCUnzip@Zip@@
+.?AV_System_error_category@std@@
+.?AUCModuleInfo@TKN@@
+.?AUCName@TKN@@
+.?AUCFunctionInfo@TKN@@
+.?AUCStructureInfo@TKN@@
+.?AUCGlobalLocalInfo@TKN@@
+.?AUCStackParaInfo@TKN@@
+.?AUCBreakPointInfo@TKN@@
+.?AUVariableStruct@TKN@@
+.?AVCTKN@TKN@@
+.?AVCTKNVariableBase@TKN@@
+.?AVCTKNSimple@TKN@@
+.?AVCTKNComposite@TKN@@
+.?AVCTKNString@TKN@@
+.?AVCTKNArray@TKN@@
+.?AVCTKNStruct@TKN@@
+.?AVCUFFHandler@TKN@@
+.?AVtype_info@@
+.PAVCMemoryException@@
+.?AVCAutoCoInitialize@GenUtility@@
+060E0c0o0
+0&1V1f1
+2(2W2|2
+2(313M3{3
+5<7D7N7
+869H9
+9R:u:
+>U?r?{?
+030p0v0
+1<1}1
+172O2
+3"3M3f3
+4;4t4
+465J5q5
+7/7I7
+828E8[8k8t8
+8	949F9s9
+:!:::K:x:
+:4;O;d;
+;&<X<
+< =?=Y=
+=A>^>~>
+?4?]?
+2+2`2
+434N4
+8r;x;
+3;4S4
+586L6d6
+7<7\7h7
+7	8Z8r8
+9C9S9\9{9
+:-:J:f:|:
+;$;:;@;S;\;r;{;
+<!<'<9<?<k<p<v<
+=(=8=I=R=u=
+> >.>a>g>
+?#?4?>?G?X?e?n?
+0&0.070H0U0^0|0
+1<1J1P1
+2[2t2
+203I3e3u3
+3&4=4V4q4
+5$505<5H5T5`5l5x5
+6<6z6
+7*7;7t7
+9#9/9:9E9V9u9
+:#:1:>:L:Z:h:v:
+;:;W;e;
+=4=M=d=
+>?>O>w>
+?)?6?H?m?z?
+0 090L0Y0o0
+001}1
+343@3L3X3
+4+4B4f4
+5(545
+6/6P6\6h6
+7A7W7m7
+798C8X8
+9/9~9
+:Q:d:w:
+;#;9;O;e;
+<^=w=
+>+>=>V>
+?&?3?9?[?t?
+111Y1g1
+122H2^2t2
+383M3p3
+4"6;6i6
+607I7W7c7|7
+9$9T9
+:#:8:H:]:u:
+;a<z<
+<Z=q={=
+?.?U?_?t?
+0%0C0M0
+0%1E1~1
+262w2
+3$393s3
+3J4u4
+4:5S5
+6)676
+727K7x7
+9 969T9y9
+:.:v:
+:(;4;@;L;X;d;p;|;
+<$<0<<<H<T<`<l<x<
+= =,=8=D=P=\=h=t=
+&0F0d0~0
+1L1U1u1
+2$2:2P2r2
+263V3s3
+4?4U4~4
+585D5V5|5
+6*61686I6O6^6i6
+757E7N7h7~7
+8/8P8
+9>9`9x9
+:&:d:v:
+;H;N;g;u;{;
+<'<0<@<`<l<z<
+>(>S>a>z>
+?'?7?L?]?k?y?
+0(040@0L0X0d0p0|0
+1,1P1i1
+2C2l2
+373O3a3
+3%4>4T4|4
+71878F<p<
+=L=X=
+3D4R4
+7,787
+9*:X:v:
+:f;x;
+=	>H>p>|>
+040@0
+0&1J1I2
+32:8:
+5/6D6n6x6
+757k7
+8-878L8_8
+9;9T9^9u9
+:::T:m:w:
+;6;Z;{;
+;,<8<V<z<
+=L=X=v=
+>@>L>f>
+?0?<?V?
+ 0,0
+1+1F1
+2:3@3^3h3
+B3d3p3|3
+6(6f6
+6v7{7m8
+:(;4;@;L;
+>7>&?+?
+0H0T0`0l0
+4)434`4j4{4
+5,565d5n5
+666@6s6}6
+8,868L8V8g8q8
+:.:8:I:S:W;a;
+=Z=d=u=
+>;?E?X?b?}?
+0'111G1Q1
+202:2
+363f36:W:
+4#5l5
+8,9s9#:
+;6;`;
+082X2d2
+:H;N;
+3 4,484D4P4\4
+5y5~5o7
+949T9`9]:3;T;`;
+;F<Z<r<
+-1h1t1
+6$606<6H6T6`6l6x6
+8D8k8
+9?:p:|:
+<:<h<t<
+000<0H0
+6G7d8t8
+9>:g:
+0F0q0
+565b5N8
+9D9P9\9v9
+=1>T>`>^?
+030H0]0o0
+0(141D1H1L1P1T1X1\1`1d1h1
+6(646
+2X3`3
+3&5I5e6
+607<7
+9H;N;6<Z<
+<==B>H>??
+K0v0
+243t3
+3/464^4
+5&6H6T6
+9C:d:p:
+:$;S;
+;\<|<
+= =,=F=m=
+?"?,?~?
+"0,0U0_0
+1%1C1[1u1~1
+1 2,282L2P2T2X2\2`2d2h2v2
+3.3J3s3
+6M6]6
+7 7P7\7h7|7
+7L8P8T8X8\8`8d8h8
+849c9
+; ;,;F;r;
+<<<H<a=
+>N?l?x?
+060b0
+0,181 2d2
+8.8J8
+979S9
+> >$>I?P?
+677A7J9
+1(141@1L1'2H2T2`2l2(9H9T9`9`;
+3$363`3a7|7
+<L<X<
+777(8T8`8.9P9\9
+>0><>V>z>y?
+":(:
+: ;,;
+="=(=.=4=:=@=F=L=R=X=^=d=j=p=v=|=
+>$>5>@>E>J>a>l>r>
+3,343:3F3Q3Z3d3k3q3v3{3
+4'4-44494F4U4]4e4y4
+525j5p5v5|5
+6%656>6L6R6X6a6~6
+8 8'8/8O8Z8`8i8n8y8
+9&9O9Z9
+:g:n:
+;4;Q;
+<9<?<U<
+<V=[=m=
+=H>k>w>
+?H?N?T?Z?`?f?t?
+0<0g0
+0?1Y1
+2$3+3
+404Y4
+575d5m5
+6R6Y6
+767H7
+:#:*:B:N:Z:f:
+;1;A;J;e;k;s;
+<?<[<v<
+=(=Y=w=
+=%>V>^>}>
+?&?5?d?z?
+0$0)020M0l0<1_1o1
+1*2R2g2y2
+3%3E3Z3o3
+4*4:4O4d4y4
+515[5s5
+606E6Z6
+6&7;7P7{7
+8%8:8d8t8
+9(9:9L9a9v9
+:*:J:Z:o:
+;2;U;u;
+<'<D<T<q<
+=%=H=k=
+=	>/>U>{>
+?2?I?}?
+%0e0
+2Q2r2
+3-3P3`3
+4M4s4
+555U5u5
+6"6B6X6z6
+7*7@7f7|7
+7%8<8e8|8
+9D9N9t9~9
+:4:>:d:n:
+:	;';-;9;W;];i;
+<D<N<y<
+=$=D=d=
+>$>G>M>w>}>
+?7?=?d?
+4 4$4(4,4044484<4@4D4H4L4P4T4X4\4`4d4p4t4x4
+4 5$5(5,505@5D5
+586<6@6D6H6L6P6T6X6\6`6d6h6l6p6t6x6|6
+L4P4T4X4\4`4d4054585<5@5D5H5L5P5T5X5\5`5d5
+< <$<(<,<0<4<8<<<@<D<H<L<P<T<X<\<`<d<h<l<p<t<x<|<
+<D=H=L=P=T=X=
+5L5P5d5h5p5
+6,60646<6T6d6h6x6|6
+7$7<7L7P7`7d7h7p7
+8$84888H8L8T8l8|8
+9 9$9,9D9T9X9h9l9t9
+:,:0:@:D:L:d:t:x:
+; ;$;(;0;H;X;\;l;p;t;x;
+< <(<@<P<T<d<h<l<p<t<|<
+=$=(=0=H=X=h=l=
+?H?P?t?
+080@0H0P0X0h0|0
+1(10181@1H1P1X1`1l1
+2 2D2h2
+3 3(30383@3H3P3X3`3h3p3x3
+4 4(40484@4H4P4X4`4h4p4x4
+5 5(50585@5H5P5X5`5h5p5x5
+6 6D6P6X6p6|6
+7(7L7X7`7
+8@8d8
+9<9\9d9l9t9|9
+:$:H:l:
+;$;H;T;\;t;|;
+<,<8<@<X<`<h<p<x<
+< =D=h=
+>@>d>
+?,?8?@?`?
+0(0@0H0\0
+141\1
+2 2(2D2L2d2l2x2
+3(303P3t3
+4$40484X4|4
+5,585@5X5d5
+6,606P6l6p6
+787\7h7p7
+8,888X8d8
+9(9L9p9
+0 0<0`0
+1$1@1l1
+202T2x2
+303P3p3
