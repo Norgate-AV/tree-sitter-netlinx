@@ -3118,282 +3118,282 @@ INTEGER DUET_RAMPING_REPEAT = 3
 (*           SUBROUTINE DEFINITIONS GO BELOW               *)
 (***********************************************************)
 
-// Name   : ==== DuetPackCmdHeader ====
-// Purpose: To package header for module send_command or send_string
-// Params : (1) IN - sndcmd/str header
-// Returns: Packed header with command separator added if missing
-// Notes  : Adds the command header to the string and adds the command if missing
-//          This function assumes the standard Duet command separator '-'
-//
-DEFINE_FUNCTION CHAR[DUET_MAX_HDR_LEN] DuetPackCmdHeader(CHAR cHdr[])
-{
-  STACK_VAR CHAR cSep[1]
-  cSep = '-'
+// // Name   : ==== DuetPackCmdHeader ====
+// // Purpose: To package header for module send_command or send_string
+// // Params : (1) IN - sndcmd/str header
+// // Returns: Packed header with command separator added if missing
+// // Notes  : Adds the command header to the string and adds the command if missing
+// //          This function assumes the standard Duet command separator '-'
+// //
+// DEFINE_FUNCTION CHAR[DUET_MAX_HDR_LEN] DuetPackCmdHeader(CHAR cHdr[])
+// {
+//   STACK_VAR CHAR cSep[1]
+//   cSep = '-'
 
-  IF (RIGHT_STRING(cHdr,LENGTH_STRING(cSep)) != cSep)
-      RETURN "cHdr,cSep";
+//   IF (RIGHT_STRING(cHdr,LENGTH_STRING(cSep)) != cSep)
+//       RETURN "cHdr,cSep";
 
-  RETURN cHdr;
-}
+//   RETURN cHdr;
+// }
 
-// Name   : ==== DuetPackCmdParam ====
-// Purpose: To package parameter for module send_command or send_string
-// Params : (1) IN - sndcmd/str to which parameter will be added
-//          (2) IN - sndcmd/str parameter
-// Returns: Packed parameter wrapped in double-quotes if needed, added to the command
-// Notes  : Wraps the parameter in double-quotes if it contains the separator
-//          This function assumes the standard Duet parameter separator ','
-//
-DEFINE_FUNCTION CHAR[DUET_MAX_CMD_LEN] DuetPackCmdParam(CHAR cCmd[], CHAR cParam[])
-{
-  STACK_VAR CHAR cTemp[DUET_MAX_CMD_LEN]
-  STACK_VAR CHAR cTempParam[DUET_MAX_CMD_LEN]
-  STACK_VAR CHAR cCmdSep[1]
-  STACK_VAR CHAR cParamSep[1]
-  STACK_VAR INTEGER nLoop
-  cCmdSep = '-'
-  cParamSep = ','
+// // Name   : ==== DuetPackCmdParam ====
+// // Purpose: To package parameter for module send_command or send_string
+// // Params : (1) IN - sndcmd/str to which parameter will be added
+// //          (2) IN - sndcmd/str parameter
+// // Returns: Packed parameter wrapped in double-quotes if needed, added to the command
+// // Notes  : Wraps the parameter in double-quotes if it contains the separator
+// //          This function assumes the standard Duet parameter separator ','
+// //
+// DEFINE_FUNCTION CHAR[DUET_MAX_CMD_LEN] DuetPackCmdParam(CHAR cCmd[], CHAR cParam[])
+// {
+//   STACK_VAR CHAR cTemp[DUET_MAX_CMD_LEN]
+//   STACK_VAR CHAR cTempParam[DUET_MAX_CMD_LEN]
+//   STACK_VAR CHAR cCmdSep[1]
+//   STACK_VAR CHAR cParamSep[1]
+//   STACK_VAR INTEGER nLoop
+//   cCmdSep = '-'
+//   cParamSep = ','
 
-  // Not the first param?  Add the param separator
-  cTemp = cCmd
-  IF (FIND_STRING(cCmd,cCmdSep,1) != (LENGTH_STRING(cCmd)-LENGTH_STRING(cCmdSep)+1))
-    cTemp = "cTemp,cParamSep"
+//   // Not the first param?  Add the param separator
+//   cTemp = cCmd
+//   IF (FIND_STRING(cCmd,cCmdSep,1) != (LENGTH_STRING(cCmd)-LENGTH_STRING(cCmdSep)+1))
+//     cTemp = "cTemp,cParamSep"
 
-  // Escape any quotes
-  FOR (nLoop = 1; nLoop <= LENGTH_ARRAY(cParam); nLoop++)
-  {
-    IF (cParam[nLoop] == '"')
-      cTempParam = "cTempParam,'"'"
-    cTempParam = "cTempParam,cParam[nLoop]"
-  }
+//   // Escape any quotes
+//   FOR (nLoop = 1; nLoop <= LENGTH_ARRAY(cParam); nLoop++)
+//   {
+//     IF (cParam[nLoop] == '"')
+//       cTempParam = "cTempParam,'"'"
+//     cTempParam = "cTempParam,cParam[nLoop]"
+//   }
 
-  // Add the param, wrapped in double-quotes if needed
-  IF (FIND_STRING(cTempParam,cParamSep,1) > 0)
-      cTemp = "cTemp,'"',cTempParam,'"'"
-  ELSE
-      cTemp = "cTemp,cTempParam"
+//   // Add the param, wrapped in double-quotes if needed
+//   IF (FIND_STRING(cTempParam,cParamSep,1) > 0)
+//       cTemp = "cTemp,'"',cTempParam,'"'"
+//   ELSE
+//       cTemp = "cTemp,cTempParam"
 
-  RETURN cTemp;
-}
+//   RETURN cTemp;
+// }
 
-// Name   : ==== DuetPackCmdParamArray ====
-// Purpose: To package parameters for module send_command or send_string
-// Params : (1) IN - sndcmd/str to which parameter will be added
-//          (2) IN - sndcmd/str parameter array
-// Returns: packed parameters wrapped in double-quotes if needed
-// Notes  : Wraps the parameter in double-quotes if it contains the separator
-//          and separates them using the separator sequence
-//          This function assumes the standard Duet parameter separator ','
-//
-DEFINE_FUNCTION CHAR[DUET_MAX_CMD_LEN] DuetPackCmdParamArray(CHAR cCmd[], CHAR cParams[][])
-{
-  STACK_VAR CHAR    cTemp[DUET_MAX_CMD_LEN]
-  STACK_VAR INTEGER nLoop
-  STACK_VAR INTEGER nMax
-  STACK_VAR CHAR cCmdSep[1]
-  STACK_VAR CHAR cParamSep[1]
-  cCmdSep = '-'
-  cParamSep = ','
+// // Name   : ==== DuetPackCmdParamArray ====
+// // Purpose: To package parameters for module send_command or send_string
+// // Params : (1) IN - sndcmd/str to which parameter will be added
+// //          (2) IN - sndcmd/str parameter array
+// // Returns: packed parameters wrapped in double-quotes if needed
+// // Notes  : Wraps the parameter in double-quotes if it contains the separator
+// //          and separates them using the separator sequence
+// //          This function assumes the standard Duet parameter separator ','
+// //
+// DEFINE_FUNCTION CHAR[DUET_MAX_CMD_LEN] DuetPackCmdParamArray(CHAR cCmd[], CHAR cParams[][])
+// {
+//   STACK_VAR CHAR    cTemp[DUET_MAX_CMD_LEN]
+//   STACK_VAR INTEGER nLoop
+//   STACK_VAR INTEGER nMax
+//   STACK_VAR CHAR cCmdSep[1]
+//   STACK_VAR CHAR cParamSep[1]
+//   cCmdSep = '-'
+//   cParamSep = ','
 
-  nMax = LENGTH_ARRAY(cParams)
-  IF (nMax == 0)
-    nMax = MAX_LENGTH_ARRAY(cParams)
+//   nMax = LENGTH_ARRAY(cParams)
+//   IF (nMax == 0)
+//     nMax = MAX_LENGTH_ARRAY(cParams)
 
-  cTemp = cCmd
-  FOR (nLoop = 1; nLoop <= nMax; nLoop++)
-    cTemp = DuetPackCmdParam(cTemp,cParams[nLoop])
+//   cTemp = cCmd
+//   FOR (nLoop = 1; nLoop <= nMax; nLoop++)
+//     cTemp = DuetPackCmdParam(cTemp,cParams[nLoop])
 
-  RETURN cTemp;
-}
+//   RETURN cTemp;
+// }
 
-// Name   : ==== DuetPackCmdSimple ====
-// Purpose: To package header and 1 parameter for module send_command or send_string
-// Params : (1) IN - sndcmd/str header
-//          (2) IN - sndcmd/str parameter
-// Returns: Packed header with command separator added if missing and parameter
-// Notes  : Adds the command header to the string and adds the command if missing
-//          This function assumes the standard Duet command separator '-'
-//          This function also adds a parameter to the command
-//
-DEFINE_FUNCTION CHAR[DUET_MAX_CMD_LEN] DuetPackCmdSimple(CHAR cHdr[], CHAR cParam[])
-{
-  STACK_VAR CHAR cCmd[DUET_MAX_CMD_LEN]
+// // Name   : ==== DuetPackCmdSimple ====
+// // Purpose: To package header and 1 parameter for module send_command or send_string
+// // Params : (1) IN - sndcmd/str header
+// //          (2) IN - sndcmd/str parameter
+// // Returns: Packed header with command separator added if missing and parameter
+// // Notes  : Adds the command header to the string and adds the command if missing
+// //          This function assumes the standard Duet command separator '-'
+// //          This function also adds a parameter to the command
+// //
+// DEFINE_FUNCTION CHAR[DUET_MAX_CMD_LEN] DuetPackCmdSimple(CHAR cHdr[], CHAR cParam[])
+// {
+//   STACK_VAR CHAR cCmd[DUET_MAX_CMD_LEN]
 
-  cCmd = DuetPackCmdHeader(cHdr)
-  cCmd = DuetPackCmdParam(cCmd,cParam)
-  RETURN cCmd;
-}
+//   cCmd = DuetPackCmdHeader(cHdr)
+//   cCmd = DuetPackCmdParam(cCmd,cParam)
+//   RETURN cCmd;
+// }
 
-// Name   : ==== DuetParseCmdHeader ====
-// Purpose: To parse out parameters from module send_command or send_string
-// Params : (1) IN/OUT  - sndcmd/str data
-// Returns: parsed property/method name, still includes the leading '?' if present
-// Notes  : Parses the strings sent to or from modules extracting the command header.
-//          Command separating character assumed to be '-', Duet standard
-//
-DEFINE_FUNCTION CHAR[DUET_MAX_HDR_LEN] DuetParseCmdHeader(CHAR cCmd[])
-{
-  STACK_VAR CHAR cTemp[DUET_MAX_HDR_LEN]
-  STACK_VAR CHAR cSep[1]
-  cSep = '-'
+// // Name   : ==== DuetParseCmdHeader ====
+// // Purpose: To parse out parameters from module send_command or send_string
+// // Params : (1) IN/OUT  - sndcmd/str data
+// // Returns: parsed property/method name, still includes the leading '?' if present
+// // Notes  : Parses the strings sent to or from modules extracting the command header.
+// //          Command separating character assumed to be '-', Duet standard
+// //
+// DEFINE_FUNCTION CHAR[DUET_MAX_HDR_LEN] DuetParseCmdHeader(CHAR cCmd[])
+// {
+//   STACK_VAR CHAR cTemp[DUET_MAX_HDR_LEN]
+//   STACK_VAR CHAR cSep[1]
+//   cSep = '-'
 
-  // Assume the argument to be the command
-  cTemp = cCmd
+//   // Assume the argument to be the command
+//   cTemp = cCmd
 
-  // If we find the seperator, remove it from the command
-  IF (FIND_STRING(cCmd,cSep,1) > 0)
-  {
-    cTemp = REMOVE_STRING(cCmd,cSep,1)
-    IF (LENGTH_STRING(cTemp))
-      cTemp = LEFT_STRING(cTemp,LENGTH_STRING(cTemp)-LENGTH_STRING(cSep))
-  }
+//   // If we find the seperator, remove it from the command
+//   IF (FIND_STRING(cCmd,cSep,1) > 0)
+//   {
+//     cTemp = REMOVE_STRING(cCmd,cSep,1)
+//     IF (LENGTH_STRING(cTemp))
+//       cTemp = LEFT_STRING(cTemp,LENGTH_STRING(cTemp)-LENGTH_STRING(cSep))
+//   }
 
-  // Did not find seperator, argument is the command (like ?SOMETHING)
-  ELSE
-    cCmd = ""
+//   // Did not find seperator, argument is the command (like ?SOMETHING)
+//   ELSE
+//     cCmd = ""
 
-  RETURN cTemp;
-}
+//   RETURN cTemp;
+// }
 
-// Name   : ==== DuetParseCmdParam ====
-// Purpose: To parse out parameters from module send_command or send_string
-// Params : (1) IN/OUT  - sndcmd/str data
-// Returns: Parse parameter from the front of the string not including the separator
-// Notes  : Parses the strings sent to or from modules extracting the parameters.
-//          A single param is picked of the cmd string and removed, through the separator.
-//          The separator is NOT returned from the function.
-//          If the first character of the param is a double quote, the function will
-//          remove up to (and including) the next double-quote and the separator without spaces.
-//          The double quotes will then be stripped from the parameter before it is returned.
-//          If the double-quote/separator sequence is not found, the function will remove up to (and including)
-//          the separator character and the leading double quote will NOT be removed.
-//          If the separator is not found, the entire remained of the command is removed.
-//          Command separating character assumed to be ',', Duet standard
-//
-DEFINE_FUNCTION CHAR[DUET_MAX_PARAM_LEN] DuetParseCmdParam(CHAR cCmd[])
-{
-  STACK_VAR CHAR cTemp[DUET_MAX_PARAM_LEN]
-  STACK_VAR CHAR cSep[1]
-  STACK_VAR CHAR chC
-  STACK_VAR INTEGER nLoop
-  STACK_VAR INTEGER nState
-  STACK_VAR CHAR bInquotes
-  STACK_VAR CHAR bDone
-  cSep = ','
+// // Name   : ==== DuetParseCmdParam ====
+// // Purpose: To parse out parameters from module send_command or send_string
+// // Params : (1) IN/OUT  - sndcmd/str data
+// // Returns: Parse parameter from the front of the string not including the separator
+// // Notes  : Parses the strings sent to or from modules extracting the parameters.
+// //          A single param is picked of the cmd string and removed, through the separator.
+// //          The separator is NOT returned from the function.
+// //          If the first character of the param is a double quote, the function will
+// //          remove up to (and including) the next double-quote and the separator without spaces.
+// //          The double quotes will then be stripped from the parameter before it is returned.
+// //          If the double-quote/separator sequence is not found, the function will remove up to (and including)
+// //          the separator character and the leading double quote will NOT be removed.
+// //          If the separator is not found, the entire remained of the command is removed.
+// //          Command separating character assumed to be ',', Duet standard
+// //
+// DEFINE_FUNCTION CHAR[DUET_MAX_PARAM_LEN] DuetParseCmdParam(CHAR cCmd[])
+// {
+//   STACK_VAR CHAR cTemp[DUET_MAX_PARAM_LEN]
+//   STACK_VAR CHAR cSep[1]
+//   STACK_VAR CHAR chC
+//   STACK_VAR INTEGER nLoop
+//   STACK_VAR INTEGER nState
+//   STACK_VAR CHAR bInquotes
+//   STACK_VAR CHAR bDone
+//   cSep = ','
 
-  // Reset state
-  nState = 1; //ST_START
-  bInquotes = FALSE;
-  bDone = FALSE;
+//   // Reset state
+//   nState = 1; //ST_START
+//   bInquotes = FALSE;
+//   bDone = FALSE;
 
-  // Loop the command and escape it
-  FOR (nLoop = 1; nLoop <= LENGTH_ARRAY(cCmd); nLoop++)
-  {
-    // Grab characters and process it based on state machine
-    chC = cCmd[nLoop];
-    Switch (nState)
-    {
-      // Start or string: end of string bails us out
-      CASE 1: //ST_START
-      {
-        // Starts with a quote?
-        // If so, skip it, set flag and move to collect.
-        IF (chC == '"')
-        {
-          nState = 2; //ST_COLLECT
-          bInquotes = TRUE;
-        }
+//   // Loop the command and escape it
+//   FOR (nLoop = 1; nLoop <= LENGTH_ARRAY(cCmd); nLoop++)
+//   {
+//     // Grab characters and process it based on state machine
+//     chC = cCmd[nLoop];
+//     Switch (nState)
+//     {
+//       // Start or string: end of string bails us out
+//       CASE 1: //ST_START
+//       {
+//         // Starts with a quote?
+//         // If so, skip it, set flag and move to collect.
+//         IF (chC == '"')
+//         {
+//           nState = 2; //ST_COLLECT
+//           bInquotes = TRUE;
+//         }
 
-        // Starts with a comma?  Empty param
-        ELSE IF (chC == ',')
-        {
-          // I am done
-          bDone = TRUE;
-        }
+//         // Starts with a comma?  Empty param
+//         ELSE IF (chC == ',')
+//         {
+//           // I am done
+//           bDone = TRUE;
+//         }
 
-        // Not a quote or a comma?  Add it to the string and move to collection
-        Else
-        {
-          cTemp = "cTemp, chC"
-          nState = 2; //ST_COLLECT
-        }
-        BREAK;
-      }
+//         // Not a quote or a comma?  Add it to the string and move to collection
+//         Else
+//         {
+//           cTemp = "cTemp, chC"
+//           nState = 2; //ST_COLLECT
+//         }
+//         BREAK;
+//       }
 
-      // Collect string.
-      CASE 2: //ST_COLLECT
-      {
-        // If in quotes, just grab the characters
-        IF (bInquotes)
-        {
-          // Ah...found a quote, jump to end quote state
-          IF (chC == '"' )
-          {
-            nState = 3; //ST_END_QUOTE
-            BREAK;
-          }
-        }
+//       // Collect string.
+//       CASE 2: //ST_COLLECT
+//       {
+//         // If in quotes, just grab the characters
+//         IF (bInquotes)
+//         {
+//           // Ah...found a quote, jump to end quote state
+//           IF (chC == '"' )
+//           {
+//             nState = 3; //ST_END_QUOTE
+//             BREAK;
+//           }
+//         }
 
-        // Not in quotes, look for commas
-        ELSE IF (chC == ',')
-        {
-          // I am done
-          bDone = TRUE;
-          BREAK;
-        }
+//         // Not in quotes, look for commas
+//         ELSE IF (chC == ',')
+//         {
+//           // I am done
+//           bDone = TRUE;
+//           BREAK;
+//         }
 
-        // Not in quotes, look for quotes (this would be wrong)
-        // But instead of barfing, I will just add the quote (below)
-        ELSE IF (chC == '"' )
-        {
-          // I will check to see if it should be escaped
-          IF (nLoop < LENGTH_ARRAY(cCmd))
-          {
-            // If this is 2 uqotes back to back, just include the one
-            IF (cCmd[nLoop+1] = '"')
-              nLoop++;
-          }
-        }
+//         // Not in quotes, look for quotes (this would be wrong)
+//         // But instead of barfing, I will just add the quote (below)
+//         ELSE IF (chC == '"' )
+//         {
+//           // I will check to see if it should be escaped
+//           IF (nLoop < LENGTH_ARRAY(cCmd))
+//           {
+//             // If this is 2 uqotes back to back, just include the one
+//             IF (cCmd[nLoop+1] = '"')
+//               nLoop++;
+//           }
+//         }
 
-        // Add character to collection
-        cTemp = "cTemp,chC"
-        BREAK;
-      }
+//         // Add character to collection
+//         cTemp = "cTemp,chC"
+//         BREAK;
+//       }
 
-      // End Quote
-      CASE 3: //ST_END_QUOTE
-      {
-        // Hit a comma
-        IF (chC == ',')
-        {
-          // I am done
-          bDone = TRUE;
-        }
+//       // End Quote
+//       CASE 3: //ST_END_QUOTE
+//       {
+//         // Hit a comma
+//         IF (chC == ',')
+//         {
+//           // I am done
+//           bDone = TRUE;
+//         }
 
-        // OK, found a quote right after another quote.  So this is escaped.
-        ELSE IF (chC == '"')
-        {
-          cTemp = "cTemp,chC"
-          nState = 2; //ST_COLLECT
-        }
-        BREAK;
-      }
-    }
+//         // OK, found a quote right after another quote.  So this is escaped.
+//         ELSE IF (chC == '"')
+//         {
+//           cTemp = "cTemp,chC"
+//           nState = 2; //ST_COLLECT
+//         }
+//         BREAK;
+//       }
+//     }
 
-    // OK, if end of string or done, process and exit
-    IF (bDone == TRUE || nLoop >= LENGTH_ARRAY(cCmd))
-    {
-      // remove cTemp from cCmd
-      cCmd = MID_STRING(cCmd, nLoop + 1, LENGTH_STRING(cCmd) - nLoop)
+//     // OK, if end of string or done, process and exit
+//     IF (bDone == TRUE || nLoop >= LENGTH_ARRAY(cCmd))
+//     {
+//       // remove cTemp from cCmd
+//       cCmd = MID_STRING(cCmd, nLoop + 1, LENGTH_STRING(cCmd) - nLoop)
 
-      // cTemp is done
-      RETURN cTemp;
-    }
-  }
+//       // cTemp is done
+//       RETURN cTemp;
+//     }
+//   }
 
-  // Well...we should never hit this
-  RETURN "";
-}
+//   // Well...we should never hit this
+//   RETURN "";
+// }
 
 #END_IF //  __SNAPI_CONST__
 (***********************************************************)

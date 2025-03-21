@@ -60,6 +60,10 @@
         "named": true
       },
       {
+        "type": "device_literal",
+        "named": true
+      },
+      {
         "type": "device_operation_expression",
         "named": true
       },
@@ -750,6 +754,42 @@
         ]
       },
       "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "device_literal",
+    "named": true,
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "port": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "system": {
         "multiple": false,
         "required": true,
         "types": [

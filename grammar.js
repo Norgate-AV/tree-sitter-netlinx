@@ -1258,6 +1258,7 @@ module.exports = grammar({
                 $.true,
                 $.false,
                 $.char_literal,
+                $.device_literal,
                 $.parenthesized_expression,
                 $.device_channel_assignment_expression,
                 $.device_channel_reference_expression,
