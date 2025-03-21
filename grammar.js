@@ -97,16 +97,21 @@ module.exports = grammar({
         _top_level_item: ($) =>
             choice(
                 // Sections
-                // $.section,
-                // $.program_name,
-                // $.module_name,
+                $.section,
+
+                // Headers
+                $.program_name,
+                $.module_name,
+
+                // Functions, Calls, and Modules Definitions
                 $.define_function,
-                // $.define_call,
-                // $.define_module,
+                $.define_call,
+                $.define_module,
 
                 // Top-Level Declarations
                 $.declaration,
-                // $.struct_definition,
+                $.struct_definition,
+                // $.event_definition,
                 // $.combine_definition,
                 // $.connect_level_definition,
                 // $.mutually_exclusive_definition,
@@ -315,16 +320,16 @@ module.exports = grammar({
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.device_channel_reference_expression))),
 
-        define_function_section: ($) =>
-            seq(keywords.define_function, $.function_definition),
+        // define_function_section: ($) =>
+        //     seq(keywords.define_function, $.function_definition),
 
-        define_call_section: ($) =>
-            seq(keywords.define_call, $.call_definition),
+        // define_call_section: ($) =>
+        //     seq(keywords.define_call, $.call_definition),
 
-        define_module_section: ($) =>
-            prec.right(
-                seq(keywords.define_module, repeat($.module_definition)),
-            ),
+        // define_module_section: ($) =>
+        //     prec.right(
+        //         seq(keywords.define_module, repeat($.module_definition)),
+        //     ),
 
         module_definition: ($) =>
             prec.right(

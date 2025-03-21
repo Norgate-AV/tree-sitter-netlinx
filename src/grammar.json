@@ -15,11 +15,35 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "program_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "module_name"
+        },
+        {
+          "type": "SYMBOL",
           "name": "define_function"
         },
         {
           "type": "SYMBOL",
+          "name": "define_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define_module"
+        },
+        {
+          "type": "SYMBOL",
           "name": "declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "struct_definition"
         },
         {
           "type": "SYMBOL",
@@ -906,55 +930,6 @@
                 "name": "device_channel_reference_expression"
               }
             ]
-          }
-        ]
-      }
-    },
-    "define_function_section": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "define_function",
-          "flags": "i"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_definition"
-        }
-      ]
-    },
-    "define_call_section": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "define_call",
-          "flags": "i"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "call_definition"
-        }
-      ]
-    },
-    "define_module_section": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "define_module",
-            "flags": "i"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "module_definition"
-            }
           }
         ]
       }
