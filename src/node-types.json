@@ -2021,10 +2021,6 @@
     "named": true
   },
   {
-    "type": "else",
-    "named": false
-  },
-  {
     "type": "false",
     "named": true
   },
@@ -2039,10 +2035,6 @@
   {
     "type": "identifier",
     "named": true
-  },
-  {
-    "type": "if",
-    "named": false
   },
   {
     "type": "preproc_arg",

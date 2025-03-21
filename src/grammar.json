@@ -4053,8 +4053,9 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": "if"
+            "type": "PATTERN",
+            "value": "if",
+            "flags": "i"
           },
           {
             "type": "FIELD",
@@ -4095,8 +4096,9 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "else"
+          "type": "PATTERN",
+          "value": "else",
+          "flags": "i"
         },
         {
           "type": "SYMBOL",

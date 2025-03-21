@@ -9,5 +9,7 @@ if (foo())
 else
     cCmd =  "
                 'Hello, ',
-                'World!'
+                'World!',
+                itoa(1234),
+                'Goodbye!'
             "

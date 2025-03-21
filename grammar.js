@@ -1115,14 +1115,14 @@ module.exports = grammar({
         if_statement: ($) =>
             prec.right(
                 seq(
-                    "if",
+                    keywords.if,
                     field("condition", $.parenthesized_expression),
                     field("consequence", $.statement),
                     optional(field("alternative", $.else_clause)),
                 ),
             ),
 
-        else_clause: ($) => seq("else", $.statement),
+        else_clause: ($) => seq(keywords.else, $.statement),
         // else_clause: ($) =>
         //     prec.right(seq(alias(/[eE][lL][sS][eE]/, "else"), $.statement)),
 
