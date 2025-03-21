@@ -42,55 +42,27 @@ module.exports = grammar({
     // word: ($) => $.identifier,
 
     conflicts: ($) => [
-        [$.type_specifier, $._declarator],
-        [$.type_specifier, $.expression],
+        // [$.type_specifier, $._declarator],
+        // [$.type_specifier, $.expression],
         [$._declarator, $._declaration_declarator],
         // [$.custom_type, $.expression],
-        [$.function_declarator, $._function_declaration_declarator],
+        // [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
-        // [$.local_variable_declaration],
-        // [$.array_dimension],
         // [$._type_identifier, $.identifier],
-        // [
-        //     $.constant_definition,
-        //     $.global_variable_definition,
-        //     $.assignment_expression,
-        // ],
-        // [$.preproc_if_defined, $.section],
-        // [$.preproc_if_not_defined, $.section],
-        // [$.preproc_else, $.section],
         // [$.device_channel_reference_expression, $.subscript_expression],
         // [$.assignment_expression, $.device_channel_assignment_expression],
         // [$._top_level_item, $.section],
-        // [$.global_variable_definition, $.latching_definition],
         // [$.latching_definition, $.toggling_definition],
         // [$.latching_definition, $.toggling_definition, $.expression],
-        // [
-        //     // $.latching_definition,
-        //     // $.global_variable_definition,
-        //     $._top_level_expression_statement,
-        // ],
-        // [
-        //     $.device_definition,
-        //     $.constant_definition,
-        //     // $.global_variable_definition,
-        // ],
-        // [
-        //     $.device_definition,
-        //     $.constant_definition,
-        //     // $.global_variable_definition,
-        //     $.assignment_expression,
-        // ],
         // [$.combine_definition, $.connect_level_definition],
         // [
         //     // $.combine_definition,
         //     // $.connect_level_definition,
         //     $.parenthesized_expression,
         // ],
-        [$._top_level_item, $._top_level_statement],
-        // [$.type_specifier, $._top_level_expression_statement],
-        [$.type_specifier, $.expression_statement],
+        // [$._top_level_item, $._top_level_statement],
+        // [$.type_specifier, $.expression_statement],
         // [$.combine_definition, $.connect_level_definition, $.comma_expression],
         [$.string_expression],
     ],
@@ -134,10 +106,7 @@ module.exports = grammar({
 
                 // Top-Level Declarations
                 $.declaration,
-                // $.constant_definition,
-                // $.global_variable_definition,
                 // $.struct_definition,
-                // $.device_definition,
                 // $.combine_definition,
                 // $.connect_level_definition,
                 // $.mutually_exclusive_definition,
@@ -159,19 +128,12 @@ module.exports = grammar({
         // Section-level context - matches <language statement list>
         // _section_item: ($) =>
         //     choice(
-        //         // Preprocessor
-        //         // $.preproc_directive,
-        //         // $.comment,
-
         //         // Declarations and definitions
-        //         // $.constant_definition,
-        //         // $.global_variable_definition,
         //         // $.function_definition,
         //         $.declaration,
         //         // $.struct_definition,
 
         //         // Statements
-        //         // $.local_variable_declaration,
         //         $.statement,
         //         $.compound_statement,
         //         $.expression_statement,
@@ -182,7 +144,6 @@ module.exports = grammar({
             choice(
                 // Block-level declarations
                 $.declaration,
-                // $.local_variable_declaration,
 
                 // Statements
                 $.statement,
@@ -305,35 +266,11 @@ module.exports = grammar({
         define_call: ($) => seq(keywords.define_call, $.call_definition),
         define_module: ($) => seq(keywords.define_module, $.module_definition),
 
-        device_definition: ($) =>
-            prec.right(seq($.identifier, "=", $.device_literal, optional(";"))),
-
         combine_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
         connect_level_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
-
-        // constant_definition: ($) =>
-        //     prec.right(
-        //         10,
-        //         seq(
-        //             optional(keywords.constant),
-        //             optional(field("type", $.type_specifier)),
-        //             field("name", $.identifier),
-        //             optional(field("dimensions", $.array_dimension)),
-        //             "=",
-        //             field(
-        //                 "value",
-        //                 choice(
-        //                     $.expression,
-        //                     $.string_literal,
-        //                     $.initializer_list,
-        //                 ),
-        //             ),
-        //             optional(";"),
-        //         ),
-        //     ),
 
         mutually_exclusive_definition: ($) =>
             prec.right(
@@ -377,37 +314,6 @@ module.exports = grammar({
 
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.device_channel_reference_expression))),
-
-        // global_variable_definition: ($) =>
-        //     prec.right(
-        //         5,
-        //         seq(
-        //             optional(field("qualifier", $.type_qualifier)),
-        //             optional(
-        //                 field(
-        //                     "type",
-        //                     choice(
-        //                         prec(3, $.primitive_type),
-        //                         prec(2, $.custom_type),
-        //                     ),
-        //                 ),
-        //             ),
-        //             field("name", prec(1, $.identifier)),
-        //             optional(field("dimensions", $.array_dimension)),
-        //             optional("="),
-        //             optional(
-        //                 field(
-        //                     "value",
-        //                     choice(
-        //                         $.expression,
-        //                         $.string_literal,
-        //                         $.initializer_list,
-        //                     ),
-        //                 ),
-        //             ),
-        //             optional(";"),
-        //         ),
-        //     ),
 
         define_function_section: ($) =>
             seq(keywords.define_function, $.function_definition),
@@ -717,8 +623,8 @@ module.exports = grammar({
         //         ),
         //     ),
 
-        _array_brackets: ($) =>
-            seq("[", field("size", optional($.expression)), "]"),
+        // _array_brackets: ($) =>
+        //     seq("[", field("size", optional($.expression)), "]"),
 
         array_declarator: ($) =>
             prec(
@@ -1043,38 +949,6 @@ module.exports = grammar({
                         "declarator",
                         choice($._declarator, $._abstract_declarator),
                     ),
-                ),
-            ),
-
-        local_variable_declaration: ($) =>
-            prec.right(
-                10,
-                seq(
-                    optional(
-                        field(
-                            "storage",
-                            choice(keywords.stack_var, keywords.local_var),
-                        ),
-                    ),
-                    field("type", $.type_specifier),
-                    commaSep1(
-                        seq(
-                            field("name", $.identifier),
-                            optional(
-                                field(
-                                    "dimensions",
-                                    repeat1(
-                                        seq(
-                                            "[",
-                                            field("size", $.expression),
-                                            "]",
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    optional(";"),
                 ),
             ),
 
