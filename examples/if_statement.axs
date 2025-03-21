@@ -1,11 +1,13 @@
-DEFINE_START
+if (foo())
+{
+    cTemp = bar()
+    if (baz())
+        cTemp = fizz()
+}
 
-IF (x > 5) {
-    doSomething()
-}
-ELSE IF (x < 0) {
-    handleNegative()
-}
-ELSE {
-    handleDefault()
-}
+// Did not find seperator, argument is the command (like ?SOMETHING)
+else
+    cCmd =  "
+                'Hello, ',
+                'World!'
+            "

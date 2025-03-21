@@ -48,6 +48,10 @@
         "named": true
       },
       {
+        "type": "char_literal",
+        "named": true
+      },
+      {
         "type": "device_channel_assignment_expression",
         "named": true
       },
@@ -60,6 +64,10 @@
         "named": true
       },
       {
+        "type": "false",
+        "named": true
+      },
+      {
         "type": "field_expression",
         "named": true
       },
@@ -68,7 +76,7 @@
         "named": true
       },
       {
-        "type": "literal",
+        "type": "number_literal",
         "named": true
       },
       {
@@ -80,7 +88,15 @@
         "named": true
       },
       {
+        "type": "string_literal",
+        "named": true
+      },
+      {
         "type": "subscript_expression",
+        "named": true
+      },
+      {
+        "type": "true",
         "named": true
       },
       {
@@ -147,10 +163,6 @@
     "type": "type_specifier",
     "named": true,
     "subtypes": [
-      {
-        "type": "custom_type",
-        "named": true
-      },
       {
         "type": "primitive_type",
         "named": true
@@ -244,22 +256,6 @@
       },
       "size": {
         "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "array_dimension",
-    "named": true,
-    "fields": {
-      "size": {
-        "multiple": true,
         "required": false,
         "types": [
           {
@@ -432,42 +428,6 @@
     "fields": {}
   },
   {
-    "type": "call_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "compound_statement",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "parameter_list",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "call_expression",
     "named": true,
     "fields": {
@@ -560,46 +520,15 @@
     }
   },
   {
-    "type": "channel_range_expression",
+    "type": "char_literal",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "device_channel_reference_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "char_array_return_type",
-    "named": true,
-    "fields": {
-      "size": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "combine_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
+          "type": "char_content",
           "named": true
         }
       ]
@@ -644,15 +573,31 @@
       "required": false,
       "types": [
         {
-          "type": "comment",
+          "type": "declaration",
           "named": true
         },
         {
-          "type": "local_variable_declaration",
+          "type": "preproc_define",
           "named": true
         },
         {
-          "type": "preproc_directive",
+          "type": "preproc_disable_warning",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
+        {
+          "type": "preproc_warn",
           "named": true
         },
         {
@@ -663,93 +608,9 @@
     }
   },
   {
-    "type": "connect_level_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "constant_definition",
-    "named": true,
-    "fields": {
-      "dimensions": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_dimension",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_specifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          },
-          {
-            "type": "initializer_list",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "continue_statement",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "custom_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "custom_type",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "declaration",
@@ -802,105 +663,6 @@
         },
         {
           "type": "type_qualifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_call",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "call_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_function",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "function_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_module",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "module_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_program_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "local_variable_declaration",
-          "named": true
-        },
-        {
-          "type": "preproc_directive",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "define_start_section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
-        {
-          "type": "local_variable_declaration",
-          "named": true
-        },
-        {
-          "type": "preproc_directive",
-          "named": true
-        },
-        {
-          "type": "statement",
           "named": true
         }
       ]
@@ -969,61 +731,6 @@
     }
   },
   {
-    "type": "device_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "device_literal",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "device_literal",
-    "named": true,
-    "fields": {
-      "device": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "port": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "system": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "device_operation_expression",
     "named": true,
     "fields": {
@@ -1075,7 +782,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "comma_expression",
@@ -1083,65 +790,6 @@
         },
         {
           "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "field_declaration",
-    "named": true,
-    "fields": {
-      "dimensions": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type_specifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "field_declaration_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "field_declaration",
           "named": true
         }
       ]
@@ -1288,124 +936,6 @@
     }
   },
   {
-    "type": "function_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "compound_statement",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "parameter_list",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "char_array_return_type",
-            "named": true
-          },
-          {
-            "type": "intrinsic_type",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "global_variable_definition",
-    "named": true,
-    "fields": {
-      "dimensions": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "array_dimension",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "qualifier": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_qualifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "custom_type",
-            "named": true
-          },
-          {
-            "type": "primitive_type",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          },
-          {
-            "type": "initializer_list",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "if_statement",
     "named": true,
     "fields": {
@@ -1494,187 +1024,6 @@
     "type": "intrinsic_type",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "latching_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "channel_range_expression",
-          "named": true
-        },
-        {
-          "type": "device_channel_reference_expression",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number_literal",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "local_variable_declaration",
-    "named": true,
-    "fields": {
-      "dimensions": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "[",
-            "named": false
-          },
-          {
-            "type": "]",
-            "named": false
-          },
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "size": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type_specifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "module_definition",
-    "named": true,
-    "fields": {
-      "instance_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "module_name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "argument_list",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "module_name",
-    "named": true,
-    "fields": {
-      "parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "parameter_list",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "mutually_exclusive_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "channel_range_expression",
-          "named": true
-        },
-        {
-          "type": "device_channel_reference_expression",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "number_literal",
@@ -1799,36 +1148,91 @@
   {
     "type": "preproc_define",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "number_literal",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "preproc_arg",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
-    "type": "preproc_directive",
+    "type": "preproc_disable_warning",
+    "named": true,
+    "fields": {
+      "code": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "decimal_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "preproc_else",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
+          "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "expression_statement",
+          "named": true
+        },
+        {
+          "type": "for_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
           "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_disable_warning",
           "named": true
         },
         {
@@ -1846,84 +1250,21 @@
         {
           "type": "preproc_warn",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "preproc_else",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
+        },
         {
-          "type": "combine_definition",
+          "type": "return_statement",
           "named": true
         },
         {
-          "type": "comment",
+          "type": "select_statement",
           "named": true
         },
         {
-          "type": "connect_level_definition",
+          "type": "switch_statement",
           "named": true
         },
         {
-          "type": "constant_definition",
-          "named": true
-        },
-        {
-          "type": "define_call",
-          "named": true
-        },
-        {
-          "type": "define_function",
-          "named": true
-        },
-        {
-          "type": "define_module",
-          "named": true
-        },
-        {
-          "type": "device_definition",
-          "named": true
-        },
-        {
-          "type": "global_variable_definition",
-          "named": true
-        },
-        {
-          "type": "latching_definition",
-          "named": true
-        },
-        {
-          "type": "module_name",
-          "named": true
-        },
-        {
-          "type": "mutually_exclusive_definition",
-          "named": true
-        },
-        {
-          "type": "preproc_directive",
-          "named": true
-        },
-        {
-          "type": "program_name",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "struct_definition",
-          "named": true
-        },
-        {
-          "type": "toggling_definition",
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -1964,55 +1305,43 @@
       "required": true,
       "types": [
         {
-          "type": "combine_definition",
+          "type": "break_statement",
           "named": true
         },
         {
-          "type": "comment",
+          "type": "case_statement",
           "named": true
         },
         {
-          "type": "connect_level_definition",
+          "type": "compound_statement",
           "named": true
         },
         {
-          "type": "constant_definition",
+          "type": "continue_statement",
           "named": true
         },
         {
-          "type": "define_call",
+          "type": "declaration",
           "named": true
         },
         {
-          "type": "define_function",
+          "type": "expression_statement",
           "named": true
         },
         {
-          "type": "define_module",
+          "type": "for_statement",
           "named": true
         },
         {
-          "type": "device_definition",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "global_variable_definition",
+          "type": "preproc_define",
           "named": true
         },
         {
-          "type": "latching_definition",
-          "named": true
-        },
-        {
-          "type": "module_name",
-          "named": true
-        },
-        {
-          "type": "mutually_exclusive_definition",
-          "named": true
-        },
-        {
-          "type": "preproc_directive",
+          "type": "preproc_disable_warning",
           "named": true
         },
         {
@@ -2020,19 +1349,35 @@
           "named": true
         },
         {
-          "type": "program_name",
+          "type": "preproc_if_defined",
           "named": true
         },
         {
-          "type": "section",
+          "type": "preproc_if_not_defined",
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "preproc_include",
           "named": true
         },
         {
-          "type": "toggling_definition",
+          "type": "preproc_warn",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -2068,55 +1413,43 @@
       "required": true,
       "types": [
         {
-          "type": "combine_definition",
+          "type": "break_statement",
           "named": true
         },
         {
-          "type": "comment",
+          "type": "case_statement",
           "named": true
         },
         {
-          "type": "connect_level_definition",
+          "type": "compound_statement",
           "named": true
         },
         {
-          "type": "constant_definition",
+          "type": "continue_statement",
           "named": true
         },
         {
-          "type": "define_call",
+          "type": "declaration",
           "named": true
         },
         {
-          "type": "define_function",
+          "type": "expression_statement",
           "named": true
         },
         {
-          "type": "define_module",
+          "type": "for_statement",
           "named": true
         },
         {
-          "type": "device_definition",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "global_variable_definition",
+          "type": "preproc_define",
           "named": true
         },
         {
-          "type": "latching_definition",
-          "named": true
-        },
-        {
-          "type": "module_name",
-          "named": true
-        },
-        {
-          "type": "mutually_exclusive_definition",
-          "named": true
-        },
-        {
-          "type": "preproc_directive",
+          "type": "preproc_disable_warning",
           "named": true
         },
         {
@@ -2124,19 +1457,35 @@
           "named": true
         },
         {
-          "type": "program_name",
+          "type": "preproc_if_defined",
           "named": true
         },
         {
-          "type": "section",
+          "type": "preproc_if_not_defined",
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "preproc_include",
           "named": true
         },
         {
-          "type": "toggling_definition",
+          "type": "preproc_warn",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "select_statement",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -2145,31 +1494,33 @@
   {
     "type": "preproc_include",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
+    "fields": {
+      "path": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "preproc_warn",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
+    "fields": {
+      "message": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2192,21 +1543,6 @@
     }
   },
   {
-    "type": "program_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "return_statement",
     "named": true,
     "fields": {},
@@ -2220,65 +1556,6 @@
         },
         {
           "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "section",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "define_combine_section",
-          "named": true
-        },
-        {
-          "type": "define_connect_level_section",
-          "named": true
-        },
-        {
-          "type": "define_constant_section",
-          "named": true
-        },
-        {
-          "type": "define_device_section",
-          "named": true
-        },
-        {
-          "type": "define_event_section",
-          "named": true
-        },
-        {
-          "type": "define_latching_section",
-          "named": true
-        },
-        {
-          "type": "define_mutually_exclusive_section",
-          "named": true
-        },
-        {
-          "type": "define_program_section",
-          "named": true
-        },
-        {
-          "type": "define_start_section",
-          "named": true
-        },
-        {
-          "type": "define_toggling_section",
-          "named": true
-        },
-        {
-          "type": "define_type_section",
-          "named": true
-        },
-        {
-          "type": "define_variable_section",
           "named": true
         }
       ]
@@ -2309,71 +1586,75 @@
       "required": false,
       "types": [
         {
-          "type": "combine_definition",
+          "type": "break_statement",
           "named": true
         },
         {
-          "type": "comment",
+          "type": "case_statement",
           "named": true
         },
         {
-          "type": "connect_level_definition",
+          "type": "compound_statement",
           "named": true
         },
         {
-          "type": "constant_definition",
+          "type": "continue_statement",
           "named": true
         },
         {
-          "type": "define_call",
+          "type": "declaration",
           "named": true
         },
         {
-          "type": "define_function",
+          "type": "expression_statement",
           "named": true
         },
         {
-          "type": "define_module",
+          "type": "for_statement",
           "named": true
         },
         {
-          "type": "device_definition",
+          "type": "if_statement",
           "named": true
         },
         {
-          "type": "global_variable_definition",
+          "type": "preproc_define",
           "named": true
         },
         {
-          "type": "latching_definition",
+          "type": "preproc_disable_warning",
           "named": true
         },
         {
-          "type": "module_name",
+          "type": "preproc_if_defined",
           "named": true
         },
         {
-          "type": "mutually_exclusive_definition",
+          "type": "preproc_if_not_defined",
           "named": true
         },
         {
-          "type": "preproc_directive",
+          "type": "preproc_include",
           "named": true
         },
         {
-          "type": "program_name",
+          "type": "preproc_warn",
           "named": true
         },
         {
-          "type": "section",
+          "type": "return_statement",
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "select_statement",
           "named": true
         },
         {
-          "type": "toggling_definition",
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -2390,7 +1671,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "expression",
@@ -2412,32 +1693,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "struct_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "field_declaration_list",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -2495,21 +1750,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "toggling_definition",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "device_channel_reference_expression",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2632,6 +1872,10 @@
     "named": false
   },
   {
+    "type": "#disable_warning",
+    "named": false
+  },
+  {
     "type": "#else",
     "named": false
   },
@@ -2708,10 +1952,6 @@
     "named": false
   },
   {
-    "type": "..",
-    "named": false
-  },
-  {
     "type": "/",
     "named": false
   },
@@ -2768,6 +2008,10 @@
     "named": false
   },
   {
+    "type": "char_content",
+    "named": true
+  },
+  {
     "type": "comment",
     "named": true,
     "extra": true
@@ -2777,43 +2021,11 @@
     "named": true
   },
   {
-    "type": "define_combine_section",
-    "named": true
+    "type": "else",
+    "named": false
   },
   {
-    "type": "define_connect_level_section",
-    "named": true
-  },
-  {
-    "type": "define_constant_section",
-    "named": true
-  },
-  {
-    "type": "define_device_section",
-    "named": true
-  },
-  {
-    "type": "define_event_section",
-    "named": true
-  },
-  {
-    "type": "define_latching_section",
-    "named": true
-  },
-  {
-    "type": "define_mutually_exclusive_section",
-    "named": true
-  },
-  {
-    "type": "define_toggling_section",
-    "named": true
-  },
-  {
-    "type": "define_type_section",
-    "named": true
-  },
-  {
-    "type": "define_variable_section",
+    "type": "false",
     "named": true
   },
   {
@@ -2829,7 +2041,19 @@
     "named": true
   },
   {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "preproc_arg",
+    "named": true
+  },
+  {
     "type": "string_content",
+    "named": true
+  },
+  {
+    "type": "true",
     "named": true
   },
   {

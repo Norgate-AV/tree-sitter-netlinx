@@ -14,4 +14,5 @@ module.exports = {
     if_not_defined: "if_not_defined",
     else: "else",
     end_if: "end_if",
+    disable_warning: "disable_warning",
 };

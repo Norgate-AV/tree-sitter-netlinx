@@ -39,17 +39,17 @@ module.exports = grammar({
     name: "netlinx",
 
     // Add this option for case insensitivity globally
-    word: ($) => $.identifier,
+    // word: ($) => $.identifier,
 
     conflicts: ($) => [
         // [$.type_specifier, $._declarator],
-        // [$.type_specifier, $.expression],
+        // [$.custom_type, $.expression],
         // [$.function_declarator, $._function_declaration_declarator],
         [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         [$.local_variable_declaration],
         [$.array_dimension],
-        [$._type_identifier, $.identifier],
+        // [$._type_identifier, $.identifier],
         // [
         //     $.constant_definition,
         //     $.global_variable_definition,
@@ -61,14 +61,35 @@ module.exports = grammar({
         // [$.device_channel_reference_expression, $.subscript_expression],
         // [$.assignment_expression, $.device_channel_assignment_expression],
         // [$._top_level_item, $.section],
-        [$.global_variable_definition, $.latching_definition],
-        [$.latching_definition, $.toggling_definition],
+        // [$.global_variable_definition, $.latching_definition],
+        // [$.latching_definition, $.toggling_definition],
+        // [$.latching_definition, $.toggling_definition, $.expression],
+        [
+            // $.latching_definition,
+            // $.global_variable_definition,
+            $._top_level_expression_statement,
+        ],
         [
             $.device_definition,
             $.constant_definition,
-            $.global_variable_definition,
+            // $.global_variable_definition,
         ],
-        [$.combine_definition, $.connect_level_definition],
+        [
+            $.device_definition,
+            $.constant_definition,
+            // $.global_variable_definition,
+            $.assignment_expression,
+        ],
+        // [$.combine_definition, $.connect_level_definition],
+        [
+            // $.combine_definition,
+            // $.connect_level_definition,
+            $.parenthesized_expression,
+        ],
+        [$._top_level_item, $._top_level_statement],
+        [$.type_specifier, $._top_level_expression_statement],
+        // [$.combine_definition, $.connect_level_definition, $.comma_expression],
+        [$.string_expression],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -92,71 +113,86 @@ module.exports = grammar({
         $._abstract_declarator,
     ],
 
+    word: ($) => $.identifier,
+
     rules: {
         source_file: ($) => repeat($._top_level_item),
 
         // Top-level context - matches <module section list>
         _top_level_item: ($) =>
             choice(
-                // Preprocessor
-                $.preproc_directive,
-                $.comment,
-
                 // Sections
-                $.section,
-                $.program_name,
-                $.module_name,
-                $.define_function,
-                $.define_call,
-                $.define_module,
+                // $.section,
+                // $.program_name,
+                // $.module_name,
+                // $.define_function,
+                // $.define_call,
+                // $.define_module,
 
                 // Top-Level Declarations
-                $.constant_definition,
-                $.global_variable_definition,
-                $.struct_definition,
-                $.device_definition,
-                $.combine_definition,
-                $.connect_level_definition,
-                $.mutually_exclusive_definition,
-                $.toggling_definition,
-                $.latching_definition,
+                $.declaration,
+                // $.constant_definition,
+                // $.global_variable_definition,
+                // $.struct_definition,
+                // $.device_definition,
+                // $.combine_definition,
+                // $.connect_level_definition,
+                // $.mutually_exclusive_definition,
+                // $.toggling_definition,
+                // $.latching_definition,
+
+                // Statements
+                $._top_level_statement,
+
+                // Preprocessor
+                $.preproc_if_defined,
+                $.preproc_if_not_defined,
+                $.preproc_define,
+                $.preproc_include,
+                $.preproc_warn,
+                $.preproc_disable_warning,
             ),
 
         // Section-level context - matches <language statement list>
-        _section_item: ($) =>
-            choice(
-                // Preprocessor
-                $.preproc_directive,
-                $.comment,
+        // _section_item: ($) =>
+        //     choice(
+        //         // Preprocessor
+        //         // $.preproc_directive,
+        //         // $.comment,
 
-                // Declarations and definitions
-                $.constant_definition,
-                $.global_variable_definition,
-                $.function_definition,
-                $.declaration,
-                $.struct_definition,
+        //         // Declarations and definitions
+        //         // $.constant_definition,
+        //         // $.global_variable_definition,
+        //         // $.function_definition,
+        //         $.declaration,
+        //         // $.struct_definition,
 
-                // Statements
-                // $.local_variable_declaration,
-                $.statement,
-                $.compound_statement,
-                $.expression_statement,
-            ),
+        //         // Statements
+        //         // $.local_variable_declaration,
+        //         $.statement,
+        //         $.compound_statement,
+        //         $.expression_statement,
+        //     ),
 
         // Block-level context - matches <compound statement inside {}>
         _block_item: ($) =>
             choice(
-                // Preprocessor
-                $.preproc_directive,
-                $.comment,
-
                 // Block-level declarations
-                $.local_variable_declaration,
+                $.declaration,
+                // $.local_variable_declaration,
 
                 // Statements
                 $.statement,
-                $.expression_statement,
-                $.compound_statement,
+                // $.expression_statement,
+                // $.compound_statement,
+
+                // Preprocessor
+                $.preproc_if_defined,
+                $.preproc_if_not_defined,
+                $.preproc_define,
+                $.preproc_include,
+                $.preproc_warn,
+                $.preproc_disable_warning,
             ),
 
         program_name: ($) =>
@@ -176,76 +212,50 @@ module.exports = grammar({
             ),
 
         // Preprocessor
-        preproc_directive: ($) =>
-            choice(
-                $.preproc_include,
-                $.preproc_define,
-                $.preproc_if_defined,
-                $.preproc_if_not_defined,
-                $.preproc_warn,
-            ),
-
         preproc_include: ($) =>
-            prec(
-                PREC.DIRECTIVE,
-                seq(
-                    preprocessor(directives.include),
-                    $.string_literal,
-                    token.immediate(/\r?\n/),
-                ),
+            // prec(
+            //     PREC.DIRECTIVE,
+            seq(
+                preprocessor(directives.include),
+                field("path", $.string_literal),
+                token.immediate(/\r?\n/),
             ),
+        // ),
 
         preproc_define: ($) =>
-            prec(
-                PREC.DIRECTIVE,
-                seq(
-                    preprocessor(directives.define),
-                    $.identifier,
-                    optional(choice($.number_literal, $.string_literal)),
-                    token.immediate(/\r?\n/),
-                ),
+            // prec(
+            //     PREC.DIRECTIVE,
+            seq(
+                preprocessor(directives.define),
+                field("name", $.identifier),
+                field("value", optional($.preproc_arg)),
+                token.immediate(/\r?\n/),
             ),
+        // ),
 
         preproc_warn: ($) =>
-            prec(
-                PREC.DIRECTIVE,
-                seq(
-                    preprocessor(directives.warn),
-                    $.string_literal,
-                    token.immediate(/\r?\n/),
-                ),
+            // prec(
+            //     PREC.DIRECTIVE,
+            seq(
+                preprocessor(directives.warn),
+                field("message", $.string_literal),
+                token.immediate(/\r?\n/),
+            ),
+        // ),
+
+        preproc_disable_warning: ($) =>
+            seq(
+                preprocessor(directives.disable_warning),
+                field("code", $.decimal_literal),
+                token.immediate(/\r?\n/),
             ),
 
-        // preproc_if_defined: ($) =>
-        //     seq(
-        //         preprocessor(directives.if_defined),
-        //         field("name", $.identifier),
-        //         "\n",
-        //         repeat($._top_level_item),
-        //         optional($.preproc_else),
-        //         $.preproc_end_if,
-        //     ),
-
-        // preproc_if_not_defined: ($) =>
-        //     seq(
-        //         preprocessor(directives.if_not_defined),
-        //         field("name", $.identifier),
-        //         "\n",
-        //         repeat($._top_level_item),
-        //         optional($.preproc_else),
-        //         $.preproc_end_if,
-        //     ),
-
-        // preproc_else: ($) =>
-        //     seq(preprocessor(directives.else), repeat($._top_level_item)),
-
-        // preproc_end_if: (_) => preprocessor(directives.end_if),
-
         ...preprocIf(""),
-        ...preprocIf("_in_section"),
+        // ...preprocIf("_in_section"),
         ...preprocIf("_in_block"),
 
-        // preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
+        preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
+        preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
 
         // Main Grammar
 
@@ -293,7 +303,7 @@ module.exports = grammar({
         define_module: ($) => seq(keywords.define_module, $.module_definition),
 
         device_definition: ($) =>
-            seq($.identifier, "=", $.device_literal, optional(";")),
+            prec.right(seq($.identifier, "=", $.device_literal, optional(";"))),
 
         combine_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
@@ -408,11 +418,13 @@ module.exports = grammar({
             ),
 
         module_definition: ($) =>
-            seq(
-                field("module_name", $.string_literal),
-                field("instance_name", $.identifier),
-                field("parameters", $.argument_list),
-                optional(";"),
+            prec.right(
+                seq(
+                    field("module_name", $.string_literal),
+                    field("instance_name", $.identifier),
+                    field("parameters", $.argument_list),
+                    optional(";"),
+                ),
             ),
 
         event_definition: ($) =>
@@ -772,7 +784,8 @@ module.exports = grammar({
                 keywords.persistent,
             ),
 
-        type_specifier: ($) => choice($.primitive_type, $.custom_type),
+        // type_specifier: ($) => choice($.primitive_type, $.custom_type),
+        type_specifier: ($) => choice($.primitive_type),
 
         custom_type: ($) => alias($.identifier, $.custom_type),
 
@@ -857,8 +870,9 @@ module.exports = grammar({
             ),
 
         declaration: ($) =>
+            // Using prec.right here to allow for the optional semicolon
             prec.right(
-                2,
+                // 2,
                 seq(
                     $._declaration_specifiers,
                     commaSep1(
@@ -1051,6 +1065,7 @@ module.exports = grammar({
         _non_case_statement: ($) =>
             choice(
                 $.compound_statement,
+                $.expression_statement,
                 $.if_statement,
                 $.switch_statement,
                 $.select_statement,
@@ -1059,12 +1074,33 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
-                $.expression_statement,
             ),
 
+        _top_level_statement: ($) =>
+            choice(
+                $.case_statement,
+                $.compound_statement,
+                alias(
+                    $._top_level_expression_statement,
+                    $.expression_statement,
+                ),
+                $.if_statement,
+                $.switch_statement,
+                $.select_statement,
+                $.while_statement,
+                $.for_statement,
+                $.return_statement,
+                $.break_statement,
+                $.continue_statement,
+            ),
+
+        _top_level_expression_statement: ($) =>
+            seq(optional($._expression_not_binary), ";"),
+
         expression_statement: ($) =>
+            // Using prec.right here to allow for the optional semicolon
             prec.right(
-                10,
+                // 10,
                 choice(
                     // Standard expression statements
                     seq(
@@ -1079,14 +1115,16 @@ module.exports = grammar({
         if_statement: ($) =>
             prec.right(
                 seq(
-                    keywords.if,
+                    "if",
                     field("condition", $.parenthesized_expression),
                     field("consequence", $.statement),
                     optional(field("alternative", $.else_clause)),
                 ),
             ),
 
-        else_clause: ($) => seq(keywords.else, $.statement),
+        else_clause: ($) => seq("else", $.statement),
+        // else_clause: ($) =>
+        //     prec.right(seq(alias(/[eE][lL][sS][eE]/, "else"), $.statement)),
 
         switch_statement: ($) =>
             seq(
@@ -1157,6 +1195,7 @@ module.exports = grammar({
             ),
 
         return_statement: ($) =>
+            // Using prec.right here to allow for the optional semicolon
             prec.right(
                 seq(
                     keywords.return,
@@ -1165,9 +1204,12 @@ module.exports = grammar({
                 ),
             ),
 
-        break_statement: (_) => prec.right(seq(keywords.break, optional(";"))),
+        break_statement: (_) =>
+            // Using prec.right here to allow for the optional semicolon
+            prec.right(seq(keywords.break, optional(";"))),
 
         continue_statement: (_) =>
+            // Using prec.right here to allow for the optional semicolon
             prec.right(seq(keywords.continue, optional(";"))),
 
         /**
@@ -1175,7 +1217,8 @@ module.exports = grammar({
          */
 
         expression: ($) =>
-            prec(2, choice($._expression_not_binary, $.binary_expression)),
+            // prec(2, choice($._expression_not_binary, $.binary_expression)),
+            choice($._expression_not_binary, $.binary_expression),
 
         _expression_not_binary: ($) =>
             choice(
@@ -1187,9 +1230,13 @@ module.exports = grammar({
                 // $.function_reference,
                 $.field_expression,
                 $.subscript_expression,
-                $.identifier,
-                $.literal,
                 $.string_expression,
+                $.identifier,
+                $.number_literal,
+                $.string_literal,
+                $.true,
+                $.false,
+                $.char_literal,
                 $.parenthesized_expression,
                 $.device_channel_assignment_expression,
                 $.device_channel_reference_expression,
@@ -1363,8 +1410,9 @@ module.exports = grammar({
                 ),
             ),
 
-        // String Expressions in NetLinx are like an interpolated string
-        string_expression: ($) => seq('"', commaSep1($.expression), '"'),
+        // String Expressions in NetLinx are like interpolated strings
+        // or string template literals in other languages.
+        string_expression: ($) => seq('"', commaSep($.expression), '"'),
 
         initializer_list: ($) =>
             seq(
@@ -1374,14 +1422,13 @@ module.exports = grammar({
                 "}",
             ),
 
-        string_literal: ($) =>
-            seq(
-                "'",
-                alias(token.immediate(prec(1, /[^'\n]*/)), $.string_content),
-                "'",
+        literal: ($) =>
+            choice(
+                $.number_literal,
+                $.string_literal,
+                $.char_literal,
+                $.device_literal,
             ),
-
-        literal: ($) => choice($.number_literal, $.string_literal),
 
         device_literal: ($) =>
             prec.right(
@@ -1395,6 +1442,20 @@ module.exports = grammar({
                 ),
             ),
 
+        string_literal: ($) =>
+            seq(
+                "'",
+                alias(token.immediate(prec(1, /[^'\n]*/)), $.string_content),
+                "'",
+            ),
+
+        char_literal: ($) =>
+            seq(
+                "'",
+                alias(token.immediate(prec(1, /[^'\n]/)), $.char_content),
+                "'",
+            ),
+
         number_literal: ($) => choice($.decimal_literal, $.hex_literal),
 
         decimal_literal: (_) => /[-+]?\d+/,
@@ -1404,11 +1465,13 @@ module.exports = grammar({
         true: (_) => netlinx.true,
         false: (_) => netlinx.false,
 
-        identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
+        // identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
+        identifier: (_) =>
+            /(\p{XID_Start}|\$|_|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})(\p{XID_Continue}|\$|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})*/,
 
-        _type_identifier: ($) =>
-            prec.right(2, alias($.identifier, $.type_identifier)),
-
+        // _type_identifier: ($) =>
+        //     prec.right(2, alias($.identifier, $.type_identifier)),
+        _type_identifier: ($) => alias($.identifier, $.type_identifier),
         _field_identifier: ($) => alias($.identifier, $.field_identifier),
         _statement_identifier: ($) =>
             alias($.identifier, $.statement_identifier),
@@ -1504,8 +1567,8 @@ function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
         switch (suffix) {
             case "":
                 return $._top_level_item;
-            case "_in_section":
-                return $._section_item;
+            // case "_in_section":
+            //     return $._section_item;
             case "_in_block":
                 return $._block_item;
             default:
@@ -1592,5 +1655,7 @@ function commaSep1(rule) {
 }
 
 module.exports.PREC = PREC;
+module.exports.preprocIf = preprocIf;
+module.exports.preprocessor = preprocessor;
 module.exports.commaSep = commaSep;
 module.exports.commaSep1 = commaSep1;
