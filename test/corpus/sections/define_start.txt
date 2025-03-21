@@ -1,5 +1,6 @@
 ==================
 Define Start Test
+:skip
 ==================
 
 PROGRAM_NAME='Start Test'

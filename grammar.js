@@ -45,10 +45,10 @@ module.exports = grammar({
         // [$.type_specifier, $._declarator],
         // [$.custom_type, $.expression],
         // [$.function_declarator, $._function_declaration_declarator],
-        [$._block_item, $.statement],
+        // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
-        [$.local_variable_declaration],
-        [$.array_dimension],
+        // [$.local_variable_declaration],
+        // [$.array_dimension],
         // [$._type_identifier, $.identifier],
         // [
         //     $.constant_definition,
@@ -64,30 +64,30 @@ module.exports = grammar({
         // [$.global_variable_definition, $.latching_definition],
         // [$.latching_definition, $.toggling_definition],
         // [$.latching_definition, $.toggling_definition, $.expression],
-        [
-            // $.latching_definition,
-            // $.global_variable_definition,
-            $._top_level_expression_statement,
-        ],
-        [
-            $.device_definition,
-            $.constant_definition,
-            // $.global_variable_definition,
-        ],
-        [
-            $.device_definition,
-            $.constant_definition,
-            // $.global_variable_definition,
-            $.assignment_expression,
-        ],
+        // [
+        //     // $.latching_definition,
+        //     // $.global_variable_definition,
+        //     $._top_level_expression_statement,
+        // ],
+        // [
+        //     $.device_definition,
+        //     $.constant_definition,
+        //     // $.global_variable_definition,
+        // ],
+        // [
+        //     $.device_definition,
+        //     $.constant_definition,
+        //     // $.global_variable_definition,
+        //     $.assignment_expression,
+        // ],
         // [$.combine_definition, $.connect_level_definition],
-        [
-            // $.combine_definition,
-            // $.connect_level_definition,
-            $.parenthesized_expression,
-        ],
-        [$._top_level_item, $._top_level_statement],
-        [$.type_specifier, $._top_level_expression_statement],
+        // [
+        //     // $.combine_definition,
+        //     // $.connect_level_definition,
+        //     $.parenthesized_expression,
+        // ],
+        // [$._top_level_item, $._top_level_statement],
+        // [$.type_specifier, $._top_level_expression_statement],
         // [$.combine_definition, $.connect_level_definition, $.comma_expression],
         [$.string_expression],
     ],
@@ -217,7 +217,7 @@ module.exports = grammar({
             //     PREC.DIRECTIVE,
             seq(
                 preprocessor(directives.include),
-                field("path", $.string_literal),
+                field("path", choice($.string_literal)),
                 token.immediate(/\r?\n/),
             ),
         // ),
@@ -250,9 +250,9 @@ module.exports = grammar({
                 token.immediate(/\r?\n/),
             ),
 
-        ...preprocIf(""),
+        ...preprocIf("", ($) => $._block_item),
         // ...preprocIf("_in_section"),
-        ...preprocIf("_in_block"),
+        // ...preprocIf("_in_block"),
 
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
         preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
@@ -1080,10 +1080,11 @@ module.exports = grammar({
             choice(
                 $.case_statement,
                 $.compound_statement,
-                alias(
-                    $._top_level_expression_statement,
-                    $.expression_statement,
-                ),
+                // alias(
+                //     $._top_level_expression_statement,
+                //     $.expression_statement,
+                // ),
+                $.expression_statement,
                 $.if_statement,
                 $.switch_statement,
                 $.select_statement,
@@ -1094,8 +1095,8 @@ module.exports = grammar({
                 $.continue_statement,
             ),
 
-        _top_level_expression_statement: ($) =>
-            seq(optional($._expression_not_binary), ";"),
+        // _top_level_expression_statement: ($) =>
+        //     seq(optional($._expression_not_binary), ";"),
 
         expression_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
@@ -1123,8 +1124,6 @@ module.exports = grammar({
             ),
 
         else_clause: ($) => seq(keywords.else, $.statement),
-        // else_clause: ($) =>
-        //     prec.right(seq(alias(/[eE][lL][sS][eE]/, "else"), $.statement)),
 
         switch_statement: ($) =>
             seq(
@@ -1487,93 +1486,28 @@ module.exports = grammar({
     },
 });
 
-// /**
-//  * Creates preprocessor conditional rules
-//  *
-//  * @param {string} suffix
-//  * @param {RuleBuilder<string>} content
-//  * @param {number} precedence
-//  *
-//  * @returns {RuleBuilders<string, string>}
-//  */
-// function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
-//     /**
-//      *
-//      * @param {GrammarSymbols<string>} $
-//      *
-//      * @returns {ChoiceRule}
-//      */
-//     function alternativeBlock($) {
-//         return choice(
-//             suffix
-//                 ? alias($["preproc_else" + suffix], $.preproc_else)
-//                 : $.preproc_else,
-//         );
-//     }
-
-//     return {
-//         ["preproc_if_defined" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.if_defined),
-//                     field("name", $.identifier),
-//                     "\n",
-//                     repeat(content($)),
-//                     field("alternative", optional(alternativeBlock($))),
-//                     $.preproc_end_if,
-//                 ),
-//             ),
-
-//         ["preproc_if_not_defined" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.if_not_defined),
-//                     field("name", $.identifier),
-//                     "\n",
-//                     repeat(content($)),
-//                     field("alternative", optional(alternativeBlock($))),
-//                     $.preproc_end_if,
-//                 ),
-//             ),
-
-//         ["preproc_else" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(preprocessor(directives.else), repeat(content($))),
-//             ),
-
-//         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
-//     };
-// }
-
 /**
  * Creates preprocessor conditional rules
  *
  * @param {string} suffix
+ * @param {RuleBuilder<string>} content
  * @param {number} precedence
  *
  * @returns {RuleBuilders<string, string>}
  */
-function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
+function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
     /**
      *
      * @param {GrammarSymbols<string>} $
      *
-     * @returns {Rule}
+     * @returns {ChoiceRule}
      */
-    function contentForContext($) {
-        switch (suffix) {
-            case "":
-                return $._top_level_item;
-            // case "_in_section":
-            //     return $._section_item;
-            case "_in_block":
-                return $._block_item;
-            default:
-                return $._top_level_item;
-        }
+    function alternativeBlock($) {
+        return choice(
+            suffix
+                ? alias($["preproc_else" + suffix], $.preproc_else)
+                : $.preproc_else,
+        );
     }
 
     return {
@@ -1584,8 +1518,8 @@ function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
                     preprocessor(directives.if_defined),
                     field("name", $.identifier),
                     "\n",
-                    repeat(contentForContext($)),
-                    field("alternative", optional($.preproc_else)),
+                    repeat(content($)),
+                    field("alternative", optional(alternativeBlock($))),
                     $.preproc_end_if,
                 ),
             ),
@@ -1597,8 +1531,8 @@ function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
                     preprocessor(directives.if_not_defined),
                     field("name", $.identifier),
                     "\n",
-                    repeat(contentForContext($)),
-                    field("alternative", optional($.preproc_else)),
+                    repeat(content($)),
+                    field("alternative", optional(alternativeBlock($))),
                     $.preproc_end_if,
                 ),
             ),
@@ -1606,15 +1540,80 @@ function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
         ["preproc_else" + suffix]: ($) =>
             prec(
                 precedence,
-                seq(
-                    preprocessor(directives.else),
-                    repeat(contentForContext($)),
-                ),
+                seq(preprocessor(directives.else), repeat(content($))),
             ),
 
         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
     };
 }
+
+// /**
+//  * Creates preprocessor conditional rules
+//  *
+//  * @param {string} suffix
+//  * @param {number} precedence
+//  *
+//  * @returns {RuleBuilders<string, string>}
+//  */
+// function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
+//     /**
+//      *
+//      * @param {GrammarSymbols<string>} $
+//      *
+//      * @returns {Rule}
+//      */
+//     function contentForContext($) {
+//         switch (suffix) {
+//             case "":
+//                 return $._top_level_item;
+//             // case "_in_section":
+//             //     return $._section_item;
+//             case "_in_block":
+//                 return $._block_item;
+//             default:
+//                 return $._top_level_item;
+//         }
+//     }
+
+//     return {
+//         ["preproc_if_defined" + suffix]: ($) =>
+//             prec(
+//                 precedence,
+//                 seq(
+//                     preprocessor(directives.if_defined),
+//                     field("name", $.identifier),
+//                     "\n",
+//                     repeat(contentForContext($)),
+//                     field("alternative", optional($.preproc_else)),
+//                     $.preproc_end_if,
+//                 ),
+//             ),
+
+//         ["preproc_if_not_defined" + suffix]: ($) =>
+//             prec(
+//                 precedence,
+//                 seq(
+//                     preprocessor(directives.if_not_defined),
+//                     field("name", $.identifier),
+//                     "\n",
+//                     repeat(contentForContext($)),
+//                     field("alternative", optional($.preproc_else)),
+//                     $.preproc_end_if,
+//                 ),
+//             ),
+
+//         ["preproc_else" + suffix]: ($) =>
+//             prec(
+//                 precedence,
+//                 seq(
+//                     preprocessor(directives.else),
+//                     repeat(contentForContext($)),
+//                 ),
+//             ),
+
+//         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
+//     };
+// }
 
 /**
  * Creates a preprocessor regex rule

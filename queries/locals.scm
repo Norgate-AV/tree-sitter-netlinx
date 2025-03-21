@@ -3,7 +3,7 @@
 
 ; Block scopes
 (compound_statement) @local.scope
-(function_definition) @local.scope
+;; (function_definition) @local.scope
 (parameter_list) @local.scope
 
 ; Loops and conditionals also create their own scope
@@ -22,17 +22,17 @@
 ; ===========
 
 ; Local variables
-(local_variable_declaration
-  type: (type_specifier)
-  name: (identifier) @local.definition)
+;; (local_variable_declaration
+;;   type: (type_specifier)
+;;   name: (identifier) @local.definition)
 
 ; Function parameters
 (parameter_declaration
   declarator: (identifier) @local.definition)
 
 ; Function definitions
-(function_definition
-  name: (identifier) @local.definition.function)
+;; (function_definition
+;;   name: (identifier) @local.definition.function)
 
 ; References
 ; ==========

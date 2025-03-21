@@ -8,14 +8,12 @@ INCLUDE 'button_constants'
 ---
 
 (source_file
-  (preproc_directive
-    (preproc_include
-      (string_literal
-        (string_content))))
-  (preproc_directive
-    (preproc_include
-      (string_literal
-        (string_content)))))
+  (preproc_include
+    path: (string_literal
+      (string_content)))
+  (preproc_include
+    path: (string_literal
+      (string_content))))
 
 ==================
 Define Directives
@@ -28,23 +26,17 @@ Define Directives
 ---
 
 (source_file
-  (preproc_directive
-    (preproc_define
-      (identifier)))
-  (preproc_directive
-    (preproc_define
-      (identifier)
-      (number_literal
-        (decimal_literal))))
-  (preproc_directive
-    (preproc_define
-      (identifier)
-      (string_literal
-        (string_content)))))
+  (preproc_define
+    name: (identifier))
+  (preproc_define
+    name: (identifier)
+    value: (preproc_arg))
+  (preproc_define
+    name: (identifier)
+    value: (preproc_arg)))
 
 ==================
 Basic Conditional Directives
-:skip
 ==================
 
 #IF_NOT_DEFINED DEBUG_MODE
@@ -54,12 +46,11 @@ Basic Conditional Directives
 ---
 
 (source_file
-  (preproc_directive
-    (preproc_if_not_defined
-      name: (identifier)
-      (preproc_define
-        (identifier))
-      (preproc_end_if))))
+  (preproc_if_not_defined
+    name: (identifier)
+    (preproc_define
+      name: (identifier))
+    (preproc_end_if)))
 
 ==================
 Warning Directive
@@ -70,7 +61,6 @@ Warning Directive
 ---
 
 (source_file
-  (preproc_directive
-    (preproc_warn
-      (string_literal
-        (string_content)))))
+  (preproc_warn
+        (string_literal
+          (string_content))))

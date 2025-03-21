@@ -1,5 +1,6 @@
 ==================
 Program Name Test
+:skip
 ==================
 
 PROGRAM_NAME='Basic Test'

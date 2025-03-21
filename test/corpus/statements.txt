@@ -1,181 +1,326 @@
 ==================
-If Statement
+If Statements
 ==================
 
-DEFINE_START
+if (a)
+    1;
 
-IF (x > 5) {
-    doSomething()
-}
-ELSE IF (x < 0) {
-    handleNegative()
-}
-ELSE {
-    handleDefault()
+if (!a) {
+    2;
+} else {
+    3;
 }
 
 ---
 
 (source_file
-  (section
-    (define_start_section
-      (if_statement
-        condition: (parenthesized_expression
-          (binary_expression
-            left: (identifier)
-            right: (literal
-              (number_literal
-                (decimal_literal)))))
-        consequence: (compound_statement
-          (expression_statement
-            (call_expression
-              function: (identifier)
-              arguments: (argument_list))))
-        alternative: (else_clause
-          (if_statement
-            condition: (parenthesized_expression
-              (binary_expression
-                left: (identifier)
-                right: (literal
-                  (number_literal
-                    (decimal_literal)))))
-            consequence: (compound_statement
-              (expression_statement
-                (call_expression
-                  function: (identifier)
-                  arguments: (argument_list))))
-            alternative: (else_clause
-              (compound_statement
-                (expression_statement
-                  (call_expression
-                    function: (identifier)
-                    arguments: (argument_list)))))))))))
-
-==================
-Switch Statement
-==================
-
-DEFINE_START
-
-SWITCH (value) {
-    CASE 1: {
-        doAction1()
-    }
-    CASE 2: {
-        doAction2()
-    }
-    DEFAULT: {
-        doDefault()
-    }
-}
-
----
-
-(source_file
-  (section
-    (define_start_section
-      (switch_statement
+  (if_statement
         condition: (parenthesized_expression
           (identifier))
-        body: (compound_statement
-          (case_statement
-            value: (literal
+        consequence: (expression_statement
+          (number_literal
+            (decimal_literal))))
+      (if_statement
+        condition: (parenthesized_expression
+          (unary_expression
+            argument: (identifier)))
+        consequence: (compound_statement
+          (expression_statement
+            (number_literal
+              (decimal_literal))))
+        alternative: (else_clause
+          (compound_statement
+            (expression_statement
               (number_literal
-                (decimal_literal)))
-            (compound_statement
-              (expression_statement
-                (call_expression
-                  function: (identifier)
-                  arguments: (argument_list)))))
-          (case_statement
-            value: (literal
-              (number_literal
-                (decimal_literal)))
-            (compound_statement
-              (expression_statement
-                (call_expression
-                  function: (identifier)
-                  arguments: (argument_list)))))
-          (case_statement
-            (compound_statement
-              (expression_statement
-                (call_expression
-                  function: (identifier)
-                  arguments: (argument_list))))))))))
+                (decimal_literal)))))))
 
 ==================
-For Loop
+Switch statements
 ==================
 
-DEFINE_START
+switch (a) {
+    print('entered switch!');
 
-FOR (i = 0; i < 10; i++) {
-    processItem(items[i])
+    case 3:
+    case 5:
+        if (b) {
+            c();
+        }
+        break;
+
+    default:
+        c();
+        break;
 }
 
 ---
 
 (source_file
-  (section
-    (define_start_section
-      (for_statement
-        initializer: (assignment_expression
-          left: (identifier)
-          right: (literal
-            (number_literal
-              (decimal_literal))))
-        condition: (binary_expression
-          left: (identifier)
-          right: (literal
-            (number_literal
-              (decimal_literal))))
-        update: (update_expression
-          argument: (identifier))
+  (switch_statement
+        condition: (parenthesized_expression
+          (identifier))
         body: (compound_statement
           (expression_statement
             (call_expression
               function: (identifier)
               arguments: (argument_list
-                (subscript_expression
-                  argument: (identifier)
-                  index: (identifier))))))))))
+                (string_literal
+                  (string_content)))))
+          (case_statement
+            value: (number_literal
+              (decimal_literal)))
+          (case_statement
+            value: (number_literal
+              (decimal_literal))
+            (if_statement
+              condition: (parenthesized_expression
+                (identifier))
+              consequence: (compound_statement
+                (expression_statement
+                  (call_expression
+                    function: (identifier)
+                    arguments: (argument_list)))))
+            (break_statement))
+          (case_statement
+            (expression_statement
+              (call_expression
+                function: (identifier)
+                arguments: (argument_list)))
+            (break_statement)))))
 
-==================
-While Loop
-==================
+================================================================================
+Case statements separate from switch statements
+:skip
+================================================================================
 
-DEFINE_START
-
-WHILE (condition) {
-    processData()
-    condition = checkStatus()
+switch (count % 8) {
+case 0:
+    do {
+      *to = *from++;
+      case 2: *to = *from++;
+      case 1: *to = *from++;
+    } while (--n > 0);
 }
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (function_definition
+    (primitive_type)
+    (function_declarator
+      (identifier)
+      (parameter_list))
+    (compound_statement
+      (switch_statement
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal)))
+        (compound_statement
+          (case_statement
+            (number_literal)
+            (do_statement
+              (compound_statement
+                (expression_statement
+                  (assignment_expression
+                    (pointer_expression
+                      (identifier))
+                    (pointer_expression
+                      (update_expression
+                        (identifier)))))
+                (case_statement
+                  (number_literal)
+                  (expression_statement
+                    (assignment_expression
+                      (pointer_expression
+                        (identifier))
+                      (pointer_expression
+                        (update_expression
+                          (identifier))))))
+                (case_statement
+                  (number_literal)
+                  (expression_statement
+                    (assignment_expression
+                      (pointer_expression
+                        (identifier))
+                      (pointer_expression
+                        (update_expression
+                          (identifier)))))))
+              (parenthesized_expression
+                (binary_expression
+                  (update_expression
+                    (identifier))
+                  (number_literal))))))))))
+
+================================================================================
+Return statements
+================================================================================
+
+return;
+return a;
+return a, b;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (return_statement)
+  (return_statement
+    (identifier))
+  (return_statement
+    (comma_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+Comments with asterisks
+:skip
+================================================================================
+
+/*************************
+ * odd number of asterisks
+ *************************/
+integer a;
+
+/**************************
+ * even number of asterisks
+ **************************/
+integer b;
+
+--------------------------------------------------------------------------------
+
+(translation_unit
+  (comment)
+  (declaration
+    (primitive_type)
+    (identifier))
+  (comment)
+  (declaration
+    (primitive_type)
+    (identifier)))
+
+==================
+For loops
+==================
+
+for (;;)
+    1;
+
+for (i = 0; i < 5; next(), i++) {
+    2;
+}
+
+for (start(); check(); step())
+    3;
+
+for (i = 0, j = 0, k = 0, l = 0; i < 1, j < 1; i++, j++, k++, l++)
+    1;
 
 ---
 
 (source_file
-  (section
-    (define_start_section
-      (while_statement
-        condition: (parenthesized_expression
-          (identifier))
+  (for_statement
+        body: (expression_statement
+          (number_literal
+            (decimal_literal))))
+      (for_statement
+        initializer: (assignment_expression
+          left: (identifier)
+          right: (number_literal
+            (decimal_literal)))
+        condition: (binary_expression
+          left: (identifier)
+          right: (number_literal
+            (decimal_literal)))
+        update: (comma_expression
+          left: (call_expression
+            function: (identifier)
+            arguments: (argument_list))
+          right: (update_expression
+            argument: (identifier)))
         body: (compound_statement
           (expression_statement
-            (call_expression
-              function: (identifier)
-              arguments: (argument_list)))
-          (expression_statement
-            (assignment_expression
+            (number_literal
+              (decimal_literal)))))
+      (for_statement
+        initializer: (call_expression
+          function: (identifier)
+          arguments: (argument_list))
+        condition: (call_expression
+          function: (identifier)
+          arguments: (argument_list))
+        update: (call_expression
+          function: (identifier)
+          arguments: (argument_list))
+        body: (expression_statement
+          (number_literal
+            (decimal_literal))))
+      (for_statement
+        initializer: (comma_expression
+          left: (assignment_expression
+            left: (identifier)
+            right: (number_literal
+              (decimal_literal)))
+          right: (comma_expression
+            left: (assignment_expression
               left: (identifier)
-              right: (call_expression
-                function: (identifier)
-                arguments: (argument_list)))))))))
+              right: (number_literal
+                (decimal_literal)))
+            right: (comma_expression
+              left: (assignment_expression
+                left: (identifier)
+                right: (number_literal
+                  (decimal_literal)))
+              right: (assignment_expression
+                left: (identifier)
+                right: (number_literal
+                  (decimal_literal))))))
+        condition: (comma_expression
+          left: (binary_expression
+            left: (identifier)
+            right: (number_literal
+              (decimal_literal)))
+          right: (binary_expression
+            left: (identifier)
+            right: (number_literal
+              (decimal_literal))))
+        update: (comma_expression
+          left: (update_expression
+            argument: (identifier))
+          right: (comma_expression
+            left: (update_expression
+              argument: (identifier))
+            right: (comma_expression
+              left: (update_expression
+                argument: (identifier))
+              right: (update_expression
+                argument: (identifier)))))
+        body: (expression_statement
+          (number_literal
+            (decimal_literal)))))
+
+==================
+While loops
+==================
+
+while (x)
+    printf('hi');
+
+---
+
+(source_file
+  (while_statement
+    condition: (parenthesized_expression
+        (identifier))
+    body: (expression_statement
+        (call_expression
+        function: (identifier)
+        arguments: (argument_list
+            (string_literal
+            (string_content)))))))
 
 ==================
 Select Statement
 ==================
-
-DEFINE_START
 
 SELECT {
     ACTIVE(btnMode == MODE_NORMAL): {
@@ -184,31 +329,40 @@ SELECT {
     ACTIVE(btnMode == MODE_ADMIN): {
         processAdmin()
     }
+    active(true): {
+        processGuest()
+    }
 }
 
 ---
 
 (source_file
-  (section
-    (define_start_section
-      (select_statement
-        (active_block
-          condition: (parenthesized_expression
-            (binary_expression
-              left: (identifier)
-              right: (identifier)))
-          body: (compound_statement
-            (expression_statement
-              (call_expression
-                function: (identifier)
-                arguments: (argument_list)))))
-        (active_block
-          condition: (parenthesized_expression
-            (binary_expression
-              left: (identifier)
-              right: (identifier)))
-          body: (compound_statement
-            (expression_statement
-              (call_expression
-                function: (identifier)
-                arguments: (argument_list)))))))))
+  (select_statement
+    (active_block
+        condition: (parenthesized_expression
+        (binary_expression
+            left: (identifier)
+            right: (identifier)))
+        body: (compound_statement
+        (expression_statement
+            (call_expression
+            function: (identifier)
+            arguments: (argument_list)))))
+    (active_block
+        condition: (parenthesized_expression
+        (binary_expression
+            left: (identifier)
+            right: (identifier)))
+        body: (compound_statement
+        (expression_statement
+            (call_expression
+            function: (identifier)
+            arguments: (argument_list)))))
+    (active_block
+        condition: (parenthesized_expression
+        (true))
+        body: (compound_statement
+        (expression_statement
+            (call_expression
+            function: (identifier)
+            arguments: (argument_list)))))))

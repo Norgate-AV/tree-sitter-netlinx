@@ -1,0 +1,3 @@
+#DEFINE DEBUG_MODE
+#define MAX_ATTEMPTS 5
+#define DEVICE_NAME 'Touch Panel'
