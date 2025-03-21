@@ -520,6 +520,22 @@
     }
   },
   {
+    "type": "char_array_return_type",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "char_literal",
     "named": true,
     "fields": {},
@@ -663,6 +679,21 @@
         },
         {
           "type": "type_qualifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function_definition",
           "named": true
         }
       ]
@@ -929,6 +960,56 @@
         "types": [
           {
             "type": "type_specifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "function_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "char_array_return_type",
+            "named": true
+          },
+          {
+            "type": "intrinsic_type",
             "named": true
           }
         ]
@@ -1483,6 +1564,10 @@
         },
         {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "define_function",
           "named": true
         },
         {

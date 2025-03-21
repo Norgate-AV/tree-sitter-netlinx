@@ -42,9 +42,11 @@ module.exports = grammar({
     // word: ($) => $.identifier,
 
     conflicts: ($) => [
-        // [$.type_specifier, $._declarator],
+        [$.type_specifier, $._declarator],
+        [$.type_specifier, $.expression],
+        [$._declarator, $._declaration_declarator],
         // [$.custom_type, $.expression],
-        // [$.function_declarator, $._function_declaration_declarator],
+        [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         // [$.local_variable_declaration],
@@ -86,8 +88,9 @@ module.exports = grammar({
         //     // $.connect_level_definition,
         //     $.parenthesized_expression,
         // ],
-        // [$._top_level_item, $._top_level_statement],
+        [$._top_level_item, $._top_level_statement],
         // [$.type_specifier, $._top_level_expression_statement],
+        [$.type_specifier, $.expression_statement],
         // [$.combine_definition, $.connect_level_definition, $.comma_expression],
         [$.string_expression],
     ],
@@ -125,7 +128,7 @@ module.exports = grammar({
                 // $.section,
                 // $.program_name,
                 // $.module_name,
-                // $.define_function,
+                $.define_function,
                 // $.define_call,
                 // $.define_module,
 
@@ -311,26 +314,26 @@ module.exports = grammar({
         connect_level_definition: ($) =>
             seq("(", commaSep1($.expression), ")", optional(";")),
 
-        constant_definition: ($) =>
-            prec.right(
-                10,
-                seq(
-                    optional(keywords.constant),
-                    optional(field("type", $.type_specifier)),
-                    field("name", $.identifier),
-                    optional(field("dimensions", $.array_dimension)),
-                    "=",
-                    field(
-                        "value",
-                        choice(
-                            $.expression,
-                            $.string_literal,
-                            $.initializer_list,
-                        ),
-                    ),
-                    optional(";"),
-                ),
-            ),
+        // constant_definition: ($) =>
+        //     prec.right(
+        //         10,
+        //         seq(
+        //             optional(keywords.constant),
+        //             optional(field("type", $.type_specifier)),
+        //             field("name", $.identifier),
+        //             optional(field("dimensions", $.array_dimension)),
+        //             "=",
+        //             field(
+        //                 "value",
+        //                 choice(
+        //                     $.expression,
+        //                     $.string_literal,
+        //                     $.initializer_list,
+        //                 ),
+        //             ),
+        //             optional(";"),
+        //         ),
+        //     ),
 
         mutually_exclusive_definition: ($) =>
             prec.right(
@@ -375,36 +378,36 @@ module.exports = grammar({
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.device_channel_reference_expression))),
 
-        global_variable_definition: ($) =>
-            prec.right(
-                5,
-                seq(
-                    optional(field("qualifier", $.type_qualifier)),
-                    optional(
-                        field(
-                            "type",
-                            choice(
-                                prec(3, $.primitive_type),
-                                prec(2, $.custom_type),
-                            ),
-                        ),
-                    ),
-                    field("name", prec(1, $.identifier)),
-                    optional(field("dimensions", $.array_dimension)),
-                    optional("="),
-                    optional(
-                        field(
-                            "value",
-                            choice(
-                                $.expression,
-                                $.string_literal,
-                                $.initializer_list,
-                            ),
-                        ),
-                    ),
-                    optional(";"),
-                ),
-            ),
+        // global_variable_definition: ($) =>
+        //     prec.right(
+        //         5,
+        //         seq(
+        //             optional(field("qualifier", $.type_qualifier)),
+        //             optional(
+        //                 field(
+        //                     "type",
+        //                     choice(
+        //                         prec(3, $.primitive_type),
+        //                         prec(2, $.custom_type),
+        //                     ),
+        //                 ),
+        //             ),
+        //             field("name", prec(1, $.identifier)),
+        //             optional(field("dimensions", $.array_dimension)),
+        //             optional("="),
+        //             optional(
+        //                 field(
+        //                     "value",
+        //                     choice(
+        //                         $.expression,
+        //                         $.string_literal,
+        //                         $.initializer_list,
+        //                     ),
+        //                 ),
+        //             ),
+        //             optional(";"),
+        //         ),
+        //     ),
 
         define_function_section: ($) =>
             seq(keywords.define_function, $.function_definition),
@@ -706,13 +709,13 @@ module.exports = grammar({
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
-        array_dimension: ($) =>
-            repeat1(
-                choice(
-                    seq("[", "]"),
-                    seq("[", field("size", $.expression), "]"),
-                ),
-            ),
+        // array_dimension: ($) =>
+        //     repeat1(
+        //         choice(
+        //             seq("[", "]"),
+        //             seq("[", field("size", $.expression), "]"),
+        //         ),
+        //     ),
 
         _array_brackets: ($) =>
             seq("[", field("size", optional($.expression)), "]"),
@@ -720,16 +723,23 @@ module.exports = grammar({
         array_declarator: ($) =>
             prec(
                 1,
-                choice(
-                    // Empty brackets case (variable-length arrays)
-                    seq(field("declarator", $._declarator), "[", "]"),
-                    // Standard case with optional size expression
-                    seq(
-                        field("declarator", $._declarator),
-                        "[",
-                        field("size", optional($.expression)),
-                        "]",
-                    ),
+                // choice(
+                //     // Empty brackets case (variable-length arrays)
+                //     seq(field("declarator", $._declarator), "[", "]"),
+                //     // Standard case with optional size expression
+                //     seq(
+                //         field("declarator", $._declarator),
+                //         "[",
+                //         field("size", optional($.expression)),
+                //         "]",
+                //     ),
+                // ),
+                seq(
+                    field("declarator", $._declarator),
+                    // $._array_brackets,
+                    "[",
+                    field("size", optional($.expression)),
+                    "]",
                 ),
             ),
 
@@ -738,14 +748,23 @@ module.exports = grammar({
                 1,
                 seq(
                     field("declarator", $._field_declarator),
-                    $._array_brackets,
+                    // $._array_brackets,
+                    "[",
+                    field("size", optional($.expression)),
+                    "]",
                 ),
             ),
 
         array_type_declarator: ($) =>
             prec(
                 1,
-                seq(field("declarator", $._type_declarator), $._array_brackets),
+                seq(
+                    field("declarator", $._type_declarator),
+                    // $._array_brackets
+                    "[",
+                    field("size", optional($.expression)),
+                    "]",
+                ),
             ),
 
         abstract_array_declarator: ($) =>
@@ -753,7 +772,10 @@ module.exports = grammar({
                 1,
                 seq(
                     field("declarator", optional($._abstract_declarator)),
-                    $._array_brackets,
+                    // $._array_brackets,
+                    "[",
+                    field("size", optional($.expression)),
+                    "]",
                 ),
             ),
 
@@ -871,22 +893,22 @@ module.exports = grammar({
 
         declaration: ($) =>
             // Using prec.right here to allow for the optional semicolon
-            prec.right(
-                // 2,
-                seq(
-                    $._declaration_specifiers,
-                    commaSep1(
-                        field(
-                            "declarator",
-                            choice(
-                                seq($._declaration_declarator),
-                                $.init_declarator,
-                            ),
+            // prec.right(
+            // 2,
+            seq(
+                $._declaration_specifiers,
+                commaSep1(
+                    field(
+                        "declarator",
+                        choice(
+                            seq($._declaration_declarator),
+                            $.init_declarator,
                         ),
                     ),
-                    optional(";"),
                 ),
+                optional(";"),
             ),
+        // ),
 
         _declaration_modifiers: ($) =>
             choice($.storage_class_specifier, $.type_qualifier),
@@ -901,29 +923,29 @@ module.exports = grammar({
             ),
 
         _declarator: ($) =>
-            prec(
-                2,
-                choice(
-                    $.function_declarator,
-                    $.array_declarator,
-                    $.parenthesized_declarator,
-                    $.identifier,
-                ),
+            // prec(
+            // 2,
+            choice(
+                $.function_declarator,
+                $.array_declarator,
+                $.parenthesized_declarator,
+                $.identifier,
             ),
+        // ),
 
         _declaration_declarator: ($) =>
-            prec(
-                3,
-                choice(
-                    alias(
-                        $._function_declaration_declarator,
-                        $.function_declarator,
-                    ),
-                    $.array_declarator,
-                    $.parenthesized_declarator,
-                    $.identifier,
+            // prec(
+            // 3,
+            choice(
+                alias(
+                    $._function_declaration_declarator,
+                    $.function_declarator,
                 ),
+                $.array_declarator,
+                $.parenthesized_declarator,
+                $.identifier,
             ),
+        // ),
 
         _field_declarator: ($) =>
             choice(
