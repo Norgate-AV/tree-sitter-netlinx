@@ -1,9 +1,8 @@
 PROGRAM_NAME='define_function'
 
 DEFINE_FUNCTION CHAR[100] FormatStatus(DeviceStatus status) {
-    // STACK_VAR CHAR result[100]
+    STACK_VAR CHAR result[100]
 
-    // A "String Expression", or more widely known as "String Interpolation"
     result = "'Device: ', status.name, 'Power: ', ITOA(status.isPowered), 'Volume: ', ITOA(status.volume)"
 
     RETURN ''

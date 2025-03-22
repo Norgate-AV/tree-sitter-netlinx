@@ -14,6 +14,7 @@ const directives = require("./directives");
 const PREC = {
     PAREN_DECLARATOR: -10,
     ASSIGNMENT: -2,
+    CONDITIONAL: -1,
     DEFAULT: 0,
     LOGICAL_OR: 1,
     LOGICAL_AND: 2,
@@ -22,15 +23,17 @@ const PREC = {
     BITWISE_AND: 5,
     EQUAL: 6,
     RELATIONAL: 7,
+    OFFSETOF: 8,
     SHIFT: 9,
     ADD: 10,
     MULTIPLY: 11,
+    CAST: 12,
     UNARY: 14,
-    FUNCTION_REF: 15,
-    CALL: 17,
-    SUBSCRIPT: 18,
-    ARRAY_FUNCTION: 19,
+    // FUNCTION_REF: 15,
+    CALL: 15,
     FIELD: 16,
+    SUBSCRIPT: 17,
+    // ARRAY_FUNCTION: 19,
     DIRECTIVE: 20,
     SECTION_DEFINITION: 110,
 };
@@ -45,8 +48,9 @@ module.exports = grammar({
         // [$.type_specifier, $._declarator],
         // [$.type_specifier, $.expression],
         [$._declarator, $._declaration_declarator],
-        // [$.custom_type, $.expression],
-        // [$.function_declarator, $._function_declaration_declarator],
+        [$.custom_type, $.expression],
+        // [$.custom_type, $._declarator],
+        [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
         // [$.array_declarator, $.device_channel_reference_expression],
         // [$._type_identifier, $.identifier],
@@ -147,6 +151,12 @@ module.exports = grammar({
         // Block-level context - matches <compound statement inside {}>
         _block_item: ($) =>
             choice(
+                // Definitions
+                // $.define_function,
+                // $.struct_definition,
+                // $.define_call,
+                // $.define_module,
+
                 // Block-level declarations
                 $.declaration,
 
@@ -154,6 +164,9 @@ module.exports = grammar({
                 $.statement,
                 // $.expression_statement,
                 // $.compound_statement,
+
+                // Sections
+                // $.section,
 
                 // Preprocessor
                 $.preproc_if_defined,
@@ -219,9 +232,11 @@ module.exports = grammar({
                 token.immediate(/\r?\n/),
             ),
 
-        ...preprocIf("", ($) => $._block_item),
+        // ...preprocIf("", ($) => $._block_item),
+        ...preprocIf("", ($) => $._top_level_item),
+        // ...preprocIf("", ($) => choice($._top_level_item, $._block_item)),
         // ...preprocIf("_in_section"),
-        // ...preprocIf("_in_block"),
+        ...preprocIf("_in_block", ($) => $._block_item),
 
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
         preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
@@ -717,8 +732,18 @@ module.exports = grammar({
                 keywords.persistent,
             ),
 
-        // type_specifier: ($) => choice($.intrinsic_type, $.custom_type),
-        type_specifier: ($) => choice($.intrinsic_type),
+        // type_specifier: ($) =>
+        //     choice($.array_type_specifier, $.intrinsic_type, $.custom_type),
+        // type_specifier: ($) => choice($.intrinsic_type),
+        type_specifier: ($) => choice($.intrinsic_type, $.custom_type),
+
+        // array_type_specifier: ($) =>
+        //     seq(
+        //         field("type", $.intrinsic_type),
+        //         "[",
+        //         field("size", optional($.expression)),
+        //         "]",
+        //     ),
 
         custom_type: ($) => alias($.identifier, $.custom_type),
 
@@ -771,14 +796,14 @@ module.exports = grammar({
 
         function_definition: ($) =>
             choice(
-                // No return type (void)
+                // // No return type (void)
                 seq(
                     field("name", $.identifier),
                     field("parameters", $.parameter_list),
                     field("body", $.compound_statement),
                 ),
 
-                // Char array return type
+                // // Char array return type
                 seq(
                     field("return_type", $.char_array_return_type),
                     field("name", $.identifier),
@@ -788,11 +813,26 @@ module.exports = grammar({
 
                 // Simple intrinsic return type
                 seq(
-                    field("return_type", $.intrinsic_type),
+                    optional(field("return_type", $.intrinsic_type)),
                     field("name", $.identifier),
                     field("parameters", $.parameter_list),
                     field("body", $.compound_statement),
                 ),
+                // seq(
+                //     $._declaration_specifiers,
+                //     // optional(
+                //     //     field(
+                //     //         "return_type",
+                //     //         seq(
+                //     //             $.intrinsic_type,
+                //     //             optional(seq("[", optional($.expression), "]")),
+                //     //         ),
+                //     //     ),
+                //     // ),
+                //     // optional(field("return_type", $.type_specifier)),
+                //     field("declarator", $._declarator),
+                //     field("body", $.compound_statement),
+                // ),
             ),
 
         call_definition: ($) =>
@@ -829,6 +869,13 @@ module.exports = grammar({
                 seq(
                     repeat($._declaration_modifiers),
                     field("type", $.type_specifier),
+                    // optional(
+                    //     seq(
+                    //         "[",
+                    //         field("array_size", optional($.expression)),
+                    //         "]",
+                    //     ),
+                    // ),
                     repeat($._declaration_modifiers),
                 ),
             ),
@@ -881,19 +928,35 @@ module.exports = grammar({
                 $.intrinsic_type,
             ),
 
+        // function_declarator: ($) =>
+        //     prec.right(
+        //         1,
+        //         seq(
+        //             field("return_type", optional($.type_specifier)),
+        //             field("name", $.identifier),
+        //             field("parameters", $.parameter_list),
+        //         ),
+        //     ),
+
         function_declarator: ($) =>
             prec.right(
                 1,
                 seq(
-                    field("return_type", optional($.type_specifier)),
-                    field("name", $.identifier),
+                    field("declarator", $._declarator),
                     field("parameters", $.parameter_list),
+                    // repeat(
+                    //     choice(
+                    //         $.attribute_specifier,
+                    //         $.identifier,
+                    //         alias($.preproc_call_expression, $.call_expression),
+                    //     ),
+                    // ),
                 ),
             ),
 
         _function_declaration_declarator: ($) =>
             prec.right(
-                2,
+                1,
                 seq(
                     field("declarator", $._declarator),
                     field("parameters", $.parameter_list),
@@ -996,8 +1059,8 @@ module.exports = grammar({
                 $.continue_statement,
             ),
 
-        // _top_level_expression_statement: ($) =>
-        //     seq(optional($._expression_not_binary), ";"),
+        _top_level_expression_statement: ($) =>
+            seq(optional($._expression_not_binary), optional(";")),
 
         expression_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
@@ -1136,7 +1199,7 @@ module.exports = grammar({
                 $.string_literal,
                 $.true,
                 $.false,
-                $.char_literal,
+                // $.char_literal,
                 $.device_literal,
                 $.parenthesized_expression,
                 $.device_channel_assignment_expression,
@@ -1327,7 +1390,7 @@ module.exports = grammar({
             choice(
                 $.number_literal,
                 $.string_literal,
-                $.char_literal,
+                // $.char_literal,
                 $.device_literal,
             ),
 
@@ -1350,12 +1413,12 @@ module.exports = grammar({
                 "'",
             ),
 
-        char_literal: ($) =>
-            seq(
-                "'",
-                alias(token.immediate(prec(1, /[^'\n]/)), $.char_content),
-                "'",
-            ),
+        // char_literal: ($) =>
+        //     seq(
+        //         "'",
+        //         alias(token.immediate(prec(1, /[^'\n]/)), $.char_content),
+        //         "'",
+        //     ),
 
         number_literal: ($) => choice($.decimal_literal, $.hex_literal),
 

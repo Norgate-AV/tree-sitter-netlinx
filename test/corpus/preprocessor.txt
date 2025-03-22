@@ -64,3 +64,169 @@ Warning Directive
   (preproc_warn
         (string_literal
           (string_content))))
+
+==================
+Complex Conditional Directives
+==================
+
+#IF_DEFINED RELEASE_BUILD
+    INCLUDE 'release_config'
+#ELSE
+    INCLUDE 'debug_config'
+    #DEFINE DEBUG_LOGGING
+#END_IF
+
+---
+
+(source_file
+  (preproc_if_defined
+    name: (identifier)
+    (preproc_include
+      path: (string_literal
+        (string_content)))
+    alternative: (preproc_else
+      (preproc_include
+        path: (string_literal
+          (string_content)))
+      (preproc_define
+        name: (identifier)))
+    (preproc_end_if)))
+
+==================
+Nested Conditional Directives
+:skip
+==================
+
+#IF_DEFINED ADVANCED_FEATURES
+    #DEFINE FEATURE_COUNT 10
+
+    #IF_NOT_DEFINED DISABLE_LOGGING
+        #DEFINE ENABLE_FEATURE_LOGGING
+    #END_IF
+
+    MAX_FEATURES = FEATURE_COUNT
+#END_IF
+
+---
+
+(source_file
+  (preproc_if_defined
+    name: (identifier)
+    (preproc_define
+      name: (identifier)
+      value: (preproc_arg))
+    (preproc_if_not_defined
+      name: (identifier)
+      (preproc_define
+        name: (identifier))
+      (preproc_end_if))
+    (expression_statement
+      (assignment_expression
+        (identifier)
+        (identifier)))
+    (preproc_end_if)))
+
+==================
+Conditional Directives With Code Blocks
+:skip
+==================
+
+#IF_DEFINED ENABLE_SPECIAL_FUNCTIONS
+DEFINE_FUNCTION integer GetSpecialValue(integer param)
+{
+    RETURN param * 2 + SPECIAL_FACTOR
+}
+
+#IF_DEFINED INCLUDE_HELPERS
+DEFINE_FUNCTION char[50] FormatSpecialValue(integer val)
+{
+    RETURN "'Special: ', ITOA(val)"
+}
+#END_IF
+
+#ELSE
+DEFINE_FUNCTION integer GetSpecialValue(integer param)
+{
+    RETURN param
+}
+#END_IF
+
+---
+
+(source_file
+  (preproc_if_defined
+    name: (identifier)
+    (define_function
+      (function_definition
+        (return_type: (intrinsic_type
+          (primitive_type)))
+        (name: (identifier))
+        (parameters: (parameter_list
+          (parameter_declaration
+            (type_specifier
+              (intrinsic_type
+                (primitive_type)))
+            (declarator: (identifier)))))
+        (body: (compound_statement
+          (return_statement
+            (binary_expression
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))
+              (identifier)))))))
+    (preproc_if_defined
+      name: (identifier)
+      (define_function
+        (function_definition
+          (return_type: (char_array_return_type
+            (size: (number_literal
+              (decimal_literal)))))
+          (name: (identifier))
+          (parameters: (parameter_list
+            (parameter_declaration
+              (type_specifier
+                (intrinsic_type
+                  (primitive_type)))
+              (declarator: (identifier)))))
+          (body: (compound_statement
+            (return_statement
+              (string_expression
+                (string_literal
+                  (string_content))
+                (call_expression
+                  (function: (identifier))
+                  (arguments: (argument_list
+                    (identifier))))))))))
+      (preproc_end_if))
+    alternative: (preproc_else
+      (define_function
+        (function_definition
+          (return_type: (intrinsic_type
+            (primitive_type)))
+          (name: (identifier))
+          (parameters: (parameter_list
+            (parameter_declaration
+              (type_specifier
+                (intrinsic_type
+                  (primitive_type)))
+              (declarator: (identifier)))))
+          (body: (compound_statement
+            (return_statement
+              (identifier)))))))
+    (preproc_end_if)))
+
+==================
+Disable Warning Directive
+==================
+
+#DISABLE_WARNING 1506
+#DISABLE_WARNING 2041
+
+---
+
+(source_file
+  (preproc_disable_warning
+    (decimal_literal))
+  (preproc_disable_warning
+    (decimal_literal)))

@@ -1,9 +1,7 @@
 ==================
-Basic Arithmetic
-:skip
+Arithmetic
 ==================
 
-DEFINE_START
 x = 5 + 3
 y = x * 2
 z = (x + y) / 4
@@ -11,40 +9,34 @@ z = (x + y) / 4
 ---
 
 (source_file
-  (section
-    (define_start_section
       (expression_statement
         (assignment_expression
-          left: (identifier)
-          right: (binary_expression
-            left: (literal
-              (number_literal
-                (decimal_literal)))
-            right: (literal
-              (number_literal
-                (decimal_literal))))))
+          (identifier)
+          (binary_expression
+            (number_literal
+              (decimal_literal))
+            (number_literal
+              (decimal_literal)))))
       (expression_statement
         (assignment_expression
-          left: (identifier)
-          right: (binary_expression
-            left: (identifier)
-            right: (literal
-              (number_literal
-                (decimal_literal))))))
+          (identifier)
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
       (expression_statement
         (assignment_expression
-          left: (identifier)
-          right: (binary_expression
-            left: (parenthesized_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
               (binary_expression
-                left: (identifier)
-                right: (identifier)))
-            right: (literal
-              (number_literal
-                (decimal_literal)))))))))
+                (identifier)
+                (identifier)))
+            (number_literal
+              (decimal_literal))))))
 
 ==================
-Logical Expressions
+Logical
 ==================
 
 flag = (x > 10) && (y < 5)
@@ -79,7 +71,7 @@ result = (a || b) && !c
               argument: (identifier))))))
 
 ==================
-String Expressions
+String
 ==================
 
 message = "'Hello, World!'"
@@ -130,7 +122,7 @@ command = "'COMMAND-',CMD_TYPE,',',PARAM"
                 field: (field_identifier)))))))
 
 ==================
-Update Expressions
+Update
 ==================
 
 counter++
@@ -147,7 +139,7 @@ value--
           argument: (identifier))))
 
 ================================================================================
-The comma operator
+Comma
 ================================================================================
 
 i--, j--;
@@ -169,3 +161,420 @@ i--, j--;
               (identifier))
             (update_expression
               (identifier))))))
+
+==================
+Unary
+==================
+
+negated = -5
+bitwise_not = ~mask
+positive = +value
+not_flag = !condition
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (unary_expression
+            (identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (unary_expression
+            (identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (unary_expression
+            (identifier)))))
+
+==================
+Call
+==================
+
+result = calculate(x, y)
+doSomething()
+nested = outer(inner(x), y)
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (call_expression
+            (identifier)
+            (argument_list
+              (identifier)
+              (identifier)))))
+      (expression_statement
+        (call_expression
+          (identifier)
+          (argument_list)))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (call_expression
+            (identifier)
+            (argument_list
+              (call_expression
+                (identifier)
+                (argument_list
+                  (identifier)))
+              (identifier))))))
+
+==================
+Field
+==================
+
+name = person.fullName
+value = device.port.status
+nested = obj.field1.field2
+obj.method()
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (field_expression
+            (identifier)
+            (field_identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (field_expression
+            (field_expression
+              (identifier)
+              (field_identifier))
+            (field_identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (field_expression
+            (field_expression
+              (identifier)
+              (field_identifier))
+            (field_identifier))))
+      (expression_statement
+        (call_expression
+          (field_expression
+            (identifier)
+            (field_identifier))
+          (argument_list))))
+
+==================
+Subscript
+==================
+
+item = array[5]
+matrix = grid[row][col]
+value = items[index + 1]
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (subscript_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (subscript_expression
+            (subscript_expression
+              (identifier)
+              (identifier))
+            (identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (subscript_expression
+            (identifier)
+            (binary_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))))))
+
+
+==================
+Devchan
+:skip
+==================
+
+status = [dvTP, 1]
+[dvDevice, CHANNEL] = ON
+[panel, BTN_VOLUME] = [mixer, VOL_LEVEL]
+
+---
+
+==================
+Boolean Literals
+==================
+
+isEnabled = TRUE
+flag = FALSE
+result = (x > 5) == TRUE
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (true)))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (false)))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))
+            (true)))))
+
+==================
+Character and Hex Literals
+==================
+
+letter = 'A'
+hex_value = $FF
+mixed = $1A + 20
+ascii_code = 'Z'
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (number_literal
+            (hex_literal))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (number_literal
+              (hex_literal))
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content)))))
+
+==================
+Device
+==================
+
+device = 5001:1:0
+address = 10001:2:0
+system = deviceID:1:systemID
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (device_literal
+            (number_literal
+              (decimal_literal))
+            (number_literal
+              (decimal_literal))
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (device_literal
+            (number_literal
+              (decimal_literal))
+            (number_literal
+              (decimal_literal))
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (device_literal
+            (identifier)
+            (number_literal
+              (decimal_literal))
+            (identifier)))))
+
+==================
+Complex Nested
+==================
+
+result = (a + b) * (c / d)
+complex = -(x * y) + (z && !flag)
+combined = func(a.field, [device, channel]) + value[i++]
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (identifier)))
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (identifier))))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (unary_expression
+              (parenthesized_expression
+                (binary_expression
+                  (identifier)
+                  (identifier))))
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (unary_expression
+                  (identifier)))))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (call_expression
+              (identifier)
+              (argument_list
+                (field_expression
+                  (identifier)
+                  (field_identifier))
+                (device_channel_reference_expression
+                  (identifier)
+                  (identifier))))
+            (subscript_expression
+              (identifier)
+              (update_expression
+                (identifier)))))))
+
+==================
+Bitwise
+==================
+
+// Basic bitwise operations
+mask1 = value & $FF
+mask2 = value | $80
+flags = flag1 ^ flag2
+shifted_left = data << 4
+shifted_right = data >> 2
+
+// Combined bitwise operations
+result = (value & $0F) | ($80 >> 1)
+combined = (flags & mask) ^ ~control
+complex = ((data & $FF) << 8) | (data2 & $FF)
+
+---
+
+(source_file
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (number_literal
+              (hex_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (number_literal
+              (hex_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (hex_literal))))
+            (parenthesized_expression
+              (binary_expression
+                (number_literal
+                  (hex_literal))
+                (number_literal
+                  (decimal_literal)))))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (identifier)))
+            (unary_expression
+              (identifier)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (parenthesized_expression
+                  (binary_expression
+                    (identifier)
+                    (number_literal
+                      (hex_literal))))
+                (number_literal
+                  (decimal_literal))))
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (hex_literal))))))))
