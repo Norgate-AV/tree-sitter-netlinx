@@ -717,8 +717,8 @@ module.exports = grammar({
                 keywords.persistent,
             ),
 
-        // type_specifier: ($) => choice($.primitive_type, $.custom_type),
-        type_specifier: ($) => choice($.primitive_type),
+        // type_specifier: ($) => choice($.intrinsic_type, $.custom_type),
+        type_specifier: ($) => choice($.intrinsic_type),
 
         custom_type: ($) => alias($.identifier, $.custom_type),
 
@@ -749,9 +749,9 @@ module.exports = grammar({
                 optional(";"),
             ),
 
-        primitive_type: ($) => choice($.intrinsic_type, $.structured_type),
+        intrinsic_type: ($) => choice($.primitive_type, $.structured_type),
 
-        intrinsic_type: (_) =>
+        primitive_type: (_) =>
             choice(
                 keywords.char,
                 keywords.widechar,
@@ -878,7 +878,7 @@ module.exports = grammar({
                     $.parenthesized_declarator,
                 ),
                 $._type_identifier,
-                $.primitive_type,
+                $.intrinsic_type,
             ),
 
         function_declarator: ($) =>

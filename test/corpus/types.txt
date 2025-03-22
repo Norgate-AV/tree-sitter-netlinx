@@ -1,0 +1,31 @@
+========================================
+Intrinsic types
+========================================
+
+char a;
+widechar a;
+integer a;
+sinteger a;
+long a;
+slong a;
+float a;
+double a;
+
+dev a;
+devchan a;
+devlev a;
+
+---
+
+(source_file
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (primitive_type)) (identifier))
+  (declaration (intrinsic_type (structured_type)) (identifier))
+  (declaration (intrinsic_type (structured_type)) (identifier))
+  (declaration (intrinsic_type (structured_type)) (identifier)))

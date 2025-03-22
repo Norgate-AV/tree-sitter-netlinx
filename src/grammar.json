@@ -2287,7 +2287,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "primitive_type"
+          "name": "intrinsic_type"
         }
       ]
     },
@@ -2439,12 +2439,12 @@
         }
       ]
     },
-    "primitive_type": {
+    "intrinsic_type": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "intrinsic_type"
+          "name": "primitive_type"
         },
         {
           "type": "SYMBOL",
@@ -2452,7 +2452,7 @@
         }
       ]
     },
-    "intrinsic_type": {
+    "primitive_type": {
       "type": "CHOICE",
       "members": [
         {
@@ -2933,7 +2933,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "primitive_type"
+          "name": "intrinsic_type"
         }
       ]
     },

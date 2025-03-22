@@ -45,18 +45,14 @@ z = (x + y) / 4
 
 ==================
 Logical Expressions
-:skip
 ==================
 
-DEFINE_START
 flag = (x > 10) && (y < 5)
 result = (a || b) && !c
 
 ---
 
 (source_file
-  (section
-    (define_start_section
       (expression_statement
         (assignment_expression
           left: (identifier)
@@ -64,15 +60,13 @@ result = (a || b) && !c
             left: (parenthesized_expression
               (binary_expression
                 left: (identifier)
-                right: (literal
-                  (number_literal
-                    (decimal_literal)))))
+                right: (number_literal
+                  (decimal_literal))))
             right: (parenthesized_expression
               (binary_expression
                 left: (identifier)
-                right: (literal
-                  (number_literal
-                    (decimal_literal))))))))
+                right: (number_literal
+                  (decimal_literal)))))))
       (expression_statement
         (assignment_expression
           left: (identifier)
@@ -82,68 +76,96 @@ result = (a || b) && !c
                 left: (identifier)
                 right: (identifier)))
             right: (unary_expression
-              argument: (identifier))))))))
+              argument: (identifier))))))
 
 ==================
 String Expressions
-:skip
 ==================
 
-DEFINE_START
 message = "'Hello, World!'"
 combined = "'Value: ',x"
 command = "'COMMAND-',CMD_TYPE,',',PARAM"
+"'Device: ', status.name, ' Power: ', ITOA(status.isPowered)"
 
 ---
 
 (source_file
-  (section
-    (define_start_section
+  (expression_statement
+        (assignment_expression
+          left: (identifier)
+          right: (string_expression
+            (string_literal
+              (string_content)))))
       (expression_statement
         (assignment_expression
           left: (identifier)
           right: (string_expression
-            (literal
-              (string_literal
-                (string_content))))))
-      (expression_statement
-        (assignment_expression
-          left: (identifier)
-          right: (string_expression
-            (literal
-              (string_literal
-                (string_content)))
+            (string_literal
+              (string_content))
             (identifier))))
       (expression_statement
         (assignment_expression
           left: (identifier)
           right: (string_expression
-            (literal
-              (string_literal
-                (string_content)))
+            (string_literal
+              (string_content))
             (identifier)
-            (literal
-              (string_literal
-                (string_content)))
-            (identifier)))))))
+            (string_literal
+              (string_content))
+            (identifier))))
+      (expression_statement
+        (string_expression
+          (string_literal
+            (string_content))
+          (field_expression
+            argument: (identifier)
+            field: (field_identifier))
+          (string_literal
+            (string_content))
+          (call_expression
+            function: (identifier)
+            arguments: (argument_list
+              (field_expression
+                argument: (identifier)
+                field: (field_identifier)))))))
 
 ==================
 Update Expressions
-:skip
 ==================
 
-DEFINE_START
 counter++
 value--
 
 ---
 
 (source_file
-  (section
-    (define_start_section
-      (expression_statement
+  (expression_statement
         (update_expression
           argument: (identifier)))
       (expression_statement
         (update_expression
-          argument: (identifier))))))
+          argument: (identifier))))
+
+================================================================================
+The comma operator
+================================================================================
+
+i--, j--;
+(i--, j--);
+
+--------------------------------------------------------------------------------
+
+(source_file
+      (expression_statement
+        (comma_expression
+          (update_expression
+            (identifier))
+          (update_expression
+            (identifier))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (update_expression
+              (identifier))
+            (update_expression
+              (identifier))))))
