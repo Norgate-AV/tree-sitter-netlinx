@@ -94,7 +94,6 @@ Complex Conditional Directives
 
 ==================
 Nested Conditional Directives
-:skip
 ==================
 
 #IF_DEFINED ADVANCED_FEATURES
@@ -122,13 +121,12 @@ Nested Conditional Directives
       (preproc_end_if))
     (expression_statement
       (assignment_expression
-        (identifier)
-        (identifier)))
+        left: (identifier)
+        right: (identifier)))
     (preproc_end_if)))
 
 ==================
 Conditional Directives With Code Blocks
-:skip
 ==================
 
 #IF_DEFINED ENABLE_SPECIAL_FUNCTIONS
@@ -154,67 +152,64 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
 ---
 
 (source_file
-  (preproc_if_defined
-    name: (identifier)
-    (define_function
-      (function_definition
-        (return_type: (intrinsic_type
-          (primitive_type)))
-        (name: (identifier))
-        (parameters: (parameter_list
-          (parameter_declaration
-            (type_specifier
-              (intrinsic_type
-                (primitive_type)))
-            (declarator: (identifier)))))
-        (body: (compound_statement
-          (return_statement
-            (binary_expression
-              (binary_expression
-                (identifier)
+      (preproc_if_defined
+        (identifier)
+        (define_function
+          (function_definition
+            (intrinsic_type
+              (primitive_type))
+            (identifier)
+            (parameter_list
+              (parameter_declaration
+                (intrinsic_type
+                  (primitive_type))
+                (identifier)))
+            (compound_statement
+              (return_statement
+                (binary_expression
+                  (binary_expression
+                    (identifier)
+                    (number_literal
+                      (decimal_literal)))
+                  (identifier))))))
+        (preproc_if_defined
+          (identifier)
+          (define_function
+            (function_definition
+              (char_array_return_type
                 (number_literal
                   (decimal_literal)))
-              (identifier)))))))
-    (preproc_if_defined
-      name: (identifier)
-      (define_function
-        (function_definition
-          (return_type: (char_array_return_type
-            (size: (number_literal
-              (decimal_literal)))))
-          (name: (identifier))
-          (parameters: (parameter_list
-            (parameter_declaration
-              (type_specifier
-                (intrinsic_type
-                  (primitive_type)))
-              (declarator: (identifier)))))
-          (body: (compound_statement
-            (return_statement
-              (string_expression
-                (string_literal
-                  (string_content))
-                (call_expression
-                  (function: (identifier))
-                  (arguments: (argument_list
-                    (identifier))))))))))
-      (preproc_end_if))
-    alternative: (preproc_else
-      (define_function
-        (function_definition
-          (return_type: (intrinsic_type
-            (primitive_type)))
-          (name: (identifier))
-          (parameters: (parameter_list
-            (parameter_declaration
-              (type_specifier
-                (intrinsic_type
-                  (primitive_type)))
-              (declarator: (identifier)))))
-          (body: (compound_statement
-            (return_statement
-              (identifier)))))))
-    (preproc_end_if)))
+              (identifier)
+              (parameter_list
+                (parameter_declaration
+                  (intrinsic_type
+                    (primitive_type))
+                  (identifier)))
+              (compound_statement
+                (return_statement
+                  (string_expression
+                    (string_literal
+                      (string_content))
+                    (call_expression
+                      (identifier)
+                      (argument_list
+                        (identifier))))))))
+          (preproc_end_if))
+        (preproc_else
+          (define_function
+            (function_definition
+              (intrinsic_type
+                (primitive_type))
+              (identifier)
+              (parameter_list
+                (parameter_declaration
+                  (intrinsic_type
+                    (primitive_type))
+                  (identifier)))
+              (compound_statement
+                (return_statement
+                  (identifier))))))
+        (preproc_end_if)))
 
 ==================
 Disable Warning Directive

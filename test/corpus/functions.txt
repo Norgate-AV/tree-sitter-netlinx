@@ -1,6 +1,5 @@
 ==================
-Basic Function Definition
-:skip
+Basic Function
 ==================
 
 DEFINE_FUNCTION INTEGER addNumbers(INTEGER a, INTEGER b) {
@@ -16,46 +15,44 @@ DEFINE_FUNCTION doSomething() {
 ---
 
 (source_file
-  (section
-    (define_function_section
-      (function_definition
-        return_type: (intrinsic_type)
-        name: (identifier)
-        parameters: (parameter_list
-          (parameter_declaration
-            type: (primitive_type
-              (intrinsic_type))
-            declarator: (identifier))
-          (parameter_declaration
-            type: (primitive_type
-              (intrinsic_type))
-            declarator: (identifier)))
-        body: (compound_statement
-          (return_statement
-            (binary_expression
-              left: (identifier)
-              right: (identifier)))))))
-  (section
-    (define_function_section
-      (function_definition
-        name: (identifier)
-        parameters: (parameter_list)
-        body: (compound_statement
-          (comment)
-          (local_variable_declaration
-            type: (primitive_type
-              (intrinsic_type))
-            name: (identifier))
-          (expression_statement
-            (assignment_expression
-              left: (identifier)
-              right: (literal
+      (define_function
+        (function_definition
+          (intrinsic_type
+            (primitive_type))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type))
+              (identifier))
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type))
+              (identifier)))
+          (compound_statement
+            (return_statement
+              (binary_expression
+                (identifier)
+                (identifier))))))
+      (define_function
+        (function_definition
+          (identifier)
+          (parameter_list)
+          (compound_statement
+            (comment)
+            (declaration
+              (storage_class_specifier)
+              (intrinsic_type
+                (primitive_type))
+              (identifier))
+            (expression_statement
+              (assignment_expression
+                (identifier)
                 (number_literal
-                  (decimal_literal))))))))))
+                  (decimal_literal))))))))
 
 ==================
 Array Return Function
-:skip
 ==================
 
 DEFINE_FUNCTION CHAR[10] getUsername() {
@@ -65,50 +62,41 @@ DEFINE_FUNCTION CHAR[10] getUsername() {
 ---
 
 (source_file
-  (section
-    (define_function_section
-      (function_definition
-        return_type: (char_array_return_type
-          size: (literal
+      (define_function
+        (function_definition
+          (char_array_return_type
             (number_literal
-              (decimal_literal))))
-        name: (identifier)
-        parameters: (parameter_list)
-        body: (compound_statement
-          (return_statement
-            (literal
+              (decimal_literal)))
+          (identifier)
+          (parameter_list)
+          (compound_statement
+            (return_statement
               (string_literal
-                (string_content)))))))))
+                (string_content)))))))
 
 ==================
 Function Call
-:skip
 ==================
 
-DEFINE_START
 result = addNumbers(5, 10)
 sendCommand(dvTP, cmd)
 
 ---
 
 (source_file
-  (section
-    (define_start_section
       (expression_statement
         (assignment_expression
-          left: (identifier)
-          right: (call_expression
-            function: (identifier)
-            arguments: (argument_list
-              (literal
-                (number_literal
-                  (decimal_literal)))
-              (literal
-                (number_literal
-                  (decimal_literal)))))))
+          (identifier)
+          (call_expression
+            (identifier)
+            (argument_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))))))
       (expression_statement
         (call_expression
-          function: (identifier)
-          arguments: (argument_list
+          (identifier)
+          (argument_list
             (identifier)
-            (identifier)))))))
+            (identifier)))))
