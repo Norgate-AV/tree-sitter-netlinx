@@ -3427,6 +3427,14 @@
         {
           "type": "SYMBOL",
           "name": "continue_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "devchan_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "devchan_operation_statement"
         }
       ]
     },
@@ -3476,6 +3484,14 @@
         {
           "type": "SYMBOL",
           "name": "continue_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "devchan_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "devchan_operation_statement"
         }
       ]
     },
@@ -3526,8 +3542,17 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "STRING",
-                    "value": ";"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ";"
+                      },
+                      {
+                        "type": "PATTERN",
+                        "value": "\\s*\\r?\\n"
+                      }
+                    ]
                   },
                   {
                     "type": "BLANK"
@@ -3990,6 +4015,123 @@
         ]
       }
     },
+    "devchan_statement": {
+      "type": "PREC_RIGHT",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "target",
+            "content": {
+              "type": "SYMBOL",
+              "name": "devchan_expression"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "STRING",
+              "value": "="
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "value",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "devchan_operation_statement": {
+      "type": "PREC_RIGHT",
+      "value": 36,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operation",
+            "content": {
+              "type": "SYMBOL",
+              "name": "devchan_operation"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "target",
+            "content": {
+              "type": "SYMBOL",
+              "name": "devchan_expression"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ";"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "devchan_operation": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "on",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "off",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "to",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "min_to",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "total_off",
+          "flags": "i"
+        },
+        {
+          "type": "PATTERN",
+          "value": "pulse",
+          "flags": "i"
+        }
+      ]
+    },
     "expression": {
       "type": "CHOICE",
       "members": [
@@ -4065,10 +4207,6 @@
         {
           "type": "SYMBOL",
           "name": "devchan_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "devchan_operation_expression"
         }
       ]
     },
@@ -5036,95 +5174,6 @@
           "value": ")"
         }
       ]
-    },
-    "devchan_operation": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "on",
-          "flags": "i"
-        },
-        {
-          "type": "PATTERN",
-          "value": "off",
-          "flags": "i"
-        },
-        {
-          "type": "PATTERN",
-          "value": "to",
-          "flags": "i"
-        },
-        {
-          "type": "PATTERN",
-          "value": "min_to",
-          "flags": "i"
-        },
-        {
-          "type": "PATTERN",
-          "value": "total_off",
-          "flags": "i"
-        },
-        {
-          "type": "PATTERN",
-          "value": "pulse",
-          "flags": "i"
-        }
-      ]
-    },
-    "devchan_operation_expression": {
-      "type": "PREC_RIGHT",
-      "value": 31,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "operation",
-            "content": {
-              "type": "SYMBOL",
-              "name": "devchan_operation"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "target",
-            "content": {
-              "type": "SYMBOL",
-              "name": "devchan_expression"
-            }
-          }
-        ]
-      }
-    },
-    "devchan_assignment_expression": {
-      "type": "PREC_RIGHT",
-      "value": -2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "devchan_expression"
-          },
-          {
-            "type": "FIELD",
-            "name": "operator",
-            "content": {
-              "type": "STRING",
-              "value": "="
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "value",
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
-          }
-        ]
-      }
     },
     "devchan_expression": {
       "type": "PREC_DYNAMIC",

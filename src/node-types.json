@@ -52,10 +52,6 @@
         "named": true
       },
       {
-        "type": "devchan_operation_expression",
-        "named": true
-      },
-      {
         "type": "device_literal",
         "named": true
       },
@@ -123,6 +119,14 @@
       },
       {
         "type": "continue_statement",
+        "named": true
+      },
+      {
+        "type": "devchan_operation_statement",
+        "named": true
+      },
+      {
+        "type": "devchan_statement",
         "named": true
       },
       {
@@ -529,6 +533,14 @@
           "named": true
         },
         {
+          "type": "devchan_operation_statement",
+          "named": true
+        },
+        {
+          "type": "devchan_statement",
+          "named": true
+        },
+        {
           "type": "expression_statement",
           "named": true
         },
@@ -887,7 +899,7 @@
     "fields": {}
   },
   {
-    "type": "devchan_operation_expression",
+    "type": "devchan_operation_statement",
     "named": true,
     "fields": {
       "operation": {
@@ -906,6 +918,42 @@
         "types": [
           {
             "type": "devchan_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "devchan_statement",
+    "named": true,
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "devchan_expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
             "named": true
           }
         ]
@@ -1580,6 +1628,14 @@
           "named": true
         },
         {
+          "type": "devchan_operation_statement",
+          "named": true
+        },
+        {
+          "type": "devchan_statement",
+          "named": true
+        },
+        {
           "type": "expression_statement",
           "named": true
         },
@@ -1717,6 +1773,14 @@
           "named": true
         },
         {
+          "type": "devchan_operation_statement",
+          "named": true
+        },
+        {
+          "type": "devchan_statement",
+          "named": true
+        },
+        {
           "type": "expression_statement",
           "named": true
         },
@@ -1850,6 +1914,14 @@
         },
         {
           "type": "define_module",
+          "named": true
+        },
+        {
+          "type": "devchan_operation_statement",
+          "named": true
+        },
+        {
+          "type": "devchan_statement",
           "named": true
         },
         {
@@ -2111,6 +2183,14 @@
         },
         {
           "type": "define_module",
+          "named": true
+        },
+        {
+          "type": "devchan_operation_statement",
+          "named": true
+        },
+        {
+          "type": "devchan_statement",
           "named": true
         },
         {

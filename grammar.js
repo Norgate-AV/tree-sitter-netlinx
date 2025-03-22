@@ -1017,6 +1017,8 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
+                $.devchan_statement,
+                $.devchan_operation_statement,
             ),
 
         _top_level_statement: ($) =>
@@ -1036,6 +1038,8 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
+                $.devchan_statement,
+                $.devchan_operation_statement,
             ),
 
         _top_level_expression_statement: ($) =>
@@ -1049,8 +1053,8 @@ module.exports = grammar({
                     // Standard expression statements
                     seq(
                         choice($.expression, $.comma_expression),
-                        optional(";"),
-                        // optional(choice(";", /\s*\r?\n/)),
+                        // optional(";"),
+                        optional(choice(";", /\s*\r?\n/)),
                     ),
                     // Dedicated handling for NetLinx custom functions as statements
                     // prec.dynamic(15, $.netlinx_custom_function),
@@ -1155,6 +1159,37 @@ module.exports = grammar({
             // Using prec.right here to allow for the optional semicolon
             prec.right(seq(keywords.continue, optional(";"))),
 
+        devchan_statement: ($) =>
+            prec.right(
+                PREC.ASSIGNMENT + 1,
+                seq(
+                    field("target", $.devchan_expression),
+                    field("operator", "="),
+                    field("value", $.expression),
+                    optional(";"),
+                ),
+            ),
+
+        devchan_operation_statement: ($) =>
+            prec.right(
+                PREC.FIELD + 20,
+                seq(
+                    field("operation", $.devchan_operation),
+                    field("target", $.devchan_expression),
+                    optional(";"),
+                ),
+            ),
+
+        devchan_operation: (_) =>
+            choice(
+                keywords.devchan_on,
+                keywords.devchan_off,
+                keywords.devchan_to,
+                keywords.devchan_min_to,
+                keywords.devchan_total_off,
+                keywords.devchan_pulse,
+            ),
+
         /**
          * Expressions
          */
@@ -1182,7 +1217,6 @@ module.exports = grammar({
                 $.device_literal,
                 $.parenthesized_expression,
                 $.devchan_expression,
-                $.devchan_operation_expression,
             ),
 
         assignment_expression: ($) =>
@@ -1309,37 +1343,6 @@ module.exports = grammar({
                 ")",
             ),
 
-        devchan_operation: (_) =>
-            choice(
-                keywords.devchan_on,
-                keywords.devchan_off,
-                keywords.devchan_to,
-                keywords.devchan_min_to,
-                keywords.devchan_total_off,
-                keywords.devchan_pulse,
-            ),
-
-        devchan_operation_expression: ($) =>
-            prec.right(
-                PREC.FIELD + 15,
-                seq(
-                    field("operation", $.devchan_operation),
-                    field("target", $.devchan_expression),
-                ),
-            ),
-
-        // When setting a channel: [device, channel] = value
-        devchan_assignment_expression: ($) =>
-            prec.right(
-                PREC.ASSIGNMENT,
-                seq(
-                    $.devchan_expression,
-                    field("operator", "="),
-                    field("value", $.expression),
-                ),
-            ),
-
-        // When reading a channel: value = [device, channel]
         devchan_expression: ($) =>
             prec.dynamic(
                 PREC.FIELD + 12,
