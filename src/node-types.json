@@ -126,10 +126,6 @@
         "named": true
       },
       {
-        "type": "devchan_statement",
-        "named": true
-      },
-      {
         "type": "expression_statement",
         "named": true
       },
@@ -537,10 +533,6 @@
           "named": true
         },
         {
-          "type": "devchan_statement",
-          "named": true
-        },
-        {
           "type": "expression_statement",
           "named": true
         },
@@ -918,42 +910,6 @@
         "types": [
           {
             "type": "devchan_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "devchan_statement",
-    "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "=",
-            "named": false
-          }
-        ]
-      },
-      "target": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "devchan_expression",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
             "named": true
           }
         ]
@@ -1632,10 +1588,6 @@
           "named": true
         },
         {
-          "type": "devchan_statement",
-          "named": true
-        },
-        {
           "type": "expression_statement",
           "named": true
         },
@@ -1777,10 +1729,6 @@
           "named": true
         },
         {
-          "type": "devchan_statement",
-          "named": true
-        },
-        {
           "type": "expression_statement",
           "named": true
         },
@@ -1918,10 +1866,6 @@
         },
         {
           "type": "devchan_operation_statement",
-          "named": true
-        },
-        {
-          "type": "devchan_statement",
           "named": true
         },
         {
@@ -2187,10 +2131,6 @@
         },
         {
           "type": "devchan_operation_statement",
-          "named": true
-        },
-        {
-          "type": "devchan_statement",
           "named": true
         },
         {

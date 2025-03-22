@@ -1017,7 +1017,7 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
-                $.devchan_statement,
+                // $.devchan_statement,
                 $.devchan_operation_statement,
             ),
 
@@ -1038,7 +1038,7 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
-                $.devchan_statement,
+                // $.devchan_statement,
                 $.devchan_operation_statement,
             ),
 
@@ -1159,16 +1159,16 @@ module.exports = grammar({
             // Using prec.right here to allow for the optional semicolon
             prec.right(seq(keywords.continue, optional(";"))),
 
-        devchan_statement: ($) =>
-            prec.right(
-                PREC.ASSIGNMENT + 1,
-                seq(
-                    field("target", $.devchan_expression),
-                    field("operator", "="),
-                    field("value", $.expression),
-                    optional(";"),
-                ),
-            ),
+        // devchan_statement: ($) =>
+        //     prec.right(
+        //         PREC.ASSIGNMENT + 1,
+        //         seq(
+        //             field("target", $.devchan_expression),
+        //             field("operator", "="),
+        //             field("value", $.expression),
+        //             optional(";"),
+        //         ),
+        //     ),
 
         devchan_operation_statement: ($) =>
             prec.right(

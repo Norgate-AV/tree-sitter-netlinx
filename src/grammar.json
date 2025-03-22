@@ -3430,10 +3430,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "devchan_statement"
-        },
-        {
-          "type": "SYMBOL",
           "name": "devchan_operation_statement"
         }
       ]
@@ -3484,10 +3480,6 @@
         {
           "type": "SYMBOL",
           "name": "continue_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "devchan_statement"
         },
         {
           "type": "SYMBOL",
@@ -3999,51 +3991,6 @@
             "type": "PATTERN",
             "value": "continue",
             "flags": "i"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": ";"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "devchan_statement": {
-      "type": "PREC_RIGHT",
-      "value": -1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "target",
-            "content": {
-              "type": "SYMBOL",
-              "name": "devchan_expression"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "operator",
-            "content": {
-              "type": "STRING",
-              "value": "="
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "value",
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
           },
           {
             "type": "CHOICE",
