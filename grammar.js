@@ -300,7 +300,7 @@ module.exports = grammar({
                     commaSep1(
                         choice(
                             $.devchan_expression,
-                            $.channel_range_expression,
+                            $.devchan_range_expression,
                             $.identifier,
                         ),
                     ),
@@ -309,19 +309,13 @@ module.exports = grammar({
                 ),
             ),
 
-        channel_range_expression: ($) =>
-            prec.dynamic(
-                PREC.FIELD,
-                seq($.devchan_expression, "..", $.devchan_expression),
-            ),
-
         latching_definition: ($) =>
             prec.right(
                 5,
                 seq(
                     choice(
                         $.devchan_expression,
-                        $.channel_range_expression,
+                        $.devchan_range_expression,
                         $.identifier,
                     ),
                     optional(";"),
@@ -330,17 +324,6 @@ module.exports = grammar({
 
         toggling_definition: ($) =>
             prec.right(5, seq(choice($.devchan_expression))),
-
-        // define_function_section: ($) =>
-        //     seq(keywords.define_function, $.function_definition),
-
-        // define_call_section: ($) =>
-        //     seq(keywords.define_call, $.call_definition),
-
-        // define_module_section: ($) =>
-        //     prec.right(
-        //         seq(keywords.define_module, repeat($.module_definition)),
-        //     ),
 
         module_definition: ($) =>
             prec.right(
@@ -1056,7 +1039,7 @@ module.exports = grammar({
             ),
 
         _top_level_expression_statement: ($) =>
-            seq(optional($._expression_not_binary), optional(";")),
+            seq($._expression_not_binary, optional(";")),
 
         expression_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
@@ -1195,13 +1178,10 @@ module.exports = grammar({
                 $.string_literal,
                 $.true,
                 $.false,
-                // $.char_literal,
                 $.device_literal,
                 $.parenthesized_expression,
                 $.devchan_expression,
-                // $.device_channel_assignment_expression,
-                // $.device_channel_reference_expression,
-                // $.device_operation_expression,
+                $.devchan_operation_expression,
             ),
 
         assignment_expression: ($) =>
@@ -1371,6 +1351,12 @@ module.exports = grammar({
                 ),
             ),
 
+        devchan_range_expression: ($) =>
+            prec.dynamic(
+                PREC.FIELD,
+                seq($.devchan_expression, "..", $.devchan_expression),
+            ),
+
         // String Expressions in NetLinx are like interpolated strings
         // or string template literals in other languages.
         string_expression: ($) => seq('"', commaSep($.expression), '"'),
@@ -1384,12 +1370,7 @@ module.exports = grammar({
             ),
 
         literal: ($) =>
-            choice(
-                $.number_literal,
-                $.string_literal,
-                // $.char_literal,
-                $.device_literal,
-            ),
+            choice($.number_literal, $.string_literal, $.device_literal),
 
         device_literal: ($) =>
             prec.right(
@@ -1410,13 +1391,6 @@ module.exports = grammar({
                 "'",
             ),
 
-        // char_literal: ($) =>
-        //     seq(
-        //         "'",
-        //         alias(token.immediate(prec(1, /[^'\n]/)), $.char_content),
-        //         "'",
-        //     ),
-
         number_literal: ($) => choice($.decimal_literal, $.hex_literal),
 
         decimal_literal: (_) => /[-+]?\d+/,
@@ -1426,9 +1400,9 @@ module.exports = grammar({
         true: (_) => netlinx.true,
         false: (_) => netlinx.false,
 
-        // identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
-        identifier: (_) =>
-            /(\p{XID_Start}|\$|_|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})(\p{XID_Continue}|\$|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})*/,
+        identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
+        // identifier: (_) =>
+        //     /(\p{XID_Start}|\$|_|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})(\p{XID_Continue}|\$|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})*/,
 
         // _type_identifier: ($) =>
         //     prec.right(2, alias($.identifier, $.type_identifier)),
@@ -1508,74 +1482,6 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
     };
 }
-
-// /**
-//  * Creates preprocessor conditional rules
-//  *
-//  * @param {string} suffix
-//  * @param {number} precedence
-//  *
-//  * @returns {RuleBuilders<string, string>}
-//  */
-// function preprocIf(suffix, precedence = PREC.DIRECTIVE) {
-//     /**
-//      *
-//      * @param {GrammarSymbols<string>} $
-//      *
-//      * @returns {Rule}
-//      */
-//     function contentForContext($) {
-//         switch (suffix) {
-//             case "":
-//                 return $._top_level_item;
-//             // case "_in_section":
-//             //     return $._section_item;
-//             case "_in_block":
-//                 return $._block_item;
-//             default:
-//                 return $._top_level_item;
-//         }
-//     }
-
-//     return {
-//         ["preproc_if_defined" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.if_defined),
-//                     field("name", $.identifier),
-//                     "\n",
-//                     repeat(contentForContext($)),
-//                     field("alternative", optional($.preproc_else)),
-//                     $.preproc_end_if,
-//                 ),
-//             ),
-
-//         ["preproc_if_not_defined" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.if_not_defined),
-//                     field("name", $.identifier),
-//                     "\n",
-//                     repeat(contentForContext($)),
-//                     field("alternative", optional($.preproc_else)),
-//                     $.preproc_end_if,
-//                 ),
-//             ),
-
-//         ["preproc_else" + suffix]: ($) =>
-//             prec(
-//                 precedence,
-//                 seq(
-//                     preprocessor(directives.else),
-//                     repeat(contentForContext($)),
-//                 ),
-//             ),
-
-//         ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
-//     };
-// }
 
 /**
  * Creates a preprocessor regex rule

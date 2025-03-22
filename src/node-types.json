@@ -52,6 +52,10 @@
         "named": true
       },
       {
+        "type": "devchan_operation_expression",
+        "named": true
+      },
+      {
         "type": "device_literal",
         "named": true
       },
@@ -871,6 +875,37 @@
         "types": [
           {
             "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "devchan_operation",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "devchan_operation_expression",
+    "named": true,
+    "fields": {
+      "operation": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "devchan_operation",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "devchan_expression",
             "named": true
           }
         ]

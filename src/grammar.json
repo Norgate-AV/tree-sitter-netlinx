@@ -961,7 +961,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "channel_range_expression"
+                    "name": "devchan_range_expression"
                   },
                   {
                     "type": "SYMBOL",
@@ -987,7 +987,7 @@
                         },
                         {
                           "type": "SYMBOL",
-                          "name": "channel_range_expression"
+                          "name": "devchan_range_expression"
                         },
                         {
                           "type": "SYMBOL",
@@ -1019,27 +1019,6 @@
         ]
       }
     },
-    "channel_range_expression": {
-      "type": "PREC_DYNAMIC",
-      "value": 16,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "devchan_expression"
-          },
-          {
-            "type": "STRING",
-            "value": ".."
-          },
-          {
-            "type": "SYMBOL",
-            "name": "devchan_expression"
-          }
-        ]
-      }
-    },
     "latching_definition": {
       "type": "PREC_RIGHT",
       "value": 5,
@@ -1055,7 +1034,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "channel_range_expression"
+                "name": "devchan_range_expression"
               },
               {
                 "type": "SYMBOL",
@@ -3504,16 +3483,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_expression_not_binary"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_expression_not_binary"
         },
         {
           "type": "CHOICE",
@@ -4094,6 +4065,10 @@
         {
           "type": "SYMBOL",
           "name": "devchan_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "devchan_operation_expression"
         }
       ]
     },
@@ -5191,6 +5166,27 @@
         ]
       }
     },
+    "devchan_range_expression": {
+      "type": "PREC_DYNAMIC",
+      "value": 16,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "devchan_expression"
+          },
+          {
+            "type": "STRING",
+            "value": ".."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "devchan_expression"
+          }
+        ]
+      }
+    },
     "string_expression": {
       "type": "SEQ",
       "members": [
@@ -5445,7 +5441,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "(\\p{XID_Start}|\\$|_|\\\\u[0-9A-Fa-f]{4}|\\\\U[0-9A-Fa-f]{8})(\\p{XID_Continue}|\\$|\\\\u[0-9A-Fa-f]{4}|\\\\U[0-9A-Fa-f]{8})*"
+      "value": "[_a-zA-Z][_a-zA-Z0-9]*"
     },
     "_type_identifier": {
       "type": "ALIAS",
