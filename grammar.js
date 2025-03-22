@@ -299,7 +299,7 @@ module.exports = grammar({
                     "(",
                     commaSep1(
                         choice(
-                            $.device_channel_reference_expression,
+                            $.devchan_expression,
                             $.channel_range_expression,
                             $.identifier,
                         ),
@@ -312,11 +312,7 @@ module.exports = grammar({
         channel_range_expression: ($) =>
             prec.dynamic(
                 PREC.FIELD,
-                seq(
-                    $.device_channel_reference_expression,
-                    "..",
-                    $.device_channel_reference_expression,
-                ),
+                seq($.devchan_expression, "..", $.devchan_expression),
             ),
 
         latching_definition: ($) =>
@@ -324,7 +320,7 @@ module.exports = grammar({
                 5,
                 seq(
                     choice(
-                        $.device_channel_reference_expression,
+                        $.devchan_expression,
                         $.channel_range_expression,
                         $.identifier,
                     ),
@@ -333,7 +329,7 @@ module.exports = grammar({
             ),
 
         toggling_definition: ($) =>
-            prec.right(5, seq(choice($.device_channel_reference_expression))),
+            prec.right(5, seq(choice($.devchan_expression))),
 
         // define_function_section: ($) =>
         //     seq(keywords.define_function, $.function_definition),
@@ -1202,9 +1198,10 @@ module.exports = grammar({
                 // $.char_literal,
                 $.device_literal,
                 $.parenthesized_expression,
-                $.device_channel_assignment_expression,
-                $.device_channel_reference_expression,
-                $.device_operation_expression,
+                $.devchan_expression,
+                // $.device_channel_assignment_expression,
+                // $.device_channel_reference_expression,
+                // $.device_operation_expression,
             ),
 
         assignment_expression: ($) =>
@@ -1224,7 +1221,7 @@ module.exports = grammar({
                 $.field_expression,
                 $.subscript_expression,
                 $.parenthesized_expression,
-                // $.device_channel_reference_expression,
+                $.devchan_expression,
             ),
 
         unary_expression: ($) =>
@@ -1331,7 +1328,7 @@ module.exports = grammar({
                 ")",
             ),
 
-        device_operation_keyword: (_) =>
+        devchan_operation: (_) =>
             choice(
                 keywords.devchan_on,
                 keywords.devchan_off,
@@ -1341,28 +1338,28 @@ module.exports = grammar({
                 keywords.devchan_pulse,
             ),
 
-        device_operation_expression: ($) =>
+        devchan_operation_expression: ($) =>
             prec.right(
                 PREC.FIELD + 15,
                 seq(
-                    field("operation", $.device_operation_keyword),
-                    field("target", $.device_channel_reference_expression),
+                    field("operation", $.devchan_operation),
+                    field("target", $.devchan_expression),
                 ),
             ),
 
         // When setting a channel: [device, channel] = value
-        device_channel_assignment_expression: ($) =>
+        devchan_assignment_expression: ($) =>
             prec.right(
                 PREC.ASSIGNMENT,
                 seq(
-                    $.device_channel_reference_expression,
+                    $.devchan_expression,
                     field("operator", "="),
                     field("value", $.expression),
                 ),
             ),
 
         // When reading a channel: value = [device, channel]
-        device_channel_reference_expression: ($) =>
+        devchan_expression: ($) =>
             prec.dynamic(
                 PREC.FIELD + 12,
                 seq(

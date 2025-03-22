@@ -472,7 +472,7 @@ combined = func(a.field, [device, channel]) + value[i++]
                 (field_expression
                   (identifier)
                   (field_identifier))
-                (device_channel_reference_expression
+                (devchan_expression
                   (identifier)
                   (identifier))))
             (subscript_expression

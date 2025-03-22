@@ -48,19 +48,11 @@
         "named": true
       },
       {
-        "type": "device_channel_assignment_expression",
-        "named": true
-      },
-      {
-        "type": "device_channel_reference_expression",
+        "type": "devchan_expression",
         "named": true
       },
       {
         "type": "device_literal",
-        "named": true
-      },
-      {
-        "type": "device_operation_expression",
         "named": true
       },
       {
@@ -280,6 +272,10 @@
         "types": [
           {
             "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "devchan_expression",
             "named": true
           },
           {
@@ -856,43 +852,7 @@
     }
   },
   {
-    "type": "device_channel_assignment_expression",
-    "named": true,
-    "fields": {
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "=",
-            "named": false
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "device_channel_reference_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "device_channel_reference_expression",
+    "type": "devchan_expression",
     "named": true,
     "fields": {
       "channel": {
@@ -952,37 +912,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "device_operation_expression",
-    "named": true,
-    "fields": {
-      "operation": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "device_operation_keyword",
-            "named": true
-          }
-        ]
-      },
-      "target": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "device_channel_reference_expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "device_operation_keyword",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "else_clause",

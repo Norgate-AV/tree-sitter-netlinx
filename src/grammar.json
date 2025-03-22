@@ -957,7 +957,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "device_channel_reference_expression"
+                    "name": "devchan_expression"
                   },
                   {
                     "type": "SYMBOL",
@@ -983,7 +983,7 @@
                       "members": [
                         {
                           "type": "SYMBOL",
-                          "name": "device_channel_reference_expression"
+                          "name": "devchan_expression"
                         },
                         {
                           "type": "SYMBOL",
@@ -1027,7 +1027,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "device_channel_reference_expression"
+            "name": "devchan_expression"
           },
           {
             "type": "STRING",
@@ -1035,7 +1035,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "device_channel_reference_expression"
+            "name": "devchan_expression"
           }
         ]
       }
@@ -1051,7 +1051,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "device_channel_reference_expression"
+                "name": "devchan_expression"
               },
               {
                 "type": "SYMBOL",
@@ -1089,7 +1089,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "device_channel_reference_expression"
+                "name": "devchan_expression"
               }
             ]
           }
@@ -4093,15 +4093,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "device_channel_assignment_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "device_channel_reference_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "device_operation_expression"
+          "name": "devchan_expression"
         }
       ]
     },
@@ -4160,6 +4152,10 @@
         {
           "type": "SYMBOL",
           "name": "parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "devchan_expression"
         }
       ]
     },
@@ -5066,7 +5062,7 @@
         }
       ]
     },
-    "device_operation_keyword": {
+    "devchan_operation": {
       "type": "CHOICE",
       "members": [
         {
@@ -5101,7 +5097,7 @@
         }
       ]
     },
-    "device_operation_expression": {
+    "devchan_operation_expression": {
       "type": "PREC_RIGHT",
       "value": 31,
       "content": {
@@ -5112,7 +5108,7 @@
             "name": "operation",
             "content": {
               "type": "SYMBOL",
-              "name": "device_operation_keyword"
+              "name": "devchan_operation"
             }
           },
           {
@@ -5120,13 +5116,13 @@
             "name": "target",
             "content": {
               "type": "SYMBOL",
-              "name": "device_channel_reference_expression"
+              "name": "devchan_expression"
             }
           }
         ]
       }
     },
-    "device_channel_assignment_expression": {
+    "devchan_assignment_expression": {
       "type": "PREC_RIGHT",
       "value": -2,
       "content": {
@@ -5134,7 +5130,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "device_channel_reference_expression"
+            "name": "devchan_expression"
           },
           {
             "type": "FIELD",
@@ -5155,7 +5151,7 @@
         ]
       }
     },
-    "device_channel_reference_expression": {
+    "devchan_expression": {
       "type": "PREC_DYNAMIC",
       "value": 28,
       "content": {
