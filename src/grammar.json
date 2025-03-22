@@ -43,7 +43,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "struct_definition"
+          "name": "type_definition"
         },
         {
           "type": "SYMBOL",
@@ -2445,7 +2445,7 @@
       "named": true,
       "value": "custom_type"
     },
-    "struct_definition": {
+    "type_definition": {
       "type": "SEQ",
       "members": [
         {

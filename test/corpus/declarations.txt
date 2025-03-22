@@ -142,3 +142,128 @@ dvTP = 10001:1:0
               (decimal_literal))
             (number_literal
               (decimal_literal))))))
+
+=================
+Custom Types
+=================
+
+STRUCTURE DeviceStatus {
+    CHAR name[50]
+    INTEGER isPowered
+    INTEGER volume
+}
+
+struct Person {
+    char name[50]
+    integer age
+}
+
+---
+
+(source_file
+      (type_definition
+        (identifier)
+        (field_declaration_list
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (identifier))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (identifier))))
+      (type_definition
+        (identifier)
+        (field_declaration_list
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (identifier)))))
+
+==================
+Basic Function
+==================
+
+DEFINE_FUNCTION INTEGER addNumbers(INTEGER a, INTEGER b) {
+    RETURN a + b
+}
+
+DEFINE_FUNCTION doSomething() {
+    // No return value
+    stack_var integer x
+    x = 5
+}
+
+---
+
+(source_file
+      (define_function
+        (function_definition
+          (intrinsic_type
+            (primitive_type))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type))
+              (identifier))
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type))
+              (identifier)))
+          (compound_statement
+            (return_statement
+              (binary_expression
+                (identifier)
+                (identifier))))))
+      (define_function
+        (function_definition
+          (identifier)
+          (parameter_list)
+          (compound_statement
+            (comment)
+            (declaration
+              (storage_class_specifier)
+              (intrinsic_type
+                (primitive_type))
+              (identifier))
+            (expression_statement
+              (assignment_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))))))
+
+==================
+Array Return Function
+==================
+
+DEFINE_FUNCTION CHAR[10] getUsername() {
+    RETURN 'admin'
+}
+
+---
+
+(source_file
+      (define_function
+        (function_definition
+          (char_array_return_type
+            (number_literal
+              (decimal_literal)))
+          (identifier)
+          (parameter_list)
+          (compound_statement
+            (return_statement
+              (string_literal
+                (string_content)))))))

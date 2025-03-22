@@ -52,10 +52,10 @@ module.exports = grammar({
         // [$.custom_type, $._declarator],
         [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
-        // [$.array_declarator, $.device_channel_reference_expression],
+        // [$.array_declarator, $.devchan_expression],
         // [$._type_identifier, $.identifier],
-        // [$.device_channel_reference_expression, $.subscript_expression],
-        // [$.assignment_expression, $.device_channel_assignment_expression],
+        // [$.devchan_expression, $.subscript_expression],
+        // [$.assignment_expression, $.devchan_expression],
         // [$._top_level_item, $.section],
         // [$.latching_definition, $.toggling_definition],
         // [$.latching_definition, $.toggling_definition, $.expression],
@@ -114,7 +114,7 @@ module.exports = grammar({
 
                 // Top-Level Declarations
                 $.declaration,
-                $.struct_definition,
+                $.type_definition,
                 // $.event_definition,
                 // $.combine_definition,
                 // $.connect_level_definition,
@@ -140,7 +140,7 @@ module.exports = grammar({
         //         // Declarations and definitions
         //         // $.function_definition,
         //         $.declaration,
-        //         // $.struct_definition,
+        //         // $.type_definition,
 
         //         // Statements
         //         $.statement,
@@ -153,7 +153,7 @@ module.exports = grammar({
             choice(
                 // Definitions
                 // $.define_function,
-                // $.struct_definition,
+                // $.type_definition,
                 // $.define_call,
                 // $.define_module,
 
@@ -726,7 +726,7 @@ module.exports = grammar({
 
         custom_type: ($) => alias($.identifier, $.custom_type),
 
-        struct_definition: ($) =>
+        type_definition: ($) =>
             seq(
                 choice(keywords.struct, keywords.structure),
                 choice(
@@ -1050,6 +1050,7 @@ module.exports = grammar({
                     seq(
                         choice($.expression, $.comma_expression),
                         optional(";"),
+                        // optional(choice(";", /\s*\r?\n/)),
                     ),
                     // Dedicated handling for NetLinx custom functions as statements
                     // prec.dynamic(15, $.netlinx_custom_function),
@@ -1356,6 +1357,10 @@ module.exports = grammar({
                 PREC.FIELD,
                 seq($.devchan_expression, "..", $.devchan_expression),
             ),
+        // prec.dynamic(
+        // PREC.FIELD,
+        // seq($.subscript_expression, "..", $.subscript_expression),
+        // ),
 
         // String Expressions in NetLinx are like interpolated strings
         // or string template literals in other languages.

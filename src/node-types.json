@@ -1636,11 +1636,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "switch_statement",
           "named": true
         },
         {
-          "type": "switch_statement",
+          "type": "type_definition",
           "named": true
         },
         {
@@ -1777,11 +1777,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "switch_statement",
           "named": true
         },
         {
-          "type": "switch_statement",
+          "type": "type_definition",
           "named": true
         },
         {
@@ -1913,11 +1913,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "switch_statement",
           "named": true
         },
         {
-          "type": "switch_statement",
+          "type": "type_definition",
           "named": true
         },
         {
@@ -2170,11 +2170,11 @@
           "named": true
         },
         {
-          "type": "struct_definition",
+          "type": "switch_statement",
           "named": true
         },
         {
-          "type": "switch_statement",
+          "type": "type_definition",
           "named": true
         },
         {
@@ -2217,32 +2217,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "struct_definition",
-    "named": true,
-    "fields": {
-      "body": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "field_declaration_list",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -2296,6 +2270,32 @@
         "types": [
           {
             "type": "parenthesized_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "type_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "field_declaration_list",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
