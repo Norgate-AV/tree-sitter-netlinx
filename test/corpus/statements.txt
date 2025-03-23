@@ -366,3 +366,306 @@ SELECT {
             (call_expression
             function: (identifier)
             arguments: (argument_list)))))))
+
+==================
+Dangling else and nested if statements
+==================
+
+if (a)
+    if (b)
+        1;
+    else
+        2;
+
+if (x) {
+    if (y) {
+        3;
+    }
+} else {
+    4;
+}
+
+if (c)
+    5;
+else if (d)
+    6;
+else if (e) {
+    7;
+} else {
+    8;
+}
+
+---
+
+(source_file
+      (if_statement
+        (parenthesized_expression
+          (identifier))
+        (if_statement
+          (parenthesized_expression
+            (identifier))
+          (expression_statement
+            (number_literal
+              (decimal_literal)))
+          (else_clause
+            (expression_statement
+              (number_literal
+                (decimal_literal))))))
+      (if_statement
+        (parenthesized_expression
+          (identifier))
+        (compound_statement
+          (if_statement
+            (parenthesized_expression
+              (identifier))
+            (compound_statement
+              (expression_statement
+                (number_literal
+                  (decimal_literal))))))
+        (else_clause
+          (compound_statement
+            (expression_statement
+              (number_literal
+                (decimal_literal))))))
+      (if_statement
+        (parenthesized_expression
+          (identifier))
+        (expression_statement
+          (number_literal
+            (decimal_literal)))
+        (else_clause
+          (if_statement
+            (parenthesized_expression
+              (identifier))
+            (expression_statement
+              (number_literal
+                (decimal_literal)))
+            (else_clause
+              (if_statement
+                (parenthesized_expression
+                  (identifier))
+                (compound_statement
+                  (expression_statement
+                    (number_literal
+                      (decimal_literal))))
+                (else_clause
+                  (compound_statement
+                    (expression_statement
+                      (number_literal
+                        (decimal_literal)))))))))))
+
+==================
+Break and continue in loops
+==================
+
+for (i = 0; i < 10; i++) {
+    if (i == 5)
+        break;
+
+    if (i == 3)
+        continue;
+
+    doSomething(i);
+}
+
+while (running) {
+    if (error)
+        break;
+
+    if (skip)
+        continue;
+
+    process();
+}
+
+---
+
+(source_file
+      (for_statement
+        (assignment_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (binary_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (update_expression
+          (identifier))
+        (compound_statement
+          (if_statement
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))
+            (break_statement))
+          (if_statement
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))
+            (continue_statement))
+          (expression_statement
+            (call_expression
+              (identifier)
+              (argument_list
+                (identifier))))))
+      (while_statement
+        (parenthesized_expression
+          (identifier))
+        (compound_statement
+          (if_statement
+            (parenthesized_expression
+              (identifier))
+            (break_statement))
+          (if_statement
+            (parenthesized_expression
+              (identifier))
+            (continue_statement))
+          (expression_statement
+            (call_expression
+              (identifier)
+              (argument_list))))))
+
+==================
+Nested loops with break/continue
+==================
+
+for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+        if (i * j > 50)
+            break;
+
+        if ((i + j) % 2 == 0)
+            continue;
+
+        process(i, j);
+    }
+}
+
+---
+
+(source_file
+      (for_statement
+        (assignment_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (binary_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (update_expression
+          (identifier))
+        (compound_statement
+          (for_statement
+            (assignment_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (binary_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (update_expression
+              (identifier))
+            (compound_statement
+              (if_statement
+                (parenthesized_expression
+                  (binary_expression
+                    (binary_expression
+                      (identifier)
+                      (identifier))
+                    (number_literal
+                      (decimal_literal))))
+                (break_statement))
+              (if_statement
+                (parenthesized_expression
+                  (binary_expression
+                    (binary_expression
+                      (parenthesized_expression
+                        (binary_expression
+                          (identifier)
+                          (identifier)))
+                      (number_literal
+                        (decimal_literal)))
+                    (number_literal
+                      (decimal_literal))))
+                (continue_statement))
+              (expression_statement
+                (call_expression
+                  (identifier)
+                  (argument_list
+                    (identifier)
+                    (identifier)))))))))
+
+==================
+Switch variations
+==================
+
+switch (x) {
+    // Empty case with fallthrough
+    case 1:
+    case 2:
+        doSomething();
+        // No break - intentional fallthrough
+    case 3:
+        doSomethingElse();
+        break;
+    // Empty default
+    default:
+}
+
+switch (empty) {
+    // Empty switch body
+}
+
+---
+
+(source_file
+      (switch_statement
+        (parenthesized_expression
+          (identifier))
+        (compound_statement
+          (comment)
+          (case_statement
+            (number_literal
+              (decimal_literal)))
+          (case_statement
+            (number_literal
+              (decimal_literal))
+            (expression_statement
+              (call_expression
+                (identifier)
+                (argument_list))))
+          (comment)
+          (case_statement
+            (number_literal
+              (decimal_literal))
+            (expression_statement
+              (call_expression
+                (identifier)
+                (argument_list)))
+            (break_statement))
+          (comment)
+          (case_statement)))
+      (switch_statement
+        (parenthesized_expression
+          (identifier))
+        (compound_statement
+          (comment))))
+
+==================
+Empty statement bodies
+:error
+==================
+
+if (condition);
+
+for (;;);
+
+while (true);
+
+---
