@@ -74,6 +74,10 @@
         "named": true
       },
       {
+        "type": "devchan_range_expression",
+        "named": true
+      },
+      {
         "type": "device_literal",
         "named": true
       },
@@ -290,6 +294,32 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "array_return_type",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type_specifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -590,22 +620,6 @@
     }
   },
   {
-    "type": "char_array_return_type",
-    "named": true,
-    "fields": {
-      "size": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "comma_expression",
     "named": true,
     "fields": {
@@ -645,6 +659,18 @@
       "types": [
         {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "define_call",
+          "named": true
+        },
+        {
+          "type": "define_function",
+          "named": true
+        },
+        {
+          "type": "define_module",
           "named": true
         },
         {
@@ -801,6 +827,18 @@
           "named": true
         },
         {
+          "type": "define_call",
+          "named": true
+        },
+        {
+          "type": "define_function",
+          "named": true
+        },
+        {
+          "type": "define_module",
+          "named": true
+        },
+        {
           "type": "preproc_define",
           "named": true
         },
@@ -845,6 +883,18 @@
       "types": [
         {
           "type": "declaration",
+          "named": true
+        },
+        {
+          "type": "define_call",
+          "named": true
+        },
+        {
+          "type": "define_function",
+          "named": true
+        },
+        {
+          "type": "define_module",
           "named": true
         },
         {
@@ -937,6 +987,42 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "devchan_range_expression",
+    "named": true,
+    "fields": {
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "devchan_expression",
+            "named": true
+          }
+        ]
+      },
+      "start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "devchan_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "range_operator",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1247,11 +1333,11 @@
         "required": false,
         "types": [
           {
-            "type": "char_array_return_type",
+            "type": "array_return_type",
             "named": true
           },
           {
-            "type": "intrinsic_type",
+            "type": "type_specifier",
             "named": true
           }
         ]
@@ -2718,6 +2804,10 @@
   },
   {
     "type": "preproc_arg",
+    "named": true
+  },
+  {
+    "type": "range_operator",
     "named": true
   },
   {

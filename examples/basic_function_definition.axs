@@ -7,3 +7,7 @@ DEFINE_FUNCTION doSomething() {
     stack_var integer x
     x = 5
 }
+
+define_function DeviceState GetDeviceState(DEV device) {
+    RETURN device.state
+}

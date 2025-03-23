@@ -80,7 +80,19 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "define_function"
+        },
+        {
+          "type": "SYMBOL",
           "name": "type_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define_module"
         },
         {
           "type": "SYMBOL",
@@ -1852,25 +1864,32 @@
         }
       ]
     },
-    "char_array_return_type": {
+    "array_return_type": {
       "type": "SEQ",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "char",
-          "flags": "i"
+          "type": "SYMBOL",
+          "name": "type_specifier"
         },
         {
           "type": "STRING",
           "value": "["
         },
         {
-          "type": "FIELD",
-          "name": "size",
-          "content": {
-            "type": "SYMBOL",
-            "name": "expression"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "size",
+              "content": {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -1885,80 +1904,23 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "FIELD",
-              "name": "name",
-              "content": {
-                "type": "SYMBOL",
-                "name": "identifier"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "parameters",
-              "content": {
-                "type": "SYMBOL",
-                "name": "parameter_list"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "body",
-              "content": {
-                "type": "SYMBOL",
-                "name": "compound_statement"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "return_type",
-              "content": {
-                "type": "SYMBOL",
-                "name": "char_array_return_type"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "name",
-              "content": {
-                "type": "SYMBOL",
-                "name": "identifier"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "parameters",
-              "content": {
-                "type": "SYMBOL",
-                "name": "parameter_list"
-              }
-            },
-            {
-              "type": "FIELD",
-              "name": "body",
-              "content": {
-                "type": "SYMBOL",
-                "name": "compound_statement"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
               "type": "CHOICE",
               "members": [
                 {
                   "type": "FIELD",
                   "name": "return_type",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "intrinsic_type"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "type_specifier"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "array_return_type"
+                      }
+                    ]
                   }
                 },
                 {
@@ -3381,6 +3343,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "devchan_range_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "devchan_expression"
         }
       ]
@@ -4397,18 +4363,33 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "devchan_expression"
+            "type": "FIELD",
+            "name": "start",
+            "content": {
+              "type": "SYMBOL",
+              "name": "devchan_expression"
+            }
           },
           {
-            "type": "STRING",
-            "value": ".."
+            "type": "SYMBOL",
+            "name": "range_operator"
           },
           {
-            "type": "SYMBOL",
-            "name": "devchan_expression"
+            "type": "FIELD",
+            "name": "end",
+            "content": {
+              "type": "SYMBOL",
+              "name": "devchan_expression"
+            }
           }
         ]
+      }
+    },
+    "range_operator": {
+      "type": "TOKEN",
+      "content": {
+        "type": "STRING",
+        "value": ".."
       }
     },
     "string_expression": {

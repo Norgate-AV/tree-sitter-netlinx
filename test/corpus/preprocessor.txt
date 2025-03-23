@@ -176,7 +176,9 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
           (identifier)
           (define_function
             (function_definition
-              (char_array_return_type
+              (array_return_type
+                (intrinsic_type
+                  (primitive_type))
                 (number_literal
                   (decimal_literal)))
               (identifier)

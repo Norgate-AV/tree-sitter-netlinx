@@ -41,9 +41,6 @@ const PREC = {
 module.exports = grammar({
     name: "netlinx",
 
-    // Add this option for case insensitivity globally
-    // word: ($) => $.identifier,
-
     conflicts: ($) => [
         // [$.type_specifier, $._declarator],
         [$.type_specifier, $.expression],
@@ -136,28 +133,14 @@ module.exports = grammar({
                 $.preproc_disable_warning,
             ),
 
-        // Section-level context - matches <language statement list>
-        // _section_item: ($) =>
-        //     choice(
-        //         // Declarations and definitions
-        //         // $.function_definition,
-        //         $.declaration,
-        //         // $.type_definition,
-
-        //         // Statements
-        //         $.statement,
-        //         $.compound_statement,
-        //         $.expression_statement,
-        //     ),
-
         // Block-level context - matches <compound statement inside {}>
         _block_item: ($) =>
             choice(
                 // Definitions
-                // $.define_function,
+                $.define_function,
                 $.type_definition,
-                // $.define_call,
-                // $.define_module,
+                $.define_call,
+                $.define_module,
 
                 // Block-level declarations
                 $.declaration,
@@ -749,48 +732,27 @@ module.exports = grammar({
         structured_type: (_) =>
             choice(keywords.dev, keywords.devlev, keywords.devchan),
 
-        char_array_return_type: ($) =>
-            seq(keywords.char, "[", field("size", $.expression), "]"),
+        array_return_type: ($) =>
+            seq(
+                $.type_specifier,
+                "[",
+                optional(field("size", $.expression)),
+                "]",
+            ),
 
         function_definition: ($) =>
             choice(
-                // // No return type (void)
                 seq(
+                    optional(
+                        field(
+                            "return_type",
+                            choice($.type_specifier, $.array_return_type),
+                        ),
+                    ),
                     field("name", $.identifier),
                     field("parameters", $.parameter_list),
                     field("body", $.compound_statement),
                 ),
-
-                // // Char array return type
-                seq(
-                    field("return_type", $.char_array_return_type),
-                    field("name", $.identifier),
-                    field("parameters", $.parameter_list),
-                    field("body", $.compound_statement),
-                ),
-
-                // Simple intrinsic return type
-                seq(
-                    optional(field("return_type", $.intrinsic_type)),
-                    field("name", $.identifier),
-                    field("parameters", $.parameter_list),
-                    field("body", $.compound_statement),
-                ),
-                // seq(
-                //     $._declaration_specifiers,
-                //     // optional(
-                //     //     field(
-                //     //         "return_type",
-                //     //         seq(
-                //     //             $.intrinsic_type,
-                //     //             optional(seq("[", optional($.expression), "]")),
-                //     //         ),
-                //     //     ),
-                //     // ),
-                //     // optional(field("return_type", $.type_specifier)),
-                //     field("declarator", $._declarator),
-                //     field("body", $.compound_statement),
-                // ),
             ),
 
         call_definition: ($) =>
@@ -1372,7 +1334,7 @@ module.exports = grammar({
                     field("start", $.devchan_expression),
                     $.range_operator,
                     field("end", $.devchan_expression),
-            ),
+                ),
             ),
 
         range_operator: (_) => token(".."),

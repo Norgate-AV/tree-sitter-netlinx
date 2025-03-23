@@ -310,14 +310,36 @@ value = items[index + 1]
 
 ==================
 Devchan
-:skip
 ==================
 
 status = [dvTP, 1]
-[dvDevice, CHANNEL] = ON
+[dvDevice, CHANNEL] = true
 [panel, BTN_VOLUME] = [mixer, VOL_LEVEL]
 
 ---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (devchan_expression
+            (identifier)
+            (identifier))
+          (true)))
+      (expression_statement
+        (assignment_expression
+          (devchan_expression
+            (identifier)
+            (identifier))
+          (devchan_expression
+            (identifier)
+            (identifier)))))
 
 ==================
 Boolean Literals
@@ -578,3 +600,159 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
                 (identifier)
                 (number_literal
                   (hex_literal))))))))
+
+===============
+Devchan range
+===============
+
+([vdvObject, 1]..[vdvObject,100])
+[dvRelays, 1]..[dvRelays,8]
+
+---
+
+(source_file
+      (expression_statement
+        (parenthesized_expression
+          (devchan_range_expression
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (range_operator)
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal))))))
+      (expression_statement
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal))))))
+
+=================
+Parenthesized
+=================
+
+(vdvObject, dvTP1, dvTP2)
+([vdvObject, 1], [vdvObject, 2])
+([dvRelays, 5], [dvRelays, 6])
+
+---
+
+(source_file
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (comma_expression
+              (identifier)
+              (identifier)))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal))))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))))))
+
+======================
+Array Operations
+======================
+
+// Array assignments
+myArray[0] = 123
+myArray[i + 1] = x * 2
+
+// Array subscripts in expressions
+myVar = myArray[5]
+result = myArray[i] + myArray[j]
+
+// Multi-dimensional access
+matrix[0][1] = 42
+value = grid[x][y][z]
+
+---
+
+(source_file
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (subscript_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (assignment_expression
+          (subscript_expression
+            (identifier)
+            (binary_expression
+              (identifier)
+              (number_literal
+                (decimal_literal))))
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (subscript_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (subscript_expression
+              (identifier)
+              (identifier))
+            (subscript_expression
+              (identifier)
+              (identifier)))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (subscript_expression
+            (subscript_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (number_literal
+              (decimal_literal)))
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (subscript_expression
+            (subscript_expression
+              (subscript_expression
+                (identifier)
+                (identifier))
+              (identifier))
+            (identifier)))))

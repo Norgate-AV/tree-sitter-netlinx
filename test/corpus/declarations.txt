@@ -383,7 +383,9 @@ DEFINE_FUNCTION CHAR[10] getUsername() {
 (source_file
       (define_function
         (function_definition
-          (char_array_return_type
+          (array_return_type
+            (intrinsic_type
+              (primitive_type))
             (number_literal
               (decimal_literal)))
           (identifier)
@@ -410,6 +412,9 @@ CHAR grid[][2][2]
 // Array declarations with modifiers
 CONSTANT VOLATILE INTEGER flags[]
 PERSISTENT CHAR names[][50]
+
+// Array with complex initializers
+INTEGER values[] = {1, 2, 3 + x, func()}
 
 ---
 
@@ -493,4 +498,144 @@ PERSISTENT CHAR names[][50]
           (array_declarator
             (identifier))
           (number_literal
-            (decimal_literal)))))
+            (decimal_literal))))
+      (comment)
+      (declaration
+        (intrinsic_type
+          (primitive_type))
+        (init_declarator
+          (array_declarator
+            (identifier))
+          (initializer_list
+            (number_literal
+              (decimal_literal))
+            (number_literal
+              (decimal_literal))
+            (binary_expression
+              (number_literal
+                (decimal_literal))
+              (identifier))
+            (call_expression
+              (identifier)
+              (argument_list))))))
+
+========================
+Struct with Array Fields
+========================
+
+STRUCTURE AudioDevice {
+  CHAR name[]
+  INTEGER levels[][8]
+  DEV connectedDevices[]
+}
+
+---
+
+(source_file
+      (type_definition
+        (struct_specifier
+          (type_identifier)
+          (field_declaration_list
+            (field_declaration
+              (intrinsic_type
+                (primitive_type))
+              (array_declarator
+                (field_identifier)))
+            (field_declaration
+              (intrinsic_type
+                (primitive_type))
+              (array_declarator
+                (array_declarator
+                  (field_identifier))
+                (number_literal
+                  (decimal_literal))))
+            (field_declaration
+              (intrinsic_type
+                (structured_type))
+              (array_declarator
+                (field_identifier)))))))
+
+=========================
+Functions with Array Types
+=========================
+
+DEFINE_FUNCTION CHAR[50] GetDeviceName(DEV device) {
+  RETURN 'Device'
+}
+
+DEFINE_FUNCTION INTEGER[] GetValues() {
+  RETURN {1, 2, 3}
+}
+
+// Functions manipulating arrays
+DEFINE_FUNCTION SortArray(INTEGER array[]) {
+  INTEGER i, j, temp
+  // Array operations in function body
+  array[0] = 42
+}
+
+---
+
+(source_file
+      (define_function
+        (function_definition
+          (array_return_type
+            (intrinsic_type
+              (primitive_type))
+            (number_literal
+              (decimal_literal)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (intrinsic_type
+                (structured_type))
+              (identifier)))
+          (compound_statement
+            (return_statement
+              (string_literal
+                (string_content))))))
+      (define_function
+        (function_definition
+          (array_return_type
+            (intrinsic_type
+              (primitive_type)))
+          (identifier)
+          (parameter_list)
+          (compound_statement
+            (return_statement)
+            (compound_statement
+              (expression_statement
+                (comma_expression
+                  (number_literal
+                    (decimal_literal))
+                  (comma_expression
+                    (number_literal
+                      (decimal_literal))
+                    (number_literal
+                      (decimal_literal)))))))))
+      (comment)
+      (define_function
+        (function_definition
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type))
+              (array_declarator
+                (identifier))))
+          (compound_statement
+            (declaration
+              (intrinsic_type
+                (primitive_type))
+              (identifier)
+              (identifier)
+              (identifier))
+            (comment)
+            (expression_statement
+              (assignment_expression
+                (subscript_expression
+                  (identifier)
+                  (number_literal
+                    (decimal_literal)))
+                (number_literal
+                  (decimal_literal))))))))
