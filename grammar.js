@@ -48,6 +48,7 @@ module.exports = grammar({
         // [$.type_specifier, $._declarator],
         [$.type_specifier, $.expression],
         [$._declarator, $._declaration_declarator],
+        // [$._declaration_declarator, $.declaration],
         // [$.custom_type, $.expression],
         // [$.custom_type, $._declarator],
         [$.function_declarator, $._function_declaration_declarator],
@@ -801,22 +802,30 @@ module.exports = grammar({
 
         declaration: ($) =>
             // Using prec.right here to allow for the optional semicolon
-            // prec.right(
-            // 2,
-            seq(
-                $._declaration_specifiers,
-                commaSep1(
-                    field(
-                        "declarator",
-                        choice(
-                            seq($._declaration_declarator),
-                            $.init_declarator,
+            prec.right(
+                // -2,
+                seq(
+                    $._declaration_specifiers,
+                    commaSep1(
+                        field(
+                            "declarator",
+                            choice(
+                                seq($._declaration_declarator),
+                                $.init_declarator,
+                            ),
                         ),
                     ),
+
+                    // NOTE: This optional semicolon is causing a "recoverable" error
+                    // This is normal behavior for generalized LR parsing, which
+                    // explores multiple paths and sometimes abandons some.
+                    // The "recoverable error" only appears in debug output; it
+                    // doesn't affect actual parsing.
+                    // Despite the warning, the resulting AST is correct. Tree-sitter
+                    // successfully produces the right tree structure.
+                    optional(";"),
                 ),
-                optional(";"),
             ),
-        // ),
 
         type_definition: ($) =>
             prec.right(
