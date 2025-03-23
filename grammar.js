@@ -339,282 +339,282 @@ module.exports = grammar({
                 ),
             ),
 
-        event_definition: ($) =>
-            choice(
-                $.button_event_definition,
-                $.channel_event_definition,
-                $.level_event_definition,
-                $.data_event_definition,
-                $.timeline_event_definition,
-                $.custom_event_definition,
-            ),
+        // event_definition: ($) =>
+        //     choice(
+        //         $.button_event_definition,
+        //         $.channel_event_definition,
+        //         $.level_event_definition,
+        //         $.data_event_definition,
+        //         $.timeline_event_definition,
+        //         $.custom_event_definition,
+        //     ),
 
-        data_event_definition: ($) =>
-            seq(
-                seq(
-                    keywords.data_event,
-                    field("device", $.data_event_device_reference),
-                ),
-                repeat(
-                    seq(
-                        keywords.data_event,
-                        field("device", $.data_event_device_reference),
-                    ),
-                ),
-                field("body", $.data_event_block),
-            ),
+        // data_event_definition: ($) =>
+        //     seq(
+        //         seq(
+        //             keywords.data_event,
+        //             field("device", $.data_event_device_reference),
+        //         ),
+        //         repeat(
+        //             seq(
+        //                 keywords.data_event,
+        //                 field("device", $.data_event_device_reference),
+        //             ),
+        //         ),
+        //         field("body", $.data_event_block),
+        //     ),
 
-        data_event_device_reference: ($) =>
-            seq("[", choice($.device_literal, $.identifier, $.expression), "]"),
+        // data_event_device_reference: ($) =>
+        //     seq("[", choice($.device_literal, $.identifier, $.expression), "]"),
 
-        data_event_block: ($) => seq("{", repeat1($.data_event_handler), "}"),
+        // data_event_block: ($) => seq("{", repeat1($.data_event_handler), "}"),
 
-        data_event_handler: ($) =>
-            seq(
-                field("type", $.data_event_type),
-                ":",
-                field("body", $.compound_statement),
-            ),
+        // data_event_handler: ($) =>
+        //     seq(
+        //         field("type", $.data_event_type),
+        //         ":",
+        //         field("body", $.compound_statement),
+        //     ),
 
-        data_event_type: (_) =>
-            choice(
-                keywords.command,
-                keywords.string,
-                keywords.online,
-                keywords.offline,
-                keywords.onerror,
-                keywords.standby,
-                keywords.awake,
-            ),
+        // data_event_type: (_) =>
+        //     choice(
+        //         keywords.command,
+        //         keywords.string,
+        //         keywords.online,
+        //         keywords.offline,
+        //         keywords.onerror,
+        //         keywords.standby,
+        //         keywords.awake,
+        //     ),
 
-        timeline_event_definition: ($) =>
-            seq(
-                seq(
-                    keywords.timeline_event,
-                    field("id", $.timeline_event_id_reference),
-                ),
-                repeat(
-                    seq(
-                        keywords.timeline_event,
-                        field("id", $.timeline_event_id_reference),
-                    ),
-                ),
-                field("body", $.compound_statement),
-            ),
+        // timeline_event_definition: ($) =>
+        //     seq(
+        //         seq(
+        //             keywords.timeline_event,
+        //             field("id", $.timeline_event_id_reference),
+        //         ),
+        //         repeat(
+        //             seq(
+        //                 keywords.timeline_event,
+        //                 field("id", $.timeline_event_id_reference),
+        //             ),
+        //         ),
+        //         field("body", $.compound_statement),
+        //     ),
 
-        timeline_event_id_reference: ($) => seq("[", $.expression, "]"),
+        // timeline_event_id_reference: ($) => seq("[", $.expression, "]"),
 
-        button_event_definition: ($) =>
-            seq(
-                seq(
-                    keywords.button_event,
-                    field("devchan", $.button_event_device_channel_reference),
-                ),
-                repeat(
-                    seq(
-                        keywords.button_event,
-                        field(
-                            "devchan",
-                            $.button_event_device_channel_reference,
-                        ),
-                    ),
-                ),
-                field("body", $.button_event_block),
-            ),
+        // button_event_definition: ($) =>
+        //     seq(
+        //         seq(
+        //             keywords.button_event,
+        //             field("devchan", $.button_event_device_channel_reference),
+        //         ),
+        //         repeat(
+        //             seq(
+        //                 keywords.button_event,
+        //                 field(
+        //                     "devchan",
+        //                     $.button_event_device_channel_reference,
+        //                 ),
+        //             ),
+        //         ),
+        //         field("body", $.button_event_block),
+        //     ),
 
-        button_event_device_channel_reference: ($) =>
-            seq(
-                "[",
-                choice(
-                    seq(
-                        field(
-                            "device",
-                            choice(
-                                $.device_literal,
-                                $.identifier,
-                                $.expression,
-                            ),
-                        ),
-                        ",",
-                        field("channel", choice($.identifier, $.expression)),
-                    ),
-                    field("devchan", choice($.identifier, $.expression)),
-                ),
-                "]",
-            ),
+        // button_event_device_channel_reference: ($) =>
+        //     seq(
+        //         "[",
+        //         choice(
+        //             seq(
+        //                 field(
+        //                     "device",
+        //                     choice(
+        //                         $.device_literal,
+        //                         $.identifier,
+        //                         $.expression,
+        //                     ),
+        //                 ),
+        //                 ",",
+        //                 field("channel", choice($.identifier, $.expression)),
+        //             ),
+        //             field("devchan", choice($.identifier, $.expression)),
+        //         ),
+        //         "]",
+        //     ),
 
-        button_event_block: ($) =>
-            seq("{", repeat1($.button_event_handler), "}"),
+        // button_event_block: ($) =>
+        //     seq("{", repeat1($.button_event_handler), "}"),
 
-        button_event_handler: ($) =>
-            seq(
-                field("type", $.button_event_type),
-                ":",
-                field("body", $.compound_statement),
-            ),
+        // button_event_handler: ($) =>
+        //     seq(
+        //         field("type", $.button_event_type),
+        //         ":",
+        //         field("body", $.compound_statement),
+        //     ),
 
-        button_event_type: ($) =>
-            choice(
-                keywords.push,
-                keywords.release,
-                choice(
-                    // HOLD[time]
-                    seq(
-                        keywords.hold,
-                        seq("[", field("time", $.expression), "]"),
-                    ),
+        // button_event_type: ($) =>
+        //     choice(
+        //         keywords.push,
+        //         keywords.release,
+        //         choice(
+        //             // HOLD[time]
+        //             seq(
+        //                 keywords.hold,
+        //                 seq("[", field("time", $.expression), "]"),
+        //             ),
 
-                    // HOLD[time,repeat]
-                    seq(
-                        keywords.hold,
-                        seq(
-                            "[",
-                            field("time", $.expression),
-                            ",",
-                            field(
-                                "repeat",
-                                alias(
-                                    token.immediate(/[Rr][Ee][Pp][Ee][Aa][Tt]/),
-                                    "repeat",
-                                ),
-                            ),
-                            "]",
-                        ),
-                    ),
-                ),
-            ),
+        //             // HOLD[time,repeat]
+        //             seq(
+        //                 keywords.hold,
+        //                 seq(
+        //                     "[",
+        //                     field("time", $.expression),
+        //                     ",",
+        //                     field(
+        //                         "repeat",
+        //                         alias(
+        //                             token.immediate(/[Rr][Ee][Pp][Ee][Aa][Tt]/),
+        //                             "repeat",
+        //                         ),
+        //                     ),
+        //                     "]",
+        //                 ),
+        //             ),
+        //         ),
+        //     ),
 
-        level_event_definition: ($) =>
-            seq(
-                seq(
-                    keywords.level_event,
-                    field("devlev", $.level_event_device_level_reference),
-                ),
-                repeat(
-                    seq(
-                        keywords.level_event,
-                        field("devlev", $.level_event_device_level_reference),
-                    ),
-                ),
-                field("body", $.compound_statement),
-            ),
+        // level_event_definition: ($) =>
+        //     seq(
+        //         seq(
+        //             keywords.level_event,
+        //             field("devlev", $.level_event_device_level_reference),
+        //         ),
+        //         repeat(
+        //             seq(
+        //                 keywords.level_event,
+        //                 field("devlev", $.level_event_device_level_reference),
+        //             ),
+        //         ),
+        //         field("body", $.compound_statement),
+        //     ),
 
-        level_event_device_level_reference: ($) =>
-            seq(
-                "[",
-                choice(
-                    seq(
-                        field(
-                            "device",
-                            choice(
-                                $.device_literal,
-                                $.identifier,
-                                $.expression,
-                            ),
-                        ),
-                        ",",
-                        field("level", choice($.identifier, $.expression)),
-                    ),
-                    field("devlev", choice($.identifier, $.expression)),
-                ),
-                "]",
-            ),
+        // level_event_device_level_reference: ($) =>
+        //     seq(
+        //         "[",
+        //         choice(
+        //             seq(
+        //                 field(
+        //                     "device",
+        //                     choice(
+        //                         $.device_literal,
+        //                         $.identifier,
+        //                         $.expression,
+        //                     ),
+        //                 ),
+        //                 ",",
+        //                 field("level", choice($.identifier, $.expression)),
+        //             ),
+        //             field("devlev", choice($.identifier, $.expression)),
+        //         ),
+        //         "]",
+        //     ),
 
-        channel_event_definition: ($) =>
-            seq(
-                seq(
-                    keywords.channel_event,
-                    field("devchan", $.channel_event_device_channel_reference),
-                ),
-                repeat(
-                    seq(
-                        keywords.channel_event,
-                        field(
-                            "devchan",
-                            $.channel_event_device_channel_reference,
-                        ),
-                    ),
-                ),
-                field("body", $.channel_event_block),
-            ),
+        // channel_event_definition: ($) =>
+        //     seq(
+        //         seq(
+        //             keywords.channel_event,
+        //             field("devchan", $.channel_event_device_channel_reference),
+        //         ),
+        //         repeat(
+        //             seq(
+        //                 keywords.channel_event,
+        //                 field(
+        //                     "devchan",
+        //                     $.channel_event_device_channel_reference,
+        //                 ),
+        //             ),
+        //         ),
+        //         field("body", $.channel_event_block),
+        //     ),
 
-        channel_event_device_channel_reference: ($) =>
-            seq(
-                "[",
-                choice(
-                    seq(
-                        field(
-                            "device",
-                            choice(
-                                $.device_literal,
-                                $.identifier,
-                                $.expression,
-                            ),
-                        ),
-                        ",",
-                        field("channel", choice($.identifier, $.expression)),
-                    ),
-                    field("devchan", choice($.identifier, $.expression)),
-                ),
-                "]",
-            ),
+        // channel_event_device_channel_reference: ($) =>
+        //     seq(
+        //         "[",
+        //         choice(
+        //             seq(
+        //                 field(
+        //                     "device",
+        //                     choice(
+        //                         $.device_literal,
+        //                         $.identifier,
+        //                         $.expression,
+        //                     ),
+        //                 ),
+        //                 ",",
+        //                 field("channel", choice($.identifier, $.expression)),
+        //             ),
+        //             field("devchan", choice($.identifier, $.expression)),
+        //         ),
+        //         "]",
+        //     ),
 
-        channel_event_block: ($) =>
-            seq("{", repeat1($.channel_event_handler), "}"),
+        // channel_event_block: ($) =>
+        //     seq("{", repeat1($.channel_event_handler), "}"),
 
-        channel_event_handler: ($) =>
-            seq(
-                field("type", $.channel_event_type),
-                ":",
-                field("body", $.compound_statement),
-            ),
+        // channel_event_handler: ($) =>
+        //     seq(
+        //         field("type", $.channel_event_type),
+        //         ":",
+        //         field("body", $.compound_statement),
+        //     ),
 
-        channel_event_type: (_) => choice(keywords.on, keywords.off),
+        // channel_event_type: (_) => choice(keywords.on, keywords.off),
 
-        custom_event_definition: ($) =>
-            seq(
-                seq(
-                    keywords.custom_event,
-                    field("reference", $.custom_event_reference),
-                ),
-                repeat(
-                    seq(
-                        keywords.custom_event,
-                        field("reference", $.custom_event_reference),
-                    ),
-                ),
-                field("body", $.compound_statement),
-            ),
+        // custom_event_definition: ($) =>
+        //     seq(
+        //         seq(
+        //             keywords.custom_event,
+        //             field("reference", $.custom_event_reference),
+        //         ),
+        //         repeat(
+        //             seq(
+        //                 keywords.custom_event,
+        //                 field("reference", $.custom_event_reference),
+        //             ),
+        //         ),
+        //         field("body", $.compound_statement),
+        //     ),
 
-        custom_event_reference: ($) =>
-            seq(
-                "[",
-                choice(
-                    // Format 1: [DEVICE,ID,TYPE]
-                    seq(
-                        field(
-                            "device",
-                            choice(
-                                $.device_literal,
-                                $.identifier,
-                                $.expression,
-                            ),
-                        ),
-                        ",",
-                        field("id", $.expression),
-                        ",",
-                        field("type", $.expression),
-                    ),
+        // custom_event_reference: ($) =>
+        //     seq(
+        //         "[",
+        //         choice(
+        //             // Format 1: [DEVICE,ID,TYPE]
+        //             seq(
+        //                 field(
+        //                     "device",
+        //                     choice(
+        //                         $.device_literal,
+        //                         $.identifier,
+        //                         $.expression,
+        //                     ),
+        //                 ),
+        //                 ",",
+        //                 field("id", $.expression),
+        //                 ",",
+        //                 field("type", $.expression),
+        //             ),
 
-                    // Format 2: [DEVCHAN,EVENTID]
-                    seq(
-                        field("devchan", choice($.identifier, $.expression)),
-                        ",",
-                        field("eventid", $.expression),
-                    ),
-                ),
-                "]",
-            ),
+        //             // Format 2: [DEVCHAN,EVENTID]
+        //             seq(
+        //                 field("devchan", choice($.identifier, $.expression)),
+        //                 ",",
+        //                 field("eventid", $.expression),
+        //             ),
+        //         ),
+        //         "]",
+        //     ),
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
