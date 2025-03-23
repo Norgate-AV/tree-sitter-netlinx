@@ -237,6 +237,10 @@ module.exports = grammar({
         // ...preprocIf("", ($) => choice($._top_level_item, $._block_item)),
         // ...preprocIf("_in_section"),
         ...preprocIf("_in_block", ($) => $._block_item),
+        ...preprocIf(
+            "_in_field_declaration_list",
+            ($) => $._field_declaration_list_item,
+        ),
 
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
         preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
@@ -731,27 +735,45 @@ module.exports = grammar({
                 choice(keywords.struct, keywords.structure),
                 choice(
                     seq(
-                        field("name", $.identifier),
+                        field("name", $._type_identifier),
                         field("body", $.field_declaration_list),
                     ),
                 ),
             ),
 
         field_declaration_list: ($) =>
-            seq("{", repeat1($.field_declaration), "}"),
+            seq("{", repeat1($._field_declaration_list_item), "}"),
+
+        _field_declaration_list_item: ($) =>
+            choice(
+                $.field_declaration,
+                $.preproc_define,
+                $.preproc_warn,
+                $.preproc_disable_warning,
+                alias(
+                    $.preproc_if_defined_in_field_declaration_list,
+                    $.preproc_if_defined,
+                ),
+                alias(
+                    $.preproc_if_not_defined_in_field_declaration_list,
+                    $.preproc_if_not_defined,
+                ),
+            ),
 
         field_declaration: ($) =>
-            seq(
-                field("type", $.type_specifier),
-                field("name", $.identifier),
-                optional(
-                    field(
-                        "dimensions",
-                        repeat1(seq("[", optional($.expression), "]")),
-                    ),
+            prec.right(
+                seq(
+                    $._declaration_specifiers,
+
+                    // This may not need to be optional. But leaving it for now
+                    // as it provides some flexibility
+                    optional($._field_declaration_declarator),
+                    optional(";"),
                 ),
-                optional(";"),
             ),
+
+        _field_declaration_declarator: ($) =>
+            commaSep1(seq(field("declarator", $._field_declarator))),
 
         intrinsic_type: ($) => choice($.primitive_type, $.structured_type),
 

@@ -239,7 +239,6 @@ PERSISTENT INTEGER lastPowerState
 
 =================
 Custom Types
-:skip
 =================
 
 STRUCTURE DeviceStatus {
@@ -261,7 +260,60 @@ STRUCT UserConfig {
 
 ---
 
-
+(source_file
+      (type_definition
+        (type_identifier)
+        (field_declaration_list
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (array_declarator
+              (field_identifier)
+              (number_literal
+                (decimal_literal))))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (field_identifier))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (field_identifier))))
+      (type_definition
+        (type_identifier)
+        (field_declaration_list
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (array_declarator
+              (field_identifier)
+              (number_literal
+                (decimal_literal))))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (field_identifier))))
+      (type_definition
+        (type_identifier)
+        (field_declaration_list
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (array_declarator
+              (field_identifier)
+              (number_literal
+                (decimal_literal))))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type))
+            (field_identifier))
+          (field_declaration
+            (custom_type
+              (custom_type))
+            (array_declarator
+              (field_identifier)
+              (number_literal
+                (decimal_literal)))))))
 
 ==================
 Basic Function
