@@ -669,3 +669,168 @@ for (;;);
 while (true);
 
 ---
+
+==================
+Send String
+==================
+
+send_string dvProj, "$02, 'PON', $03"
+send_string 0, 'Hello, World!'
+send_string 5001:1:0, payload
+
+---
+
+(source_file
+  (send_string_statement
+    device: (identifier)
+    value: (string_expression
+      (number_literal
+        (hex_literal))
+      (string_literal
+        (string_content))
+      (number_literal
+        (hex_literal))))
+  (send_string_statement
+    device: (number_literal
+      (decimal_literal))
+    value: (string_literal
+      (string_content)))
+  (send_string_statement
+    device: (device_literal
+      device: (number_literal
+        (decimal_literal))
+      port: (number_literal
+        (decimal_literal))
+      system: (number_literal
+        (decimal_literal)))
+    value: (identifier)))
+
+==================
+Send Command
+==================
+
+send_command vdvObject, 'Foo'
+send_command 33201:1:0, "'bar', 'baz'"
+send_command vdvObject, "cmd"
+send_command (33201 + 1):1:2, 'INPUT-HDMI,1'
+
+---
+
+(source_file
+  (send_command_statement
+    device: (identifier)
+    value: (string_literal
+      (string_content)))
+  (send_command_statement
+    device: (device_literal
+      device: (number_literal
+        (decimal_literal))
+      port: (number_literal
+        (decimal_literal))
+      system: (number_literal
+        (decimal_literal)))
+    value: (string_expression
+      (string_literal
+        (string_content))
+      (string_literal
+        (string_content))))
+  (send_command_statement
+    device: (identifier)
+    value: (string_expression
+      (identifier)))
+  (send_command_statement
+    device: (device_literal
+      device: (parenthesized_expression
+        (binary_expression
+          left: (number_literal
+            (decimal_literal))
+          right: (number_literal
+            (decimal_literal))))
+      port: (number_literal
+        (decimal_literal))
+      system: (number_literal
+        (decimal_literal)))
+    value: (string_literal
+      (string_content))))
+
+===================
+Send Level
+===================
+
+send_level dvTP, 1, 255
+send_level dvTP, 2, (255 - 10)
+
+---
+
+(source_file
+  (send_level_statement
+    device: (identifier)
+    level: (number_literal
+      (decimal_literal))
+    value: (number_literal
+      (decimal_literal)))
+  (send_level_statement
+    device: (identifier)
+    level: (number_literal
+      (decimal_literal))
+    value: (parenthesized_expression
+      (binary_expression
+        left: (number_literal
+          (decimal_literal))
+        right: (number_literal
+          (decimal_literal))))))
+
+==================
+Create Buffer
+==================
+
+create_buffer dvProj, buffer
+
+---
+
+(source_file
+  (create_buffer_statement
+    device: (identifier)
+    buffer: (identifier)))
+
+=====================
+Clear Buffer
+=====================
+
+clear_buffer buffer
+
+---
+
+(source_file
+  (clear_buffer_statement
+    buffer: (identifier)))
+
+====================
+Create Multi Buffer
+====================
+
+create_multi_buffer dvProj, dvDisplay, buffer
+
+---
+
+(source_file
+  (create_multi_buffer_statement
+    devices: (identifier)
+    devices: (identifier)
+    buffer: (identifier)))
+
+===================
+Wait
+:skip
+===================
+
+wait 1 foo()
+wait 2 {
+    bar()
+}
+
+wait (timeout * 10) 'Timeout' {
+    baz()
+}
+
+---

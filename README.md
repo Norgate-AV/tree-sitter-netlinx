@@ -49,9 +49,9 @@ This is a work in progress. Once the grammar is complete, a release will be made
 - :white_check_mark: Program Name
 - :white_check_mark: Module Name
 - :white_check_mark: Preprocessor Directives
-- :x: Send String/Command/Level Statements
+- :white_check_mark: Send String/Command/Level Statements
 - :x: Button/Channel/Level/Data/Timeline/Custom Events
-- :x: Buffer Statements
+- :white_check_mark: Buffer Statements
 - :x: Wait Statements
 - :x: Other bits that I haven't thought of yet or have forgotten about
 
