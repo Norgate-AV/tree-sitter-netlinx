@@ -830,11 +830,8 @@ module.exports = grammar({
         type_definition: ($) =>
             prec.right(
                 seq(
-                    // optional("__extension__"),
-                    // "typedef",
                     // $._type_definition_type,
                     // $._type_definition_declarators,
-                    // repeat($.attribute_specifier),
                     $.struct_specifier,
                     optional(";"),
                 ),
@@ -1208,7 +1205,6 @@ module.exports = grammar({
          */
 
         expression: ($) =>
-            // prec(2, choice($._expression_not_binary, $.binary_expression)),
             choice($._expression_not_binary, $.binary_expression),
 
         _expression_not_binary: ($) =>
@@ -1229,6 +1225,7 @@ module.exports = grammar({
                 $.false,
                 $.device_literal,
                 $.parenthesized_expression,
+                $.devchan_range_expression,
                 $.devchan_expression,
             ),
 
@@ -1371,12 +1368,14 @@ module.exports = grammar({
         devchan_range_expression: ($) =>
             prec.dynamic(
                 PREC.FIELD,
-                seq($.devchan_expression, "..", $.devchan_expression),
+                seq(
+                    field("start", $.devchan_expression),
+                    $.range_operator,
+                    field("end", $.devchan_expression),
             ),
-        // prec.dynamic(
-        // PREC.FIELD,
-        // seq($.subscript_expression, "..", $.subscript_expression),
-        // ),
+            ),
+
+        range_operator: (_) => token(".."),
 
         // String Expressions in NetLinx are like interpolated strings
         // or string template literals in other languages.
