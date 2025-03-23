@@ -1445,6 +1445,18 @@ module.exports = grammar({
                 ")",
             ),
 
+        // devlev_expression: ($) =>
+        //     prec.dynamic(
+        //         PREC.FIELD + 12,
+        //         seq(
+        //             token("["),
+        //             field("device", $.expression),
+        //             ",",
+        //             field("level", $.expression),
+        //             "]",
+        //         ),
+        //     ),
+
         devchan_expression: ($) =>
             prec.dynamic(
                 PREC.FIELD + 12,
