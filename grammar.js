@@ -991,6 +991,18 @@ module.exports = grammar({
                 $.continue_statement,
                 // $.devchan_statement,
                 $.devchan_operation_statement,
+                $.send_string_statement,
+                $.send_command_statement,
+                $.send_level_statement,
+                $.create_buffer_statement,
+                $.create_multi_buffer_statement,
+                $.clear_buffer_statement,
+                $.wait_statement,
+                $.wait_until_statement,
+                $.cancel_all_wait_statement,
+                $.cancel_all_wait_until_statement,
+                $.cancel_wait_statement,
+                $.cancel_wait_until_statement,
             ),
 
         _top_level_statement: ($) =>
@@ -1012,6 +1024,18 @@ module.exports = grammar({
                 $.continue_statement,
                 // $.devchan_statement,
                 $.devchan_operation_statement,
+                $.send_string_statement,
+                $.send_command_statement,
+                $.send_level_statement,
+                $.create_buffer_statement,
+                $.create_multi_buffer_statement,
+                $.clear_buffer_statement,
+                $.wait_statement,
+                $.wait_until_statement,
+                $.cancel_all_wait_statement,
+                $.cancel_all_wait_until_statement,
+                $.cancel_wait_statement,
+                $.cancel_wait_until_statement,
             ),
 
         _top_level_expression_statement: ($) =>
@@ -1160,6 +1184,112 @@ module.exports = grammar({
                 keywords.devchan_min_to,
                 keywords.devchan_total_off,
                 keywords.devchan_pulse,
+            ),
+
+        send_string_statement: ($) =>
+            seq(
+                keywords.send_string,
+                field("device", $.expression),
+                ",",
+                field("value", $.expression),
+                optional(";"),
+            ),
+
+        send_command_statement: ($) =>
+            seq(
+                keywords.send_command,
+                field("device", $.expression),
+                ",",
+                field("value", $.expression),
+                optional(";"),
+            ),
+
+        send_level_statement: ($) =>
+            seq(
+                keywords.send_level,
+                field("device", $.expression),
+                ",",
+                field("level", $.expression),
+                ",",
+                field("value", $.expression),
+                optional(";"),
+            ),
+
+        create_buffer_statement: ($) =>
+            seq(
+                keywords.create_buffer,
+                field("device", $.expression),
+                ",",
+                field("buffer", $.expression),
+                optional(";"),
+            ),
+
+        create_multi_buffer_statement: ($) =>
+            seq(
+                keywords.create_multi_buffer,
+                field("devices", commaSep1($.expression)),
+                ",",
+                field("buffer", $.expression),
+                optional(";"),
+            ),
+
+        clear_buffer_statement: ($) =>
+            seq(
+                keywords.clear_buffer,
+                field("buffer", $.expression),
+                optional(";"),
+            ),
+
+        wait_statement: ($) =>
+            seq(
+                keywords.wait,
+                field("time", $.expression),
+                optional(field("name", $.string_literal)),
+                choice(
+                    $.compound_statement,
+                    // $
+                ),
+            ),
+
+        wait_until_statement: ($) =>
+            seq(
+                keywords.wait_until,
+                field("condition", $.expression),
+                optional(field("name", $.string_literal)),
+                choice(
+                    $.compound_statement,
+                    // $
+                ),
+            ),
+
+        cancel_all_wait_statement: ($) => seq(keywords.cancel_all_wait),
+        cancel_all_wait_until_statement: ($) =>
+            seq(keywords.cancel_all_wait_until),
+
+        cancel_wait_statement: ($) =>
+            seq(
+                keywords.cancel_wait,
+                field("name", $.string_literal),
+                optional(";"),
+            ),
+
+        cancel_wait_until_statement: ($) =>
+            seq(
+                keywords.cancel_wait_until,
+                field("name", $.string_literal),
+                optional(";"),
+            ),
+
+        // This is for invoking NetLinx's legacy DEFINE_CALL function.
+        // These cannot be used in or as expressions.
+        // Think of them like simple macros.
+        // They do not support return values.
+        call_statement: ($) =>
+            seq(
+                keywords.call,
+                field("call", $.string_literal),
+                field("arguments", $.argument_list),
+                optional(";"),
             ),
 
         /**

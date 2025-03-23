@@ -86,12 +86,14 @@ module.exports = {
     awake: /awake/i,
     repeat: /repeat/i,
 
-    // Add special function keywords needed for the parser
+    // Statements
     send_level: /send_level/i,
     send_string: /send_string/i,
     send_command: /send_command/i,
     clear_buffer: /clear_buffer/i,
     create_buffer: /create_buffer/i,
+    create_multi_buffer: /create_multi_buffer/i,
+    call: /call/i,
 
     // Built-in Structured Types
     dev: /dev/i,
@@ -134,5 +136,9 @@ module.exports = {
 
     // Waits
     wait: /wait/i,
+    cancel_wait: /cancel_wait/i,
     wait_until: /wait_until/i,
+    cancel_wait_until: /cancel_wait_until/i,
+    cancel_all_wait: /cancel_all_wait/i,
+    cancel_all_wait_until: /cancel_all_wait_until/i,
 };

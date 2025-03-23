@@ -136,7 +136,27 @@
         "named": true
       },
       {
+        "type": "cancel_all_wait_statement",
+        "named": true
+      },
+      {
+        "type": "cancel_all_wait_until_statement",
+        "named": true
+      },
+      {
+        "type": "cancel_wait_statement",
+        "named": true
+      },
+      {
+        "type": "cancel_wait_until_statement",
+        "named": true
+      },
+      {
         "type": "case_statement",
+        "named": true
+      },
+      {
+        "type": "clear_buffer_statement",
         "named": true
       },
       {
@@ -145,6 +165,14 @@
       },
       {
         "type": "continue_statement",
+        "named": true
+      },
+      {
+        "type": "create_buffer_statement",
+        "named": true
+      },
+      {
+        "type": "create_multi_buffer_statement",
         "named": true
       },
       {
@@ -172,7 +200,27 @@
         "named": true
       },
       {
+        "type": "send_command_statement",
+        "named": true
+      },
+      {
+        "type": "send_level_statement",
+        "named": true
+      },
+      {
+        "type": "send_string_statement",
+        "named": true
+      },
+      {
         "type": "switch_statement",
+        "named": true
+      },
+      {
+        "type": "wait_statement",
+        "named": true
+      },
+      {
+        "type": "wait_until_statement",
         "named": true
       },
       {
@@ -550,6 +598,48 @@
     }
   },
   {
+    "type": "cancel_all_wait_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "cancel_all_wait_until_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "cancel_wait_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "cancel_wait_until_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "case_statement",
     "named": true,
     "fields": {
@@ -573,11 +663,39 @@
           "named": true
         },
         {
+          "type": "cancel_all_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_all_wait_until_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_until_statement",
+          "named": true
+        },
+        {
+          "type": "clear_buffer_statement",
+          "named": true
+        },
+        {
           "type": "compound_statement",
           "named": true
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "create_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "create_multi_buffer_statement",
           "named": true
         },
         {
@@ -609,7 +727,27 @@
           "named": true
         },
         {
+          "type": "send_command_statement",
+          "named": true
+        },
+        {
+          "type": "send_level_statement",
+          "named": true
+        },
+        {
+          "type": "send_string_statement",
+          "named": true
+        },
+        {
           "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "wait_statement",
+          "named": true
+        },
+        {
+          "type": "wait_until_statement",
           "named": true
         },
         {
@@ -617,6 +755,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "clear_buffer_statement",
+    "named": true,
+    "fields": {
+      "buffer": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -712,6 +866,62 @@
     "type": "continue_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "create_buffer_statement",
+    "named": true,
+    "fields": {
+      "buffer": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "create_multi_buffer_statement",
+    "named": true,
+    "fields": {
+      "buffer": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "devices": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "declaration",
@@ -1689,7 +1899,27 @@
           "named": true
         },
         {
+          "type": "cancel_all_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_all_wait_until_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_until_statement",
+          "named": true
+        },
+        {
           "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "clear_buffer_statement",
           "named": true
         },
         {
@@ -1698,6 +1928,14 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "create_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "create_multi_buffer_statement",
           "named": true
         },
         {
@@ -1781,11 +2019,31 @@
           "named": true
         },
         {
+          "type": "send_command_statement",
+          "named": true
+        },
+        {
+          "type": "send_level_statement",
+          "named": true
+        },
+        {
+          "type": "send_string_statement",
+          "named": true
+        },
+        {
           "type": "switch_statement",
           "named": true
         },
         {
           "type": "type_definition",
+          "named": true
+        },
+        {
+          "type": "wait_statement",
+          "named": true
+        },
+        {
+          "type": "wait_until_statement",
           "named": true
         },
         {
@@ -1834,7 +2092,27 @@
           "named": true
         },
         {
+          "type": "cancel_all_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_all_wait_until_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_until_statement",
+          "named": true
+        },
+        {
           "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "clear_buffer_statement",
           "named": true
         },
         {
@@ -1843,6 +2121,14 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "create_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "create_multi_buffer_statement",
           "named": true
         },
         {
@@ -1930,11 +2216,31 @@
           "named": true
         },
         {
+          "type": "send_command_statement",
+          "named": true
+        },
+        {
+          "type": "send_level_statement",
+          "named": true
+        },
+        {
+          "type": "send_string_statement",
+          "named": true
+        },
+        {
           "type": "switch_statement",
           "named": true
         },
         {
           "type": "type_definition",
+          "named": true
+        },
+        {
+          "type": "wait_statement",
+          "named": true
+        },
+        {
+          "type": "wait_until_statement",
           "named": true
         },
         {
@@ -1978,7 +2284,27 @@
           "named": true
         },
         {
+          "type": "cancel_all_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_all_wait_until_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_until_statement",
+          "named": true
+        },
+        {
           "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "clear_buffer_statement",
           "named": true
         },
         {
@@ -1987,6 +2313,14 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "create_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "create_multi_buffer_statement",
           "named": true
         },
         {
@@ -2074,11 +2408,31 @@
           "named": true
         },
         {
+          "type": "send_command_statement",
+          "named": true
+        },
+        {
+          "type": "send_level_statement",
+          "named": true
+        },
+        {
+          "type": "send_string_statement",
+          "named": true
+        },
+        {
           "type": "switch_statement",
           "named": true
         },
         {
           "type": "type_definition",
+          "named": true
+        },
+        {
+          "type": "wait_statement",
+          "named": true
+        },
+        {
+          "type": "wait_until_statement",
           "named": true
         },
         {
@@ -2234,6 +2588,94 @@
     }
   },
   {
+    "type": "send_command_statement",
+    "named": true,
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "send_level_statement",
+    "named": true,
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "level": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "send_string_statement",
+    "named": true,
+    "fields": {
+      "device": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -2247,7 +2689,27 @@
           "named": true
         },
         {
+          "type": "cancel_all_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_all_wait_until_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_statement",
+          "named": true
+        },
+        {
+          "type": "cancel_wait_until_statement",
+          "named": true
+        },
+        {
           "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "clear_buffer_statement",
           "named": true
         },
         {
@@ -2256,6 +2718,14 @@
         },
         {
           "type": "continue_statement",
+          "named": true
+        },
+        {
+          "type": "create_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "create_multi_buffer_statement",
           "named": true
         },
         {
@@ -2335,11 +2805,31 @@
           "named": true
         },
         {
+          "type": "send_command_statement",
+          "named": true
+        },
+        {
+          "type": "send_level_statement",
+          "named": true
+        },
+        {
+          "type": "send_string_statement",
+          "named": true
+        },
+        {
           "type": "switch_statement",
           "named": true
         },
         {
           "type": "type_definition",
+          "named": true
+        },
+        {
+          "type": "wait_statement",
+          "named": true
+        },
+        {
+          "type": "wait_until_statement",
           "named": true
         },
         {
@@ -2553,6 +3043,78 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "wait_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "time": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "compound_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "wait_until_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "compound_statement",
+          "named": true
+        }
+      ]
     }
   },
   {
