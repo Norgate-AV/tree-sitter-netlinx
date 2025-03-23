@@ -46,9 +46,9 @@ module.exports = grammar({
 
     conflicts: ($) => [
         // [$.type_specifier, $._declarator],
-        // [$.type_specifier, $.expression],
+        [$.type_specifier, $.expression],
         [$._declarator, $._declaration_declarator],
-        [$.custom_type, $.expression],
+        // [$.custom_type, $.expression],
         // [$.custom_type, $._declarator],
         [$.function_declarator, $._function_declaration_declarator],
         // [$._block_item, $.statement],
@@ -69,6 +69,7 @@ module.exports = grammar({
         // [$.type_specifier, $.expression_statement],
         // [$.combine_definition, $.connect_level_definition, $.comma_expression],
         [$.string_expression],
+        [$.type_specifier, $._top_level_expression_statement],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -153,7 +154,7 @@ module.exports = grammar({
             choice(
                 // Definitions
                 // $.define_function,
-                // $.type_definition,
+                $.type_definition,
                 // $.define_call,
                 // $.define_module,
 
@@ -232,10 +233,7 @@ module.exports = grammar({
                 token.immediate(/\r?\n/),
             ),
 
-        // ...preprocIf("", ($) => $._block_item),
         ...preprocIf("", ($) => $._top_level_item),
-        // ...preprocIf("", ($) => choice($._top_level_item, $._block_item)),
-        // ...preprocIf("_in_section"),
         ...preprocIf("_in_block", ($) => $._block_item),
         ...preprocIf(
             "_in_field_declaration_list",
@@ -616,38 +614,14 @@ module.exports = grammar({
         //         "]",
         //     ),
 
-        _abstract_declarator: ($) => choice($.abstract_array_declarator),
-
-        // array_dimension: ($) =>
-        //     repeat1(
-        //         choice(
-        //             seq("[", "]"),
-        //             seq("[", field("size", $.expression), "]"),
-        //         ),
-        //     ),
-
-        // _array_brackets: ($) =>
-        //     seq("[", field("size", optional($.expression)), "]"),
-
         array_declarator: ($) =>
             prec(
                 1,
-                // choice(
-                //     // Empty brackets case (variable-length arrays)
-                //     seq(field("declarator", $._declarator), "[", "]"),
-                //     // Standard case with optional size expression
-                //     seq(
-                //         field("declarator", $._declarator),
-                //         "[",
-                //         field("size", optional($.expression)),
-                //         "]",
-                //     ),
-                // ),
                 seq(
                     field("declarator", $._declarator),
-                    // $._array_brackets,
                     "[",
-                    field("size", optional($.expression)),
+                    // repeat(choice($.type_qualifier)),
+                    field("size", optional(choice($.expression))),
                     "]",
                 ),
             ),
@@ -657,9 +631,9 @@ module.exports = grammar({
                 1,
                 seq(
                     field("declarator", $._field_declarator),
-                    // $._array_brackets,
                     "[",
-                    field("size", optional($.expression)),
+                    // repeat(choice($.type_qualifier)),
+                    field("size", optional(choice($.expression))),
                     "]",
                 ),
             ),
@@ -669,9 +643,9 @@ module.exports = grammar({
                 1,
                 seq(
                     field("declarator", $._type_declarator),
-                    // $._array_brackets
                     "[",
-                    field("size", optional($.expression)),
+                    // repeat(choice($.type_qualifier)),
+                    field("size", optional(choice($.expression))),
                     "]",
                 ),
             ),
@@ -681,9 +655,9 @@ module.exports = grammar({
                 1,
                 seq(
                     field("declarator", optional($._abstract_declarator)),
-                    // $._array_brackets,
                     "[",
-                    field("size", optional($.expression)),
+                    // repeat(choice($.type_qualifier)),
+                    field("size", optional(choice($.expression))),
                     "]",
                 ),
             ),
@@ -696,13 +670,6 @@ module.exports = grammar({
             ),
 
         compound_statement: ($) => seq("{", repeat($._block_item), "}"),
-        // compound_statement: ($) =>
-        //     seq(
-        //         "{",
-        //         repeat($.local_variable_declaration),
-        //         repeat($.statement),
-        //         "}",
-        //     ),
 
         storage_class_specifier: (_) =>
             choice(keywords.local_var, keywords.stack_var),
@@ -715,28 +682,17 @@ module.exports = grammar({
                 keywords.persistent,
             ),
 
-        // type_specifier: ($) =>
-        //     choice($.array_type_specifier, $.intrinsic_type, $.custom_type),
-        // type_specifier: ($) => choice($.intrinsic_type),
-        type_specifier: ($) => choice($.intrinsic_type, $.custom_type),
+        type_specifier: ($) => choice($.intrinsic_type, $._type_identifier),
 
-        // array_type_specifier: ($) =>
-        //     seq(
-        //         field("type", $.intrinsic_type),
-        //         "[",
-        //         field("size", optional($.expression)),
-        //         "]",
-        //     ),
-
-        custom_type: ($) => alias($.identifier, $.custom_type),
-
-        type_definition: ($) =>
-            seq(
-                choice(keywords.struct, keywords.structure),
-                choice(
-                    seq(
-                        field("name", $._type_identifier),
-                        field("body", $.field_declaration_list),
+        struct_specifier: ($) =>
+            prec.right(
+                seq(
+                    choice(keywords.struct, keywords.structure),
+                    choice(
+                        seq(
+                            field("name", $._type_identifier),
+                            field("body", $.field_declaration_list),
+                        ),
                     ),
                 ),
             ),
@@ -862,6 +818,30 @@ module.exports = grammar({
             ),
         // ),
 
+        type_definition: ($) =>
+            prec.right(
+                seq(
+                    // optional("__extension__"),
+                    // "typedef",
+                    // $._type_definition_type,
+                    // $._type_definition_declarators,
+                    // repeat($.attribute_specifier),
+                    $.struct_specifier,
+                    optional(";"),
+                ),
+            ),
+
+        // _type_definition_type: ($) =>
+        //     seq(
+        //         repeat($.type_qualifier),
+        //         field("type", $.type_specifier),
+        //         // field("type", $.struct_specifier),
+        //         repeat($.type_qualifier),
+        //     ),
+
+        // _type_definition_declarators: ($) =>
+        //     commaSep1(field("declarator", $._type_declarator)),
+
         _declaration_modifiers: ($) =>
             choice($.storage_class_specifier, $.type_qualifier),
 
@@ -928,6 +908,8 @@ module.exports = grammar({
                 $._type_identifier,
                 $.intrinsic_type,
             ),
+
+        _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
         // function_declarator: ($) =>
         //     prec.right(
@@ -1431,11 +1413,7 @@ module.exports = grammar({
         false: (_) => netlinx.false,
 
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
-        // identifier: (_) =>
-        //     /(\p{XID_Start}|\$|_|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})(\p{XID_Continue}|\$|\\u[0-9A-Fa-f]{4}|\\U[0-9A-Fa-f]{8})*/,
 
-        // _type_identifier: ($) =>
-        //     prec.right(2, alias($.identifier, $.type_identifier)),
         _type_identifier: ($) => alias($.identifier, $.type_identifier),
         _field_identifier: ($) => alias($.identifier, $.field_identifier),
         _statement_identifier: ($) =>
