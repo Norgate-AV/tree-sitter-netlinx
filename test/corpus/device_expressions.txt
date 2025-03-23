@@ -3,7 +3,6 @@ Device Reference
 :skip
 ==================
 
-DEFINE_START
 state = [dvTP, 1]
 state = [dvTP, BUTTON_1]
 state = [vdvDevice, CHANNEL_ON]
@@ -39,7 +38,6 @@ Device Assignment
 :skip
 ==================
 
-DEFINE_START
 [dvTP, 1] = ON_STATE
 
 ---
@@ -58,99 +56,132 @@ DEFINE_START
 
 ==================
 Device Operations
-:skip
 ==================
 
-DEFINE_START
-ON[dvTP, 1]
-OFF[dvTP, 2]
-TO[dvTP, 3] = 127
-PULSE[dvTP, 4]
+ON[dvTP,1]
+OFF[dvTP,2]
+TO[dvTP,3]
+MIN_TO[dvTP,4]
+TOTAL_OFF[dvTP,5]
+PULSE[dvTP,6]
 
 ---
 
 (source_file
-  (expression_statement
-    (expression
-      (device_operation_expression
-        (device_operation_keyword)
-        (device_channel_reference_expression
-          (expression
-            (identifier))
-          (expression
-            (number_literal
-              (decimal_literal)))))))
-  (expression_statement
-    (expression
-      (device_operation_expression
-        (device_operation_keyword)
-        (device_channel_reference_expression
-          (expression
-            (identifier))
-          (expression
-            (number_literal
-              (decimal_literal)))))))
-  (expression_statement
-    (expression
-      (assignment_expression
-        (left
-          (device_operation_expression
-            (device_operation_keyword)
-            (device_channel_reference_expression
-              (expression
-                (identifier))
-              (expression
-                (number_literal
-                  (decimal_literal))))))
-        (operator)
-        (right
-          (expression
-            (number_literal
-              (decimal_literal)))))))
-  (expression_statement
-    (expression
-      (device_operation_expression
-        (device_operation_keyword)
-        (device_channel_reference_expression
-          (expression
-            (identifier))
-          (expression
-            (number_literal
-              (decimal_literal))))))))
+      (devchan_operation_statement
+        (devchan_operation)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (devchan_operation_statement
+        (devchan_operation)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (devchan_operation_statement
+        (devchan_operation)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (devchan_operation_statement
+        (devchan_operation)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (devchan_operation_statement
+        (devchan_operation)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (devchan_operation_statement
+        (devchan_operation)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))))
 
 ==================
 Device Literals
-:skip
 ==================
 
-DEFINE_DEVICE
-dvTP = 10001:1:0
-deviceVar = TYPE_ID:1:0
+10001:1:0
+5001:1:2
+5001:2:3
+0:3:0
+0:1:0
+5002:14:0
+33201:1:0
+41001:1:0
 
 ---
 
 (source_file
-  (section
-    (define_device_section
-      (device_definition
-        (identifier)
+      (expression_statement
         (device_literal
-          device: (literal
-            (number_literal
-              (decimal_literal)))
-          port: (literal
-            (number_literal
-              (decimal_literal)))
-          system: (literal
-            (number_literal
-              (decimal_literal)))))
-      (device_definition
-        (identifier)
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
         (device_literal
-          device: (identifier)
-          port: (literal
-            (number_literal
-              (decimal_literal)))
-          system: (literal
-            (number_literal
-              (decimal_literal))))))))
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          device: (number_literal
+            (decimal_literal))
+          port: (number_literal
+            (decimal_literal))
+          system: (number_literal
+            (decimal_literal)))))

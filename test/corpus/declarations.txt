@@ -52,6 +52,17 @@ dvProj = 5001:1:0
 dvSwitcher = 5001:2:0
 dvTP = 10001:1:0
 
+DEV audioDevices[5]
+DEVLEV volumeControls[5]
+DEVCHAN buttonControls[10]
+
+INTEGER matrix[3][3] = {{1,2,3},{4,5,6},{7,8,9}}
+
+CONSTANT INTEGER MAX_DEVICES = 10
+VOLATILE INTEGER statusFlags
+NON_VOLATILE CHAR deviceNames[5][20]
+PERSISTENT INTEGER lastPowerState
+
 ---
 
 (source_file
@@ -141,10 +152,94 @@ dvTP = 10001:1:0
             (number_literal
               (decimal_literal))
             (number_literal
-              (decimal_literal))))))
+              (decimal_literal)))))
+      (declaration
+        (intrinsic_type
+          (structured_type))
+        (array_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (intrinsic_type
+          (structured_type))
+        (array_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (intrinsic_type
+          (structured_type))
+        (array_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (intrinsic_type
+          (primitive_type))
+        (init_declarator
+          (array_declarator
+            (array_declarator
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (number_literal
+              (decimal_literal)))
+          (initializer_list
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal)))
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal)))
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))))))
+      (declaration
+        (type_qualifier)
+        (intrinsic_type
+          (primitive_type))
+        (init_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (type_qualifier)
+        (intrinsic_type
+          (primitive_type))
+        (identifier))
+      (declaration
+        (type_qualifier)
+        (intrinsic_type
+          (primitive_type))
+        (array_declarator
+          (array_declarator
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (type_qualifier)
+        (intrinsic_type
+          (primitive_type))
+        (identifier)))
 
 =================
 Custom Types
+:skip
 =================
 
 STRUCTURE DeviceStatus {
@@ -158,39 +253,15 @@ struct Person {
     integer age
 }
 
+STRUCT UserConfig {
+    CHAR username[50]
+    INTEGER accessLevel
+    DeviceStatus devices[10]
+}
+
 ---
 
-(source_file
-      (type_definition
-        (identifier)
-        (field_declaration_list
-          (field_declaration
-            (intrinsic_type
-              (primitive_type))
-            (identifier)
-            (number_literal
-              (decimal_literal)))
-          (field_declaration
-            (intrinsic_type
-              (primitive_type))
-            (identifier))
-          (field_declaration
-            (intrinsic_type
-              (primitive_type))
-            (identifier))))
-      (type_definition
-        (identifier)
-        (field_declaration_list
-          (field_declaration
-            (intrinsic_type
-              (primitive_type))
-            (identifier)
-            (number_literal
-              (decimal_literal)))
-          (field_declaration
-            (intrinsic_type
-              (primitive_type))
-            (identifier)))))
+
 
 ==================
 Basic Function
