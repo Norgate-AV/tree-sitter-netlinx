@@ -16,6 +16,10 @@ NetLinx grammar for [tree-sitter](https://tree-sitter.github.io).
 
 This is a work in progress. Once the grammar is complete, a release will be made.
 
+At this point the grammar is mostly complete. Work is now focused on testing and fixing any bugs.
+
+Following that, the query files for highlights, tags, and locals still need to be finalized and tested.
+
 ## What's Working :white_check_mark:
 
 - Expressions
@@ -60,6 +64,10 @@ This is a work in progress. Once the grammar is complete, a release will be made
     - :white_check_mark: Constants Declarations
     - :white_check_mark: Type Declarations
     - :white_check_mark: Module Definitions
+    - :white_check_mark: Combine Definitions
+    - :white_check_mark: Connect Level Definitions
+    - :white_check_mark: Toggling Definitions
+    - :white_check_mark: Mutually Exclusive Definitions
 - Events
     - :white_check_mark: Button Events
     - :white_check_mark: Channel Events
