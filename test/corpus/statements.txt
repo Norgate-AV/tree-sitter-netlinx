@@ -909,3 +909,256 @@ wait_until (volume > 50) 'VolumeWait' {
       (call_expression
         function: (identifier)
         arguments: (argument_list)))))
+
+====================
+Combine
+====================
+
+(vdvObject, dvObject1, dvObject2)
+(vdvObject, DVA_OBJECT)
+(vdvObject, DVA_OBJECT[1], DVA_OBJECT[2])
+
+---
+
+ (source_file
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (comma_expression
+              (identifier)
+              (identifier)))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (identifier))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (comma_expression
+              (subscript_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))
+              (subscript_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))))))
+
+==============================
+Connect Level
+==============================
+
+(vdvObject, dvObject1, dvObject2)
+(vdvObject, DVA_OBJECT)
+(vdvObject, DVA_OBJECT[1], DVA_OBJECT[2])
+
+---
+
+(source_file
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (comma_expression
+              (identifier)
+              (identifier)))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (identifier))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (comma_expression
+              (subscript_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))
+              (subscript_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))))))
+
+====================
+Latching
+====================
+
+[dvTP,1]
+[dvTP,2]
+[dvTP,11]..[dvTP,15]
+POWER_BTN
+MODE_BTN
+
+---
+
+(source_file
+      (expression_statement
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (identifier))
+      (expression_statement
+        (identifier)))
+
+======================
+Define module
+======================
+
+define_module 'MyModule1' MyModuleInstance1(vdvObject, dvObject)
+define_module 'MyModule2' MyModuleInstance2(dvObject)
+define_module 'MyModule3' MyModuleInstance3()
+define_module 'MyModule4' MyModuleInstance4(vdvObject[1], dvObject)
+define_module 'MyModule5' MyModuleInstance5(vdvObject, CONST_ARRAY, dvObject)
+define_module 'MyModule6' MyModuleInstance6(vdvObject, dvObject, foo, bar)
+
+---
+
+(source_file
+      (define_module
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (identifier)
+            (identifier))))
+      (define_module
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (identifier))))
+      (define_module
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list)))
+      (define_module
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (subscript_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (identifier))))
+      (define_module
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (identifier)
+            (identifier)
+            (identifier))))
+      (define_module
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (identifier)
+            (identifier)
+            (identifier)
+            (identifier)))))
+
+=======================
+Mutually Exclusive
+=======================
+
+([dvTP,1],[dvTP,2],[dvTP,3])
+([dvTP,11]..[dvTP,15])
+(DVD_PLAY_BTN, DVD_STOP_BTN, DVD_PAUSE_BTN)
+
+---
+
+(source_file
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (comma_expression
+              (devchan_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))
+              (devchan_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))))))
+      (expression_statement
+        (parenthesized_expression
+          (devchan_range_expression
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (range_operator)
+            (devchan_expression
+              (identifier)
+              (number_literal
+                (decimal_literal))))))
+      (expression_statement
+        (parenthesized_expression
+          (comma_expression
+            (identifier)
+            (comma_expression
+              (identifier)
+              (identifier))))))
+
+=======================
+Toggling
+=======================
+
+[dvTP,1]
+[dvTP,2]
+[dvTP,3]
+
+---
+
+(source_file
+      (expression_statement
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))))
