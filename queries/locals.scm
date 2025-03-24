@@ -3,7 +3,7 @@
 
 ; Block scopes
 (compound_statement) @local.scope
-;; (function_definition) @local.scope
+(function_definition) @local.scope
 (parameter_list) @local.scope
 
 ; Loops and conditionals also create their own scope
@@ -14,9 +14,9 @@
 (select_statement) @local.scope
 
 ; Event blocks are scopes
-;; (button_event_block) @local.scope
-;; (channel_event_block) @local.scope
-;; (data_event_block) @local.scope
+(button_event_block) @local.scope
+(channel_event_block) @local.scope
+(data_event_block) @local.scope
 
 ; Definitions
 ; ===========
@@ -31,8 +31,8 @@
   declarator: (identifier) @local.definition)
 
 ; Function definitions
-;; (function_definition
-;;   name: (identifier) @local.definition.function)
+(function_definition
+  name: (identifier) @local.definition.function)
 
 ; References
 ; ==========

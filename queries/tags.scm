@@ -1,6 +1,6 @@
 ; Functions
-;; (function_definition
-;;   name: (identifier) @name) @definition.function
+(function_definition
+  name: (identifier) @name) @definition.function
 
 ; Global variables
 ;; (global_variable_definition
@@ -15,17 +15,17 @@
 ;;   name: (identifier) @name) @definition.struct
 
 ; Module definitions
-;; (module_definition
-;;   instance_name: (identifier) @name) @definition.module
+(module_definition
+  instance_name: (identifier) @name) @definition.module
 
 ; Data/Button/Timeline event definitions
-;; (data_event_definition) @definition.event
-;; (button_event_definition) @definition.event
-;; (timeline_event_definition) @definition.event
+(data_event_definition) @definition.event
+(button_event_definition) @definition.event
+(timeline_event_definition) @definition.event
 
 ; Function parameters (references)
-;; (parameter_declaration
-;;   declarator: (identifier) @name) @reference.parameter
+(parameter_declaration
+  declarator: (identifier) @name) @reference.parameter
 
 ; Local variables (references)
 ;; (local_variable_declaration

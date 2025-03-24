@@ -5,13 +5,13 @@
 (primitive_type) @type
 
 ; Keywords - match the actual section nodes instead of text
-;; (define_device_section) @keyword
-;; (define_constant_section) @keyword
-;; (define_type_section) @keyword
-;; (define_variable_section) @keyword
+(define_device_section) @keyword
+(define_constant_section) @keyword
+(define_type_section) @keyword
+(define_variable_section) @keyword
 ;; (define_function_section) @keyword
 ;; (define_module_section) @keyword
-;; ;(define_program_section) @keyword
+(define_program_section) @keyword
 
 ; Structure definitions
 ;; (struct_definition) @keyword
@@ -37,15 +37,15 @@
 (storage_class_specifier) @keyword.modifier
 
 ; Program name
-;; (program_name) @keyword
-;; (module_name) @keyword
+(program_name) @keyword
+(module_name) @keyword
 
 ; Literals
 (string_literal) @string
 (number_literal) @number
 (decimal_literal) @number
 (hex_literal) @number
-;; (device_literal) @number
+(device_literal) @number
 
 ; Comments
 (comment) @comment
@@ -54,8 +54,8 @@
 (call_expression
   function: (identifier) @function.call)
 
-;; (function_definition
-;;   name: (identifier) @function)
+(function_definition
+  name: (identifier) @function)
 
 ; Preprocessor directives
 ;; (preproc_directive) @preproc
