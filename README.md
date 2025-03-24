@@ -52,6 +52,7 @@ This is a work in progress. Once the grammar is complete, a release will be made
     - :white_check_mark: Send String Statements
     - :white_check_mark: Send Command Statements
     - :white_check_mark: Send Level Statements
+    - :white_check_mark: Devchan Operation Statements (ON, OFF, TO, MIN_TO, PULSE, etc)
 - Declarations
     - :white_check_mark: Define Function Definitions
     - :white_check_mark: Define Call Definitions
@@ -63,8 +64,8 @@ This is a work in progress. Once the grammar is complete, a release will be made
     - :x: Button Events
     - :x: Channel Events
     - :x: Level Events
-    - :x: Data Events
-    - :x: Timeline Events
+    - :white_check_mark: Data Events
+    - :white_check_mark: Timeline Events
     - :x: Custom Events
 - Literals
     - :white_check_mark: String Literals

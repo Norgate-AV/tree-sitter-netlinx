@@ -116,7 +116,7 @@ module.exports = grammar({
                 // Top-Level Declarations
                 $.declaration,
                 $.type_definition,
-                // $.event_definition,
+                $.event_definition,
                 // $.combine_definition,
                 // $.connect_level_definition,
                 // $.mutually_exclusive_definition,
@@ -274,44 +274,44 @@ module.exports = grammar({
         define_call: ($) => seq(keywords.define_call, $.call_definition),
         define_module: ($) => seq(keywords.define_module, $.module_definition),
 
-        combine_definition: ($) =>
-            seq("(", commaSep1($.expression), ")", optional(";")),
+        // combine_definition: ($) =>
+        //     seq("(", commaSep1($.expression), ")", optional(";")),
 
-        connect_level_definition: ($) =>
-            seq("(", commaSep1($.expression), ")", optional(";")),
+        // connect_level_definition: ($) =>
+        //     seq("(", commaSep1($.expression), ")", optional(";")),
 
-        mutually_exclusive_definition: ($) =>
-            prec.right(
-                5,
-                seq(
-                    "(",
-                    commaSep1(
-                        choice(
-                            $.devchan_expression,
-                            $.devchan_range_expression,
-                            $.identifier,
-                        ),
-                    ),
-                    ")",
-                    optional(";"),
-                ),
-            ),
+        // mutually_exclusive_definition: ($) =>
+        //     prec.right(
+        //         5,
+        //         seq(
+        //             "(",
+        //             commaSep1(
+        //                 choice(
+        //                     $.devchan_expression,
+        //                     $.devchan_range_expression,
+        //                     $.identifier,
+        //                 ),
+        //             ),
+        //             ")",
+        //             optional(";"),
+        //         ),
+        //     ),
 
-        latching_definition: ($) =>
-            prec.right(
-                5,
-                seq(
-                    choice(
-                        $.devchan_expression,
-                        $.devchan_range_expression,
-                        $.identifier,
-                    ),
-                    optional(";"),
-                ),
-            ),
+        // latching_definition: ($) =>
+        //     prec.right(
+        //         5,
+        //         seq(
+        //             choice(
+        //                 $.devchan_expression,
+        //                 $.devchan_range_expression,
+        //                 $.identifier,
+        //             ),
+        //             optional(";"),
+        //         ),
+        //     ),
 
-        toggling_definition: ($) =>
-            prec.right(5, seq(choice($.devchan_expression))),
+        // toggling_definition: ($) =>
+        //     prec.right(5, seq(choice($.devchan_expression))),
 
         module_definition: ($) =>
             prec.right(
@@ -323,70 +323,65 @@ module.exports = grammar({
                 ),
             ),
 
-        // event_definition: ($) =>
-        //     choice(
-        //         $.button_event_definition,
-        //         $.channel_event_definition,
-        //         $.level_event_definition,
-        //         $.data_event_definition,
-        //         $.timeline_event_definition,
-        //         $.custom_event_definition,
-        //     ),
+        event_definition: ($) =>
+            choice(
+                // $.button_event_definition,
+                // $.channel_event_definition,
+                // $.level_event_definition,
+                $.data_event_definition,
+                $.timeline_event_definition,
+                // $.custom_event_definition,
+            ),
 
-        // data_event_definition: ($) =>
-        //     seq(
-        //         seq(
-        //             keywords.data_event,
-        //             field("device", $.data_event_device_reference),
-        //         ),
-        //         repeat(
-        //             seq(
-        //                 keywords.data_event,
-        //                 field("device", $.data_event_device_reference),
-        //             ),
-        //         ),
-        //         field("body", $.data_event_block),
-        //     ),
+        data_event_definition: ($) =>
+            seq(
+                repeat1($.data_event_declarator),
+                field("body", $.data_event_block),
+            ),
 
-        // data_event_device_reference: ($) =>
-        //     seq("[", choice($.device_literal, $.identifier, $.expression), "]"),
+        data_event_declarator: ($) =>
+            seq(
+                keywords.data_event,
+                field("device", $.data_event_device_reference),
+            ),
 
-        // data_event_block: ($) => seq("{", repeat1($.data_event_handler), "}"),
+        data_event_device_reference: ($) =>
+            // seq("[", choice($.device_literal, $.identifier, $.expression), "]"),
+            seq("[", choice($.expression), "]"),
 
-        // data_event_handler: ($) =>
-        //     seq(
-        //         field("type", $.data_event_type),
-        //         ":",
-        //         field("body", $.compound_statement),
-        //     ),
+        data_event_block: ($) => seq("{", repeat1($.data_event_handler), "}"),
 
-        // data_event_type: (_) =>
-        //     choice(
-        //         keywords.command,
-        //         keywords.string,
-        //         keywords.online,
-        //         keywords.offline,
-        //         keywords.onerror,
-        //         keywords.standby,
-        //         keywords.awake,
-        //     ),
+        data_event_handler: ($) =>
+            seq(
+                field("type", $.data_event_type),
+                ":",
+                field("body", $.compound_statement),
+            ),
 
-        // timeline_event_definition: ($) =>
-        //     seq(
-        //         seq(
-        //             keywords.timeline_event,
-        //             field("id", $.timeline_event_id_reference),
-        //         ),
-        //         repeat(
-        //             seq(
-        //                 keywords.timeline_event,
-        //                 field("id", $.timeline_event_id_reference),
-        //             ),
-        //         ),
-        //         field("body", $.compound_statement),
-        //     ),
+        data_event_type: (_) =>
+            choice(
+                keywords.command,
+                keywords.string,
+                keywords.online,
+                keywords.offline,
+                keywords.onerror,
+                keywords.standby,
+                keywords.awake,
+            ),
 
-        // timeline_event_id_reference: ($) => seq("[", $.expression, "]"),
+        timeline_event_definition: ($) =>
+            seq(
+                repeat1($.timeline_event_declarator),
+                field("body", $.compound_statement),
+            ),
+
+        timeline_event_declarator: ($) =>
+            seq(
+                keywords.timeline_event,
+                field("id", $.timeline_event_id_reference),
+            ),
+
+        timeline_event_id_reference: ($) => seq("[", $.expression, "]"),
 
         // button_event_definition: ($) =>
         //     seq(

@@ -1,9 +1,8 @@
 ==================
-Button Event
+Button
 :skip
 ==================
 
-DEFINE_EVENT
 BUTTON_EVENT[dvTP, BTN_HOME] {
     PUSH: {
         doSomething()
@@ -40,18 +39,13 @@ BUTTON_EVENT[dvTP, BTN_HOME] {
                     arguments: (argument_list)))))))))))
 
 ==================
-Channel Event
+Channel
 :skip
 ==================
 
-DEFINE_EVENT
-CHANNEL_EVENT[dvTP, 1] {
-    ON: {
-        [dvTP, 5] = ON
-    }
-    OFF: {
-        [dvTP, 5] = OFF
-    }
+CHANNEL_EVENT[dvIO, 1] {
+    ON: {}
+    OFF: {}
 }
 
 ---
@@ -106,40 +100,136 @@ CHANNEL_EVENT[dvTP, 1] {
                               (identifier))))))))))))))))))
 
 ==================
-Data Event
-:skip
+Data
 ==================
 
-DEFINE_EVENT
 DATA_EVENT[dvDevice] {
-    ONLINE: {
+    ONLINE: {}
+    offline: {}
+    STRING: {}
+    command: {}
+    awake: {}
+    standby: {}
+    ONERROR: {}
+}
 
-    }
-    STRING: {
-        processResponse(DATA.TEXT)
-    }
+data_event[vdvObject1]
+data_event[vdvObject2]
+data_event[5001:1:0]
+data_event[DVA_OBJECTS[1]] {
+    ONLINE: {}
+    offline: {}
+    STRING: {}
+    command: {}
+    awake: {}
+    standby: {}
+    ONERROR: {}
 }
 
 ---
 
 (source_file
-  (section
-    (define_event_section
-      (event_definition
-        (data_event_definition
-          device: (data_event_device_reference
-            (identifier))
-          body: (data_event_block
-            (data_event_handler
-              type: (data_event_type)
-              body: (compound_statement))
-            (data_event_handler
-              type: (data_event_type)
-              body: (compound_statement
-                (expression_statement
-                  (call_expression
-                    function: (identifier)
-                    arguments: (argument_list
-                      (field_expression
-                        argument: (identifier)
-                        field: (field_identifier)))))))))))))
+  (event_definition
+    (data_event_definition
+      (data_event_declarator
+        device: (data_event_device_reference
+          (identifier)))
+      body: (data_event_block
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement)))))
+  (event_definition
+    (data_event_definition
+      (data_event_declarator
+        device: (data_event_device_reference
+          (identifier)))
+      (data_event_declarator
+        device: (data_event_device_reference
+          (identifier)))
+      (data_event_declarator
+        device: (data_event_device_reference
+          (device_literal
+            device: (number_literal
+              (decimal_literal))
+            port: (number_literal
+              (decimal_literal))
+            system: (number_literal
+              (decimal_literal)))))
+      (data_event_declarator
+        device: (data_event_device_reference
+          (subscript_expression
+            argument: (identifier)
+            index: (number_literal
+              (decimal_literal)))))
+      body: (data_event_block
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))
+        (data_event_handler
+          type: (data_event_type)
+          body: (compound_statement))))))
+
+========================
+Timeline
+========================
+
+timeline_event[TL1] {}
+
+timeline_event[TL1]
+timeline_event[TL2]
+timeline_event[TL3] {}
+
+---
+
+(source_file
+  (event_definition
+    (timeline_event_definition
+      (timeline_event_declarator
+        id: (timeline_event_id_reference
+          (identifier)))
+      body: (compound_statement)))
+  (event_definition
+    (timeline_event_definition
+      (timeline_event_declarator
+        id: (timeline_event_id_reference
+          (identifier)))
+      (timeline_event_declarator
+        id: (timeline_event_id_reference
+          (identifier)))
+      (timeline_event_declarator
+        id: (timeline_event_id_reference
+          (identifier)))
+      body: (compound_statement))))
