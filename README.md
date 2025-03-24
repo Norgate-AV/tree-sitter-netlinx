@@ -18,48 +18,77 @@ This is a work in progress. Once the grammar is complete, a release will be made
 
 ## What's Working :white_check_mark:
 
-- :white_check_mark: Binary Expressions
-- :white_check_mark: Bitwise Expressions
-- :white_check_mark: Unary Expressions
-- :white_check_mark: Update Expressions
-- :white_check_mark: Assignment Expressions
-- :white_check_mark: Devchan Expressions
-- :white_check_mark: Devchan Range Expressions
-- :white_check_mark: Comparison Expressions
-- :white_check_mark: Logical Expressions
-- :white_check_mark: String Expressions
-- :white_check_mark: Function Call Expressions
-- :white_check_mark: If Statements
-- :white_check_mark: While Loops
-- :white_check_mark: For Loops
-- :white_check_mark: Switch/Case Statements
-- :white_check_mark: Select/Active Statements
-- :white_check_mark: Define Function Definitions
-- :white_check_mark: Define Call Definitions
-- :white_check_mark: Variable Declarations
-- :white_check_mark: Constants Declarations
-- :white_check_mark: Type Declarations
-- :white_check_mark: Comments
-- :white_check_mark: Strings Literals
-- :white_check_mark: Number Literals
-- :white_check_mark: Device Literals
-- :white_check_mark: Arrays
-- :white_check_mark: Module Definitions
-- :white_check_mark: Section Definitions
-- :white_check_mark: Program Name
-- :white_check_mark: Module Name
-- :white_check_mark: Preprocessor Directives
-- :white_check_mark: Send String/Command/Level Statements
-- :x: Button/Channel/Level/Data/Timeline/Custom Events
-- :white_check_mark: Buffer Statements
-- :white_check_mark: Wait Statements
+- Expressions
+    - :white_check_mark: Binary Expressions
+    - :white_check_mark: Bitwise Expressions
+    - :white_check_mark: Unary Expressions
+    - :white_check_mark: Update Expressions
+    - :white_check_mark: Assignment Expressions
+    - :white_check_mark: Devchan Expressions
+    - :white_check_mark: Devchan Range Expressions
+    - :white_check_mark: Comparison Expressions
+    - :white_check_mark: Logical Expressions
+    - :white_check_mark: String Expressions
+    - :white_check_mark: Function Call Expressions
+- Statements
+    - :white_check_mark: If Statements
+    - :white_check_mark: While Loops
+    - :white_check_mark: For Loops
+    - :white_check_mark: Switch/Case Statements
+    - :white_check_mark: Select/Active Statements
+    - :white_check_mark: Create Buffer Statements
+    - :white_check_mark: Create Multi Buffer Statements
+    - :white_check_mark: Clear Buffer Statements
+    - :white_check_mark: Wait Statements
+    - :white_check_mark: Wait Until Statements
+    - :white_check_mark: Cancel Wait Statements
+    - :white_check_mark: Cancel Wait Until Statements
+    - :white_check_mark: Cancel All Wait Statements
+    - :white_check_mark: Cancel All Wait Until Statements
+    - :white_check_mark: Break Statements
+    - :white_check_mark: Section Statements
+    - :white_check_mark: Program Name
+    - :white_check_mark: Module Name
+    - :white_check_mark: Send String Statements
+    - :white_check_mark: Send Command Statements
+    - :white_check_mark: Send Level Statements
+- Declarations
+    - :white_check_mark: Define Function Definitions
+    - :white_check_mark: Define Call Definitions
+    - :white_check_mark: Variable Declarations
+    - :white_check_mark: Constants Declarations
+    - :white_check_mark: Type Declarations
+    - :white_check_mark: Module Definitions
+- Events
+    - :x: Button Events
+    - :x: Channel Events
+    - :x: Level Events
+    - :x: Data Events
+    - :x: Timeline Events
+    - :x: Custom Events
+- Literals
+    - :white_check_mark: String Literals
+    - :white_check_mark: Number Literals
+    - :white_check_mark: Device Literals
+    - :white_check_mark: Arrays
+- Comments
+    - :white_check_mark: Single Line Comments
+    - :white_check_mark: Multi Line Comments
+    - :white_check_mark: Pascal Comments
+- Preprocessor
+    - :white_check_mark: Define
+    - :white_check_mark: Include
+    - :white_check_mark: Warn
+    - :white_check_mark: Disable Warning
+    - :white_check_mark: If Defined
+    - :white_check_mark: If Not Defined
 - :x: Other bits that I haven't thought of yet or have forgotten about
 
 ## Contributing :sparkles:
 
 Contributions are welcome! Please fork and open a pull request if you have any suggestions or improvements.
 
-Any help would be greatly appreciated. 
+Any help would be greatly appreciated.
 
 ## LICENSE :balance_scale:
 
