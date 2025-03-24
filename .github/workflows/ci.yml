@@ -34,6 +34,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-14]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -50,7 +51,7 @@ jobs:
           test-go: true
           test-swift: true
 
-      # - name: Parse examples
-      #   uses: tree-sitter/parse-action@v4
-      #   with:
-      #     files: examples/*
+      - name: Parse examples
+        uses: tree-sitter/parse-action@v4
+        with:
+          files: examples/*
