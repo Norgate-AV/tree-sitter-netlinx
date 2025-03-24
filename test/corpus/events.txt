@@ -350,3 +350,87 @@ level_event[DVA_DEVLEV[1]] {}
             index: (number_literal
               (decimal_literal)))))
       body: (compound_statement))))
+
+=====================
+Custom
+=====================
+
+custom_event[dvTP, 1, 1001] {}
+
+custom_event[dvTP, 1002] {}
+
+custom_event[dvTP, 1, 1001]
+custom_event[dvTP, 1, 1002] {}
+
+custom_event[dvTP, 1001]
+custom_event[dvTP, 1002] {}
+
+custom_event[dvTP, 1, 1001]
+custom_event[dvTP, 1002] {}
+
+---
+
+(source_file
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        reference: (custom_event_reference
+          device: (identifier)
+          id: (number_literal
+            (decimal_literal))
+          type: (number_literal
+            (decimal_literal))))
+      body: (compound_statement)))
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        reference: (custom_event_reference
+          devchan: (identifier)
+          eventid: (number_literal
+            (decimal_literal))))
+      body: (compound_statement)))
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        reference: (custom_event_reference
+          device: (identifier)
+          id: (number_literal
+            (decimal_literal))
+          type: (number_literal
+            (decimal_literal))))
+      (custom_event_declarator
+        reference: (custom_event_reference
+          device: (identifier)
+          id: (number_literal
+            (decimal_literal))
+          type: (number_literal
+            (decimal_literal))))
+      body: (compound_statement)))
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        reference: (custom_event_reference
+          devchan: (identifier)
+          eventid: (number_literal
+            (decimal_literal))))
+      (custom_event_declarator
+        reference: (custom_event_reference
+          devchan: (identifier)
+          eventid: (number_literal
+            (decimal_literal))))
+      body: (compound_statement)))
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        reference: (custom_event_reference
+          device: (identifier)
+          id: (number_literal
+            (decimal_literal))
+          type: (number_literal
+            (decimal_literal))))
+      (custom_event_declarator
+        reference: (custom_event_reference
+          devchan: (identifier)
+          eventid: (number_literal
+            (decimal_literal))))
+      body: (compound_statement))))

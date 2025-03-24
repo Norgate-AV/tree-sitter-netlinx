@@ -1088,6 +1088,10 @@
                 {
                     "type": "SYMBOL",
                     "name": "timeline_event_definition"
+                },
+                {
+                    "type": "SYMBOL",
+                    "name": "custom_event_definition"
                 }
             ]
         },
@@ -1715,21 +1719,8 @@
                                     "type": "FIELD",
                                     "name": "device",
                                     "content": {
-                                        "type": "CHOICE",
-                                        "members": [
-                                            {
-                                                "type": "SYMBOL",
-                                                "name": "device_literal"
-                                            },
-                                            {
-                                                "type": "SYMBOL",
-                                                "name": "identifier"
-                                            },
-                                            {
-                                                "type": "SYMBOL",
-                                                "name": "expression"
-                                            }
-                                        ]
+                                        "type": "SYMBOL",
+                                        "name": "expression"
                                     }
                                 },
                                 {
@@ -1765,17 +1756,8 @@
                                     "type": "FIELD",
                                     "name": "devchan",
                                     "content": {
-                                        "type": "CHOICE",
-                                        "members": [
-                                            {
-                                                "type": "SYMBOL",
-                                                "name": "identifier"
-                                            },
-                                            {
-                                                "type": "SYMBOL",
-                                                "name": "expression"
-                                            }
-                                        ]
+                                        "type": "SYMBOL",
+                                        "name": "expression"
                                     }
                                 },
                                 {

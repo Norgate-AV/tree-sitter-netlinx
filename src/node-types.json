@@ -1114,6 +1114,104 @@
         }
     },
     {
+        "type": "custom_event_declarator",
+        "named": true,
+        "fields": {
+            "reference": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "custom_event_reference",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "type": "custom_event_definition",
+        "named": true,
+        "fields": {
+            "body": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "compound_statement",
+                        "named": true
+                    }
+                ]
+            }
+        },
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "custom_event_declarator",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "custom_event_reference",
+        "named": true,
+        "fields": {
+            "devchan": {
+                "multiple": false,
+                "required": false,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            },
+            "device": {
+                "multiple": false,
+                "required": false,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            },
+            "eventid": {
+                "multiple": false,
+                "required": false,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            },
+            "id": {
+                "multiple": false,
+                "required": false,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            },
+            "type": {
+                "multiple": false,
+                "required": false,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
         "type": "data_event_block",
         "named": true,
         "fields": {},
@@ -1619,6 +1717,10 @@
                 },
                 {
                     "type": "channel_event_definition",
+                    "named": true
+                },
+                {
+                    "type": "custom_event_definition",
                     "named": true
                 },
                 {

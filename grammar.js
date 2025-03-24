@@ -296,7 +296,7 @@ module.exports = grammar({
                 $.level_event_definition,
                 $.data_event_definition,
                 $.timeline_event_definition,
-                // $.custom_event_definition,
+                $.custom_event_definition,
             ),
 
         data_event_definition: ($) =>
@@ -449,17 +449,11 @@ module.exports = grammar({
         custom_event_reference: ($) =>
             seq(
                 "[",
+                // repeat1($.comma_expression),
                 choice(
                     // Format 1: [DEVICE,ID,TYPE]
                     seq(
-                        field(
-                            "device",
-                            choice(
-                                $.device_literal,
-                                $.identifier,
-                                $.expression,
-                            ),
-                        ),
+                        field("device", $.expression),
                         ",",
                         field("id", $.expression),
                         ",",
@@ -468,7 +462,7 @@ module.exports = grammar({
 
                     // Format 2: [DEVCHAN,EVENTID]
                     seq(
-                        field("devchan", choice($.identifier, $.expression)),
+                        field("devchan", $.expression),
                         ",",
                         field("eventid", $.expression),
                     ),

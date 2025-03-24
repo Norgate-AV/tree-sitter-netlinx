@@ -66,7 +66,7 @@ This is a work in progress. Once the grammar is complete, a release will be made
     - :white_check_mark: Level Events
     - :white_check_mark: Data Events
     - :white_check_mark: Timeline Events
-    - :x: Custom Events
+    - :white_check_mark: Custom Events
 - Literals
     - :white_check_mark: String Literals
     - :white_check_mark: Number Literals
