@@ -1,6 +1,5 @@
 ===============
 Combined Definitions Test
-:skip
 ===============
 
 PROGRAM_NAME='combined_definitions'
@@ -35,105 +34,102 @@ DEFINE_TOGGLING
     (string_literal
       (string_content)))
   (section
-    (define_device_section
-      (device_definition
-        (identifier)
-        (device_literal
-          device: (literal
-            (number_literal
-              (decimal_literal)))
-          port: (literal
-            (number_literal
-              (decimal_literal)))
-          system: (literal
-            (number_literal
-              (decimal_literal)))))
-      (device_definition
-        (identifier)
-        (device_literal
-          device: (literal
-            (number_literal
-              (decimal_literal)))
-          port: (literal
-            (number_literal
-              (decimal_literal)))
-          system: (literal
-            (number_literal
-              (decimal_literal)))))))
+    (define_device_section))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (device_literal
+        device: (number_literal
+          (decimal_literal))
+        port: (number_literal
+          (decimal_literal))
+        system: (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (device_literal
+        device: (number_literal
+          (decimal_literal))
+        port: (number_literal
+          (decimal_literal))
+        system: (number_literal
+          (decimal_literal)))))
   (section
-    (define_constant_section
-      (comment)
-      (constant_definition
-        type: (primitive_type
-          (intrinsic_type))
-        name: (identifier)
-        value: (literal
-          (number_literal
-            (decimal_literal))))
-      (constant_definition
-        type: (primitive_type
-          (intrinsic_type))
-        name: (identifier)
-        value: (literal
-          (number_literal
-            (decimal_literal))))
-      (constant_definition
-        type: (primitive_type
-          (intrinsic_type))
-        name: (identifier)
-        value: (literal
-          (number_literal
-            (decimal_literal))))
-      (constant_definition
-        type: (primitive_type
-          (intrinsic_type))
-        name: (identifier)
-        value: (literal
-          (number_literal
+    (define_constant_section))
+  (comment)
+  (declaration
+    type: (intrinsic_type
+      (primitive_type))
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (number_literal
+        (decimal_literal))))
+  (declaration
+    type: (intrinsic_type
+      (primitive_type))
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (number_literal
+        (decimal_literal))))
+  (declaration
+    type: (intrinsic_type
+      (primitive_type))
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (number_literal
+        (decimal_literal))))
+  (declaration
+    type: (intrinsic_type
+      (primitive_type))
+    declarator: (init_declarator
+      declarator: (identifier)
+      value: (number_literal
+        (decimal_literal))))
+  (section
+    (define_mutually_exclusive_section))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        left: (devchan_expression
+          device: (identifier)
+          channel: (identifier))
+        right: (comma_expression
+          left: (devchan_expression
+            device: (identifier)
+            channel: (identifier))
+          right: (devchan_expression
+            device: (identifier)
+            channel: (identifier))))))
+  (expression_statement
+    (parenthesized_expression
+      (devchan_range_expression
+        start: (devchan_expression
+          device: (identifier)
+          channel: (number_literal
+            (decimal_literal)))
+        (range_operator)
+        end: (devchan_expression
+          device: (identifier)
+          channel: (number_literal
             (decimal_literal))))))
   (section
-    (define_mutually_exclusive_section
-      (mutually_exclusive_definition
-        (device_channel_reference_expression
-          device: (identifier)
-          channel: (identifier))
-        (device_channel_reference_expression
-          device: (identifier)
-          channel: (identifier))
-        (device_channel_reference_expression
-          device: (identifier)
-          channel: (identifier)))
-      (mutually_exclusive_definition
-        (channel_range_expression
-          (device_channel_reference_expression
-            device: (identifier)
-            channel: (literal
-              (number_literal
-                (decimal_literal))))
-          (device_channel_reference_expression
-            device: (identifier)
-            channel: (literal
-              (number_literal
-                (decimal_literal))))))))
+    (define_latching_section))
+  (expression_statement
+    (devchan_expression
+      device: (identifier)
+      channel: (identifier)))
+  (expression_statement
+    (identifier))
   (section
-    (define_latching_section
-      (latching_definition
-        (device_channel_reference_expression
-          device: (identifier)
-          channel: (identifier)))
-      (latching_definition
-        (identifier))))
-  (section
-    (define_toggling_section
-      (toggling_definition
-        (device_channel_reference_expression
-          device: (identifier)
-          channel: (literal
-            (number_literal
-              (decimal_literal)))))
-      (toggling_definition
-        (device_channel_reference_expression
-          device: (identifier)
-          channel: (literal
-            (number_literal
-              (decimal_literal))))))))
+    (define_toggling_section))
+  (expression_statement
+    (devchan_expression
+      device: (identifier)
+      channel: (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (devchan_expression
+      device: (identifier)
+      channel: (number_literal
+        (decimal_literal)))))
