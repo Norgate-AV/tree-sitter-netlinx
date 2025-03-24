@@ -68,6 +68,8 @@ module.exports = grammar({
         // [$.combine_definition, $.connect_level_definition, $.comma_expression],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
+        [$.wait_statement],
+        [$.wait_until_statement],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -1227,7 +1229,7 @@ module.exports = grammar({
         create_multi_buffer_statement: ($) =>
             seq(
                 keywords.create_multi_buffer,
-                field("devices", commaSep1($.expression)),
+                field("devices", commaSep($.expression)),
                 ",",
                 field("buffer", $.expression),
                 optional(";"),
@@ -1245,10 +1247,6 @@ module.exports = grammar({
                 keywords.wait,
                 field("time", $.expression),
                 optional(field("name", $.string_literal)),
-                choice(
-                    $.compound_statement,
-                    // $
-                ),
             ),
 
         wait_until_statement: ($) =>
@@ -1256,10 +1254,6 @@ module.exports = grammar({
                 keywords.wait_until,
                 field("condition", $.expression),
                 optional(field("name", $.string_literal)),
-                choice(
-                    $.compound_statement,
-                    // $
-                ),
             ),
 
         cancel_all_wait_statement: ($) => seq(keywords.cancel_all_wait),

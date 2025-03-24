@@ -821,7 +821,6 @@ create_multi_buffer dvProj, dvDisplay, buffer
 
 ===================
 Wait
-:skip
 ===================
 
 wait 1 foo()
@@ -834,3 +833,82 @@ wait (timeout * 10) 'Timeout' {
 }
 
 ---
+
+(source_file
+  (wait_statement
+    time: (number_literal
+      (decimal_literal)))
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      arguments: (argument_list)))
+  (wait_statement
+    time: (number_literal
+      (decimal_literal)))
+  (compound_statement
+    (expression_statement
+      (call_expression
+        function: (identifier)
+        arguments: (argument_list))))
+  (wait_statement
+    time: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (number_literal
+          (decimal_literal))))
+    name: (string_literal
+      (string_content)))
+  (compound_statement
+    (expression_statement
+      (call_expression
+        function: (identifier)
+        arguments: (argument_list)))))
+
+====================
+Wait Until
+====================
+
+wait_until (foo == true) bar()
+wait_until (bar == false) {
+    baz()
+}
+
+wait_until (volume > 50) 'VolumeWait' {
+    foo()
+}
+
+---
+
+(source_file
+  (wait_until_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (true))))
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      arguments: (argument_list)))
+  (wait_until_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (false))))
+  (compound_statement
+    (expression_statement
+      (call_expression
+        function: (identifier)
+        arguments: (argument_list))))
+  (wait_until_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (number_literal
+          (decimal_literal))))
+    name: (string_literal
+      (string_content)))
+  (compound_statement
+    (expression_statement
+      (call_expression
+        function: (identifier)
+        arguments: (argument_list)))))

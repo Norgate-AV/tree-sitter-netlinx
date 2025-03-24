@@ -3557,27 +3557,35 @@
           "type": "FIELD",
           "name": "devices",
           "content": {
-            "type": "SEQ",
+            "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "expression"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "expression"
+                  },
+                  {
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "expression"
+                        }
+                      ]
+                    }
+                  }
+                ]
               },
               {
-                "type": "REPEAT",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": ","
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "expression"
-                    }
-                  ]
-                }
+                "type": "BLANK"
               }
             ]
           }
@@ -3669,15 +3677,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "compound_statement"
-            }
-          ]
         }
       ]
     },
@@ -3710,15 +3709,6 @@
             },
             {
               "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "compound_statement"
             }
           ]
         }
@@ -5333,6 +5323,12 @@
     [
       "type_specifier",
       "_top_level_expression_statement"
+    ],
+    [
+      "wait_statement"
+    ],
+    [
+      "wait_until_statement"
     ]
   ],
   "precedences": [],

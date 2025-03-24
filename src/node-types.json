@@ -909,7 +909,7 @@
       },
       "devices": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": ",",
@@ -3069,16 +3069,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "compound_statement",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3105,16 +3095,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "compound_statement",
-          "named": true
-        }
-      ]
     }
   },
   {

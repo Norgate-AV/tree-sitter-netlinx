@@ -52,7 +52,7 @@ This is a work in progress. Once the grammar is complete, a release will be made
 - :white_check_mark: Send String/Command/Level Statements
 - :x: Button/Channel/Level/Data/Timeline/Custom Events
 - :white_check_mark: Buffer Statements
-- :x: Wait Statements
+- :white_check_mark: Wait Statements
 - :x: Other bits that I haven't thought of yet or have forgotten about
 
 ## Contributing :sparkles:
