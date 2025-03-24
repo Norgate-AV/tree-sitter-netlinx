@@ -1565,6 +1565,32 @@
         }
     },
     {
+        "type": "devlev_expression",
+        "named": true,
+        "fields": {
+            "device": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            },
+            "level": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
         "type": "else_clause",
         "named": true,
         "fields": {},
@@ -1597,6 +1623,10 @@
                 },
                 {
                     "type": "data_event_definition",
+                    "named": true
+                },
+                {
+                    "type": "level_event_definition",
                     "named": true
                 },
                 {
@@ -1973,6 +2003,67 @@
                 },
                 {
                     "type": "structured_type",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "level_event_declarator",
+        "named": true,
+        "fields": {
+            "devlev": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "level_event_devlev_reference",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "type": "level_event_definition",
+        "named": true,
+        "fields": {
+            "body": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "compound_statement",
+                        "named": true
+                    }
+                ]
+            }
+        },
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "level_event_declarator",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "level_event_devlev_reference",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "devlev_expression",
+                    "named": true
+                },
+                {
+                    "type": "expression",
                     "named": true
                 }
             ]

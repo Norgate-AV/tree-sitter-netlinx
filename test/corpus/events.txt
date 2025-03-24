@@ -304,3 +304,49 @@ timeline_event[TL3] {}
         id: (timeline_event_id_reference
           (identifier)))
       body: (compound_statement))))
+
+=========================
+Level
+=========================
+
+LEVEL_EVENT[dvTP, VOL_LVL] {}
+
+level_event[dvDevLev]
+level_event[10001:1:0, 1]
+level_event[DVA_DEVLEV[1]] {}
+
+---
+
+(source_file
+  (event_definition
+    (level_event_definition
+      (level_event_declarator
+        devlev: (level_event_devlev_reference
+          (devlev_expression
+            device: (identifier)
+            level: (identifier))))
+      body: (compound_statement)))
+  (event_definition
+    (level_event_definition
+      (level_event_declarator
+        devlev: (level_event_devlev_reference
+          (identifier)))
+      (level_event_declarator
+        devlev: (level_event_devlev_reference
+          (devlev_expression
+            device: (device_literal
+              device: (number_literal
+                (decimal_literal))
+              port: (number_literal
+                (decimal_literal))
+              system: (number_literal
+                (decimal_literal)))
+            level: (number_literal
+              (decimal_literal)))))
+      (level_event_declarator
+        devlev: (level_event_devlev_reference
+          (subscript_expression
+            argument: (identifier)
+            index: (number_literal
+              (decimal_literal)))))
+      body: (compound_statement))))

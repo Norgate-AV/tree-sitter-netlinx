@@ -325,7 +325,7 @@ module.exports = grammar({
             choice(
                 $.button_event_definition,
                 $.channel_event_definition,
-                // $.level_event_definition,
+                $.level_event_definition,
                 $.data_event_definition,
                 $.timeline_event_definition,
                 // $.custom_event_definition,
@@ -424,41 +424,20 @@ module.exports = grammar({
 
         button_event_hold_repeat: (_) => keywords.repeat,
 
-        // level_event_definition: ($) =>
-        //     seq(
-        //         seq(
-        //             keywords.level_event,
-        //             field("devlev", $.level_event_device_level_reference),
-        //         ),
-        //         repeat(
-        //             seq(
-        //                 keywords.level_event,
-        //                 field("devlev", $.level_event_device_level_reference),
-        //             ),
-        //         ),
-        //         field("body", $.compound_statement),
-        //     ),
+        level_event_definition: ($) =>
+            seq(
+                repeat1($.level_event_declarator),
+                field("body", $.compound_statement),
+            ),
 
-        // level_event_device_level_reference: ($) =>
-        //     seq(
-        //         "[",
-        //         choice(
-        //             seq(
-        //                 field(
-        //                     "device",
-        //                     choice(
-        //                         $.device_literal,
-        //                         $.identifier,
-        //                         $.expression,
-        //                     ),
-        //                 ),
-        //                 ",",
-        //                 field("level", choice($.identifier, $.expression)),
-        //             ),
-        //             field("devlev", choice($.identifier, $.expression)),
-        //         ),
-        //         "]",
-        //     ),
+        level_event_declarator: ($) =>
+            seq(
+                keywords.level_event,
+                field("devlev", $.level_event_devlev_reference),
+            ),
+
+        level_event_devlev_reference: ($) =>
+            choice($.devlev_expression, seq("[", $.expression, "]")),
 
         channel_event_definition: ($) =>
             seq(
@@ -487,50 +466,47 @@ module.exports = grammar({
 
         channel_event_type: (_) => choice(keywords.on, keywords.off),
 
-        // custom_event_definition: ($) =>
-        //     seq(
-        //         seq(
-        //             keywords.custom_event,
-        //             field("reference", $.custom_event_reference),
-        //         ),
-        //         repeat(
-        //             seq(
-        //                 keywords.custom_event,
-        //                 field("reference", $.custom_event_reference),
-        //             ),
-        //         ),
-        //         field("body", $.compound_statement),
-        //     ),
+        custom_event_definition: ($) =>
+            seq(
+                repeat1($.custom_event_declarator),
+                field("body", $.compound_statement),
+            ),
 
-        // custom_event_reference: ($) =>
-        //     seq(
-        //         "[",
-        //         choice(
-        //             // Format 1: [DEVICE,ID,TYPE]
-        //             seq(
-        //                 field(
-        //                     "device",
-        //                     choice(
-        //                         $.device_literal,
-        //                         $.identifier,
-        //                         $.expression,
-        //                     ),
-        //                 ),
-        //                 ",",
-        //                 field("id", $.expression),
-        //                 ",",
-        //                 field("type", $.expression),
-        //             ),
+        custom_event_declarator: ($) =>
+            seq(
+                keywords.custom_event,
+                field("reference", $.custom_event_reference),
+            ),
 
-        //             // Format 2: [DEVCHAN,EVENTID]
-        //             seq(
-        //                 field("devchan", choice($.identifier, $.expression)),
-        //                 ",",
-        //                 field("eventid", $.expression),
-        //             ),
-        //         ),
-        //         "]",
-        //     ),
+        custom_event_reference: ($) =>
+            seq(
+                "[",
+                choice(
+                    // Format 1: [DEVICE,ID,TYPE]
+                    seq(
+                        field(
+                            "device",
+                            choice(
+                                $.device_literal,
+                                $.identifier,
+                                $.expression,
+                            ),
+                        ),
+                        ",",
+                        field("id", $.expression),
+                        ",",
+                        field("type", $.expression),
+                    ),
+
+                    // Format 2: [DEVCHAN,EVENTID]
+                    seq(
+                        field("devchan", choice($.identifier, $.expression)),
+                        ",",
+                        field("eventid", $.expression),
+                    ),
+                ),
+                "]",
+            ),
 
         array_declarator: ($) =>
             prec(
@@ -1186,6 +1162,7 @@ module.exports = grammar({
                 $.parenthesized_expression,
                 $.devchan_range_expression,
                 $.devchan_expression,
+                // $.devlev_expression,
             ),
 
         assignment_expression: ($) =>
@@ -1206,6 +1183,7 @@ module.exports = grammar({
                 $.subscript_expression,
                 $.parenthesized_expression,
                 $.devchan_expression,
+                // $.devlev_expression,
             ),
 
         unary_expression: ($) =>
@@ -1312,17 +1290,17 @@ module.exports = grammar({
                 ")",
             ),
 
-        // devlev_expression: ($) =>
-        //     prec.dynamic(
-        //         PREC.FIELD + 12,
-        //         seq(
-        //             token("["),
-        //             field("device", $.expression),
-        //             ",",
-        //             field("level", $.expression),
-        //             "]",
-        //         ),
-        //     ),
+        devlev_expression: ($) =>
+            prec.dynamic(
+                PREC.FIELD + 12,
+                seq(
+                    token("["),
+                    field("device", $.expression),
+                    ",",
+                    field("level", $.expression),
+                    "]",
+                ),
+            ),
 
         devchan_expression: ($) =>
             prec.dynamic(

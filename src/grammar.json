@@ -1079,6 +1079,10 @@
                 },
                 {
                     "type": "SYMBOL",
+                    "name": "level_event_definition"
+                },
+                {
+                    "type": "SYMBOL",
                     "name": "data_event_definition"
                 },
                 {
@@ -1468,6 +1472,70 @@
             "value": "repeat",
             "flags": "i"
         },
+        "level_event_definition": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "REPEAT1",
+                    "content": {
+                        "type": "SYMBOL",
+                        "name": "level_event_declarator"
+                    }
+                },
+                {
+                    "type": "FIELD",
+                    "name": "body",
+                    "content": {
+                        "type": "SYMBOL",
+                        "name": "compound_statement"
+                    }
+                }
+            ]
+        },
+        "level_event_declarator": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "PATTERN",
+                    "value": "level_event",
+                    "flags": "i"
+                },
+                {
+                    "type": "FIELD",
+                    "name": "devlev",
+                    "content": {
+                        "type": "SYMBOL",
+                        "name": "level_event_devlev_reference"
+                    }
+                }
+            ]
+        },
+        "level_event_devlev_reference": {
+            "type": "CHOICE",
+            "members": [
+                {
+                    "type": "SYMBOL",
+                    "name": "devlev_expression"
+                },
+                {
+                    "type": "SEQ",
+                    "members": [
+                        {
+                            "type": "STRING",
+                            "value": "["
+                        },
+                        {
+                            "type": "SYMBOL",
+                            "name": "expression"
+                        },
+                        {
+                            "type": "STRING",
+                            "value": "]"
+                        }
+                    ]
+                }
+            ]
+        },
         "channel_event_definition": {
             "type": "SEQ",
             "members": [
@@ -1589,6 +1657,146 @@
                     "type": "PATTERN",
                     "value": "off",
                     "flags": "i"
+                }
+            ]
+        },
+        "custom_event_definition": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "REPEAT1",
+                    "content": {
+                        "type": "SYMBOL",
+                        "name": "custom_event_declarator"
+                    }
+                },
+                {
+                    "type": "FIELD",
+                    "name": "body",
+                    "content": {
+                        "type": "SYMBOL",
+                        "name": "compound_statement"
+                    }
+                }
+            ]
+        },
+        "custom_event_declarator": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "PATTERN",
+                    "value": "custom_event",
+                    "flags": "i"
+                },
+                {
+                    "type": "FIELD",
+                    "name": "reference",
+                    "content": {
+                        "type": "SYMBOL",
+                        "name": "custom_event_reference"
+                    }
+                }
+            ]
+        },
+        "custom_event_reference": {
+            "type": "SEQ",
+            "members": [
+                {
+                    "type": "STRING",
+                    "value": "["
+                },
+                {
+                    "type": "CHOICE",
+                    "members": [
+                        {
+                            "type": "SEQ",
+                            "members": [
+                                {
+                                    "type": "FIELD",
+                                    "name": "device",
+                                    "content": {
+                                        "type": "CHOICE",
+                                        "members": [
+                                            {
+                                                "type": "SYMBOL",
+                                                "name": "device_literal"
+                                            },
+                                            {
+                                                "type": "SYMBOL",
+                                                "name": "identifier"
+                                            },
+                                            {
+                                                "type": "SYMBOL",
+                                                "name": "expression"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "STRING",
+                                    "value": ","
+                                },
+                                {
+                                    "type": "FIELD",
+                                    "name": "id",
+                                    "content": {
+                                        "type": "SYMBOL",
+                                        "name": "expression"
+                                    }
+                                },
+                                {
+                                    "type": "STRING",
+                                    "value": ","
+                                },
+                                {
+                                    "type": "FIELD",
+                                    "name": "type",
+                                    "content": {
+                                        "type": "SYMBOL",
+                                        "name": "expression"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "SEQ",
+                            "members": [
+                                {
+                                    "type": "FIELD",
+                                    "name": "devchan",
+                                    "content": {
+                                        "type": "CHOICE",
+                                        "members": [
+                                            {
+                                                "type": "SYMBOL",
+                                                "name": "identifier"
+                                            },
+                                            {
+                                                "type": "SYMBOL",
+                                                "name": "expression"
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "STRING",
+                                    "value": ","
+                                },
+                                {
+                                    "type": "FIELD",
+                                    "name": "eventid",
+                                    "content": {
+                                        "type": "SYMBOL",
+                                        "name": "expression"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "STRING",
+                    "value": "]"
                 }
             ]
         },
@@ -5097,6 +5305,46 @@
                     "value": ")"
                 }
             ]
+        },
+        "devlev_expression": {
+            "type": "PREC_DYNAMIC",
+            "value": 28,
+            "content": {
+                "type": "SEQ",
+                "members": [
+                    {
+                        "type": "TOKEN",
+                        "content": {
+                            "type": "STRING",
+                            "value": "["
+                        }
+                    },
+                    {
+                        "type": "FIELD",
+                        "name": "device",
+                        "content": {
+                            "type": "SYMBOL",
+                            "name": "expression"
+                        }
+                    },
+                    {
+                        "type": "STRING",
+                        "value": ","
+                    },
+                    {
+                        "type": "FIELD",
+                        "name": "level",
+                        "content": {
+                            "type": "SYMBOL",
+                            "name": "expression"
+                        }
+                    },
+                    {
+                        "type": "STRING",
+                        "value": "]"
+                    }
+                ]
+            }
         },
         "devchan_expression": {
             "type": "PREC_DYNAMIC",
