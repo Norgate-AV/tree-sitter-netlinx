@@ -1,11 +1,11 @@
-DEFINE_FUNCTION
-INTEGER calculateValue(INTEGER x, INTEGER y) {
-// ^ type
-//        ^ function
-//                     ^ type
-//                             ^ parameter
-//                                ^ type
-//                                        ^ parameter
+DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
+// ^ keyword
+//              ^ type
+//                      ^ function
+//                                     ^ type
+//                                             ^ parameter
+//                                                 ^ type
+//                                                        ^ parameter
 
     STACK_VAR INTEGER result
     // ^ keyword
@@ -14,12 +14,12 @@ INTEGER calculateValue(INTEGER x, INTEGER y) {
 
     result = x + y * 10
     // ^ variable
-    //       ^ operator
-    //         ^ variable
-    //           ^ operator
-    //             ^ variable
-    //               ^ operator
-    //                 ^ number
+    //     ^ operator
+    //       ^ variable
+    //         ^ operator
+    //           ^ variable
+    //             ^ operator
+    //               ^ number
 
     IF (result > 100) {
     // ^ keyword
