@@ -8,14 +8,11 @@ This document presents findings from analyzing the NetLinx compiler components a
 
 The NetLinx compiler consists of several components:
 
-| Component | Description | Relevance to Grammar |
-|-----------|-------------|---------------------|
-| **nlc.dll** | Core compiler component | Contains grammar rules and syntax parsing logic |
-| **nlpp.dll** | Preprocessor component | Handles preprocessor directives (#DEFINE, #IF_DEFINED, etc.) |
-| **nllink.dll** | Linker component | Links compiled modules |
-| **SciLexer.dll** | Scintilla lexer component | Contains lexical analysis for syntax highlighting |
-| **NetLinx.rw** | Reserved Words file | Lists language keywords and preprocessor directives |
-| **NetLinx.scl** | Scintilla Coloring file | Contains lexical token definitions |
+| Component      | Description             | Relevance to Grammar                                         |
+| -------------- | ----------------------- | ------------------------------------------------------------ |
+| **nlc.dll**    | Core compiler component | Contains grammar rules and syntax parsing logic              |
+| **nlpp.dll**   | Preprocessor component  | Handles preprocessor directives (#DEFINE, #IF_DEFINED, etc.) |
+| **NetLinx.rw** | Reserved Words file     | Lists language keywords and preprocessor directives          |
 
 ## Preprocessor Directives
 
@@ -95,13 +92,3 @@ The compiler distinguishes between different context levels:
 3. **Block-Level Context** - Items that can appear inside code blocks
 
 Each context has a different set of valid constructs, and preprocessor directives can appear in all contexts.
-
-## C Grammar Reference Analysis
-
-The C grammar implementation for tree-sitter uses a pattern where:
-
-1. Comprehensive container rules are defined for each context:
-   ```javascript
-   _top_level_item: ($) => choice(...),
-   _block_item: ($) => choice(...),
-   ```
