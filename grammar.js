@@ -1172,29 +1172,17 @@ module.exports = grammar({
             ),
 
         create_buffer_statement: ($) =>
-            seq(
-                keywords.create_buffer,
-                field("device", $.expression),
-                ",",
-                field("buffer", $.expression),
-                optional(";"),
-            ),
+            seq(keywords.create_buffer, $.comma_expression, optional(";")),
 
         create_multi_buffer_statement: ($) =>
             seq(
                 keywords.create_multi_buffer,
-                field("devices", commaSep($.expression)),
-                ",",
-                field("buffer", $.expression),
+                $.comma_expression,
                 optional(";"),
             ),
 
         clear_buffer_statement: ($) =>
-            seq(
-                keywords.clear_buffer,
-                field("buffer", $.expression),
-                optional(";"),
-            ),
+            seq(keywords.clear_buffer, $.expression, optional(";")),
 
         wait_statement: ($) =>
             seq(

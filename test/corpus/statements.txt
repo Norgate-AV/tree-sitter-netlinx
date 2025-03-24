@@ -790,8 +790,9 @@ create_buffer dvProj, buffer
 
 (source_file
   (create_buffer_statement
-    device: (identifier)
-    buffer: (identifier)))
+    (comma_expression
+      left: (identifier)
+      right: (identifier))))
 
 =====================
 Clear Buffer
@@ -803,7 +804,7 @@ clear_buffer buffer
 
 (source_file
   (clear_buffer_statement
-    buffer: (identifier)))
+    (identifier)))
 
 ====================
 Create Multi Buffer
@@ -815,9 +816,11 @@ create_multi_buffer dvProj, dvDisplay, buffer
 
 (source_file
   (create_multi_buffer_statement
-    devices: (identifier)
-    devices: (identifier)
-    buffer: (identifier)))
+    (comma_expression
+      left: (identifier)
+      right: (comma_expression
+        left: (identifier)
+        right: (identifier)))))
 
 ===================
 Wait
