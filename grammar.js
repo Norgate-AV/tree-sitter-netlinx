@@ -9,7 +9,6 @@
 const keywords = require("./keywords");
 const netlinx = require("./netlinx");
 const directives = require("./directives");
-// const functions = require("./functions");
 
 const PREC = {
     PAREN_DECLARATOR: -10,
@@ -93,11 +92,6 @@ module.exports = grammar({
                 $.declaration,
                 $.type_definition,
                 $.event_definition,
-                // $.combine_definition,
-                // $.connect_level_definition,
-                // $.mutually_exclusive_definition,
-                // $.toggling_definition,
-                // $.latching_definition,
 
                 // Statements
                 $._top_level_statement,
@@ -239,45 +233,6 @@ module.exports = grammar({
             seq(keywords.define_function, $.function_definition),
         define_call: ($) => seq(keywords.define_call, $.call_definition),
         define_module: ($) => seq(keywords.define_module, $.module_definition),
-
-        // combine_definition: ($) =>
-        //     seq("(", commaSep1($.expression), ")", optional(";")),
-
-        // connect_level_definition: ($) =>
-        //     seq("(", commaSep1($.expression), ")", optional(";")),
-
-        // mutually_exclusive_definition: ($) =>
-        //     prec.right(
-        //         5,
-        //         seq(
-        //             "(",
-        //             commaSep1(
-        //                 choice(
-        //                     $.devchan_expression,
-        //                     $.devchan_range_expression,
-        //                     $.identifier,
-        //                 ),
-        //             ),
-        //             ")",
-        //             optional(";"),
-        //         ),
-        //     ),
-
-        // latching_definition: ($) =>
-        //     prec.right(
-        //         5,
-        //         seq(
-        //             choice(
-        //                 $.devchan_expression,
-        //                 $.devchan_range_expression,
-        //                 $.identifier,
-        //             ),
-        //             optional(";"),
-        //         ),
-        //     ),
-
-        // toggling_definition: ($) =>
-        //     prec.right(5, seq(choice($.devchan_expression))),
 
         module_definition: ($) =>
             prec.right(
@@ -969,17 +924,6 @@ module.exports = grammar({
             // Using prec.right here to allow for the optional semicolon
             prec.right(seq(keywords.continue, optional(";"))),
 
-        // devchan_statement: ($) =>
-        //     prec.right(
-        //         PREC.ASSIGNMENT + 1,
-        //         seq(
-        //             field("target", $.devchan_expression),
-        //             field("operator", "="),
-        //             field("value", $.expression),
-        //             optional(";"),
-        //         ),
-        //     ),
-
         devchan_operation_statement: ($) =>
             prec.right(
                 PREC.FIELD + 20,
@@ -1098,8 +1042,6 @@ module.exports = grammar({
                 $.unary_expression,
                 $.update_expression,
                 $.call_expression,
-                // Add simple identifier as a function reference without calling it
-                // $.function_reference,
                 $.field_expression,
                 $.subscript_expression,
                 $.string_expression,
@@ -1112,7 +1054,6 @@ module.exports = grammar({
                 $.parenthesized_expression,
                 $.devchan_range_expression,
                 $.devchan_expression,
-                // $.devlev_expression,
             ),
 
         assignment_expression: ($) =>
@@ -1133,7 +1074,6 @@ module.exports = grammar({
                 $.subscript_expression,
                 $.parenthesized_expression,
                 $.devchan_expression,
-                // $.devlev_expression,
             ),
 
         unary_expression: ($) =>
