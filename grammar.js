@@ -29,11 +29,9 @@ const PREC = {
     MULTIPLY: 11,
     CAST: 12,
     UNARY: 14,
-    // FUNCTION_REF: 15,
     CALL: 15,
     FIELD: 16,
     SUBSCRIPT: 17,
-    // ARRAY_FUNCTION: 19,
     DIRECTIVE: 20,
     SECTION_DEFINITION: 110,
 };
@@ -42,30 +40,9 @@ module.exports = grammar({
     name: "netlinx",
 
     conflicts: ($) => [
-        // [$.type_specifier, $._declarator],
         [$.type_specifier, $.expression],
         [$._declarator, $._declaration_declarator],
-        // [$._declaration_declarator, $.declaration],
-        // [$.custom_type, $.expression],
-        // [$.custom_type, $._declarator],
         [$.function_declarator, $._function_declaration_declarator],
-        // [$._block_item, $.statement],
-        // [$.array_declarator, $.devchan_expression],
-        // [$._type_identifier, $.identifier],
-        // [$.devchan_expression, $.subscript_expression],
-        // [$.assignment_expression, $.devchan_expression],
-        // [$._top_level_item, $.section],
-        // [$.latching_definition, $.toggling_definition],
-        // [$.latching_definition, $.toggling_definition, $.expression],
-        // [$.combine_definition, $.connect_level_definition],
-        // [
-        //     // $.combine_definition,
-        //     // $.connect_level_definition,
-        //     $.parenthesized_expression,
-        // ],
-        // [$._top_level_item, $._top_level_statement],
-        // [$.type_specifier, $.expression_statement],
-        // [$.combine_definition, $.connect_level_definition, $.comma_expression],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
         [$.wait_statement],
@@ -180,35 +157,26 @@ module.exports = grammar({
 
         // Preprocessor
         preproc_include: ($) =>
-            // prec(
-            //     PREC.DIRECTIVE,
             seq(
                 preprocessor(directives.include),
                 field("path", choice($.string_literal)),
                 token.immediate(/\r?\n/),
             ),
-        // ),
 
         preproc_define: ($) =>
-            // prec(
-            //     PREC.DIRECTIVE,
             seq(
                 preprocessor(directives.define),
                 field("name", $.identifier),
                 field("value", optional($.preproc_arg)),
                 token.immediate(/\r?\n/),
             ),
-        // ),
 
         preproc_warn: ($) =>
-            // prec(
-            //     PREC.DIRECTIVE,
             seq(
                 preprocessor(directives.warn),
                 field("message", $.string_literal),
                 token.immediate(/\r?\n/),
             ),
-        // ),
 
         preproc_disable_warning: ($) =>
             seq(
@@ -671,7 +639,6 @@ module.exports = grammar({
         declaration: ($) =>
             // Using prec.right here to allow for the optional semicolon
             prec.right(
-                // -2,
                 seq(
                     $._declaration_specifiers,
                     commaSep1(
@@ -711,19 +678,14 @@ module.exports = grammar({
             ),
 
         _declarator: ($) =>
-            // prec(
-            // 2,
             choice(
                 $.function_declarator,
                 $.array_declarator,
                 $.parenthesized_declarator,
                 $.identifier,
             ),
-        // ),
 
         _declaration_declarator: ($) =>
-            // prec(
-            // 3,
             choice(
                 alias(
                     $._function_declaration_declarator,
@@ -733,7 +695,6 @@ module.exports = grammar({
                 $.parenthesized_declarator,
                 $.identifier,
             ),
-        // ),
 
         _field_declarator: ($) =>
             choice(
@@ -908,16 +869,11 @@ module.exports = grammar({
         expression_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
             prec.right(
-                // 10,
                 choice(
-                    // Standard expression statements
                     seq(
                         choice($.expression, $.comma_expression),
-                        // optional(";"),
                         optional(choice(";", /\s*\r?\n/)),
                     ),
-                    // Dedicated handling for NetLinx custom functions as statements
-                    // prec.dynamic(15, $.netlinx_custom_function),
                 ),
             ),
 
