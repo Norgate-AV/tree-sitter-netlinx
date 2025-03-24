@@ -1,46 +1,95 @@
 ==================
 Button
-:skip
 ==================
 
 BUTTON_EVENT[dvTP, BTN_HOME] {
-    PUSH: {
-        doSomething()
-    }
-    RELEASE: {
-        doSomethingElse()
-    }
+    PUSH: {}
+    RELEASE: {}
+    hold[100]: {}
+    hold[1, repeat]: {}
+}
+
+button_event[dvDevChan]
+button_event[10001:1:0, 1]
+button_event[DVA_DEVCHAN[1]] {
+    PUSH: {}
+    RELEASE: {}
+    hold[100]: {}
+    hold[1, repeat]: {}
 }
 
 ---
 
 (source_file
-  (section
-    (define_event_section
-      (event_definition
-        (button_event_definition
-          devchan: (button_event_device_channel_reference
+  (event_definition
+    (button_event_definition
+      (button_event_declarator
+        devchan: (button_event_devchan_reference
+          (devchan_expression
             device: (identifier)
-            channel: (identifier))
-          body: (button_event_block
-            (button_event_handler
-              type: (button_event_type)
-              body: (compound_statement
-                (expression_statement
-                  (call_expression
-                    function: (identifier)
-                    arguments: (argument_list)))))
-            (button_event_handler
-              type: (button_event_type)
-              body: (compound_statement
-                (expression_statement
-                  (call_expression
-                    function: (identifier)
-                    arguments: (argument_list)))))))))))
+            channel: (identifier))))
+      body: (button_event_block
+        (button_event_handler
+          type: (button_event_type)
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type)
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type
+            time: (number_literal
+              (decimal_literal)))
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type
+            time: (number_literal
+              (decimal_literal))
+            (button_event_hold_repeat))
+          body: (compound_statement)))))
+  (event_definition
+    (button_event_definition
+      (button_event_declarator
+        devchan: (button_event_devchan_reference
+          (identifier)))
+      (button_event_declarator
+        devchan: (button_event_devchan_reference
+          (devchan_expression
+            device: (device_literal
+              device: (number_literal
+                (decimal_literal))
+              port: (number_literal
+                (decimal_literal))
+              system: (number_literal
+                (decimal_literal)))
+            channel: (number_literal
+              (decimal_literal)))))
+      (button_event_declarator
+        devchan: (button_event_devchan_reference
+          (subscript_expression
+            argument: (identifier)
+            index: (number_literal
+              (decimal_literal)))))
+      body: (button_event_block
+        (button_event_handler
+          type: (button_event_type)
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type)
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type
+            time: (number_literal
+              (decimal_literal)))
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type
+            time: (number_literal
+              (decimal_literal))
+            (button_event_hold_repeat))
+          body: (compound_statement))))))
 
 ==================
 Channel
-:skip
 ==================
 
 CHANNEL_EVENT[dvIO, 1] {
@@ -48,56 +97,78 @@ CHANNEL_EVENT[dvIO, 1] {
     OFF: {}
 }
 
+channel_event[dvDevChan] {
+    on: {}
+    off: {}
+}
+
+channel_event[dvDevChan]
+channel_event[5001:21:0, 1]
+channel_event[DVA_DEVCHAN[1]] {
+    on: {}
+    off: {}
+}
+
 ---
 
 (source_file
-  (section
-    (define_event_section
-      (event_definition
-        (channel_event_definition
-          (devchan
-            (channel_event_device_channel_reference
-              (device
-                (identifier))
-              (channel
-                (number_literal
-                  (decimal_literal)))))
-          (body
-            (channel_event_block
-              (channel_event_handler
-                (type
-                  (on))
-                (body
-                  (compound_statement
-                    (statement
-                      (expression_statement
-                        (expression
-                          (device_channel_assignment_expression
-                            (device_channel_reference_expression
-                              (expression
-                                (identifier))
-                              (expression
-                                (number_literal
-                                  (decimal_literal))))
-                            (expression
-                              (identifier)))))))))
-              (channel_event_handler
-                (type
-                  (off))
-                (body
-                  (compound_statement
-                    (statement
-                      (expression_statement
-                        (expression
-                          (device_channel_assignment_expression
-                            (device_channel_reference_expression
-                              (expression
-                                (identifier))
-                              (expression
-                                (number_literal
-                                  (decimal_literal))))
-                            (expression
-                              (identifier))))))))))))))))))
+  (event_definition
+    (channel_event_definition
+      (channel_event_declarator
+        devchan: (channel_event_devchan_reference
+          (devchan_expression
+            device: (identifier)
+            channel: (number_literal
+              (decimal_literal)))))
+      body: (channel_event_block
+        (channel_event_handler
+          type: (channel_event_type)
+          body: (compound_statement))
+        (channel_event_handler
+          type: (channel_event_type)
+          body: (compound_statement)))))
+  (event_definition
+    (channel_event_definition
+      (channel_event_declarator
+        devchan: (channel_event_devchan_reference
+          (identifier)))
+      body: (channel_event_block
+        (channel_event_handler
+          type: (channel_event_type)
+          body: (compound_statement))
+        (channel_event_handler
+          type: (channel_event_type)
+          body: (compound_statement)))))
+  (event_definition
+    (channel_event_definition
+      (channel_event_declarator
+        devchan: (channel_event_devchan_reference
+          (identifier)))
+      (channel_event_declarator
+        devchan: (channel_event_devchan_reference
+          (devchan_expression
+            device: (device_literal
+              device: (number_literal
+                (decimal_literal))
+              port: (number_literal
+                (decimal_literal))
+              system: (number_literal
+                (decimal_literal)))
+            channel: (number_literal
+              (decimal_literal)))))
+      (channel_event_declarator
+        devchan: (channel_event_devchan_reference
+          (subscript_expression
+            argument: (identifier)
+            index: (number_literal
+              (decimal_literal)))))
+      body: (channel_event_block
+        (channel_event_handler
+          type: (channel_event_type)
+          body: (compound_statement))
+        (channel_event_handler
+          type: (channel_event_type)
+          body: (compound_statement))))))
 
 ==================
 Data

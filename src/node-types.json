@@ -536,6 +536,130 @@
         "fields": {}
     },
     {
+        "type": "button_event_block",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "button_event_handler",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "button_event_declarator",
+        "named": true,
+        "fields": {
+            "devchan": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "button_event_devchan_reference",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "type": "button_event_definition",
+        "named": true,
+        "fields": {
+            "body": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "button_event_block",
+                        "named": true
+                    }
+                ]
+            }
+        },
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "button_event_declarator",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "button_event_devchan_reference",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "expression",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "button_event_handler",
+        "named": true,
+        "fields": {
+            "body": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "compound_statement",
+                        "named": true
+                    }
+                ]
+            },
+            "type": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "button_event_type",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "type": "button_event_type",
+        "named": true,
+        "fields": {
+            "time": {
+                "multiple": false,
+                "required": false,
+                "types": [
+                    {
+                        "type": "expression",
+                        "named": true
+                    }
+                ]
+            }
+        },
+        "children": {
+            "multiple": false,
+            "required": false,
+            "types": [
+                {
+                    "type": "button_event_hold_repeat",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
         "type": "call_definition",
         "named": true,
         "fields": {
@@ -746,6 +870,109 @@
                 }
             ]
         }
+    },
+    {
+        "type": "channel_event_block",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "channel_event_handler",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "channel_event_declarator",
+        "named": true,
+        "fields": {
+            "devchan": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "channel_event_devchan_reference",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "type": "channel_event_definition",
+        "named": true,
+        "fields": {
+            "body": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "channel_event_block",
+                        "named": true
+                    }
+                ]
+            }
+        },
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "channel_event_declarator",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "channel_event_devchan_reference",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "expression",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "channel_event_handler",
+        "named": true,
+        "fields": {
+            "body": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "compound_statement",
+                        "named": true
+                    }
+                ]
+            },
+            "type": {
+                "multiple": false,
+                "required": true,
+                "types": [
+                    {
+                        "type": "channel_event_type",
+                        "named": true
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "type": "channel_event_type",
+        "named": true,
+        "fields": {}
     },
     {
         "type": "clear_buffer_statement",
@@ -1360,6 +1587,14 @@
             "multiple": false,
             "required": true,
             "types": [
+                {
+                    "type": "button_event_definition",
+                    "named": true
+                },
+                {
+                    "type": "channel_event_definition",
+                    "named": true
+                },
                 {
                     "type": "data_event_definition",
                     "named": true
@@ -3436,6 +3671,10 @@
     {
         "type": "^",
         "named": false
+    },
+    {
+        "type": "button_event_hold_repeat",
+        "named": true
     },
     {
         "type": "cancel_all_wait_statement",

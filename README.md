@@ -62,7 +62,7 @@ This is a work in progress. Once the grammar is complete, a release will be made
     - :white_check_mark: Module Definitions
 - Events
     - :x: Button Events
-    - :x: Channel Events
+    - :white_check_mark: Channel Events
     - :x: Level Events
     - :white_check_mark: Data Events
     - :white_check_mark: Timeline Events
