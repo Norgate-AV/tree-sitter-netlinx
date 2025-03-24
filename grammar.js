@@ -606,7 +606,6 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._declarator),
                     "[",
-                    // repeat(choice($.type_qualifier)),
                     field("size", optional(choice($.expression))),
                     "]",
                 ),
@@ -618,7 +617,6 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._field_declarator),
                     "[",
-                    // repeat(choice($.type_qualifier)),
                     field("size", optional(choice($.expression))),
                     "]",
                 ),
@@ -630,7 +628,6 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._type_declarator),
                     "[",
-                    // repeat(choice($.type_qualifier)),
                     field("size", optional(choice($.expression))),
                     "]",
                 ),
@@ -642,7 +639,6 @@ module.exports = grammar({
                 seq(
                     field("declarator", optional($._abstract_declarator)),
                     "[",
-                    // repeat(choice($.type_qualifier)),
                     field("size", optional(choice($.expression))),
                     "]",
                 ),
@@ -792,25 +788,7 @@ module.exports = grammar({
             ),
 
         type_definition: ($) =>
-            prec.right(
-                seq(
-                    // $._type_definition_type,
-                    // $._type_definition_declarators,
-                    $.struct_specifier,
-                    optional(";"),
-                ),
-            ),
-
-        // _type_definition_type: ($) =>
-        //     seq(
-        //         repeat($.type_qualifier),
-        //         field("type", $.type_specifier),
-        //         // field("type", $.struct_specifier),
-        //         repeat($.type_qualifier),
-        //     ),
-
-        // _type_definition_declarators: ($) =>
-        //     commaSep1(field("declarator", $._type_declarator)),
+            prec.right(seq($.struct_specifier, optional(";"))),
 
         _declaration_modifiers: ($) =>
             choice($.storage_class_specifier, $.type_qualifier),
@@ -820,13 +798,6 @@ module.exports = grammar({
                 seq(
                     repeat($._declaration_modifiers),
                     field("type", $.type_specifier),
-                    // optional(
-                    //     seq(
-                    //         "[",
-                    //         field("array_size", optional($.expression)),
-                    //         "]",
-                    //     ),
-                    // ),
                     repeat($._declaration_modifiers),
                 ),
             ),
@@ -881,29 +852,12 @@ module.exports = grammar({
 
         _abstract_declarator: ($) => choice($.abstract_array_declarator),
 
-        // function_declarator: ($) =>
-        //     prec.right(
-        //         1,
-        //         seq(
-        //             field("return_type", optional($.type_specifier)),
-        //             field("name", $.identifier),
-        //             field("parameters", $.parameter_list),
-        //         ),
-        //     ),
-
         function_declarator: ($) =>
             prec.right(
                 1,
                 seq(
                     field("declarator", $._declarator),
                     field("parameters", $.parameter_list),
-                    // repeat(
-                    //     choice(
-                    //         $.attribute_specifier,
-                    //         $.identifier,
-                    //         alias($.preproc_call_expression, $.call_expression),
-                    //     ),
-                    // ),
                 ),
             ),
 
