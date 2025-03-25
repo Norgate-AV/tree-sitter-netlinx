@@ -562,6 +562,16 @@
       "value": "cancel_all_wait_until",
       "flags": "i"
     },
+    "true": {
+      "type": "PATTERN",
+      "value": "true",
+      "flags": "i"
+    },
+    "false": {
+      "type": "PATTERN",
+      "value": "false",
+      "flags": "i"
+    },
     "program_name": {
       "type": "PREC_RIGHT",
       "value": 30,
@@ -6210,16 +6220,6 @@
     "hex_literal": {
       "type": "PATTERN",
       "value": "\\$[0-9a-fA-F]+"
-    },
-    "true": {
-      "type": "PATTERN",
-      "value": "true",
-      "flags": "i"
-    },
-    "false": {
-      "type": "PATTERN",
-      "value": "false",
-      "flags": "i"
     },
     "identifier": {
       "type": "PATTERN",

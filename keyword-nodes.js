@@ -129,4 +129,8 @@ module.exports = {
     cancel_wait_until_keyword: (_) => keywords.cancel_wait_until,
     cancel_all_wait_keyword: (_) => keywords.cancel_all_wait,
     cancel_all_wait_until_keyword: (_) => keywords.cancel_all_wait_until,
+
+    // Boolean keywords
+    true: (_) => keywords.true,
+    false: (_) => keywords.false,
 };

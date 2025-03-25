@@ -141,4 +141,8 @@ module.exports = {
     cancel_wait_until: /cancel_wait_until/i,
     cancel_all_wait: /cancel_all_wait/i,
     cancel_all_wait_until: /cancel_all_wait_until/i,
+
+    // Boolean
+    true: /true/i,
+    false: /false/i,
 };

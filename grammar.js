@@ -6,7 +6,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const netlinx = require("./netlinx");
 const directives = require("./directives");
 const keywords = require("./keyword-nodes");
 
@@ -1303,9 +1302,6 @@ module.exports = grammar({
         decimal_literal: (_) => /[-+]?\d+/,
 
         hex_literal: (_) => /\$[0-9a-fA-F]+/,
-
-        true: (_) => netlinx.true,
-        false: (_) => netlinx.false,
 
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 
