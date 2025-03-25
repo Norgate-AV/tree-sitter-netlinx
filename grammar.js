@@ -46,6 +46,7 @@ module.exports = grammar({
         [$.type_specifier, $._top_level_expression_statement],
         [$.wait_statement],
         [$.wait_until_statement],
+        [$.device_literal],
     ],
 
     extras: ($) => [/\s|\\\r?\n/, $.comment],
@@ -1237,14 +1238,14 @@ module.exports = grammar({
             choice($.number_literal, $.string_literal, $.device_literal),
 
         device_literal: ($) =>
-            prec.right(
-                PREC.FIELD + 10,
+            prec.dynamic(
+                PREC.FIELD + 30,
                 seq(
-                    field("device", prec.dynamic(PREC.FIELD + 5, $.expression)),
+                    field("device", $.expression),
                     ":",
-                    field("port", prec.dynamic(PREC.FIELD + 5, $.expression)),
+                    field("port", $.expression),
                     ":",
-                    field("system", prec.dynamic(PREC.FIELD + 5, $.expression)),
+                    field("system", $.expression),
                 ),
             ),
 

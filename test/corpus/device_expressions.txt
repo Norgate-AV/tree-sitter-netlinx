@@ -193,3 +193,33 @@ Device Expressions
 dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM
 
 ---
+
+(source_file
+      (expression_statement
+        (device_literal
+          (number_literal
+            (decimal_literal))
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          (number_literal
+            (decimal_literal))
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (device_literal
+          (field_expression
+            (identifier)
+            (field_identifier))
+          (field_expression
+            (identifier)
+            (field_identifier))
+          (field_expression
+            (identifier)
+            (field_identifier)))))

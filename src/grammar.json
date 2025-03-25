@@ -5959,8 +5959,8 @@
       ]
     },
     "device_literal": {
-      "type": "PREC_RIGHT",
-      "value": 26,
+      "type": "PREC_DYNAMIC",
+      "value": 46,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5968,12 +5968,8 @@
             "type": "FIELD",
             "name": "device",
             "content": {
-              "type": "PREC_DYNAMIC",
-              "value": 21,
-              "content": {
-                "type": "SYMBOL",
-                "name": "expression"
-              }
+              "type": "SYMBOL",
+              "name": "expression"
             }
           },
           {
@@ -5984,12 +5980,8 @@
             "type": "FIELD",
             "name": "port",
             "content": {
-              "type": "PREC_DYNAMIC",
-              "value": 21,
-              "content": {
-                "type": "SYMBOL",
-                "name": "expression"
-              }
+              "type": "SYMBOL",
+              "name": "expression"
             }
           },
           {
@@ -6000,12 +5992,8 @@
             "type": "FIELD",
             "name": "system",
             "content": {
-              "type": "PREC_DYNAMIC",
-              "value": 21,
-              "content": {
-                "type": "SYMBOL",
-                "name": "expression"
-              }
+              "type": "SYMBOL",
+              "name": "expression"
             }
           }
         ]
@@ -6193,6 +6181,9 @@
     ],
     [
       "wait_until_statement"
+    ],
+    [
+      "device_literal"
     ]
   ],
   "precedences": [],

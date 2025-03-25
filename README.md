@@ -34,6 +34,7 @@ Following that, the query files for highlights, tags, and locals still need to b
     - :white_check_mark: Logical Expressions
     - :white_check_mark: String Expressions
     - :white_check_mark: Function Call Expressions
+    - :white_check_mark: Device Expressions (`0:first_local_port+1:1`, `dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM`)
 - Statements
     - :white_check_mark: If Statements
     - :white_check_mark: While Loops
@@ -56,7 +57,7 @@ Following that, the query files for highlights, tags, and locals still need to b
     - :white_check_mark: Send String Statements
     - :white_check_mark: Send Command Statements
     - :white_check_mark: Send Level Statements
-    - :white_check_mark: Devchan Operation Statements (ON, OFF, TO, MIN_TO, PULSE, etc)
+    - :white_check_mark: Devchan Operation Statements (`ON`, `OFF`, `TO`, `MIN_TO`, `PULSE`, etc)
 - Declarations
     - :white_check_mark: Define Function Definitions
     - :white_check_mark: Define Call Definitions
@@ -82,8 +83,8 @@ Following that, the query files for highlights, tags, and locals still need to b
     - :white_check_mark: Arrays
 - Comments
     - :white_check_mark: Single Line Comments
-    - :white_check_mark: Multi Line Comments
-    - :white_check_mark: Pascal Comments
+    - :white_check_mark: Multi Line Comments (C Style `/* */`)
+    - :white_check_mark: Pascal Comments (`(* *)`)
 - Preprocessor
     - :white_check_mark: Define
     - :white_check_mark: Include
@@ -92,7 +93,7 @@ Following that, the query files for highlights, tags, and locals still need to b
     - :white_check_mark: If Defined
     - :white_check_mark: If Not Defined
 - :x: Other bits that I haven't thought of yet or have forgotten about
-- :x: Device Expressions (`0:first_local_port:1`)
+
 
 ## Contributing :sparkles:
 
