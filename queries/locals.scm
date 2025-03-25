@@ -55,3 +55,25 @@
 
 (type_specifier
   (identifier) @local.reference)
+
+;; Parameter definitions
+(parameter_declaration
+  declarator: (identifier) @local.definition.parameter)
+
+;; All identifier references
+(identifier) @local.reference
+
+;; Parameter list defines scope
+(parameter_list) @local.scope
+
+;; Scopes
+(compound_statement) @local.scope
+(function_definition) @local.scope
+(parameter_list) @local.scope
+
+;; Definitions
+(parameter_declaration
+  declarator: (identifier) @local.definition.parameter)
+
+;; References
+(identifier) @local.reference

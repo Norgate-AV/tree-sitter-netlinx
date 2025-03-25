@@ -323,3 +323,45 @@
 ;;   (type_qualifier) @_qualifier
 ;;   declarator: (identifier) @constant
 ;;   (#match? @_qualifier "constant|CONSTANT"))
+
+;; Function parameters
+;; Parameters in declaration
+(parameter_declaration
+  declarator: (identifier) @parameter)
+
+;; Parameters in function definition
+(function_definition
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (identifier) @parameter)))
+
+;; Parameters in call definition
+(call_definition
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (identifier) @parameter)))
+
+;; Parameters in function declarator
+(function_declarator
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (identifier) @parameter)))
+
+;; Function calls with arguments
+(call_expression
+  arguments: (argument_list
+    (identifier) @variable.parameter))
+
+;; Parameter types
+(parameter_declaration
+  (type_specifier) @type)
+
+;; Parameter references within function bodies
+((identifier) @parameter
+ (#is? @parameter @local.reference)
+ (#is? @parameter @local.scope "parameter"))
+
+;; Parameter references
+((identifier) @parameter
+ (#is? @local.reference)
+ (#is? @local.definition.parameter))
