@@ -31,10 +31,12 @@ DEFINE_TOGGLING
 
 (source_file
   (program_name
+    (program_name_keyword)
     (string_literal
       (string_content)))
   (section
-    (define_device_section))
+    (define_device_section
+      (define_device_keyword)))
   (expression_statement
     (assignment_expression
       left: (identifier)
@@ -56,38 +58,44 @@ DEFINE_TOGGLING
         system: (number_literal
           (decimal_literal)))))
   (section
-    (define_constant_section))
+    (define_constant_section
+      (define_constant_keyword)))
   (comment)
   (declaration
     type: (intrinsic_type
-      (primitive_type))
+      (primitive_type
+        (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
       value: (number_literal
         (decimal_literal))))
   (declaration
     type: (intrinsic_type
-      (primitive_type))
+      (primitive_type
+        (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
       value: (number_literal
         (decimal_literal))))
   (declaration
     type: (intrinsic_type
-      (primitive_type))
+      (primitive_type
+        (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
       value: (number_literal
         (decimal_literal))))
   (declaration
     type: (intrinsic_type
-      (primitive_type))
+      (primitive_type
+        (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
       value: (number_literal
         (decimal_literal))))
   (section
-    (define_mutually_exclusive_section))
+    (define_mutually_exclusive_section
+      (define_mutually_exclusive_keyword)))
   (expression_statement
     (parenthesized_expression
       (comma_expression
@@ -114,7 +122,8 @@ DEFINE_TOGGLING
           channel: (number_literal
             (decimal_literal))))))
   (section
-    (define_latching_section))
+    (define_latching_section
+      (define_latching_keyword)))
   (expression_statement
     (devchan_expression
       device: (identifier)
@@ -122,7 +131,8 @@ DEFINE_TOGGLING
   (expression_statement
     (identifier))
   (section
-    (define_toggling_section))
+    (define_toggling_section
+      (define_toggling_keyword)))
   (expression_statement
     (devchan_expression
       device: (identifier)

@@ -11,18 +11,20 @@ DEFINE_PROGRAM {
 ---
 
 (source_file
-      (program_name
-        (string_literal
-          (string_content)))
-      (section
-        (define_program_section
-          (compound_statement
-            (expression_statement
-              (assignment_expression
-                (devchan_expression
-                  (identifier)
-                  (identifier))
-                (parenthesized_expression
-                  (field_expression
-                    (identifier)
-                    (field_identifier)))))))))
+  (program_name
+    (program_name_keyword)
+    (string_literal
+      (string_content)))
+  (section
+    (define_program_section
+      (define_program_keyword)
+      (compound_statement
+        (expression_statement
+          (assignment_expression
+            (devchan_expression
+              (identifier)
+              (identifier))
+            (parenthesized_expression
+              (field_expression
+                (identifier)
+                (field_identifier)))))))))
