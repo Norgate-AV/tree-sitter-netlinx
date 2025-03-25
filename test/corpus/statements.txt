@@ -15,24 +15,27 @@ if (!a) {
 
 (source_file
   (if_statement
-        condition: (parenthesized_expression
-          (identifier))
-        consequence: (expression_statement
+    (if_keyword)
+    condition: (parenthesized_expression
+      (identifier))
+    consequence: (expression_statement
+      (number_literal
+        (decimal_literal))))
+  (if_statement
+    (if_keyword)
+    condition: (parenthesized_expression
+      (unary_expression
+        argument: (identifier)))
+    consequence: (compound_statement
+      (expression_statement
+        (number_literal
+          (decimal_literal))))
+    alternative: (else_clause
+      (else_keyword)
+      (compound_statement
+        (expression_statement
           (number_literal
-            (decimal_literal))))
-      (if_statement
-        condition: (parenthesized_expression
-          (unary_expression
-            argument: (identifier)))
-        consequence: (compound_statement
-          (expression_statement
-            (number_literal
-              (decimal_literal))))
-        alternative: (else_clause
-          (compound_statement
-            (expression_statement
-              (number_literal
-                (decimal_literal)))))))
+            (decimal_literal)))))))
 
 ==================
 Switch statements
@@ -57,36 +60,43 @@ switch (a) {
 
 (source_file
   (switch_statement
-        condition: (parenthesized_expression
-          (identifier))
-        body: (compound_statement
-          (expression_statement
-            (call_expression
-              function: (identifier)
-              arguments: (argument_list
-                (string_literal
-                  (string_content)))))
-          (case_statement
-            value: (number_literal
-              (decimal_literal)))
-          (case_statement
-            value: (number_literal
-              (decimal_literal))
-            (if_statement
-              condition: (parenthesized_expression
-                (identifier))
-              consequence: (compound_statement
-                (expression_statement
-                  (call_expression
-                    function: (identifier)
-                    arguments: (argument_list)))))
-            (break_statement))
-          (case_statement
+    (switch_keyword)
+    condition: (parenthesized_expression
+      (identifier))
+    body: (compound_statement
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (string_literal
+              (string_content)))))
+      (case_statement
+        (case_keyword)
+        value: (number_literal
+          (decimal_literal)))
+      (case_statement
+        (case_keyword)
+        value: (number_literal
+          (decimal_literal))
+        (if_statement
+          (if_keyword)
+          condition: (parenthesized_expression
+            (identifier))
+          consequence: (compound_statement
             (expression_statement
               (call_expression
                 function: (identifier)
-                arguments: (argument_list)))
-            (break_statement)))))
+                arguments: (argument_list)))))
+        (break_statement
+          (break_keyword)))
+      (case_statement
+        (default_keyword)
+        (expression_statement
+          (call_expression
+            function: (identifier)
+            arguments: (argument_list)))
+        (break_statement
+          (break_keyword))))))
 
 ================================================================================
 Case statements separate from switch statements
@@ -104,46 +114,51 @@ case 0:
 --------------------------------------------------------------------------------
 
 (source_file
-      (switch_statement
-        (parenthesized_expression
-          (binary_expression
-            (identifier)
-            (number_literal
-              (decimal_literal))))
-        (compound_statement
-          (case_statement
-            (number_literal
-              (decimal_literal))
-            (while_statement
-              (parenthesized_expression
-                (binary_expression
-                  (unary_expression
-                    (unary_expression
-                      (identifier)))
-                  (number_literal
-                    (decimal_literal))))
-              (compound_statement
-                (expression_statement
-                  (assignment_expression
-                    (identifier)
-                    (update_expression
-                      (identifier))))
-                (case_statement
-                  (number_literal
-                    (decimal_literal))
-                  (expression_statement
-                    (assignment_expression
-                      (identifier)
-                      (update_expression
-                        (identifier)))))
-                (case_statement
-                  (number_literal
-                    (decimal_literal))
-                  (expression_statement
-                    (assignment_expression
-                      (identifier)
-                      (update_expression
-                        (identifier)))))))))))
+  (switch_statement
+    (switch_keyword)
+    (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal
+          (decimal_literal))))
+    (compound_statement
+      (case_statement
+        (case_keyword)
+        (number_literal
+          (decimal_literal))
+        (while_statement
+          (while_keyword)
+          (parenthesized_expression
+            (binary_expression
+              (unary_expression
+                (unary_expression
+                  (identifier)))
+              (number_literal
+                (decimal_literal))))
+          (compound_statement
+            (expression_statement
+              (assignment_expression
+                (identifier)
+                (update_expression
+                  (identifier))))
+            (case_statement
+              (case_keyword)
+              (number_literal
+                (decimal_literal))
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (update_expression
+                    (identifier)))))
+            (case_statement
+              (case_keyword)
+              (number_literal
+                (decimal_literal))
+              (expression_statement
+                (assignment_expression
+                  (identifier)
+                  (update_expression
+                    (identifier)))))))))))
 
 ================================================================================
 Return statements
@@ -156,10 +171,13 @@ return a, b;
 --------------------------------------------------------------------------------
 
 (source_file
-  (return_statement)
   (return_statement
+    (return_keyword))
+  (return_statement
+    (return_keyword)
     (identifier))
   (return_statement
+    (return_keyword)
     (comma_expression
       (identifier)
       (identifier))))
@@ -181,16 +199,18 @@ integer b;
 --------------------------------------------------------------------------------
 
 (source_file
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type))
-        (identifier))
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type))
-        (identifier)))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (identifier))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (identifier)))
 
 ==================
 For loops
@@ -213,84 +233,88 @@ for (i = 0, j = 0, k = 0, l = 0; i < 1, j < 1; i++, j++, k++, l++)
 
 (source_file
   (for_statement
-        body: (expression_statement
-          (number_literal
-            (decimal_literal))))
-      (for_statement
-        initializer: (assignment_expression
+    (for_keyword)
+    body: (expression_statement
+      (number_literal
+        (decimal_literal))))
+  (for_statement
+    (for_keyword)
+    initializer: (assignment_expression
+      left: (identifier)
+      right: (number_literal
+        (decimal_literal)))
+    condition: (binary_expression
+      left: (identifier)
+      right: (number_literal
+        (decimal_literal)))
+    update: (comma_expression
+      left: (call_expression
+        function: (identifier)
+        arguments: (argument_list))
+      right: (update_expression
+        argument: (identifier)))
+    body: (compound_statement
+      (expression_statement
+        (number_literal
+          (decimal_literal)))))
+  (for_statement
+    (for_keyword)
+    initializer: (call_expression
+      function: (identifier)
+      arguments: (argument_list))
+    condition: (call_expression
+      function: (identifier)
+      arguments: (argument_list))
+    update: (call_expression
+      function: (identifier)
+      arguments: (argument_list))
+    body: (expression_statement
+      (number_literal
+        (decimal_literal))))
+  (for_statement
+    (for_keyword)
+    initializer: (comma_expression
+      left: (assignment_expression
+        left: (identifier)
+        right: (number_literal
+          (decimal_literal)))
+      right: (comma_expression
+        left: (assignment_expression
           left: (identifier)
           right: (number_literal
             (decimal_literal)))
-        condition: (binary_expression
-          left: (identifier)
-          right: (number_literal
-            (decimal_literal)))
-        update: (comma_expression
-          left: (call_expression
-            function: (identifier)
-            arguments: (argument_list))
-          right: (update_expression
-            argument: (identifier)))
-        body: (compound_statement
-          (expression_statement
-            (number_literal
-              (decimal_literal)))))
-      (for_statement
-        initializer: (call_expression
-          function: (identifier)
-          arguments: (argument_list))
-        condition: (call_expression
-          function: (identifier)
-          arguments: (argument_list))
-        update: (call_expression
-          function: (identifier)
-          arguments: (argument_list))
-        body: (expression_statement
-          (number_literal
-            (decimal_literal))))
-      (for_statement
-        initializer: (comma_expression
+        right: (comma_expression
           left: (assignment_expression
             left: (identifier)
             right: (number_literal
               (decimal_literal)))
-          right: (comma_expression
-            left: (assignment_expression
-              left: (identifier)
-              right: (number_literal
-                (decimal_literal)))
-            right: (comma_expression
-              left: (assignment_expression
-                left: (identifier)
-                right: (number_literal
-                  (decimal_literal)))
-              right: (assignment_expression
-                left: (identifier)
-                right: (number_literal
-                  (decimal_literal))))))
-        condition: (comma_expression
-          left: (binary_expression
+          right: (assignment_expression
             left: (identifier)
             right: (number_literal
-              (decimal_literal)))
-          right: (binary_expression
-            left: (identifier)
-            right: (number_literal
-              (decimal_literal))))
-        update: (comma_expression
+              (decimal_literal))))))
+    condition: (comma_expression
+      left: (binary_expression
+        left: (identifier)
+        right: (number_literal
+          (decimal_literal)))
+      right: (binary_expression
+        left: (identifier)
+        right: (number_literal
+          (decimal_literal))))
+    update: (comma_expression
+      left: (update_expression
+        argument: (identifier))
+      right: (comma_expression
+        left: (update_expression
+          argument: (identifier))
+        right: (comma_expression
           left: (update_expression
             argument: (identifier))
-          right: (comma_expression
-            left: (update_expression
-              argument: (identifier))
-            right: (comma_expression
-              left: (update_expression
-                argument: (identifier))
-              right: (update_expression
-                argument: (identifier)))))
-        body: (expression_statement
-          (number_literal
-            (decimal_literal)))))
+          right: (update_expression
+            argument: (identifier)))))
+    body: (expression_statement
+      (number_literal
+        (decimal_literal)))))
 
 ==================
 While loops
@@ -303,13 +327,14 @@ while (x)
 
 (source_file
   (while_statement
+    (while_keyword)
     condition: (parenthesized_expression
-        (identifier))
+      (identifier))
     body: (expression_statement
-        (call_expression
+      (call_expression
         function: (identifier)
         arguments: (argument_list
-            (string_literal
+          (string_literal
             (string_content)))))))
 
 ==================
@@ -332,32 +357,36 @@ SELECT {
 
 (source_file
   (select_statement
+    (select_keyword)
     (active_block
-        condition: (parenthesized_expression
+      (active_keyword)
+      condition: (parenthesized_expression
         (binary_expression
-            left: (identifier)
-            right: (identifier)))
-        body: (compound_statement
+          left: (identifier)
+          right: (identifier)))
+      body: (compound_statement
         (expression_statement
-            (call_expression
+          (call_expression
             function: (identifier)
             arguments: (argument_list)))))
     (active_block
-        condition: (parenthesized_expression
+      (active_keyword)
+      condition: (parenthesized_expression
         (binary_expression
-            left: (identifier)
-            right: (identifier)))
-        body: (compound_statement
+          left: (identifier)
+          right: (identifier)))
+      body: (compound_statement
         (expression_statement
-            (call_expression
+          (call_expression
             function: (identifier)
             arguments: (argument_list)))))
     (active_block
-        condition: (parenthesized_expression
+      (active_keyword)
+      condition: (parenthesized_expression
         (true))
-        body: (compound_statement
+      body: (compound_statement
         (expression_statement
-            (call_expression
+          (call_expression
             function: (identifier)
             arguments: (argument_list)))))))
 
@@ -392,61 +421,73 @@ else if (e) {
 ---
 
 (source_file
+  (if_statement
+    (if_keyword)
+    (parenthesized_expression
+      (identifier))
+    (if_statement
+      (if_keyword)
+      (parenthesized_expression
+        (identifier))
+      (expression_statement
+        (number_literal
+          (decimal_literal)))
+      (else_clause
+        (else_keyword)
+        (expression_statement
+          (number_literal
+            (decimal_literal))))))
+  (if_statement
+    (if_keyword)
+    (parenthesized_expression
+      (identifier))
+    (compound_statement
       (if_statement
-        (parenthesized_expression
-          (identifier))
-        (if_statement
-          (parenthesized_expression
-            (identifier))
-          (expression_statement
-            (number_literal
-              (decimal_literal)))
-          (else_clause
-            (expression_statement
-              (number_literal
-                (decimal_literal))))))
-      (if_statement
+        (if_keyword)
         (parenthesized_expression
           (identifier))
         (compound_statement
-          (if_statement
-            (parenthesized_expression
-              (identifier))
-            (compound_statement
-              (expression_statement
-                (number_literal
-                  (decimal_literal))))))
-        (else_clause
-          (compound_statement
-            (expression_statement
-              (number_literal
-                (decimal_literal))))))
+          (expression_statement
+            (number_literal
+              (decimal_literal))))))
+    (else_clause
+      (else_keyword)
+      (compound_statement
+        (expression_statement
+          (number_literal
+            (decimal_literal))))))
+  (if_statement
+    (if_keyword)
+    (parenthesized_expression
+      (identifier))
+    (expression_statement
+      (number_literal
+        (decimal_literal)))
+    (else_clause
+      (else_keyword)
       (if_statement
+        (if_keyword)
         (parenthesized_expression
           (identifier))
         (expression_statement
           (number_literal
             (decimal_literal)))
         (else_clause
+          (else_keyword)
           (if_statement
+            (if_keyword)
             (parenthesized_expression
               (identifier))
-            (expression_statement
-              (number_literal
-                (decimal_literal)))
+            (compound_statement
+              (expression_statement
+                (number_literal
+                  (decimal_literal))))
             (else_clause
-              (if_statement
-                (parenthesized_expression
-                  (identifier))
-                (compound_statement
-                  (expression_statement
-                    (number_literal
-                      (decimal_literal))))
-                (else_clause
-                  (compound_statement
-                    (expression_statement
-                      (number_literal
-                        (decimal_literal)))))))))))
+              (else_keyword)
+              (compound_statement
+                (expression_statement
+                  (number_literal
+                    (decimal_literal)))))))))))
 
 ==================
 Break and continue in loops
@@ -475,53 +516,63 @@ while (running) {
 ---
 
 (source_file
-      (for_statement
-        (assignment_expression
+  (for_statement
+    (for_keyword)
+    (assignment_expression
+      (identifier)
+      (number_literal
+        (decimal_literal)))
+    (binary_expression
+      (identifier)
+      (number_literal
+        (decimal_literal)))
+    (update_expression
+      (identifier))
+    (compound_statement
+      (if_statement
+        (if_keyword)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal))))
+        (break_statement
+          (break_keyword)))
+      (if_statement
+        (if_keyword)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal
+              (decimal_literal))))
+        (continue_statement
+          (continue_keyword)))
+      (expression_statement
+        (call_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))
-        (binary_expression
-          (identifier)
-          (number_literal
-            (decimal_literal)))
-        (update_expression
-          (identifier))
-        (compound_statement
-          (if_statement
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal))))
-            (break_statement))
-          (if_statement
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal))))
-            (continue_statement))
-          (expression_statement
-            (call_expression
-              (identifier)
-              (argument_list
-                (identifier))))))
-      (while_statement
+          (argument_list
+            (identifier))))))
+  (while_statement
+    (while_keyword)
+    (parenthesized_expression
+      (identifier))
+    (compound_statement
+      (if_statement
+        (if_keyword)
         (parenthesized_expression
           (identifier))
-        (compound_statement
-          (if_statement
-            (parenthesized_expression
-              (identifier))
-            (break_statement))
-          (if_statement
-            (parenthesized_expression
-              (identifier))
-            (continue_statement))
-          (expression_statement
-            (call_expression
-              (identifier)
-              (argument_list))))))
+        (break_statement
+          (break_keyword)))
+      (if_statement
+        (if_keyword)
+        (parenthesized_expression
+          (identifier))
+        (continue_statement
+          (continue_keyword)))
+      (expression_statement
+        (call_expression
+          (identifier)
+          (argument_list))))))
 
 ==================
 Nested loops with break/continue
@@ -542,7 +593,21 @@ for (i = 0; i < 10; i++) {
 ---
 
 (source_file
+  (for_statement
+    (for_keyword)
+    (assignment_expression
+      (identifier)
+      (number_literal
+        (decimal_literal)))
+    (binary_expression
+      (identifier)
+      (number_literal
+        (decimal_literal)))
+    (update_expression
+      (identifier))
+    (compound_statement
       (for_statement
+        (for_keyword)
         (assignment_expression
           (identifier)
           (number_literal
@@ -554,46 +619,38 @@ for (i = 0; i < 10; i++) {
         (update_expression
           (identifier))
         (compound_statement
-          (for_statement
-            (assignment_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (binary_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (update_expression
-              (identifier))
-            (compound_statement
-              (if_statement
-                (parenthesized_expression
-                  (binary_expression
+          (if_statement
+            (if_keyword)
+            (parenthesized_expression
+              (binary_expression
+                (binary_expression
+                  (identifier)
+                  (identifier))
+                (number_literal
+                  (decimal_literal))))
+            (break_statement
+              (break_keyword)))
+          (if_statement
+            (if_keyword)
+            (parenthesized_expression
+              (binary_expression
+                (binary_expression
+                  (parenthesized_expression
                     (binary_expression
                       (identifier)
-                      (identifier))
-                    (number_literal
-                      (decimal_literal))))
-                (break_statement))
-              (if_statement
-                (parenthesized_expression
-                  (binary_expression
-                    (binary_expression
-                      (parenthesized_expression
-                        (binary_expression
-                          (identifier)
-                          (identifier)))
-                      (number_literal
-                        (decimal_literal)))
-                    (number_literal
-                      (decimal_literal))))
-                (continue_statement))
-              (expression_statement
-                (call_expression
-                  (identifier)
-                  (argument_list
-                    (identifier)
-                    (identifier)))))))))
+                      (identifier)))
+                  (number_literal
+                    (decimal_literal)))
+                (number_literal
+                  (decimal_literal))))
+            (continue_statement
+              (continue_keyword)))
+          (expression_statement
+            (call_expression
+              (identifier)
+              (argument_list
+                (identifier)
+                (identifier)))))))))
 
 ==================
 Switch variations
@@ -619,37 +676,44 @@ switch (empty) {
 ---
 
 (source_file
-      (switch_statement
-        (parenthesized_expression
-          (identifier))
-        (compound_statement
-          (comment)
-          (case_statement
-            (number_literal
-              (decimal_literal)))
-          (case_statement
-            (number_literal
-              (decimal_literal))
-            (expression_statement
-              (call_expression
-                (identifier)
-                (argument_list))))
-          (comment)
-          (case_statement
-            (number_literal
-              (decimal_literal))
-            (expression_statement
-              (call_expression
-                (identifier)
-                (argument_list)))
-            (break_statement))
-          (comment)
-          (case_statement)))
-      (switch_statement
-        (parenthesized_expression
-          (identifier))
-        (compound_statement
-          (comment))))
+  (switch_statement
+    (switch_keyword)
+    (parenthesized_expression
+      (identifier))
+    (compound_statement
+      (comment)
+      (case_statement
+        (case_keyword)
+        (number_literal
+          (decimal_literal)))
+      (case_statement
+        (case_keyword)
+        (number_literal
+          (decimal_literal))
+        (expression_statement
+          (call_expression
+            (identifier)
+            (argument_list))))
+      (comment)
+      (case_statement
+        (case_keyword)
+        (number_literal
+          (decimal_literal))
+        (expression_statement
+          (call_expression
+            (identifier)
+            (argument_list)))
+        (break_statement
+          (break_keyword)))
+      (comment)
+      (case_statement
+        (default_keyword))))
+  (switch_statement
+    (switch_keyword)
+    (parenthesized_expression
+      (identifier))
+    (compound_statement
+      (comment))))
 
 ==================
 Empty statement bodies
@@ -664,6 +728,8 @@ while (true);
 
 ---
 
+
+
 ==================
 Send String
 ==================
@@ -676,6 +742,7 @@ send_string 5001:1:0, payload
 
 (source_file
   (send_string_statement
+    (send_string_keyword)
     device: (identifier)
     value: (string_expression
       (number_literal
@@ -685,11 +752,13 @@ send_string 5001:1:0, payload
       (number_literal
         (hex_literal))))
   (send_string_statement
+    (send_string_keyword)
     device: (number_literal
       (decimal_literal))
     value: (string_literal
       (string_content)))
   (send_string_statement
+    (send_string_keyword)
     device: (device_literal
       device: (number_literal
         (decimal_literal))
@@ -712,10 +781,12 @@ send_command (33201 + 1):1:2, 'INPUT-HDMI,1'
 
 (source_file
   (send_command_statement
+    (send_command_keyword)
     device: (identifier)
     value: (string_literal
       (string_content)))
   (send_command_statement
+    (send_command_keyword)
     device: (device_literal
       device: (number_literal
         (decimal_literal))
@@ -729,10 +800,12 @@ send_command (33201 + 1):1:2, 'INPUT-HDMI,1'
       (string_literal
         (string_content))))
   (send_command_statement
+    (send_command_keyword)
     device: (identifier)
     value: (string_expression
       (identifier)))
   (send_command_statement
+    (send_command_keyword)
     device: (device_literal
       device: (parenthesized_expression
         (binary_expression
@@ -758,12 +831,14 @@ send_level dvTP, 2, (255 - 10)
 
 (source_file
   (send_level_statement
+    (send_level_keyword)
     device: (identifier)
     level: (number_literal
       (decimal_literal))
     value: (number_literal
       (decimal_literal)))
   (send_level_statement
+    (send_level_keyword)
     device: (identifier)
     level: (number_literal
       (decimal_literal))
@@ -784,6 +859,7 @@ create_buffer dvProj, buffer
 
 (source_file
   (create_buffer_statement
+    (create_buffer_keyword)
     (comma_expression
       left: (identifier)
       right: (identifier))))
@@ -798,6 +874,7 @@ clear_buffer buffer
 
 (source_file
   (clear_buffer_statement
+    (clear_buffer_keyword)
     (identifier)))
 
 ====================
@@ -810,6 +887,7 @@ create_multi_buffer dvProj, dvDisplay, buffer
 
 (source_file
   (create_multi_buffer_statement
+    (create_multi_buffer_keyword)
     (comma_expression
       left: (identifier)
       right: (comma_expression
@@ -833,6 +911,7 @@ wait (timeout * 10) 'Timeout' {
 
 (source_file
   (wait_statement
+    (wait_keyword)
     time: (number_literal
       (decimal_literal)))
   (expression_statement
@@ -840,6 +919,7 @@ wait (timeout * 10) 'Timeout' {
       function: (identifier)
       arguments: (argument_list)))
   (wait_statement
+    (wait_keyword)
     time: (number_literal
       (decimal_literal)))
   (compound_statement
@@ -848,6 +928,7 @@ wait (timeout * 10) 'Timeout' {
         function: (identifier)
         arguments: (argument_list))))
   (wait_statement
+    (wait_keyword)
     time: (parenthesized_expression
       (binary_expression
         left: (identifier)
@@ -878,6 +959,7 @@ wait_until (volume > 50) 'VolumeWait' {
 
 (source_file
   (wait_until_statement
+    (wait_until_keyword)
     condition: (parenthesized_expression
       (binary_expression
         left: (identifier)
@@ -887,6 +969,7 @@ wait_until (volume > 50) 'VolumeWait' {
       function: (identifier)
       arguments: (argument_list)))
   (wait_until_statement
+    (wait_until_keyword)
     condition: (parenthesized_expression
       (binary_expression
         left: (identifier)
@@ -897,6 +980,7 @@ wait_until (volume > 50) 'VolumeWait' {
         function: (identifier)
         arguments: (argument_list))))
   (wait_until_statement
+    (wait_until_keyword)
     condition: (parenthesized_expression
       (binary_expression
         left: (identifier)
@@ -920,32 +1004,32 @@ Combine
 
 ---
 
- (source_file
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
+(source_file
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (comma_expression
+          (identifier)
+          (identifier)))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (identifier))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (comma_expression
+          (subscript_expression
             (identifier)
-            (comma_expression
-              (identifier)
-              (identifier)))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
+            (number_literal
+              (decimal_literal)))
+          (subscript_expression
             (identifier)
-            (identifier))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (identifier)
-            (comma_expression
-              (subscript_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal)))
-              (subscript_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal))))))))
+            (number_literal
+              (decimal_literal))))))))
 
 ==============================
 Connect Level
@@ -958,31 +1042,31 @@ Connect Level
 ---
 
 (source_file
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (comma_expression
+          (identifier)
+          (identifier)))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (identifier))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (comma_expression
+          (subscript_expression
             (identifier)
-            (comma_expression
-              (identifier)
-              (identifier)))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
+            (number_literal
+              (decimal_literal)))
+          (subscript_expression
             (identifier)
-            (identifier))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (identifier)
-            (comma_expression
-              (subscript_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal)))
-              (subscript_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal))))))))
+            (number_literal
+              (decimal_literal))))))))
 
 ====================
 Latching
@@ -997,31 +1081,31 @@ MODE_BTN
 ---
 
 (source_file
-      (expression_statement
-        (devchan_expression
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (devchan_expression
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (devchan_range_expression
-          (devchan_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))
-          (range_operator)
-          (devchan_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (identifier))
-      (expression_statement
-        (identifier)))
+  (expression_statement
+    (devchan_expression
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (devchan_expression
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (devchan_range_expression
+      (devchan_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))
+      (range_operator)
+      (devchan_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (identifier))
+  (expression_statement
+    (identifier)))
 
 ======================
 Define module
@@ -1037,57 +1121,63 @@ define_module 'MyModule6' MyModuleInstance6(vdvObject, dvObject, foo, bar)
 ---
 
 (source_file
-      (define_module
-        (module_definition
-          (string_literal
-            (string_content))
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list
+        (identifier)
+        (identifier))))
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list
+        (identifier))))
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list)))
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list
+        (subscript_expression
           (identifier)
-          (argument_list
-            (identifier)
-            (identifier))))
-      (define_module
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list
-            (identifier))))
-      (define_module
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list)))
-      (define_module
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list
-            (subscript_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (identifier))))
-      (define_module
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list
-            (identifier)
-            (identifier)
-            (identifier))))
-      (define_module
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list
-            (identifier)
-            (identifier)
-            (identifier)
-            (identifier)))))
+          (number_literal
+            (decimal_literal)))
+        (identifier))))
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list
+        (identifier)
+        (identifier)
+        (identifier))))
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier)))))
 
 =======================
 Mutually Exclusive
@@ -1100,41 +1190,41 @@ Mutually Exclusive
 ---
 
 (source_file
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (comma_expression
-              (devchan_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal)))
-              (devchan_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal)))))))
-      (expression_statement
-        (parenthesized_expression
-          (devchan_range_expression
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (range_operator)
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal))))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (comma_expression
+          (devchan_expression
             (identifier)
-            (comma_expression
-              (identifier)
-              (identifier))))))
+            (number_literal
+              (decimal_literal)))
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))))
+  (expression_statement
+    (parenthesized_expression
+      (devchan_range_expression
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (range_operator)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (comma_expression
+          (identifier)
+          (identifier))))))
 
 =======================
 Toggling
@@ -1147,18 +1237,18 @@ Toggling
 ---
 
 (source_file
-      (expression_statement
-        (devchan_expression
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (devchan_expression
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (devchan_expression
-          (identifier)
-          (number_literal
-            (decimal_literal)))))
+  (expression_statement
+    (devchan_expression
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (devchan_expression
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (devchan_expression
+      (identifier)
+      (number_literal
+        (decimal_literal)))))

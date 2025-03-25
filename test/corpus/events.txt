@@ -24,34 +24,42 @@ button_event[DVA_DEVCHAN[1]] {
   (event_definition
     (button_event_definition
       (button_event_declarator
+        (button_event_keyword)
         devchan: (button_event_devchan_reference
           (devchan_expression
             device: (identifier)
             channel: (identifier))))
       body: (button_event_block
         (button_event_handler
-          type: (button_event_type)
-          body: (compound_statement))
-        (button_event_handler
-          type: (button_event_type)
+          type: (button_event_type
+            (push_keyword))
           body: (compound_statement))
         (button_event_handler
           type: (button_event_type
+            (release_keyword))
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type
+            (hold_keyword)
             time: (number_literal
               (decimal_literal)))
           body: (compound_statement))
         (button_event_handler
           type: (button_event_type
+            (hold_keyword)
             time: (number_literal
               (decimal_literal))
-            (button_event_hold_repeat))
+            (button_event_hold_repeat
+              (repeat_keyword)))
           body: (compound_statement)))))
   (event_definition
     (button_event_definition
       (button_event_declarator
+        (button_event_keyword)
         devchan: (button_event_devchan_reference
           (identifier)))
       (button_event_declarator
+        (button_event_keyword)
         devchan: (button_event_devchan_reference
           (devchan_expression
             device: (device_literal
@@ -64,6 +72,7 @@ button_event[DVA_DEVCHAN[1]] {
             channel: (number_literal
               (decimal_literal)))))
       (button_event_declarator
+        (button_event_keyword)
         devchan: (button_event_devchan_reference
           (subscript_expression
             argument: (identifier)
@@ -71,21 +80,26 @@ button_event[DVA_DEVCHAN[1]] {
               (decimal_literal)))))
       body: (button_event_block
         (button_event_handler
-          type: (button_event_type)
-          body: (compound_statement))
-        (button_event_handler
-          type: (button_event_type)
+          type: (button_event_type
+            (push_keyword))
           body: (compound_statement))
         (button_event_handler
           type: (button_event_type
+            (release_keyword))
+          body: (compound_statement))
+        (button_event_handler
+          type: (button_event_type
+            (hold_keyword)
             time: (number_literal
               (decimal_literal)))
           body: (compound_statement))
         (button_event_handler
           type: (button_event_type
+            (hold_keyword)
             time: (number_literal
               (decimal_literal))
-            (button_event_hold_repeat))
+            (button_event_hold_repeat
+              (repeat_keyword)))
           body: (compound_statement))))))
 
 ==================
@@ -115,6 +129,7 @@ channel_event[DVA_DEVCHAN[1]] {
   (event_definition
     (channel_event_definition
       (channel_event_declarator
+        (channel_event_keyword)
         devchan: (channel_event_devchan_reference
           (devchan_expression
             device: (identifier)
@@ -122,29 +137,36 @@ channel_event[DVA_DEVCHAN[1]] {
               (decimal_literal)))))
       body: (channel_event_block
         (channel_event_handler
-          type: (channel_event_type)
+          type: (channel_event_type
+            (on_keyword))
           body: (compound_statement))
         (channel_event_handler
-          type: (channel_event_type)
+          type: (channel_event_type
+            (off_keyword))
           body: (compound_statement)))))
   (event_definition
     (channel_event_definition
       (channel_event_declarator
+        (channel_event_keyword)
         devchan: (channel_event_devchan_reference
           (identifier)))
       body: (channel_event_block
         (channel_event_handler
-          type: (channel_event_type)
+          type: (channel_event_type
+            (on_keyword))
           body: (compound_statement))
         (channel_event_handler
-          type: (channel_event_type)
+          type: (channel_event_type
+            (off_keyword))
           body: (compound_statement)))))
   (event_definition
     (channel_event_definition
       (channel_event_declarator
+        (channel_event_keyword)
         devchan: (channel_event_devchan_reference
           (identifier)))
       (channel_event_declarator
+        (channel_event_keyword)
         devchan: (channel_event_devchan_reference
           (devchan_expression
             device: (device_literal
@@ -157,6 +179,7 @@ channel_event[DVA_DEVCHAN[1]] {
             channel: (number_literal
               (decimal_literal)))))
       (channel_event_declarator
+        (channel_event_keyword)
         devchan: (channel_event_devchan_reference
           (subscript_expression
             argument: (identifier)
@@ -164,10 +187,12 @@ channel_event[DVA_DEVCHAN[1]] {
               (decimal_literal)))))
       body: (channel_event_block
         (channel_event_handler
-          type: (channel_event_type)
+          type: (channel_event_type
+            (on_keyword))
           body: (compound_statement))
         (channel_event_handler
-          type: (channel_event_type)
+          type: (channel_event_type
+            (off_keyword))
           body: (compound_statement))))))
 
 ==================
@@ -203,39 +228,50 @@ data_event[DVA_OBJECTS[1]] {
   (event_definition
     (data_event_definition
       (data_event_declarator
+        (data_event_keyword)
         device: (data_event_device_reference
           (identifier)))
       body: (data_event_block
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (online_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (offline_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (string_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (command_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (awake_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (standby_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (onerror_keyword))
           body: (compound_statement)))))
   (event_definition
     (data_event_definition
       (data_event_declarator
+        (data_event_keyword)
         device: (data_event_device_reference
           (identifier)))
       (data_event_declarator
+        (data_event_keyword)
         device: (data_event_device_reference
           (identifier)))
       (data_event_declarator
+        (data_event_keyword)
         device: (data_event_device_reference
           (device_literal
             device: (number_literal
@@ -245,6 +281,7 @@ data_event[DVA_OBJECTS[1]] {
             system: (number_literal
               (decimal_literal)))))
       (data_event_declarator
+        (data_event_keyword)
         device: (data_event_device_reference
           (subscript_expression
             argument: (identifier)
@@ -252,25 +289,32 @@ data_event[DVA_OBJECTS[1]] {
               (decimal_literal)))))
       body: (data_event_block
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (online_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (offline_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (string_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (command_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (awake_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (standby_keyword))
           body: (compound_statement))
         (data_event_handler
-          type: (data_event_type)
+          type: (data_event_type
+            (onerror_keyword))
           body: (compound_statement))))))
 
 ========================
@@ -289,18 +333,22 @@ timeline_event[TL3] {}
   (event_definition
     (timeline_event_definition
       (timeline_event_declarator
+        (timeline_event_keyword)
         id: (timeline_event_id_reference
           (identifier)))
       body: (compound_statement)))
   (event_definition
     (timeline_event_definition
       (timeline_event_declarator
+        (timeline_event_keyword)
         id: (timeline_event_id_reference
           (identifier)))
       (timeline_event_declarator
+        (timeline_event_keyword)
         id: (timeline_event_id_reference
           (identifier)))
       (timeline_event_declarator
+        (timeline_event_keyword)
         id: (timeline_event_id_reference
           (identifier)))
       body: (compound_statement))))
@@ -321,6 +369,7 @@ level_event[DVA_DEVLEV[1]] {}
   (event_definition
     (level_event_definition
       (level_event_declarator
+        (level_event_keyword)
         devlev: (level_event_devlev_reference
           (devlev_expression
             device: (identifier)
@@ -329,9 +378,11 @@ level_event[DVA_DEVLEV[1]] {}
   (event_definition
     (level_event_definition
       (level_event_declarator
+        (level_event_keyword)
         devlev: (level_event_devlev_reference
           (identifier)))
       (level_event_declarator
+        (level_event_keyword)
         devlev: (level_event_devlev_reference
           (devlev_expression
             device: (device_literal
@@ -344,6 +395,7 @@ level_event[DVA_DEVLEV[1]] {}
             level: (number_literal
               (decimal_literal)))))
       (level_event_declarator
+        (level_event_keyword)
         devlev: (level_event_devlev_reference
           (subscript_expression
             argument: (identifier)
@@ -374,6 +426,7 @@ custom_event[dvTP, 1002] {}
   (event_definition
     (custom_event_definition
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           device: (identifier)
           id: (number_literal
@@ -384,6 +437,7 @@ custom_event[dvTP, 1002] {}
   (event_definition
     (custom_event_definition
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           devchan: (identifier)
           eventid: (number_literal
@@ -392,6 +446,7 @@ custom_event[dvTP, 1002] {}
   (event_definition
     (custom_event_definition
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           device: (identifier)
           id: (number_literal
@@ -399,6 +454,7 @@ custom_event[dvTP, 1002] {}
           type: (number_literal
             (decimal_literal))))
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           device: (identifier)
           id: (number_literal
@@ -409,11 +465,13 @@ custom_event[dvTP, 1002] {}
   (event_definition
     (custom_event_definition
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           devchan: (identifier)
           eventid: (number_literal
             (decimal_literal))))
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           devchan: (identifier)
           eventid: (number_literal
@@ -422,6 +480,7 @@ custom_event[dvTP, 1002] {}
   (event_definition
     (custom_event_definition
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           device: (identifier)
           id: (number_literal
@@ -429,6 +488,7 @@ custom_event[dvTP, 1002] {}
           type: (number_literal
             (decimal_literal))))
       (custom_event_declarator
+        (custom_event_keyword)
         reference: (custom_event_reference
           devchan: (identifier)
           eventid: (number_literal

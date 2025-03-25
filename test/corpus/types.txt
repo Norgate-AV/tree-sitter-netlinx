@@ -18,14 +18,58 @@ devlev a;
 ---
 
 (source_file
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (primitive_type)) (identifier))
-  (declaration (intrinsic_type (structured_type)) (identifier))
-  (declaration (intrinsic_type (structured_type)) (identifier))
-  (declaration (intrinsic_type (structured_type)) (identifier)))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (widechar_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (sinteger_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (long_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (slong_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (float_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (double_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (structured_type
+        (dev_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (structured_type
+        (devchan_keyword)))
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (structured_type
+        (devlev_keyword)))
+    (identifier)))
