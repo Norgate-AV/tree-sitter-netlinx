@@ -103,6 +103,9 @@
     (preproc_if_not_defined_keyword)
     (preproc_else_keyword)
     (preproc_end_if_keyword)
+
+    (struct_keyword)
+    (structure_keyword)
 ] @keyword
 
 ;; Types
@@ -118,8 +121,6 @@
     (dev_keyword)
     (devlev_keyword)
     (devchan_keyword)
-    (struct_keyword)
-    (structure_keyword)
 ] @type
 
 ;; Operators
