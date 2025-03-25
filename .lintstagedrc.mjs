@@ -18,8 +18,7 @@ export default {
         return [
             `eslint --fix ${file}`,
             `prettier --write ${file}`,
-            // "tree-sitter-cli generate",
-            // "tree-sitter-cli test",
+            "pnpm test",
         ];
     },
 };

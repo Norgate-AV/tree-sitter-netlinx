@@ -59,6 +59,7 @@
         "prepare": "husky",
         "doctoc": "doctoc README.md",
         "generate": "tree-sitter generate --abi 14",
+        "pretest": "pnpm generate",
         "test": "tree-sitter test"
     },
     "pnpm": {
