@@ -357,11 +357,11 @@
   (type_specifier) @type)
 
 ;; Parameter references within function bodies
-((identifier) @parameter
- (#is? @parameter @local.reference)
- (#is? @parameter @local.scope "parameter"))
+;; ((identifier) @parameter
+;;  (#is? @parameter @local.reference)
+;;  (#is? @parameter @local.scope "parameter"))
 
 ;; Parameter references
-((identifier) @parameter
- (#is? @local.reference)
- (#is? @local.definition.parameter))
+;; ((identifier) @parameter
+;;  (#is? @local.reference)
+;;  (#is? @local.definition.parameter))
