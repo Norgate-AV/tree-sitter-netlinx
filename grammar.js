@@ -594,13 +594,55 @@ module.exports = grammar({
             // Using prec.right here to allow for the optional semicolon
             prec.right(
                 seq(
-                    $._declaration_specifiers,
-                    commaSep1(
-                        field(
-                            "declarator",
-                            choice(
-                                seq($._declaration_declarator),
-                                $.init_declarator,
+                    choice(
+                        // Regular declaration
+                        prec.right(
+                            1,
+                            seq(
+                                $._declaration_specifiers,
+                                commaSep1(
+                                    field(
+                                        "declarator",
+                                        choice(
+                                            seq($._declaration_declarator),
+                                            $.init_declarator,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+
+                        // Qualifier only
+                        prec.right(
+                            2,
+                            seq(
+                                $.type_qualifier,
+                                commaSep1(
+                                    field(
+                                        "declarator",
+                                        choice(
+                                            seq($._declaration_declarator),
+                                            $.init_declarator,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+
+                        // Storage class only
+                        prec.right(
+                            3,
+                            seq(
+                                $.storage_class_specifier,
+                                commaSep1(
+                                    field(
+                                        "declarator",
+                                        choice(
+                                            seq($._declaration_declarator),
+                                            $.init_declarator,
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
