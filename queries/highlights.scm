@@ -37,10 +37,10 @@
 
     (local_var_keyword)
     (stack_var_keyword)
-    (constant_keyword)
-    (volatile_keyword)
-    (non_volatile_keyword)
-    (persistent_keyword)
+    ;; (constant_keyword)
+    ;; (volatile_keyword)
+    ;; (non_volatile_keyword)
+    ;; (persistent_keyword)
 
     (if_keyword)
     (else_keyword)
@@ -132,7 +132,12 @@
 ;; (structured_type) @type
 ;; (type_specifier) @type
 (storage_class_specifier) @storage
-(type_qualifier) @keyword.modifier
+
+(type_qualifier) @type.qualifier
+(constant_keyword) @type.qualifier
+(volatile_keyword) @type.qualifier
+(non_volatile_keyword) @type.qualifier
+(persistent_keyword) @type.qualifier
 
 ;; Struct specifiers
 ;; (struct_specifier) @type
@@ -289,9 +294,9 @@
 ;; (function_definition
 ;;   name: (identifier) @function)
 (function_definition
-  name: declarator: (identifier) @function)
-(call_expression
-  function: (identifier) @function.call)
+  name: (identifier) @function)
+;; (call_expression
+;;   function: (identifier) @function.call)
 ;; (call_definition
 ;;   name: (string_literal) @function)
 
@@ -357,11 +362,6 @@
   (type_specifier) @type)
 
 ;; Parameter references within function bodies
-;; ((identifier) @parameter
-;;  (#is? @parameter @local.reference)
-;;  (#is? @parameter @local.scope "parameter"))
-
-;; Parameter references
-;; ((identifier) @parameter
-;;  (#is? @local.reference)
-;;  (#is? @local.definition.parameter))
+((identifier) @parameter
+ (#is? @parameter local.reference)
+ (#eq? @parameter local.definition.parameter))
