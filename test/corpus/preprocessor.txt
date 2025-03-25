@@ -9,9 +9,11 @@ INCLUDE 'button_constants'
 
 (source_file
   (preproc_include
+    (preproc_include_keyword)
     path: (string_literal
       (string_content)))
   (preproc_include
+    (preproc_include_keyword)
     path: (string_literal
       (string_content))))
 
@@ -27,11 +29,14 @@ Define Directives
 
 (source_file
   (preproc_define
+    (preproc_define_keyword)
     name: (identifier))
   (preproc_define
+    (preproc_define_keyword)
     name: (identifier)
     value: (preproc_arg))
   (preproc_define
+    (preproc_define_keyword)
     name: (identifier)
     value: (preproc_arg)))
 
@@ -47,10 +52,13 @@ Basic Conditional Directives
 
 (source_file
   (preproc_if_not_defined
+    (preproc_if_not_defined_keyword)
     name: (identifier)
     (preproc_define
+      (preproc_define_keyword)
       name: (identifier))
-    (preproc_end_if)))
+    (preproc_end_if
+      (preproc_end_if_keyword))))
 
 ==================
 Warning Directive
@@ -62,6 +70,7 @@ Warning Directive
 
 (source_file
   (preproc_warn
+    (preproc_warn_keyword)
     (string_literal
       (string_content))))
 
@@ -80,17 +89,23 @@ Complex Conditional Directives
 
 (source_file
   (preproc_if_defined
+    (preproc_if_defined_keyword)
     name: (identifier)
     (preproc_include
+      (preproc_include_keyword)
       path: (string_literal
         (string_content)))
     alternative: (preproc_else
+      (preproc_else_keyword)
       (preproc_include
+        (preproc_include_keyword)
         path: (string_literal
           (string_content)))
       (preproc_define
+        (preproc_define_keyword)
         name: (identifier)))
-    (preproc_end_if)))
+    (preproc_end_if
+      (preproc_end_if_keyword))))
 
 ==================
 Nested Conditional Directives
@@ -110,20 +125,26 @@ Nested Conditional Directives
 
 (source_file
   (preproc_if_defined
+    (preproc_if_defined_keyword)
     name: (identifier)
     (preproc_define
+      (preproc_define_keyword)
       name: (identifier)
       value: (preproc_arg))
     (preproc_if_not_defined
+      (preproc_if_not_defined_keyword)
       name: (identifier)
       (preproc_define
+        (preproc_define_keyword)
         name: (identifier))
-      (preproc_end_if))
+      (preproc_end_if
+        (preproc_end_if_keyword)))
     (expression_statement
       (assignment_expression
         left: (identifier)
         right: (identifier)))
-    (preproc_end_if)))
+    (preproc_end_if
+      (preproc_end_if_keyword))))
 
 ==================
 Conditional Directives With Code Blocks
@@ -153,6 +174,7 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
 
 (source_file
   (preproc_if_defined
+    (preproc_if_defined_keyword)
     (identifier)
     (define_function
       (define_function_keyword)
@@ -177,6 +199,7 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
                   (decimal_literal)))
               (identifier))))))
     (preproc_if_defined
+      (preproc_if_defined_keyword)
       (identifier)
       (define_function
         (define_function_keyword)
@@ -204,8 +227,10 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
                   (identifier)
                   (argument_list
                     (identifier))))))))
-      (preproc_end_if))
+      (preproc_end_if
+        (preproc_end_if_keyword)))
     (preproc_else
+      (preproc_else_keyword)
       (define_function
         (define_function_keyword)
         (function_definition
@@ -223,7 +248,8 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
             (return_statement
               (return_keyword)
               (identifier))))))
-    (preproc_end_if)))
+    (preproc_end_if
+      (preproc_end_if_keyword))))
 
 ==================
 Disable Warning Directive
@@ -236,6 +262,8 @@ Disable Warning Directive
 
 (source_file
   (preproc_disable_warning
+    (preproc_disable_warning_keyword)
     (decimal_literal))
   (preproc_disable_warning
+    (preproc_disable_warning_keyword)
     (decimal_literal)))

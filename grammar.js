@@ -155,14 +155,20 @@ module.exports = grammar({
         // Preprocessor
         preproc_include: ($) =>
             seq(
-                preprocessor(directives.include),
+                alias(
+                    preprocessor(directives.include),
+                    $.preproc_include_keyword,
+                ),
                 field("path", choice($.string_literal)),
                 token.immediate(/\r?\n/),
             ),
 
         preproc_define: ($) =>
             seq(
-                preprocessor(directives.define),
+                alias(
+                    preprocessor(directives.define),
+                    $.preproc_define_keyword,
+                ),
                 field("name", $.identifier),
                 field("value", optional($.preproc_arg)),
                 token.immediate(/\r?\n/),
@@ -170,14 +176,17 @@ module.exports = grammar({
 
         preproc_warn: ($) =>
             seq(
-                preprocessor(directives.warn),
+                alias(preprocessor(directives.warn), $.preproc_warn_keyword),
                 field("message", $.string_literal),
                 token.immediate(/\r?\n/),
             ),
 
         preproc_disable_warning: ($) =>
             seq(
-                preprocessor(directives.disable_warning),
+                alias(
+                    preprocessor(directives.disable_warning),
+                    $.preproc_disable_warning_keyword,
+                ),
                 field("code", $.decimal_literal),
                 token.immediate(/\r?\n/),
             ),
@@ -1310,7 +1319,10 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
             prec(
                 precedence,
                 seq(
-                    preprocessor(directives.if_defined),
+                    alias(
+                        preprocessor(directives.if_defined),
+                        $.preproc_if_defined_keyword,
+                    ),
                     field("name", $.identifier),
                     "\n",
                     repeat(content($)),
@@ -1323,7 +1335,10 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
             prec(
                 precedence,
                 seq(
-                    preprocessor(directives.if_not_defined),
+                    alias(
+                        preprocessor(directives.if_not_defined),
+                        $.preproc_if_not_defined_keyword,
+                    ),
                     field("name", $.identifier),
                     "\n",
                     repeat(content($)),
@@ -1335,10 +1350,17 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
         ["preproc_else" + suffix]: ($) =>
             prec(
                 precedence,
-                seq(preprocessor(directives.else), repeat(content($))),
+                seq(
+                    alias(
+                        preprocessor(directives.else),
+                        $.preproc_else_keyword,
+                    ),
+                    repeat(content($)),
+                ),
             ),
 
-        ["preproc_end_if"]: (_) => preprocessor(directives.end_if),
+        ["preproc_end_if"]: ($) =>
+            alias(preprocessor(directives.end_if), $.preproc_end_if_keyword),
     };
 }
 

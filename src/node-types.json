@@ -2858,6 +2858,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "preproc_define_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -2874,6 +2884,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "preproc_disable_warning_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -2882,7 +2902,7 @@
         "fields": {},
         "children": {
             "multiple": true,
-            "required": false,
+            "required": true,
             "types": [
                 {
                     "type": "break_statement",
@@ -2981,6 +3001,10 @@
                     "named": true
                 },
                 {
+                    "type": "preproc_else_keyword",
+                    "named": true
+                },
+                {
                     "type": "preproc_if_defined",
                     "named": true
                 },
@@ -3050,7 +3074,17 @@
     {
         "type": "preproc_end_if",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "preproc_end_if_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "preproc_if_defined",
@@ -3183,6 +3217,10 @@
                 },
                 {
                     "type": "preproc_if_defined",
+                    "named": true
+                },
+                {
+                    "type": "preproc_if_defined_keyword",
                     "named": true
                 },
                 {
@@ -3386,6 +3424,10 @@
                     "named": true
                 },
                 {
+                    "type": "preproc_if_not_defined_keyword",
+                    "named": true
+                },
+                {
                     "type": "preproc_include",
                     "named": true
                 },
@@ -3458,6 +3500,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "preproc_include_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3474,6 +3526,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "preproc_warn_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -4401,38 +4463,6 @@
         "named": false
     },
     {
-        "type": "#define",
-        "named": false
-    },
-    {
-        "type": "#disable_warning",
-        "named": false
-    },
-    {
-        "type": "#else",
-        "named": false
-    },
-    {
-        "type": "#end_if",
-        "named": false
-    },
-    {
-        "type": "#if_defined",
-        "named": false
-    },
-    {
-        "type": "#if_not_defined",
-        "named": false
-    },
-    {
-        "type": "#include",
-        "named": false
-    },
-    {
-        "type": "#warn",
-        "named": false
-    },
-    {
         "type": "%",
         "named": false
     },
@@ -4803,6 +4833,38 @@
     },
     {
         "type": "preproc_arg",
+        "named": true
+    },
+    {
+        "type": "preproc_define_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_disable_warning_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_else_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_end_if_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_if_defined_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_if_not_defined_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_include_keyword",
+        "named": true
+    },
+    {
+        "type": "preproc_warn_keyword",
         "named": true
     },
     {

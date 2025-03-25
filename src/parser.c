@@ -427,16 +427,16 @@ static const char * const ts_symbol_names[] = {
   [sym_cancel_all_wait_keyword] = "cancel_all_wait_keyword",
   [sym_cancel_all_wait_until_keyword] = "cancel_all_wait_until_keyword",
   [anon_sym_EQ] = "=",
-  [aux_sym_preproc_include_token1] = "#include",
+  [aux_sym_preproc_include_token1] = "preproc_include_keyword",
   [aux_sym_preproc_include_token2] = "preproc_include_token2",
-  [aux_sym_preproc_define_token1] = "#define",
-  [aux_sym_preproc_warn_token1] = "#warn",
-  [aux_sym_preproc_disable_warning_token1] = "#disable_warning",
-  [aux_sym_preproc_if_defined_token1] = "#if_defined",
+  [aux_sym_preproc_define_token1] = "preproc_define_keyword",
+  [aux_sym_preproc_warn_token1] = "preproc_warn_keyword",
+  [aux_sym_preproc_disable_warning_token1] = "preproc_disable_warning_keyword",
+  [aux_sym_preproc_if_defined_token1] = "preproc_if_defined_keyword",
   [anon_sym_LF] = "\n",
-  [aux_sym_preproc_if_not_defined_token1] = "#if_not_defined",
-  [aux_sym_preproc_else_token1] = "#else",
-  [aux_sym_preproc_end_if_token1] = "#end_if",
+  [aux_sym_preproc_if_not_defined_token1] = "preproc_if_not_defined_keyword",
+  [aux_sym_preproc_else_token1] = "preproc_else_keyword",
+  [aux_sym_preproc_end_if_token1] = "preproc_end_if_keyword",
   [sym_preproc_arg] = "preproc_arg",
   [anon_sym_SEMI] = ";",
   [anon_sym_LBRACK] = "[",
@@ -1315,7 +1315,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [aux_sym_preproc_include_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [aux_sym_preproc_include_token2] = {
     .visible = false,
@@ -1323,19 +1323,19 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [aux_sym_preproc_define_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [aux_sym_preproc_warn_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [aux_sym_preproc_disable_warning_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [aux_sym_preproc_if_defined_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [anon_sym_LF] = {
     .visible = true,
@@ -1343,15 +1343,15 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [aux_sym_preproc_if_not_defined_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [aux_sym_preproc_else_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [aux_sym_preproc_end_if_token1] = {
     .visible = true,
-    .named = false,
+    .named = true,
   },
   [sym_preproc_arg] = {
     .visible = true,

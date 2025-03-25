@@ -4,6 +4,9 @@
 ;; Identifiers
 (identifier) @identifier
 
+;; Preprocessor
+
+
 ;; Constants
 [
     (true)
@@ -94,6 +97,15 @@
     (level_event_keyword)
     (timeline_event_keyword)
     (custom_event_keyword)
+
+    (preproc_include_keyword)
+    (preproc_define_keyword)
+    (preproc_warn_keyword)
+    (preproc_disable_warning_keyword)
+    (preproc_if_defined_keyword)
+    (preproc_if_not_defined_keyword)
+    (preproc_else_keyword)
+    (preproc_end_if_keyword)
 ] @keyword
 
 ;; Types
