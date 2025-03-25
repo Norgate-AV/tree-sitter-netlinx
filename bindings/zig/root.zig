@@ -16,3 +16,4 @@ test "can load grammar" {
     try testing.expectEqual(parser.setLanguage(language()), void{});
     try testing.expectEqual(parser.getLanguage(), tree_sitter_netlinx());
 }
+

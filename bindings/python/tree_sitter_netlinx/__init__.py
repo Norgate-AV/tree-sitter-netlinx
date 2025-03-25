@@ -1,4 +1,4 @@
-"""Netlinx grammar for tree-sitter"""
+"""NetLinx grammar for tree-sitter"""
 
 from importlib.resources import files as _files
 

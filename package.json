@@ -56,5 +56,10 @@
         "start": "tree-sitter playground",
         "test": "node --test bindings/node/*_test.js",
         "prepare": "husky"
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "tree-sitter-cli"
+        ]
     }
 }
