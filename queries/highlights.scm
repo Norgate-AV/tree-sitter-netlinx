@@ -121,12 +121,43 @@
     "*"
     "/"
     "%"
+    ">"
+    "<"
+    "&"
+    "|"
+    "^"
+    "!"
+    "~"
+    "&&"
+    "||"
+    "=="
+    "!="
+    "<="
+    ">="
+    "<<"
+    ">>"
     "++"
     "--"
+    ;; "<>"
 ] @operator
+
+;; Punctuation
+[
+    "("
+    ")"
+    "{"
+    "}"
+    "["
+    "]"
+    ","
+    ";"
+    ":"
+    "."
+] @punctuation
 
 ;; Literals
 (string_literal) @string
 (number_literal) @number
 (hex_literal) @number
 (device_literal) @number
+"\"" @string
