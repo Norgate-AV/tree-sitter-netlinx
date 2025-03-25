@@ -14,7 +14,17 @@ export default {
         ];
     },
     // "*?(test|spec).{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
-    "*.{css,scss,md,html,json,yml,yaml}": ["prettier --write"],
+    "*.{css,scss,md,html,json,yml,yaml}": (files) => {
+        const match = micromatch(files, "!(src/*.json)");
+
+        console.log(match);
+
+        if (match.length === 0) {
+            return [];
+        }
+
+        return [`prettier --write ${match.join(" ")}`];
+    },
     "grammar.js": (file) => {
         return [
             `eslint --fix ${file}`,
