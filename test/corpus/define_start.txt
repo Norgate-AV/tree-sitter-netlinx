@@ -23,34 +23,34 @@ primaryDevice.isPowered = true;
       (string_content)))
   (section
     (define_start_section
-      (define_start_keyword)
-      (compound_statement
-        (expression_statement
-          (assignment_expression
-            (field_expression
-              (identifier)
-              (field_identifier))
-            (string_literal
-              (string_content))))
-        (expression_statement
-          (assignment_expression
-            (field_expression
-              (identifier)
-              (field_identifier))
-            (false)))
-        (expression_statement
-          (assignment_expression
-            (field_expression
-              (identifier)
-              (field_identifier))
-            (number_literal
-              (decimal_literal)))))))
+      (define_start_keyword)))
+  (compound_statement
+    (expression_statement
+      (assignment_expression
+        (field_expression
+          (identifier)
+          (field_identifier))
+        (string_literal
+          (string_content))))
+    (expression_statement
+      (assignment_expression
+        (field_expression
+          (identifier)
+          (field_identifier))
+        (false)))
+    (expression_statement
+      (assignment_expression
+        (field_expression
+          (identifier)
+          (field_identifier))
+        (number_literal
+          (decimal_literal)))))
   (section
     (define_start_section
-      (define_start_keyword)
-      (expression_statement
-        (assignment_expression
-          (field_expression
-            (identifier)
-            (field_identifier))
-          (true))))))
+      (define_start_keyword)))
+  (expression_statement
+    (assignment_expression
+      (field_expression
+        (identifier)
+        (field_identifier))
+      (true))))

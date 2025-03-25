@@ -230,16 +230,8 @@ module.exports = grammar({
         define_toggling_section: ($) => $.define_toggling_keyword,
         define_variable_section: ($) => $.define_variable_keyword,
         define_event_section: ($) => $.define_event_keyword,
-        define_start_section: ($) =>
-            prec.right(
-                PREC.SECTION_DEFINITION,
-                seq($.define_start_keyword, repeat($._block_item)),
-            ),
-        define_program_section: ($) =>
-            prec.right(
-                PREC.SECTION_DEFINITION,
-                seq($.define_program_keyword, repeat($._block_item)),
-            ),
+        define_start_section: ($) => $.define_start_keyword,
+        define_program_section: ($) => $.define_program_keyword,
 
         define_function: ($) =>
             seq($.define_function_keyword, $.function_definition),

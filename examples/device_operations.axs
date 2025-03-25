@@ -1,5 +1,5 @@
 DEFINE_START
 ON[dvTP, 1]
 OFF[dvTP, 2]
-TO[dvTP, 3] = 127
+TO[dvTP, 3]
 PULSE[dvTP, 4]

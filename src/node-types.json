@@ -1756,59 +1756,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "declaration",
-          "named": true
-        },
-        {
-          "type": "define_call",
-          "named": true
-        },
-        {
-          "type": "define_function",
-          "named": true
-        },
-        {
-          "type": "define_module",
-          "named": true
-        },
-        {
           "type": "define_program_keyword",
-          "named": true
-        },
-        {
-          "type": "preproc_define",
-          "named": true
-        },
-        {
-          "type": "preproc_disable_warning",
-          "named": true
-        },
-        {
-          "type": "preproc_if_defined",
-          "named": true
-        },
-        {
-          "type": "preproc_if_not_defined",
-          "named": true
-        },
-        {
-          "type": "preproc_include",
-          "named": true
-        },
-        {
-          "type": "preproc_warn",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        },
-        {
-          "type": "type_definition",
           "named": true
         }
       ]
@@ -1819,59 +1771,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "declaration",
-          "named": true
-        },
-        {
-          "type": "define_call",
-          "named": true
-        },
-        {
-          "type": "define_function",
-          "named": true
-        },
-        {
-          "type": "define_module",
-          "named": true
-        },
-        {
           "type": "define_start_keyword",
-          "named": true
-        },
-        {
-          "type": "preproc_define",
-          "named": true
-        },
-        {
-          "type": "preproc_disable_warning",
-          "named": true
-        },
-        {
-          "type": "preproc_if_defined",
-          "named": true
-        },
-        {
-          "type": "preproc_if_not_defined",
-          "named": true
-        },
-        {
-          "type": "preproc_include",
-          "named": true
-        },
-        {
-          "type": "preproc_warn",
-          "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
-        },
-        {
-          "type": "type_definition",
           "named": true
         }
       ]

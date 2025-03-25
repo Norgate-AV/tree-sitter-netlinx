@@ -1426,44 +1426,12 @@
       "name": "define_event_keyword"
     },
     "define_start_section": {
-      "type": "PREC_RIGHT",
-      "value": 110,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "define_start_keyword"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_block_item"
-            }
-          }
-        ]
-      }
+      "type": "SYMBOL",
+      "name": "define_start_keyword"
     },
     "define_program_section": {
-      "type": "PREC_RIGHT",
-      "value": 110,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "define_program_keyword"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_block_item"
-            }
-          }
-        ]
-      }
+      "type": "SYMBOL",
+      "name": "define_program_keyword"
     },
     "define_function": {
       "type": "SEQ",

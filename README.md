@@ -92,6 +92,7 @@ Following that, the query files for highlights, tags, and locals still need to b
     - :white_check_mark: If Defined
     - :white_check_mark: If Not Defined
 - :x: Other bits that I haven't thought of yet or have forgotten about
+- :x: Device Expressions (`0:first_local_port:1`)
 
 ## Contributing :sparkles:
 

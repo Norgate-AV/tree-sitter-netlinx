@@ -183,3 +183,13 @@ Device Literals
         (decimal_literal))
       system: (number_literal
         (decimal_literal)))))
+
+============================
+Device Expressions
+============================
+
+0:first_local_port:1
+0:first_local_port+1:1
+dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM
+
+---
