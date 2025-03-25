@@ -37,10 +37,12 @@ const PREC = {
 module.exports = grammar({
     name: "netlinx",
 
+    externals: ($) => [$._automatic_semicolon],
+
     conflicts: ($) => [
         [$.type_specifier, $.expression],
-        [$._declarator, $._declaration_declarator],
-        [$.function_declarator, $._function_declaration_declarator],
+        // [$._declarator, $._declaration_declarator],
+        // [$.function_declarator, $._function_declaration_declarator],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
         [$.wait_statement],
@@ -48,7 +50,7 @@ module.exports = grammar({
         [$.device_literal],
     ],
 
-    extras: ($) => [/\s|\\\r?\n/, $.comment],
+    extras: ($) => [/\s/, $.comment],
 
     inline: ($) => [
         $._type_identifier,
@@ -57,6 +59,7 @@ module.exports = grammar({
         $._non_case_statement,
         $._assignment_left_expression,
         $._expression_not_binary,
+        $._semicolon,
     ],
 
     supertypes: ($) => [
@@ -244,7 +247,8 @@ module.exports = grammar({
                     field("module_name", $.string_literal),
                     field("instance_name", $.identifier),
                     field("parameters", $.argument_list),
-                    optional(";"),
+                    // optional(";"),
+                    $._semicolon,
                 ),
             ),
 
@@ -535,7 +539,8 @@ module.exports = grammar({
                     // This may not need to be optional. But leaving it for now
                     // as it provides some flexibility
                     optional($._field_declaration_declarator),
-                    optional(";"),
+                    // optional(";"),
+                    $._semicolon,
                 ),
             ),
 
@@ -653,12 +658,14 @@ module.exports = grammar({
                     // doesn't affect actual parsing.
                     // Despite the warning, the resulting AST is correct. Tree-sitter
                     // successfully produces the right tree structure.
-                    optional(";"),
+                    // optional(";"),
+                    $._semicolon,
                 ),
             ),
 
         type_definition: ($) =>
-            prec.right(seq($.struct_specifier, optional(";"))),
+            // prec.right(seq($.struct_specifier, optional(";"))),
+            prec.right(seq($.struct_specifier, $._semicolon)),
 
         _declaration_modifiers: ($) =>
             choice($.storage_class_specifier, $.type_qualifier),
@@ -859,7 +866,8 @@ module.exports = grammar({
             ),
 
         _top_level_expression_statement: ($) =>
-            seq($._expression_not_binary, optional(";")),
+            // seq($._expression_not_binary, optional(";")),
+            seq($._expression_not_binary, $._semicolon),
 
         expression_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
@@ -867,7 +875,11 @@ module.exports = grammar({
                 choice(
                     seq(
                         choice($.expression, $.comma_expression),
-                        optional(choice(";", /\s*\r?\n/)),
+
+                        // There was a specific reason for using this regex
+                        // pattern here. I can't remember what it was.
+                        // optional(choice(";", /\s*\r?\n/)),
+                        $._semicolon,
                     ),
                 ),
             ),
@@ -958,17 +970,20 @@ module.exports = grammar({
                 seq(
                     $.return_keyword,
                     optional(choice($.expression, $.comma_expression)),
-                    optional(";"),
+                    // optional(";"),
+                    $._semicolon,
                 ),
             ),
 
         break_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
-            prec.right(seq($.break_keyword, optional(";"))),
+            // prec.right(seq($.break_keyword, optional(";"))),
+            prec.right(seq($.break_keyword, $._semicolon)),
 
         continue_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
-            prec.right(seq($.continue_keyword, optional(";"))),
+            // prec.right(seq($.continue_keyword, optional(";"))),
+            prec.right(seq($.continue_keyword, $._semicolon)),
 
         devchan_operation_statement: ($) =>
             prec.right(
@@ -976,7 +991,8 @@ module.exports = grammar({
                 seq(
                     field("operation", $.devchan_operation),
                     field("target", $.devchan_expression),
-                    optional(";"),
+                    // optional(";"),
+                    $._semicolon,
                 ),
             ),
 
@@ -996,7 +1012,8 @@ module.exports = grammar({
                 field("device", $.expression),
                 ",",
                 field("value", $.expression),
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         send_command_statement: ($) =>
@@ -1005,7 +1022,8 @@ module.exports = grammar({
                 field("device", $.expression),
                 ",",
                 field("value", $.expression),
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         send_level_statement: ($) =>
@@ -1016,21 +1034,25 @@ module.exports = grammar({
                 field("level", $.expression),
                 ",",
                 field("value", $.expression),
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         create_buffer_statement: ($) =>
-            seq($.create_buffer_keyword, $.comma_expression, optional(";")),
+            // seq($.create_buffer_keyword, $.comma_expression, optional(";")),
+            seq($.create_buffer_keyword, $.comma_expression, $._semicolon),
 
         create_multi_buffer_statement: ($) =>
             seq(
                 $.create_multi_buffer_keyword,
                 $.comma_expression,
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         clear_buffer_statement: ($) =>
-            seq($.clear_buffer_keyword, $.expression, optional(";")),
+            // seq($.clear_buffer_keyword, $.expression, optional(";")),
+            seq($.clear_buffer_keyword, $.expression, $._semicolon),
 
         wait_statement: ($) =>
             seq(
@@ -1053,14 +1075,16 @@ module.exports = grammar({
             seq(
                 $.cancel_wait_keyword,
                 field("name", $.string_literal),
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         cancel_wait_until_statement: ($) =>
             seq(
                 $.cancel_wait_until_keyword,
                 field("name", $.string_literal),
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         // This is for invoking NetLinx's legacy DEFINE_CALL function.
@@ -1072,7 +1096,8 @@ module.exports = grammar({
                 $.call_keyword,
                 field("call", $.string_literal),
                 field("arguments", $.argument_list),
-                optional(";"),
+                // optional(";"),
+                $._semicolon,
             ),
 
         /**
@@ -1313,11 +1338,13 @@ module.exports = grammar({
         comment: (_) =>
             token(
                 choice(
-                    seq("//", /(\\+(.|\r?\n)|[^\\\n])*/), // Single-line comments
+                    seq("//", /[^\n]*/), // Single-line comments
                     seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"), // C-style multi-line comments
                     seq("(*", /.*/, "*)"), // Pascal-style comments
                 ),
             ),
+
+        _semicolon: ($) => choice($._automatic_semicolon, ";"),
     },
 });
 
