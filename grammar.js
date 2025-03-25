@@ -1102,6 +1102,7 @@ module.exports = grammar({
                 ["&", PREC.BITWISE_AND],
                 ["==", PREC.EQUAL],
                 ["!=", PREC.EQUAL],
+                ["<>", PREC.EQUAL],
                 [">", PREC.RELATIONAL],
                 [">=", PREC.RELATIONAL],
                 ["<=", PREC.RELATIONAL],

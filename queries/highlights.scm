@@ -138,7 +138,8 @@
     ">>"
     "++"
     "--"
-    ;; "<>"
+    "<>"
+    (range_operator)
 ] @operator
 
 ;; Punctuation
