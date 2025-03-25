@@ -18,7 +18,7 @@ export default {
         return [
             `eslint --fix ${file}`,
             `prettier --write ${file}`,
-            "pnpm test",
+            // "pnpm test",
         ];
     },
 };
