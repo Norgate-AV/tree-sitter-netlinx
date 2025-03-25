@@ -55,9 +55,11 @@
         "lint": "eslint grammar.js",
         "prestart": "tree-sitter build --wasm",
         "start": "tree-sitter playground",
-        "test": "node --test bindings/node/*_test.js",
+        "test-node": "node --test bindings/node/*_test.js",
         "prepare": "husky",
-        "doctoc": "doctoc README.md"
+        "doctoc": "doctoc README.md",
+        "generate": "tree-sitter generate --abi 14",
+        "test": "tree-sitter test"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
