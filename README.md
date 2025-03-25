@@ -20,6 +20,51 @@ At this point the grammar is mostly complete. Work is now focused on testing and
 
 Following that, the query files for highlights, tags, and locals still need to be finalized and tested.
 
+## Contents :book:
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Design :art:](#design-art)
+    - [Permissive Parsing](#permissive-parsing)
+    - [Syntax vs. Semantics](#syntax-vs-semantics)
+    - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
+- [What's Working :white_check_mark:](#whats-working-white_check_mark)
+- [Team :soccer:](#team-soccer)
+- [Contributing :sparkles:](#contributing-sparkles)
+- [LICENSE :balance_scale:](#license-balance_scale)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Design :art:
+
+The grammar is designed to be as accurate as possible, while also being as flexible as possible.
+
+### Permissive Parsing
+
+The grammar is intentionally permissive, allowing it to parse syntactically valid but semantically questionable code. This approach enables:
+
+- Better error recovery during editing
+- A more forgiving experience during development
+- The ability to parse incomplete or incorrect code
+- Better syntax highlighting and code navigation
+
+### Syntax vs. Semantics
+
+As a parsing tool, tree-sitter focuses on syntactic structure rather than semantic validity:
+
+- The parser will accept constructs that are syntactically correct but might fail during compilation
+- Semantic validation should be handled by the NetLinx compiler or separate analysis tools
+- This separation allows the grammar to be more stable and maintainable
+
+### Examples of Accepted Patterns
+
+The parser will accept patterns that the NetLinx compiler might reject:
+
+- Declarations with inconsistent or incomplete type specifiers
+- Mixed implicit and explicit typings
+- Unusual combinations of modifiers
+
 ## What's Working :white_check_mark:
 
 - Expressions
@@ -94,6 +139,15 @@ Following that, the query files for highlights, tags, and locals still need to b
     - :white_check_mark: If Not Defined
 - :x: Other bits that I haven't thought of yet or have forgotten about
 
+## Team :soccer:
+
+This project is maintained by the following person(s) and a bunch of [awesome contributors](https://github.com/Norgate-AV/tree-sitter-netlinx/graphs/contributors).
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/damienbutt"><img src="https://avatars.githubusercontent.com/damienbutt?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Damien Butt</b></sub></a><br /></td>
+  </tr>
+</table>
 
 ## Contributing :sparkles:
 
