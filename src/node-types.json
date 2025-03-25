@@ -293,6 +293,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "active_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -533,7 +543,17 @@
     {
         "type": "break_statement",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "break_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "button_event_block",
@@ -564,6 +584,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "button_event_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -634,6 +664,21 @@
         }
     },
     {
+        "type": "button_event_hold_repeat",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "repeat_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
         "type": "button_event_type",
         "named": true,
         "fields": {
@@ -649,11 +694,23 @@
             }
         },
         "children": {
-            "multiple": false,
-            "required": false,
+            "multiple": true,
+            "required": true,
             "types": [
                 {
                     "type": "button_event_hold_repeat",
+                    "named": true
+                },
+                {
+                    "type": "hold_keyword",
+                    "named": true
+                },
+                {
+                    "type": "push_keyword",
+                    "named": true
+                },
+                {
+                    "type": "release_keyword",
                     "named": true
                 }
             ]
@@ -722,6 +779,36 @@
         }
     },
     {
+        "type": "cancel_all_wait_statement",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "cancel_all_wait_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "cancel_all_wait_until_statement",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "cancel_all_wait_until_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
         "type": "cancel_wait_statement",
         "named": true,
         "fields": {
@@ -735,6 +822,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "cancel_wait_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -751,6 +848,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "cancel_wait_until_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -770,7 +877,7 @@
         },
         "children": {
             "multiple": true,
-            "required": false,
+            "required": true,
             "types": [
                 {
                     "type": "break_statement",
@@ -790,6 +897,10 @@
                 },
                 {
                     "type": "cancel_wait_until_statement",
+                    "named": true
+                },
+                {
+                    "type": "case_keyword",
                     "named": true
                 },
                 {
@@ -814,6 +925,10 @@
                 },
                 {
                     "type": "declaration",
+                    "named": true
+                },
+                {
+                    "type": "default_keyword",
                     "named": true
                 },
                 {
@@ -900,6 +1015,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "channel_event_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -972,16 +1097,34 @@
     {
         "type": "channel_event_type",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "off_keyword",
+                    "named": true
+                },
+                {
+                    "type": "on_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "clear_buffer_statement",
         "named": true,
         "fields": {},
         "children": {
-            "multiple": false,
+            "multiple": true,
             "required": true,
             "types": [
+                {
+                    "type": "clear_buffer_keyword",
+                    "named": true
+                },
                 {
                     "type": "expression",
                     "named": true
@@ -1081,18 +1224,32 @@
     {
         "type": "continue_statement",
         "named": true,
-        "fields": {}
-    },
-    {
-        "type": "create_buffer_statement",
-        "named": true,
         "fields": {},
         "children": {
             "multiple": false,
             "required": true,
             "types": [
                 {
+                    "type": "continue_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "create_buffer_statement",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
                     "type": "comma_expression",
+                    "named": true
+                },
+                {
+                    "type": "create_buffer_keyword",
                     "named": true
                 }
             ]
@@ -1103,11 +1260,15 @@
         "named": true,
         "fields": {},
         "children": {
-            "multiple": false,
+            "multiple": true,
             "required": true,
             "types": [
                 {
                     "type": "comma_expression",
+                    "named": true
+                },
+                {
+                    "type": "create_multi_buffer_keyword",
                     "named": true
                 }
             ]
@@ -1127,6 +1288,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "custom_event_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -1240,6 +1411,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "data_event_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -1312,7 +1493,41 @@
     {
         "type": "data_event_type",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "awake_keyword",
+                    "named": true
+                },
+                {
+                    "type": "command_keyword",
+                    "named": true
+                },
+                {
+                    "type": "offline_keyword",
+                    "named": true
+                },
+                {
+                    "type": "onerror_keyword",
+                    "named": true
+                },
+                {
+                    "type": "online_keyword",
+                    "named": true
+                },
+                {
+                    "type": "standby_keyword",
+                    "named": true
+                },
+                {
+                    "type": "string_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "declaration",
@@ -1375,11 +1590,90 @@
         "named": true,
         "fields": {},
         "children": {
-            "multiple": false,
+            "multiple": true,
             "required": true,
             "types": [
                 {
                     "type": "call_definition",
+                    "named": true
+                },
+                {
+                    "type": "define_call_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_combine_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_combine_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_connect_level_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_connect_level_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_constant_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_constant_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_device_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_device_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_event_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_event_keyword",
                     "named": true
                 }
             ]
@@ -1390,11 +1684,30 @@
         "named": true,
         "fields": {},
         "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_function_keyword",
+                    "named": true
+                },
+                {
+                    "type": "function_definition",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_latching_section",
+        "named": true,
+        "fields": {},
+        "children": {
             "multiple": false,
             "required": true,
             "types": [
                 {
-                    "type": "function_definition",
+                    "type": "define_latching_keyword",
                     "named": true
                 }
             ]
@@ -1405,11 +1718,30 @@
         "named": true,
         "fields": {},
         "children": {
+            "multiple": true,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_module_keyword",
+                    "named": true
+                },
+                {
+                    "type": "module_definition",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_mutually_exclusive_section",
+        "named": true,
+        "fields": {},
+        "children": {
             "multiple": false,
             "required": true,
             "types": [
                 {
-                    "type": "module_definition",
+                    "type": "define_mutually_exclusive_keyword",
                     "named": true
                 }
             ]
@@ -1421,7 +1753,7 @@
         "fields": {},
         "children": {
             "multiple": true,
-            "required": false,
+            "required": true,
             "types": [
                 {
                     "type": "declaration",
@@ -1437,6 +1769,10 @@
                 },
                 {
                     "type": "define_module",
+                    "named": true
+                },
+                {
+                    "type": "define_program_keyword",
                     "named": true
                 },
                 {
@@ -1480,7 +1816,7 @@
         "fields": {},
         "children": {
             "multiple": true,
-            "required": false,
+            "required": true,
             "types": [
                 {
                     "type": "declaration",
@@ -1496,6 +1832,10 @@
                 },
                 {
                     "type": "define_module",
+                    "named": true
+                },
+                {
+                    "type": "define_start_keyword",
                     "named": true
                 },
                 {
@@ -1534,6 +1874,51 @@
         }
     },
     {
+        "type": "define_toggling_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_toggling_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_type_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_type_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
+        "type": "define_variable_section",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "define_variable_keyword",
+                    "named": true
+                }
+            ]
+        }
+    },
+    {
         "type": "devchan_expression",
         "named": true,
         "fields": {
@@ -1560,9 +1945,49 @@
         }
     },
     {
-        "type": "devchan_operation",
+        "type": "devchan_off_keyword",
         "named": true,
         "fields": {}
+    },
+    {
+        "type": "devchan_on_keyword",
+        "named": true,
+        "fields": {}
+    },
+    {
+        "type": "devchan_operation",
+        "named": true,
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "devchan_min_to_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devchan_off_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devchan_on_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devchan_pulse_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devchan_to_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devchan_total_off_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "devchan_operation_statement",
@@ -1693,9 +2118,13 @@
         "named": true,
         "fields": {},
         "children": {
-            "multiple": false,
+            "multiple": true,
             "required": true,
             "types": [
+                {
+                    "type": "else_keyword",
+                    "named": true
+                },
                 {
                     "type": "statement",
                     "named": true
@@ -1924,6 +2353,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "for_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -2040,6 +2479,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "if_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -2124,6 +2573,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "level_event_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -2223,9 +2682,13 @@
             }
         },
         "children": {
-            "multiple": false,
+            "multiple": true,
             "required": true,
             "types": [
+                {
+                    "type": "module_name_keyword",
+                    "named": true
+                },
                 {
                     "type": "string_literal",
                     "named": true
@@ -2251,6 +2714,16 @@
                 }
             ]
         }
+    },
+    {
+        "type": "off_keyword",
+        "named": true,
+        "fields": {}
+    },
+    {
+        "type": "on_keyword",
+        "named": true,
+        "fields": {}
     },
     {
         "type": "parameter_declaration",
@@ -3002,16 +3475,58 @@
     {
         "type": "primitive_type",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "char_keyword",
+                    "named": true
+                },
+                {
+                    "type": "double_keyword",
+                    "named": true
+                },
+                {
+                    "type": "float_keyword",
+                    "named": true
+                },
+                {
+                    "type": "integer_keyword",
+                    "named": true
+                },
+                {
+                    "type": "long_keyword",
+                    "named": true
+                },
+                {
+                    "type": "sinteger_keyword",
+                    "named": true
+                },
+                {
+                    "type": "slong_keyword",
+                    "named": true
+                },
+                {
+                    "type": "widechar_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "program_name",
         "named": true,
         "fields": {},
         "children": {
-            "multiple": false,
+            "multiple": true,
             "required": true,
             "types": [
+                {
+                    "type": "program_name_keyword",
+                    "named": true
+                },
                 {
                     "type": "string_literal",
                     "named": true
@@ -3024,8 +3539,8 @@
         "named": true,
         "fields": {},
         "children": {
-            "multiple": false,
-            "required": false,
+            "multiple": true,
+            "required": true,
             "types": [
                 {
                     "type": "comma_expression",
@@ -3033,6 +3548,10 @@
                 },
                 {
                     "type": "expression",
+                    "named": true
+                },
+                {
+                    "type": "return_keyword",
                     "named": true
                 }
             ]
@@ -3108,6 +3627,10 @@
                 {
                     "type": "active_block",
                     "named": true
+                },
+                {
+                    "type": "select_keyword",
+                    "named": true
                 }
             ]
         }
@@ -3136,6 +3659,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "send_command_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3172,6 +3705,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "send_level_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3198,6 +3741,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "send_string_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3371,7 +3924,21 @@
     {
         "type": "storage_class_specifier",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "local_var_keyword",
+                    "named": true
+                },
+                {
+                    "type": "stack_var_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "string_expression",
@@ -3427,12 +3994,44 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "struct_keyword",
+                    "named": true
+                },
+                {
+                    "type": "structure_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
         "type": "structured_type",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "dev_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devchan_keyword",
+                    "named": true
+                },
+                {
+                    "type": "devlev_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "subscript_expression",
@@ -3484,6 +4083,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "switch_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3500,6 +4109,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "timeline_event_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3561,7 +4180,29 @@
     {
         "type": "type_qualifier",
         "named": true,
-        "fields": {}
+        "fields": {},
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "constant_keyword",
+                    "named": true
+                },
+                {
+                    "type": "non_volatile_keyword",
+                    "named": true
+                },
+                {
+                    "type": "persistent_keyword",
+                    "named": true
+                },
+                {
+                    "type": "volatile_keyword",
+                    "named": true
+                }
+            ]
+        }
     },
     {
         "type": "unary_expression",
@@ -3655,6 +4296,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "wait_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3681,6 +4332,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "wait_until_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3707,6 +4368,16 @@
                     }
                 ]
             }
+        },
+        "children": {
+            "multiple": false,
+            "required": true,
+            "types": [
+                {
+                    "type": "while_keyword",
+                    "named": true
+                }
+            ]
         }
     },
     {
@@ -3866,15 +4537,55 @@
         "named": false
     },
     {
-        "type": "button_event_hold_repeat",
+        "type": "active_keyword",
         "named": true
     },
     {
-        "type": "cancel_all_wait_statement",
+        "type": "awake_keyword",
         "named": true
     },
     {
-        "type": "cancel_all_wait_until_statement",
+        "type": "break_keyword",
+        "named": true
+    },
+    {
+        "type": "button_event_keyword",
+        "named": true
+    },
+    {
+        "type": "cancel_all_wait_keyword",
+        "named": true
+    },
+    {
+        "type": "cancel_all_wait_until_keyword",
+        "named": true
+    },
+    {
+        "type": "cancel_wait_keyword",
+        "named": true
+    },
+    {
+        "type": "cancel_wait_until_keyword",
+        "named": true
+    },
+    {
+        "type": "case_keyword",
+        "named": true
+    },
+    {
+        "type": "channel_event_keyword",
+        "named": true
+    },
+    {
+        "type": "char_keyword",
+        "named": true
+    },
+    {
+        "type": "clear_buffer_keyword",
+        "named": true
+    },
+    {
+        "type": "command_keyword",
         "named": true
     },
     {
@@ -3883,47 +4594,131 @@
         "extra": true
     },
     {
+        "type": "constant_keyword",
+        "named": true
+    },
+    {
+        "type": "continue_keyword",
+        "named": true
+    },
+    {
+        "type": "create_buffer_keyword",
+        "named": true
+    },
+    {
+        "type": "create_multi_buffer_keyword",
+        "named": true
+    },
+    {
+        "type": "custom_event_keyword",
+        "named": true
+    },
+    {
+        "type": "data_event_keyword",
+        "named": true
+    },
+    {
         "type": "decimal_literal",
         "named": true
     },
     {
-        "type": "define_combine_section",
+        "type": "default_keyword",
         "named": true
     },
     {
-        "type": "define_connect_level_section",
+        "type": "define_call_keyword",
         "named": true
     },
     {
-        "type": "define_constant_section",
+        "type": "define_combine_keyword",
         "named": true
     },
     {
-        "type": "define_device_section",
+        "type": "define_connect_level_keyword",
         "named": true
     },
     {
-        "type": "define_event_section",
+        "type": "define_constant_keyword",
         "named": true
     },
     {
-        "type": "define_latching_section",
+        "type": "define_device_keyword",
         "named": true
     },
     {
-        "type": "define_mutually_exclusive_section",
+        "type": "define_event_keyword",
         "named": true
     },
     {
-        "type": "define_toggling_section",
+        "type": "define_function_keyword",
         "named": true
     },
     {
-        "type": "define_type_section",
+        "type": "define_latching_keyword",
         "named": true
     },
     {
-        "type": "define_variable_section",
+        "type": "define_module_keyword",
+        "named": true
+    },
+    {
+        "type": "define_mutually_exclusive_keyword",
+        "named": true
+    },
+    {
+        "type": "define_program_keyword",
+        "named": true
+    },
+    {
+        "type": "define_start_keyword",
+        "named": true
+    },
+    {
+        "type": "define_toggling_keyword",
+        "named": true
+    },
+    {
+        "type": "define_type_keyword",
+        "named": true
+    },
+    {
+        "type": "define_variable_keyword",
+        "named": true
+    },
+    {
+        "type": "dev_keyword",
+        "named": true
+    },
+    {
+        "type": "devchan_keyword",
+        "named": true
+    },
+    {
+        "type": "devchan_min_to_keyword",
+        "named": true
+    },
+    {
+        "type": "devchan_pulse_keyword",
+        "named": true
+    },
+    {
+        "type": "devchan_to_keyword",
+        "named": true
+    },
+    {
+        "type": "devchan_total_off_keyword",
+        "named": true
+    },
+    {
+        "type": "devlev_keyword",
+        "named": true
+    },
+    {
+        "type": "double_keyword",
+        "named": true
+    },
+    {
+        "type": "else_keyword",
         "named": true
     },
     {
@@ -3935,7 +4730,19 @@
         "named": true
     },
     {
+        "type": "float_keyword",
+        "named": true
+    },
+    {
+        "type": "for_keyword",
+        "named": true
+    },
+    {
         "type": "hex_literal",
+        "named": true
+    },
+    {
+        "type": "hold_keyword",
         "named": true
     },
     {
@@ -3943,7 +4750,59 @@
         "named": true
     },
     {
+        "type": "if_keyword",
+        "named": true
+    },
+    {
+        "type": "integer_keyword",
+        "named": true
+    },
+    {
+        "type": "level_event_keyword",
+        "named": true
+    },
+    {
+        "type": "local_var_keyword",
+        "named": true
+    },
+    {
+        "type": "long_keyword",
+        "named": true
+    },
+    {
+        "type": "module_name_keyword",
+        "named": true
+    },
+    {
+        "type": "non_volatile_keyword",
+        "named": true
+    },
+    {
+        "type": "offline_keyword",
+        "named": true
+    },
+    {
+        "type": "onerror_keyword",
+        "named": true
+    },
+    {
+        "type": "online_keyword",
+        "named": true
+    },
+    {
+        "type": "persistent_keyword",
+        "named": true
+    },
+    {
         "type": "preproc_arg",
+        "named": true
+    },
+    {
+        "type": "program_name_keyword",
+        "named": true
+    },
+    {
+        "type": "push_keyword",
         "named": true
     },
     {
@@ -3951,7 +4810,71 @@
         "named": true
     },
     {
+        "type": "release_keyword",
+        "named": true
+    },
+    {
+        "type": "repeat_keyword",
+        "named": true
+    },
+    {
+        "type": "return_keyword",
+        "named": true
+    },
+    {
+        "type": "select_keyword",
+        "named": true
+    },
+    {
+        "type": "send_command_keyword",
+        "named": true
+    },
+    {
+        "type": "send_level_keyword",
+        "named": true
+    },
+    {
+        "type": "send_string_keyword",
+        "named": true
+    },
+    {
+        "type": "sinteger_keyword",
+        "named": true
+    },
+    {
+        "type": "slong_keyword",
+        "named": true
+    },
+    {
+        "type": "stack_var_keyword",
+        "named": true
+    },
+    {
+        "type": "standby_keyword",
+        "named": true
+    },
+    {
         "type": "string_content",
+        "named": true
+    },
+    {
+        "type": "string_keyword",
+        "named": true
+    },
+    {
+        "type": "struct_keyword",
+        "named": true
+    },
+    {
+        "type": "structure_keyword",
+        "named": true
+    },
+    {
+        "type": "switch_keyword",
+        "named": true
+    },
+    {
+        "type": "timeline_event_keyword",
         "named": true
     },
     {
@@ -3960,6 +4883,26 @@
     },
     {
         "type": "type_identifier",
+        "named": true
+    },
+    {
+        "type": "volatile_keyword",
+        "named": true
+    },
+    {
+        "type": "wait_keyword",
+        "named": true
+    },
+    {
+        "type": "wait_until_keyword",
+        "named": true
+    },
+    {
+        "type": "while_keyword",
+        "named": true
+    },
+    {
+        "type": "widechar_keyword",
         "named": true
     },
     {

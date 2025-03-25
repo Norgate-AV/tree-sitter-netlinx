@@ -132,6 +132,436 @@
                 }
             ]
         },
+        "program_name_keyword": {
+            "type": "PATTERN",
+            "value": "program_name",
+            "flags": "i"
+        },
+        "module_name_keyword": {
+            "type": "PATTERN",
+            "value": "module_name",
+            "flags": "i"
+        },
+        "define_device_keyword": {
+            "type": "PATTERN",
+            "value": "define_device",
+            "flags": "i"
+        },
+        "define_combine_keyword": {
+            "type": "PATTERN",
+            "value": "define_combine",
+            "flags": "i"
+        },
+        "define_constant_keyword": {
+            "type": "PATTERN",
+            "value": "define_constant",
+            "flags": "i"
+        },
+        "define_type_keyword": {
+            "type": "PATTERN",
+            "value": "define_type",
+            "flags": "i"
+        },
+        "define_variable_keyword": {
+            "type": "PATTERN",
+            "value": "define_variable",
+            "flags": "i"
+        },
+        "define_connect_level_keyword": {
+            "type": "PATTERN",
+            "value": "define_connect_level",
+            "flags": "i"
+        },
+        "define_latching_keyword": {
+            "type": "PATTERN",
+            "value": "define_latching",
+            "flags": "i"
+        },
+        "define_mutually_exclusive_keyword": {
+            "type": "PATTERN",
+            "value": "define_mutually_exclusive",
+            "flags": "i"
+        },
+        "define_toggling_keyword": {
+            "type": "PATTERN",
+            "value": "define_toggling",
+            "flags": "i"
+        },
+        "define_call_keyword": {
+            "type": "PATTERN",
+            "value": "define_call",
+            "flags": "i"
+        },
+        "define_function_keyword": {
+            "type": "PATTERN",
+            "value": "define_function",
+            "flags": "i"
+        },
+        "define_start_keyword": {
+            "type": "PATTERN",
+            "value": "define_start",
+            "flags": "i"
+        },
+        "define_event_keyword": {
+            "type": "PATTERN",
+            "value": "define_event",
+            "flags": "i"
+        },
+        "define_program_keyword": {
+            "type": "PATTERN",
+            "value": "define_program",
+            "flags": "i"
+        },
+        "define_module_keyword": {
+            "type": "PATTERN",
+            "value": "define_module",
+            "flags": "i"
+        },
+        "char_keyword": {
+            "type": "PATTERN",
+            "value": "char",
+            "flags": "i"
+        },
+        "widechar_keyword": {
+            "type": "PATTERN",
+            "value": "widechar",
+            "flags": "i"
+        },
+        "integer_keyword": {
+            "type": "PATTERN",
+            "value": "integer",
+            "flags": "i"
+        },
+        "sinteger_keyword": {
+            "type": "PATTERN",
+            "value": "sinteger",
+            "flags": "i"
+        },
+        "long_keyword": {
+            "type": "PATTERN",
+            "value": "long",
+            "flags": "i"
+        },
+        "slong_keyword": {
+            "type": "PATTERN",
+            "value": "slong",
+            "flags": "i"
+        },
+        "float_keyword": {
+            "type": "PATTERN",
+            "value": "float",
+            "flags": "i"
+        },
+        "double_keyword": {
+            "type": "PATTERN",
+            "value": "double",
+            "flags": "i"
+        },
+        "local_var_keyword": {
+            "type": "PATTERN",
+            "value": "local_var",
+            "flags": "i"
+        },
+        "stack_var_keyword": {
+            "type": "PATTERN",
+            "value": "stack_var",
+            "flags": "i"
+        },
+        "constant_keyword": {
+            "type": "PATTERN",
+            "value": "constant",
+            "flags": "i"
+        },
+        "volatile_keyword": {
+            "type": "PATTERN",
+            "value": "volatile",
+            "flags": "i"
+        },
+        "non_volatile_keyword": {
+            "type": "PATTERN",
+            "value": "non_volatile",
+            "flags": "i"
+        },
+        "persistent_keyword": {
+            "type": "PATTERN",
+            "value": "persistent",
+            "flags": "i"
+        },
+        "dev_keyword": {
+            "type": "PATTERN",
+            "value": "dev",
+            "flags": "i"
+        },
+        "devlev_keyword": {
+            "type": "PATTERN",
+            "value": "devlev",
+            "flags": "i"
+        },
+        "devchan_keyword": {
+            "type": "PATTERN",
+            "value": "devchan",
+            "flags": "i"
+        },
+        "if_keyword": {
+            "type": "PATTERN",
+            "value": "if",
+            "flags": "i"
+        },
+        "else_keyword": {
+            "type": "PATTERN",
+            "value": "else",
+            "flags": "i"
+        },
+        "switch_keyword": {
+            "type": "PATTERN",
+            "value": "switch",
+            "flags": "i"
+        },
+        "case_keyword": {
+            "type": "PATTERN",
+            "value": "case",
+            "flags": "i"
+        },
+        "default_keyword": {
+            "type": "PATTERN",
+            "value": "default",
+            "flags": "i"
+        },
+        "while_keyword": {
+            "type": "PATTERN",
+            "value": "while",
+            "flags": "i"
+        },
+        "for_keyword": {
+            "type": "PATTERN",
+            "value": "for",
+            "flags": "i"
+        },
+        "break_keyword": {
+            "type": "PATTERN",
+            "value": "break",
+            "flags": "i"
+        },
+        "continue_keyword": {
+            "type": "PATTERN",
+            "value": "continue",
+            "flags": "i"
+        },
+        "return_keyword": {
+            "type": "PATTERN",
+            "value": "return",
+            "flags": "i"
+        },
+        "select_keyword": {
+            "type": "PATTERN",
+            "value": "select",
+            "flags": "i"
+        },
+        "active_keyword": {
+            "type": "PATTERN",
+            "value": "active",
+            "flags": "i"
+        },
+        "struct_keyword": {
+            "type": "PATTERN",
+            "value": "struct",
+            "flags": "i"
+        },
+        "structure_keyword": {
+            "type": "PATTERN",
+            "value": "structure",
+            "flags": "i"
+        },
+        "button_event_keyword": {
+            "type": "PATTERN",
+            "value": "button_event",
+            "flags": "i"
+        },
+        "channel_event_keyword": {
+            "type": "PATTERN",
+            "value": "channel_event",
+            "flags": "i"
+        },
+        "level_event_keyword": {
+            "type": "PATTERN",
+            "value": "level_event",
+            "flags": "i"
+        },
+        "data_event_keyword": {
+            "type": "PATTERN",
+            "value": "data_event",
+            "flags": "i"
+        },
+        "timeline_event_keyword": {
+            "type": "PATTERN",
+            "value": "timeline_event",
+            "flags": "i"
+        },
+        "custom_event_keyword": {
+            "type": "PATTERN",
+            "value": "custom_event",
+            "flags": "i"
+        },
+        "push_keyword": {
+            "type": "PATTERN",
+            "value": "push",
+            "flags": "i"
+        },
+        "release_keyword": {
+            "type": "PATTERN",
+            "value": "release",
+            "flags": "i"
+        },
+        "hold_keyword": {
+            "type": "PATTERN",
+            "value": "hold",
+            "flags": "i"
+        },
+        "repeat_keyword": {
+            "type": "PATTERN",
+            "value": "repeat",
+            "flags": "i"
+        },
+        "on_keyword": {
+            "type": "PATTERN",
+            "value": "on",
+            "flags": "i"
+        },
+        "off_keyword": {
+            "type": "PATTERN",
+            "value": "off",
+            "flags": "i"
+        },
+        "online_keyword": {
+            "type": "PATTERN",
+            "value": "online",
+            "flags": "i"
+        },
+        "offline_keyword": {
+            "type": "PATTERN",
+            "value": "offline",
+            "flags": "i"
+        },
+        "onerror_keyword": {
+            "type": "PATTERN",
+            "value": "onerror",
+            "flags": "i"
+        },
+        "string_keyword": {
+            "type": "PATTERN",
+            "value": "string",
+            "flags": "i"
+        },
+        "command_keyword": {
+            "type": "PATTERN",
+            "value": "command",
+            "flags": "i"
+        },
+        "standby_keyword": {
+            "type": "PATTERN",
+            "value": "standby",
+            "flags": "i"
+        },
+        "awake_keyword": {
+            "type": "PATTERN",
+            "value": "awake",
+            "flags": "i"
+        },
+        "send_level_keyword": {
+            "type": "PATTERN",
+            "value": "send_level",
+            "flags": "i"
+        },
+        "send_string_keyword": {
+            "type": "PATTERN",
+            "value": "send_string",
+            "flags": "i"
+        },
+        "send_command_keyword": {
+            "type": "PATTERN",
+            "value": "send_command",
+            "flags": "i"
+        },
+        "clear_buffer_keyword": {
+            "type": "PATTERN",
+            "value": "clear_buffer",
+            "flags": "i"
+        },
+        "create_buffer_keyword": {
+            "type": "PATTERN",
+            "value": "create_buffer",
+            "flags": "i"
+        },
+        "create_multi_buffer_keyword": {
+            "type": "PATTERN",
+            "value": "create_multi_buffer",
+            "flags": "i"
+        },
+        "call_keyword": {
+            "type": "PATTERN",
+            "value": "call",
+            "flags": "i"
+        },
+        "devchan_on_keyword": {
+            "type": "PATTERN",
+            "value": "on",
+            "flags": "i"
+        },
+        "devchan_off_keyword": {
+            "type": "PATTERN",
+            "value": "off",
+            "flags": "i"
+        },
+        "devchan_to_keyword": {
+            "type": "PATTERN",
+            "value": "to",
+            "flags": "i"
+        },
+        "devchan_min_to_keyword": {
+            "type": "PATTERN",
+            "value": "min_to",
+            "flags": "i"
+        },
+        "devchan_total_off_keyword": {
+            "type": "PATTERN",
+            "value": "total_off",
+            "flags": "i"
+        },
+        "devchan_pulse_keyword": {
+            "type": "PATTERN",
+            "value": "pulse",
+            "flags": "i"
+        },
+        "wait_keyword": {
+            "type": "PATTERN",
+            "value": "wait",
+            "flags": "i"
+        },
+        "cancel_wait_keyword": {
+            "type": "PATTERN",
+            "value": "cancel_wait",
+            "flags": "i"
+        },
+        "wait_until_keyword": {
+            "type": "PATTERN",
+            "value": "wait_until",
+            "flags": "i"
+        },
+        "cancel_wait_until_keyword": {
+            "type": "PATTERN",
+            "value": "cancel_wait_until",
+            "flags": "i"
+        },
+        "cancel_all_wait_keyword": {
+            "type": "PATTERN",
+            "value": "cancel_all_wait",
+            "flags": "i"
+        },
+        "cancel_all_wait_until_keyword": {
+            "type": "PATTERN",
+            "value": "cancel_all_wait_until",
+            "flags": "i"
+        },
         "program_name": {
             "type": "PREC_RIGHT",
             "value": 30,
@@ -139,9 +569,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "program_name",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "program_name_keyword"
                     },
                     {
                         "type": "STRING",
@@ -161,9 +590,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "module_name",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "module_name_keyword"
                     },
                     {
                         "type": "STRING",
@@ -888,54 +1316,44 @@
             ]
         },
         "define_device_section": {
-            "type": "PATTERN",
-            "value": "define_device",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_device_keyword"
         },
         "define_combine_section": {
-            "type": "PATTERN",
-            "value": "define_combine",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_combine_keyword"
         },
         "define_connect_level_section": {
-            "type": "PATTERN",
-            "value": "define_connect_level",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_connect_level_keyword"
         },
         "define_constant_section": {
-            "type": "PATTERN",
-            "value": "define_constant",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_constant_keyword"
         },
         "define_type_section": {
-            "type": "PATTERN",
-            "value": "define_type",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_type_keyword"
         },
         "define_mutually_exclusive_section": {
-            "type": "PATTERN",
-            "value": "define_mutually_exclusive",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_mutually_exclusive_keyword"
         },
         "define_latching_section": {
-            "type": "PATTERN",
-            "value": "define_latching",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_latching_keyword"
         },
         "define_toggling_section": {
-            "type": "PATTERN",
-            "value": "define_toggling",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_toggling_keyword"
         },
         "define_variable_section": {
-            "type": "PATTERN",
-            "value": "define_variable",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_variable_keyword"
         },
         "define_event_section": {
-            "type": "PATTERN",
-            "value": "define_event",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "define_event_keyword"
         },
         "define_start_section": {
             "type": "PREC_RIGHT",
@@ -944,9 +1362,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "define_start",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "define_start_keyword"
                     },
                     {
                         "type": "REPEAT",
@@ -965,9 +1382,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "define_program",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "define_program_keyword"
                     },
                     {
                         "type": "REPEAT",
@@ -983,9 +1399,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "define_function",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "define_function_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -997,9 +1412,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "define_call",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "define_call_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -1011,9 +1425,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "define_module",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "define_module_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -1119,9 +1532,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "data_event",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "data_event_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -1199,39 +1611,32 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "command",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "command_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "string",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "string_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "online",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "online_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "offline",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "offline_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "onerror",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "onerror_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "standby",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "standby_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "awake",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "awake_keyword"
                 }
             ]
         },
@@ -1259,9 +1664,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "timeline_event",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "timeline_event_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -1314,9 +1718,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "button_event",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "button_event_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -1403,14 +1806,12 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "push",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "push_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "release",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "release_keyword"
                 },
                 {
                     "type": "CHOICE",
@@ -1419,9 +1820,8 @@
                             "type": "SEQ",
                             "members": [
                                 {
-                                    "type": "PATTERN",
-                                    "value": "hold",
-                                    "flags": "i"
+                                    "type": "SYMBOL",
+                                    "name": "hold_keyword"
                                 },
                                 {
                                     "type": "SEQ",
@@ -1472,9 +1872,8 @@
             ]
         },
         "button_event_hold_repeat": {
-            "type": "PATTERN",
-            "value": "repeat",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "repeat_keyword"
         },
         "level_event_definition": {
             "type": "SEQ",
@@ -1500,9 +1899,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "level_event",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "level_event_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -1564,9 +1962,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "channel_event",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "channel_event_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -1653,14 +2050,12 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "on",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "on_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "off",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "off_keyword"
                 }
             ]
         },
@@ -1688,9 +2083,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "custom_event",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "custom_event_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -2032,14 +2426,12 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "local_var",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "local_var_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "stack_var",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "stack_var_keyword"
                 }
             ]
         },
@@ -2047,24 +2439,20 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "constant",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "constant_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "volatile",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "volatile_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "non_volatile",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "non_volatile_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "persistent",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "persistent_keyword"
                 }
             ]
         },
@@ -2091,14 +2479,12 @@
                         "type": "CHOICE",
                         "members": [
                             {
-                                "type": "PATTERN",
-                                "value": "struct",
-                                "flags": "i"
+                                "type": "SYMBOL",
+                                "name": "struct_keyword"
                             },
                             {
-                                "type": "PATTERN",
-                                "value": "structure",
-                                "flags": "i"
+                                "type": "SYMBOL",
+                                "name": "structure_keyword"
                             }
                         ]
                     },
@@ -2287,44 +2673,36 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "char",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "char_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "widechar",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "widechar_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "integer",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "integer_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "sinteger",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "sinteger_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "long",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "long_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "slong",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "slong_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "float",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "float_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "double",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "double_keyword"
                 }
             ]
         },
@@ -2332,19 +2710,16 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "dev",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "dev_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "devlev",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devlev_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "devchan",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_keyword"
                 }
             ]
         },
@@ -3333,9 +3708,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "if",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "if_keyword"
                     },
                     {
                         "type": "FIELD",
@@ -3376,9 +3750,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "else",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "else_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -3390,9 +3763,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "switch",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "switch_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -3425,9 +3797,8 @@
                                 "type": "SEQ",
                                 "members": [
                                     {
-                                        "type": "PATTERN",
-                                        "value": "case",
-                                        "flags": "i"
+                                        "type": "SYMBOL",
+                                        "name": "case_keyword"
                                     },
                                     {
                                         "type": "FIELD",
@@ -3440,9 +3811,8 @@
                                 ]
                             },
                             {
-                                "type": "PATTERN",
-                                "value": "default",
-                                "flags": "i"
+                                "type": "SYMBOL",
+                                "name": "default_keyword"
                             }
                         ]
                     },
@@ -3473,9 +3843,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "while",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "while_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -3499,9 +3868,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "for",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "for_keyword"
                 },
                 {
                     "type": "STRING",
@@ -3627,9 +3995,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "select",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "select_keyword"
                 },
                 {
                     "type": "STRING",
@@ -3652,9 +4019,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "active",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "active_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -3685,9 +4051,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "return",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "return_keyword"
                     },
                     {
                         "type": "CHOICE",
@@ -3732,9 +4097,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "break",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "break_keyword"
                     },
                     {
                         "type": "CHOICE",
@@ -3758,9 +4122,8 @@
                 "type": "SEQ",
                 "members": [
                     {
-                        "type": "PATTERN",
-                        "value": "continue",
-                        "flags": "i"
+                        "type": "SYMBOL",
+                        "name": "continue_keyword"
                     },
                     {
                         "type": "CHOICE",
@@ -3818,34 +4181,28 @@
             "type": "CHOICE",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "on",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_on_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "off",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_off_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "to",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_to_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "min_to",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_min_to_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "total_off",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_total_off_keyword"
                 },
                 {
-                    "type": "PATTERN",
-                    "value": "pulse",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "devchan_pulse_keyword"
                 }
             ]
         },
@@ -3853,9 +4210,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "send_string",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "send_string_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -3895,9 +4251,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "send_command",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "send_command_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -3937,9 +4292,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "send_level",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "send_level_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -3991,9 +4345,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "create_buffer",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "create_buffer_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -4017,9 +4370,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "create_multi_buffer",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "create_multi_buffer_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -4043,9 +4395,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "clear_buffer",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "clear_buffer_keyword"
                 },
                 {
                     "type": "SYMBOL",
@@ -4069,9 +4420,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "wait",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "wait_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -4103,9 +4453,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "wait_until",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "wait_until_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -4134,22 +4483,19 @@
             ]
         },
         "cancel_all_wait_statement": {
-            "type": "PATTERN",
-            "value": "cancel_all_wait",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "cancel_all_wait_keyword"
         },
         "cancel_all_wait_until_statement": {
-            "type": "PATTERN",
-            "value": "cancel_all_wait_until",
-            "flags": "i"
+            "type": "SYMBOL",
+            "name": "cancel_all_wait_until_keyword"
         },
         "cancel_wait_statement": {
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "cancel_wait",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "cancel_wait_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -4177,9 +4523,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "cancel_wait_until",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "cancel_wait_until_keyword"
                 },
                 {
                     "type": "FIELD",
@@ -4207,9 +4552,8 @@
             "type": "SEQ",
             "members": [
                 {
-                    "type": "PATTERN",
-                    "value": "call",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "call_keyword"
                 },
                 {
                     "type": "FIELD",

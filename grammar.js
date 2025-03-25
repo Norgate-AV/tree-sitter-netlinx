@@ -6,9 +6,9 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const keywords = require("./keywords");
 const netlinx = require("./netlinx");
 const directives = require("./directives");
+const keywords = require("./keyword-nodes");
 
 const PREC = {
     PAREN_DECLARATOR: -10,
@@ -133,16 +133,19 @@ module.exports = grammar({
                 $.preproc_disable_warning,
             ),
 
+        // Include all keyword nodes
+        ...keywords,
+
         program_name: ($) =>
             prec.right(
                 PREC.DIRECTIVE + 10,
-                seq(keywords.program_name, "=", $.string_literal),
+                seq($.program_name_keyword, "=", $.string_literal),
             ),
 
         module_name: ($) =>
             prec.right(
                 seq(
-                    keywords.module_name,
+                    $.module_name_keyword,
                     "=",
                     $.string_literal,
                     optional(field("parameters", $.parameter_list)),
@@ -207,32 +210,32 @@ module.exports = grammar({
                 $.define_program_section,
             ),
 
-        define_device_section: (_) => keywords.define_device,
-        define_combine_section: (_) => keywords.define_combine,
-        define_connect_level_section: (_) => keywords.define_connect_level,
-        define_constant_section: (_) => keywords.define_constant,
-        define_type_section: (_) => keywords.define_type,
-        define_mutually_exclusive_section: (_) =>
-            keywords.define_mutually_exclusive,
-        define_latching_section: (_) => keywords.define_latching,
-        define_toggling_section: (_) => keywords.define_toggling,
-        define_variable_section: (_) => keywords.define_variable,
-        define_event_section: (_) => keywords.define_event,
+        define_device_section: ($) => $.define_device_keyword,
+        define_combine_section: ($) => $.define_combine_keyword,
+        define_connect_level_section: ($) => $.define_connect_level_keyword,
+        define_constant_section: ($) => $.define_constant_keyword,
+        define_type_section: ($) => $.define_type_keyword,
+        define_mutually_exclusive_section: ($) =>
+            $.define_mutually_exclusive_keyword,
+        define_latching_section: ($) => $.define_latching_keyword,
+        define_toggling_section: ($) => $.define_toggling_keyword,
+        define_variable_section: ($) => $.define_variable_keyword,
+        define_event_section: ($) => $.define_event_keyword,
         define_start_section: ($) =>
             prec.right(
                 PREC.SECTION_DEFINITION,
-                seq(keywords.define_start, repeat($._block_item)),
+                seq($.define_start_keyword, repeat($._block_item)),
             ),
         define_program_section: ($) =>
             prec.right(
                 PREC.SECTION_DEFINITION,
-                seq(keywords.define_program, repeat($._block_item)),
+                seq($.define_program_keyword, repeat($._block_item)),
             ),
 
         define_function: ($) =>
-            seq(keywords.define_function, $.function_definition),
-        define_call: ($) => seq(keywords.define_call, $.call_definition),
-        define_module: ($) => seq(keywords.define_module, $.module_definition),
+            seq($.define_function_keyword, $.function_definition),
+        define_call: ($) => seq($.define_call_keyword, $.call_definition),
+        define_module: ($) => seq($.define_module_keyword, $.module_definition),
 
         module_definition: ($) =>
             prec.right(
@@ -262,7 +265,7 @@ module.exports = grammar({
 
         data_event_declarator: ($) =>
             seq(
-                keywords.data_event,
+                $.data_event_keyword,
                 field("device", $.data_event_device_reference),
             ),
 
@@ -277,15 +280,15 @@ module.exports = grammar({
                 field("body", $.compound_statement),
             ),
 
-        data_event_type: (_) =>
+        data_event_type: ($) =>
             choice(
-                keywords.command,
-                keywords.string,
-                keywords.online,
-                keywords.offline,
-                keywords.onerror,
-                keywords.standby,
-                keywords.awake,
+                $.command_keyword,
+                $.string_keyword,
+                $.online_keyword,
+                $.offline_keyword,
+                $.onerror_keyword,
+                $.standby_keyword,
+                $.awake_keyword,
             ),
 
         timeline_event_definition: ($) =>
@@ -296,7 +299,7 @@ module.exports = grammar({
 
         timeline_event_declarator: ($) =>
             seq(
-                keywords.timeline_event,
+                $.timeline_event_keyword,
                 field("id", $.timeline_event_id_reference),
             ),
 
@@ -310,7 +313,7 @@ module.exports = grammar({
 
         button_event_declarator: ($) =>
             seq(
-                keywords.button_event,
+                $.button_event_keyword,
                 field("devchan", $.button_event_devchan_reference),
             ),
 
@@ -329,12 +332,12 @@ module.exports = grammar({
 
         button_event_type: ($) =>
             choice(
-                keywords.push,
-                keywords.release,
+                $.push_keyword,
+                $.release_keyword,
                 choice(
                     // HOLD[time[, repeat]]
                     seq(
-                        keywords.hold,
+                        $.hold_keyword,
                         seq(
                             "[",
                             field("time", $.expression),
@@ -345,7 +348,7 @@ module.exports = grammar({
                 ),
             ),
 
-        button_event_hold_repeat: (_) => keywords.repeat,
+        button_event_hold_repeat: ($) => $.repeat_keyword,
 
         level_event_definition: ($) =>
             seq(
@@ -355,7 +358,7 @@ module.exports = grammar({
 
         level_event_declarator: ($) =>
             seq(
-                keywords.level_event,
+                $.level_event_keyword,
                 field("devlev", $.level_event_devlev_reference),
             ),
 
@@ -370,7 +373,7 @@ module.exports = grammar({
 
         channel_event_declarator: ($) =>
             seq(
-                keywords.channel_event,
+                $.channel_event_keyword,
                 field("devchan", $.channel_event_devchan_reference),
             ),
 
@@ -387,7 +390,7 @@ module.exports = grammar({
                 field("body", $.compound_statement),
             ),
 
-        channel_event_type: (_) => choice(keywords.on, keywords.off),
+        channel_event_type: ($) => choice($.on_keyword, $.off_keyword),
 
         custom_event_definition: ($) =>
             seq(
@@ -397,7 +400,7 @@ module.exports = grammar({
 
         custom_event_declarator: ($) =>
             seq(
-                keywords.custom_event,
+                $.custom_event_keyword,
                 field("reference", $.custom_event_reference),
             ),
 
@@ -478,15 +481,15 @@ module.exports = grammar({
 
         compound_statement: ($) => seq("{", repeat($._block_item), "}"),
 
-        storage_class_specifier: (_) =>
-            choice(keywords.local_var, keywords.stack_var),
+        storage_class_specifier: ($) =>
+            choice($.local_var_keyword, $.stack_var_keyword),
 
         type_qualifier: ($) =>
             choice(
-                keywords.constant,
-                keywords.volatile,
-                keywords.non_volatile,
-                keywords.persistent,
+                $.constant_keyword,
+                $.volatile_keyword,
+                $.non_volatile_keyword,
+                $.persistent_keyword,
             ),
 
         type_specifier: ($) => choice($.intrinsic_type, $._type_identifier),
@@ -494,7 +497,7 @@ module.exports = grammar({
         struct_specifier: ($) =>
             prec.right(
                 seq(
-                    choice(keywords.struct, keywords.structure),
+                    choice($.struct_keyword, $.structure_keyword),
                     choice(
                         seq(
                             field("name", $._type_identifier),
@@ -540,20 +543,20 @@ module.exports = grammar({
 
         intrinsic_type: ($) => choice($.primitive_type, $.structured_type),
 
-        primitive_type: (_) =>
+        primitive_type: ($) =>
             choice(
-                keywords.char,
-                keywords.widechar,
-                keywords.integer,
-                keywords.sinteger,
-                keywords.long,
-                keywords.slong,
-                keywords.float,
-                keywords.double,
+                $.char_keyword,
+                $.widechar_keyword,
+                $.integer_keyword,
+                $.sinteger_keyword,
+                $.long_keyword,
+                $.slong_keyword,
+                $.float_keyword,
+                $.double_keyword,
             ),
 
-        structured_type: (_) =>
-            choice(keywords.dev, keywords.devlev, keywords.devchan),
+        structured_type: ($) =>
+            choice($.dev_keyword, $.devlev_keyword, $.devchan_keyword),
 
         array_return_type: ($) =>
             seq(
@@ -829,18 +832,18 @@ module.exports = grammar({
         if_statement: ($) =>
             prec.right(
                 seq(
-                    keywords.if,
+                    $.if_keyword,
                     field("condition", $.parenthesized_expression),
                     field("consequence", $.statement),
                     optional(field("alternative", $.else_clause)),
                 ),
             ),
 
-        else_clause: ($) => seq(keywords.else, $.statement),
+        else_clause: ($) => seq($.else_keyword, $.statement),
 
         switch_statement: ($) =>
             seq(
-                keywords.switch,
+                $.switch_keyword,
                 field("condition", $.parenthesized_expression),
                 field("body", $.compound_statement),
             ),
@@ -849,8 +852,8 @@ module.exports = grammar({
             prec.right(
                 seq(
                     choice(
-                        seq(keywords.case, field("value", $.expression)),
-                        keywords.default,
+                        seq($.case_keyword, field("value", $.expression)),
+                        $.default_keyword,
                     ),
                     ":",
                     repeat(choice($._non_case_statement, $.declaration)),
@@ -859,14 +862,14 @@ module.exports = grammar({
 
         while_statement: ($) =>
             seq(
-                keywords.while,
+                $.while_keyword,
                 field("condition", $.parenthesized_expression),
                 field("body", $.statement),
             ),
 
         for_statement: ($) =>
             seq(
-                keywords.for,
+                $.for_keyword,
                 "(",
                 $._for_statement_body,
                 ")",
@@ -896,11 +899,11 @@ module.exports = grammar({
             ),
 
         select_statement: ($) =>
-            seq(keywords.select, "{", repeat1($.active_block), "}"),
+            seq($.select_keyword, "{", repeat1($.active_block), "}"),
 
         active_block: ($) =>
             seq(
-                keywords.active,
+                $.active_keyword,
                 field("condition", $.parenthesized_expression),
                 ":",
                 field("body", $.statement),
@@ -910,19 +913,19 @@ module.exports = grammar({
             // Using prec.right here to allow for the optional semicolon
             prec.right(
                 seq(
-                    keywords.return,
+                    $.return_keyword,
                     optional(choice($.expression, $.comma_expression)),
                     optional(";"),
                 ),
             ),
 
-        break_statement: (_) =>
+        break_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
-            prec.right(seq(keywords.break, optional(";"))),
+            prec.right(seq($.break_keyword, optional(";"))),
 
-        continue_statement: (_) =>
+        continue_statement: ($) =>
             // Using prec.right here to allow for the optional semicolon
-            prec.right(seq(keywords.continue, optional(";"))),
+            prec.right(seq($.continue_keyword, optional(";"))),
 
         devchan_operation_statement: ($) =>
             prec.right(
@@ -934,19 +937,19 @@ module.exports = grammar({
                 ),
             ),
 
-        devchan_operation: (_) =>
+        devchan_operation: ($) =>
             choice(
-                keywords.devchan_on,
-                keywords.devchan_off,
-                keywords.devchan_to,
-                keywords.devchan_min_to,
-                keywords.devchan_total_off,
-                keywords.devchan_pulse,
+                $.devchan_on_keyword,
+                $.devchan_off_keyword,
+                $.devchan_to_keyword,
+                $.devchan_min_to_keyword,
+                $.devchan_total_off_keyword,
+                $.devchan_pulse_keyword,
             ),
 
         send_string_statement: ($) =>
             seq(
-                keywords.send_string,
+                $.send_string_keyword,
                 field("device", $.expression),
                 ",",
                 field("value", $.expression),
@@ -955,7 +958,7 @@ module.exports = grammar({
 
         send_command_statement: ($) =>
             seq(
-                keywords.send_command,
+                $.send_command_keyword,
                 field("device", $.expression),
                 ",",
                 field("value", $.expression),
@@ -964,7 +967,7 @@ module.exports = grammar({
 
         send_level_statement: ($) =>
             seq(
-                keywords.send_level,
+                $.send_level_keyword,
                 field("device", $.expression),
                 ",",
                 field("level", $.expression),
@@ -974,45 +977,45 @@ module.exports = grammar({
             ),
 
         create_buffer_statement: ($) =>
-            seq(keywords.create_buffer, $.comma_expression, optional(";")),
+            seq($.create_buffer_keyword, $.comma_expression, optional(";")),
 
         create_multi_buffer_statement: ($) =>
             seq(
-                keywords.create_multi_buffer,
+                $.create_multi_buffer_keyword,
                 $.comma_expression,
                 optional(";"),
             ),
 
         clear_buffer_statement: ($) =>
-            seq(keywords.clear_buffer, $.expression, optional(";")),
+            seq($.clear_buffer_keyword, $.expression, optional(";")),
 
         wait_statement: ($) =>
             seq(
-                keywords.wait,
+                $.wait_keyword,
                 field("time", $.expression),
                 optional(field("name", $.string_literal)),
             ),
 
         wait_until_statement: ($) =>
             seq(
-                keywords.wait_until,
+                $.wait_until_keyword,
                 field("condition", $.expression),
                 optional(field("name", $.string_literal)),
             ),
 
-        cancel_all_wait_statement: (_) => keywords.cancel_all_wait,
-        cancel_all_wait_until_statement: (_) => keywords.cancel_all_wait_until,
+        cancel_all_wait_statement: ($) => $.cancel_all_wait_keyword,
+        cancel_all_wait_until_statement: ($) => $.cancel_all_wait_until_keyword,
 
         cancel_wait_statement: ($) =>
             seq(
-                keywords.cancel_wait,
+                $.cancel_wait_keyword,
                 field("name", $.string_literal),
                 optional(";"),
             ),
 
         cancel_wait_until_statement: ($) =>
             seq(
-                keywords.cancel_wait_until,
+                $.cancel_wait_until_keyword,
                 field("name", $.string_literal),
                 optional(";"),
             ),
@@ -1023,7 +1026,7 @@ module.exports = grammar({
         // They do not support return values.
         call_statement: ($) =>
             seq(
-                keywords.call,
+                $.call_keyword,
                 field("call", $.string_literal),
                 field("arguments", $.argument_list),
                 optional(";"),
