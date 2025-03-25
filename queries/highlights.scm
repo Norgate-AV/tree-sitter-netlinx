@@ -4,9 +4,6 @@
 ;; Identifiers
 (identifier) @identifier
 
-;; Preprocessor
-
-
 ;; Constants
 [
     (true)
