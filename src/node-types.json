@@ -1583,6 +1583,10 @@
           "named": true
         },
         {
+          "type": "type_identifier",
+          "named": true
+        },
+        {
           "type": "type_qualifier",
           "named": true
         }

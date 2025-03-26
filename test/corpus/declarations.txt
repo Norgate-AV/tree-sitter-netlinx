@@ -264,7 +264,140 @@ PERSISTENT INTEGER lastPowerState
     (identifier)))
 
 =================
-Custom Types
+Custom Type Declarations
+=================
+
+stack_var volatile Person x
+local_var Person y
+volatile Person z
+
+integer Car
+Car d[10]
+Boat my2D[][] = {{1,2,3},{4,5,6}}
+
+Animal matrix[3][3] = {{1,2,3},{4,5,6},{7,8,9}}
+
+CONSTANT Person MAX_DEVICES = 10
+VOLATILE Car statusFlags
+NON_VOLATILE Boat deviceNames[5][20]
+PERSISTENT Animal lastPowerState
+
+---
+
+(source_file
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (type_qualifier
+          (volatile_keyword))
+        (type_identifier)
+        (identifier))
+      (declaration
+        (storage_class_specifier
+          (local_var_keyword))
+        (type_identifier)
+        (identifier))
+      (declaration
+        (type_qualifier
+          (volatile_keyword))
+        (type_identifier)
+        (identifier))
+      (declaration
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (declaration
+        (type_identifier)
+        (array_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (type_identifier)
+        (init_declarator
+          (array_declarator
+            (array_declarator
+              (identifier)))
+          (initializer_list
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal)))
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))))))
+      (declaration
+        (type_identifier)
+        (init_declarator
+          (array_declarator
+            (array_declarator
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (number_literal
+              (decimal_literal)))
+          (initializer_list
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal)))
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal)))
+            (initializer_list
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))
+              (number_literal
+                (decimal_literal))))))
+      (declaration
+        (type_qualifier
+          (constant_keyword))
+        (type_identifier)
+        (init_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (type_qualifier
+          (volatile_keyword))
+        (type_identifier)
+        (identifier))
+      (declaration
+        (type_qualifier
+          (non_volatile_keyword))
+        (type_identifier)
+        (array_declarator
+          (array_declarator
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (type_qualifier
+          (persistent_keyword))
+        (type_identifier)
+        (identifier)))
+
+=================
+Custom Type Definitions
 =================
 
 STRUCTURE DeviceStatus {

@@ -407,7 +407,6 @@ module.exports = grammar({
         custom_event_reference: ($) =>
             seq(
                 "[",
-                // repeat1($.comma_expression),
                 choice(
                     // Format 1: [DEVICE,ID,TYPE]
                     seq(
@@ -589,10 +588,63 @@ module.exports = grammar({
             ),
 
         declaration: ($) =>
-            // Using prec.right here to allow for the optional semicolon
             prec.right(
                 seq(
                     choice(
+                        // Regular declaration with custom type
+                        prec.right(
+                            10,
+                            seq(
+                                $._declaration_specifiers,
+                                alias($.identifier, $.type_identifier),
+                                commaSep1(
+                                    field(
+                                        "declarator",
+                                        choice(
+                                            seq($._declaration_declarator),
+                                            $.init_declarator,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+
+                        // Custom type with qualifier only
+                        prec.right(
+                            10,
+                            seq(
+                                $.type_qualifier,
+                                alias($.identifier, $.type_identifier),
+                                commaSep1(
+                                    field(
+                                        "declarator",
+                                        choice(
+                                            seq($._declaration_declarator),
+                                            $.init_declarator,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+
+                        // Custom type with storage class only
+                        prec.right(
+                            10,
+                            seq(
+                                $.storage_class_specifier,
+                                alias($.identifier, $.type_identifier),
+                                commaSep1(
+                                    field(
+                                        "declarator",
+                                        choice(
+                                            seq($._declaration_declarator),
+                                            $.init_declarator,
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+
                         // Regular declaration
                         prec.right(
                             1,
@@ -644,15 +696,6 @@ module.exports = grammar({
                             ),
                         ),
                     ),
-
-                    // NOTE: This optional semicolon is causing a "recoverable" error
-                    // This is normal behavior for generalized LR parsing, which
-                    // explores multiple paths and sometimes abandons some.
-                    // The "recoverable error" only appears in debug output; it
-                    // doesn't affect actual parsing.
-                    // Despite the warning, the resulting AST is correct. Tree-sitter
-                    // successfully produces the right tree structure.
-                    // optional(";"),
                     $._semicolon,
                 ),
             ),
