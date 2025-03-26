@@ -1,5 +1,11 @@
 #!/usr/bin/env pwsh
 
+<#
+ * @file FindAndParse.ps1
+ * @brief Find and parse .axs and .axi files using tree-sitter.
+ * @license MIT
+#>
+
 [CmdletBinding()]
 
 param (

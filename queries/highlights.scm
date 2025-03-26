@@ -100,14 +100,14 @@
     (timeline_event_keyword)
     (custom_event_keyword)
 
-    (preproc_include_keyword)
-    (preproc_define_keyword)
-    (preproc_warn_keyword)
-    (preproc_disable_warning_keyword)
-    (preproc_if_defined_keyword)
-    (preproc_if_not_defined_keyword)
-    (preproc_else_keyword)
-    (preproc_end_if_keyword)
+    ;; (preproc_include_keyword)
+    ;; (preproc_define_keyword)
+    ;; (preproc_warn_keyword)
+    ;; (preproc_disable_warning_keyword)
+    ;; (preproc_if_defined_keyword)
+    ;; (preproc_if_not_defined_keyword)
+    ;; (preproc_else_keyword)
+    ;; (preproc_end_if_keyword)
 
     (struct_keyword)
     (structure_keyword)
@@ -306,6 +306,21 @@
 (hex_literal) @number
 (device_literal) @number
 "\"" @string
+
+;; Preprocessor
+(preproc_include_keyword) @preprocessor
+(preproc_define_keyword) @preprocessor
+(preproc_warn_keyword) @preprocessor
+(preproc_disable_warning_keyword) @preprocessor
+(preproc_if_defined_keyword) @preprocessor
+(preproc_if_not_defined_keyword) @preprocessor
+(preproc_else_keyword) @preprocessor
+(preproc_end_if_keyword) @preprocessor
+
+;; Preproc Arguments
+;; (preproc_arg
+;;  (#match? @string "'[^']*'")
+;;  (#match? @number "\d+"))
 
 ;; Preprocessor specifics
 ;; (preproc_disable_warning

@@ -5,7 +5,7 @@
 #define MAX_CHANNELS 32
 // ^ preprocessor
 //       ^ constant
-//                  ^ number
+//                   ^ number
 
 #if_defined DEBUG_MODE
 // ^ preprocessor
@@ -21,9 +21,9 @@ STACK_VAR INTEGER debug_level = 5
 CONSTANT INTEGER debug_level = 0
 // ^ type.qualifier
 //         ^ type
-//                 ^ constant
-//                            ^ operator
-//                              ^ number
+//                 ^ variable
+//                           ^ operator
+//                             ^ number
 #end_if
 // ^ preprocessor
 

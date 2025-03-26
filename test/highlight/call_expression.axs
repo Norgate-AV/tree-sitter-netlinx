@@ -1,6 +1,11 @@
-    timeline_create(1, 500, TIMELINE_ABSOLUTE, TIMELINE_REPEAT)
-//  ^ function
-//                  ^ number
-//                     ^ number
-//                          ^ variable.parameter
-//                                             ^ variable.parameter
+timeline_create(1, 500, TIMELINE_ABSOLUTE, TIMELINE_REPEAT)
+// <- function
+//             ^ punctuation.bracket
+//              ^ number
+//               ^ punctuation.delimiter
+//                 ^ number
+//                    ^ punctuation.delimiter
+//                      ^ variable.parameter
+//                                       ^ punctuation.delimiter
+//                                         ^ variable.parameter
+//                                                        ^ punctuation.bracket
