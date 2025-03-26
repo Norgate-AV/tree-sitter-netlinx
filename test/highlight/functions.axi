@@ -15,11 +15,11 @@ DEFINE_FUNCTION INTEGER MyFunction(INTEGER param1, CHAR param2[])
 // <- punctuation.bracket
     RETURN param1 + LENGTH_ARRAY(param2)
 //  ^ keyword
-//         ^ parameter
+//         ^ variable
 //                ^ operator
 //                  ^ function
 //                              ^ punctuation.bracket
-//                               ^ parameter
+//                               ^ variable.parameter
 //                                     ^ punctuation.bracket
 }
 // <- punctuation.bracket

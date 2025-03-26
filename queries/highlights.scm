@@ -318,9 +318,17 @@
 (preproc_end_if_keyword) @preprocessor
 
 ;; Preproc Arguments
-;; (preproc_arg
-;;  (#match? @string "'[^']*'")
-;;  (#match? @number "\d+"))
+;; Preprocessor arguments
+;; Highlight all preproc_args initially as constants
+(preproc_arg) @constant
+
+;; Then specifically override numeric values
+((preproc_arg) @number
+ (#match? @number "^[ \t]*[0-9]+[ \t]*$"))
+
+;; And string values with quotes
+((preproc_arg) @string
+ (#match? @string "'"))
 
 ;; Preprocessor specifics
 ;; (preproc_disable_warning
@@ -372,6 +380,20 @@
   arguments: (argument_list
     (identifier) @variable.parameter))
 
+;; Array parameters in function definition
+(function_definition
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (identifier) @parameter))))
+
+;; Array parameters in function declaration
+(function_declaration
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (identifier) @parameter))))
+
 ;; Parameter types
 (parameter_declaration
   (type_specifier) @type)
@@ -380,3 +402,8 @@
 ((identifier) @parameter
  (#is? @parameter local.reference)
  (#eq? @parameter local.definition.parameter))
+
+;; Parameter declaration direct highlight
+(parameter_list
+  (parameter_declaration
+    declarator: (identifier) @parameter))

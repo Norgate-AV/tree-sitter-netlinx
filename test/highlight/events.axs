@@ -3,86 +3,121 @@ DEFINE_EVENT
 
 BUTTON_EVENT[dvTP,1]
 // ^ keyword
-//           ^ punctuation.bracket
+//          ^ punctuation.bracket
 //            ^ variable
 //                ^ number
+//                 ^ punctuation.bracket
 {
+// <- punctuation.bracket
     PUSH:
-    // ^ type
-    //   ^ punctuation
+    // ^ keyword
+    //  ^ punctuation.delimiter
     {
+    // <- punctuation.bracket
         // Function call
+        // ^ comment
         doSomething(10)
         // ^ function
+        //         ^ punctuation.bracket
         //           ^ number
+        //            ^ punctuation.bracket
     }
+    // <- punctuation.bracket
 
     RELEASE:
-    // ^ type
-    //      ^ punctuation
+    // ^ keyword
+    //     ^ punctuation.delimiter
     {
+    // <- punctuation.bracket
         // String literal
+        // ^ comment
         SEND_COMMAND dvTP, "'TEXT-1,0,Button Released'"
-        // ^ function
+        // ^ keyword
         //            ^ variable
+        //               ^ punctuation.delimiter
+        //                 ^ string
         //                   ^ string
+        //                                            ^ string
     }
+    // <- punctuation.bracket
 
     HOLD[2]:
-    // ^ type
-    //   ^ punctuation.bracket
-    //    ^ number
-    //     ^ punctuation.bracket
-    //      ^ punctuation
+    // ^ keyword
+    //  ^ punctuation.bracket
+    //   ^ number
+    //    ^ punctuation.bracket
+    //     ^ punctuation.delimiter
     {
+    // <- punctuation.bracket
         // Binary expression
+        // ^ comment
         counter = counter + 1
         // ^ variable
-        //        ^ operator
+        //      ^ operator
         //          ^ variable
-        //                  ^ operator
-        //                    ^ number
+        //                ^ operator
+        //                  ^ number
     }
+    // <- punctuation.bracket
 }
+// <- punctuation.bracket
 
 DATA_EVENT[dvTP]
 // ^ keyword
-//         ^ punctuation.bracket
+//        ^ punctuation.bracket
 //          ^ variable
-//              ^ punctuation.bracket
+//             ^ punctuation.bracket
 {
+// <- punctuation.bracket
     ONLINE:
-    // ^ type
-    //     ^ punctuation
+    // ^ keyword
+    //    ^ punctuation.delimiter
     {
+    // <- punctuation.bracket
         // Device control
+        // ^ comment
         ON[dvTP,10]
-        // ^ function
-        //  ^ punctuation.bracket
+        // <- keyword
+        //^ punctuation.bracket
         //   ^ variable
+        //     ^ punctuation.delimiter
         //       ^ number
-        //         ^ punctuation.bracket
+        //        ^ punctuation.bracket
     }
+    // <- punctuation.bracket
 
     OFFLINE:
-    // ^ type
-    //      ^ punctuation
+    // ^ keyword
+    //     ^ punctuation.delimiter
     {
+    // <- punctuation.bracket
         // Hex literal
+        // ^ comment
         counter = $FF
         // ^ variable
-        //        ^ operator
-        //          ^ number
+        //      ^ operator
+        //         ^ number
     }
+    // <- punctuation.bracket
 
     STRING:
-    // ^ type
-    //     ^ punctuation
+    // ^ keyword
+    //    ^ punctuation.delimiter
     {
+    // <- punctuation.bracket
         // String expression
-        message = "Received: ,DATA.TEXT"
+        // ^ comment
+        message = "'Received: ', DATA.TEXT"
         // ^ variable
-        //        ^ operator
-        //          ^ string
+        //      ^ operator
+        //        ^ string
+        //                ^ string
+        //                     ^ punctuation.delimiter
+        //                       ^ constant
+        //                           ^ punctuation.delimiter
+        //                             ^ property
+        //                                ^ string
     }
+    // <- punctuation.bracket
 }
+// <- punctuation.bracket
