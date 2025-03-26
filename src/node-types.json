@@ -3521,6 +3521,10 @@
           "named": true
         },
         {
+          "type": "initializer_list",
+          "named": true
+        },
+        {
           "type": "return_keyword",
           "named": true
         }

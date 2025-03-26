@@ -136,13 +136,16 @@ static bool scan_automatic_semicolon(TSLexer *lexer, bool comment_condition, boo
         case '>':
         case '<':
         case '=':
-        case '[':
-        case '(':
         case '^':
         case '|':
         case '&':
         case '/':
             return false;
+
+        // Insert a semicolon before opening parenthesis or bracket when preceded by a closing one
+        case '(':
+        case '[':
+            return true;
 
         // Insert a semicolon before decimals literals but not otherwise.
         case '.':
@@ -171,8 +174,8 @@ static bool scan_automatic_semicolon(TSLexer *lexer, bool comment_condition, boo
 }
 
 bool tree_sitter_netlinx_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
-    fprintf(stderr, "Scanner called: AUTOMATIC_SEMICOLON=%d, lookahead=%c\n",
-            valid_symbols[AUTOMATIC_SEMICOLON], lexer->lookahead);
+    // fprintf(stderr, "Scanner called: AUTOMATIC_SEMICOLON=%d, lookahead=%c\n",
+    //         valid_symbols[AUTOMATIC_SEMICOLON], lexer->lookahead);
 
     if (valid_symbols[AUTOMATIC_SEMICOLON]) {
         bool scanned_comment = false;

@@ -41,8 +41,6 @@ module.exports = grammar({
 
     conflicts: ($) => [
         [$.type_specifier, $.expression],
-        // [$._declarator, $._declaration_declarator],
-        // [$.function_declarator, $._function_declaration_declarator],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
         [$.wait_statement],
@@ -242,14 +240,11 @@ module.exports = grammar({
         define_module: ($) => seq($.define_module_keyword, $.module_definition),
 
         module_definition: ($) =>
-            prec.right(
-                seq(
-                    field("module_name", $.string_literal),
-                    field("instance_name", $.identifier),
-                    field("parameters", $.argument_list),
-                    // optional(";"),
-                    $._semicolon,
-                ),
+            seq(
+                field("module_name", $.string_literal),
+                field("instance_name", $.identifier),
+                field("parameters", $.argument_list),
+                $._semicolon,
             ),
 
         event_definition: ($) =>
@@ -539,7 +534,6 @@ module.exports = grammar({
                     // This may not need to be optional. But leaving it for now
                     // as it provides some flexibility
                     optional($._field_declaration_declarator),
-                    // optional(";"),
                     $._semicolon,
                 ),
             ),
@@ -664,7 +658,6 @@ module.exports = grammar({
             ),
 
         type_definition: ($) =>
-            // prec.right(seq($.struct_specifier, optional(";"))),
             prec.right(seq($.struct_specifier, $._semicolon)),
 
         _declaration_modifiers: ($) =>
@@ -866,23 +859,10 @@ module.exports = grammar({
             ),
 
         _top_level_expression_statement: ($) =>
-            // seq($._expression_not_binary, optional(";")),
             seq($._expression_not_binary, $._semicolon),
 
         expression_statement: ($) =>
-            // Using prec.right here to allow for the optional semicolon
-            prec.right(
-                choice(
-                    seq(
-                        choice($.expression, $.comma_expression),
-
-                        // There was a specific reason for using this regex
-                        // pattern here. I can't remember what it was.
-                        // optional(choice(";", /\s*\r?\n/)),
-                        $._semicolon,
-                    ),
-                ),
-            ),
+            choice(seq(choice($.expression, $.comma_expression), $._semicolon)),
 
         if_statement: ($) =>
             prec.right(
@@ -965,25 +945,21 @@ module.exports = grammar({
             ),
 
         return_statement: ($) =>
-            // Using prec.right here to allow for the optional semicolon
-            prec.right(
-                seq(
-                    $.return_keyword,
-                    optional(choice($.expression, $.comma_expression)),
-                    // optional(";"),
-                    $._semicolon,
+            seq(
+                $.return_keyword,
+                optional(
+                    choice(
+                        $.expression,
+                        $.comma_expression,
+                        $.initializer_list,
+                    ),
                 ),
+                $._semicolon,
             ),
 
-        break_statement: ($) =>
-            // Using prec.right here to allow for the optional semicolon
-            // prec.right(seq($.break_keyword, optional(";"))),
-            prec.right(seq($.break_keyword, $._semicolon)),
+        break_statement: ($) => seq($.break_keyword, $._semicolon),
 
-        continue_statement: ($) =>
-            // Using prec.right here to allow for the optional semicolon
-            // prec.right(seq($.continue_keyword, optional(";"))),
-            prec.right(seq($.continue_keyword, $._semicolon)),
+        continue_statement: ($) => seq($.continue_keyword, $._semicolon),
 
         devchan_operation_statement: ($) =>
             prec.right(
@@ -991,7 +967,6 @@ module.exports = grammar({
                 seq(
                     field("operation", $.devchan_operation),
                     field("target", $.devchan_expression),
-                    // optional(";"),
                     $._semicolon,
                 ),
             ),
@@ -1012,7 +987,6 @@ module.exports = grammar({
                 field("device", $.expression),
                 ",",
                 field("value", $.expression),
-                // optional(";"),
                 $._semicolon,
             ),
 
@@ -1022,7 +996,6 @@ module.exports = grammar({
                 field("device", $.expression),
                 ",",
                 field("value", $.expression),
-                // optional(";"),
                 $._semicolon,
             ),
 
@@ -1034,24 +1007,20 @@ module.exports = grammar({
                 field("level", $.expression),
                 ",",
                 field("value", $.expression),
-                // optional(";"),
                 $._semicolon,
             ),
 
         create_buffer_statement: ($) =>
-            // seq($.create_buffer_keyword, $.comma_expression, optional(";")),
             seq($.create_buffer_keyword, $.comma_expression, $._semicolon),
 
         create_multi_buffer_statement: ($) =>
             seq(
                 $.create_multi_buffer_keyword,
                 $.comma_expression,
-                // optional(";"),
                 $._semicolon,
             ),
 
         clear_buffer_statement: ($) =>
-            // seq($.clear_buffer_keyword, $.expression, optional(";")),
             seq($.clear_buffer_keyword, $.expression, $._semicolon),
 
         wait_statement: ($) =>
@@ -1075,7 +1044,6 @@ module.exports = grammar({
             seq(
                 $.cancel_wait_keyword,
                 field("name", $.string_literal),
-                // optional(";"),
                 $._semicolon,
             ),
 
@@ -1083,7 +1051,6 @@ module.exports = grammar({
             seq(
                 $.cancel_wait_until_keyword,
                 field("name", $.string_literal),
-                // optional(";"),
                 $._semicolon,
             ),
 
@@ -1096,7 +1063,6 @@ module.exports = grammar({
                 $.call_keyword,
                 field("call", $.string_literal),
                 field("arguments", $.argument_list),
-                // optional(";"),
                 $._semicolon,
             ),
 
