@@ -842,3 +842,119 @@ DEFINE_FUNCTION SortArray(INTEGER array[]) {
                 (decimal_literal)))
             right: (number_literal
               (decimal_literal))))))))
+
+==============================
+Function Param Qualifiers
+==============================
+
+// Type qualifier before type
+DEFINE_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1) {}
+
+// Type qualifier after type
+DEFINE_FUNCTION INTEGER MyFunc(INTEGER CONSTANT param1) {}
+
+// Multiple qualifiers
+DEFINE_FUNCTION INTEGER MyFunc(CONSTANT VOLATILE INTEGER param1) {}
+
+// With arrays
+DEFINE_FUNCTION INTEGER MyFunc(CONSTANT CHAR buffer[]) {}
+
+---
+
+(source_file
+      (comment)
+      (define_function
+        (define_function_keyword)
+        (function_definition
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (type_qualifier
+                (constant_keyword))
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (identifier)))
+          (compound_statement)))
+      (comment)
+      (define_function
+        (define_function_keyword)
+        (function_definition
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (type_qualifier
+                (constant_keyword))
+              (identifier)))
+          (compound_statement)))
+      (comment)
+      (define_function
+        (define_function_keyword)
+        (function_definition
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (type_qualifier
+                (constant_keyword))
+              (type_qualifier
+                (volatile_keyword))
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (identifier)))
+          (compound_statement)))
+      (comment)
+      (define_function
+        (define_function_keyword)
+        (function_definition
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (type_qualifier
+                (constant_keyword))
+              (intrinsic_type
+                (primitive_type
+                  (char_keyword)))
+              (array_declarator
+                (identifier))))
+          (compound_statement))))
+
+================================
+Function Declarations
+================================
+
+DEFINE_LIBRARY_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1)
+
+---
+
+(source_file
+      (define_function
+        (define_library_function_keyword)
+        (function_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (type_qualifier
+                (constant_keyword))
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (identifier))))))
