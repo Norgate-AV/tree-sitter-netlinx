@@ -1,9 +1,13 @@
 # tree-sitter-netlinx
 
 [![CI][ci]](https://github.com/Norgate-AV/tree-siter-netlinx/actions/workflows/ci.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/Norgate-AV/tree-sitter-netlinx)](https://github.com/Norgate-AV/tree-sitter-netlinx/releases)
 [![crates][crates]](https://crates.io/crates/tree-sitter-netlinx)
 [![npm][npm]](https://www.npmjs.com/package/tree-sitter-netlinx)
 [![pypi][pypi]](https://pypi.org/project/tree-sitter-netlinx)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+[![GitHub contributors](https://img.shields.io/github/contributors/Norgate-AV/tree-sitter-netlinx)](https://github.com/Norgate-AV/tree-sitter-netlinx/graphs/contributors)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 NetLinx grammar for [tree-sitter](https://tree-sitter.github.io).
 
