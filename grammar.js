@@ -235,12 +235,9 @@ module.exports = grammar({
         define_program_section: ($) => $.define_program_keyword,
 
         define_function: ($) =>
-            seq(
-                choice(
-                    $.define_function_keyword,
-                    $.define_library_function_keyword,
-                ),
-                $.function_definition,
+            choice(
+                seq($.define_function_keyword, $.function_definition),
+                seq($.define_library_function_keyword, $.function_declaration),
             ),
 
         define_call: ($) => seq($.define_call_keyword, $.call_definition),
@@ -573,18 +570,29 @@ module.exports = grammar({
             ),
 
         function_definition: ($) =>
-            choice(
-                seq(
-                    optional(
-                        field(
-                            "return_type",
-                            choice($.type_specifier, $.array_return_type),
-                        ),
+            seq(
+                optional(
+                    field(
+                        "return_type",
+                        choice($.type_specifier, $.array_return_type),
                     ),
-                    field("name", $.identifier),
-                    field("parameters", $.parameter_list),
-                    field("body", $.compound_statement),
                 ),
+                field("name", $.identifier),
+                field("parameters", $.parameter_list),
+                field("body", $.compound_statement),
+            ),
+
+        function_declaration: ($) =>
+            seq(
+                optional(
+                    field(
+                        "return_type",
+                        choice($.type_specifier, $.array_return_type),
+                    ),
+                ),
+                field("name", $.identifier),
+                field("parameters", $.parameter_list),
+                $._semicolon,
             ),
 
         call_definition: ($) =>
