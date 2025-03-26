@@ -235,7 +235,14 @@ module.exports = grammar({
         define_program_section: ($) => $.define_program_keyword,
 
         define_function: ($) =>
-            seq($.define_function_keyword, $.function_definition),
+            seq(
+                choice(
+                    $.define_function_keyword,
+                    $.define_library_function_keyword,
+                ),
+                $.function_definition,
+            ),
+
         define_call: ($) => seq($.define_call_keyword, $.call_definition),
         define_module: ($) => seq($.define_module_keyword, $.module_definition),
 

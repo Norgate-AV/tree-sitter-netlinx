@@ -28,6 +28,7 @@ module.exports = {
     define_toggling_keyword: (_) => keywords.define_toggling,
     define_call_keyword: (_) => keywords.define_call,
     define_function_keyword: (_) => keywords.define_function,
+    define_library_function_keyword: (_) => keywords.define_library_function,
     define_start_keyword: (_) => keywords.define_start,
     define_event_keyword: (_) => keywords.define_event,
     define_program_keyword: (_) => keywords.define_program,

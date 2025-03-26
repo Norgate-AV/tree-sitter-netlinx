@@ -1700,6 +1700,10 @@
           "named": true
         },
         {
+          "type": "define_library_function_keyword",
+          "named": true
+        },
+        {
           "type": "function_definition",
           "named": true
         }
@@ -4605,6 +4609,10 @@
   },
   {
     "type": "define_latching_keyword",
+    "named": true
+  },
+  {
+    "type": "define_library_function_keyword",
     "named": true
   },
   {

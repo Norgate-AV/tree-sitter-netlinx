@@ -197,6 +197,11 @@
       "value": "define_function",
       "flags": "i"
     },
+    "define_library_function_keyword": {
+      "type": "PATTERN",
+      "value": "define_library_function",
+      "flags": "i"
+    },
     "define_start_keyword": {
       "type": "PATTERN",
       "value": "define_start",
@@ -1447,8 +1452,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "define_function_keyword"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "define_function_keyword"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "define_library_function_keyword"
+            }
+          ]
         },
         {
           "type": "SYMBOL",

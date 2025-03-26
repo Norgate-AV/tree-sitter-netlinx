@@ -20,6 +20,7 @@ module.exports = {
     define_toggling: /define_toggling/i,
     define_call: /define_call/i,
     define_function: /define_function/i,
+    define_library_function: /define_library_function/i,
     define_start: /define_start/i,
     define_event: /define_event/i,
     define_program: /define_program/i,
