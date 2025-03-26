@@ -105,6 +105,7 @@ The parser will accept patterns that the NetLinx compiler might reject:
     - :white_check_mark: Devchan Operation Statements (`ON`, `OFF`, `TO`, `MIN_TO`, `PULSE`, etc)
 - Declarations
     - :white_check_mark: Define Function Definitions
+    - :white_check_mark: Define Library Function Declarations
     - :white_check_mark: Define Call Definitions
     - :white_check_mark: Variable Declarations
     - :white_check_mark: Constants Declarations
@@ -125,7 +126,6 @@ The parser will accept patterns that the NetLinx compiler might reject:
     - :white_check_mark: String Literals
     - :white_check_mark: Number Literals
     - :white_check_mark: Device Literals
-    - :white_check_mark: Arrays
 - Comments
     - :white_check_mark: Single Line Comments
     - :white_check_mark: Multi Line Comments (C Style `/* */`)
