@@ -35,8 +35,8 @@
     (define_call_keyword)
     (define_module_keyword)
 
-    (local_var_keyword)
-    (stack_var_keyword)
+    ;; (local_var_keyword)
+    ;; (stack_var_keyword)
     ;; (constant_keyword)
     ;; (volatile_keyword)
     ;; (non_volatile_keyword)
@@ -134,6 +134,8 @@
 ;; (structured_type) @type
 ;; (type_specifier) @type
 (storage_class_specifier) @storage
+(local_var_keyword) @type.storage
+(stack_var_keyword) @type.storage
 
 (type_qualifier) @type.qualifier
 (constant_keyword) @type.qualifier
