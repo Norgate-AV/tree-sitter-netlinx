@@ -407,3 +407,6 @@
 (parameter_list
   (parameter_declaration
     declarator: (identifier) @parameter))
+
+(MISSING) @missing
+(ERROR) @error

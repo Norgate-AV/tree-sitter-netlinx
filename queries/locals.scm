@@ -28,20 +28,20 @@
 (function_definition
   parameters: (parameter_list
     (parameter_declaration
-      declarator: (identifier) @local.definition.parameter)))
+      declarator: (identifier) @local.definition)))
 
 ;; Function definitions
 (function_definition
-  name: (identifier) @local.definition.function)
+  name: (identifier) @local.definition)
 
 ;; Local variables
 (declaration
   (storage_class_specifier)
-  declarator: (identifier) @local.definition.var)
+  declarator: (identifier) @local.definition)
 
 ;; Regular variable declarations
 (declaration
-  declarator: (identifier) @local.definition.var)
+  declarator: (identifier) @local.definition)
 
 ;; References
 ;; ==========
