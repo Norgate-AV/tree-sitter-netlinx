@@ -45,13 +45,6 @@
     (define_call_keyword)
     (define_module_keyword)
 
-    ;; (local_var_keyword)
-    ;; (stack_var_keyword)
-    ;; (constant_keyword)
-    ;; (volatile_keyword)
-    ;; (non_volatile_keyword)
-    ;; (persistent_keyword)
-
     (if_keyword)
     (else_keyword)
     (switch_keyword)
@@ -87,7 +80,7 @@
     (clear_buffer_keyword)
     (create_buffer_keyword)
     (create_multi_buffer_keyword)
-    ;; (call_keyword)
+    (call_keyword)
 
     (devchan_on_keyword)
     (devchan_off_keyword)
@@ -110,19 +103,8 @@
     (timeline_event_keyword)
     (custom_event_keyword)
 
-    ;; (preproc_include_keyword)
-    ;; (preproc_define_keyword)
-    ;; (preproc_warn_keyword)
-    ;; (preproc_disable_warning_keyword)
-    ;; (preproc_if_defined_keyword)
-    ;; (preproc_if_not_defined_keyword)
-    ;; (preproc_else_keyword)
-    ;; (preproc_end_if_keyword)
-
     (struct_keyword)
     (structure_keyword)
-
-    (call_keyword)
 ] @keyword
 
 ;; ============================================================================
@@ -144,10 +126,6 @@
     (variantarray_keyword)
 ] @type
 
-;; (primitive_type) @type
-;; (structured_type) @type
-;; (type_specifier) @type
-(storage_class_specifier) @storage
 (local_var_keyword) @type.storage
 (stack_var_keyword) @type.storage
 
@@ -156,9 +134,6 @@
 (volatile_keyword) @type.qualifier
 (non_volatile_keyword) @type.qualifier
 (persistent_keyword) @type.qualifier
-
-;; Struct specifiers
-;; (struct_specifier) @type
 
 ;; Type definitions in struct declarations
 (struct_specifier
@@ -192,55 +167,8 @@
     (identifier)))
 
 ;; ============================================================================
-;; CONTROL FLOW AND EVENT TYPES
-;; ============================================================================
-;; Event types
-;; (button_event_type) @keyword
-;; (data_event_type) @keyword
-;; (channel_event_type) @keyword
-
-;; Control flow
-;; (if_statement) @keyword.control
-;; (else_clause) @keyword.control
-;; (for_statement) @keyword.control
-;; (while_statement) @keyword.control
-;; (switch_statement) @keyword.control
-;; (case_statement) @keyword.control
-;; (select_statement) @keyword.control
-;; (active_block) @keyword.control
-;; (break_statement) @keyword.control
-;; (continue_statement) @keyword.control
-;; (return_statement) @keyword.control
-
-;; Wait statements
-;; (wait_statement) @keyword
-;; (wait_until_statement) @keyword
-;; (cancel_wait_statement) @keyword
-;; (cancel_wait_until_statement) @keyword
-;; (cancel_all_wait_statement) @keyword
-;; (cancel_all_wait_until_statement) @keyword
-
-;; NetLinx-specific statements
-;; (send_string_statement) @keyword.function
-;; (send_command_statement) @keyword.function
-;; (send_level_statement) @keyword.function
-;; (create_buffer_statement) @keyword.function
-;; (create_multi_buffer_statement) @keyword.function
-;; (clear_buffer_statement) @keyword.function
-;; (devchan_operation_statement) @keyword.function
-;; (call_statement) @keyword.function
-
-;; ============================================================================
 ;; EVENT REFERENCES AND DEVICE EXPRESSIONS
 ;; ============================================================================
-;; Event references and parameters
-;; (button_event_declarator) @keyword
-;; (data_event_declarator) @keyword
-;; (level_event_declarator) @keyword
-;; (channel_event_declarator) @keyword
-;; (timeline_event_declarator) @keyword
-;; (custom_event_declarator) @keyword
-
 ;; Brackets in references
 (button_event_devchan_reference
   "[" @punctuation.bracket
@@ -307,19 +235,6 @@
     (range_operator)
 ] @operator
 
-;; Operators in expressions
-;; (binary_expression
-;;   operator: _) @operator
-
-;; (unary_expression
-;;   operator: _) @operator
-
-;; (assignment_expression
-;;   operator: _) @operator
-
-;; (update_expression
-;;   operator: _) @operator
-
 ;; Punctuation
 [
     "("
@@ -346,14 +261,9 @@
 ;; Functions
 (call_expression
   function: (identifier) @function)
-;; (function_definition
-;;   name: (identifier) @function)
 (function_definition
   name: (identifier) @function)
-;; (call_expression
-;;   function: (identifier) @function.call)
-;; (call_definition
-;;   name: (string_literal) @function)
+
 ;; Library function declarations
 (function_declaration
   name: (identifier) @function)
@@ -363,8 +273,8 @@
   declarator: (identifier) @parameter)
 
 ;; Parameters in declaration
-(parameter_declaration
-  declarator: (identifier) @parameter)
+;; (parameter_declaration
+;;   declarator: (identifier) @parameter)
 
 ;; Parameters in function definition
 (function_definition
@@ -503,28 +413,6 @@
 ;; And string values with quotes
 ((preproc_arg) @string
  (#match? @string "'"))
-
-;; Preprocessor specifics
-;; (preproc_disable_warning
-;;   code: (decimal_literal) @number)
-
-;; (preproc_include
-;;   path: (string_literal) @string)
-
-;; (preproc_define
-;;   name: (identifier) @constant)
-
-;; (preproc_if_defined
-;;   name: (identifier) @constant)
-
-;; (preproc_if_not_defined
-;;   name: (identifier) @constant)
-
-;; Variables with constant qualifier
-;; (declaration
-;;   (type_qualifier) @_qualifier
-;;   declarator: (identifier) @constant
-;;   (#match? @_qualifier "constant|CONSTANT"))
 
 ;; ============================================================================
 ;; ERROR HANDLING
