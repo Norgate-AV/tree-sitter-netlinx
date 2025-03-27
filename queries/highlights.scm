@@ -144,10 +144,6 @@
   type: (type_specifier
     (type_identifier) @type))
 
-;; Custom type in variable declarations
-(declaration
-  type: (type_identifier) @type)
-
 ;; Custom types in local variable declarations with storage specifiers
 (declaration
   (storage_class_specifier)
