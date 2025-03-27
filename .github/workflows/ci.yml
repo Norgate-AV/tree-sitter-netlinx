@@ -35,6 +35,9 @@ jobs:
           cache: pnpm
           node-version-file: .nvmrc
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
 
