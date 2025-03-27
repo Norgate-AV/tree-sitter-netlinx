@@ -11,7 +11,7 @@
 // ^ preprocessor
 //           ^ constant
 STACK_VAR INTEGER debug_level = 5
-// ^ keyword
+// ^ type.storage
 //         ^ type
 //                 ^ variable
 //                            ^ operator

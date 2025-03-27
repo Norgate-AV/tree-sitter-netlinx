@@ -12,16 +12,16 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
 //                                                           ^ punctuation.bracket
 
     STACK_VAR INTEGER result
-    // ^ keyword
+    // ^ type.storage
     //         ^ type
     //                 ^ variable
 
     result = x + y * 10
     // ^ variable
     //     ^ operator
-    //       ^ variable
+    //       ^ parameter
     //         ^ operator
-    //           ^ variable
+    //           ^ parameter
     //             ^ operator
     //               ^ number
 
@@ -60,7 +60,7 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
     // Array access
     // ^ comment
     STACK_VAR INTEGER arr[5]
-    // ^ keyword
+    // ^ type.storage
     //         ^ type
     //                 ^ variable
     //                   ^ punctuation.bracket

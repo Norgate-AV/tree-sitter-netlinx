@@ -6,6 +6,7 @@
 
 (identifier) @variable
 
+;; Uppercase identifiers are probably constants
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_]*$"))
 
@@ -307,6 +308,9 @@
 ;;   function: (identifier) @function.call)
 ;; (call_definition
 ;;   name: (string_literal) @function)
+;; Library function declarations
+(function_declaration
+  name: (identifier) @function)
 
 ;; Literals
 (string_literal) @string
@@ -409,12 +413,97 @@
 ;; Parameter references within function bodies
 ((identifier) @parameter
  (#is? @parameter local.reference)
- (#eq? @parameter local.definition.parameter))
+ (#eq? @parameter local.definition))
 
 ;; Parameter declaration direct highlight
 (parameter_list
   (parameter_declaration
     declarator: (identifier) @parameter))
+
+;; Type definitions in struct declarations
+(struct_specifier
+  name: (type_identifier) @type.definition)
+
+;; Field types in struct declarations
+(field_declaration
+  type: (type_specifier
+    (type_identifier) @type))
+
+;; Custom type in variable declarations
+(declaration
+  type: (type_identifier) @type)
+
+;; Custom types in local variable declarations with storage specifiers
+(declaration
+  (storage_class_specifier)
+  type: (type_identifier) @type)
+
+;; Structure field types that are custom types
+(field_declaration
+  type: (type_identifier) @type)
+
+;; Custom types in local variable declarations - direct pattern
+(compound_statement
+  (declaration
+    (storage_class_specifier)
+    .
+    (_) @type
+    .
+    (identifier)))
+
+;; 2D array parameters in function declarations
+(function_declaration
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (array_declarator
+          declarator: (identifier) @parameter)))))
+
+;; 3D array parameters in function declarations
+(function_declaration
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (array_declarator
+          declarator: (array_declarator
+            declarator: (identifier) @parameter))))))
+
+;; 4D array parameters in function declarations
+(function_declaration
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (array_declarator
+          declarator: (array_declarator
+            declarator: (array_declarator
+              declarator: (identifier) @parameter)))))))
+
+;; 2D array parameters in function definitions
+(function_definition
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (array_declarator
+          declarator: (identifier) @parameter)))))
+
+;; 3D array parameters in function definitions
+(function_definition
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (array_declarator
+          declarator: (array_declarator
+            declarator: (identifier) @parameter))))))
+
+;; 4D array parameters in function definitions
+(function_definition
+  parameters: (parameter_list
+    (parameter_declaration
+      declarator: (array_declarator
+        declarator: (array_declarator
+          declarator: (array_declarator
+            declarator: (array_declarator
+              declarator: (identifier) @parameter)))))))
 
 (MISSING) @missing
 (ERROR) @error
