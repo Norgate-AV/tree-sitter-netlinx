@@ -1368,7 +1368,10 @@ module.exports = grammar({
                 choice(
                     seq("//", /[^\n]*/), // Single-line comments
                     seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"), // C-style multi-line comments
-                    seq("(*", /.*/, "*)"), // Pascal-style comments
+
+                    // Adding choice for Pascal-style comment endings
+                    // This is to support this odd use case in the NetLinx.axi file
+                    seq("(*", /.*/, choice("*)", "*/")), // Pascal-style comments
                 ),
             ),
 
