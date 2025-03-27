@@ -111,6 +111,8 @@
 
     (struct_keyword)
     (structure_keyword)
+
+    (call_keyword)
 ] @keyword
 
 ;; Types

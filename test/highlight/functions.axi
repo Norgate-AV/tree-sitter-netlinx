@@ -52,3 +52,10 @@ result = MyFunction(10, 'test')
 //                    ^ punctuation.delimiter
 //                       ^ string
 //                            ^ punctuation.bracket
+
+call 'MyCallFunction'(result)
+// <- keyword
+//    ^ string
+//                   ^ punctuation.bracket
+//                     ^ variable
+//                          ^ punctuation.bracket
