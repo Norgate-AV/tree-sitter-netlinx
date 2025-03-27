@@ -8,13 +8,13 @@ pub fn build(b: *std.Build) !void {
     const reuse_alloc = b.option(bool, "reuse-allocator", "Reuse the library allocator") orelse false;
 
     const lib: *std.Build.Step.Compile = if (shared) b.addSharedLibrary(.{
-        .name = "tree-sitter-netlinx",
+        .name = "tree_sitter_netlinx",
         .pic = true,
         .target = target,
         .optimize = optimize,
         .link_libc = true,
     }) else b.addStaticLibrary(.{
-        .name = "tree-sitter-netlinx",
+        .name = "tree_sitter_netlinx",
         .target = target,
         .optimize = optimize,
         .link_libc = true,
