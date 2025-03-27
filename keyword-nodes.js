@@ -21,6 +21,7 @@ module.exports = {
     define_constant_keyword: (_) => keywords.define_constant,
     define_type_keyword: (_) => keywords.define_type,
     define_variable_keyword: (_) => keywords.define_variable,
+    define_system_variable_keyword: (_) => keywords.define_system_variable,
     define_connect_level_keyword: (_) => keywords.define_connect_level,
     define_latching_keyword: (_) => keywords.define_latching,
     define_mutually_exclusive_keyword: (_) =>

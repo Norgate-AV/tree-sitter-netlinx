@@ -167,6 +167,11 @@
       "value": "define_variable",
       "flags": "i"
     },
+    "define_system_variable_keyword": {
+      "type": "PATTERN",
+      "value": "define_system_variable",
+      "flags": "i"
+    },
     "define_connect_level_keyword": {
       "type": "PATTERN",
       "value": "define_connect_level",
@@ -1388,6 +1393,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "define_system_variable_section"
+        },
+        {
+          "type": "SYMBOL",
           "name": "define_start_section"
         },
         {
@@ -1435,6 +1444,10 @@
     "define_variable_section": {
       "type": "SYMBOL",
       "name": "define_variable_keyword"
+    },
+    "define_system_variable_section": {
+      "type": "SYMBOL",
+      "name": "define_system_variable_keyword"
     },
     "define_event_section": {
       "type": "SYMBOL",

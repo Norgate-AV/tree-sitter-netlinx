@@ -14,6 +14,7 @@ module.exports = {
     define_constant: /define_constant/i,
     define_type: /define_type/i,
     define_variable: /define_variable/i,
+    define_system_variable: /define_system_variable/i,
     define_connect_level: /define_connect_level/i,
     define_latching: /define_latching/i,
     define_mutually_exclusive: /define_mutually_exclusive/i,
