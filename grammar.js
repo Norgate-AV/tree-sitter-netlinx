@@ -881,6 +881,7 @@ module.exports = grammar({
                 $.cancel_all_wait_until_statement,
                 $.cancel_wait_statement,
                 $.cancel_wait_until_statement,
+                $.call_statement,
             ),
 
         _top_level_statement: ($) =>
@@ -914,6 +915,7 @@ module.exports = grammar({
                 $.cancel_all_wait_until_statement,
                 $.cancel_wait_statement,
                 $.cancel_wait_until_statement,
+                $.call_statement,
             ),
 
         _top_level_expression_statement: ($) =>

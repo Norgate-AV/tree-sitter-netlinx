@@ -136,6 +136,10 @@
         "named": true
       },
       {
+        "type": "call_statement",
+        "named": true
+      },
+      {
         "type": "cancel_all_wait_statement",
         "named": true
       },
@@ -783,6 +787,42 @@
     }
   },
   {
+    "type": "call_statement",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
+      },
+      "call": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "call_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "cancel_all_wait_statement",
     "named": true,
     "fields": {},
@@ -885,6 +925,10 @@
       "types": [
         {
           "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
           "named": true
         },
         {
@@ -2865,6 +2909,10 @@
           "named": true
         },
         {
+          "type": "call_statement",
+          "named": true
+        },
+        {
           "type": "cancel_all_wait_statement",
           "named": true
         },
@@ -3076,6 +3124,10 @@
           "named": true
         },
         {
+          "type": "call_statement",
+          "named": true
+        },
+        {
           "type": "cancel_all_wait_statement",
           "named": true
         },
@@ -3273,6 +3325,10 @@
       "types": [
         {
           "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
           "named": true
         },
         {
@@ -3790,6 +3846,10 @@
       "types": [
         {
           "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "call_statement",
           "named": true
         },
         {
@@ -4548,6 +4608,10 @@
   },
   {
     "type": "button_event_keyword",
+    "named": true
+  },
+  {
+    "type": "call_keyword",
     "named": true
   },
   {

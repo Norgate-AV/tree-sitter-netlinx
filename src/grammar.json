@@ -4019,6 +4019,10 @@
         {
           "type": "SYMBOL",
           "name": "cancel_wait_until_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "call_statement"
         }
       ]
     },
@@ -4120,6 +4124,10 @@
         {
           "type": "SYMBOL",
           "name": "cancel_wait_until_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "call_statement"
         }
       ]
     },

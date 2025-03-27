@@ -1252,3 +1252,35 @@ Toggling
       (identifier)
       (number_literal
         (decimal_literal)))))
+
+============================
+Call
+============================
+
+call 'MyFunction'()
+call 'MyFunction'(param1, param2)
+call 'MyFunction' (param1, param2, param3)
+
+---
+
+(source_file
+      (call_statement
+        (call_keyword)
+        (string_literal
+          (string_content))
+        (argument_list))
+      (call_statement
+        (call_keyword)
+        (string_literal
+          (string_content))
+        (argument_list
+          (identifier)
+          (identifier)))
+      (call_statement
+        (call_keyword)
+        (string_literal
+          (string_content))
+        (argument_list
+          (identifier)
+          (identifier)
+          (identifier))))
