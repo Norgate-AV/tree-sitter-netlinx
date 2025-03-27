@@ -1,9 +1,12 @@
-;; Comments
+;; ============================================================================
+;; COMMENTS
+;; ============================================================================
 (comment) @comment
 
-;; Identifiers
+;; ============================================================================
+;; IDENTIFIERS, VARIABLES AND CONSTANTS
+;; ============================================================================
 ;; (identifier) @identifier
-
 (identifier) @variable
 
 ;; Uppercase identifiers are probably constants
@@ -16,7 +19,11 @@
     (false)
 ] @constant.builtin
 
-;; Keywords
+(field_identifier) @property
+
+;; ============================================================================
+;; KEYWORDS
+;; ============================================================================
 [
     (program_name_keyword)
     (module_name_keyword)
@@ -118,7 +125,9 @@
     (call_keyword)
 ] @keyword
 
-;; Types
+;; ============================================================================
+;; TYPES, STORAGE CLASSES AND QUALIFIERS
+;; ============================================================================
 [
     (char_keyword)
     (widechar_keyword)
@@ -151,10 +160,40 @@
 ;; Struct specifiers
 ;; (struct_specifier) @type
 
-;; Parameters
-(parameter_declaration
-  declarator: (identifier) @parameter)
+;; Type definitions in struct declarations
+(struct_specifier
+  name: (type_identifier) @type.definition)
 
+;; Field types in struct declarations
+(field_declaration
+  type: (type_specifier
+    (type_identifier) @type))
+
+;; Custom type in variable declarations
+(declaration
+  type: (type_identifier) @type)
+
+;; Custom types in local variable declarations with storage specifiers
+(declaration
+  (storage_class_specifier)
+  type: (type_identifier) @type)
+
+;; Structure field types that are custom types
+(field_declaration
+  type: (type_identifier) @type)
+
+;; Custom types in local variable declarations - direct pattern
+(compound_statement
+  (declaration
+    (storage_class_specifier)
+    .
+    (_) @type
+    .
+    (identifier)))
+
+;; ============================================================================
+;; CONTROL FLOW AND EVENT TYPES
+;; ============================================================================
 ;; Event types
 ;; (button_event_type) @keyword
 ;; (data_event_type) @keyword
@@ -191,6 +230,9 @@
 ;; (devchan_operation_statement) @keyword.function
 ;; (call_statement) @keyword.function
 
+;; ============================================================================
+;; EVENT REFERENCES AND DEVICE EXPRESSIONS
+;; ============================================================================
 ;; Event references and parameters
 ;; (button_event_declarator) @keyword
 ;; (data_event_declarator) @keyword
@@ -233,9 +275,9 @@
   "[" @punctuation.bracket
   "]" @punctuation.bracket)
 
-;; Parameter lists
-(parameter_list) @punctuation.bracket
-
+;; ============================================================================
+;; OPERATORS AND PUNCTUATION
+;; ============================================================================
 ;; Operators
 [
     "="
@@ -295,8 +337,12 @@
     ":"
 ] @punctuation.delimiter
 
-(field_identifier) @property
+;; Parameter lists
+(parameter_list) @punctuation.bracket
 
+;; ============================================================================
+;; FUNCTIONS AND PARAMETERS
+;; ============================================================================
 ;; Functions
 (call_expression
   function: (identifier) @function)
@@ -312,59 +358,10 @@
 (function_declaration
   name: (identifier) @function)
 
-;; Literals
-(string_literal) @string
-(number_literal) @number
-(hex_literal) @number
-(device_literal) @number
-"\"" @string
+;; Parameters
+(parameter_declaration
+  declarator: (identifier) @parameter)
 
-;; Preprocessor
-(preproc_include_keyword) @preprocessor
-(preproc_define_keyword) @preprocessor
-(preproc_warn_keyword) @preprocessor
-(preproc_disable_warning_keyword) @preprocessor
-(preproc_if_defined_keyword) @preprocessor
-(preproc_if_not_defined_keyword) @preprocessor
-(preproc_else_keyword) @preprocessor
-(preproc_end_if_keyword) @preprocessor
-
-;; Preproc Arguments
-;; Preprocessor arguments
-;; Highlight all preproc_args initially as constants
-(preproc_arg) @constant
-
-;; Then specifically override numeric values
-((preproc_arg) @number
- (#match? @number "^[ \t]*[0-9]+[ \t]*$"))
-
-;; And string values with quotes
-((preproc_arg) @string
- (#match? @string "'"))
-
-;; Preprocessor specifics
-;; (preproc_disable_warning
-;;   code: (decimal_literal) @number)
-
-;; (preproc_include
-;;   path: (string_literal) @string)
-
-;; (preproc_define
-;;   name: (identifier) @constant)
-
-;; (preproc_if_defined
-;;   name: (identifier) @constant)
-
-;; (preproc_if_not_defined
-;;   name: (identifier) @constant)
-
-;; Variables with constant qualifier
-;; (declaration
-;;   (type_qualifier) @_qualifier
-;;   declarator: (identifier) @constant
-;;   (#match? @_qualifier "constant|CONSTANT"))
-
-;; Function parameters
 ;; Parameters in declaration
 (parameter_declaration
   declarator: (identifier) @parameter)
@@ -420,37 +417,6 @@
   (parameter_declaration
     declarator: (identifier) @parameter))
 
-;; Type definitions in struct declarations
-(struct_specifier
-  name: (type_identifier) @type.definition)
-
-;; Field types in struct declarations
-(field_declaration
-  type: (type_specifier
-    (type_identifier) @type))
-
-;; Custom type in variable declarations
-(declaration
-  type: (type_identifier) @type)
-
-;; Custom types in local variable declarations with storage specifiers
-(declaration
-  (storage_class_specifier)
-  type: (type_identifier) @type)
-
-;; Structure field types that are custom types
-(field_declaration
-  type: (type_identifier) @type)
-
-;; Custom types in local variable declarations - direct pattern
-(compound_statement
-  (declaration
-    (storage_class_specifier)
-    .
-    (_) @type
-    .
-    (identifier)))
-
 ;; 2D array parameters in function declarations
 (function_declaration
   parameters: (parameter_list
@@ -505,5 +471,63 @@
             declarator: (array_declarator
               declarator: (identifier) @parameter)))))))
 
+;; ============================================================================
+;; LITERALS
+;; ============================================================================
+(string_literal) @string
+(number_literal) @number
+(hex_literal) @number
+(device_literal) @number
+"\"" @string
+
+;; ============================================================================
+;; PREPROCESSOR
+;; ============================================================================
+(preproc_include_keyword) @preprocessor
+(preproc_define_keyword) @preprocessor
+(preproc_warn_keyword) @preprocessor
+(preproc_disable_warning_keyword) @preprocessor
+(preproc_if_defined_keyword) @preprocessor
+(preproc_if_not_defined_keyword) @preprocessor
+(preproc_else_keyword) @preprocessor
+(preproc_end_if_keyword) @preprocessor
+
+;; Preproc Arguments
+;; Highlight all preproc_args initially as constants
+(preproc_arg) @constant
+
+;; Then specifically override numeric values
+((preproc_arg) @number
+ (#match? @number "^[ \t]*[0-9]+[ \t]*$"))
+
+;; And string values with quotes
+((preproc_arg) @string
+ (#match? @string "'"))
+
+;; Preprocessor specifics
+;; (preproc_disable_warning
+;;   code: (decimal_literal) @number)
+
+;; (preproc_include
+;;   path: (string_literal) @string)
+
+;; (preproc_define
+;;   name: (identifier) @constant)
+
+;; (preproc_if_defined
+;;   name: (identifier) @constant)
+
+;; (preproc_if_not_defined
+;;   name: (identifier) @constant)
+
+;; Variables with constant qualifier
+;; (declaration
+;;   (type_qualifier) @_qualifier
+;;   declarator: (identifier) @constant
+;;   (#match? @_qualifier "constant|CONSTANT"))
+
+;; ============================================================================
+;; ERROR HANDLING
+;; ============================================================================
 (MISSING) @missing
 (ERROR) @error
