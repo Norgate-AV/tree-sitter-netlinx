@@ -267,6 +267,16 @@
       "value": "double",
       "flags": "i"
     },
+    "variant_keyword": {
+      "type": "PATTERN",
+      "value": "variant",
+      "flags": "i"
+    },
+    "variantarray_keyword": {
+      "type": "PATTERN",
+      "value": "variantarray",
+      "flags": "i"
+    },
     "local_var_keyword": {
       "type": "PATTERN",
       "value": "local_var",
@@ -2767,6 +2777,14 @@
         {
           "type": "SYMBOL",
           "name": "double_keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variant_keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variantarray_keyword"
         }
       ]
     },

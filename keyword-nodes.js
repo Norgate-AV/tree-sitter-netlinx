@@ -44,6 +44,8 @@ module.exports = {
     slong_keyword: (_) => keywords.slong,
     float_keyword: (_) => keywords.float,
     double_keyword: (_) => keywords.double,
+    variant_keyword: (_) => keywords.variant,
+    variantarray_keyword: (_) => keywords.variantarray,
 
     // Storage class keywords
     local_var_keyword: (_) => keywords.local_var,

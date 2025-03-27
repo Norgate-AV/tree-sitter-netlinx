@@ -3612,6 +3612,14 @@
           "named": true
         },
         {
+          "type": "variant_keyword",
+          "named": true
+        },
+        {
+          "type": "variantarray_keyword",
+          "named": true
+        },
+        {
           "type": "widechar_keyword",
           "named": true
         }
@@ -5014,6 +5022,14 @@
   },
   {
     "type": "type_identifier",
+    "named": true
+  },
+  {
+    "type": "variant_keyword",
+    "named": true
+  },
+  {
+    "type": "variantarray_keyword",
     "named": true
   },
   {

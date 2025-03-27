@@ -23,10 +23,12 @@
     (define_constant_keyword)
     (define_type_keyword)
     (define_variable_keyword)
+    (define_system_variable_keyword)
     (define_start_keyword)
     (define_event_keyword)
     (define_mutually_exclusive_keyword)
     (define_function_keyword)
+    (define_library_function_keyword)
     (define_combine_keyword)
     (define_connect_level_keyword)
     (define_latching_keyword)
@@ -128,6 +130,8 @@
     (dev_keyword)
     (devlev_keyword)
     (devchan_keyword)
+    (variant_keyword)
+    (variantarray_keyword)
 ] @type
 
 ;; (primitive_type) @type

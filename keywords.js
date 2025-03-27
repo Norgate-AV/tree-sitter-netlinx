@@ -36,6 +36,8 @@ module.exports = {
     slong: /slong/i,
     float: /float/i,
     double: /double/i,
+    variant: /variant/i,
+    variantarray: /variantarray/i,
 
     // Type qualifiers
     constant: /constant/i,

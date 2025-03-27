@@ -558,6 +558,8 @@ module.exports = grammar({
                 $.slong_keyword,
                 $.float_keyword,
                 $.double_keyword,
+                $.variant_keyword,
+                $.variantarray_keyword,
             ),
 
         structured_type: ($) =>

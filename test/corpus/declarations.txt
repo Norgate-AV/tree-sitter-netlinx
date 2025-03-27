@@ -281,6 +281,8 @@ CONSTANT Person MAX_DEVICES = 10
 VOLATILE Car statusFlags
 NON_VOLATILE Boat deviceNames[5][20]
 PERSISTENT Animal lastPowerState
+constant variant foo
+constant variantarray bar
 
 ---
 
@@ -394,6 +396,20 @@ PERSISTENT Animal lastPowerState
         (type_qualifier
           (persistent_keyword))
         (type_identifier)
+        (identifier))
+      (declaration
+        (type_qualifier
+          (constant_keyword))
+        (intrinsic_type
+          (primitive_type
+            (variant_keyword)))
+        (identifier))
+      (declaration
+        (type_qualifier
+          (constant_keyword))
+        (intrinsic_type
+          (primitive_type
+            (variantarray_keyword)))
         (identifier)))
 
 =================
