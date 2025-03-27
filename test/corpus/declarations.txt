@@ -939,6 +939,7 @@ Function Declarations
 ================================
 
 DEFINE_LIBRARY_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1)
+DEFINE_LIBRARY_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1) = $FF01
 
 ---
 
@@ -957,4 +958,21 @@ DEFINE_LIBRARY_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1)
               (intrinsic_type
                 (primitive_type
                   (integer_keyword)))
-              (identifier))))))
+              (identifier)))))
+      (define_function
+        (define_library_function_keyword)
+        (function_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (type_qualifier
+                (constant_keyword))
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (identifier)))
+          (number_literal
+            (hex_literal)))))

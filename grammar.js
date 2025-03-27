@@ -594,6 +594,7 @@ module.exports = grammar({
                 ),
                 field("name", $.identifier),
                 field("parameters", $.parameter_list),
+                optional(seq("=", $.expression)),
                 $._semicolon,
             ),
 
