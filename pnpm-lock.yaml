@@ -50,6 +50,9 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
+      string-builder:
+        specifier: ^0.1.8
+        version: 0.1.8
       tree-sitter-cli:
         specifier: ^0.25.3
         version: 0.25.3
@@ -2002,6 +2005,12 @@ packages:
       }
     engines: { node: ">=0.6.19" }
 
+  string-builder@0.1.8:
+    resolution:
+      {
+        integrity: sha512-0pUtikmhChLaf+uLqzYTgzTCQc4jAjaWHolxPGq3D77SgSoTqkOlv0RVF3XwDxMR9x/y1WPPwkTNalZCA9DGnQ==,
+      }
+
   string-width@7.2.0:
     resolution:
       {
@@ -3596,6 +3605,8 @@ snapshots:
   spdx-license-ids@3.0.21: {}
 
   string-argv@0.3.2: {}
+
+  string-builder@0.1.8: {}
 
   string-width@7.2.0:
     dependencies:
