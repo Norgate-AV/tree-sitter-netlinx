@@ -54,6 +54,8 @@
     },
     "scripts": {
         "install": "node-gyp-build",
+        "prerebuild": "pnpm generate",
+        "rebuild": "node-gyp rebuild",
         "lint": "eslint .",
         "prestart": "tree-sitter build --wasm",
         "start": "tree-sitter playground",
