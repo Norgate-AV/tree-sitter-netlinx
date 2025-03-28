@@ -6507,18 +6507,18 @@
               },
               {
                 "type": "PATTERN",
-                "value": ".*"
+                "value": "[^*]*\\*+(?:[^)*/][^*]*\\*+)*"
               },
               {
                 "type": "CHOICE",
                 "members": [
                   {
                     "type": "STRING",
-                    "value": "*)"
+                    "value": ")"
                   },
                   {
                     "type": "STRING",
-                    "value": "*/"
+                    "value": "/"
                   }
                 ]
               }

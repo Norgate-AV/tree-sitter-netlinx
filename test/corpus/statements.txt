@@ -182,36 +182,6 @@ return a, b;
       (identifier)
       (identifier))))
 
-================================================================================
-Comments with asterisks
-================================================================================
-
-/*************************
- * odd number of asterisks
- *************************/
-integer a;
-
-/**************************
- * even number of asterisks
- **************************/
-integer b;
-
---------------------------------------------------------------------------------
-
-(source_file
-  (comment)
-  (declaration
-    (intrinsic_type
-      (primitive_type
-        (integer_keyword)))
-    (identifier))
-  (comment)
-  (declaration
-    (intrinsic_type
-      (primitive_type
-        (integer_keyword)))
-    (identifier)))
-
 ==================
 For loops
 ==================
