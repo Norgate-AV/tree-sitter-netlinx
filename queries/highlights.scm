@@ -137,7 +137,7 @@
 
 ;; Type definitions in struct declarations
 (struct_specifier
-  name: (type_identifier) @type.definition)
+  name: (type_identifier) @type)
 
 ;; Field types in struct declarations
 (field_declaration
