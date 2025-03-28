@@ -24,8 +24,8 @@ importers:
         specifier: ^4.0.9
         version: 4.0.9
       "@types/node":
-        specifier: ^22.13.13
-        version: 22.13.13
+        specifier: ^22.13.14
+        version: 22.13.14
       doctoc:
         specifier: ^2.2.1
         version: 2.2.1
@@ -223,10 +223,10 @@ packages:
         integrity: sha512-7V+8ncr22h4UoYRLnLXSpTxjQrNUXtWHGeMPRJt1nULXI57G9bIcpyrHlmrQ7QK24EyyuXvYcSSWAM8GA9nqCg==,
       }
 
-  "@types/node@22.13.13":
+  "@types/node@22.13.14":
     resolution:
       {
-        integrity: sha512-ClsL5nMwKaBRwPcCvH8E7+nU4GxHVx1axNvMZTFHMEfNI7oahimt26P5zjVCRrjiIWj6YFXfE1v3dEp94wLcGQ==,
+        integrity: sha512-Zs/Ollc1SJ8nKUAgc7ivOEdIBM8JAKgrqqUYi2J997JuKO7/tpQC+WCetQ1sypiKCQWHdvdg9wBNpUPEWZae7w==,
       }
 
   "@types/unist@2.0.11":
@@ -2432,7 +2432,7 @@ snapshots:
     dependencies:
       "@types/braces": 3.0.5
 
-  "@types/node@22.13.13":
+  "@types/node@22.13.14":
     dependencies:
       undici-types: 6.20.0
 
