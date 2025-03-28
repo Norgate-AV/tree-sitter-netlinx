@@ -52,7 +52,7 @@ jobs:
 
           test-python: true
           test-go: true
-          test-swift: true
+          test-swift: ${{ runner.os == 'macOS' }}
 
         # Running the Node.js tests here
         # The parser-test-action doesn't seem to work
