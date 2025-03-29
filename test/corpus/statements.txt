@@ -1257,8 +1257,6 @@ call 'MyFunction' (param1, param2, param3)
 
 =================================
 Named Wait Statement Tests
-:skip
-There's a problem here. The string literal 'DynamicWait' is being parsed as a separate expression statement rather than as part of the wait statement. This is happening because your grammar isn't correctly handling the case where the time expression is complex.
 =================================
 
 // Named wait statements
@@ -1312,8 +1310,7 @@ CANCEL_WAIT 'DynamicWait'
         (wait_keyword)
         (binary_expression
           (identifier)
-          (identifier)))
-      (expression_statement
+          (identifier))
         (string_literal
           (string_content)))
       (cancel_wait_statement

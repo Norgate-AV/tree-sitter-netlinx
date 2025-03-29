@@ -43,8 +43,6 @@ module.exports = grammar({
         [$.type_specifier, $.expression],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
-        [$.wait_statement],
-        [$.wait_until_statement],
         [$.device_literal],
     ],
 
@@ -1103,17 +1101,23 @@ module.exports = grammar({
             seq($.clear_buffer_keyword, $.expression, $._semicolon),
 
         wait_statement: ($) =>
-            seq(
-                $.wait_keyword,
-                field("time", $.expression),
-                optional(field("name", $.string_literal)),
+            prec.right(
+                seq(
+                    $.wait_keyword,
+                    field("time", $.expression),
+                    optional(field("name", $.string_literal)),
+                    optional($._semicolon),
+                ),
             ),
 
         wait_until_statement: ($) =>
-            seq(
-                $.wait_until_keyword,
-                field("condition", $.expression),
-                optional(field("name", $.string_literal)),
+            prec.right(
+                seq(
+                    $.wait_until_keyword,
+                    field("condition", $.expression),
+                    optional(field("name", $.string_literal)),
+                    optional($._semicolon),
+                ),
             ),
 
         cancel_all_wait_statement: ($) =>
