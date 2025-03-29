@@ -12,8 +12,14 @@ permissions:
   attestations: write
 
 jobs:
+  test:
+    name: Run Tests
+    uses: ./.github/workflows/ci.yml
+
   changelog:
     name: Generate Changelog
+
+    needs: test
 
     runs-on: ubuntu-latest
 
@@ -48,17 +54,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Generate changelog
-      #   id: changelog
-      #   uses: metcalfc/changelog-generator@v4.1.0
-      #   with:
-      #     mytoken: ${{ secrets.GITHUB_TOKEN }}
-      #     head-ref: ${{ github.ref_name }}
-      #     output-file: "CHANGELOG.md"
-
       - name: Verify changelog generation
         run: |
-          echo "Changelog output: ${{ steps.github_changelog.outputs.changelog }}"
+          echo "Changelog output: ${{ steps.changelog.outputs.changelog }}"
           echo "Changelog file exists: $(ls -la CHANGELOG.md || echo 'File not found')"
           if [ -f "CHANGELOG.md" ]; then
             echo "Changelog content:"
