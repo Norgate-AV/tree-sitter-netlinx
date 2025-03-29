@@ -246,7 +246,3 @@ Any help would be greatly appreciated.
 ## LICENSE :balance_scale:
 
 [MIT](./LICENSE)
-
-```
-
-```
