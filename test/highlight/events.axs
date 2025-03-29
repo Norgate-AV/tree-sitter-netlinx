@@ -119,5 +119,114 @@ DATA_EVENT[dvTP]
         //                                ^ string
     }
     // <- punctuation.bracket
+
+    COMMAND:
+    // <- keyword
+    //     ^ punctuation.delimiter
+    {
+    // <- punctuation.bracket
+        // Command handler
+        // ^ comment
+    }
+    // <- punctuation.bracket
+}
+// <- punctuation.bracket
+
+channel_event[vdvObject, 1]
+// <- keyword
+//           ^ punctuation.bracket
+//             ^ variable
+//                       ^ number
+//                        ^ punctuation.bracket
+{
+// <- punctuation.bracket
+    on:
+    // <- keyword
+    //^ punctuation.delimiter
+    {
+    // <- punctuation.bracket
+        // Channel event handler
+        // ^ comment
+        SEND_COMMAND dvTP, "'Channel 1 ON'"
+        // ^ keyword
+        //            ^ variable
+        //               ^ punctuation.delimiter
+        //                 ^ string
+        //                   ^ string
+        //                                ^ string
+    }
+    // <- punctuation.bracket
+    off:
+    // <- keyword
+    // ^ punctuation.delimiter
+    {
+    // <- punctuation.bracket
+        // Channel event handler
+        // ^ comment
+        SEND_COMMAND dvTP, "'Channel 1 OFF'"
+        // ^ keyword
+        //            ^ variable
+        //               ^ punctuation.delimiter
+        //                 ^ string
+        //                   ^ string
+        //                                ^ string
+    }
+    // <- punctuation.bracket
+}
+
+level_event[dvTP, 1]
+// <- keyword
+//         ^ punctuation.bracket
+//           ^ variable
+//                ^ number
+//                 ^ punctuation.bracket
+{
+// <- punctuation.bracket
+    send_string 0:1:0, "'New level:', itoa(level.value)"
+    // ^ keyword
+    //          ^ number
+    //           ^ punctuation.delimiter
+    //            ^ number
+    //             ^ punctuation.delimiter
+    //              ^ number
+    //               ^ punctuation.delimiter
+    //                 ^ string
+    //                   ^ string
+    //                              ^ punctuation.delimiter
+    //                                ^ function
+    //                                    ^ punctuation.bracket
+    //                                      ^ variable
+    //                                          ^ punctuation.delimiter
+    //                                             ^ property
+    //                                                ^ punctuation.bracket
+    //                                                 ^ string
+}
+// <- punctuation.bracket
+
+timeline_event[TL1]
+// <- keyword
+//            ^ punctuation.bracket
+//              ^ constant
+//                ^ punctuation.bracket
+{
+// <- punctuation.bracket
+    // Timeline event code
+    // ^ comment
+}
+// <- punctuation.bracket
+
+custom_event[dvTP, 1, 1001]
+// <- keyword
+//          ^ punctuation.bracket
+//            ^ variable
+//               ^ punctuation.delimiter
+//                 ^ number
+//                  ^ punctuation.delimiter
+//                    ^ number
+//                        ^ punctuation.bracket
+{
+// <- punctuation.bracket
+    // Custom event code
+    // ^ comment
 }
 // <- punctuation.bracket
