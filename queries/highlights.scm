@@ -171,6 +171,14 @@
     .
     (identifier)))
 
+;; Custom types in variable declarations with type qualifiers
+(declaration
+  (type_qualifier)
+  .
+  (type_identifier) @type
+  .
+  (identifier))
+
 ;; ============================================================================
 ;; EVENT REFERENCES AND DEVICE EXPRESSIONS
 ;; ============================================================================

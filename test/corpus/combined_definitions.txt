@@ -1,5 +1,5 @@
 ===============
-Combined Definitions Test
+Combined Definitions
 ===============
 
 PROGRAM_NAME='combined_definitions'

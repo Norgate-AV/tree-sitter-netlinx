@@ -738,6 +738,16 @@
           }
         ]
       },
+      "local_declarations": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "declaration",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1988,6 +1998,10 @@
         "types": [
           {
             "type": "devchan_expression",
+            "named": true
+          },
+          {
+            "type": "devchan_range_expression",
             "named": true
           }
         ]

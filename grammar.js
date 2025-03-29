@@ -43,8 +43,6 @@ module.exports = grammar({
         [$.type_specifier, $.expression],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
-        [$.wait_statement],
-        [$.wait_until_statement],
         [$.device_literal],
     ],
 
@@ -611,6 +609,13 @@ module.exports = grammar({
             seq(
                 field("name", $.string_literal),
                 optional(field("parameters", $.parameter_list)),
+
+                // Optional local declarations
+                // Legacy/Weird syntax where local declarations
+                // are defined before the body of the function
+                field("local_declarations", repeat($.declaration)),
+
+                // Call body { ... }
                 field("body", $.compound_statement),
             ),
 
@@ -1038,7 +1043,13 @@ module.exports = grammar({
                 PREC.FIELD + 20,
                 seq(
                     field("operation", $.devchan_operation),
-                    field("target", $.devchan_expression),
+                    field(
+                        "target",
+                        choice(
+                            $.devchan_expression,
+                            $.devchan_range_expression,
+                        ),
+                    ),
                     $._semicolon,
                 ),
             ),
@@ -1096,21 +1107,29 @@ module.exports = grammar({
             seq($.clear_buffer_keyword, $.expression, $._semicolon),
 
         wait_statement: ($) =>
-            seq(
-                $.wait_keyword,
-                field("time", $.expression),
-                optional(field("name", $.string_literal)),
+            prec.right(
+                seq(
+                    $.wait_keyword,
+                    field("time", $.expression),
+                    optional(field("name", $.string_literal)),
+                    optional($._semicolon),
+                ),
             ),
 
         wait_until_statement: ($) =>
-            seq(
-                $.wait_until_keyword,
-                field("condition", $.expression),
-                optional(field("name", $.string_literal)),
+            prec.right(
+                seq(
+                    $.wait_until_keyword,
+                    field("condition", $.expression),
+                    optional(field("name", $.string_literal)),
+                    optional($._semicolon),
+                ),
             ),
 
-        cancel_all_wait_statement: ($) => $.cancel_all_wait_keyword,
-        cancel_all_wait_until_statement: ($) => $.cancel_all_wait_until_keyword,
+        cancel_all_wait_statement: ($) =>
+            seq($.cancel_all_wait_keyword, $._semicolon),
+        cancel_all_wait_until_statement: ($) =>
+            seq($.cancel_all_wait_until_keyword, $._semicolon),
 
         cancel_wait_statement: ($) =>
             seq(

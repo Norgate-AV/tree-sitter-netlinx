@@ -1254,3 +1254,234 @@ call 'MyFunction' (param1, param2, param3)
           (identifier)
           (identifier)
           (identifier))))
+
+=================================
+Named Wait Statements
+=================================
+
+// Named wait statements
+WAIT 500 'PowerSequence'
+WAIT_UNTIL(powerState) 'PowerCheck'
+
+// Cancel wait statements
+CANCEL_WAIT 'PowerSequence'
+CANCEL_WAIT_UNTIL 'PowerCheck'
+
+// Cancel all waits
+CANCEL_ALL_WAIT
+CANCEL_ALL_WAIT_UNTIL
+
+// Wait with dynamic expression
+WAIT timeout * multiplier 'DynamicWait'
+CANCEL_WAIT 'DynamicWait'
+
+---
+
+(source_file
+      (comment)
+      (wait_statement
+        (wait_keyword)
+        (number_literal
+          (decimal_literal))
+        (string_literal
+          (string_content)))
+      (wait_until_statement
+        (wait_until_keyword)
+        (parenthesized_expression
+          (identifier))
+        (string_literal
+          (string_content)))
+      (comment)
+      (cancel_wait_statement
+        (cancel_wait_keyword)
+        (string_literal
+          (string_content)))
+      (cancel_wait_until_statement
+        (cancel_wait_until_keyword)
+        (string_literal
+          (string_content)))
+      (comment)
+      (cancel_all_wait_statement
+        (cancel_all_wait_keyword))
+      (cancel_all_wait_until_statement
+        (cancel_all_wait_until_keyword))
+      (comment)
+      (wait_statement
+        (wait_keyword)
+        (binary_expression
+          (identifier)
+          (identifier))
+        (string_literal
+          (string_content)))
+      (cancel_wait_statement
+        (cancel_wait_keyword)
+        (string_literal
+          (string_content))))
+
+=================================
+DevChan Range in Operations
+=================================
+
+// DevChan range operations
+ON [dvTP, 1]..[dvTP, 10]
+OFF [dvTP, 11]..[dvTP, 20]
+TO [dvTP, 21]..[dvTP, 30]
+
+// Complex range operations
+ON [dv[i], ch[j]]..[dv[i+5], ch[j+10]]
+PULSE [devices[1], startChannel]..[devices[1], endChannel]
+
+---
+
+(source_file
+      (comment)
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_on_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_off_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_to_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (comment)
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_on_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (identifier))
+            (subscript_expression
+              (identifier)
+              (identifier)))
+          (range_operator)
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))
+            (subscript_expression
+              (identifier)
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))))))
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_pulse_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (identifier))
+          (range_operator)
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (identifier)))))
+
+=================================
+Create Multi Buffer
+=================================
+
+// Simple multi buffer
+CREATE_MULTI_BUFFER dvTP1, dvTP2, BUFFER
+
+// Complex multi buffer expressions
+CREATE_MULTI_BUFFER devices[currentIndex], BUFFER[i+1], MakeDevice(5001)
+CREATE_BUFFER someDevice, GetBuffer(index), bufferSize * 2
+
+// Clear buffer operations
+CLEAR_BUFFER BUFFER
+CLEAR_BUFFER dynamicBuffer[currentIndex]
+
+---
+
+(source_file
+      (comment)
+      (create_multi_buffer_statement
+        (create_multi_buffer_keyword)
+        (comma_expression
+          (identifier)
+          (comma_expression
+            (identifier)
+            (identifier))))
+      (comment)
+      (create_multi_buffer_statement
+        (create_multi_buffer_keyword)
+        (comma_expression
+          (subscript_expression
+            (identifier)
+            (identifier))
+          (comma_expression
+            (subscript_expression
+              (identifier)
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))
+            (call_expression
+              (identifier)
+              (argument_list
+                (number_literal
+                  (decimal_literal)))))))
+      (create_buffer_statement
+        (create_buffer_keyword)
+        (comma_expression
+          (identifier)
+          (comma_expression
+            (call_expression
+              (identifier)
+              (argument_list
+                (identifier)))
+            (binary_expression
+              (identifier)
+              (number_literal
+                (decimal_literal))))))
+      (comment)
+      (clear_buffer_statement
+        (clear_buffer_keyword)
+        (identifier))
+      (clear_buffer_statement
+        (clear_buffer_keyword)
+        (subscript_expression
+          (identifier)
+          (identifier))))

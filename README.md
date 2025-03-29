@@ -84,7 +84,15 @@ The parser will accept patterns that the NetLinx compiler might reject:
     - :white_check_mark: String Expressions
     - :white_check_mark: Function Call Expressions
     - :white_check_mark: Device Expressions (`0:first_local_port+1:1`, `dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM`)
+    - :white_check_mark: Parenthesized Expressions
+    - :white_check_mark: Subscript Expressions
+    - :white_check_mark: Comma Expressions
 - Statements
+    - :white_check_mark: Expression Statements
+    - :white_check_mark: Compound Statements
+    - :white_check_mark: Return Statements
+    - :white_check_mark: Break Statements
+    - :white_check_mark: Continue Statements
     - :white_check_mark: If Statements
     - :white_check_mark: While Loops
     - :white_check_mark: For Loops
@@ -142,7 +150,6 @@ The parser will accept patterns that the NetLinx compiler might reject:
     - :white_check_mark: Disable Warning
     - :white_check_mark: If Defined
     - :white_check_mark: If Not Defined
-- :x: Other bits that I haven't thought of yet or have forgotten about
 
 ## Team :soccer:
 

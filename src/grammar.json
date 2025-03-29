@@ -3003,6 +3003,17 @@
         },
         {
           "type": "FIELD",
+          "name": "local_declarations",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "declaration"
+            }
+          }
+        },
+        {
+          "type": "FIELD",
           "name": "body",
           "content": {
             "type": "SYMBOL",
@@ -4659,8 +4670,17 @@
             "type": "FIELD",
             "name": "target",
             "content": {
-              "type": "SYMBOL",
-              "name": "devchan_expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "devchan_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "devchan_range_expression"
+                }
+              ]
             }
           },
           {
@@ -4862,78 +4882,128 @@
       ]
     },
     "wait_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "wait_keyword"
-        },
-        {
-          "type": "FIELD",
-          "name": "time",
-          "content": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
             "type": "SYMBOL",
-            "name": "expression"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "name",
-              "content": {
-                "type": "SYMBOL",
-                "name": "string_literal"
-              }
-            },
-            {
-              "type": "BLANK"
+            "name": "wait_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "time",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
             }
-          ]
-        }
-      ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "string_literal"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_semicolon"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "wait_until_statement": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "wait_until_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "name",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "string_literal"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_semicolon"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "cancel_all_wait_statement": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "wait_until_keyword"
+          "name": "cancel_all_wait_keyword"
         },
         {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "expression"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "name",
-              "content": {
-                "type": "SYMBOL",
-                "name": "string_literal"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_semicolon"
         }
       ]
     },
-    "cancel_all_wait_statement": {
-      "type": "SYMBOL",
-      "name": "cancel_all_wait_keyword"
-    },
     "cancel_all_wait_until_statement": {
-      "type": "SYMBOL",
-      "name": "cancel_all_wait_until_keyword"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "cancel_all_wait_until_keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_semicolon"
+        }
+      ]
     },
     "cancel_wait_statement": {
       "type": "SEQ",
@@ -6562,12 +6632,6 @@
     [
       "type_specifier",
       "_top_level_expression_statement"
-    ],
-    [
-      "wait_statement"
-    ],
-    [
-      "wait_until_statement"
     ],
     [
       "device_literal"
