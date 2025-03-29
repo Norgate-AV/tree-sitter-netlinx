@@ -4939,12 +4939,30 @@
       ]
     },
     "cancel_all_wait_statement": {
-      "type": "SYMBOL",
-      "name": "cancel_all_wait_keyword"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "cancel_all_wait_keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_semicolon"
+        }
+      ]
     },
     "cancel_all_wait_until_statement": {
-      "type": "SYMBOL",
-      "name": "cancel_all_wait_until_keyword"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "cancel_all_wait_until_keyword"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_semicolon"
+        }
+      ]
     },
     "cancel_wait_statement": {
       "type": "SEQ",

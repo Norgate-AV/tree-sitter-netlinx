@@ -1116,8 +1116,10 @@ module.exports = grammar({
                 optional(field("name", $.string_literal)),
             ),
 
-        cancel_all_wait_statement: ($) => $.cancel_all_wait_keyword,
-        cancel_all_wait_until_statement: ($) => $.cancel_all_wait_until_keyword,
+        cancel_all_wait_statement: ($) =>
+            seq($.cancel_all_wait_keyword, $._semicolon),
+        cancel_all_wait_until_statement: ($) =>
+            seq($.cancel_all_wait_until_keyword, $._semicolon),
 
         cancel_wait_statement: ($) =>
             seq(
