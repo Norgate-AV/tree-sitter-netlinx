@@ -117,11 +117,6 @@ module.exports = grammar({
 
                 // Statements
                 $.statement,
-                // $.expression_statement,
-                // $.compound_statement,
-
-                // Sections
-                // $.section,
 
                 // Preprocessor
                 $.preproc_if_defined,
@@ -884,7 +879,6 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
-                // $.devchan_statement,
                 $.devchan_operation_statement,
                 $.send_string_statement,
                 $.send_command_statement,
@@ -905,10 +899,6 @@ module.exports = grammar({
             choice(
                 $.case_statement,
                 $.compound_statement,
-                // alias(
-                //     $._top_level_expression_statement,
-                //     $.expression_statement,
-                // ),
                 $.expression_statement,
                 $.if_statement,
                 $.switch_statement,
@@ -918,7 +908,6 @@ module.exports = grammar({
                 $.return_statement,
                 $.break_statement,
                 $.continue_statement,
-                // $.devchan_statement,
                 $.devchan_operation_statement,
                 $.send_string_statement,
                 $.send_command_statement,
