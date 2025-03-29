@@ -41,6 +41,10 @@ VOLATILE INTEGER count
 // ^ type.qualifier
 //         ^ type
 //                 ^ variable
+persistent DeviceStatus status
+// ^ type.qualifier
+//             ^ type
+//                      ^ variable
 
 DEFINE_START
 // ^ keyword
