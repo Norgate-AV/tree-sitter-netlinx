@@ -325,3 +325,73 @@ volatile powerState = false
             (false)))
         (preproc_end_if
           (preproc_end_if_keyword))))
+
+=================================
+Preprocessor in Struct Fields Tests
+=================================
+
+// Structure with preprocessor directives
+DEFINE_TYPE
+STRUCTURE ConfigOptions {
+  INTEGER version
+
+  #IF_DEFINED EXTENDED_FEATURES
+  INTEGER extendedFeatures[10]
+  INTEGER extendedFlag
+  #ELSE
+  INTEGER basicFeatures
+  #END_IF
+
+  CHAR label[20]
+}
+
+---
+
+(source_file
+      (comment)
+      (section
+        (define_type_section
+          (define_type_keyword)))
+      (type_definition
+        (struct_specifier
+          (structure_keyword)
+          (type_identifier)
+          (field_declaration_list
+            (field_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (field_identifier))
+            (preproc_if_defined
+              (preproc_if_defined_keyword)
+              (identifier)
+              (field_declaration
+                (intrinsic_type
+                  (primitive_type
+                    (integer_keyword)))
+                (array_declarator
+                  (field_identifier)
+                  (number_literal
+                    (decimal_literal))))
+              (field_declaration
+                (intrinsic_type
+                  (primitive_type
+                    (integer_keyword)))
+                (field_identifier))
+              (preproc_else
+                (preproc_else_keyword)
+                (field_declaration
+                  (intrinsic_type
+                    (primitive_type
+                      (integer_keyword)))
+                  (field_identifier)))
+              (preproc_end_if
+                (preproc_end_if_keyword)))
+            (field_declaration
+              (intrinsic_type
+                (primitive_type
+                  (char_keyword)))
+              (array_declarator
+                (field_identifier)
+                (number_literal
+                  (decimal_literal))))))))
