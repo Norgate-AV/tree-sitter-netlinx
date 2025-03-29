@@ -22,8 +22,6 @@ This is a work in progress. Once the grammar is complete, a release will be made
 
 At this point the grammar is mostly complete. Work is now focused on testing and fixing any bugs.
 
-Following that, the query files for highlights, tags, and locals still need to be finalized and tested.
-
 ## Contents :book:
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -39,6 +37,7 @@ Following that, the query files for highlights, tags, and locals still need to b
     - [Permissive Parsing](#permissive-parsing)
     - [Syntax vs. Semantics](#syntax-vs-semantics)
     - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
+    - [Flexibility Over Semantic Correctness](#flexibility-over-semantic-correctness)
 - [Team :soccer:](#team-soccer)
 - [Contributing :sparkles:](#contributing-sparkles)
 - [LICENSE :balance_scale:](#license-balance_scale)
@@ -200,6 +199,33 @@ The parser will accept patterns that the NetLinx compiler might reject:
 - Declarations with inconsistent or incomplete type specifiers
 - Mixed implicit and explicit typings
 - Unusual combinations of modifiers
+- Devchan range expressions used with devchan operations
+
+### Flexibility Over Semantic Correctness
+
+The parser deliberately prioritizes syntactic flexibility over strict semantic validation:
+
+- **Section-Independent Parsing**: Declarations can appear anywhere in the code, even outside their semantically correct sections. The parser doesn't enforce section-specific constraints that the NetLinx compiler would apply.
+
+- **Context-Free Analysis**: Device definitions, constants, and variables are parsed based on their syntactic structure rather than their semantic context. For example, device definitions in a `DEFINE_DEVICE` section are parsed as standard assignment expressions.
+
+- **Support for Implicit Typing**: The parser accommodates NetLinx's implicit typing behaviors. In NetLinx, when type declarations are omitted, the compiler applies implicit types—`INTEGER` for regular variables and `CHAR` for array variables.
+
+**Examples:**
+
+```netlinx
+DEFINE_CONSTANT
+FOO = 1  // Parsed as an assignment expression rather than a specialized constant declaration
+
+DEFINE_VARIABLE
+bar = 1  // Parsed as an assignment expression
+         // NetLinx compiler would implicitly type this as INTEGER
+
+baz[10]  // Parsed as an identifier with subscript
+         // NetLinx compiler would implicitly type this as CHAR array
+```
+
+This approach enables more resilient parsing during code editing and provides better syntax highlighting and tooling support, even for incomplete or semantically imperfect code. Semantic validation is intentionally left to the NetLinx compiler or separate analysis tools.
 
 ## Team :soccer:
 
@@ -220,3 +246,7 @@ Any help would be greatly appreciated.
 ## LICENSE :balance_scale:
 
 [MIT](./LICENSE)
+
+```
+
+```
