@@ -611,6 +611,13 @@ module.exports = grammar({
             seq(
                 field("name", $.string_literal),
                 optional(field("parameters", $.parameter_list)),
+
+                // Optional local declarations
+                // Legacy/Weird syntax where local declarations
+                // are defined before the body of the function
+                field("local_declarations", repeat($.declaration)),
+
+                // Call body { ... }
                 field("body", $.compound_statement),
             ),
 
