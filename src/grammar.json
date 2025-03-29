@@ -4670,8 +4670,17 @@
             "type": "FIELD",
             "name": "target",
             "content": {
-              "type": "SYMBOL",
-              "name": "devchan_expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "devchan_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "devchan_range_expression"
+                }
+              ]
             }
           },
           {

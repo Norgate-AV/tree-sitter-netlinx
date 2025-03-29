@@ -1043,7 +1043,13 @@ module.exports = grammar({
                 PREC.FIELD + 20,
                 seq(
                     field("operation", $.devchan_operation),
-                    field("target", $.devchan_expression),
+                    field(
+                        "target",
+                        choice(
+                            $.devchan_expression,
+                            $.devchan_range_expression,
+                        ),
+                    ),
                     $._semicolon,
                 ),
             ),
