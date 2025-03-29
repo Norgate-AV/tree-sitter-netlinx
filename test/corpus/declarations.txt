@@ -994,7 +994,7 @@ DEFINE_LIBRARY_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1) = $FF01
             (hex_literal)))))
 
 =================================
-Abstract Array Parameter Tests
+Abstract Array Parameter
 =================================
 
 // Basic abstract array parameter
@@ -1086,7 +1086,7 @@ DEFINE_FUNCTION INTEGER SumArrays(INTEGER[], INTEGER[10])
                 (decimal_literal)))))))
 
 =================================
-Parenthesized Declarator Tests
+Parenthesized Declarator
 =================================
 
 // Simple parenthesized declarator
@@ -1145,8 +1145,7 @@ CHAR ((buffer)[50])[100]
             (decimal_literal)))))
 
 =================================
-Nested Custom Types Tests
-:skip
+Nested Custom Types
 =================================
 
 // Define nested structures
@@ -1154,7 +1153,7 @@ DEFINE_TYPE
 STRUCTURE DeviceStatus {
   INTEGER connected
   INTEGER powerState
-  CHAR[50] statusMessage
+  CHAR statusMessage[50]
 }
 
 STRUCTURE SystemConfig {
@@ -1174,10 +1173,96 @@ systemSettings.backupDevices[0].statusMessage = 'Standby'
 
 ---
 
-
+(source_file
+      (comment)
+      (section
+        (define_type_section
+          (define_type_keyword)))
+      (type_definition
+        (struct_specifier
+          (structure_keyword)
+          (type_identifier)
+          (field_declaration_list
+            (field_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (field_identifier))
+            (field_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (field_identifier))
+            (field_declaration
+              (intrinsic_type
+                (primitive_type
+                  (char_keyword)))
+              (array_declarator
+                (field_identifier)
+                (number_literal
+                  (decimal_literal)))))))
+      (type_definition
+        (struct_specifier
+          (structure_keyword)
+          (type_identifier)
+          (field_declaration_list
+            (field_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (field_identifier))
+            (field_declaration
+              (type_identifier)
+              (field_identifier))
+            (field_declaration
+              (type_identifier)
+              (array_declarator
+                (field_identifier)
+                (number_literal
+                  (decimal_literal)))))))
+      (comment)
+      (declaration
+        (type_qualifier
+          (volatile_keyword))
+        (type_identifier)
+        (identifier))
+      (declaration
+        (type_qualifier
+          (volatile_keyword))
+        (type_identifier)
+        (identifier))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (field_expression
+            (identifier)
+            (field_identifier))
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (assignment_expression
+          (field_expression
+            (field_expression
+              (identifier)
+              (field_identifier))
+            (field_identifier))
+          (number_literal
+            (decimal_literal))))
+      (expression_statement
+        (assignment_expression
+          (field_expression
+            (subscript_expression
+              (field_expression
+                (identifier)
+                (field_identifier))
+              (number_literal
+                (decimal_literal)))
+            (field_identifier))
+          (string_literal
+            (string_content)))))
 
 =================================
-Function Type Declarator Tests
+Function Type Declarator
 =================================
 
 // Basic function type

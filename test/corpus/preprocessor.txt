@@ -327,7 +327,7 @@ volatile powerState = false
           (preproc_end_if_keyword))))
 
 =================================
-Preprocessor in Struct Fields Tests
+Preprocessor in Struct Fields
 =================================
 
 // Structure with preprocessor directives

@@ -1256,7 +1256,7 @@ call 'MyFunction' (param1, param2, param3)
           (identifier))))
 
 =================================
-Named Wait Statement Tests
+Named Wait Statements
 =================================
 
 // Named wait statements
@@ -1319,14 +1319,13 @@ CANCEL_WAIT 'DynamicWait'
           (string_content))))
 
 =================================
-DevChan Range in Operations Tests
-:skip
+DevChan Range in Operations
 =================================
 
 // DevChan range operations
 ON [dvTP, 1]..[dvTP, 10]
 OFF [dvTP, 11]..[dvTP, 20]
-TO [dvTP, 21]..[dvTP, 30], level
+TO [dvTP, 21]..[dvTP, 30]
 
 // Complex range operations
 ON [dv[i], ch[j]]..[dv[i+5], ch[j+10]]
@@ -1334,10 +1333,93 @@ PULSE [devices[1], startChannel]..[devices[1], endChannel]
 
 ---
 
-
+(source_file
+      (comment)
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_on_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_off_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_to_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))
+          (range_operator)
+          (devchan_expression
+            (identifier)
+            (number_literal
+              (decimal_literal)))))
+      (comment)
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_on_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (identifier))
+            (subscript_expression
+              (identifier)
+              (identifier)))
+          (range_operator)
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal))))
+            (subscript_expression
+              (identifier)
+              (binary_expression
+                (identifier)
+                (number_literal
+                  (decimal_literal)))))))
+      (devchan_operation_statement
+        (devchan_operation
+          (devchan_pulse_keyword))
+        (devchan_range_expression
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (identifier))
+          (range_operator)
+          (devchan_expression
+            (subscript_expression
+              (identifier)
+              (number_literal
+                (decimal_literal)))
+            (identifier)))))
 
 =================================
-Create Multi Buffer Tests
+Create Multi Buffer
 =================================
 
 // Simple multi buffer
