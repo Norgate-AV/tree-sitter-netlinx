@@ -30,3 +30,28 @@ CONSTANT INTEGER debug_level = 0
 #warn 'API v2.0 only'
 // ^ preprocessor
 //     ^ string
+
+#IF_DEFINED DEBUG
+// ^ preprocessor
+//           ^ constant
+    #IF_DEFINED VERBOSE_LOGGING
+//  ^ preprocessor
+//              ^ constant
+        STACK_VAR INTEGER debug_level = 3
+//      ^ type.storage
+//                ^ type
+//                        ^ variable
+//                                    ^ operator
+//                                      ^ number
+    #ELSE
+//  ^ preprocessor
+        STACK_VAR INTEGER debug_level = 1
+//      ^ type.storage
+//                ^ type
+//                        ^ variable
+//                                    ^ operator
+//                                      ^ number
+    #END_IF
+//  ^ preprocessor
+#END_IF
+// ^ preprocessor
