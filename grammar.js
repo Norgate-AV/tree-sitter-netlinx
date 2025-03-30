@@ -1399,10 +1399,7 @@ module.exports = grammar({
 
         comment: (_) =>
             token(
-                // prec(
-                // -10,
                 choice(
-                    // seq("//", /[^\n]*/), // Single-line comments
                     seq("//", /(\\+(.|\r?\n)|[^\\\n])*/), // Single-line comments
                     seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"), // C-style multi-line comments
 
@@ -1410,7 +1407,6 @@ module.exports = grammar({
                     // This is to support this odd use case in the NetLinx.axi file
                     seq("(*", /[^*]*\*+(?:[^)*/][^*]*\*+)*/, choice(")", "/")), // Pascal-style comments
                 ),
-                // ),
             ),
 
         _semicolon: ($) => choice($._automatic_semicolon, ";"),
