@@ -1370,7 +1370,11 @@ module.exports = grammar({
         string_literal: ($) =>
             seq(
                 "'",
-                alias(token.immediate(prec(1, /[^'\n]*/)), $.string_content),
+                alias(
+                    // Allow for escaped single quotes by doubling them
+                    token.immediate(prec(1, /([^'\n]|'')*/)),
+                    $.string_content,
+                ),
                 "'",
             ),
 

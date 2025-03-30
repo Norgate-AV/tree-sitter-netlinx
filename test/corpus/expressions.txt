@@ -1148,3 +1148,252 @@ target_device = (BASE_ID + offset):(PORT_ARRAY[index]):SYSTEM_ID
                 (identifier)
                 (identifier)))
             (identifier)))))
+
+==============================
+String Literal Escape
+==============================
+
+'This is a ''quoted'' word in a string'
+'Don''t forget this syntax'
+
+// Basic single quote escaping
+message = 'This isn''t a problem'
+query = 'SQL Query: SELECT * FROM ''Users'''
+empty = ''
+singleQuote = ''''
+
+// Multiple escaped quotes
+text = 'She said, ''Hello,'' and then ''Goodbye'''
+
+// Quotes at edges
+edgeCase = '''Start'' and ''End'''
+
+// Only escaped quotes
+onlyEscaped = ''''''
+
+---
+
+(source_file
+      (expression_statement
+        (string_literal
+          (string_content)))
+      (expression_statement
+        (string_literal
+          (string_content)))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content)))))
+
+===============================
+String Literals as Function Arguments
+===============================
+
+// Function calls with escaped quotes in arguments
+SendString(dvDevice, 'Here''s a message')
+ProcessQuery('SELECT * FROM ''Table''')
+ShowDialog('Warning', 'Don''t press ''OK'' unless you''re sure!')
+
+// Mixed with other arguments
+SetName(userID, 'O''Brien', isActive)
+
+---
+
+(source_file
+      (comment)
+      (expression_statement
+        (call_expression
+          (identifier)
+          (argument_list
+            (identifier)
+            (string_literal
+              (string_content)))))
+      (expression_statement
+        (call_expression
+          (identifier)
+          (argument_list
+            (string_literal
+              (string_content)))))
+      (expression_statement
+        (call_expression
+          (identifier)
+          (argument_list
+            (string_literal
+              (string_content))
+            (string_literal
+              (string_content)))))
+      (comment)
+      (expression_statement
+        (call_expression
+          (identifier)
+          (argument_list
+            (identifier)
+            (string_literal
+              (string_content))
+            (identifier)))))
+
+===============================
+String Literals in Declarations
+===============================
+
+// String literals in declarations
+DEFINE_VARIABLE
+CHAR message[] = 'User ''Admin'' logged in'
+CHAR empty[] = ''
+CHAR singleQuote[] = ''''
+
+// In structure initialization
+UserInfo user = {'John O''Malley', 42, TRUE}
+
+---
+
+(source_file
+      (comment)
+      (section
+        (define_variable_section
+          (define_variable_keyword)))
+      (declaration
+        (intrinsic_type
+          (primitive_type
+            (char_keyword)))
+        (init_declarator
+          (array_declarator
+            (identifier))
+          (string_literal
+            (string_content))))
+      (declaration
+        (intrinsic_type
+          (primitive_type
+            (char_keyword)))
+        (init_declarator
+          (array_declarator
+            (identifier))
+          (string_literal
+            (string_content))))
+      (declaration
+        (intrinsic_type
+          (primitive_type
+            (char_keyword)))
+        (init_declarator
+          (array_declarator
+            (identifier))
+          (string_literal
+            (string_content))))
+      (comment)
+      (declaration
+        (type_identifier)
+        (init_declarator
+          (identifier)
+          (initializer_list
+            (string_literal
+              (string_content))
+            (number_literal
+              (decimal_literal))
+            (true)))))
+
+===============================
+String Literals in Module and Program Names
+===============================
+
+// String literals in module and program definitions
+PROGRAM_NAME = 'NetLinx ''Master'' Control'
+MODULE_NAME = 'Room''s UI Module'
+
+// In module definitions
+DEFINE_MODULE 'User''s Authentication Module' AuthModule(vdvAuth, dvTP)
+
+---
+
+(source_file
+      (comment)
+      (program_name
+        (program_name_keyword)
+        (string_literal
+          (string_content)))
+      (module_name
+        (module_name_keyword)
+        (string_literal
+          (string_content)))
+      (comment)
+      (define_module
+        (define_module_keyword)
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (identifier)
+            (identifier)))))
+
+===============================
+String Literals with Edge Cases
+===============================
+
+// Edge cases
+emptyWithSpace = ' '
+consecutive = 'First''Second''Third'
+mixed = 'Normal text with ''quoted'' portions and more ''quotes'''
+
+// String literal containing only two single quotes (one escaped quote)
+justOneQuote = ''''
+
+---
+
+(source_file
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (string_literal
+            (string_content)))))
