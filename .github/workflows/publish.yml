@@ -41,23 +41,31 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
           echo "Extracted version: $VERSION"
 
+      - name: Install Tools
+        run: |
+          # Install git-cliff and typos-cli using Cargo
+          cargo install git-cliff
+          cargo install typos-cli
+
+          # Verify installations
+          git-cliff --version
+          typos --version
+
       - name: Generate changelog
         id: changelog
-        uses: mikepenz/release-changelog-builder-action@v4
-        with:
-          configuration: ".github/changelog-config.json"
-          outputFile: "CHANGELOG.md"
-          ignorePreReleases: "false"
-          fromTag: ""
-          toTag: "${{ github.ref_name }}"
-          failOnError: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CHANGELOG_CONTENT=$(git-cliff)
+
+          echo "$CHANGELOG_CONTENT" > CHANGELOG.md
+
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Verify changelog generation
         run: |
           echo "Changelog output: ${{ steps.changelog.outputs.changelog }}"
-          echo "Changelog file exists: $(ls -la CHANGELOG.md || echo 'File not found')"
+          echo "Changelog file exists: $(ls -la CHANGELOG.md || echo 'File not found' && exit 1)"
           if [ -f "CHANGELOG.md" ]; then
             echo "Changelog content:"
             cat CHANGELOG.md
@@ -68,7 +76,7 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
           git add CHANGELOG.md
-          git commit -m "chore: update version to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
+          git commit -m "chore(release): update version to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
           git push origin master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
