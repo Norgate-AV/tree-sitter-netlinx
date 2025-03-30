@@ -57,6 +57,16 @@ DEFINE_START
 }
 // <- punctuation.bracket
 
+define_module 'MyModule' module(vdvObject, dvPort)
+// ^ keyword
+//             ^ string
+//                       ^ variable
+//                             ^ punctuation.bracket
+//                               ^ variable
+//                                       ^ punctuation.delimiter
+//                                         ^ variable
+//                                               ^ punctuation.bracket
+
 DEFINE_EVENT
 // ^ keyword
 [dvTP, VOL_MUTE] = (mute == true)

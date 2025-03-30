@@ -137,6 +137,25 @@ DEFINE_START
     //               ^ number
     //                ^ punctuation.delimiter
     //                  ^ number
+
+    create_buffer dvPort, buffer;
+    // ^ keyword
+    //             ^ variable
+    //                  ^ punctuation.delimiter
+    //                    ^ variable
+    //                          ^ punctuation.delimiter
+
+    CREATE_MULTI_BUFFER dvProj, dvDisplay, buffer
+    // ^ keyword
+    //                  ^ variable
+    //                        ^ punctuation.delimiter
+    //                          ^ variable
+    //                                   ^ punctuation.delimiter
+    //                                     ^ variable
+
+    cLeAr_BUFFER buffer
+    // ^ keyword
+    //            ^ variable
 }
 // <- punctuation.bracket
 
@@ -188,6 +207,67 @@ DEFINE_FUNCTION refreshUI()
         // <- punctuation.bracket
             // Another active block
             // ^ comment
+            wait 1 foo()
+            // <- keyword
+            //   ^ number
+            //     ^ function
+            //        ^ punctuation.bracket
+            //         ^ punctuation.bracket
+
+            wait (timeout * 2) 'MyWait'
+            // <- keyword
+            //   ^ punctuation.bracket
+            //    ^ variable
+            //            ^ operator
+            //              ^ number
+            //               ^ punctuation.bracket
+            //                  ^ string
+            {
+            // <- punctuation.bracket
+                // Nested block
+                // ^ comment
+            }
+            // <- punctuation.bracket
+
+            cancel_wait 'MyWait'
+            // <- keyword
+            //           ^ string
+
+            cancel_all_wait
+            // <- keyword
+
+            wait_until (x > 10) bar()
+            // <- keyword
+            //         ^ punctuation.bracket
+            //          ^ variable
+            //            ^ operator
+            //              ^ number
+            //                ^ punctuation.bracket
+            //                  ^ function
+            //                     ^ punctuation.bracket
+            //                      ^ punctuation.bracket
+
+            wait_until (y == true) 'MyWaitUntil'
+            // <- keyword
+            //         ^ punctuation.bracket
+            //          ^ variable
+            //            ^ operator
+            //                ^ constant.builtin
+            //                   ^ punctuation.bracket
+            //                       ^ string
+            {
+            // <- punctuation.bracket
+                // Nested wait_until block
+                // ^ comment
+            }
+            // <- punctuation.bracket
+
+            cancel_wait_until 'MyWaitUntil'
+            // <- keyword
+            //                 ^ string
+
+            cancel_all_wait_until
+            // <- keyword
         }
         // <- punctuation.bracket
     }
