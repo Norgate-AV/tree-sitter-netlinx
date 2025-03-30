@@ -982,3 +982,55 @@ dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM
           (field_expression
             (identifier)
             (field_identifier)))))
+
+=========================
+Deep Field Access
+=========================
+
+result = system.devices[getIndex()].config.settings[2].enabled
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (field_expression
+            (subscript_expression
+              (field_expression
+                (field_expression
+                  (subscript_expression
+                    (field_expression
+                      (identifier)
+                      (field_identifier))
+                    (call_expression
+                      (identifier)
+                      (argument_list)))
+                  (field_identifier))
+                (field_identifier))
+              (number_literal
+                (decimal_literal)))
+            (field_identifier)))))
+
+=============================
+Complex Device Literals
+=============================
+
+target_device = (BASE_ID + offset):(PORT_ARRAY[index]):SYSTEM_ID
+
+---
+
+(source_file
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (device_literal
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (identifier)))
+            (parenthesized_expression
+              (subscript_expression
+                (identifier)
+                (identifier)))
+            (identifier)))))

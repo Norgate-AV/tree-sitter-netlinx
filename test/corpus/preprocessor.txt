@@ -395,3 +395,55 @@ STRUCTURE ConfigOptions {
                 (field_identifier)
                 (number_literal
                   (decimal_literal))))))))
+
+=========================
+Nested Preprocessor With Sections
+=========================
+
+#IF_DEFINED FEATURE_X
+  #IF_DEFINED FEATURE_Y
+    DEFINE_CONSTANT
+    INTEGER MAX_COUNT = 50
+  #ELSE
+    DEFINE_CONSTANT
+    INTEGER MAX_COUNT = 10
+  #END_IF
+#END_IF
+
+---
+
+(source_file
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (section
+            (define_constant_section
+              (define_constant_keyword)))
+          (declaration
+            (intrinsic_type
+              (primitive_type
+                (integer_keyword)))
+            (init_declarator
+              (identifier)
+              (number_literal
+                (decimal_literal))))
+          (preproc_else
+            (preproc_else_keyword)
+            (section
+              (define_constant_section
+                (define_constant_keyword)))
+            (declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (init_declarator
+                (identifier)
+                (number_literal
+                  (decimal_literal)))))
+          (preproc_end_if
+            (preproc_end_if_keyword)))
+        (preproc_end_if
+          (preproc_end_if_keyword))))

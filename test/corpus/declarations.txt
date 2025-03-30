@@ -1529,3 +1529,115 @@ stack_var integer j
             (identifier))
           (compound_statement
             (comment)))))
+
+=======================
+Storage Class Combinations
+=======================
+
+stack_var volatile persistent CHAR message[50]
+local_var constant non_volatile INTEGER flags
+
+---
+
+(source_file
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (type_qualifier
+          (volatile_keyword))
+        (type_qualifier
+          (persistent_keyword))
+        (intrinsic_type
+          (primitive_type
+            (char_keyword)))
+        (array_declarator
+          (identifier)
+          (number_literal
+            (decimal_literal))))
+      (declaration
+        (storage_class_specifier
+          (local_var_keyword))
+        (type_qualifier
+          (constant_keyword))
+        (type_qualifier
+          (non_volatile_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier)))
+
+=============================
+Abstract Array Params
+=============================
+
+DEFINE_FUNCTION process(INTEGER count, CHAR data[], INTEGER maxSize, CHAR param[][]) {}
+
+---
+
+(source_file
+      (define_function
+        (define_function_keyword)
+        (function_definition
+          (identifier)
+          (parameter_list
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (identifier))
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type
+                  (char_keyword)))
+              (array_declarator
+                (identifier)))
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type
+                  (integer_keyword)))
+              (identifier))
+            (parameter_declaration
+              (intrinsic_type
+                (primitive_type
+                  (char_keyword)))
+              (array_declarator
+                (array_declarator
+                  (identifier)))))
+          (compound_statement))))
+
+==============================
+Complex Module Definitions
+==============================
+
+DEFINE_MODULE 'RmsNetLinxAdapter' mdlRms(vdvRMS,
+  dvTP1, {dvTP2, dvTP3},
+  RMS_CONN_TYPE[connectionType],
+  systems[getActiveSystem()].deviceList)
+
+---
+
+(source_file
+      (define_module
+        (define_module_keyword)
+        (module_definition
+          (string_literal
+            (string_content))
+          (identifier)
+          (argument_list
+            (identifier)
+            (identifier)
+            (compound_statement
+              (expression_statement
+                (comma_expression
+                  (identifier)
+                  (identifier))))
+            (subscript_expression
+              (identifier)
+              (identifier))
+            (field_expression
+              (subscript_expression
+                (identifier)
+                (call_expression
+                  (identifier)
+                  (argument_list)))
+              (field_identifier))))))
