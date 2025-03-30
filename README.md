@@ -1,6 +1,6 @@
 # tree-sitter-netlinx
 
-[![CI][ci]](https://github.com/Norgate-AV/tree-siter-netlinx/actions/workflows/ci.yml)
+[![CI][ci]](https://github.com/Norgate-AV/tree-sitter-netlinx/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Norgate-AV/tree-sitter-netlinx)](https://github.com/Norgate-AV/tree-sitter-netlinx/releases)
 [![crates][crates]](https://crates.io/crates/tree-sitter-netlinx)
 [![npm][npm]](https://www.npmjs.com/package/tree-sitter-netlinx)
