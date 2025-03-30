@@ -41,14 +41,12 @@ button_event[DVA_DEVCHAN[1]] {
         (button_event_handler
           type: (button_event_type
             (hold_keyword)
-            time: (number_literal
-              (decimal_literal)))
+            time: (number_literal))
           body: (compound_statement))
         (button_event_handler
           type: (button_event_type
             (hold_keyword)
-            time: (number_literal
-              (decimal_literal))
+            time: (number_literal)
             (button_event_hold_repeat
               (repeat_keyword)))
           body: (compound_statement)))))
@@ -63,21 +61,16 @@ button_event[DVA_DEVCHAN[1]] {
         devchan: (button_event_devchan_reference
           (devchan_expression
             device: (device_literal
-              device: (number_literal
-                (decimal_literal))
-              port: (number_literal
-                (decimal_literal))
-              system: (number_literal
-                (decimal_literal)))
-            channel: (number_literal
-              (decimal_literal)))))
+              device: (number_literal)
+              port: (number_literal)
+              system: (number_literal))
+            channel: (number_literal))))
       (button_event_declarator
         (button_event_keyword)
         devchan: (button_event_devchan_reference
           (subscript_expression
             argument: (identifier)
-            index: (number_literal
-              (decimal_literal)))))
+            index: (number_literal))))
       body: (button_event_block
         (button_event_handler
           type: (button_event_type
@@ -90,14 +83,12 @@ button_event[DVA_DEVCHAN[1]] {
         (button_event_handler
           type: (button_event_type
             (hold_keyword)
-            time: (number_literal
-              (decimal_literal)))
+            time: (number_literal))
           body: (compound_statement))
         (button_event_handler
           type: (button_event_type
             (hold_keyword)
-            time: (number_literal
-              (decimal_literal))
+            time: (number_literal)
             (button_event_hold_repeat
               (repeat_keyword)))
           body: (compound_statement))))))
@@ -133,8 +124,7 @@ channel_event[DVA_DEVCHAN[1]] {
         devchan: (channel_event_devchan_reference
           (devchan_expression
             device: (identifier)
-            channel: (number_literal
-              (decimal_literal)))))
+            channel: (number_literal))))
       body: (channel_event_block
         (channel_event_handler
           type: (channel_event_type
@@ -170,21 +160,16 @@ channel_event[DVA_DEVCHAN[1]] {
         devchan: (channel_event_devchan_reference
           (devchan_expression
             device: (device_literal
-              device: (number_literal
-                (decimal_literal))
-              port: (number_literal
-                (decimal_literal))
-              system: (number_literal
-                (decimal_literal)))
-            channel: (number_literal
-              (decimal_literal)))))
+              device: (number_literal)
+              port: (number_literal)
+              system: (number_literal))
+            channel: (number_literal))))
       (channel_event_declarator
         (channel_event_keyword)
         devchan: (channel_event_devchan_reference
           (subscript_expression
             argument: (identifier)
-            index: (number_literal
-              (decimal_literal)))))
+            index: (number_literal))))
       body: (channel_event_block
         (channel_event_handler
           type: (channel_event_type
@@ -274,19 +259,15 @@ data_event[DVA_OBJECTS[1]] {
         (data_event_keyword)
         device: (data_event_device_reference
           (device_literal
-            device: (number_literal
-              (decimal_literal))
-            port: (number_literal
-              (decimal_literal))
-            system: (number_literal
-              (decimal_literal)))))
+            device: (number_literal)
+            port: (number_literal)
+            system: (number_literal))))
       (data_event_declarator
         (data_event_keyword)
         device: (data_event_device_reference
           (subscript_expression
             argument: (identifier)
-            index: (number_literal
-              (decimal_literal)))))
+            index: (number_literal))))
       body: (data_event_block
         (data_event_handler
           type: (data_event_type
@@ -386,21 +367,16 @@ level_event[DVA_DEVLEV[1]] {}
         devlev: (level_event_devlev_reference
           (devlev_expression
             device: (device_literal
-              device: (number_literal
-                (decimal_literal))
-              port: (number_literal
-                (decimal_literal))
-              system: (number_literal
-                (decimal_literal)))
-            level: (number_literal
-              (decimal_literal)))))
+              device: (number_literal)
+              port: (number_literal)
+              system: (number_literal))
+            level: (number_literal))))
       (level_event_declarator
         (level_event_keyword)
         devlev: (level_event_devlev_reference
           (subscript_expression
             argument: (identifier)
-            index: (number_literal
-              (decimal_literal)))))
+            index: (number_literal))))
       body: (compound_statement))))
 
 =====================
@@ -429,10 +405,8 @@ custom_event[dvTP, 1002] {}
         (custom_event_keyword)
         reference: (custom_event_reference
           device: (identifier)
-          id: (number_literal
-            (decimal_literal))
-          type: (number_literal
-            (decimal_literal))))
+          id: (number_literal)
+          type: (number_literal)))
       body: (compound_statement)))
   (event_definition
     (custom_event_definition
@@ -440,42 +414,7 @@ custom_event[dvTP, 1002] {}
         (custom_event_keyword)
         reference: (custom_event_reference
           devchan: (identifier)
-          eventid: (number_literal
-            (decimal_literal))))
-      body: (compound_statement)))
-  (event_definition
-    (custom_event_definition
-      (custom_event_declarator
-        (custom_event_keyword)
-        reference: (custom_event_reference
-          device: (identifier)
-          id: (number_literal
-            (decimal_literal))
-          type: (number_literal
-            (decimal_literal))))
-      (custom_event_declarator
-        (custom_event_keyword)
-        reference: (custom_event_reference
-          device: (identifier)
-          id: (number_literal
-            (decimal_literal))
-          type: (number_literal
-            (decimal_literal))))
-      body: (compound_statement)))
-  (event_definition
-    (custom_event_definition
-      (custom_event_declarator
-        (custom_event_keyword)
-        reference: (custom_event_reference
-          devchan: (identifier)
-          eventid: (number_literal
-            (decimal_literal))))
-      (custom_event_declarator
-        (custom_event_keyword)
-        reference: (custom_event_reference
-          devchan: (identifier)
-          eventid: (number_literal
-            (decimal_literal))))
+          eventid: (number_literal)))
       body: (compound_statement)))
   (event_definition
     (custom_event_definition
@@ -483,16 +422,41 @@ custom_event[dvTP, 1002] {}
         (custom_event_keyword)
         reference: (custom_event_reference
           device: (identifier)
-          id: (number_literal
-            (decimal_literal))
-          type: (number_literal
-            (decimal_literal))))
+          id: (number_literal)
+          type: (number_literal)))
+      (custom_event_declarator
+        (custom_event_keyword)
+        reference: (custom_event_reference
+          device: (identifier)
+          id: (number_literal)
+          type: (number_literal)))
+      body: (compound_statement)))
+  (event_definition
+    (custom_event_definition
       (custom_event_declarator
         (custom_event_keyword)
         reference: (custom_event_reference
           devchan: (identifier)
-          eventid: (number_literal
-            (decimal_literal))))
+          eventid: (number_literal)))
+      (custom_event_declarator
+        (custom_event_keyword)
+        reference: (custom_event_reference
+          devchan: (identifier)
+          eventid: (number_literal)))
+      body: (compound_statement)))
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        (custom_event_keyword)
+        reference: (custom_event_reference
+          device: (identifier)
+          id: (number_literal)
+          type: (number_literal)))
+      (custom_event_declarator
+        (custom_event_keyword)
+        reference: (custom_event_reference
+          devchan: (identifier)
+          eventid: (number_literal)))
       body: (compound_statement))))
 
 ==========================
@@ -507,17 +471,17 @@ CUSTOM_EVENT[vdvObjects[activeIndex], customEvents[EVENT_TYPE_STATUS], CUSTOM_EV
 ---
 
 (source_file
-      (event_definition
-        (custom_event_definition
-          (custom_event_declarator
-            (custom_event_keyword)
-            (custom_event_reference
-              (subscript_expression
-                (identifier)
-                (identifier))
-              (subscript_expression
-                (identifier)
-                (identifier))
-              (identifier)))
-          (compound_statement
-            (comment)))))
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        (custom_event_keyword)
+        (custom_event_reference
+          (subscript_expression
+            (identifier)
+            (identifier))
+          (subscript_expression
+            (identifier)
+            (identifier))
+          (identifier)))
+      (compound_statement
+        (comment)))))

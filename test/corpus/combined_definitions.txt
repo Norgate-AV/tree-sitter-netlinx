@@ -41,22 +41,16 @@ DEFINE_TOGGLING
     (assignment_expression
       left: (identifier)
       right: (device_literal
-        device: (number_literal
-          (decimal_literal))
-        port: (number_literal
-          (decimal_literal))
-        system: (number_literal
-          (decimal_literal)))))
+        device: (number_literal)
+        port: (number_literal)
+        system: (number_literal))))
   (expression_statement
     (assignment_expression
       left: (identifier)
       right: (device_literal
-        device: (number_literal
-          (decimal_literal))
-        port: (number_literal
-          (decimal_literal))
-        system: (number_literal
-          (decimal_literal)))))
+        device: (number_literal)
+        port: (number_literal)
+        system: (number_literal))))
   (section
     (define_constant_section
       (define_constant_keyword)))
@@ -67,32 +61,28 @@ DEFINE_TOGGLING
         (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
-      value: (number_literal
-        (decimal_literal))))
+      value: (number_literal)))
   (declaration
     type: (intrinsic_type
       (primitive_type
         (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
-      value: (number_literal
-        (decimal_literal))))
+      value: (number_literal)))
   (declaration
     type: (intrinsic_type
       (primitive_type
         (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
-      value: (number_literal
-        (decimal_literal))))
+      value: (number_literal)))
   (declaration
     type: (intrinsic_type
       (primitive_type
         (integer_keyword)))
     declarator: (init_declarator
       declarator: (identifier)
-      value: (number_literal
-        (decimal_literal))))
+      value: (number_literal)))
   (section
     (define_mutually_exclusive_section
       (define_mutually_exclusive_keyword)))
@@ -114,13 +104,11 @@ DEFINE_TOGGLING
       (devchan_range_expression
         start: (devchan_expression
           device: (identifier)
-          channel: (number_literal
-            (decimal_literal)))
+          channel: (number_literal))
         (range_operator)
         end: (devchan_expression
           device: (identifier)
-          channel: (number_literal
-            (decimal_literal))))))
+          channel: (number_literal)))))
   (section
     (define_latching_section
       (define_latching_keyword)))
@@ -136,10 +124,8 @@ DEFINE_TOGGLING
   (expression_statement
     (devchan_expression
       device: (identifier)
-      channel: (number_literal
-        (decimal_literal))))
+      channel: (number_literal)))
   (expression_statement
     (devchan_expression
       device: (identifier)
-      channel: (number_literal
-        (decimal_literal)))))
+      channel: (number_literal))))

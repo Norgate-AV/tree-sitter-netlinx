@@ -49,6 +49,7 @@ At this point the grammar is mostly complete. Work is now focused on testing and
 - Expressions
     - :white_check_mark: Binary Expressions
     - :white_check_mark: Bitwise Expressions
+    - :white_check_mark: Bitwise Word Expressions (`band`, `bor`, `bxor`, `bnot`, `lshift`, `rshift`)
     - :white_check_mark: Unary Expressions
     - :white_check_mark: Update Expressions
     - :white_check_mark: Assignment Expressions
@@ -112,7 +113,12 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - :white_check_mark: Custom Events
 - Literals
     - :white_check_mark: String Literals
+        - :white_check_mark: Single Quoted String Literals
+        - :white_check_mark: Escape Sequence for Single Quotes (`''`)
     - :white_check_mark: Number Literals
+        - :white_check_mark: Decimal
+        - :white_check_mark: Hexadecimal
+        - :white_check_mark: Floating Point
     - :white_check_mark: Device Literals
 - Comments
     - :white_check_mark: Single Line Comments

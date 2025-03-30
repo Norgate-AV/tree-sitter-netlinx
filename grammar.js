@@ -181,7 +181,7 @@ module.exports = grammar({
                     preprocessor(directives.disable_warning),
                     $.preproc_disable_warning_keyword,
                 ),
-                field("code", $.decimal_literal),
+                field("code", $.number_literal),
                 token.immediate(/\r?\n/),
             ),
 
@@ -1384,11 +1384,29 @@ module.exports = grammar({
 
         escape_sequence: (_) => token(prec(1, seq("'", /'/))),
 
-        number_literal: ($) => choice($.decimal_literal, $.hex_literal),
+        number_literal: (_) => {
+            return token(
+                choice(
+                    // Hexadecimal literals
+                    /\$[0-9a-fA-F]+/,
 
-        decimal_literal: (_) => /[-+]?\d+/,
-
-        hex_literal: (_) => /\$[0-9a-fA-F]+/,
+                    // Floating point with scientific notation
+                    seq(
+                        optional(/[-+]/),
+                        choice(
+                            // Format: digits.digits
+                            seq(/\d+/, ".", optional(/\d+/)),
+                            // Format: .digits
+                            seq(".", /\d+/),
+                            // Format: digits (integers)
+                            /\d+/,
+                        ),
+                        // Optional scientific notation
+                        optional(seq(/[eE]/, optional(/[-+]/), /\d+/)),
+                    ),
+                ),
+            );
+        },
 
         identifier: (_) => /[_a-zA-Z][_a-zA-Z0-9]*/,
 

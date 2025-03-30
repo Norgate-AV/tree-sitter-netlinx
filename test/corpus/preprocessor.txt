@@ -195,8 +195,7 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
             (binary_expression
               (binary_expression
                 (identifier)
-                (number_literal
-                  (decimal_literal)))
+                (number_literal))
               (identifier))))))
     (preproc_if_defined
       (preproc_if_defined_keyword)
@@ -208,8 +207,7 @@ DEFINE_FUNCTION integer GetSpecialValue(integer param)
             (intrinsic_type
               (primitive_type
                 (char_keyword)))
-            (number_literal
-              (decimal_literal)))
+            (number_literal))
           (identifier)
           (parameter_list
             (parameter_declaration
@@ -263,10 +261,10 @@ Disable Warning Directive
 (source_file
   (preproc_disable_warning
     (preproc_disable_warning_keyword)
-    (decimal_literal))
+    (number_literal))
   (preproc_disable_warning
     (preproc_disable_warning_keyword)
-    (decimal_literal)))
+    (number_literal)))
 
 =================================
 Sections in Conditionals
@@ -286,45 +284,42 @@ volatile powerState = false
 ---
 
 (source_file
-      (preproc_if_defined
-        (preproc_if_defined_keyword)
+  (preproc_if_defined
+    (preproc_if_defined_keyword)
+    (identifier)
+    (section
+      (define_device_section
+        (define_device_keyword)))
+    (expression_statement
+      (assignment_expression
         (identifier)
-        (section
-          (define_device_section
-            (define_device_keyword)))
-        (expression_statement
-          (assignment_expression
-            (identifier)
-            (device_literal
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal)))))
-        (section
-          (define_constant_section
-            (define_constant_keyword)))
-        (declaration
-          (intrinsic_type
-            (primitive_type
-              (char_keyword)))
-          (init_declarator
-            (array_declarator
-              (identifier))
-            (string_literal
-              (string_content))))
-        (section
-          (define_variable_section
-            (define_variable_keyword)))
-        (declaration
-          (type_qualifier
-            (volatile_keyword))
-          (init_declarator
-            (identifier)
-            (false)))
-        (preproc_end_if
-          (preproc_end_if_keyword))))
+        (device_literal
+          (number_literal)
+          (number_literal)
+          (number_literal))))
+    (section
+      (define_constant_section
+        (define_constant_keyword)))
+    (declaration
+      (intrinsic_type
+        (primitive_type
+          (char_keyword)))
+      (init_declarator
+        (array_declarator
+          (identifier))
+        (string_literal
+          (string_content))))
+    (section
+      (define_variable_section
+        (define_variable_keyword)))
+    (declaration
+      (type_qualifier
+        (volatile_keyword))
+      (init_declarator
+        (identifier)
+        (false)))
+    (preproc_end_if
+      (preproc_end_if_keyword))))
 
 =================================
 Preprocessor in Struct Fields
@@ -348,53 +343,51 @@ STRUCTURE ConfigOptions {
 ---
 
 (source_file
-      (comment)
-      (section
-        (define_type_section
-          (define_type_keyword)))
-      (type_definition
-        (struct_specifier
-          (structure_keyword)
-          (type_identifier)
-          (field_declaration_list
+  (comment)
+  (section
+    (define_type_section
+      (define_type_keyword)))
+  (type_definition
+    (struct_specifier
+      (structure_keyword)
+      (type_identifier)
+      (field_declaration_list
+        (field_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (field_identifier))
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (field_declaration
+            (intrinsic_type
+              (primitive_type
+                (integer_keyword)))
+            (array_declarator
+              (field_identifier)
+              (number_literal)))
+          (field_declaration
+            (intrinsic_type
+              (primitive_type
+                (integer_keyword)))
+            (field_identifier))
+          (preproc_else
+            (preproc_else_keyword)
             (field_declaration
               (intrinsic_type
                 (primitive_type
                   (integer_keyword)))
-              (field_identifier))
-            (preproc_if_defined
-              (preproc_if_defined_keyword)
-              (identifier)
-              (field_declaration
-                (intrinsic_type
-                  (primitive_type
-                    (integer_keyword)))
-                (array_declarator
-                  (field_identifier)
-                  (number_literal
-                    (decimal_literal))))
-              (field_declaration
-                (intrinsic_type
-                  (primitive_type
-                    (integer_keyword)))
-                (field_identifier))
-              (preproc_else
-                (preproc_else_keyword)
-                (field_declaration
-                  (intrinsic_type
-                    (primitive_type
-                      (integer_keyword)))
-                  (field_identifier)))
-              (preproc_end_if
-                (preproc_end_if_keyword)))
-            (field_declaration
-              (intrinsic_type
-                (primitive_type
-                  (char_keyword)))
-              (array_declarator
-                (field_identifier)
-                (number_literal
-                  (decimal_literal))))))))
+              (field_identifier)))
+          (preproc_end_if
+            (preproc_end_if_keyword)))
+        (field_declaration
+          (intrinsic_type
+            (primitive_type
+              (char_keyword)))
+          (array_declarator
+            (field_identifier)
+            (number_literal)))))))
 
 =========================
 Nested Preprocessor With Sections
@@ -413,37 +406,35 @@ Nested Preprocessor With Sections
 ---
 
 (source_file
-      (preproc_if_defined
-        (preproc_if_defined_keyword)
-        (identifier)
-        (preproc_if_defined
-          (preproc_if_defined_keyword)
+  (preproc_if_defined
+    (preproc_if_defined_keyword)
+    (identifier)
+    (preproc_if_defined
+      (preproc_if_defined_keyword)
+      (identifier)
+      (section
+        (define_constant_section
+          (define_constant_keyword)))
+      (declaration
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (init_declarator
           (identifier)
-          (section
-            (define_constant_section
-              (define_constant_keyword)))
-          (declaration
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (init_declarator
-              (identifier)
-              (number_literal
-                (decimal_literal))))
-          (preproc_else
-            (preproc_else_keyword)
-            (section
-              (define_constant_section
-                (define_constant_keyword)))
-            (declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (init_declarator
-                (identifier)
-                (number_literal
-                  (decimal_literal)))))
-          (preproc_end_if
-            (preproc_end_if_keyword)))
-        (preproc_end_if
-          (preproc_end_if_keyword))))
+          (number_literal)))
+      (preproc_else
+        (preproc_else_keyword)
+        (section
+          (define_constant_section
+            (define_constant_keyword)))
+        (declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (init_declarator
+            (identifier)
+            (number_literal))))
+      (preproc_end_if
+        (preproc_end_if_keyword)))
+    (preproc_end_if
+      (preproc_end_if_keyword))))

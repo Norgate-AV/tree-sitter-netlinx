@@ -2770,25 +2770,6 @@
     }
   },
   {
-    "type": "number_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "decimal_literal",
-          "named": true
-        },
-        {
-          "type": "hex_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "off_keyword",
     "named": true,
     "fields": {}
@@ -2948,7 +2929,7 @@
         "required": true,
         "types": [
           {
-            "type": "decimal_literal",
+            "type": "number_literal",
             "named": true
           }
         ]
@@ -4785,10 +4766,6 @@
     "named": true
   },
   {
-    "type": "decimal_literal",
-    "named": true
-  },
-  {
     "type": "default_keyword",
     "named": true
   },
@@ -4917,10 +4894,6 @@
     "named": true
   },
   {
-    "type": "hex_literal",
-    "named": true
-  },
-  {
     "type": "hold_keyword",
     "named": true
   },
@@ -4958,6 +4931,10 @@
   },
   {
     "type": "non_volatile_keyword",
+    "named": true
+  },
+  {
+    "type": "number_literal",
     "named": true
   },
   {

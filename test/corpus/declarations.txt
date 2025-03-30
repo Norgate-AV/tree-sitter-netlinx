@@ -96,8 +96,7 @@ PERSISTENT INTEGER lastPowerState
   (expression_statement
     (assignment_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (declaration
     (intrinsic_type
       (primitive_type
@@ -124,73 +123,55 @@ PERSISTENT INTEGER lastPowerState
           (identifier)))
       (initializer_list
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal)))
+          (number_literal)
+          (number_literal)
+          (number_literal))
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))))))
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
   (expression_statement
     (assignment_expression
       (identifier)
       (device_literal
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (device_literal
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (device_literal
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (declaration
     (intrinsic_type
       (structured_type
         (dev_keyword)))
     (array_declarator
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (declaration
     (intrinsic_type
       (structured_type
         (devlev_keyword)))
     (array_declarator
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (declaration
     (intrinsic_type
       (structured_type
         (devchan_keyword)))
     (array_declarator
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (declaration
     (intrinsic_type
       (primitive_type
@@ -199,32 +180,21 @@ PERSISTENT INTEGER lastPowerState
       (array_declarator
         (array_declarator
           (identifier)
-          (number_literal
-            (decimal_literal)))
-        (number_literal
-          (decimal_literal)))
+          (number_literal))
+        (number_literal))
       (initializer_list
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal)))
+          (number_literal)
+          (number_literal)
+          (number_literal))
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal)))
+          (number_literal)
+          (number_literal)
+          (number_literal))
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))))))
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
   (declaration
     (type_qualifier
       (constant_keyword))
@@ -233,8 +203,7 @@ PERSISTENT INTEGER lastPowerState
         (integer_keyword)))
     (init_declarator
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (declaration
     (type_qualifier
       (volatile_keyword))
@@ -251,10 +220,8 @@ PERSISTENT INTEGER lastPowerState
     (array_declarator
       (array_declarator
         (identifier)
-        (number_literal
-          (decimal_literal)))
-      (number_literal
-        (decimal_literal))))
+        (number_literal))
+      (number_literal)))
   (declaration
     (type_qualifier
       (persistent_keyword))
@@ -287,130 +254,109 @@ constant variantarray bar
 ---
 
 (source_file
-      (declaration
-        (storage_class_specifier
-          (stack_var_keyword))
-        (type_qualifier
-          (volatile_keyword))
-        (type_identifier)
-        (identifier))
-      (declaration
-        (storage_class_specifier
-          (local_var_keyword))
-        (type_identifier)
-        (identifier))
-      (declaration
-        (type_qualifier
-          (volatile_keyword))
-        (type_identifier)
-        (identifier))
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (integer_keyword)))
-        (identifier))
-      (declaration
-        (type_identifier)
+  (declaration
+    (storage_class_specifier
+      (stack_var_keyword))
+    (type_qualifier
+      (volatile_keyword))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (storage_class_specifier
+      (local_var_keyword))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (type_qualifier
+      (volatile_keyword))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (identifier))
+  (declaration
+    (type_identifier)
+    (array_declarator
+      (identifier)
+      (number_literal)))
+  (declaration
+    (type_identifier)
+    (init_declarator
+      (array_declarator
+        (array_declarator
+          (identifier)))
+      (initializer_list
+        (initializer_list
+          (number_literal)
+          (number_literal)
+          (number_literal))
+        (initializer_list
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
+  (declaration
+    (type_identifier)
+    (init_declarator
+      (array_declarator
         (array_declarator
           (identifier)
-          (number_literal
-            (decimal_literal))))
-      (declaration
-        (type_identifier)
-        (init_declarator
-          (array_declarator
-            (array_declarator
-              (identifier)))
-          (initializer_list
-            (initializer_list
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal)))
-            (initializer_list
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))))))
-      (declaration
-        (type_identifier)
-        (init_declarator
-          (array_declarator
-            (array_declarator
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (number_literal
-              (decimal_literal)))
-          (initializer_list
-            (initializer_list
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal)))
-            (initializer_list
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal)))
-            (initializer_list
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))
-              (number_literal
-                (decimal_literal))))))
-      (declaration
-        (type_qualifier
-          (constant_keyword))
-        (type_identifier)
-        (init_declarator
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (declaration
-        (type_qualifier
-          (volatile_keyword))
-        (type_identifier)
-        (identifier))
-      (declaration
-        (type_qualifier
-          (non_volatile_keyword))
-        (type_identifier)
-        (array_declarator
-          (array_declarator
-            (identifier)
-            (number_literal
-              (decimal_literal)))
-          (number_literal
-            (decimal_literal))))
-      (declaration
-        (type_qualifier
-          (persistent_keyword))
-        (type_identifier)
-        (identifier))
-      (declaration
-        (type_qualifier
-          (constant_keyword))
-        (intrinsic_type
-          (primitive_type
-            (variant_keyword)))
-        (identifier))
-      (declaration
-        (type_qualifier
-          (constant_keyword))
-        (intrinsic_type
-          (primitive_type
-            (variantarray_keyword)))
-        (identifier)))
+          (number_literal))
+        (number_literal))
+      (initializer_list
+        (initializer_list
+          (number_literal)
+          (number_literal)
+          (number_literal))
+        (initializer_list
+          (number_literal)
+          (number_literal)
+          (number_literal))
+        (initializer_list
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
+  (declaration
+    (type_qualifier
+      (constant_keyword))
+    (type_identifier)
+    (init_declarator
+      (identifier)
+      (number_literal)))
+  (declaration
+    (type_qualifier
+      (volatile_keyword))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (type_qualifier
+      (non_volatile_keyword))
+    (type_identifier)
+    (array_declarator
+      (array_declarator
+        (identifier)
+        (number_literal))
+      (number_literal)))
+  (declaration
+    (type_qualifier
+      (persistent_keyword))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (type_qualifier
+      (constant_keyword))
+    (intrinsic_type
+      (primitive_type
+        (variant_keyword)))
+    (identifier))
+  (declaration
+    (type_qualifier
+      (constant_keyword))
+    (intrinsic_type
+      (primitive_type
+        (variantarray_keyword)))
+    (identifier)))
 
 =================
 Custom Type Definitions
@@ -447,8 +393,7 @@ STRUCT UserConfig {
               (char_keyword)))
           (array_declarator
             (field_identifier)
-            (number_literal
-              (decimal_literal))))
+            (number_literal)))
         (field_declaration
           (intrinsic_type
             (primitive_type
@@ -470,8 +415,7 @@ STRUCT UserConfig {
               (char_keyword)))
           (array_declarator
             (field_identifier)
-            (number_literal
-              (decimal_literal))))
+            (number_literal)))
         (field_declaration
           (intrinsic_type
             (primitive_type
@@ -488,8 +432,7 @@ STRUCT UserConfig {
               (char_keyword)))
           (array_declarator
             (field_identifier)
-            (number_literal
-              (decimal_literal))))
+            (number_literal)))
         (field_declaration
           (intrinsic_type
             (primitive_type
@@ -499,8 +442,7 @@ STRUCT UserConfig {
           (type_identifier)
           (array_declarator
             (field_identifier)
-            (number_literal
-              (decimal_literal))))))))
+            (number_literal)))))))
 
 ==================
 Basic Function
@@ -560,8 +502,7 @@ DEFINE_FUNCTION doSomething() {
         (expression_statement
           (assignment_expression
             (identifier)
-            (number_literal
-              (decimal_literal))))))))
+            (number_literal)))))))
 
 ==================
 Array Return Function
@@ -581,8 +522,7 @@ DEFINE_FUNCTION CHAR[10] getUsername() {
         (intrinsic_type
           (primitive_type
             (char_keyword)))
-        (number_literal
-          (decimal_literal)))
+        (number_literal))
       (identifier)
       (parameter_list)
       (compound_statement
@@ -655,23 +595,16 @@ INTEGER values[] = {1, 2, 3 + x, func()}
       (array_declarator
         (array_declarator
           (identifier))
-        (number_literal
-          (decimal_literal)))
+        (number_literal))
       (initializer_list
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal)))
+          (number_literal)
+          (number_literal)
+          (number_literal))
         (initializer_list
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))
-          (number_literal
-            (decimal_literal))))))
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
   (declaration
     (intrinsic_type
       (primitive_type
@@ -680,10 +613,8 @@ INTEGER values[] = {1, 2, 3 + x, func()}
       (array_declarator
         (array_declarator
           (identifier))
-        (number_literal
-          (decimal_literal)))
-      (number_literal
-        (decimal_literal))))
+        (number_literal))
+      (number_literal)))
   (comment)
   (declaration
     (type_qualifier
@@ -704,8 +635,7 @@ INTEGER values[] = {1, 2, 3 + x, func()}
     (array_declarator
       (array_declarator
         (identifier))
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (comment)
   (declaration
     (intrinsic_type
@@ -715,13 +645,10 @@ INTEGER values[] = {1, 2, 3 + x, func()}
       (array_declarator
         (identifier))
       (initializer_list
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal))
+        (number_literal)
+        (number_literal)
         (binary_expression
-          (number_literal
-            (decimal_literal))
+          (number_literal)
           (identifier))
         (call_expression
           (identifier)
@@ -758,8 +685,7 @@ STRUCTURE AudioDevice {
           (array_declarator
             (array_declarator
               (field_identifier))
-            (number_literal
-              (decimal_literal))))
+            (number_literal)))
         (field_declaration
           (intrinsic_type
             (structured_type
@@ -796,8 +722,7 @@ DEFINE_FUNCTION SortArray(INTEGER array[]) {
         (intrinsic_type
           (primitive_type
             (char_keyword)))
-        size: (number_literal
-          (decimal_literal)))
+        size: (number_literal))
       name: (identifier)
       parameters: (parameter_list
         (parameter_declaration
@@ -823,12 +748,9 @@ DEFINE_FUNCTION SortArray(INTEGER array[]) {
         (return_statement
           (return_keyword)
           (initializer_list
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal)))))))
+            (number_literal)
+            (number_literal)
+            (number_literal))))))
   (comment)
   (define_function
     (define_function_keyword)
@@ -854,10 +776,8 @@ DEFINE_FUNCTION SortArray(INTEGER array[]) {
           (assignment_expression
             left: (subscript_expression
               argument: (identifier)
-              index: (number_literal
-                (decimal_literal)))
-            right: (number_literal
-              (decimal_literal))))))))
+              index: (number_literal))
+            right: (number_literal)))))))
 
 ==============================
 Function Param Qualifiers
@@ -878,77 +798,77 @@ DEFINE_FUNCTION INTEGER MyFunc(CONSTANT CHAR buffer[]) {}
 ---
 
 (source_file
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (type_qualifier
+            (constant_keyword))
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (type_qualifier
-                (constant_keyword))
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier)))
-          (compound_statement)))
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+          (identifier)))
+      (compound_statement)))
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (type_qualifier
-                (constant_keyword))
-              (identifier)))
-          (compound_statement)))
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+          (type_qualifier
+            (constant_keyword))
+          (identifier)))
+      (compound_statement)))
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (type_qualifier
+            (constant_keyword))
+          (type_qualifier
+            (volatile_keyword))
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (type_qualifier
-                (constant_keyword))
-              (type_qualifier
-                (volatile_keyword))
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier)))
-          (compound_statement)))
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+          (identifier)))
+      (compound_statement)))
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (type_qualifier
+            (constant_keyword))
           (intrinsic_type
             (primitive_type
-              (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (type_qualifier
-                (constant_keyword))
-              (intrinsic_type
-                (primitive_type
-                  (char_keyword)))
-              (array_declarator
-                (identifier))))
-          (compound_statement))))
+              (char_keyword)))
+          (array_declarator
+            (identifier))))
+      (compound_statement))))
 
 ================================
 Function Declarations
@@ -960,38 +880,37 @@ DEFINE_LIBRARY_FUNCTION INTEGER MyFunc(CONSTANT INTEGER param1) = $FF01
 ---
 
 (source_file
-      (define_function
-        (define_library_function_keyword)
-        (function_declaration
+  (define_function
+    (define_library_function_keyword)
+    (function_declaration
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (type_qualifier
+            (constant_keyword))
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (type_qualifier
-                (constant_keyword))
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier)))))
-      (define_function
-        (define_library_function_keyword)
-        (function_declaration
+          (identifier)))))
+  (define_function
+    (define_library_function_keyword)
+    (function_declaration
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (type_qualifier
+            (constant_keyword))
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (type_qualifier
-                (constant_keyword))
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier)))
-          (number_literal
-            (hex_literal)))))
+          (identifier)))
+      (number_literal))))
 
 =================================
 Abstract Array Parameter
@@ -1018,71 +937,68 @@ DEFINE_FUNCTION INTEGER SumArrays(INTEGER[], INTEGER[10])
 ---
 
 (source_file
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (abstract_array_declarator)))
-          (compound_statement
-            (return_statement
-              (return_keyword)
-              (number_literal
-                (decimal_literal))))))
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
-          (array_return_type
-            (intrinsic_type
-              (primitive_type
-                (char_keyword))))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (char_keyword)))
-              (abstract_array_declarator
-                (abstract_array_declarator))))
-          (compound_statement
-            (return_statement
-              (return_keyword)
-              (string_literal)))))
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+          (abstract_array_declarator)))
+      (compound_statement
+        (return_statement
+          (return_keyword)
+          (number_literal)))))
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (array_return_type
+        (intrinsic_type
+          (primitive_type
+            (char_keyword))))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (char_keyword)))
+          (abstract_array_declarator
+            (abstract_array_declarator))))
+      (compound_statement
+        (return_statement
+          (return_keyword)
+          (string_literal)))))
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (abstract_array_declarator))
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (abstract_array_declarator
-                (number_literal
-                  (decimal_literal)))))
-          (compound_statement
-            (return_statement
-              (return_keyword)
-              (number_literal
-                (decimal_literal)))))))
+          (abstract_array_declarator))
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (abstract_array_declarator
+            (number_literal))))
+      (compound_statement
+        (return_statement
+          (return_keyword)
+          (number_literal))))))
 
 =================================
 Parenthesized Declarator
@@ -1103,45 +1019,42 @@ CHAR ((buffer)[50])[100]
 ---
 
 (source_file
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (integer_keyword)))
-        (parenthesized_declarator
-          (identifier)))
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (char_keyword)))
-        (parenthesized_declarator
-          (parenthesized_declarator
-            (identifier))))
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (integer_keyword)))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (parenthesized_declarator
+      (identifier)))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (parenthesized_declarator
+      (parenthesized_declarator
+        (identifier))))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (array_declarator
+      (parenthesized_declarator
+        (identifier))
+      (number_literal)))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (array_declarator
+      (parenthesized_declarator
         (array_declarator
           (parenthesized_declarator
             (identifier))
-          (number_literal
-            (decimal_literal))))
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (char_keyword)))
-        (array_declarator
-          (parenthesized_declarator
-            (array_declarator
-              (parenthesized_declarator
-                (identifier))
-              (number_literal
-                (decimal_literal))))
-          (number_literal
-            (decimal_literal)))))
+          (number_literal)))
+      (number_literal))))
 
 =================================
 Nested Custom Types
@@ -1173,92 +1086,87 @@ systemSettings.backupDevices[0].statusMessage = 'Standby'
 ---
 
 (source_file
-      (comment)
-      (section
-        (define_type_section
-          (define_type_keyword)))
-      (type_definition
-        (struct_specifier
-          (structure_keyword)
+  (comment)
+  (section
+    (define_type_section
+      (define_type_keyword)))
+  (type_definition
+    (struct_specifier
+      (structure_keyword)
+      (type_identifier)
+      (field_declaration_list
+        (field_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (field_identifier))
+        (field_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (field_identifier))
+        (field_declaration
+          (intrinsic_type
+            (primitive_type
+              (char_keyword)))
+          (array_declarator
+            (field_identifier)
+            (number_literal))))))
+  (type_definition
+    (struct_specifier
+      (structure_keyword)
+      (type_identifier)
+      (field_declaration_list
+        (field_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (field_identifier))
+        (field_declaration
           (type_identifier)
-          (field_declaration_list
-            (field_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (field_identifier))
-            (field_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (field_identifier))
-            (field_declaration
-              (intrinsic_type
-                (primitive_type
-                  (char_keyword)))
-              (array_declarator
-                (field_identifier)
-                (number_literal
-                  (decimal_literal)))))))
-      (type_definition
-        (struct_specifier
-          (structure_keyword)
+          (field_identifier))
+        (field_declaration
           (type_identifier)
-          (field_declaration_list
-            (field_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (field_identifier))
-            (field_declaration
-              (type_identifier)
-              (field_identifier))
-            (field_declaration
-              (type_identifier)
-              (array_declarator
-                (field_identifier)
-                (number_literal
-                  (decimal_literal)))))))
-      (comment)
-      (declaration
-        (type_qualifier
-          (volatile_keyword))
-        (type_identifier)
-        (identifier))
-      (declaration
-        (type_qualifier
-          (volatile_keyword))
-        (type_identifier)
-        (identifier))
-      (comment)
-      (expression_statement
-        (assignment_expression
+          (array_declarator
+            (field_identifier)
+            (number_literal))))))
+  (comment)
+  (declaration
+    (type_qualifier
+      (volatile_keyword))
+    (type_identifier)
+    (identifier))
+  (declaration
+    (type_qualifier
+      (volatile_keyword))
+    (type_identifier)
+    (identifier))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (field_expression
+        (identifier)
+        (field_identifier))
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (field_expression
+        (field_expression
+          (identifier)
+          (field_identifier))
+        (field_identifier))
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (field_expression
+        (subscript_expression
           (field_expression
             (identifier)
             (field_identifier))
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (assignment_expression
-          (field_expression
-            (field_expression
-              (identifier)
-              (field_identifier))
-            (field_identifier))
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (assignment_expression
-          (field_expression
-            (subscript_expression
-              (field_expression
-                (identifier)
-                (field_identifier))
-              (number_literal
-                (decimal_literal)))
-            (field_identifier))
-          (string_literal
-            (string_content)))))
+          (number_literal))
+        (field_identifier))
+      (string_literal
+        (string_content)))))
 
 =================================
 Function Type Declarator
@@ -1280,42 +1188,39 @@ calculator = GetCalculator()
 ---
 
 (source_file
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
-          (intrinsic_type
-            (primitive_type
-              (integer_keyword)))
-          (identifier)
-          (parameter_list)
-          (compound_statement
-            (return_statement
-              (return_keyword)
-              (number_literal
-                (decimal_literal))))))
-      (comment)
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (integer_keyword)))
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list)
+      (compound_statement
+        (return_statement
+          (return_keyword)
+          (number_literal)))))
+  (comment)
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (identifier))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (identifier)
+        (argument_list))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (parenthesized_expression
         (identifier))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (call_expression
-            (identifier)
-            (argument_list))))
-      (comment)
-      (expression_statement
-        (call_expression
-          (parenthesized_expression
-            (identifier))
-          (argument_list
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal))))))
+      (argument_list
+        (number_literal)
+        (number_literal)))))
 
 =================================
 Parameter Lists with Compound Statements
@@ -1342,68 +1247,66 @@ DEFINE_FUNCTION INTEGER Process(INTEGER count)
 ---
 
 (source_file
-      (comment)
-      (define_function
-        (define_function_keyword)
-        (function_definition
+  (comment)
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
           (intrinsic_type
             (primitive_type
               (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier)))
-          (compound_statement
-            (expression_statement
-              (call_expression
-                (identifier)
-                (argument_list
-                  (compound_statement
-                    (expression_statement
-                      (call_expression
-                        (identifier)
-                        (argument_list
-                          (identifier)
-                          (string_literal
-                            (string_content)))))
-                    (wait_statement
-                      (wait_keyword)
-                      (number_literal
-                        (decimal_literal)))
-                    (expression_statement
-                      (call_expression
-                        (identifier)
-                        (argument_list
-                          (identifier)
-                          (string_literal
-                            (string_content)))))))))
-            (expression_statement
-              (call_expression
-                (identifier)
-                (argument_list
-                  (identifier)
-                  (string_literal
-                    (string_content))
-                  (compound_statement
-                    (comment)
-                    (expression_statement
-                      (assignment_expression
-                        (identifier)
-                        (field_expression
-                          (identifier)
-                          (field_identifier))))
-                    (expression_statement
-                      (call_expression
-                        (identifier)
-                        (argument_list
-                          (identifier))))))))
-            (return_statement
-              (return_keyword)
-              (number_literal
-                (decimal_literal)))))))
+          (identifier)))
+      (compound_statement
+        (expression_statement
+          (call_expression
+            (identifier)
+            (argument_list
+              (compound_statement
+                (expression_statement
+                  (call_expression
+                    (identifier)
+                    (argument_list
+                      (identifier)
+                      (string_literal
+                        (string_content)))))
+                (wait_statement
+                  (wait_keyword)
+                  (number_literal))
+                (expression_statement
+                  (call_expression
+                    (identifier)
+                    (argument_list
+                      (identifier)
+                      (string_literal
+                        (string_content)))))))))
+        (expression_statement
+          (call_expression
+            (identifier)
+            (argument_list
+              (identifier)
+              (string_literal
+                (string_content))
+              (compound_statement
+                (comment)
+                (expression_statement
+                  (assignment_expression
+                    (identifier)
+                    (field_expression
+                      (identifier)
+                      (field_identifier))))
+                (expression_statement
+                  (call_expression
+                    (identifier)
+                    (argument_list
+                      (identifier))))))))
+        (return_statement
+          (return_keyword)
+          (number_literal))))))
 
 ==================================
 Function Definitions with Legacy Declarations
@@ -1419,40 +1322,40 @@ stack_var integer j
 ---
 
 (source_file
-      (define_function
-        (define_function_keyword)
-        (function_definition
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (intrinsic_type
+        (primitive_type
+          (integer_keyword)))
+      (identifier)
+      (parameter_list
+        (parameter_declaration
           (intrinsic_type
             (primitive_type
-              (integer_keyword)))
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (long_keyword)))
-              (identifier))
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (long_keyword)))
-              (identifier)))
-          (declaration
-            (storage_class_specifier
-              (stack_var_keyword))
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (identifier))
-          (declaration
-            (storage_class_specifier
-              (stack_var_keyword))
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (identifier))
-          (compound_statement
-            (comment)))))
+              (long_keyword)))
+          (identifier))
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (long_keyword)))
+          (identifier)))
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (compound_statement
+        (comment)))))
 
 ==================================
 Call Definitions with Legacy Declarations
@@ -1475,59 +1378,59 @@ stack_var integer j
 ---
 
 (source_file
-      (define_call
-        (define_call_keyword)
-        (call_definition
-          (string_literal
-            (string_content))
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (long_keyword)))
-              (identifier))
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (long_keyword)))
-              (identifier)))
-          (declaration
-            (storage_class_specifier
-              (stack_var_keyword))
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (identifier))
-          (declaration
-            (storage_class_specifier
-              (stack_var_keyword))
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (identifier))
-          (compound_statement
-            (comment))))
-      (define_call
-        (define_call_keyword)
-        (call_definition
-          (string_literal
-            (string_content))
-          (declaration
-            (storage_class_specifier
-              (stack_var_keyword))
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (identifier))
-          (declaration
-            (storage_class_specifier
-              (stack_var_keyword))
-            (intrinsic_type
-              (primitive_type
-                (integer_keyword)))
-            (identifier))
-          (compound_statement
-            (comment)))))
+  (define_call
+    (define_call_keyword)
+    (call_definition
+      (string_literal
+        (string_content))
+      (parameter_list
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (long_keyword)))
+          (identifier))
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (long_keyword)))
+          (identifier)))
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (compound_statement
+        (comment))))
+  (define_call
+    (define_call_keyword)
+    (call_definition
+      (string_literal
+        (string_content))
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (declaration
+        (storage_class_specifier
+          (stack_var_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (identifier))
+      (compound_statement
+        (comment)))))
 
 =======================
 Storage Class Combinations
@@ -1539,31 +1442,30 @@ local_var constant non_volatile INTEGER flags
 ---
 
 (source_file
-      (declaration
-        (storage_class_specifier
-          (stack_var_keyword))
-        (type_qualifier
-          (volatile_keyword))
-        (type_qualifier
-          (persistent_keyword))
-        (intrinsic_type
-          (primitive_type
-            (char_keyword)))
-        (array_declarator
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (declaration
-        (storage_class_specifier
-          (local_var_keyword))
-        (type_qualifier
-          (constant_keyword))
-        (type_qualifier
-          (non_volatile_keyword))
-        (intrinsic_type
-          (primitive_type
-            (integer_keyword)))
-        (identifier)))
+  (declaration
+    (storage_class_specifier
+      (stack_var_keyword))
+    (type_qualifier
+      (volatile_keyword))
+    (type_qualifier
+      (persistent_keyword))
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (array_declarator
+      (identifier)
+      (number_literal)))
+  (declaration
+    (storage_class_specifier
+      (local_var_keyword))
+    (type_qualifier
+      (constant_keyword))
+    (type_qualifier
+      (non_volatile_keyword))
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (identifier)))
 
 =============================
 Abstract Array Params
@@ -1574,35 +1476,35 @@ DEFINE_FUNCTION process(INTEGER count, CHAR data[], INTEGER maxSize, CHAR param[
 ---
 
 (source_file
-      (define_function
-        (define_function_keyword)
-        (function_definition
-          (identifier)
-          (parameter_list
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier))
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (char_keyword)))
-              (array_declarator
-                (identifier)))
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (integer_keyword)))
-              (identifier))
-            (parameter_declaration
-              (intrinsic_type
-                (primitive_type
-                  (char_keyword)))
-              (array_declarator
-                (array_declarator
-                  (identifier)))))
-          (compound_statement))))
+  (define_function
+    (define_function_keyword)
+    (function_definition
+      (identifier)
+      (parameter_list
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier))
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (char_keyword)))
+          (array_declarator
+            (identifier)))
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (integer_keyword)))
+          (identifier))
+        (parameter_declaration
+          (intrinsic_type
+            (primitive_type
+              (char_keyword)))
+          (array_declarator
+            (array_declarator
+              (identifier)))))
+      (compound_statement))))
 
 ==============================
 Complex Module Definitions
@@ -1616,27 +1518,27 @@ DEFINE_MODULE 'RmsNetLinxAdapter' mdlRms(vdvRMS,
 ---
 
 (source_file
-      (define_module
-        (define_module_keyword)
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list
-            (identifier)
-            (identifier)
-            (compound_statement
-              (expression_statement
-                (comma_expression
-                  (identifier)
-                  (identifier))))
-            (subscript_expression
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content))
+      (identifier)
+      (argument_list
+        (identifier)
+        (identifier)
+        (compound_statement
+          (expression_statement
+            (comma_expression
               (identifier)
-              (identifier))
-            (field_expression
-              (subscript_expression
-                (identifier)
-                (call_expression
-                  (identifier)
-                  (argument_list)))
-              (field_identifier))))))
+              (identifier))))
+        (subscript_expression
+          (identifier)
+          (identifier))
+        (field_expression
+          (subscript_expression
+            (identifier)
+            (call_expression
+              (identifier)
+              (argument_list)))
+          (field_identifier))))))

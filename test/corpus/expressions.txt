@@ -13,17 +13,14 @@ z = (x + y) / 4
     (assignment_expression
       (identifier)
       (binary_expression
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (binary_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -32,8 +29,7 @@ z = (x + y) / 4
           (binary_expression
             (identifier)
             (identifier)))
-        (number_literal
-          (decimal_literal))))))
+        (number_literal)))))
 
 ==================
 Logical
@@ -52,13 +48,11 @@ result = (a || b) && !c
         left: (parenthesized_expression
           (binary_expression
             left: (identifier)
-            right: (number_literal
-              (decimal_literal))))
+            right: (number_literal)))
         right: (parenthesized_expression
           (binary_expression
             left: (identifier)
-            right: (number_literal
-              (decimal_literal)))))))
+            right: (number_literal))))))
   (expression_statement
     (assignment_expression
       left: (identifier)
@@ -177,8 +171,7 @@ not_flag = !condition
   (expression_statement
     (assignment_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -287,8 +280,7 @@ value = items[index + 1]
       (identifier)
       (subscript_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -304,8 +296,7 @@ value = items[index + 1]
         (identifier)
         (binary_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))))))
+          (number_literal))))))
 
 ==================
 Devchan
@@ -323,8 +314,7 @@ status = [dvTP, 1]
       (identifier)
       (devchan_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (devchan_expression
@@ -366,8 +356,7 @@ result = (x > 5) == TRUE
         (parenthesized_expression
           (binary_expression
             (identifier)
-            (number_literal
-              (decimal_literal))))
+            (number_literal)))
         (true)))))
 
 ==================
@@ -390,16 +379,13 @@ ascii_code = 'Z'
   (expression_statement
     (assignment_expression
       (identifier)
-      (number_literal
-        (hex_literal))))
+      (number_literal)))
   (expression_statement
     (assignment_expression
       (identifier)
       (binary_expression
-        (number_literal
-          (hex_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -421,29 +407,22 @@ system = deviceID:1:systemID
     (assignment_expression
       (identifier)
       (device_literal
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (device_literal
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal))
-        (number_literal
-          (decimal_literal)))))
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (device_literal
         (identifier)
-        (number_literal
-          (decimal_literal))
+        (number_literal)
         (identifier)))))
 
 ==================
@@ -526,15 +505,13 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
       (identifier)
       (binary_expression
         (identifier)
-        (number_literal
-          (hex_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (binary_expression
         (identifier)
-        (number_literal
-          (hex_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -546,15 +523,13 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
       (identifier)
       (binary_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (binary_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (comment)
   (expression_statement
     (assignment_expression
@@ -563,14 +538,11 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
         (parenthesized_expression
           (binary_expression
             (identifier)
-            (number_literal
-              (hex_literal))))
+            (number_literal)))
         (parenthesized_expression
           (binary_expression
-            (number_literal
-              (hex_literal))
-            (number_literal
-              (decimal_literal)))))))
+            (number_literal)
+            (number_literal))))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -590,15 +562,12 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
             (parenthesized_expression
               (binary_expression
                 (identifier)
-                (number_literal
-                  (hex_literal))))
-            (number_literal
-              (decimal_literal))))
+                (number_literal)))
+            (number_literal)))
         (parenthesized_expression
           (binary_expression
             (identifier)
-            (number_literal
-              (hex_literal))))))))
+            (number_literal)))))))
 
 ===============================
 Bitwise Words
@@ -626,16 +595,14 @@ complex = ((data band $FF) lshift 8) bor (data2 band $FF)
       (binary_expression
         (identifier)
         (band)
-        (number_literal
-          (hex_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (binary_expression
         (identifier)
         (bor)
-        (number_literal
-          (hex_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -649,16 +616,14 @@ complex = ((data band $FF) lshift 8) bor (data2 band $FF)
       (binary_expression
         (identifier)
         (lshift)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
       (binary_expression
         (identifier)
         (rshift)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (comment)
   (expression_statement
     (assignment_expression
@@ -668,16 +633,13 @@ complex = ((data band $FF) lshift 8) bor (data2 band $FF)
           (binary_expression
             (identifier)
             (band)
-            (number_literal
-              (hex_literal))))
+            (number_literal)))
         (bor)
         (parenthesized_expression
           (binary_expression
-            (number_literal
-              (hex_literal))
+            (number_literal)
             (rshift)
-            (number_literal
-              (decimal_literal)))))))
+            (number_literal))))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -701,18 +663,15 @@ complex = ((data band $FF) lshift 8) bor (data2 band $FF)
               (binary_expression
                 (identifier)
                 (band)
-                (number_literal
-                  (hex_literal))))
+                (number_literal)))
             (lshift)
-            (number_literal
-              (decimal_literal))))
+            (number_literal)))
         (bor)
         (parenthesized_expression
           (binary_expression
             (identifier)
             (band)
-            (number_literal
-              (hex_literal))))))))
+            (number_literal)))))))
 
 ===============
 Devchan range
@@ -729,24 +688,20 @@ Devchan range
       (devchan_range_expression
         (devchan_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))
+          (number_literal))
         (range_operator)
         (devchan_expression
           (identifier)
-          (number_literal
-            (decimal_literal))))))
+          (number_literal)))))
   (expression_statement
     (devchan_range_expression
       (devchan_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))
+        (number_literal))
       (range_operator)
       (devchan_expression
         (identifier)
-        (number_literal
-          (decimal_literal))))))
+        (number_literal)))))
 
 =================
 Parenthesized
@@ -771,23 +726,19 @@ Parenthesized
       (comma_expression
         (devchan_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))
+          (number_literal))
         (devchan_expression
           (identifier)
-          (number_literal
-            (decimal_literal))))))
+          (number_literal)))))
   (expression_statement
     (parenthesized_expression
       (comma_expression
         (devchan_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))
+          (number_literal))
         (devchan_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))))))
+          (number_literal))))))
 
 ======================
 Array Operations
@@ -813,30 +764,25 @@ value = grid[x][y][z]
     (assignment_expression
       (subscript_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))
-      (number_literal
-        (decimal_literal))))
+        (number_literal))
+      (number_literal)))
   (expression_statement
     (assignment_expression
       (subscript_expression
         (identifier)
         (binary_expression
           (identifier)
-          (number_literal
-            (decimal_literal))))
+          (number_literal)))
       (binary_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (comment)
   (expression_statement
     (assignment_expression
       (identifier)
       (subscript_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -853,12 +799,9 @@ value = grid[x][y][z]
       (subscript_expression
         (subscript_expression
           (identifier)
-          (number_literal
-            (decimal_literal)))
-        (number_literal
-          (decimal_literal)))
-      (number_literal
-        (decimal_literal))))
+          (number_literal))
+        (number_literal))
+      (number_literal)))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -886,8 +829,7 @@ state = [vdvDevice, CHANNEL_ON]
       (identifier)
       (devchan_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))))
+        (number_literal))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -914,8 +856,7 @@ Device Assignment
     (assignment_expression
       (devchan_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))
+        (number_literal))
       (true))))
 
 ==================
@@ -937,43 +878,37 @@ PULSE[dvTP,6]
       (devchan_on_keyword))
     (devchan_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (devchan_operation_statement
     (devchan_operation
       (devchan_off_keyword))
     (devchan_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (devchan_operation_statement
     (devchan_operation
       (devchan_to_keyword))
     (devchan_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (devchan_operation_statement
     (devchan_operation
       (devchan_min_to_keyword))
     (devchan_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (devchan_operation_statement
     (devchan_operation
       (devchan_total_off_keyword))
     (devchan_expression
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (devchan_operation_statement
     (devchan_operation
       (devchan_pulse_keyword))
     (devchan_expression
       (identifier)
-      (number_literal
-        (decimal_literal)))))
+      (number_literal))))
 
 ==================
 Device Literals
@@ -993,68 +928,44 @@ Device Literals
 (source_file
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal)))
   (expression_statement
     (device_literal
-      device: (number_literal
-        (decimal_literal))
-      port: (number_literal
-        (decimal_literal))
-      system: (number_literal
-        (decimal_literal)))))
+      device: (number_literal)
+      port: (number_literal)
+      system: (number_literal))))
 
 ============================
 Device Expressions
@@ -1069,21 +980,16 @@ dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM
 (source_file
   (expression_statement
     (device_literal
-      (number_literal
-        (decimal_literal))
+      (number_literal)
       (identifier)
-      (number_literal
-        (decimal_literal))))
+      (number_literal)))
   (expression_statement
     (device_literal
-      (number_literal
-        (decimal_literal))
+      (number_literal)
       (binary_expression
         (identifier)
-        (number_literal
-          (decimal_literal)))
-      (number_literal
-        (decimal_literal))))
+        (number_literal))
+      (number_literal)))
   (expression_statement
     (device_literal
       (field_expression
@@ -1121,8 +1027,7 @@ result = system.devices[getIndex()].config.settings[2].enabled
                   (argument_list)))
               (field_identifier))
             (field_identifier))
-          (number_literal
-            (decimal_literal)))
+          (number_literal))
         (field_identifier)))))
 
 =============================
@@ -1365,8 +1270,7 @@ UserInfo user = {'John O''Malley', 42, TRUE}
           (string_content)
           (escape_sequence)
           (string_content))
-        (number_literal
-          (decimal_literal))
+        (number_literal)
         (true)))))
 
 ===============================
@@ -1474,23 +1378,201 @@ Comment Sequences in String Literals
 ---
 
 (source_file
-      (expression_statement
-        (string_literal
-          (string_content)))
-      (expression_statement
-        (string_expression
-          (string_literal
-            (string_content))))
-      (expression_statement
-        (string_literal
-          (string_content)))
-      (expression_statement
-        (string_literal
-          (string_content)))
-      (expression_statement
-        (string_expression
-          (string_literal
-            (string_content))))
-      (expression_statement
-        (string_literal
-          (string_content))))
+  (expression_statement
+    (string_literal
+      (string_content)))
+  (expression_statement
+    (string_expression
+      (string_literal
+        (string_content))))
+  (expression_statement
+    (string_literal
+      (string_content)))
+  (expression_statement
+    (string_literal
+      (string_content)))
+  (expression_statement
+    (string_expression
+      (string_literal
+        (string_content))))
+  (expression_statement
+    (string_literal
+      (string_content))))
+
+=================================
+Floating Point Literals
+=================================
+
+// Basic floating point values
+x = 3.14
+y = -2.5
+z = +0.75
+
+// Scientific notation
+sci1 = 1.25e3
+sci2 = 4.56E2
+sci3 = 7.89e+10
+sci4 = 1.23E-4
+
+// Edge cases
+edge1 = .5        // No leading digit
+edge2 = 5.        // No trailing digits
+edge3 = 0.0
+edge4 = 123.456
+edge5 = -.75      // Negative with no leading digit
+edge6 = +.25      // Positive with no leading digit
+
+// Float in expressions
+result1 = 1.5 + 2.5
+result2 = 10.0 / 2.0
+result3 = 3.0 * 1.5
+result4 = 5.75 - 2.25
+
+// Float in function calls
+SetLevel(vdvDevice, 1, 0.75)
+AdjustVolume(dvAudio, -1.5)
+CalculateOffset(3.14159, 2.71828)
+
+// Float in declarations
+DEFINE_VARIABLE
+float pi = 3.14159
+double e = 2.71828
+float values[] = {1.1, 2.2, 3.3, 4.4}
+
+---
+
+(source_file
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal)))
+  (comment)
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (identifier)
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (number_literal)
+        (number_literal))))
+  (comment)
+  (section
+    (define_variable_section
+      (define_variable_keyword)))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (float_keyword)))
+    (init_declarator
+      (identifier)
+      (number_literal)))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (double_keyword)))
+    (init_declarator
+      (identifier)
+      (number_literal)))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (float_keyword)))
+    (init_declarator
+      (array_declarator
+        (identifier))
+      (initializer_list
+        (number_literal)
+        (number_literal)
+        (number_literal)
+        (number_literal)))))
