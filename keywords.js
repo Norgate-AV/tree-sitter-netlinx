@@ -149,4 +149,12 @@ module.exports = {
     // Boolean
     true: /true/i,
     false: /false/i,
+
+    // Bitwise
+    band: /band/i,
+    bor: /bor/i,
+    bxor: /bxor/i,
+    bnot: /bnot/i,
+    lshift: /lshift/i,
+    rshift: /rshift/i,
 };

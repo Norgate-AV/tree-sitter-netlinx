@@ -601,6 +601,120 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
                 (number_literal
                   (hex_literal))))))))
 
+===============================
+Bitwise Words
+===============================
+
+// Basic bitwise operations
+mask1 = value band $FF
+mask2 = value bor $80
+flags = flag1 bxor flag2
+shifted_left = data lshift 4
+shifted_right = data rshift 2
+
+// Combined bitwise operations
+result = (value band $0F) bor ($80 rshift 1)
+combined = (flags band mask) bxor bnot control
+complex = ((data band $FF) lshift 8) bor (data2 band $FF)
+
+---
+
+(source_file
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (band)
+            (number_literal
+              (hex_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (bor)
+            (number_literal
+              (hex_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (bxor)
+            (identifier))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (lshift)
+            (number_literal
+              (decimal_literal)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (identifier)
+            (rshift)
+            (number_literal
+              (decimal_literal)))))
+      (comment)
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (band)
+                (number_literal
+                  (hex_literal))))
+            (bor)
+            (parenthesized_expression
+              (binary_expression
+                (number_literal
+                  (hex_literal))
+                (rshift)
+                (number_literal
+                  (decimal_literal)))))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (band)
+                (identifier)))
+            (bxor)
+            (unary_expression
+              (bnot)
+              (identifier)))))
+      (expression_statement
+        (assignment_expression
+          (identifier)
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (parenthesized_expression
+                  (binary_expression
+                    (identifier)
+                    (band)
+                    (number_literal
+                      (hex_literal))))
+                (lshift)
+                (number_literal
+                  (decimal_literal))))
+            (bor)
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (band)
+                (number_literal
+                  (hex_literal))))))))
+
 ===============
 Devchan range
 ===============

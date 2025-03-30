@@ -527,6 +527,26 @@
             "named": false
           },
           {
+            "type": "band",
+            "named": true
+          },
+          {
+            "type": "bor",
+            "named": true
+          },
+          {
+            "type": "bxor",
+            "named": true
+          },
+          {
+            "type": "lshift",
+            "named": true
+          },
+          {
+            "type": "rshift",
+            "named": true
+          },
+          {
             "type": "|",
             "named": false
           },
@@ -4382,6 +4402,10 @@
             "named": false
           },
           {
+            "type": "bnot",
+            "named": true
+          },
+          {
             "type": "~",
             "named": false
           }
@@ -4664,11 +4688,27 @@
     "named": true
   },
   {
+    "type": "band",
+    "named": true
+  },
+  {
+    "type": "bnot",
+    "named": true
+  },
+  {
+    "type": "bor",
+    "named": true
+  },
+  {
     "type": "break_keyword",
     "named": true
   },
   {
     "type": "button_event_keyword",
+    "named": true
+  },
+  {
+    "type": "bxor",
     "named": true
   },
   {
@@ -4901,6 +4941,10 @@
     "named": true
   },
   {
+    "type": "lshift",
+    "named": true
+  },
+  {
     "type": "module_name_keyword",
     "named": true
   },
@@ -4982,6 +5026,10 @@
   },
   {
     "type": "return_keyword",
+    "named": true
+  },
+  {
+    "type": "rshift",
     "named": true
   },
   {

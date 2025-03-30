@@ -137,4 +137,12 @@ module.exports = {
     // Boolean keywords
     true: (_) => keywords.true,
     false: (_) => keywords.false,
+
+    // Bitwise keywords
+    band: (_) => keywords.band,
+    bor: (_) => keywords.bor,
+    bxor: (_) => keywords.bxor,
+    bnot: (_) => keywords.bnot,
+    lshift: (_) => keywords.lshift,
+    rshift: (_) => keywords.rshift,
 };

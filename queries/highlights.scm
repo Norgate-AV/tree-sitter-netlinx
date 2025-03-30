@@ -114,6 +114,13 @@
 
     (struct_keyword)
     (structure_keyword)
+
+    (band)
+    (bor)
+    (bxor)
+    (bnot)
+    (lshift)
+    (rshift)
 ] @keyword
 
 ;; ============================================================================

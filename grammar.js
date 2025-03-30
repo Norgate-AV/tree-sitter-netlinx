@@ -1197,7 +1197,7 @@ module.exports = grammar({
             prec.right(
                 PREC.UNARY,
                 seq(
-                    field("operator", choice("!", "~", "-", "+")),
+                    field("operator", choice("!", "~", "-", "+", $.bnot)),
                     field("argument", $.expression),
                 ),
             ),
@@ -1223,11 +1223,17 @@ module.exports = grammar({
                 ["<", PREC.RELATIONAL],
                 ["<<", PREC.SHIFT],
                 [">>", PREC.SHIFT],
+                [$.band, PREC.BITWISE_AND],
+                [$.bor, PREC.INCLUSIVE_OR],
+                [$.bxor, PREC.EXCLUSIVE_OR],
+                [$.lshift, PREC.SHIFT],
+                [$.rshift, PREC.SHIFT],
             ];
 
             return choice(
                 ...table.map(([operator, precedence]) => {
                     return prec.left(
+                        // @ts-ignore
                         precedence,
                         seq(
                             field("left", $.expression),

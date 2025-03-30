@@ -16,6 +16,23 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
     //         ^ type
     //                 ^ variable
 
+    result = x band y bor z bxor 1 lshift 2 rshift 1 bnot x
+    // ^ variable
+    //     ^ operator
+    //       ^ parameter
+    //         ^ keyword
+    //              ^ parameter
+    //                ^ keyword
+    //                    ^ variable
+    //                      ^ keyword
+    //                           ^ number
+    //                             ^ keyword
+    //                                    ^ number
+    //                                       ^ keyword
+    //                                             ^ number
+    //                                                 ^ keyword
+    //                                                    ^ parameter
+
     result = x + y * 10
     // ^ variable
     //     ^ operator
