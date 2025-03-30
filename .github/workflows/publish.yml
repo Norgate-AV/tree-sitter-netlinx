@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      changelog: ${{ steps.changelog.outputs.changelog }}
+      release_notes: ${{ steps.release_notes.outputs.release_notes }}
 
     steps:
       - name: Checkout
@@ -81,46 +81,61 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create release notes
+        id: release_notes
+        run: |
+          # Read the generated release notes into an output variable
+          # Strip off everything before the first "###" header
+          RELEASE_NOTES=$(git-cliff --current | sed -n '/^###/,$p')
+
+          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$RELEASE_NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
   github:
     name: Publish GitHub Release
 
     needs: changelog
 
-    uses: tree-sitter/workflows/.github/workflows/release.yml@main
+    uses: ./.github/workflows/release.yml
     with:
       generate: true
+      abi-version: "14"
       attestations: true
-      # body: ${{ step.changelog.outputs.changelog }}
+      release-body: ${{ needs.changelog.outputs.release_notes }}
 
   npm:
     name: Publish NPM package
 
     needs: changelog
 
-    uses: tree-sitter/workflows/.github/workflows/package-npm.yml@main
+    uses: ./.github/workflows/package-npm.yml
     secrets:
       NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     with:
       generate: true
+      abi-version: "14"
 
   crates:
     name: Publish Crates package
 
     needs: changelog
 
-    uses: tree-sitter/workflows/.github/workflows/package-crates.yml@main
+    uses: ./.github/workflows/package-crates.yml
     secrets:
       CARGO_REGISTRY_TOKEN: ${{secrets.CARGO_REGISTRY_TOKEN}}
     with:
       generate: true
+      abi-version: "14"
 
   pypi:
     name: Publish PyPI package
 
     needs: changelog
 
-    uses: tree-sitter/workflows/.github/workflows/package-pypi.yml@main
+    uses: ./.github/workflows/package-pypi.yml
     secrets:
       PYPI_API_TOKEN: ${{secrets.PYPI_API_TOKEN}}
     with:
       generate: true
+      abi-version: "14"
