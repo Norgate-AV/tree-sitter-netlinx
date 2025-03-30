@@ -9,31 +9,31 @@ z = (x + y) / 4
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (number_literal
+          (decimal_literal))
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
             (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (identifier)))
-            (number_literal
-              (decimal_literal))))))
+            (identifier)))
+        (number_literal
+          (decimal_literal))))))
 
 ==================
 Logical
@@ -45,30 +45,30 @@ result = (a || b) && !c
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          left: (identifier)
-          right: (binary_expression
-            left: (parenthesized_expression
-              (binary_expression
-                left: (identifier)
-                right: (number_literal
-                  (decimal_literal))))
-            right: (parenthesized_expression
-              (binary_expression
-                left: (identifier)
-                right: (number_literal
-                  (decimal_literal)))))))
-      (expression_statement
-        (assignment_expression
-          left: (identifier)
-          right: (binary_expression
-            left: (parenthesized_expression
-              (binary_expression
-                left: (identifier)
-                right: (identifier)))
-            right: (unary_expression
-              argument: (identifier))))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (number_literal
+              (decimal_literal))))
+        right: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (number_literal
+              (decimal_literal)))))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (identifier)))
+        right: (unary_expression
+          argument: (identifier))))))
 
 ==================
 String
@@ -83,43 +83,43 @@ command = "'COMMAND-',CMD_TYPE,',',PARAM"
 
 (source_file
   (expression_statement
-        (assignment_expression
-          left: (identifier)
-          right: (string_expression
-            (string_literal
-              (string_content)))))
-      (expression_statement
-        (assignment_expression
-          left: (identifier)
-          right: (string_expression
-            (string_literal
-              (string_content))
-            (identifier))))
-      (expression_statement
-        (assignment_expression
-          left: (identifier)
-          right: (string_expression
-            (string_literal
-              (string_content))
-            (identifier)
-            (string_literal
-              (string_content))
-            (identifier))))
-      (expression_statement
-        (string_expression
-          (string_literal
-            (string_content))
+    (assignment_expression
+      left: (identifier)
+      right: (string_expression
+        (string_literal
+          (string_content)))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (string_expression
+        (string_literal
+          (string_content))
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (string_expression
+        (string_literal
+          (string_content))
+        (identifier)
+        (string_literal
+          (string_content))
+        (identifier))))
+  (expression_statement
+    (string_expression
+      (string_literal
+        (string_content))
+      (field_expression
+        argument: (identifier)
+        field: (field_identifier))
+      (string_literal
+        (string_content))
+      (call_expression
+        function: (identifier)
+        arguments: (argument_list
           (field_expression
             argument: (identifier)
-            field: (field_identifier))
-          (string_literal
-            (string_content))
-          (call_expression
-            function: (identifier)
-            arguments: (argument_list
-              (field_expression
-                argument: (identifier)
-                field: (field_identifier)))))))
+            field: (field_identifier)))))))
 
 ==================
 Update
@@ -132,11 +132,11 @@ value--
 
 (source_file
   (expression_statement
-        (update_expression
-          argument: (identifier)))
-      (expression_statement
-        (update_expression
-          argument: (identifier))))
+    (update_expression
+      argument: (identifier)))
+  (expression_statement
+    (update_expression
+      argument: (identifier))))
 
 ================================================================================
 Comma
@@ -148,19 +148,19 @@ i--, j--;
 --------------------------------------------------------------------------------
 
 (source_file
-      (expression_statement
-        (comma_expression
-          (update_expression
-            (identifier))
-          (update_expression
-            (identifier))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (update_expression
-              (identifier))
-            (update_expression
-              (identifier))))))
+  (expression_statement
+    (comma_expression
+      (update_expression
+        (identifier))
+      (update_expression
+        (identifier))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (update_expression
+          (identifier))
+        (update_expression
+          (identifier))))))
 
 ==================
 Unary
@@ -174,26 +174,26 @@ not_flag = !condition
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (unary_expression
-            (identifier))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (unary_expression
-            (identifier))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (unary_expression
-            (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (identifier)))))
 
 ==================
 Call
@@ -206,29 +206,29 @@ nested = outer(inner(x), y)
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (identifier)
+        (argument_list
           (identifier)
+          (identifier)))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (identifier)
+        (argument_list
           (call_expression
             (identifier)
             (argument_list
-              (identifier)
-              (identifier)))))
-      (expression_statement
-        (call_expression
-          (identifier)
-          (argument_list)))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (call_expression
-            (identifier)
-            (argument_list
-              (call_expression
-                (identifier)
-                (argument_list
-                  (identifier)))
-              (identifier))))))
+              (identifier)))
+          (identifier))))))
 
 ==================
 Field
@@ -242,34 +242,34 @@ obj.method()
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (field_expression
+        (identifier)
+        (field_identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (field_expression
+        (field_expression
           (identifier)
-          (field_expression
-            (identifier)
-            (field_identifier))))
-      (expression_statement
-        (assignment_expression
+          (field_identifier))
+        (field_identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (field_expression
+        (field_expression
           (identifier)
-          (field_expression
-            (field_expression
-              (identifier)
-              (field_identifier))
-            (field_identifier))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (field_expression
-            (field_expression
-              (identifier)
-              (field_identifier))
-            (field_identifier))))
-      (expression_statement
-        (call_expression
-          (field_expression
-            (identifier)
-            (field_identifier))
-          (argument_list))))
+          (field_identifier))
+        (field_identifier))))
+  (expression_statement
+    (call_expression
+      (field_expression
+        (identifier)
+        (field_identifier))
+      (argument_list))))
 
 ==================
 Subscript
@@ -282,31 +282,30 @@ value = items[index + 1]
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (subscript_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (subscript_expression
+        (subscript_expression
           (identifier)
-          (subscript_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
+          (identifier))
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (subscript_expression
+        (identifier)
+        (binary_expression
           (identifier)
-          (subscript_expression
-            (subscript_expression
-              (identifier)
-              (identifier))
-            (identifier))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (subscript_expression
-            (identifier)
-            (binary_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))))))
-
+          (number_literal
+            (decimal_literal)))))))
 
 ==================
 Devchan
@@ -319,27 +318,27 @@ status = [dvTP, 1]
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (devchan_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (devchan_expression
-            (identifier)
-            (identifier))
-          (true)))
-      (expression_statement
-        (assignment_expression
-          (devchan_expression
-            (identifier)
-            (identifier))
-          (devchan_expression
-            (identifier)
-            (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (devchan_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (devchan_expression
+        (identifier)
+        (identifier))
+      (true)))
+  (expression_statement
+    (assignment_expression
+      (devchan_expression
+        (identifier)
+        (identifier))
+      (devchan_expression
+        (identifier)
+        (identifier)))))
 
 ==================
 Boolean Literals
@@ -352,24 +351,24 @@ result = (x > 5) == TRUE
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (true)))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (false)))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (true)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (false)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (number_literal
-                  (decimal_literal))))
-            (true)))))
+            (identifier)
+            (number_literal
+              (decimal_literal))))
+        (true)))))
 
 ==================
 Character and Hex Literals
@@ -383,29 +382,29 @@ ascii_code = 'Z'
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (number_literal
-            (hex_literal))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (number_literal
-              (hex_literal))
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (number_literal
+        (hex_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (number_literal
+          (hex_literal))
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content)))))
 
 ==================
 Device
@@ -418,34 +417,34 @@ system = deviceID:1:systemID
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (device_literal
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (device_literal
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal))
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (device_literal
-            (identifier)
-            (number_literal
-              (decimal_literal))
-            (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (device_literal
+        (number_literal
+          (decimal_literal))
+        (number_literal
+          (decimal_literal))
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (device_literal
+        (number_literal
+          (decimal_literal))
+        (number_literal
+          (decimal_literal))
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (device_literal
+        (identifier)
+        (number_literal
+          (decimal_literal))
+        (identifier)))))
 
 ==================
 Complex Nested
@@ -458,49 +457,49 @@ combined = func(a.field, [device, channel]) + value[i++]
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (identifier)))
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (identifier))))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+            (identifier)
+            (identifier)))
+        (parenthesized_expression
           (binary_expression
+            (identifier)
+            (identifier))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (unary_expression
+          (parenthesized_expression
+            (binary_expression
+              (identifier)
+              (identifier))))
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
             (unary_expression
-              (parenthesized_expression
-                (binary_expression
-                  (identifier)
-                  (identifier))))
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (unary_expression
-                  (identifier)))))))
-      (expression_statement
-        (assignment_expression
+              (identifier)))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (call_expression
           (identifier)
-          (binary_expression
-            (call_expression
+          (argument_list
+            (field_expression
               (identifier)
-              (argument_list
-                (field_expression
-                  (identifier)
-                  (field_identifier))
-                (devchan_expression
-                  (identifier)
-                  (identifier))))
-            (subscript_expression
+              (field_identifier))
+            (devchan_expression
               (identifier)
-              (update_expression
-                (identifier)))))))
+              (identifier))))
+        (subscript_expression
+          (identifier)
+          (update_expression
+            (identifier)))))))
 
 ==================
 Bitwise
@@ -521,85 +520,85 @@ complex = ((data & $FF) << 8) | (data2 & $FF)
 ---
 
 (source_file
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (number_literal
+          (hex_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (number_literal
+          (hex_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
             (identifier)
             (number_literal
-              (hex_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+              (hex_literal))))
+        (parenthesized_expression
           (binary_expression
-            (identifier)
             (number_literal
-              (hex_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (identifier)
-            (identifier))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (identifier)
+              (hex_literal))
             (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+              (decimal_literal)))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
             (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
+            (identifier)))
+        (unary_expression
+          (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
             (parenthesized_expression
               (binary_expression
                 (identifier)
                 (number_literal
                   (hex_literal))))
-            (parenthesized_expression
-              (binary_expression
-                (number_literal
-                  (hex_literal))
-                (number_literal
-                  (decimal_literal)))))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+            (number_literal
+              (decimal_literal))))
+        (parenthesized_expression
           (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (identifier)))
-            (unary_expression
-              (identifier)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (parenthesized_expression
-                  (binary_expression
-                    (identifier)
-                    (number_literal
-                      (hex_literal))))
-                (number_literal
-                  (decimal_literal))))
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (number_literal
-                  (hex_literal))))))))
+            (identifier)
+            (number_literal
+              (hex_literal))))))))
 
 ===============================
 Bitwise Words
@@ -620,50 +619,83 @@ complex = ((data band $FF) lshift 8) bor (data2 band $FF)
 ---
 
 (source_file
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (band)
+        (number_literal
+          (hex_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (bor)
+        (number_literal
+          (hex_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (bxor)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (lshift)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (rshift)
+        (number_literal
+          (decimal_literal)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
             (identifier)
             (band)
             (number_literal
-              (hex_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+              (hex_literal))))
+        (bor)
+        (parenthesized_expression
           (binary_expression
-            (identifier)
-            (bor)
             (number_literal
-              (hex_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (identifier)
-            (bxor)
-            (identifier))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (identifier)
-            (lshift)
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (identifier)
+              (hex_literal))
             (rshift)
             (number_literal
-              (decimal_literal)))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
+              (decimal_literal)))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (band)
+            (identifier)))
+        (bxor)
+        (unary_expression
+          (bnot)
+          (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
           (binary_expression
             (parenthesized_expression
               (binary_expression
@@ -671,49 +703,16 @@ complex = ((data band $FF) lshift 8) bor (data2 band $FF)
                 (band)
                 (number_literal
                   (hex_literal))))
-            (bor)
-            (parenthesized_expression
-              (binary_expression
-                (number_literal
-                  (hex_literal))
-                (rshift)
-                (number_literal
-                  (decimal_literal)))))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+            (lshift)
+            (number_literal
+              (decimal_literal))))
+        (bor)
+        (parenthesized_expression
           (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (band)
-                (identifier)))
-            (bxor)
-            (unary_expression
-              (bnot)
-              (identifier)))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (binary_expression
-            (parenthesized_expression
-              (binary_expression
-                (parenthesized_expression
-                  (binary_expression
-                    (identifier)
-                    (band)
-                    (number_literal
-                      (hex_literal))))
-                (lshift)
-                (number_literal
-                  (decimal_literal))))
-            (bor)
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (band)
-                (number_literal
-                  (hex_literal))))))))
+            (identifier)
+            (band)
+            (number_literal
+              (hex_literal))))))))
 
 ===============
 Devchan range
@@ -725,29 +724,29 @@ Devchan range
 ---
 
 (source_file
-      (expression_statement
-        (parenthesized_expression
-          (devchan_range_expression
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (range_operator)
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal))))))
-      (expression_statement
-        (devchan_range_expression
-          (devchan_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))
-          (range_operator)
-          (devchan_expression
-            (identifier)
-            (number_literal
-              (decimal_literal))))))
+  (expression_statement
+    (parenthesized_expression
+      (devchan_range_expression
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (range_operator)
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))))
+  (expression_statement
+    (devchan_range_expression
+      (devchan_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))
+      (range_operator)
+      (devchan_expression
+        (identifier)
+        (number_literal
+          (decimal_literal))))))
 
 =================
 Parenthesized
@@ -760,35 +759,35 @@ Parenthesized
 ---
 
 (source_file
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (identifier)
-            (comma_expression
-              (identifier)
-              (identifier)))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal))))))
-      (expression_statement
-        (parenthesized_expression
-          (comma_expression
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (devchan_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (identifier)
+        (comma_expression
+          (identifier)
+          (identifier)))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal))))))
+  (expression_statement
+    (parenthesized_expression
+      (comma_expression
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))
+        (devchan_expression
+          (identifier)
+          (number_literal
+            (decimal_literal)))))))
 
 ======================
 Array Operations
@@ -809,67 +808,67 @@ value = grid[x][y][z]
 ---
 
 (source_file
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (subscript_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (subscript_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (assignment_expression
+      (subscript_expression
+        (identifier)
+        (binary_expression
+          (identifier)
           (number_literal
             (decimal_literal))))
-      (expression_statement
-        (assignment_expression
-          (subscript_expression
-            (identifier)
-            (binary_expression
-              (identifier)
-              (number_literal
-                (decimal_literal))))
-          (binary_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (comment)
-      (expression_statement
-        (assignment_expression
+      (binary_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (subscript_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (subscript_expression
           (identifier)
-          (subscript_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))))
-      (expression_statement
-        (assignment_expression
+          (identifier))
+        (subscript_expression
           (identifier)
-          (binary_expression
-            (subscript_expression
-              (identifier)
-              (identifier))
-            (subscript_expression
-              (identifier)
-              (identifier)))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (subscript_expression
-            (subscript_expression
-              (identifier)
-              (number_literal
-                (decimal_literal)))
-            (number_literal
-              (decimal_literal)))
+          (identifier)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (subscript_expression
+        (subscript_expression
+          (identifier)
           (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
+            (decimal_literal)))
+        (number_literal
+          (decimal_literal)))
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (subscript_expression
+        (subscript_expression
           (subscript_expression
-            (subscript_expression
-              (subscript_expression
-                (identifier)
-                (identifier))
-              (identifier))
-            (identifier)))))
+            (identifier)
+            (identifier))
+          (identifier))
+        (identifier)))))
 
 ==================
 Device Reference
@@ -1068,34 +1067,34 @@ dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM
 ---
 
 (source_file
-      (expression_statement
-        (device_literal
-          (number_literal
-            (decimal_literal))
-          (identifier)
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (device_literal
-          (number_literal
-            (decimal_literal))
-          (binary_expression
-            (identifier)
-            (number_literal
-              (decimal_literal)))
-          (number_literal
-            (decimal_literal))))
-      (expression_statement
-        (device_literal
-          (field_expression
-            (identifier)
-            (field_identifier))
-          (field_expression
-            (identifier)
-            (field_identifier))
-          (field_expression
-            (identifier)
-            (field_identifier)))))
+  (expression_statement
+    (device_literal
+      (number_literal
+        (decimal_literal))
+      (identifier)
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (device_literal
+      (number_literal
+        (decimal_literal))
+      (binary_expression
+        (identifier)
+        (number_literal
+          (decimal_literal)))
+      (number_literal
+        (decimal_literal))))
+  (expression_statement
+    (device_literal
+      (field_expression
+        (identifier)
+        (field_identifier))
+      (field_expression
+        (identifier)
+        (field_identifier))
+      (field_expression
+        (identifier)
+        (field_identifier)))))
 
 =========================
 Deep Field Access
@@ -1106,25 +1105,25 @@ result = system.devices[getIndex()].config.settings[2].enabled
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (field_expression
+        (subscript_expression
           (field_expression
-            (subscript_expression
-              (field_expression
+            (field_expression
+              (subscript_expression
                 (field_expression
-                  (subscript_expression
-                    (field_expression
-                      (identifier)
-                      (field_identifier))
-                    (call_expression
-                      (identifier)
-                      (argument_list)))
+                  (identifier)
                   (field_identifier))
-                (field_identifier))
-              (number_literal
-                (decimal_literal)))
-            (field_identifier)))))
+                (call_expression
+                  (identifier)
+                  (argument_list)))
+              (field_identifier))
+            (field_identifier))
+          (number_literal
+            (decimal_literal)))
+        (field_identifier)))))
 
 =============================
 Complex Device Literals
@@ -1135,19 +1134,19 @@ target_device = (BASE_ID + offset):(PORT_ARRAY[index]):SYSTEM_ID
 ---
 
 (source_file
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (device_literal
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (identifier)))
-            (parenthesized_expression
-              (subscript_expression
-                (identifier)
-                (identifier)))
-            (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (device_literal
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (identifier)))
+        (parenthesized_expression
+          (subscript_expression
+            (identifier)
+            (identifier)))
+        (identifier)))))
 
 ==============================
 String Literal Escape
@@ -1174,51 +1173,75 @@ onlyEscaped = ''''''
 ---
 
 (source_file
-      (expression_statement
-        (string_literal
-          (string_content)))
-      (expression_statement
-        (string_literal
-          (string_content)))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content)))))
+  (expression_statement
+    (string_literal
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)
+      (string_content)))
+  (expression_statement
+    (string_literal
+      (string_content)
+      (escape_sequence)
+      (string_content)))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (escape_sequence))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (escape_sequence)
+        (escape_sequence)))))
 
 ===============================
 String Literals as Function Arguments
@@ -1235,37 +1258,52 @@ SetName(userID, 'O''Brien', isActive)
 ---
 
 (source_file
-      (comment)
-      (expression_statement
-        (call_expression
-          (identifier)
-          (argument_list
-            (identifier)
-            (string_literal
-              (string_content)))))
-      (expression_statement
-        (call_expression
-          (identifier)
-          (argument_list
-            (string_literal
-              (string_content)))))
-      (expression_statement
-        (call_expression
-          (identifier)
-          (argument_list
-            (string_literal
-              (string_content))
-            (string_literal
-              (string_content)))))
-      (comment)
-      (expression_statement
-        (call_expression
-          (identifier)
-          (argument_list
-            (identifier)
-            (string_literal
-              (string_content))
-            (identifier)))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (identifier)
+        (string_literal
+          (string_content)
+          (escape_sequence)
+          (string_content)))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (string_literal
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (escape_sequence)))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (string_literal
+          (string_content))
+        (string_literal
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (escape_sequence)
+          (string_content)
+          (escape_sequence)
+          (string_content)))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (identifier)
+        (string_literal
+          (string_content)
+          (escape_sequence)
+          (string_content))
+        (identifier)))))
 
 ===============================
 String Literals in Declarations
@@ -1283,48 +1321,53 @@ UserInfo user = {'John O''Malley', 42, TRUE}
 ---
 
 (source_file
-      (comment)
-      (section
-        (define_variable_section
-          (define_variable_keyword)))
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (char_keyword)))
-        (init_declarator
-          (array_declarator
-            (identifier))
-          (string_literal
-            (string_content))))
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (char_keyword)))
-        (init_declarator
-          (array_declarator
-            (identifier))
-          (string_literal
-            (string_content))))
-      (declaration
-        (intrinsic_type
-          (primitive_type
-            (char_keyword)))
-        (init_declarator
-          (array_declarator
-            (identifier))
-          (string_literal
-            (string_content))))
-      (comment)
-      (declaration
-        (type_identifier)
-        (init_declarator
-          (identifier)
-          (initializer_list
-            (string_literal
-              (string_content))
-            (number_literal
-              (decimal_literal))
-            (true)))))
+  (comment)
+  (section
+    (define_variable_section
+      (define_variable_keyword)))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (init_declarator
+      (array_declarator
+        (identifier))
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content))))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (init_declarator
+      (array_declarator
+        (identifier))
+      (string_literal)))
+  (declaration
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (init_declarator
+      (array_declarator
+        (identifier))
+      (string_literal
+        (escape_sequence))))
+  (comment)
+  (declaration
+    (type_identifier)
+    (init_declarator
+      (identifier)
+      (initializer_list
+        (string_literal
+          (string_content)
+          (escape_sequence)
+          (string_content))
+        (number_literal
+          (decimal_literal))
+        (true)))))
 
 ===============================
 String Literals in Module and Program Names
@@ -1340,25 +1383,33 @@ DEFINE_MODULE 'User''s Authentication Module' AuthModule(vdvAuth, dvTP)
 ---
 
 (source_file
-      (comment)
-      (program_name
-        (program_name_keyword)
-        (string_literal
-          (string_content)))
-      (module_name
-        (module_name_keyword)
-        (string_literal
-          (string_content)))
-      (comment)
-      (define_module
-        (define_module_keyword)
-        (module_definition
-          (string_literal
-            (string_content))
-          (identifier)
-          (argument_list
-            (identifier)
-            (identifier)))))
+  (comment)
+  (program_name
+    (program_name_keyword)
+    (string_literal
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)
+      (string_content)))
+  (module_name
+    (module_name_keyword)
+    (string_literal
+      (string_content)
+      (escape_sequence)
+      (string_content)))
+  (comment)
+  (define_module
+    (define_module_keyword)
+    (module_definition
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content))
+      (identifier)
+      (argument_list
+        (identifier)
+        (identifier)))))
 
 ===============================
 String Literals with Edge Cases
@@ -1375,25 +1426,71 @@ justOneQuote = ''''
 ---
 
 (source_file
-      (comment)
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence)
+        (string_content)
+        (escape_sequence))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (string_literal
+        (escape_sequence)))))
+
+======================================
+Comment Sequences in String Literals
+======================================
+
+'//'
+"'//'"
+'/*'
+'/**/'
+"'(*'"
+'(**)'
+
+---
+
+(source_file
       (expression_statement
-        (assignment_expression
-          (identifier)
+        (string_literal
+          (string_content)))
+      (expression_statement
+        (string_expression
           (string_literal
             (string_content))))
       (expression_statement
-        (assignment_expression
-          (identifier)
+        (string_literal
+          (string_content)))
+      (expression_statement
+        (string_literal
+          (string_content)))
+      (expression_statement
+        (string_expression
           (string_literal
             (string_content))))
       (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content))))
-      (comment)
-      (expression_statement
-        (assignment_expression
-          (identifier)
-          (string_literal
-            (string_content)))))
+        (string_literal
+          (string_content))))

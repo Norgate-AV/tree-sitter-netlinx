@@ -1370,13 +1370,19 @@ module.exports = grammar({
         string_literal: ($) =>
             seq(
                 "'",
-                alias(
-                    // Allow for escaped single quotes by doubling them
-                    token.immediate(prec(1, /([^'\n]|'')*/)),
-                    $.string_content,
+                repeat(
+                    choice(
+                        alias(
+                            token.immediate(prec(1, /[^'\n]+/)),
+                            $.string_content,
+                        ),
+                        $.escape_sequence,
+                    ),
                 ),
                 "'",
             ),
+
+        escape_sequence: (_) => token(prec(1, seq("'", /'/))),
 
         number_literal: ($) => choice($.decimal_literal, $.hex_literal),
 
@@ -1393,14 +1399,18 @@ module.exports = grammar({
 
         comment: (_) =>
             token(
+                // prec(
+                // -10,
                 choice(
-                    seq("//", /[^\n]*/), // Single-line comments
+                    // seq("//", /[^\n]*/), // Single-line comments
+                    seq("//", /(\\+(.|\r?\n)|[^\\\n])*/), // Single-line comments
                     seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"), // C-style multi-line comments
 
                     // Adding choice for Pascal-style comment endings
                     // This is to support this odd use case in the NetLinx.axi file
                     seq("(*", /[^*]*\*+(?:[^)*/][^*]*\*+)*/, choice(")", "/")), // Pascal-style comments
                 ),
+                // ),
             ),
 
         _semicolon: ($) => choice($._automatic_semicolon, ";"),

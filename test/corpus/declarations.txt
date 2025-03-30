@@ -1056,8 +1056,7 @@ DEFINE_FUNCTION INTEGER SumArrays(INTEGER[], INTEGER[10])
           (compound_statement
             (return_statement
               (return_keyword)
-              (string_literal
-                (string_content))))))
+              (string_literal)))))
       (comment)
       (define_function
         (define_function_keyword)
