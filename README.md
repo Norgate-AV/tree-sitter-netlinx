@@ -39,7 +39,7 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
     - [Flexibility Over Semantic Correctness](#flexibility-over-semantic-correctness)
 - [Team :soccer:](#team-soccer)
-- [Contributing :sparkles:](#contributing-sparkles)
+- [Contributors :sparkles:](#contributors-sparkles)
 - [LICENSE :balance_scale:](#license-balance_scale)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -237,7 +237,26 @@ This project is maintained by the following person(s) and a bunch of [awesome co
   </tr>
 </table>
 
-## Contributing :sparkles:
+## Contributors :sparkles:
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+Thanks go to these awesome people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://allcontributors.org) specification.
 
 Contributions are welcome! Please fork and open a pull request if you have any suggestions or improvements.
 

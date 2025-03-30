@@ -29,9 +29,13 @@
         "node-gyp-build": "^4.8.4"
     },
     "devDependencies": {
+        "@commitlint/cli": "^19.8.0",
+        "@commitlint/config-conventional": "^19.8.0",
         "@types/lint-staged": "^13.3.0",
         "@types/micromatch": "^4.0.9",
         "@types/node": "^22.13.14",
+        "all-contributors-cli": "^6.26.1",
+        "commitizen": "^4.3.1",
         "doctoc": "^2.2.1",
         "eslint": "^9.17.0",
         "eslint-config-prettier": "^10.1.1",
@@ -53,6 +57,7 @@
         }
     },
     "scripts": {
+        "commit": "git-cz",
         "install": "node-gyp-build",
         "prerebuild": "pnpm generate",
         "rebuild": "node-gyp rebuild",
@@ -64,7 +69,10 @@
         "doctoc": "doctoc README.md",
         "generate": "tree-sitter generate --abi 14",
         "pretest": "pnpm generate",
-        "test": "tree-sitter test"
+        "test": "tree-sitter test",
+        "contrib:add": "all-contributors add",
+        "contrib:generate": "all-contributors generate",
+        "contrib:check": "all-contributors check"
     },
     "pnpm": {
         "onlyBuiltDependencies": [
