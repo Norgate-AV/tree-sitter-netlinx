@@ -539,3 +539,138 @@ switch (foo) {
                     (preproc_end_if_keyword)))))
             (preproc_end_if
               (preproc_end_if_keyword))))))
+
+=====================================
+Conditionals in Select/Active
+:skip
+=====================================
+
+select {
+    active(foo): {}
+    active(bar): {}
+
+    #IF_DEFINED FOOBAR
+    active(baz): {
+        #IF_DEFINED BARBAZ
+        // code here
+        #END_IF
+    }
+    #END_IF
+}
+
+---
+
+
+
+===============================
+Conditionals in Button Event
+:skip
+===============================
+
+button_event[dvTP, 1]
+#IF_DEFINED FOO
+button_event[dvTP, 2]
+#END_IF
+{
+    push: {}
+
+    #IF_DEFINED BAR
+    release: {}
+    #END_IF
+}
+
+---
+
+
+
+===============================
+Conditionals in Data Event
+:skip
+===============================
+
+data_event[dvTP1]
+#IF_DEFINED FOO
+data_event[dvTP2]
+#END_IF
+{
+    online: {}
+
+    #IF_DEFINED BAR
+    string: {}
+    command: {}
+    #END_IF
+}
+
+---
+
+
+
+===============================
+Conditionals in Channel Event
+:skip
+===============================
+
+channel_event[dvTP, 1]
+#IF_DEFINED FOO
+channel_event[dvTP, 2]
+#END_IF
+{
+    on: {}
+
+    #IF_DEFINED BAR
+    off: {}
+    #END_IF
+}
+
+---
+
+
+
+===============================
+Conditionals in Level Event
+:skip
+===============================
+
+level_event[dvTP, 1]
+#IF_DEFINED FOO
+level_event[dvTP, 2]
+#END_IF
+{
+
+}
+
+---
+
+
+
+===============================
+Conditionals in Timeline Event
+:skip
+===============================
+
+timeline_event[TL1]
+#IF_DEFINED FOO
+timeline_event[TL2]
+#END_IF
+{
+
+}
+
+---
+
+
+
+===============================
+Conditionals in Custom Event
+:skip
+===============================
+
+custom_event[dvTP, 1, 1001]
+#IF_DEFINED FOO
+custom_event[dvTP, 1, 1002]
+#END_IF
+{
+
+}
+
+---
