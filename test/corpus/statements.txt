@@ -306,37 +306,38 @@ SELECT {
 (source_file
   (select_statement
     (select_keyword)
-    (active_block
-      (active_keyword)
-      condition: (parenthesized_expression
-        (binary_expression
-          left: (identifier)
-          right: (identifier)))
-      body: (compound_statement
-        (expression_statement
-          (call_expression
-            function: (identifier)
-            arguments: (argument_list)))))
-    (active_block
-      (active_keyword)
-      condition: (parenthesized_expression
-        (binary_expression
-          left: (identifier)
-          right: (identifier)))
-      body: (compound_statement
-        (expression_statement
-          (call_expression
-            function: (identifier)
-            arguments: (argument_list)))))
-    (active_block
-      (active_keyword)
-      condition: (parenthesized_expression
-        (true))
-      body: (compound_statement
-        (expression_statement
-          (call_expression
-            function: (identifier)
-            arguments: (argument_list)))))))
+    body: (compound_statement
+      (active_statement
+        (active_keyword)
+        condition: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (identifier)))
+        body: (compound_statement
+          (expression_statement
+            (call_expression
+              function: (identifier)
+              arguments: (argument_list)))))
+      (active_statement
+        (active_keyword)
+        condition: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (identifier)))
+        body: (compound_statement
+          (expression_statement
+            (call_expression
+              function: (identifier)
+              arguments: (argument_list)))))
+      (active_statement
+        (active_keyword)
+        condition: (parenthesized_expression
+          (true))
+        body: (compound_statement
+          (expression_statement
+            (call_expression
+              function: (identifier)
+              arguments: (argument_list))))))))
 
 ==================
 Dangling else and nested if statements

@@ -887,6 +887,7 @@ module.exports = grammar({
                 $.if_statement,
                 $.switch_statement,
                 $.select_statement,
+                $.active_statement,
                 $.while_statement,
                 $.for_statement,
                 $.return_statement,
@@ -916,6 +917,7 @@ module.exports = grammar({
                 $.if_statement,
                 $.switch_statement,
                 $.select_statement,
+                $.active_statement,
                 $.while_statement,
                 $.for_statement,
                 $.return_statement,
@@ -1013,9 +1015,9 @@ module.exports = grammar({
             ),
 
         select_statement: ($) =>
-            seq($.select_keyword, "{", repeat1($.active_block), "}"),
+            seq($.select_keyword, field("body", $.compound_statement)),
 
-        active_block: ($) =>
+        active_statement: ($) =>
             seq(
                 $.active_keyword,
                 field("condition", $.parenthesized_expression),

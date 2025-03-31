@@ -132,6 +132,10 @@
     "named": true,
     "subtypes": [
       {
+        "type": "active_statement",
+        "named": true
+      },
+      {
         "type": "break_statement",
         "named": true
       },
@@ -274,7 +278,7 @@
     }
   },
   {
-    "type": "active_block",
+    "type": "active_statement",
     "named": true,
     "fields": {
       "body": {
@@ -953,6 +957,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "active_statement",
+          "named": true
+        },
         {
           "type": "break_statement",
           "named": true
@@ -2963,6 +2971,10 @@
       "required": true,
       "types": [
         {
+          "type": "active_statement",
+          "named": true
+        },
+        {
           "type": "break_statement",
           "named": true
         },
@@ -3186,6 +3198,10 @@
       "required": true,
       "types": [
         {
+          "type": "active_statement",
+          "named": true
+        },
+        {
           "type": "break_statement",
           "named": true
         },
@@ -3397,6 +3413,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "active_statement",
+          "named": true
+        },
         {
           "type": "break_statement",
           "named": true
@@ -3795,15 +3815,22 @@
   {
     "type": "select_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "active_block",
-          "named": true
-        },
         {
           "type": "select_keyword",
           "named": true
@@ -3938,6 +3965,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "active_statement",
+          "named": true
+        },
         {
           "type": "break_statement",
           "named": true
