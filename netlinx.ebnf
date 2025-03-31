@@ -1,0 +1,1018 @@
+(* NetLinx EBNF Grammar *)
+
+(* Program Structure *)
+source_file = repeat(top_level_item);
+
+top_level_item =
+    section
+    | program_name
+    | module_name
+    | define_function
+    | define_call
+    | define_module
+    | declaration
+    | type_definition
+    | event_definition
+    | top_level_statement
+    | preproc_if_defined
+    | preproc_if_not_defined
+    | preproc_define
+    | preproc_include
+    | preproc_warn
+    | preproc_disable_warning;
+
+block_item =
+    define_function
+    | type_definition
+    | define_call
+    | define_module
+    | declaration
+    | statement
+    | preproc_if_defined
+    | preproc_if_not_defined
+    | preproc_define
+    | preproc_include
+    | preproc_warn
+    | preproc_disable_warning;
+
+(* Headers *)
+program_name = program_name_keyword, "=", string_literal;
+module_name = module_name_keyword, "=", string_literal, [parameter_list];
+
+(* Sections *)
+section =
+    define_device_section
+    | define_combine_section
+    | define_connect_level_section
+    | define_constant_section
+    | define_type_section
+    | define_mutually_exclusive_section
+    | define_latching_section
+    | define_toggling_section
+    | define_variable_section
+    | define_system_variable_section
+    | define_start_section
+    | define_event_section
+    | define_program_section;
+
+define_device_section = define_device_keyword;
+define_combine_section = define_combine_keyword;
+define_connect_level_section = define_connect_level_keyword;
+define_constant_section = define_constant_keyword;
+define_type_section = define_type_keyword;
+define_mutually_exclusive_section = define_mutually_exclusive_keyword;
+define_latching_section = define_latching_keyword;
+define_toggling_section = define_toggling_keyword;
+define_variable_section = define_variable_keyword;
+define_system_variable_section = define_system_variable_keyword;
+define_event_section = define_event_keyword;
+define_start_section = define_start_keyword;
+define_program_section = define_program_keyword;
+
+(* Functions, Calls, and Module Definitions *)
+define_function =
+    define_function_keyword, function_definition
+    | define_library_function_keyword, function_declaration;
+
+define_call = define_call_keyword, call_definition;
+define_module = define_module_keyword, module_definition;
+
+function_definition =
+    [type_specifier | array_return_type],
+    identifier,
+    parameter_list,
+    repeat(declaration),
+    compound_statement;
+
+function_declaration =
+    [type_specifier | array_return_type],
+    identifier,
+    parameter_list,
+    ["=", expression],
+    semicolon;
+
+call_definition =
+    string_literal,
+    identifier,
+    [parameter_list],
+    repeat(declaration),
+    compound_statement;
+
+module_definition =
+    string_literal,
+    identifier,
+    argument_list,
+    semicolon;
+
+(* Parameter and Argument Lists *)
+parameter_list =
+    "(",
+    (
+        comma_separated(parameter_declaration)
+        | compound_statement
+    ),
+    ")";
+
+parameter_declaration =
+    declaration_specifiers,
+    [declarator | abstract_declarator];
+
+argument_list =
+    "(",
+    comma_separated(expression | compound_statement),
+    ")";
+
+(* Event Definitions *)
+event_definition =
+    button_event_definition
+    | channel_event_definition
+    | level_event_definition
+    | data_event_definition
+    | timeline_event_definition
+    | custom_event_definition;
+
+data_event_definition =
+    repeat1(data_event_declarator),
+    data_event_block;
+
+data_event_declarator =
+    data_event_keyword,
+    data_event_device_reference;
+
+data_event_device_reference =
+    "[", expression, "]";
+
+data_event_block =
+    "{",
+    repeat1(data_event_handler),
+    "}";
+
+data_event_handler =
+    data_event_type,
+    ":",
+    compound_statement;
+
+data_event_type =
+    command_keyword
+    | string_keyword
+    | online_keyword
+    | offline_keyword
+    | onerror_keyword
+    | standby_keyword
+    | awake_keyword;
+
+timeline_event_definition =
+    repeat1(timeline_event_declarator),
+    compound_statement;
+
+timeline_event_declarator =
+    timeline_event_keyword,
+    timeline_event_id_reference;
+
+timeline_event_id_reference =
+    "[", expression, "]";
+
+button_event_definition =
+    repeat1(button_event_declarator),
+    button_event_block;
+
+button_event_declarator =
+    button_event_keyword,
+    button_event_devchan_reference;
+
+button_event_devchan_reference =
+    devchan_expression
+    | "[", expression, "]";
+
+button_event_block =
+    "{",
+    repeat1(button_event_handler),
+    "}";
+
+button_event_handler =
+    button_event_type,
+    ":",
+    compound_statement;
+
+button_event_type =
+    push_keyword
+    | release_keyword
+    | (
+        hold_keyword,
+        "[",
+        expression,
+        [",", button_event_hold_repeat],
+        "]"
+    );
+
+button_event_hold_repeat = repeat_keyword;
+
+level_event_definition =
+    repeat1(level_event_declarator),
+    compound_statement;
+
+level_event_declarator =
+    level_event_keyword,
+    level_event_devlev_reference;
+
+level_event_devlev_reference =
+    devlev_expression
+    | "[", expression, "]";
+
+channel_event_definition =
+    repeat1(channel_event_declarator),
+    channel_event_block;
+
+channel_event_declarator =
+    channel_event_keyword,
+    channel_event_devchan_reference;
+
+channel_event_devchan_reference =
+    devchan_expression
+    | "[", expression, "]";
+
+channel_event_block =
+    "{",
+    repeat1(channel_event_handler),
+    "}";
+
+channel_event_handler =
+    channel_event_type,
+    ":",
+    compound_statement;
+
+channel_event_type = on_keyword | off_keyword;
+
+custom_event_definition =
+    repeat1(custom_event_declarator),
+    compound_statement;
+
+custom_event_declarator =
+    custom_event_keyword,
+    custom_event_reference;
+
+custom_event_reference =
+    "[",
+    (
+        (expression, ",", expression, ",", expression)
+        | (expression, ",", expression)
+    ),
+    "]";
+
+(* Declarations *)
+declaration =
+    (
+        declaration_specifiers,
+        type_identifier,
+        comma_separated1(declarator | init_declarator)
+    )
+    | (
+        type_qualifier,
+        type_identifier,
+        comma_separated1(declarator | init_declarator)
+    )
+    | (
+        storage_class_specifier,
+        type_identifier,
+        comma_separated1(declarator | init_declarator)
+    )
+    | (
+        declaration_specifiers,
+        comma_separated1(declarator | init_declarator)
+    )
+    | (
+        type_qualifier,
+        comma_separated1(declarator | init_declarator)
+    )
+    | (
+        storage_class_specifier,
+        comma_separated1(declarator | init_declarator)
+    ),
+    semicolon;
+
+type_definition = struct_specifier, semicolon;
+
+array_declarator =
+    declarator,
+    "[",
+    [expression],
+    "]";
+
+array_field_declarator =
+    field_declarator,
+    "[",
+    [expression],
+    "]";
+
+array_type_declarator =
+    type_declarator,
+    "[",
+    [expression],
+    "]";
+
+abstract_array_declarator =
+    [abstract_declarator],
+    "[",
+    [expression],
+    "]";
+
+init_declarator =
+    declarator,
+    "=",
+    (initializer_list | expression);
+
+(* Specifiers *)
+declaration_modifiers =
+    storage_class_specifier
+    | type_qualifier;
+
+declaration_specifiers =
+    repeat(declaration_modifiers),
+    type_specifier,
+    repeat(declaration_modifiers);
+
+storage_class_specifier =
+    local_var_keyword
+    | stack_var_keyword;
+
+type_qualifier =
+    constant_keyword
+    | volatile_keyword
+    | non_volatile_keyword
+    | persistent_keyword;
+
+type_specifier = intrinsic_type | type_identifier;
+
+struct_specifier =
+    (struct_keyword | structure_keyword),
+    type_identifier,
+    field_declaration_list;
+
+field_declaration_list =
+    "{",
+    repeat1(field_declaration_list_item),
+    "}";
+
+field_declaration_list_item =
+    field_declaration
+    | preproc_define
+    | preproc_warn
+    | preproc_disable_warning
+    | preproc_if_defined_in_field_declaration_list
+    | preproc_if_not_defined_in_field_declaration_list;
+
+field_declaration =
+    declaration_specifiers,
+    [field_declaration_declarator],
+    semicolon;
+
+field_declaration_declarator =
+    comma_separated1(field_declarator);
+
+intrinsic_type = primitive_type | structured_type;
+
+primitive_type =
+    char_keyword
+    | widechar_keyword
+    | integer_keyword
+    | sinteger_keyword
+    | long_keyword
+    | slong_keyword
+    | float_keyword
+    | double_keyword
+    | variant_keyword
+    | variantarray_keyword;
+
+structured_type =
+    dev_keyword
+    | devlev_keyword
+    | devchan_keyword;
+
+array_return_type =
+    type_specifier,
+    "[",
+    [expression],
+    "]";
+
+(* Declarators *)
+declarator =
+    function_declarator
+    | array_declarator
+    | parenthesized_declarator
+    | identifier;
+
+declaration_declarator =
+    function_declaration_declarator
+    | array_declarator
+    | parenthesized_declarator
+    | identifier;
+
+field_declarator =
+    function_field_declarator
+    | array_field_declarator
+    | parenthesized_field_declarator
+    | field_identifier;
+
+type_declarator =
+    function_type_declarator
+    | array_type_declarator
+    | parenthesized_type_declarator
+    | type_identifier
+    | intrinsic_type;
+
+abstract_declarator = abstract_array_declarator;
+
+function_declarator =
+    declarator,
+    parameter_list;
+
+function_declaration_declarator =
+    declarator,
+    parameter_list;
+
+parenthesized_declarator =
+    "(", declarator, ")";
+
+parenthesized_field_declarator =
+    "(", [field_declarator], ")";
+
+parenthesized_type_declarator =
+    "(", [type_declarator], ")";
+
+function_field_declarator =
+    field_declarator,
+    parameter_list;
+
+function_type_declarator =
+    type_declarator,
+    parameter_list;
+
+(* Statements *)
+statement = case_statement | non_case_statement;
+
+non_case_statement =
+    compound_statement
+    | expression_statement
+    | if_statement
+    | switch_statement
+    | select_statement
+    | active_statement
+    | while_statement
+    | for_statement
+    | return_statement
+    | break_statement
+    | continue_statement
+    | devchan_operation_statement
+    | send_string_statement
+    | send_command_statement
+    | send_level_statement
+    | create_buffer_statement
+    | create_multi_buffer_statement
+    | clear_buffer_statement
+    | wait_statement
+    | wait_until_statement
+    | cancel_all_wait_statement
+    | cancel_all_wait_until_statement
+    | cancel_wait_statement
+    | cancel_wait_until_statement
+    | call_statement;
+
+top_level_statement =
+    case_statement
+    | compound_statement
+    | expression_statement
+    | if_statement
+    | switch_statement
+    | select_statement
+    | active_statement
+    | while_statement
+    | for_statement
+    | return_statement
+    | break_statement
+    | continue_statement
+    | devchan_operation_statement
+    | send_string_statement
+    | send_command_statement
+    | send_level_statement
+    | create_buffer_statement
+    | create_multi_buffer_statement
+    | clear_buffer_statement
+    | wait_statement
+    | wait_until_statement
+    | cancel_all_wait_statement
+    | cancel_all_wait_until_statement
+    | cancel_wait_statement
+    | cancel_wait_until_statement
+    | call_statement;
+
+top_level_expression_statement =
+    expression_not_binary,
+    semicolon;
+
+expression_statement =
+    (expression | comma_expression),
+    semicolon;
+
+compound_statement =
+    "{",
+    repeat(block_item),
+    "}";
+
+if_statement =
+    if_keyword,
+    parenthesized_expression,
+    statement,
+    [else_clause];
+
+else_clause = else_keyword, statement;
+
+switch_statement =
+    switch_keyword,
+    parenthesized_expression,
+    compound_statement;
+
+case_statement =
+    (
+        (case_keyword, expression)
+        | default_keyword
+    ),
+    ":",
+    repeat(non_case_statement | declaration);
+
+while_statement =
+    while_keyword,
+    parenthesized_expression,
+    statement;
+
+for_statement =
+    for_keyword,
+    "(",
+    for_statement_body,
+    ")",
+    statement;
+
+for_statement_body =
+    [(expression | comma_expression)],
+    ";",
+    [(expression | comma_expression)],
+    ";",
+    [(expression | comma_expression)];
+
+select_statement =
+    select_keyword,
+    compound_statement;
+
+active_statement =
+    active_keyword,
+    parenthesized_expression,
+    ":",
+    statement;
+
+return_statement =
+    return_keyword,
+    [(expression | comma_expression | initializer_list)],
+    semicolon;
+
+break_statement = break_keyword, semicolon;
+
+continue_statement = continue_keyword, semicolon;
+
+devchan_operation_statement =
+    devchan_operation,
+    (devchan_expression | devchan_range_expression),
+    semicolon;
+
+devchan_operation =
+    devchan_on_keyword
+    | devchan_off_keyword
+    | devchan_to_keyword
+    | devchan_min_to_keyword
+    | devchan_total_off_keyword
+    | devchan_pulse_keyword;
+
+send_string_statement =
+    send_string_keyword,
+    expression,
+    ",",
+    expression,
+    semicolon;
+
+send_command_statement =
+    send_command_keyword,
+    expression,
+    ",",
+    expression,
+    semicolon;
+
+send_level_statement =
+    send_level_keyword,
+    expression,
+    ",",
+    expression,
+    ",",
+    expression,
+    semicolon;
+
+create_buffer_statement =
+    create_buffer_keyword,
+    comma_expression,
+    semicolon;
+
+create_multi_buffer_statement =
+    create_multi_buffer_keyword,
+    comma_expression,
+    semicolon;
+
+clear_buffer_statement =
+    clear_buffer_keyword,
+    expression,
+    semicolon;
+
+wait_statement =
+    wait_keyword,
+    expression,
+    [string_literal],
+    [semicolon];
+
+wait_until_statement =
+    wait_until_keyword,
+    expression,
+    [string_literal],
+    [semicolon];
+
+cancel_all_wait_statement =
+    cancel_all_wait_keyword,
+    semicolon;
+
+cancel_all_wait_until_statement =
+    cancel_all_wait_until_keyword,
+    semicolon;
+
+cancel_wait_statement =
+    cancel_wait_keyword,
+    string_literal,
+    semicolon;
+
+cancel_wait_until_statement =
+    cancel_wait_until_keyword,
+    string_literal,
+    semicolon;
+
+call_statement =
+    call_keyword,
+    string_literal,
+    argument_list,
+    semicolon;
+
+(* Expressions *)
+expression = expression_not_binary | binary_expression;
+
+expression_not_binary =
+    assignment_expression
+    | unary_expression
+    | update_expression
+    | call_expression
+    | field_expression
+    | subscript_expression
+    | string_expression
+    | identifier
+    | number_literal
+    | string_literal
+    | true
+    | false
+    | device_literal
+    | parenthesized_expression
+    | devchan_range_expression
+    | devchan_expression;
+
+assignment_expression =
+    assignment_left_expression,
+    "=",
+    expression;
+
+assignment_left_expression =
+    identifier
+    | call_expression
+    | field_expression
+    | subscript_expression
+    | parenthesized_expression
+    | devchan_expression;
+
+unary_expression =
+    ("!" | "~" | "-" | "+" | bnot),
+    expression;
+
+binary_expression =
+    expression, "+" | "-", expression
+    | expression, "*" | "/" | "%", expression
+    | expression, "||", expression
+    | expression, "&&", expression
+    | expression, "|", expression
+    | expression, "^", expression
+    | expression, "&", expression
+    | expression, "==" | "!=" | "<>", expression
+    | expression, ">" | ">=" | "<=" | "<", expression
+    | expression, "<<" | ">>", expression
+    | expression, band, expression
+    | expression, bor, expression
+    | expression, bxor, expression
+    | expression, lshift | rshift, expression;
+
+update_expression =
+    expression, "++" | "--";
+
+subscript_expression =
+    expression,
+    "[",
+    expression,
+    "]";
+
+call_expression =
+    expression,
+    argument_list;
+
+comma_expression =
+    expression,
+    ",",
+    (expression | comma_expression);
+
+field_expression =
+    expression,
+    ".",
+    field_identifier;
+
+parenthesized_expression =
+    "(",
+    (expression | comma_expression | compound_statement),
+    ")";
+
+devlev_expression =
+    "[",
+    expression,
+    ",",
+    expression,
+    "]";
+
+devchan_expression =
+    "[",
+    expression,
+    ",",
+    expression,
+    "]";
+
+devchan_range_expression =
+    devchan_expression,
+    "..",
+    devchan_expression;
+
+string_expression =
+    "\"",
+    comma_separated(expression),
+    "\"";
+
+initializer_list =
+    "{",
+    [
+        (expression | initializer_list),
+        repeat(
+            (",", (expression | initializer_list))
+            | preproc_if_defined_in_initializer_list
+            | preproc_if_not_defined_in_initializer_list
+        )
+    ],
+    [","],
+    "}";
+
+(* Literals *)
+literal =
+    number_literal
+    | string_literal
+    | device_literal;
+
+device_literal =
+    expression,
+    ":",
+    expression,
+    ":",
+    expression;
+
+string_literal =
+    "'",
+    repeat(string_content | escape_sequence),
+    "'";
+
+escape_sequence = "''";
+
+string_content = ? any character except single quote or newline ?;
+
+number_literal =
+    "$", ? hexadecimal digits ?
+    | ["-" | "+"],
+      (
+          (? digits ?, ".", [? digits ?])
+          | (".", ? digits ?)
+          | ? digits ?
+      ),
+      ["e" | "E", ["-" | "+"], ? digits ?];
+
+(* Identifiers *)
+identifier = ? letter or underscore followed by letters, digits, or underscores ?;
+type_identifier = identifier;
+field_identifier = identifier;
+statement_identifier = identifier;
+
+(* Preprocessor *)
+preproc_include =
+    preproc_include_keyword,
+    string_literal,
+    ? newline ?;
+
+preproc_define =
+    preproc_define_keyword,
+    identifier,
+    [preproc_arg],
+    ? newline ?;
+
+preproc_warn =
+    preproc_warn_keyword,
+    string_literal,
+    ? newline ?;
+
+preproc_disable_warning =
+    preproc_disable_warning_keyword,
+    number_literal,
+    ? newline ?;
+
+preproc_if_defined =
+    preproc_if_defined_keyword,
+    identifier,
+    ? newline ?,
+    repeat(top_level_item),
+    [preproc_else],
+    preproc_end_if;
+
+preproc_if_not_defined =
+    preproc_if_not_defined_keyword,
+    identifier,
+    ? newline ?,
+    repeat(top_level_item),
+    [preproc_else],
+    preproc_end_if;
+
+preproc_if_defined_in_field_declaration_list =
+    preproc_if_defined_keyword,
+    identifier,
+    ? newline ?,
+    repeat(field_declaration_list_item),
+    [preproc_else_in_field_declaration_list],
+    preproc_end_if;
+
+preproc_if_not_defined_in_field_declaration_list =
+    preproc_if_not_defined_keyword,
+    identifier,
+    ? newline ?,
+    repeat(field_declaration_list_item),
+    [preproc_else_in_field_declaration_list],
+    preproc_end_if;
+
+preproc_if_defined_in_initializer_list =
+    preproc_if_defined_keyword,
+    identifier,
+    ? newline ?,
+    repeat(expression | initializer_list),
+    [preproc_else_in_initializer_list],
+    preproc_end_if;
+
+preproc_if_not_defined_in_initializer_list =
+    preproc_if_not_defined_keyword,
+    identifier,
+    ? newline ?,
+    repeat(expression | initializer_list),
+    [preproc_else_in_initializer_list],
+    preproc_end_if;
+
+preproc_else =
+    preproc_else_keyword,
+    repeat(top_level_item);
+
+preproc_else_in_field_declaration_list =
+    preproc_else_keyword,
+    repeat(field_declaration_list_item);
+
+preproc_else_in_initializer_list =
+    preproc_else_keyword,
+    repeat(expression | initializer_list);
+
+preproc_end_if = preproc_end_if_keyword;
+
+preproc_arg = ? any character except newline ?;
+
+(* Keywords *)
+program_name_keyword = "PROGRAM_NAME";
+module_name_keyword = "MODULE_NAME";
+define_device_keyword = "DEFINE_DEVICE";
+define_combine_keyword = "DEFINE_COMBINE";
+define_connect_level_keyword = "DEFINE_CONNECT_LEVEL";
+define_constant_keyword = "DEFINE_CONSTANT";
+define_type_keyword = "DEFINE_TYPE";
+define_mutually_exclusive_keyword = "DEFINE_MUTUALLY_EXCLUSIVE";
+define_latching_keyword = "DEFINE_LATCHING";
+define_toggling_keyword = "DEFINE_TOGGLING";
+define_variable_keyword = "DEFINE_VARIABLE";
+define_system_variable_keyword = "DEFINE_SYSTEM_VARIABLE";
+define_event_keyword = "DEFINE_EVENT";
+define_start_keyword = "DEFINE_START";
+define_program_keyword = "DEFINE_PROGRAM";
+define_function_keyword = "DEFINE_FUNCTION";
+define_library_function_keyword = "DEFINE_LIBRARY_FUNCTION";
+define_call_keyword = "DEFINE_CALL";
+define_module_keyword = "DEFINE_MODULE";
+data_event_keyword = "DATA_EVENT";
+timeline_event_keyword = "TIMELINE_EVENT";
+button_event_keyword = "BUTTON_EVENT";
+level_event_keyword = "LEVEL_EVENT";
+channel_event_keyword = "CHANNEL_EVENT";
+custom_event_keyword = "CUSTOM_EVENT";
+command_keyword = "COMMAND";
+string_keyword = "STRING";
+online_keyword = "ONLINE";
+offline_keyword = "OFFLINE";
+onerror_keyword = "ONERROR";
+standby_keyword = "STANDBY";
+awake_keyword = "AWAKE";
+push_keyword = "PUSH";
+release_keyword = "RELEASE";
+hold_keyword = "HOLD";
+repeat_keyword = "REPEAT";
+local_var_keyword = "LOCAL_VAR";
+stack_var_keyword = "STACK_VAR";
+constant_keyword = "CONSTANT";
+volatile_keyword = "VOLATILE";
+non_volatile_keyword = "NON_VOLATILE";
+persistent_keyword = "PERSISTENT";
+struct_keyword = "STRUCT";
+structure_keyword = "STRUCTURE";
+char_keyword = "CHAR";
+widechar_keyword = "WIDECHAR";
+integer_keyword = "INTEGER";
+sinteger_keyword = "SINTEGER";
+long_keyword = "LONG";
+slong_keyword = "SLONG";
+float_keyword = "FLOAT";
+double_keyword = "DOUBLE";
+variant_keyword = "VARIANT";
+variantarray_keyword = "VARIANTARRAY";
+dev_keyword = "DEV";
+devlev_keyword = "DEVLEV";
+devchan_keyword = "DEVCHAN";
+if_keyword = "IF";
+else_keyword = "ELSE";
+switch_keyword = "SWITCH";
+case_keyword = "CASE";
+default_keyword = "DEFAULT";
+while_keyword = "WHILE";
+for_keyword = "FOR";
+select_keyword = "SELECT";
+active_keyword = "ACTIVE";
+return_keyword = "RETURN";
+break_keyword = "BREAK";
+continue_keyword = "CONTINUE";
+devchan_on_keyword = "ON";
+devchan_off_keyword = "OFF";
+devchan_to_keyword = "TO";
+devchan_min_to_keyword = "MIN_TO";
+devchan_total_off_keyword = "TOTAL_OFF";
+devchan_pulse_keyword = "PULSE";
+send_string_keyword = "SEND_STRING";
+send_command_keyword = "SEND_COMMAND";
+send_level_keyword = "SEND_LEVEL";
+create_buffer_keyword = "CREATE_BUFFER";
+create_multi_buffer_keyword = "CREATE_MULTI_BUFFER";
+clear_buffer_keyword = "CLEAR_BUFFER";
+wait_keyword = "WAIT";
+wait_until_keyword = "WAIT_UNTIL";
+cancel_all_wait_keyword = "CANCEL_ALL_WAIT";
+cancel_all_wait_until_keyword = "CANCEL_ALL_WAIT_UNTIL";
+cancel_wait_keyword = "CANCEL_WAIT";
+cancel_wait_until_keyword = "CANCEL_WAIT_UNTIL";
+call_keyword = "CALL";
+bnot = "BNOT";
+band = "BAND";
+bor = "BOR";
+bxor = "BXOR";
+lshift = "LSHIFT";
+rshift = "RSHIFT";
+true = "TRUE";
+false = "FALSE";
+preproc_include_keyword = "#INCLUDE";
+preproc_define_keyword = "#DEFINE";
+preproc_warn_keyword = "#WARN";
+preproc_disable_warning_keyword = "#DISABLE_WARNING";
+preproc_if_defined_keyword = "#IF_DEFINED";
+preproc_if_not_defined_keyword = "#IF_NOT_DEFINED";
+preproc_else_keyword = "#ELSE";
+preproc_end_if_keyword = "#END_IF";
+
+(* Utilities *)
+comma_separated(rule) = rule, { ",", rule };
+comma_separated1(rule) = rule, ",", { rule };
