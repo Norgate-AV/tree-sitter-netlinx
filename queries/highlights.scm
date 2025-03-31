@@ -405,6 +405,9 @@
 ;; LITERALS
 ;; ============================================================================
 (string_literal) @string
+;; (escape_sequence) @string.escape
+;; (escape_sequence) @constant.character.escape
+;; (string_content) @string.content
 (number_literal) @number
 (device_literal) @number
 "\"" @string
