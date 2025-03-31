@@ -2609,6 +2609,14 @@
         {
           "type": "initializer_list",
           "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
         }
       ]
     }
@@ -3027,6 +3035,10 @@
           "named": true
         },
         {
+          "type": "expression",
+          "named": true
+        },
+        {
           "type": "expression_statement",
           "named": true
         },
@@ -3040,6 +3052,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "initializer_list",
           "named": true
         },
         {
@@ -3242,6 +3258,10 @@
           "named": true
         },
         {
+          "type": "expression",
+          "named": true
+        },
+        {
           "type": "expression_statement",
           "named": true
         },
@@ -3255,6 +3275,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "initializer_list",
           "named": true
         },
         {
@@ -3446,6 +3470,10 @@
           "named": true
         },
         {
+          "type": "expression",
+          "named": true
+        },
+        {
           "type": "expression_statement",
           "named": true
         },
@@ -3459,6 +3487,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "initializer_list",
           "named": true
         },
         {

@@ -438,3 +438,44 @@ Nested Preprocessor With Sections
         (preproc_end_if_keyword)))
     (preproc_end_if
       (preproc_end_if_keyword))))
+
+=========================================
+Conditionals in Array Initializers
+=========================================
+
+constant integer FOO[] = {
+    1,
+    2,
+    3,
+    4,
+    5
+    #IF_DEFINED USING_INDEX_6
+    ,
+    6
+    #END_IF
+}
+
+---
+
+(source_file
+      (declaration
+        (type_qualifier
+          (constant_keyword))
+        (intrinsic_type
+          (primitive_type
+            (integer_keyword)))
+        (init_declarator
+          (array_declarator
+            (identifier))
+          (initializer_list
+            (number_literal)
+            (number_literal)
+            (number_literal)
+            (number_literal)
+            (number_literal)
+            (preproc_if_defined
+              (preproc_if_defined_keyword)
+              (identifier)
+              (number_literal)
+              (preproc_end_if
+                (preproc_end_if_keyword)))))))

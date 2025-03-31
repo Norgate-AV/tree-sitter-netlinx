@@ -44,6 +44,8 @@ module.exports = grammar({
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
         [$.device_literal],
+        [$.preproc_if_defined_in_initializer_list],
+        [$.preproc_else_in_initializer_list],
     ],
 
     extras: ($) => [/\s/, $.comment],
@@ -190,6 +192,17 @@ module.exports = grammar({
         ...preprocIf(
             "_in_field_declaration_list",
             ($) => $._field_declaration_list_item,
+        ),
+
+        ...preprocIf("_in_initializer_list", ($) =>
+            repeat1(
+                choice(
+                    seq(",", choice($.expression, $.initializer_list)),
+                    ",",
+                    $.expression,
+                    $.initializer_list,
+                ),
+            ),
         ),
 
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
@@ -1347,7 +1360,27 @@ module.exports = grammar({
         initializer_list: ($) =>
             seq(
                 "{",
-                commaSep(choice($.expression, $.initializer_list)),
+                optional(
+                    seq(
+                        optional(choice($.expression, $.initializer_list)),
+                        repeat(
+                            choice(
+                                seq(
+                                    ",",
+                                    choice($.expression, $.initializer_list),
+                                ),
+                                alias(
+                                    $.preproc_if_defined_in_initializer_list,
+                                    $.preproc_if_defined,
+                                ),
+                                alias(
+                                    $.preproc_if_not_defined_in_initializer_list,
+                                    $.preproc_if_not_defined,
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
                 optional(","),
                 "}",
             ),
