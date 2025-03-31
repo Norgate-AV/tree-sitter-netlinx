@@ -1,5 +1,13 @@
 # tree-sitter-netlinx
 
+<div align="center">
+    <img align="center" style="margin-right: 10px;" src="./assets/img/Tree-Sitter.png" alt="tree-sitter-logo" width="150" />
+    <!-- <span>-----</span> -->
+    <img align="center" style="margin-left: 10px;"src="./assets/img/NetLinx1.png" alt="netlinx-logo" width="150" />
+</div>
+
+---
+
 [![CI][ci]](https://github.com/Norgate-AV/tree-sitter-netlinx/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/Norgate-AV/tree-sitter-netlinx)](https://github.com/Norgate-AV/tree-sitter-netlinx/releases)
 [![crates][crates]](https://crates.io/crates/tree-sitter-netlinx)
