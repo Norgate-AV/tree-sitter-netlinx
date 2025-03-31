@@ -479,3 +479,63 @@ constant integer FOO[] = {
               (number_literal)
               (preproc_end_if
                 (preproc_end_if_keyword)))))))
+
+========================================
+Conditionals in Switch/Case
+========================================
+
+switch (foo) {
+    case 1: {}
+    case 2: {}
+
+    case 3:
+    case 4: {}
+
+    #IF_DEFINED BAR
+    case 6: {
+        #IF_DEFINED BAZ
+        break
+        #END_IF
+    }
+    #END_IF
+}
+
+---
+
+(source_file
+      (switch_statement
+        (switch_keyword)
+        (parenthesized_expression
+          (identifier))
+        (compound_statement
+          (case_statement
+            (case_keyword)
+            (number_literal)
+            (compound_statement))
+          (case_statement
+            (case_keyword)
+            (number_literal)
+            (compound_statement))
+          (case_statement
+            (case_keyword)
+            (number_literal))
+          (case_statement
+            (case_keyword)
+            (number_literal)
+            (compound_statement))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (case_statement
+              (case_keyword)
+              (number_literal)
+              (compound_statement
+                (preproc_if_defined
+                  (preproc_if_defined_keyword)
+                  (identifier)
+                  (break_statement
+                    (break_keyword))
+                  (preproc_end_if
+                    (preproc_end_if_keyword)))))
+            (preproc_end_if
+              (preproc_end_if_keyword))))))
