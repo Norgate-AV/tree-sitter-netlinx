@@ -3342,21 +3342,6 @@
     }
   },
   {
-    "type": "preproc_end_if",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "preproc_end_if_keyword",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "preproc_if_defined",
     "named": true,
     "fields": {
@@ -3530,7 +3515,7 @@
           "named": true
         },
         {
-          "type": "preproc_end_if",
+          "type": "preproc_end_if_keyword",
           "named": true
         },
         {
@@ -3782,7 +3767,7 @@
           "named": true
         },
         {
-          "type": "preproc_end_if",
+          "type": "preproc_end_if_keyword",
           "named": true
         },
         {

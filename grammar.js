@@ -44,8 +44,21 @@ module.exports = grammar({
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
         [$.device_literal],
-        [$.preproc_if_defined_in_initializer_list],
-        [$.preproc_else_in_initializer_list],
+        [$.initializer_list],
+        // [$.preproc_if_defined_in_initializer_list],
+        // [$.preproc_else_in_initializer_list],
+        [
+            $.preproc_if_defined_in_initializer_list,
+            $.preproc_if_defined_in_initializer_list_no_comma,
+        ],
+        [
+            $.preproc_if_not_defined_in_initializer_list,
+            $.preproc_if_not_defined_in_initializer_list_no_comma,
+        ],
+        [
+            $.preproc_else_in_initializer_list,
+            $.preproc_else_in_initializer_list_no_comma,
+        ],
         [$.preproc_if_defined_in_button_event_declarator],
         [$.preproc_else_in_button_event_declarator],
         [$.preproc_if_defined_in_button_event_block],
@@ -213,14 +226,18 @@ module.exports = grammar({
         ),
 
         ...preprocIf("_in_initializer_list", ($) =>
-            repeat1(
-                choice(
-                    seq(",", choice($.expression, $.initializer_list)),
-                    ",",
-                    $.expression,
-                    $.initializer_list,
-                ),
+            choice(
+                seq($.expression, ","),
+                seq($.initializer_list, ","),
+                seq(",", $.expression),
+                seq(",", $.initializer_list),
             ),
+        ),
+
+        ...preprocIf(
+            "_in_initializer_list_no_comma",
+            ($) => choice($.expression, $.initializer_list),
+            -1,
         ),
 
         ...preprocIf("_in_button_event_declarator", ($) =>
@@ -1588,28 +1605,37 @@ module.exports = grammar({
         initializer_list: ($) =>
             seq(
                 "{",
-                optional(
-                    seq(
-                        optional(choice($.expression, $.initializer_list)),
-                        repeat(
-                            choice(
-                                seq(
-                                    ",",
-                                    choice($.expression, $.initializer_list),
-                                ),
-                                alias(
-                                    $.preproc_if_defined_in_initializer_list,
-                                    $.preproc_if_defined,
-                                ),
-                                alias(
-                                    $.preproc_if_not_defined_in_initializer_list,
-                                    $.preproc_if_not_defined,
-                                ),
-                            ),
+                repeat(
+                    choice(
+                        seq(choice($.expression, $.initializer_list), ","),
+                        alias(
+                            $.preproc_if_defined_in_initializer_list,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_initializer_list,
+                            $.preproc_if_not_defined,
+                        ),
+                        seq(
+                            choice($.expression, $.initializer_list),
+                            optional(","),
                         ),
                     ),
                 ),
-                optional(","),
+                optional(
+                    choice(
+                        $.expression,
+                        $.initializer_list,
+                        alias(
+                            $.preproc_if_defined_in_initializer_list_no_comma,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_initializer_list_no_comma,
+                            $.preproc_if_not_defined,
+                        ),
+                    ),
+                ),
                 "}",
             ),
 
@@ -1718,7 +1744,7 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
 
     return {
         ["preproc_if_defined" + suffix]: ($) =>
-            prec(
+            prec.dynamic(
                 precedence,
                 seq(
                     alias(
@@ -1726,15 +1752,18 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
                         $.preproc_if_defined_keyword,
                     ),
                     field("name", $.identifier),
-                    "\n",
+                    optional("\n"),
                     repeat(content($)),
                     field("alternative", optional(alternativeBlock($))),
-                    $.preproc_end_if,
+                    alias(
+                        preprocessor(directives.end_if),
+                        $.preproc_end_if_keyword,
+                    ),
                 ),
             ),
 
         ["preproc_if_not_defined" + suffix]: ($) =>
-            prec(
+            prec.dynamic(
                 precedence,
                 seq(
                     alias(
@@ -1742,15 +1771,18 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
                         $.preproc_if_not_defined_keyword,
                     ),
                     field("name", $.identifier),
-                    "\n",
+                    optional("\n"),
                     repeat(content($)),
                     field("alternative", optional(alternativeBlock($))),
-                    $.preproc_end_if,
+                    alias(
+                        preprocessor(directives.end_if),
+                        $.preproc_end_if_keyword,
+                    ),
                 ),
             ),
 
         ["preproc_else" + suffix]: ($) =>
-            prec(
+            prec.dynamic(
                 precedence,
                 seq(
                     alias(
@@ -1760,9 +1792,6 @@ function preprocIf(suffix, content, precedence = PREC.DIRECTIVE) {
                     repeat(content($)),
                 ),
             ),
-
-        ["preproc_end_if"]: ($) =>
-            alias(preprocessor(directives.end_if), $.preproc_end_if_keyword),
     };
 }
 
