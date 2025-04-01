@@ -3279,6 +3279,10 @@
           "named": true
         },
         {
+          "type": "timeline_event_declarator",
+          "named": true
+        },
+        {
           "type": "type_definition",
           "named": true
         },
@@ -3534,6 +3538,10 @@
           "named": true
         },
         {
+          "type": "timeline_event_declarator",
+          "named": true
+        },
+        {
           "type": "type_definition",
           "named": true
         },
@@ -3771,6 +3779,10 @@
         },
         {
           "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "timeline_event_declarator",
           "named": true
         },
         {
@@ -4547,6 +4559,22 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
         {
           "type": "timeline_event_declarator",
           "named": true

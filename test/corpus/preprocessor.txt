@@ -769,7 +769,6 @@ level_event[dvTP, 2]
 
 ===============================
 Conditionals in Timeline Event
-:skip
 ===============================
 
 timeline_event[TL1]
@@ -782,7 +781,23 @@ timeline_event[TL2]
 
 ---
 
-
+(source_file
+      (event_definition
+        (timeline_event_definition
+          (timeline_event_declarator
+            (timeline_event_keyword)
+            (timeline_event_id_reference
+              (identifier)))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (timeline_event_declarator
+              (timeline_event_keyword)
+              (timeline_event_id_reference
+                (identifier)))
+            (preproc_end_if
+              (preproc_end_if_keyword)))
+          (compound_statement))))
 
 ===============================
 Conditionals in Custom Event

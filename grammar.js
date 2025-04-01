@@ -58,6 +58,8 @@ module.exports = grammar({
         [$.preproc_else_in_channel_event_declarator],
         [$.preproc_if_defined_in_channel_event_block],
         [$.preproc_else_in_channel_event_block],
+        [$.preproc_if_defined_in_timeline_event_declarator],
+        [$.preproc_else_in_timeline_event_declarator],
     ],
 
     extras: ($) => [/\s/, $.comment],
@@ -241,6 +243,10 @@ module.exports = grammar({
             repeat1($._channel_event_block_item),
         ),
 
+        ...preprocIf("_in_timeline_event_declarator", ($) =>
+            repeat1($.timeline_event_declarator),
+        ),
+
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
         preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
 
@@ -379,8 +385,28 @@ module.exports = grammar({
 
         timeline_event_definition: ($) =>
             seq(
-                repeat1($.timeline_event_declarator),
+                $._timeline_event_declarator_list,
                 field("body", $.compound_statement),
+            ),
+
+        _timeline_event_declarator_list: ($) =>
+            seq(
+                $.timeline_event_declarator,
+                repeat(
+                    choice(
+                        $.timeline_event_declarator,
+                        alias(
+                            $.preproc_if_defined_in_timeline_event_declarator,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_timeline_event_declarator,
+                            $.preproc_if_not_defined,
+                        ),
+                        $.preproc_define,
+                        $.preproc_include,
+                    ),
+                ),
             ),
 
         timeline_event_declarator: ($) =>
