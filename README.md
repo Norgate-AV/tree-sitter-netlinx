@@ -1,9 +1,9 @@
 # tree-sitter-netlinx
 
 <div align="center">
-    <img align="center" style="margin-right: 10px;" src="./assets/img/Tree-Sitter.png" alt="tree-sitter-logo" width="150" />
+    <img align="center" style="margin-right: 10px;" src="./assets/img/Tree-sitter1.png" alt="tree-sitter-logo" width="150" />
     <!-- <span>-----</span> -->
-    <img align="center" style="margin-left: 10px;"src="./assets/img/NetLinx1.png" alt="netlinx-logo" width="150" />
+    <img align="center" style="margin-left: 10px;" src="./assets/img/NetLinx1.png" alt="netlinx-logo" width="150" />
 </div>
 
 ---
