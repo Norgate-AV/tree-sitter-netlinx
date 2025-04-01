@@ -592,7 +592,6 @@ select {
 
 ===============================
 Conditionals in Button Event
-:skip
 ===============================
 
 button_event[dvTP, 1]
@@ -602,14 +601,47 @@ button_event[dvTP, 2]
 {
     push: {}
 
-    #IF_DEFINED BAR
+    #IF_NOT_DEFINED BAR
     release: {}
     #END_IF
 }
 
 ---
 
-
+(source_file
+      (event_definition
+        (button_event_definition
+          (button_event_declarator
+            (button_event_keyword)
+            (button_event_devchan_reference
+              (devchan_expression
+                (identifier)
+                (number_literal))))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (button_event_declarator
+              (button_event_keyword)
+              (button_event_devchan_reference
+                (devchan_expression
+                  (identifier)
+                  (number_literal))))
+            (preproc_end_if
+              (preproc_end_if_keyword)))
+          (button_event_block
+            (button_event_handler
+              (button_event_type
+                (push_keyword))
+              (compound_statement))
+            (preproc_if_not_defined
+              (preproc_if_not_defined_keyword)
+              (identifier)
+              (button_event_handler
+                (button_event_type
+                  (release_keyword))
+                (compound_statement))
+              (preproc_end_if
+                (preproc_end_if_keyword)))))))
 
 ===============================
 Conditionals in Data Event

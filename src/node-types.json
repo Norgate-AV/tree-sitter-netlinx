@@ -593,10 +593,34 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "button_event_handler",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_disable_warning",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
+        {
+          "type": "preproc_warn",
           "named": true
         }
       ]
@@ -649,6 +673,22 @@
       "types": [
         {
           "type": "button_event_declarator",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
           "named": true
         }
       ]
@@ -2979,6 +3019,14 @@
           "named": true
         },
         {
+          "type": "button_event_declarator",
+          "named": true
+        },
+        {
+          "type": "button_event_handler",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -3206,6 +3254,14 @@
           "named": true
         },
         {
+          "type": "button_event_declarator",
+          "named": true
+        },
+        {
+          "type": "button_event_handler",
+          "named": true
+        },
+        {
           "type": "call_statement",
           "named": true
         },
@@ -3419,6 +3475,14 @@
         },
         {
           "type": "break_statement",
+          "named": true
+        },
+        {
+          "type": "button_event_declarator",
+          "named": true
+        },
+        {
+          "type": "button_event_handler",
           "named": true
         },
         {
