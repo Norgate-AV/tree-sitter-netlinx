@@ -645,7 +645,6 @@ button_event[dvTP, 2]
 
 ===============================
 Conditionals in Data Event
-:skip
 ===============================
 
 data_event[dvTP1]
@@ -655,7 +654,7 @@ data_event[dvTP2]
 {
     online: {}
 
-    #IF_DEFINED BAR
+    #IF_NOT_DEFINED BAR
     string: {}
     command: {}
     #END_IF
@@ -663,7 +662,40 @@ data_event[dvTP2]
 
 ---
 
-
+(source_file
+      (event_definition
+        (data_event_definition
+          (data_event_declarator
+            (data_event_keyword)
+            (data_event_device_reference
+              (identifier)))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (data_event_declarator
+              (data_event_keyword)
+              (data_event_device_reference
+                (identifier)))
+            (preproc_end_if
+              (preproc_end_if_keyword)))
+          (data_event_block
+            (data_event_handler
+              (data_event_type
+                (online_keyword))
+              (compound_statement))
+            (preproc_if_not_defined
+              (preproc_if_not_defined_keyword)
+              (identifier)
+              (data_event_handler
+                (data_event_type
+                  (string_keyword))
+                (compound_statement))
+              (data_event_handler
+                (data_event_type
+                  (command_keyword))
+                (compound_statement))
+              (preproc_end_if
+                (preproc_end_if_keyword)))))))
 
 ===============================
 Conditionals in Channel Event

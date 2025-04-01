@@ -1514,10 +1514,34 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "data_event_handler",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_disable_warning",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
+        {
+          "type": "preproc_warn",
           "named": true
         }
       ]
@@ -1570,6 +1594,22 @@
       "types": [
         {
           "type": "data_event_declarator",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
           "named": true
         }
       ]
@@ -3071,6 +3111,14 @@
           "named": true
         },
         {
+          "type": "data_event_declarator",
+          "named": true
+        },
+        {
+          "type": "data_event_handler",
+          "named": true
+        },
+        {
           "type": "declaration",
           "named": true
         },
@@ -3306,6 +3354,14 @@
           "named": true
         },
         {
+          "type": "data_event_declarator",
+          "named": true
+        },
+        {
+          "type": "data_event_handler",
+          "named": true
+        },
+        {
           "type": "declaration",
           "named": true
         },
@@ -3527,6 +3583,14 @@
         },
         {
           "type": "create_multi_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "data_event_declarator",
+          "named": true
+        },
+        {
+          "type": "data_event_handler",
           "named": true
         },
         {

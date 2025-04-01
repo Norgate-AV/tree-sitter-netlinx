@@ -50,6 +50,10 @@ module.exports = grammar({
         [$.preproc_else_in_button_event_declarator],
         [$.preproc_if_defined_in_button_event_block],
         [$.preproc_else_in_button_event_block],
+        [$.preproc_if_defined_in_data_event_declarator],
+        [$.preproc_else_in_data_event_declarator],
+        [$.preproc_if_defined_in_data_event_block],
+        [$.preproc_else_in_data_event_block],
     ],
 
     extras: ($) => [/\s/, $.comment],
@@ -217,6 +221,14 @@ module.exports = grammar({
             repeat1($._button_event_block_item),
         ),
 
+        ...preprocIf("_in_data_event_declarator", ($) =>
+            repeat1($.data_event_declarator),
+        ),
+
+        ...preprocIf("_in_data_event_block", ($) =>
+            repeat1($._data_event_block_item),
+        ),
+
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
         preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
 
@@ -283,8 +295,28 @@ module.exports = grammar({
 
         data_event_definition: ($) =>
             seq(
-                repeat1($.data_event_declarator),
+                $._data_event_declarator_list,
                 field("body", $.data_event_block),
+            ),
+
+        _data_event_declarator_list: ($) =>
+            seq(
+                $.data_event_declarator,
+                repeat(
+                    choice(
+                        $.data_event_declarator,
+                        alias(
+                            $.preproc_if_defined_in_data_event_declarator,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_data_event_declarator,
+                            $.preproc_if_not_defined,
+                        ),
+                        $.preproc_define,
+                        $.preproc_include,
+                    ),
+                ),
             ),
 
         data_event_declarator: ($) =>
@@ -295,7 +327,25 @@ module.exports = grammar({
 
         data_event_device_reference: ($) => seq("[", $.expression, "]"),
 
-        data_event_block: ($) => seq("{", repeat1($.data_event_handler), "}"),
+        data_event_block: ($) =>
+            seq("{", repeat($._data_event_block_item), "}"),
+
+        _data_event_block_item: ($) =>
+            choice(
+                $.data_event_handler,
+                alias(
+                    $.preproc_if_defined_in_data_event_block,
+                    $.preproc_if_defined,
+                ),
+                alias(
+                    $.preproc_if_not_defined_in_data_event_block,
+                    $.preproc_if_not_defined,
+                ),
+                $.preproc_define,
+                $.preproc_include,
+                $.preproc_warn,
+                $.preproc_disable_warning,
+            ),
 
         data_event_handler: ($) =>
             seq(
