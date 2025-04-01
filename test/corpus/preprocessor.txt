@@ -820,7 +820,6 @@ timeline_event[TL2]
 
 ===============================
 Conditionals in Custom Event
-:skip
 ===============================
 
 custom_event[dvTP, 1, 1001]
@@ -832,3 +831,25 @@ custom_event[dvTP, 1, 1002]
 }
 
 ---
+
+(source_file
+      (event_definition
+        (custom_event_definition
+          (custom_event_declarator
+            (custom_event_keyword)
+            (custom_event_reference
+              (identifier)
+              (number_literal)
+              (number_literal)))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (custom_event_declarator
+              (custom_event_keyword)
+              (custom_event_reference
+                (identifier)
+                (number_literal)
+                (number_literal)))
+            (preproc_end_if
+              (preproc_end_if_keyword)))
+          (compound_statement))))

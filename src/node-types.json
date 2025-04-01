@@ -1488,6 +1488,22 @@
         {
           "type": "custom_event_declarator",
           "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
         }
       ]
     }
@@ -3175,6 +3191,10 @@
           "named": true
         },
         {
+          "type": "custom_event_declarator",
+          "named": true
+        },
+        {
           "type": "data_event_declarator",
           "named": true
         },
@@ -3434,6 +3454,10 @@
           "named": true
         },
         {
+          "type": "custom_event_declarator",
+          "named": true
+        },
+        {
           "type": "data_event_declarator",
           "named": true
         },
@@ -3679,6 +3703,10 @@
         },
         {
           "type": "create_multi_buffer_statement",
+          "named": true
+        },
+        {
+          "type": "custom_event_declarator",
           "named": true
         },
         {
