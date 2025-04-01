@@ -2816,6 +2816,22 @@
         {
           "type": "level_event_declarator",
           "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
         }
       ]
     }
@@ -3215,6 +3231,10 @@
           "named": true
         },
         {
+          "type": "level_event_declarator",
+          "named": true
+        },
+        {
           "type": "module_name",
           "named": true
         },
@@ -3470,6 +3490,10 @@
           "named": true
         },
         {
+          "type": "level_event_declarator",
+          "named": true
+        },
+        {
           "type": "module_name",
           "named": true
         },
@@ -3711,6 +3735,10 @@
         },
         {
           "type": "initializer_list",
+          "named": true
+        },
+        {
+          "type": "level_event_declarator",
           "named": true
         },
         {

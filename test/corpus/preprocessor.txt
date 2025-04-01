@@ -752,7 +752,6 @@ channel_event[dvTP, 2]
 
 ===============================
 Conditionals in Level Event
-:skip
 ===============================
 
 level_event[dvTP, 1]
@@ -765,7 +764,27 @@ level_event[dvTP, 2]
 
 ---
 
-
+(source_file
+      (event_definition
+        (level_event_definition
+          (level_event_declarator
+            (level_event_keyword)
+            (level_event_devlev_reference
+              (devlev_expression
+                (identifier)
+                (number_literal))))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (level_event_declarator
+              (level_event_keyword)
+              (level_event_devlev_reference
+                (devlev_expression
+                  (identifier)
+                  (number_literal))))
+            (preproc_end_if
+              (preproc_end_if_keyword)))
+          (compound_statement))))
 
 ===============================
 Conditionals in Timeline Event
