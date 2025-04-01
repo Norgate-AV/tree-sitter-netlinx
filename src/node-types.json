@@ -1118,10 +1118,34 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "channel_event_handler",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_disable_warning",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
+        {
+          "type": "preproc_warn",
           "named": true
         }
       ]
@@ -1174,6 +1198,22 @@
       "types": [
         {
           "type": "channel_event_declarator",
+          "named": true
+        },
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
           "named": true
         }
       ]
@@ -3091,6 +3131,14 @@
           "named": true
         },
         {
+          "type": "channel_event_declarator",
+          "named": true
+        },
+        {
+          "type": "channel_event_handler",
+          "named": true
+        },
+        {
           "type": "clear_buffer_statement",
           "named": true
         },
@@ -3334,6 +3382,14 @@
           "named": true
         },
         {
+          "type": "channel_event_declarator",
+          "named": true
+        },
+        {
+          "type": "channel_event_handler",
+          "named": true
+        },
+        {
           "type": "clear_buffer_statement",
           "named": true
         },
@@ -3563,6 +3619,14 @@
         },
         {
           "type": "case_statement",
+          "named": true
+        },
+        {
+          "type": "channel_event_declarator",
+          "named": true
+        },
+        {
+          "type": "channel_event_handler",
           "named": true
         },
         {

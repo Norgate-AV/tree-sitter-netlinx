@@ -699,7 +699,6 @@ data_event[dvTP2]
 
 ===============================
 Conditionals in Channel Event
-:skip
 ===============================
 
 channel_event[dvTP, 1]
@@ -709,14 +708,47 @@ channel_event[dvTP, 2]
 {
     on: {}
 
-    #IF_DEFINED BAR
+    #IF_NOT_DEFINED BAR
     off: {}
     #END_IF
 }
 
 ---
 
-
+(source_file
+      (event_definition
+        (channel_event_definition
+          (channel_event_declarator
+            (channel_event_keyword)
+            (channel_event_devchan_reference
+              (devchan_expression
+                (identifier)
+                (number_literal))))
+          (preproc_if_defined
+            (preproc_if_defined_keyword)
+            (identifier)
+            (channel_event_declarator
+              (channel_event_keyword)
+              (channel_event_devchan_reference
+                (devchan_expression
+                  (identifier)
+                  (number_literal))))
+            (preproc_end_if
+              (preproc_end_if_keyword)))
+          (channel_event_block
+            (channel_event_handler
+              (channel_event_type
+                (on_keyword))
+              (compound_statement))
+            (preproc_if_not_defined
+              (preproc_if_not_defined_keyword)
+              (identifier)
+              (channel_event_handler
+                (channel_event_type
+                  (off_keyword))
+                (compound_statement))
+              (preproc_end_if
+                (preproc_end_if_keyword)))))))
 
 ===============================
 Conditionals in Level Event

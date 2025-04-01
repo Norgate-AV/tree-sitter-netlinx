@@ -54,6 +54,10 @@ module.exports = grammar({
         [$.preproc_else_in_data_event_declarator],
         [$.preproc_if_defined_in_data_event_block],
         [$.preproc_else_in_data_event_block],
+        [$.preproc_if_defined_in_channel_event_declarator],
+        [$.preproc_else_in_channel_event_declarator],
+        [$.preproc_if_defined_in_channel_event_block],
+        [$.preproc_else_in_channel_event_block],
     ],
 
     extras: ($) => [/\s/, $.comment],
@@ -227,6 +231,14 @@ module.exports = grammar({
 
         ...preprocIf("_in_data_event_block", ($) =>
             repeat1($._data_event_block_item),
+        ),
+
+        ...preprocIf("_in_channel_event_declarator", ($) =>
+            repeat1($.channel_event_declarator),
+        ),
+
+        ...preprocIf("_in_channel_event_block", ($) =>
+            repeat1($._channel_event_block_item),
         ),
 
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
@@ -478,8 +490,28 @@ module.exports = grammar({
 
         channel_event_definition: ($) =>
             seq(
-                repeat1($.channel_event_declarator),
+                $._channel_event_declarator_list,
                 field("body", $.channel_event_block),
+            ),
+
+        _channel_event_declarator_list: ($) =>
+            seq(
+                $.channel_event_declarator,
+                repeat(
+                    choice(
+                        $.channel_event_declarator,
+                        alias(
+                            $.preproc_if_defined_in_channel_event_declarator,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_channel_event_declarator,
+                            $.preproc_if_not_defined,
+                        ),
+                        $.preproc_define,
+                        $.preproc_include,
+                    ),
+                ),
             ),
 
         channel_event_declarator: ($) =>
@@ -492,7 +524,24 @@ module.exports = grammar({
             choice($.devchan_expression, seq("[", $.expression, "]")),
 
         channel_event_block: ($) =>
-            seq("{", repeat1($.channel_event_handler), "}"),
+            seq("{", repeat($._channel_event_block_item), "}"),
+
+        _channel_event_block_item: ($) =>
+            choice(
+                $.channel_event_handler,
+                alias(
+                    $.preproc_if_defined_in_channel_event_block,
+                    $.preproc_if_defined,
+                ),
+                alias(
+                    $.preproc_if_not_defined_in_channel_event_block,
+                    $.preproc_if_not_defined,
+                ),
+                $.preproc_define,
+                $.preproc_include,
+                $.preproc_warn,
+                $.preproc_disable_warning,
+            ),
 
         channel_event_handler: ($) =>
             seq(
