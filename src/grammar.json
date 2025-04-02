@@ -717,11 +717,8 @@
           }
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\r?\\n"
-          }
+          "type": "SYMBOL",
+          "name": "_semicolon"
         }
       ]
     },
@@ -768,11 +765,8 @@
           }
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\r?\\n"
-          }
+          "type": "SYMBOL",
+          "name": "_semicolon"
         }
       ]
     },
@@ -803,11 +797,8 @@
           }
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\r?\\n"
-          }
+          "type": "SYMBOL",
+          "name": "_semicolon"
         }
       ]
     },
@@ -838,11 +829,8 @@
           }
         },
         {
-          "type": "IMMEDIATE_TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\r?\\n"
-          }
+          "type": "SYMBOL",
+          "name": "_semicolon"
         }
       ]
     },

@@ -174,7 +174,7 @@ module.exports = grammar({
                     $.preproc_include_keyword,
                 ),
                 field("path", choice($.string_literal)),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         preproc_define: ($) =>
@@ -185,14 +185,14 @@ module.exports = grammar({
                 ),
                 field("name", $.identifier),
                 field("value", optional($.preproc_arg)),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         preproc_warn: ($) =>
             seq(
                 alias(preprocessor(directives.warn), $.preproc_warn_keyword),
                 field("message", $.string_literal),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         preproc_disable_warning: ($) =>
@@ -202,7 +202,7 @@ module.exports = grammar({
                     $.preproc_disable_warning_keyword,
                 ),
                 field("code", $.number_literal),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         ...preprocIf("", ($) => $._top_level_item),

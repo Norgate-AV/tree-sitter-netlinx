@@ -4,10 +4,15 @@ Include Directives
 
 #include 'common_api'
 INCLUDE 'button_constants'
+#include 'foo';
 
 ---
 
 (source_file
+  (preproc_include
+    (preproc_include_keyword)
+    path: (string_literal
+      (string_content)))
   (preproc_include
     (preproc_include_keyword)
     path: (string_literal
@@ -21,8 +26,8 @@ INCLUDE 'button_constants'
 Define Directives
 ==================
 
-#DEFINE DEBUG_MODE
-#define MAX_ATTEMPTS 5
+#DEFINE DEBUG_MODE;
+#define MAX_ATTEMPTS 5;
 #define DEVICE_NAME 'Touch Panel'
 
 ---
@@ -458,27 +463,27 @@ constant integer FOO[] = {
 ---
 
 (source_file
-      (declaration
-        (type_qualifier
-          (constant_keyword))
-        (intrinsic_type
-          (primitive_type
-            (integer_keyword)))
-        (init_declarator
-          (array_declarator
-            (identifier))
-          (initializer_list
-            (number_literal)
-            (number_literal)
-            (number_literal)
-            (number_literal)
-            (number_literal)
-            (preproc_if_defined
-              (preproc_if_defined_keyword)
-              (identifier)
-              (number_literal)
-              (preproc_end_if
-                (preproc_end_if_keyword)))))))
+  (declaration
+    (type_qualifier
+      (constant_keyword))
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (init_declarator
+      (array_declarator
+        (identifier))
+      (initializer_list
+        (number_literal)
+        (number_literal)
+        (number_literal)
+        (number_literal)
+        (number_literal)
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (number_literal)
+          (preproc_end_if
+            (preproc_end_if_keyword)))))))
 
 ========================================
 Conditionals in Switch/Case
@@ -503,42 +508,42 @@ switch (foo) {
 ---
 
 (source_file
-      (switch_statement
-        (switch_keyword)
-        (parenthesized_expression
-          (identifier))
-        (compound_statement
-          (case_statement
-            (case_keyword)
-            (number_literal)
-            (compound_statement))
-          (case_statement
-            (case_keyword)
-            (number_literal)
-            (compound_statement))
-          (case_statement
-            (case_keyword)
-            (number_literal))
-          (case_statement
-            (case_keyword)
-            (number_literal)
-            (compound_statement))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
-            (identifier)
-            (case_statement
-              (case_keyword)
-              (number_literal)
-              (compound_statement
-                (preproc_if_defined
-                  (preproc_if_defined_keyword)
-                  (identifier)
-                  (break_statement
-                    (break_keyword))
-                  (preproc_end_if
-                    (preproc_end_if_keyword)))))
-            (preproc_end_if
-              (preproc_end_if_keyword))))))
+  (switch_statement
+    (switch_keyword)
+    (parenthesized_expression
+      (identifier))
+    (compound_statement
+      (case_statement
+        (case_keyword)
+        (number_literal)
+        (compound_statement))
+      (case_statement
+        (case_keyword)
+        (number_literal)
+        (compound_statement))
+      (case_statement
+        (case_keyword)
+        (number_literal))
+      (case_statement
+        (case_keyword)
+        (number_literal)
+        (compound_statement))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (case_statement
+          (case_keyword)
+          (number_literal)
+          (compound_statement
+            (preproc_if_defined
+              (preproc_if_defined_keyword)
+              (identifier)
+              (break_statement
+                (break_keyword))
+              (preproc_end_if
+                (preproc_end_if_keyword)))))
+        (preproc_end_if
+          (preproc_end_if_keyword))))))
 
 =====================================
 Conditionals in Select/Active
@@ -560,35 +565,35 @@ select {
 ---
 
 (source_file
-      (select_statement
-        (select_keyword)
-        (compound_statement
-          (active_statement
-            (active_keyword)
-            (parenthesized_expression
-              (identifier))
-            (compound_statement))
-          (active_statement
-            (active_keyword)
-            (parenthesized_expression
-              (identifier))
-            (compound_statement))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
-            (identifier)
-            (active_statement
-              (active_keyword)
-              (parenthesized_expression
-                (identifier))
-              (compound_statement
-                (preproc_if_defined
-                  (preproc_if_defined_keyword)
-                  (identifier)
-                  (comment)
-                  (preproc_end_if
-                    (preproc_end_if_keyword)))))
-            (preproc_end_if
-              (preproc_end_if_keyword))))))
+  (select_statement
+    (select_keyword)
+    (compound_statement
+      (active_statement
+        (active_keyword)
+        (parenthesized_expression
+          (identifier))
+        (compound_statement))
+      (active_statement
+        (active_keyword)
+        (parenthesized_expression
+          (identifier))
+        (compound_statement))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (active_statement
+          (active_keyword)
+          (parenthesized_expression
+            (identifier))
+          (compound_statement
+            (preproc_if_defined
+              (preproc_if_defined_keyword)
+              (identifier)
+              (comment)
+              (preproc_end_if
+                (preproc_end_if_keyword)))))
+        (preproc_end_if
+          (preproc_end_if_keyword))))))
 
 ===============================
 Conditionals in Button Event
@@ -609,39 +614,39 @@ button_event[dvTP, 2]
 ---
 
 (source_file
-      (event_definition
-        (button_event_definition
-          (button_event_declarator
-            (button_event_keyword)
-            (button_event_devchan_reference
-              (devchan_expression
-                (identifier)
-                (number_literal))))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
+  (event_definition
+    (button_event_definition
+      (button_event_declarator
+        (button_event_keyword)
+        (button_event_devchan_reference
+          (devchan_expression
             (identifier)
-            (button_event_declarator
-              (button_event_keyword)
-              (button_event_devchan_reference
-                (devchan_expression
-                  (identifier)
-                  (number_literal))))
-            (preproc_end_if
-              (preproc_end_if_keyword)))
-          (button_event_block
-            (button_event_handler
-              (button_event_type
-                (push_keyword))
-              (compound_statement))
-            (preproc_if_not_defined
-              (preproc_if_not_defined_keyword)
+            (number_literal))))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (button_event_declarator
+          (button_event_keyword)
+          (button_event_devchan_reference
+            (devchan_expression
               (identifier)
-              (button_event_handler
-                (button_event_type
-                  (release_keyword))
-                (compound_statement))
-              (preproc_end_if
-                (preproc_end_if_keyword)))))))
+              (number_literal))))
+        (preproc_end_if
+          (preproc_end_if_keyword)))
+      (button_event_block
+        (button_event_handler
+          (button_event_type
+            (push_keyword))
+          (compound_statement))
+        (preproc_if_not_defined
+          (preproc_if_not_defined_keyword)
+          (identifier)
+          (button_event_handler
+            (button_event_type
+              (release_keyword))
+            (compound_statement))
+          (preproc_end_if
+            (preproc_end_if_keyword)))))))
 
 ===============================
 Conditionals in Data Event
@@ -663,39 +668,39 @@ data_event[dvTP2]
 ---
 
 (source_file
-      (event_definition
-        (data_event_definition
-          (data_event_declarator
-            (data_event_keyword)
-            (data_event_device_reference
-              (identifier)))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
-            (identifier)
-            (data_event_declarator
-              (data_event_keyword)
-              (data_event_device_reference
-                (identifier)))
-            (preproc_end_if
-              (preproc_end_if_keyword)))
-          (data_event_block
-            (data_event_handler
-              (data_event_type
-                (online_keyword))
-              (compound_statement))
-            (preproc_if_not_defined
-              (preproc_if_not_defined_keyword)
-              (identifier)
-              (data_event_handler
-                (data_event_type
-                  (string_keyword))
-                (compound_statement))
-              (data_event_handler
-                (data_event_type
-                  (command_keyword))
-                (compound_statement))
-              (preproc_end_if
-                (preproc_end_if_keyword)))))))
+  (event_definition
+    (data_event_definition
+      (data_event_declarator
+        (data_event_keyword)
+        (data_event_device_reference
+          (identifier)))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (data_event_declarator
+          (data_event_keyword)
+          (data_event_device_reference
+            (identifier)))
+        (preproc_end_if
+          (preproc_end_if_keyword)))
+      (data_event_block
+        (data_event_handler
+          (data_event_type
+            (online_keyword))
+          (compound_statement))
+        (preproc_if_not_defined
+          (preproc_if_not_defined_keyword)
+          (identifier)
+          (data_event_handler
+            (data_event_type
+              (string_keyword))
+            (compound_statement))
+          (data_event_handler
+            (data_event_type
+              (command_keyword))
+            (compound_statement))
+          (preproc_end_if
+            (preproc_end_if_keyword)))))))
 
 ===============================
 Conditionals in Channel Event
@@ -716,39 +721,39 @@ channel_event[dvTP, 2]
 ---
 
 (source_file
-      (event_definition
-        (channel_event_definition
-          (channel_event_declarator
-            (channel_event_keyword)
-            (channel_event_devchan_reference
-              (devchan_expression
-                (identifier)
-                (number_literal))))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
+  (event_definition
+    (channel_event_definition
+      (channel_event_declarator
+        (channel_event_keyword)
+        (channel_event_devchan_reference
+          (devchan_expression
             (identifier)
-            (channel_event_declarator
-              (channel_event_keyword)
-              (channel_event_devchan_reference
-                (devchan_expression
-                  (identifier)
-                  (number_literal))))
-            (preproc_end_if
-              (preproc_end_if_keyword)))
-          (channel_event_block
-            (channel_event_handler
-              (channel_event_type
-                (on_keyword))
-              (compound_statement))
-            (preproc_if_not_defined
-              (preproc_if_not_defined_keyword)
+            (number_literal))))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (channel_event_declarator
+          (channel_event_keyword)
+          (channel_event_devchan_reference
+            (devchan_expression
               (identifier)
-              (channel_event_handler
-                (channel_event_type
-                  (off_keyword))
-                (compound_statement))
-              (preproc_end_if
-                (preproc_end_if_keyword)))))))
+              (number_literal))))
+        (preproc_end_if
+          (preproc_end_if_keyword)))
+      (channel_event_block
+        (channel_event_handler
+          (channel_event_type
+            (on_keyword))
+          (compound_statement))
+        (preproc_if_not_defined
+          (preproc_if_not_defined_keyword)
+          (identifier)
+          (channel_event_handler
+            (channel_event_type
+              (off_keyword))
+            (compound_statement))
+          (preproc_end_if
+            (preproc_end_if_keyword)))))))
 
 ===============================
 Conditionals in Level Event
@@ -765,26 +770,26 @@ level_event[dvTP, 2]
 ---
 
 (source_file
-      (event_definition
-        (level_event_definition
-          (level_event_declarator
-            (level_event_keyword)
-            (level_event_devlev_reference
-              (devlev_expression
-                (identifier)
-                (number_literal))))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
+  (event_definition
+    (level_event_definition
+      (level_event_declarator
+        (level_event_keyword)
+        (level_event_devlev_reference
+          (devlev_expression
             (identifier)
-            (level_event_declarator
-              (level_event_keyword)
-              (level_event_devlev_reference
-                (devlev_expression
-                  (identifier)
-                  (number_literal))))
-            (preproc_end_if
-              (preproc_end_if_keyword)))
-          (compound_statement))))
+            (number_literal))))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (level_event_declarator
+          (level_event_keyword)
+          (level_event_devlev_reference
+            (devlev_expression
+              (identifier)
+              (number_literal))))
+        (preproc_end_if
+          (preproc_end_if_keyword)))
+      (compound_statement))))
 
 ===============================
 Conditionals in Timeline Event
@@ -801,22 +806,22 @@ timeline_event[TL2]
 ---
 
 (source_file
-      (event_definition
-        (timeline_event_definition
-          (timeline_event_declarator
-            (timeline_event_keyword)
-            (timeline_event_id_reference
-              (identifier)))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
-            (identifier)
-            (timeline_event_declarator
-              (timeline_event_keyword)
-              (timeline_event_id_reference
-                (identifier)))
-            (preproc_end_if
-              (preproc_end_if_keyword)))
-          (compound_statement))))
+  (event_definition
+    (timeline_event_definition
+      (timeline_event_declarator
+        (timeline_event_keyword)
+        (timeline_event_id_reference
+          (identifier)))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (timeline_event_declarator
+          (timeline_event_keyword)
+          (timeline_event_id_reference
+            (identifier)))
+        (preproc_end_if
+          (preproc_end_if_keyword)))
+      (compound_statement))))
 
 ===============================
 Conditionals in Custom Event
@@ -833,23 +838,23 @@ custom_event[dvTP, 1, 1002]
 ---
 
 (source_file
-      (event_definition
-        (custom_event_definition
-          (custom_event_declarator
-            (custom_event_keyword)
-            (custom_event_reference
-              (identifier)
-              (number_literal)
-              (number_literal)))
-          (preproc_if_defined
-            (preproc_if_defined_keyword)
+  (event_definition
+    (custom_event_definition
+      (custom_event_declarator
+        (custom_event_keyword)
+        (custom_event_reference
+          (identifier)
+          (number_literal)
+          (number_literal)))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (custom_event_declarator
+          (custom_event_keyword)
+          (custom_event_reference
             (identifier)
-            (custom_event_declarator
-              (custom_event_keyword)
-              (custom_event_reference
-                (identifier)
-                (number_literal)
-                (number_literal)))
-            (preproc_end_if
-              (preproc_end_if_keyword)))
-          (compound_statement))))
+            (number_literal)
+            (number_literal)))
+        (preproc_end_if
+          (preproc_end_if_keyword)))
+      (compound_statement))))
