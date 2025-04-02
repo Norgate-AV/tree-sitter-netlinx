@@ -1133,6 +1133,7 @@ module.exports = grammar({
                 $.cancel_wait_statement,
                 $.cancel_wait_until_statement,
                 $.call_statement,
+                $.system_call_statement,
             ),
 
         _top_level_statement: ($) =>
@@ -1163,6 +1164,7 @@ module.exports = grammar({
                 $.cancel_wait_statement,
                 $.cancel_wait_until_statement,
                 $.call_statement,
+                $.system_call_statement,
             ),
 
         _top_level_expression_statement: ($) =>
@@ -1383,7 +1385,15 @@ module.exports = grammar({
             seq(
                 $.call_keyword,
                 field("call", $.string_literal),
-                field("arguments", $.argument_list),
+                optional(field("arguments", $.argument_list)),
+                $._semicolon,
+            ),
+
+        system_call_statement: ($) =>
+            seq(
+                $.system_call_keyword,
+                field("call", $.string_literal),
+                optional(field("arguments", $.argument_list)),
                 $._semicolon,
             ),
 

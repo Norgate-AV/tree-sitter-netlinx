@@ -100,6 +100,7 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - :white_check_mark: Send Level Statements
     - :white_check_mark: Devchan Operation Statements (`ON`, `OFF`, `TO`, `MIN_TO`, `PULSE`, etc)
     - :white_check_mark: Call Statements (for legacy `DEFINE_CALL` functions)
+    - :white_check_mark: System Call Statements
 - Declarations
     - :white_check_mark: Define Function Definitions
     - :white_check_mark: Define Library Function Declarations

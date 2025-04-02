@@ -98,6 +98,7 @@ module.exports = {
     create_buffer: /create_buffer/i,
     create_multi_buffer: /create_multi_buffer/i,
     call: /call/i,
+    system_call: /system_call/i,
 
     // Built-in Structured Types
     dev: /dev/i,

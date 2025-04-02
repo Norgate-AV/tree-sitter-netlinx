@@ -90,6 +90,7 @@
     (create_buffer_keyword)
     (create_multi_buffer_keyword)
     (call_keyword)
+    (system_call_keyword)
 
     (devchan_on_keyword)
     (devchan_off_keyword)
