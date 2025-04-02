@@ -4,10 +4,15 @@ Include Directives
 
 #include 'common_api'
 INCLUDE 'button_constants'
+#include 'foo';
 
 ---
 
 (source_file
+  (preproc_include
+    (preproc_include_keyword)
+    path: (string_literal
+      (string_content)))
   (preproc_include
     (preproc_include_keyword)
     path: (string_literal
@@ -21,8 +26,8 @@ INCLUDE 'button_constants'
 Define Directives
 ==================
 
-#DEFINE DEBUG_MODE
-#define MAX_ATTEMPTS 5
+#DEFINE DEBUG_MODE;
+#define MAX_ATTEMPTS 5;
 #define DEVICE_NAME 'Touch Panel'
 
 ---

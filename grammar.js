@@ -187,7 +187,7 @@ module.exports = grammar({
                     $.preproc_include_keyword,
                 ),
                 field("path", choice($.string_literal)),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         preproc_define: ($) =>
@@ -198,14 +198,14 @@ module.exports = grammar({
                 ),
                 field("name", $.identifier),
                 field("value", optional($.preproc_arg)),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         preproc_warn: ($) =>
             seq(
                 alias(preprocessor(directives.warn), $.preproc_warn_keyword),
                 field("message", $.string_literal),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         preproc_disable_warning: ($) =>
@@ -215,7 +215,7 @@ module.exports = grammar({
                     $.preproc_disable_warning_keyword,
                 ),
                 field("code", $.number_literal),
-                token.immediate(/\r?\n/),
+                $._semicolon,
             ),
 
         ...preprocIf("", ($) => $._top_level_item),
@@ -1150,6 +1150,7 @@ module.exports = grammar({
                 $.cancel_wait_statement,
                 $.cancel_wait_until_statement,
                 $.call_statement,
+                $.system_call_statement,
             ),
 
         _top_level_statement: ($) =>
@@ -1180,6 +1181,7 @@ module.exports = grammar({
                 $.cancel_wait_statement,
                 $.cancel_wait_until_statement,
                 $.call_statement,
+                $.system_call_statement,
             ),
 
         _top_level_expression_statement: ($) =>
@@ -1400,7 +1402,15 @@ module.exports = grammar({
             seq(
                 $.call_keyword,
                 field("call", $.string_literal),
-                field("arguments", $.argument_list),
+                optional(field("arguments", $.argument_list)),
+                $._semicolon,
+            ),
+
+        system_call_statement: ($) =>
+            seq(
+                $.system_call_keyword,
+                field("call", $.string_literal),
+                optional(field("arguments", $.argument_list)),
                 $._semicolon,
             ),
 

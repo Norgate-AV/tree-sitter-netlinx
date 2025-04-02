@@ -224,6 +224,10 @@
         "named": true
       },
       {
+        "type": "system_call_statement",
+        "named": true
+      },
+      {
         "type": "wait_statement",
         "named": true
       },
@@ -866,7 +870,7 @@
     "fields": {
       "arguments": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "argument_list",
@@ -1095,6 +1099,10 @@
         },
         {
           "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "system_call_statement",
           "named": true
         },
         {
@@ -3319,6 +3327,10 @@
           "named": true
         },
         {
+          "type": "system_call_statement",
+          "named": true
+        },
+        {
           "type": "timeline_event_declarator",
           "named": true
         },
@@ -3571,6 +3583,10 @@
           "named": true
         },
         {
+          "type": "system_call_statement",
+          "named": true
+        },
+        {
           "type": "timeline_event_declarator",
           "named": true
         },
@@ -3820,6 +3836,10 @@
         },
         {
           "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "system_call_statement",
           "named": true
         },
         {
@@ -4359,6 +4379,10 @@
           "named": true
         },
         {
+          "type": "system_call_statement",
+          "named": true
+        },
+        {
           "type": "type_definition",
           "named": true
         },
@@ -4550,6 +4574,42 @@
       "types": [
         {
           "type": "switch_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "system_call_statement",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          }
+        ]
+      },
+      "call": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "system_call_keyword",
           "named": true
         }
       ]
@@ -5391,6 +5451,10 @@
   },
   {
     "type": "switch_keyword",
+    "named": true
+  },
+  {
+    "type": "system_call_keyword",
     "named": true
   },
   {

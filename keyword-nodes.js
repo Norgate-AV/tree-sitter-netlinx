@@ -117,6 +117,7 @@ module.exports = {
     create_buffer_keyword: (_) => keywords.create_buffer,
     create_multi_buffer_keyword: (_) => keywords.create_multi_buffer,
     call_keyword: (_) => keywords.call,
+    system_call_keyword: (_) => keywords.system_call,
 
     // DevChan operation keywords
     devchan_on_keyword: (_) => keywords.devchan_on,

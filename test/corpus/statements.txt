@@ -1148,6 +1148,7 @@ Call
 call 'MyFunction'()
 call 'MyFunction'(param1, param2)
 call 'MyFunction' (param1, param2, param3)
+call 'MyFunction'
 
 ---
 
@@ -1171,7 +1172,11 @@ call 'MyFunction' (param1, param2, param3)
     (argument_list
       (identifier)
       (identifier)
-      (identifier))))
+      (identifier)))
+  (call_statement
+    (call_keyword)
+    (string_literal
+      (string_content))))
 
 =================================
 Named Wait Statements
@@ -1389,3 +1394,40 @@ CLEAR_BUFFER dynamicBuffer[currentIndex]
     (subscript_expression
       (identifier)
       (identifier))))
+
+============================
+System Call
+============================
+
+system_call 'MyFunction'()
+system_call 'MyFunction'(param1, param2)
+system_call 'MyFunction' (param1, param2, param3)
+system_call 'MyFunction'
+
+---
+
+(source_file
+  (system_call_statement
+    (system_call_keyword)
+    (string_literal
+      (string_content))
+    (argument_list))
+  (system_call_statement
+    (system_call_keyword)
+    (string_literal
+      (string_content))
+    (argument_list
+      (identifier)
+      (identifier)))
+  (system_call_statement
+    (system_call_keyword)
+    (string_literal
+      (string_content))
+    (argument_list
+      (identifier)
+      (identifier)
+      (identifier)))
+  (system_call_statement
+    (system_call_keyword)
+    (string_literal
+      (string_content))))
