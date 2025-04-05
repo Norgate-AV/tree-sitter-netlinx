@@ -1,8 +1,8 @@
-(foo
-#IF_DEFINED BAR
-&& baz
-#END_IF
-&& foobar)
+// (foo
+// #IF_DEFINED BAR
+// && baz
+// #END_IF
+// && foobar)
 #IF_DEFINED BAR
     (foo && baz && foobar)
 #ELSE
