@@ -9241,6 +9241,15 @@
         {
           "type": "SYMBOL",
           "name": "devchan_expression"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "system_variable"
+          },
+          "named": true,
+          "value": "identifier"
         }
       ]
     },

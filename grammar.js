@@ -1574,6 +1574,7 @@ module.exports = grammar({
                 $.subscript_expression,
                 $.parenthesized_expression,
                 $.devchan_expression,
+                alias($.system_variable, $.identifier),
             ),
 
         unary_expression: ($) =>
