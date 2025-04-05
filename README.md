@@ -74,6 +74,7 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - :white_check_mark: Subscript Expressions
     - :white_check_mark: Comma Expressions
     - :white_check_mark: Compiler Variables (`__file__`, `__line__`, `__date__`, `__time__`, etc)
+    - :white_check_mark: System Variables (`day`, `date`, `ldate`, `time`, etc)
 - Statements
     - :white_check_mark: Expression Statements
     - :white_check_mark: Compound Statements

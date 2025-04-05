@@ -1591,15 +1591,68 @@ __name__
 ---
 
 (source_file
-      (expression_statement
-        (compiler_variable))
-      (expression_statement
-        (compiler_variable))
-      (expression_statement
-        (compiler_variable))
-      (expression_statement
-        (compiler_variable))
-      (expression_statement
-        (compiler_variable))
-      (expression_statement
-        (compiler_variable)))
+  (expression_statement
+    (compiler_variable))
+  (expression_statement
+    (compiler_variable))
+  (expression_statement
+    (compiler_variable))
+  (expression_statement
+    (compiler_variable))
+  (expression_statement
+    (compiler_variable))
+  (expression_statement
+    (compiler_variable)))
+
+===================================
+System Variables
+===================================
+
+day
+date
+LDATE
+time
+push_device
+push_channel
+push_devchan
+release_channel
+release_device
+release_devchan
+system_number
+
+---
+
+(source_file
+  (expression_statement
+    (system_variable
+      (day)))
+  (expression_statement
+    (system_variable
+      (date)))
+  (expression_statement
+    (system_variable
+      (ldate)))
+  (expression_statement
+    (system_variable
+      (time)))
+  (expression_statement
+    (system_variable
+      (push_device)))
+  (expression_statement
+    (system_variable
+      (push_channel)))
+  (expression_statement
+    (system_variable
+      (push_devchan)))
+  (expression_statement
+    (system_variable
+      (release_channel)))
+  (expression_statement
+    (system_variable
+      (release_device)))
+  (expression_statement
+    (system_variable
+      (release_devchan)))
+  (expression_statement
+    (system_variable
+      (system_number))))

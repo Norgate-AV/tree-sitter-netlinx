@@ -8,6 +8,7 @@
 
 const directives = require("./directives");
 const keywords = require("./keyword-nodes");
+const netlinx = require("./netlinx-nodes");
 
 const PREC = {
     PAREN_DECLARATOR: -10,
@@ -160,6 +161,9 @@ module.exports = grammar({
 
         // Include all keyword nodes
         ...keywords,
+
+        // Include all netlinx nodes
+        ...netlinx.variables,
 
         program_name: ($) =>
             prec.right(
@@ -1436,6 +1440,7 @@ module.exports = grammar({
                 $.true,
                 $.false,
                 $.compiler_variable,
+                $.system_variable,
                 $.device_literal,
                 $.parenthesized_expression,
                 $.devchan_range_expression,
@@ -1450,6 +1455,21 @@ module.exports = grammar({
                 $.__time__,
                 $.__line__,
                 $.__name__,
+            ),
+
+        system_variable: ($) =>
+            choice(
+                $.date,
+                $.ldate,
+                $.day,
+                $.time,
+                $.system_number,
+                $.push_channel,
+                $.push_device,
+                $.push_devchan,
+                $.release_channel,
+                $.release_device,
+                $.release_devchan,
             ),
 
         assignment_expression: ($) =>

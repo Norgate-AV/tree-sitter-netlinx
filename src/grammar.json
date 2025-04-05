@@ -657,6 +657,61 @@
       "value": "__name__",
       "flags": "i"
     },
+    "date": {
+      "type": "PATTERN",
+      "value": "date",
+      "flags": "i"
+    },
+    "day": {
+      "type": "PATTERN",
+      "value": "day",
+      "flags": "i"
+    },
+    "time": {
+      "type": "PATTERN",
+      "value": "time",
+      "flags": "i"
+    },
+    "ldate": {
+      "type": "PATTERN",
+      "value": "ldate",
+      "flags": "i"
+    },
+    "push_device": {
+      "type": "PATTERN",
+      "value": "push_device",
+      "flags": "i"
+    },
+    "push_channel": {
+      "type": "PATTERN",
+      "value": "push_channel",
+      "flags": "i"
+    },
+    "push_devchan": {
+      "type": "PATTERN",
+      "value": "push_devchan",
+      "flags": "i"
+    },
+    "release_device": {
+      "type": "PATTERN",
+      "value": "release_device",
+      "flags": "i"
+    },
+    "release_channel": {
+      "type": "PATTERN",
+      "value": "release_channel",
+      "flags": "i"
+    },
+    "release_devchan": {
+      "type": "PATTERN",
+      "value": "release_devchan",
+      "flags": "i"
+    },
+    "system_number": {
+      "type": "PATTERN",
+      "value": "system_number",
+      "flags": "i"
+    },
     "program_name": {
       "type": "PREC_RIGHT",
       "value": 30,
@@ -8359,6 +8414,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "system_variable"
+        },
+        {
+          "type": "SYMBOL",
           "name": "device_literal"
         },
         {
@@ -8401,6 +8460,55 @@
         {
           "type": "SYMBOL",
           "name": "__name__"
+        }
+      ]
+    },
+    "system_variable": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "date"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ldate"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "day"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "time"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "push_channel"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "push_device"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "push_devchan"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "release_channel"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "release_device"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "release_devchan"
         }
       ]
     },

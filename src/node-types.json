@@ -118,6 +118,10 @@
         "named": true
       },
       {
+        "type": "system_variable",
+        "named": true
+      },
+      {
         "type": "true",
         "named": true
       },
@@ -4625,6 +4629,61 @@
     }
   },
   {
+    "type": "system_variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "day",
+          "named": true
+        },
+        {
+          "type": "ldate",
+          "named": true
+        },
+        {
+          "type": "push_channel",
+          "named": true
+        },
+        {
+          "type": "push_devchan",
+          "named": true
+        },
+        {
+          "type": "push_device",
+          "named": true
+        },
+        {
+          "type": "release_channel",
+          "named": true
+        },
+        {
+          "type": "release_devchan",
+          "named": true
+        },
+        {
+          "type": "release_device",
+          "named": true
+        },
+        {
+          "type": "system_number",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "timeline_event_declarator",
     "named": true,
     "fields": {
@@ -5159,6 +5218,14 @@
     "named": true
   },
   {
+    "type": "date",
+    "named": true
+  },
+  {
+    "type": "day",
+    "named": true
+  },
+  {
     "type": "default_keyword",
     "named": true
   },
@@ -5303,6 +5370,10 @@
     "named": true
   },
   {
+    "type": "ldate",
+    "named": true
+  },
+  {
     "type": "level_event_keyword",
     "named": true
   },
@@ -5387,11 +5458,35 @@
     "named": true
   },
   {
+    "type": "push_channel",
+    "named": true
+  },
+  {
+    "type": "push_devchan",
+    "named": true
+  },
+  {
+    "type": "push_device",
+    "named": true
+  },
+  {
     "type": "push_keyword",
     "named": true
   },
   {
     "type": "range_operator",
+    "named": true
+  },
+  {
+    "type": "release_channel",
+    "named": true
+  },
+  {
+    "type": "release_devchan",
+    "named": true
+  },
+  {
+    "type": "release_device",
     "named": true
   },
   {
@@ -5464,6 +5559,14 @@
   },
   {
     "type": "system_call_keyword",
+    "named": true
+  },
+  {
+    "type": "system_number",
+    "named": true
+  },
+  {
+    "type": "time",
     "named": true
   },
   {

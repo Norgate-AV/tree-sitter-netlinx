@@ -50,6 +50,44 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
     //                                                      ^ keyword
     //                                                              ^ string
 
+    // System Variables
+    result = "push_channel, push_device, push_devchan"
+    // ^ variable
+    //     ^ operator
+    //       ^ string
+    //         ^ keyword
+    //                    ^ punctuation.delimiter
+    //                      ^ keyword
+    //                                 ^ punctuation.delimiter
+    //                                    ^ keyword
+    //                                               ^ string
+
+    result = "release_channel, release_device, release_devchan"
+    // ^ variable
+    //     ^ operator
+    //       ^ string
+    //         ^ keyword
+    //                       ^ punctuation.delimiter
+    //                         ^ keyword
+    //                                       ^ punctuation.delimiter
+    //                                         ^ keyword
+    //                                                        ^ string
+
+    result = "date, day, ldate, time, system_number"
+    // ^ variable
+    //     ^ operator
+    //       ^ string
+    //         ^ keyword
+    //            ^ punctuation.delimiter
+    //              ^ keyword
+    //                 ^ punctuation.delimiter
+    //                   ^ keyword
+    //                        ^ punctuation.delimiter
+    //                          ^ keyword
+    //                              ^ punctuation.delimiter
+    //                                 ^ keyword
+    //                                             ^ string
+
     result = x + y * 10
     // ^ variable
     //     ^ operator
