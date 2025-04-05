@@ -36,6 +36,8 @@ At this point the grammar is mostly complete. Work is now focused on testing and
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [What's Working :white_check_mark:](#whats-working-white_check_mark)
+- [Known Limitations :warning:](#known-limitations-warning)
+    - [Preprocessor Directives in Expressions](#preprocessor-directives-in-expressions)
 - [Install :zap:](#install-zap)
     - [Node.js (npm)](#nodejs-npm)
     - [Rust (Cargo)](#rust-cargo)
@@ -140,6 +142,56 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - :white_check_mark: Disable Warning
     - :white_check_mark: If Defined
     - :white_check_mark: If Not Defined
+
+## Known Limitations :warning:
+
+### Preprocessor Directives in Expressions
+
+The NetLinx language allows preprocessor directives to be used within expressions, like:
+
+```netlinx
+(foo #IF_DEFINED BAR && baz #END_IF && foobar)
+```
+
+While this is valid NetLinx code that compiles correctly, tree-sitter has limitations when parsing these constructs due to the nature of preprocessor directives operating at a different level than normal syntax.
+
+When encountering preprocessor directives within expressions, the parser will:
+
+1. **Maintain the overall expression structure** - The parenthesized expression remains intact
+2. **Generate some error nodes** - The preprocessor directives are marked as errors
+3. **Preserve correct syntax highlighting** - Despite the errors, tokens are still correctly identified
+4. **Keep all identifiers and operators** - Variable names and operators remain properly connected
+
+**Example Parse Tree**
+
+```
+(source_file
+  (expression_statement
+    (parenthesized_expression
+      (ERROR
+        (identifier) // <- foo
+        (preproc_if_defined_keyword))
+      (binary_expression
+        left: (binary_expression
+          left: (identifier) // <- BAR
+          right: (identifier))  // <- baz
+        (ERROR
+          (preproc_end_if_keyword))
+        right: (identifier))))) // <- foobar
+```
+
+**Implications**
+
+- **Editor Experience**: Syntax highlighting and code navigation should work normally
+- **Error Reports**: Your editor may show these areas as errors, which can be safely ignored
+- **Alternative Approach**: For cleaner parsing, consider restructuring complex conditional expressions to avoid embedding preprocessor directives within expressions, like:
+    ```
+    #IF_DEFINED BAR
+      (foo && baz && foobar)
+    #ELSE
+      (foo && foobar)
+    #END_IF
+    ```
 
 ## Install :zap:
 
