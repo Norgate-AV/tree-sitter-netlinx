@@ -485,3 +485,93 @@ CUSTOM_EVENT[vdvObjects[activeIndex], customEvents[EVENT_TYPE_STATUS], CUSTOM_EV
           (identifier)))
       (compound_statement
         (comment)))))
+
+================================
+Legacy Push
+================================
+
+push[dvTP, BTN_HOME] {}
+
+push[dvDevChan]
+push[10001:1:0, 1]
+push[DVA_DEVCHAN[1]] {}
+
+---
+
+(source_file
+  (event_definition
+    (push_event_definition
+      (push_event_declarator
+        (push_keyword)
+        (push_event_devchan_reference
+          (devchan_expression
+            (identifier)
+            (identifier))))
+      (compound_statement)))
+  (event_definition
+    (push_event_definition
+      (push_event_declarator
+        (push_keyword)
+        (push_event_devchan_reference
+          (identifier)))
+      (push_event_declarator
+        (push_keyword)
+        (push_event_devchan_reference
+          (devchan_expression
+            (device_literal
+              (number_literal)
+              (number_literal)
+              (number_literal))
+            (number_literal))))
+      (push_event_declarator
+        (push_keyword)
+        (push_event_devchan_reference
+          (subscript_expression
+            (identifier)
+            (number_literal))))
+      (compound_statement))))
+
+================================
+Legacy Release
+================================
+
+RELEASE[dvTP, BTN_HOME] {}
+
+RELEASE[dvDevChan]
+RELEASE[10001:1:0, 1]
+RELEASE[DVA_DEVCHAN[1]] {}
+
+---
+
+(source_file
+  (event_definition
+    (release_event_definition
+      (release_event_declarator
+        (release_keyword)
+        (release_event_devchan_reference
+          (devchan_expression
+            (identifier)
+            (identifier))))
+      (compound_statement)))
+  (event_definition
+    (release_event_definition
+      (release_event_declarator
+        (release_keyword)
+        (release_event_devchan_reference
+          (identifier)))
+      (release_event_declarator
+        (release_keyword)
+        (release_event_devchan_reference
+          (devchan_expression
+            (device_literal
+              (number_literal)
+              (number_literal)
+              (number_literal))
+            (number_literal))))
+      (release_event_declarator
+        (release_keyword)
+        (release_event_devchan_reference
+          (subscript_expression
+            (identifier)
+            (number_literal))))
+      (compound_statement))))

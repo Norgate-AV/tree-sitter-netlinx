@@ -1017,3 +1017,73 @@ constant char FOO[][50]     =   {
           (string_literal
             (string_content))
           (preproc_end_if_keyword))))))
+
+===============================
+Conditionals in Push Event
+===============================
+
+push[dvTP, 1]
+#IF_DEFINED FOO
+push[dvTP, 2]
+#END_IF
+{
+
+}
+
+---
+
+(source_file
+  (event_definition
+    (push_event_definition
+      (push_event_declarator
+        (push_keyword)
+        (push_event_devchan_reference
+          (devchan_expression
+            (identifier)
+            (number_literal))))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (push_event_declarator
+          (push_keyword)
+          (push_event_devchan_reference
+            (devchan_expression
+              (identifier)
+              (number_literal))))
+        (preproc_end_if_keyword))
+      (compound_statement))))
+
+===============================
+Conditionals in Release Event
+===============================
+
+release[dvTP, 1]
+#IF_DEFINED FOO
+release[dvTP, 2]
+#END_IF
+{
+
+}
+
+---
+
+(source_file
+  (event_definition
+    (release_event_definition
+      (release_event_declarator
+        (release_keyword)
+        (release_event_devchan_reference
+          (devchan_expression
+            (identifier)
+            (number_literal))))
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (release_event_declarator
+          (release_keyword)
+          (release_event_devchan_reference
+            (devchan_expression
+              (identifier)
+              (number_literal))))
+        (preproc_end_if_keyword))
+      (compound_statement))))

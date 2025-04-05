@@ -2339,6 +2339,14 @@
           "named": true
         },
         {
+          "type": "push_event_definition",
+          "named": true
+        },
+        {
+          "type": "release_event_definition",
+          "named": true
+        },
+        {
           "type": "timeline_event_definition",
           "named": true
         }
@@ -3312,6 +3320,14 @@
           "named": true
         },
         {
+          "type": "push_event_declarator",
+          "named": true
+        },
+        {
+          "type": "release_event_declarator",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         },
@@ -3565,6 +3581,14 @@
         },
         {
           "type": "program_name",
+          "named": true
+        },
+        {
+          "type": "push_event_declarator",
+          "named": true
+        },
+        {
+          "type": "release_event_declarator",
           "named": true
         },
         {
@@ -3824,6 +3848,14 @@
           "named": true
         },
         {
+          "type": "push_event_declarator",
+          "named": true
+        },
+        {
+          "type": "release_event_declarator",
+          "named": true
+        },
+        {
           "type": "return_statement",
           "named": true
         },
@@ -3995,6 +4027,172 @@
         },
         {
           "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "push_event_declarator",
+    "named": true,
+    "fields": {
+      "devchan": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "push_event_devchan_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "push_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "push_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
+        {
+          "type": "push_event_declarator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "push_event_devchan_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "release_event_declarator",
+    "named": true,
+    "fields": {
+      "devchan": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "release_event_devchan_reference",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "release_keyword",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "release_event_definition",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_statement",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "preproc_define",
+          "named": true
+        },
+        {
+          "type": "preproc_if_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_if_not_defined",
+          "named": true
+        },
+        {
+          "type": "preproc_include",
+          "named": true
+        },
+        {
+          "type": "release_event_declarator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "release_event_devchan_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         }
       ]

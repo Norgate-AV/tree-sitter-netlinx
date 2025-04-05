@@ -76,6 +76,10 @@ module.exports = grammar({
         [$.preproc_else_in_level_event_declarator],
         [$.preproc_if_defined_in_custom_event_declarator],
         [$.preproc_else_in_custom_event_declarator],
+        [$.preproc_if_defined_in_push_event_declarator],
+        [$.preproc_else_in_push_event_declarator],
+        [$.preproc_if_defined_in_release_event_declarator],
+        [$.preproc_else_in_release_event_declarator],
     ],
 
     extras: ($) => [/\s/, $.comment],
@@ -280,6 +284,14 @@ module.exports = grammar({
             repeat1($.custom_event_declarator),
         ),
 
+        ...preprocIf("_in_push_event_declarator", ($) =>
+            repeat1($.push_event_declarator),
+        ),
+
+        ...preprocIf("_in_release_event_declarator", ($) =>
+            repeat1($.release_event_declarator),
+        ),
+
         preproc_arg: (_) => token(prec(-1, /\S([^/\n]|\/[^*]|\\\r?\n)*/)),
         preproc_directive: (_) => /#[a-zA-Z0-9]\w*/,
 
@@ -342,6 +354,8 @@ module.exports = grammar({
                 $.data_event_definition,
                 $.timeline_event_definition,
                 $.custom_event_definition,
+                $.push_event_definition,
+                $.release_event_definition,
             ),
 
         data_event_definition: ($) =>
@@ -685,6 +699,76 @@ module.exports = grammar({
                 ),
                 "]",
             ),
+
+        push_event_definition: ($) =>
+            seq(
+                $._push_event_declarator_list,
+                field("body", $.compound_statement),
+            ),
+
+        _push_event_declarator_list: ($) =>
+            seq(
+                $.push_event_declarator,
+                repeat(
+                    choice(
+                        $.push_event_declarator,
+                        alias(
+                            $.preproc_if_defined_in_push_event_declarator,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_push_event_declarator,
+                            $.preproc_if_not_defined,
+                        ),
+                        $.preproc_define,
+                        $.preproc_include,
+                    ),
+                ),
+            ),
+
+        push_event_declarator: ($) =>
+            seq(
+                $.push_keyword,
+                field("devchan", $.push_event_devchan_reference),
+            ),
+
+        push_event_devchan_reference: ($) =>
+            choice($.devchan_expression, seq("[", $.expression, "]")),
+
+        release_event_definition: ($) =>
+            seq(
+                $._release_event_declarator_list,
+                field("body", $.compound_statement),
+            ),
+
+        _release_event_declarator_list: ($) =>
+            seq(
+                $.release_event_declarator,
+                repeat(
+                    choice(
+                        $.release_event_declarator,
+                        alias(
+                            $.preproc_if_defined_in_release_event_declarator,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_release_event_declarator,
+                            $.preproc_if_not_defined,
+                        ),
+                        $.preproc_define,
+                        $.preproc_include,
+                    ),
+                ),
+            ),
+
+        release_event_declarator: ($) =>
+            seq(
+                $.release_keyword,
+                field("devchan", $.release_event_devchan_reference),
+            ),
+
+        release_event_devchan_reference: ($) =>
+            choice($.devchan_expression, seq("[", $.expression, "]")),
 
         array_declarator: ($) =>
             prec(

@@ -4168,6 +4168,454 @@
         ]
       }
     },
+    "preproc_if_defined_in_push_event_declarator": {
+      "type": "PREC_DYNAMIC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#if_defined",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#if_defined"
+            },
+            "named": true,
+            "value": "preproc_if_defined_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\n"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "push_event_declarator"
+              }
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "alternative",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "preproc_else_in_push_event_declarator"
+                      },
+                      "named": true,
+                      "value": "preproc_else"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#end_if",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#end_if"
+            },
+            "named": true,
+            "value": "preproc_end_if_keyword"
+          }
+        ]
+      }
+    },
+    "preproc_if_not_defined_in_push_event_declarator": {
+      "type": "PREC_DYNAMIC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#if_not_defined",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#if_not_defined"
+            },
+            "named": true,
+            "value": "preproc_if_not_defined_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\n"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "push_event_declarator"
+              }
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "alternative",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "preproc_else_in_push_event_declarator"
+                      },
+                      "named": true,
+                      "value": "preproc_else"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#end_if",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#end_if"
+            },
+            "named": true,
+            "value": "preproc_end_if_keyword"
+          }
+        ]
+      }
+    },
+    "preproc_else_in_push_event_declarator": {
+      "type": "PREC_DYNAMIC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#else",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#else"
+            },
+            "named": true,
+            "value": "preproc_else_keyword"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "push_event_declarator"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "preproc_if_defined_in_release_event_declarator": {
+      "type": "PREC_DYNAMIC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#if_defined",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#if_defined"
+            },
+            "named": true,
+            "value": "preproc_if_defined_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\n"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "release_event_declarator"
+              }
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "alternative",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "preproc_else_in_release_event_declarator"
+                      },
+                      "named": true,
+                      "value": "preproc_else"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#end_if",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#end_if"
+            },
+            "named": true,
+            "value": "preproc_end_if_keyword"
+          }
+        ]
+      }
+    },
+    "preproc_if_not_defined_in_release_event_declarator": {
+      "type": "PREC_DYNAMIC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#if_not_defined",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#if_not_defined"
+            },
+            "named": true,
+            "value": "preproc_if_not_defined_keyword"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\n"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "release_event_declarator"
+              }
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "alternative",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "preproc_else_in_release_event_declarator"
+                      },
+                      "named": true,
+                      "value": "preproc_else"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#end_if",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#end_if"
+            },
+            "named": true,
+            "value": "preproc_end_if_keyword"
+          }
+        ]
+      }
+    },
+    "preproc_else_in_release_event_declarator": {
+      "type": "PREC_DYNAMIC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "#else",
+                "flags": "i"
+              },
+              "named": false,
+              "value": "#else"
+            },
+            "named": true,
+            "value": "preproc_else_keyword"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "release_event_declarator"
+              }
+            }
+          }
+        ]
+      }
+    },
     "preproc_arg": {
       "type": "TOKEN",
       "content": {
@@ -4408,6 +4856,14 @@
         {
           "type": "SYMBOL",
           "name": "custom_event_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "push_event_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "release_event_definition"
         }
       ]
     },
@@ -5469,6 +5925,220 @@
         {
           "type": "STRING",
           "value": "]"
+        }
+      ]
+    },
+    "push_event_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_push_event_declarator_list"
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "compound_statement"
+          }
+        }
+      ]
+    },
+    "_push_event_declarator_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "push_event_declarator"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "push_event_declarator"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_if_defined_in_push_event_declarator"
+                },
+                "named": true,
+                "value": "preproc_if_defined"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_if_not_defined_in_push_event_declarator"
+                },
+                "named": true,
+                "value": "preproc_if_not_defined"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "preproc_define"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "preproc_include"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "push_event_declarator": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "push_keyword"
+        },
+        {
+          "type": "FIELD",
+          "name": "devchan",
+          "content": {
+            "type": "SYMBOL",
+            "name": "push_event_devchan_reference"
+          }
+        }
+      ]
+    },
+    "push_event_devchan_reference": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "devchan_expression"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "["
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "STRING",
+              "value": "]"
+            }
+          ]
+        }
+      ]
+    },
+    "release_event_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_release_event_declarator_list"
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "compound_statement"
+          }
+        }
+      ]
+    },
+    "_release_event_declarator_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "release_event_declarator"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "release_event_declarator"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_if_defined_in_release_event_declarator"
+                },
+                "named": true,
+                "value": "preproc_if_defined"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_if_not_defined_in_release_event_declarator"
+                },
+                "named": true,
+                "value": "preproc_if_not_defined"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "preproc_define"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "preproc_include"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "release_event_declarator": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "release_keyword"
+        },
+        {
+          "type": "FIELD",
+          "name": "devchan",
+          "content": {
+            "type": "SYMBOL",
+            "name": "release_event_devchan_reference"
+          }
+        }
+      ]
+    },
+    "release_event_devchan_reference": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "devchan_expression"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "["
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "STRING",
+              "value": "]"
+            }
+          ]
         }
       ]
     },
@@ -10419,6 +11089,18 @@
     ],
     [
       "preproc_else_in_custom_event_declarator"
+    ],
+    [
+      "preproc_if_defined_in_push_event_declarator"
+    ],
+    [
+      "preproc_else_in_push_event_declarator"
+    ],
+    [
+      "preproc_if_defined_in_release_event_declarator"
+    ],
+    [
+      "preproc_else_in_release_event_declarator"
     ]
   ],
   "precedences": [],

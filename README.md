@@ -124,6 +124,8 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - :white_check_mark: Data Events
     - :white_check_mark: Timeline Events
     - :white_check_mark: Custom Events
+    - :white_check_mark: Legacy Push
+    - :white_check_mark: Legacy Release
 - Literals
     - :white_check_mark: String Literals
         - :white_check_mark: Single Quoted String Literals
