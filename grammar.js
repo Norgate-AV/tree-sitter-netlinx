@@ -225,10 +225,12 @@ module.exports = grammar({
 
         ...preprocIf("_in_initializer_list", ($) =>
             choice(
-                seq($.expression, ","),
-                seq($.initializer_list, ","),
-                seq(",", $.expression),
-                seq(",", $.initializer_list),
+                seq(
+                    optional(","),
+                    choice($.expression, $.initializer_list),
+                    optional(","),
+                ),
+                ",",
             ),
         ),
 

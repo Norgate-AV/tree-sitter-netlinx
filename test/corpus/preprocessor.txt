@@ -945,3 +945,75 @@ constant integer FOO[]    =   {
           (identifier)
           (identifier)
           (preproc_end_if_keyword))))))
+
+======================================
+Conditionals in String Array Initializers
+======================================
+
+constant char FOO[][50]     =   {
+    #IF_DEFINED BAR
+    'foo',
+    'foo',
+    'foo',
+    'foo',
+    'foo',
+    'foo'
+    #END_IF
+
+    #IF_DEFINED BAZ
+    'bar',
+    'bar',
+    'bar',
+    'bar',
+    'bar',
+    'bar'
+    #END_IF
+}
+
+---
+
+(source_file
+  (declaration
+    (type_qualifier
+      (constant_keyword))
+    (intrinsic_type
+      (primitive_type
+        (char_keyword)))
+    (init_declarator
+      (array_declarator
+        (array_declarator
+          (identifier))
+        (number_literal))
+      (initializer_list
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (preproc_end_if_keyword))
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))
+          (preproc_end_if_keyword))))))
