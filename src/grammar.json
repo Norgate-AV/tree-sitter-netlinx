@@ -9804,6 +9804,24 @@
                 "value": "preproc_if_not_defined"
               },
               {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_if_defined_in_initializer_list_no_comma"
+                },
+                "named": true,
+                "value": "preproc_if_defined"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "preproc_if_not_defined_in_initializer_list_no_comma"
+                },
+                "named": true,
+                "value": "preproc_if_not_defined"
+              },
+              {
                 "type": "SEQ",
                 "members": [
                   {

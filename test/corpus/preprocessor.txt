@@ -845,7 +845,6 @@ custom_event[dvTP, 1, 1002]
 
 ==============================
 Conditionals in Expressions
-:error
 ==============================
 
 // This will fail
@@ -865,35 +864,84 @@ Conditionals in Expressions
 ---
 
 (source_file
-      (comment)
+  (comment)
+  (expression_statement
+    (parenthesized_expression
+      (ERROR
+        (identifier)
+        (preproc_if_defined_keyword))
+      (binary_expression
+        (binary_expression
+          (identifier)
+          (identifier))
+        (ERROR
+          (preproc_end_if_keyword))
+        (identifier))))
+  (comment)
+  (preproc_if_defined
+    (preproc_if_defined_keyword)
+    (identifier)
+    (expression_statement
+      (parenthesized_expression
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (identifier))))
+    (preproc_else
+      (preproc_else_keyword)
       (expression_statement
         (parenthesized_expression
-          (ERROR
-            (identifier)
-            (preproc_if_defined_keyword))
           (binary_expression
-            (binary_expression
-              (identifier)
-              (identifier))
-            (ERROR
-              (preproc_end_if_keyword))
-            (identifier))))
-      (comment)
-      (preproc_if_defined
-        (preproc_if_defined_keyword)
-        (identifier)
-        (expression_statement
-          (parenthesized_expression
-            (binary_expression
-              (binary_expression
-                (identifier)
-                (identifier))
-              (identifier))))
-        (preproc_else
-          (preproc_else_keyword)
-          (expression_statement
-            (parenthesized_expression
-              (binary_expression
-                (identifier)
-                (identifier)))))
-        (preproc_end_if_keyword)))
+            (identifier)
+            (identifier)))))
+    (preproc_end_if_keyword)))
+
+====================================
+Conditionals in Complex Initializer
+====================================
+
+constant integer FOO[]    =   {
+    #IF_DEFINED BAR
+    baz
+    #END_IF
+
+    #IF_DEFINED foobar
+    ,
+    bar
+    #END_IF
+
+    #IF_DEFINED BAZ
+    ,
+    foo
+    #END_IF
+}
+
+---
+
+(source_file
+  (declaration
+    (type_qualifier
+      (constant_keyword))
+    (intrinsic_type
+      (primitive_type
+        (integer_keyword)))
+    (init_declarator
+      (array_declarator
+        (identifier))
+      (initializer_list
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (identifier)
+          (preproc_end_if_keyword))
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (identifier)
+          (preproc_end_if_keyword))
+        (preproc_if_defined
+          (preproc_if_defined_keyword)
+          (identifier)
+          (identifier)
+          (preproc_end_if_keyword))))))

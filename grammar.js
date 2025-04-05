@@ -1635,6 +1635,14 @@ module.exports = grammar({
                             $.preproc_if_not_defined_in_initializer_list,
                             $.preproc_if_not_defined,
                         ),
+                        alias(
+                            $.preproc_if_defined_in_initializer_list_no_comma,
+                            $.preproc_if_defined,
+                        ),
+                        alias(
+                            $.preproc_if_not_defined_in_initializer_list_no_comma,
+                            $.preproc_if_not_defined,
+                        ),
                         seq(
                             choice($.expression, $.initializer_list),
                             optional(","),
