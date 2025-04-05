@@ -842,3 +842,58 @@ custom_event[dvTP, 1, 1002]
             (number_literal)))
         (preproc_end_if_keyword))
       (compound_statement))))
+
+==============================
+Conditionals in Expressions
+:error
+==============================
+
+// This will fail
+(foo
+#IF_DEFINED BAR
+&& baz
+#END_IF
+&& foobar)
+
+// Alternative approach
+#IF_DEFINED BAR
+    (foo && baz && foobar)
+#ELSE
+    (foo && foobar)
+#END_IF
+
+---
+
+(source_file
+      (comment)
+      (expression_statement
+        (parenthesized_expression
+          (ERROR
+            (identifier)
+            (preproc_if_defined_keyword))
+          (binary_expression
+            (binary_expression
+              (identifier)
+              (identifier))
+            (ERROR
+              (preproc_end_if_keyword))
+            (identifier))))
+      (comment)
+      (preproc_if_defined
+        (preproc_if_defined_keyword)
+        (identifier)
+        (expression_statement
+          (parenthesized_expression
+            (binary_expression
+              (binary_expression
+                (identifier)
+                (identifier))
+              (identifier))))
+        (preproc_else
+          (preproc_else_keyword)
+          (expression_statement
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (identifier)))))
+        (preproc_end_if_keyword)))
