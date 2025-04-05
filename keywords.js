@@ -158,4 +158,13 @@ module.exports = {
     bnot: /bnot/i,
     lshift: /lshift/i,
     rshift: /rshift/i,
+
+    // Compiler Keywords
+    // These are compile time replacements
+    __file__: /__file__/i, // Filename of the currently executing program file
+    __date__: /__date__/i, // Date of compilation (MM/DD/YY)
+    __ldate__: /__ldate__/i, // Date of compilation (MM/DD/YYYY)
+    __time__: /__time__/i, // Time of compilation (HH:MM:SS)
+    __line__: /__line__/i, // Contains the line number the keyword is on
+    __name__: /__name__/i, // Contains the PROGRAM_NAME value found on the first line of the program
 };

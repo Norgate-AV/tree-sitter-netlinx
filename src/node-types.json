@@ -70,6 +70,10 @@
         "named": true
       },
       {
+        "type": "compiler_variable",
+        "named": true
+      },
+      {
         "type": "devchan_expression",
         "named": true
       },
@@ -1335,6 +1339,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "compiler_variable",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "compound_statement",

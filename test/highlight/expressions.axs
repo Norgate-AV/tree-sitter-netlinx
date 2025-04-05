@@ -33,6 +33,23 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
     //                                                 ^ keyword
     //                                                    ^ parameter
 
+    // String Expression
+    // ^ comment
+    result = "__file__, ' compiled on ', __ldate__, ' at ', __time__"
+    // ^ variable
+    //     ^ operator
+    //       ^ string
+    //         ^ keyword
+    //                ^ punctuation.delimiter
+    //                  ^ string
+    //                                 ^ punctuation.delimiter
+    //                                    ^ keyword
+    //                                            ^ punctuation.delimiter
+    //                                              ^ string
+    //                                                    ^ punctuation.delimiter
+    //                                                      ^ keyword
+    //                                                              ^ string
+
     result = x + y * 10
     // ^ variable
     //     ^ operator

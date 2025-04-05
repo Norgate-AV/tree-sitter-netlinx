@@ -627,6 +627,36 @@
       "value": "rshift",
       "flags": "i"
     },
+    "__file__": {
+      "type": "PATTERN",
+      "value": "__file__",
+      "flags": "i"
+    },
+    "__date__": {
+      "type": "PATTERN",
+      "value": "__date__",
+      "flags": "i"
+    },
+    "__ldate__": {
+      "type": "PATTERN",
+      "value": "__ldate__",
+      "flags": "i"
+    },
+    "__time__": {
+      "type": "PATTERN",
+      "value": "__time__",
+      "flags": "i"
+    },
+    "__line__": {
+      "type": "PATTERN",
+      "value": "__line__",
+      "flags": "i"
+    },
+    "__name__": {
+      "type": "PATTERN",
+      "value": "__name__",
+      "flags": "i"
+    },
     "program_name": {
       "type": "PREC_RIGHT",
       "value": 30,
@@ -8343,6 +8373,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "compiler_variable"
+        },
+        {
+          "type": "SYMBOL",
           "name": "device_literal"
         },
         {
@@ -8356,6 +8390,35 @@
         {
           "type": "SYMBOL",
           "name": "devchan_expression"
+        }
+      ]
+    },
+    "compiler_variable": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "__file__"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__date__"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__ldate__"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__time__"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__line__"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__name__"
         }
       ]
     },

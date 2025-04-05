@@ -146,4 +146,12 @@ module.exports = {
     bnot: (_) => keywords.bnot,
     lshift: (_) => keywords.lshift,
     rshift: (_) => keywords.rshift,
+
+    // Compiler keywords
+    __file__: (_) => keywords.__file__,
+    __date__: (_) => keywords.__date__,
+    __ldate__: (_) => keywords.__ldate__,
+    __time__: (_) => keywords.__time__,
+    __line__: (_) => keywords.__line__,
+    __name__: (_) => keywords.__name__,
 };

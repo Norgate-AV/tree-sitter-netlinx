@@ -1576,3 +1576,30 @@ float values[] = {1.1, 2.2, 3.3, 4.4}
         (number_literal)
         (number_literal)
         (number_literal)))))
+
+=================================
+Compiler Variables
+=================================
+
+__FILE__
+__date__
+__ldate__
+__TIME__
+__line__
+__name__
+
+---
+
+(source_file
+      (expression_statement
+        (compiler_variable))
+      (expression_statement
+        (compiler_variable))
+      (expression_statement
+        (compiler_variable))
+      (expression_statement
+        (compiler_variable))
+      (expression_statement
+        (compiler_variable))
+      (expression_statement
+        (compiler_variable)))

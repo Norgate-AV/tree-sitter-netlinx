@@ -1433,10 +1433,21 @@ module.exports = grammar({
                 $.string_literal,
                 $.true,
                 $.false,
+                $.compiler_variable,
                 $.device_literal,
                 $.parenthesized_expression,
                 $.devchan_range_expression,
                 $.devchan_expression,
+            ),
+
+        compiler_variable: ($) =>
+            choice(
+                $.__file__,
+                $.__date__,
+                $.__ldate__,
+                $.__time__,
+                $.__line__,
+                $.__name__,
             ),
 
         assignment_expression: ($) =>
