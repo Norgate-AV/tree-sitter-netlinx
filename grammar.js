@@ -45,8 +45,6 @@ module.exports = grammar({
         [$.type_specifier, $._top_level_expression_statement],
         [$.device_literal],
         [$.initializer_list],
-        // [$.preproc_if_defined_in_initializer_list],
-        // [$.preproc_else_in_initializer_list],
         [
             $.preproc_if_defined_in_initializer_list,
             $.preproc_if_defined_in_initializer_list_no_comma,
