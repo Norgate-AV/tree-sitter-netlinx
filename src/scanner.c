@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <wctype.h>
 
+#define DEBUG_AUTOMATIC_SEMICOLON 0
+
 enum TokenType {
     AUTOMATIC_SEMICOLON,
 };
@@ -174,12 +176,19 @@ static bool scan_automatic_semicolon(TSLexer *lexer, bool comment_condition, boo
 }
 
 bool tree_sitter_netlinx_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
-    // fprintf(stderr, "Scanner called: AUTOMATIC_SEMICOLON=%d, lookahead=%c\n",
-    //         valid_symbols[AUTOMATIC_SEMICOLON], lexer->lookahead);
-
     if (valid_symbols[AUTOMATIC_SEMICOLON]) {
+        #if DEBUG_AUTOMATIC_SEMICOLON
+        fprintf(stderr, "Scanner called: AUTOMATIC_SEMICOLON=%d, lookahead=%c\n",
+            valid_symbols[AUTOMATIC_SEMICOLON], lexer->lookahead);
+        #endif
+
         bool scanned_comment = false;
         bool ret = scan_automatic_semicolon(lexer, true, &scanned_comment);
+
+        #if DEBUG_AUTOMATIC_SEMICOLON
+        fprintf(stderr, "SCANNER: scan_automatic_semicolon returned %d\n", ret);
+        #endif
+
         return ret;
     }
 
