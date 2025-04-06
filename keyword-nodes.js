@@ -135,6 +135,12 @@ module.exports = {
     cancel_all_wait_keyword: (_) => keywords.cancel_all_wait,
     cancel_all_wait_until_keyword: (_) => keywords.cancel_all_wait_until,
 
+    // Logical keywords
+    and: (_) => keywords.and,
+    or: (_) => keywords.or,
+    not: (_) => keywords.not,
+    xor: (_) => keywords.xor,
+
     // Bitwise keywords
     band: (_) => keywords.band,
     bor: (_) => keywords.bor,

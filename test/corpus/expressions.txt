@@ -2502,3 +2502,280 @@ build = GET_MASTER_BUILD()
         (system_function
           (get_master_build))
         (argument_list)))))
+
+===================================
+Logical Word Operators
+===================================
+
+// Basic logical word operations
+result1 = x or y
+result2 = a and b
+result3 = c xor d
+result4 = not e
+
+// Complex logical word expressions
+complex1 = (a or b) and not c
+complex2 = not (x and y) or z
+complex3 = a and b or c and d
+
+// Mixed with comparison operators
+comparison1 = (x > 5) or (y < 10)
+comparison2 = (a == 1) and (b != 2)
+comparison3 = not (value > threshold)
+
+// Nested logic with parentheses
+nested1 = ((a and b) or (c and d)) and not e
+nested2 = not (a or not (b and c))
+
+// Mixed with bitwise word operators
+mixed1 = (a band $0F) or (b band $F0)
+mixed2 = (flag1 and flag2) or (data bxor mask)
+
+// With function calls
+func_test1 = TIMELINE_ACTIVE(1) and not TIMELINE_ACTIVE(2)
+func_test2 = LENGTH_ARRAY(arr1) > 0 or LENGTH_ARRAY(arr2) > 0
+
+// Chained expressions
+chained = a or b or c or d
+chained2 = w and x and y and z
+
+---
+
+(source_file
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (or)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (and)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (xor)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (not)
+        (identifier))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (or)
+            (identifier)))
+        (and)
+        (unary_expression
+          (not)
+          (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (unary_expression
+          (not)
+          (parenthesized_expression
+            (binary_expression
+              (identifier)
+              (and)
+              (identifier))))
+        (or)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (identifier)
+          (and)
+          (identifier))
+        (or)
+        (binary_expression
+          (identifier)
+          (and)
+          (identifier)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal)))
+        (or)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal)))
+        (and)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (not)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (identifier))))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (and)
+                (identifier)))
+            (or)
+            (parenthesized_expression
+              (binary_expression
+                (identifier)
+                (and)
+                (identifier)))))
+        (and)
+        (unary_expression
+          (not)
+          (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (unary_expression
+        (not)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (or)
+            (unary_expression
+              (not)
+              (parenthesized_expression
+                (binary_expression
+                  (identifier)
+                  (and)
+                  (identifier)))))))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (band)
+            (number_literal)))
+        (or)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (band)
+            (number_literal))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (and)
+            (identifier)))
+        (or)
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (bxor)
+            (identifier))))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (call_expression
+          (system_function
+            (timeline_active))
+          (argument_list
+            (number_literal)))
+        (and)
+        (unary_expression
+          (not)
+          (call_expression
+            (system_function
+              (timeline_active))
+            (argument_list
+              (number_literal)))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (call_expression
+            (system_function
+              (length_array))
+            (argument_list
+              (identifier)))
+          (number_literal))
+        (or)
+        (binary_expression
+          (call_expression
+            (system_function
+              (length_array))
+            (argument_list
+              (identifier)))
+          (number_literal)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (or)
+            (identifier))
+          (or)
+          (identifier))
+        (or)
+        (identifier))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (and)
+            (identifier))
+          (and)
+          (identifier))
+        (and)
+        (identifier)))))

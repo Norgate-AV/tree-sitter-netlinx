@@ -543,6 +543,10 @@
             "named": false
           },
           {
+            "type": "and",
+            "named": true
+          },
+          {
             "type": "band",
             "named": true
           },
@@ -559,7 +563,15 @@
             "named": true
           },
           {
+            "type": "or",
+            "named": true
+          },
+          {
             "type": "rshift",
+            "named": true
+          },
+          {
+            "type": "xor",
             "named": true
           },
           {
@@ -6673,6 +6685,10 @@
             "named": true
           },
           {
+            "type": "not",
+            "named": true
+          },
+          {
             "type": "~",
             "named": false
           }
@@ -6976,6 +6992,10 @@
   },
   {
     "type": "amx_warning",
+    "named": true
+  },
+  {
+    "type": "and",
     "named": true
   },
   {
@@ -8272,6 +8292,10 @@
     "named": true
   },
   {
+    "type": "not",
+    "named": true
+  },
+  {
     "type": "null_str",
     "named": true
   },
@@ -8289,6 +8313,10 @@
   },
   {
     "type": "online_keyword",
+    "named": true
+  },
+  {
+    "type": "or",
     "named": true
   },
   {
@@ -8949,6 +8977,10 @@
   },
   {
     "type": "xml_to_variable",
+    "named": true
+  },
+  {
+    "type": "xor",
     "named": true
   },
   {

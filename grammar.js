@@ -2085,7 +2085,10 @@ module.exports = grammar({
             prec.right(
                 PREC.UNARY,
                 seq(
-                    field("operator", choice("!", "~", "-", "+", $.bnot)),
+                    field(
+                        "operator",
+                        choice("!", "~", "-", "+", $.bnot, $.not),
+                    ),
                     field("argument", $.expression),
                 ),
             ),
@@ -2116,6 +2119,9 @@ module.exports = grammar({
                 [$.bxor, PREC.EXCLUSIVE_OR],
                 [$.lshift, PREC.SHIFT],
                 [$.rshift, PREC.SHIFT],
+                [$.and, PREC.LOGICAL_AND],
+                [$.or, PREC.LOGICAL_OR],
+                [$.xor, PREC.EXCLUSIVE_OR],
             ];
 
             return choice(

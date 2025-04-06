@@ -67,6 +67,7 @@ At this point the grammar is mostly complete. Work is now focused on testing and
     - :white_check_mark: Devchan Range Expressions
     - :white_check_mark: Comparison Expressions
     - :white_check_mark: Logical Expressions
+    - :white_check_mark: Logical Word Expressions (`and`, `or`, `xor`, `not`)
     - :white_check_mark: String Expressions
     - :white_check_mark: Function Call Expressions
     - :white_check_mark: Device Expressions (`0:first_local_port+1:1`, `dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM`)
