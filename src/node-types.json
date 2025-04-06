@@ -2716,11 +2716,31 @@
       "required": false,
       "types": [
         {
+          "type": "button",
+          "named": true
+        },
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "custom",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
           "type": "date",
           "named": true
         },
         {
           "type": "day",
+          "named": true
+        },
+        {
+          "type": "dv_channel",
           "named": true
         },
         {
@@ -2733,6 +2753,10 @@
         },
         {
           "type": "ldate",
+          "named": true
+        },
+        {
+          "type": "level",
           "named": true
         },
         {
@@ -2773,6 +2797,10 @@
         },
         {
           "type": "time",
+          "named": true
+        },
+        {
+          "type": "timeline",
           "named": true
         }
       ]
@@ -6463,11 +6491,31 @@
       "required": false,
       "types": [
         {
+          "type": "button",
+          "named": true
+        },
+        {
+          "type": "channel",
+          "named": true
+        },
+        {
+          "type": "custom",
+          "named": true
+        },
+        {
+          "type": "data",
+          "named": true
+        },
+        {
           "type": "date",
           "named": true
         },
         {
           "type": "day",
+          "named": true
+        },
+        {
+          "type": "dv_channel",
           "named": true
         },
         {
@@ -6480,6 +6528,10 @@
         },
         {
           "type": "ldate",
+          "named": true
+        },
+        {
+          "type": "level",
           "named": true
         },
         {
@@ -6520,6 +6572,10 @@
         },
         {
           "type": "time",
+          "named": true
+        },
+        {
+          "type": "timeline",
           "named": true
         }
       ]
@@ -7051,6 +7107,10 @@
     "named": true
   },
   {
+    "type": "button",
+    "named": true
+  },
+  {
     "type": "button_event_keyword",
     "named": true
   },
@@ -7080,6 +7140,10 @@
   },
   {
     "type": "case_keyword",
+    "named": true
+  },
+  {
+    "type": "channel",
     "named": true
   },
   {
@@ -7216,7 +7280,15 @@
     "named": true
   },
   {
+    "type": "custom",
+    "named": true
+  },
+  {
     "type": "custom_event_keyword",
+    "named": true
+  },
+  {
+    "type": "data",
     "named": true
   },
   {
@@ -7740,6 +7812,10 @@
     "named": true
   },
   {
+    "type": "dv_channel",
+    "named": true
+  },
+  {
     "type": "dynamic_application_device",
     "named": true
   },
@@ -8185,6 +8261,10 @@
   },
   {
     "type": "length_variable_to_xml",
+    "named": true
+  },
+  {
+    "type": "level",
     "named": true
   },
   {
@@ -8729,6 +8809,10 @@
   },
   {
     "type": "time_to_second",
+    "named": true
+  },
+  {
+    "type": "timeline",
     "named": true
   },
   {

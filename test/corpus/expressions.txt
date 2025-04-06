@@ -304,7 +304,7 @@ Devchan
 ==================
 
 status = [dvTP, 1]
-[dvDevice, CHANNEL] = true
+[dvDevice, CHAN] = true
 [panel, BTN_VOLUME] = [mixer, VOL_LEVEL]
 
 ---
@@ -436,7 +436,7 @@ Complex Nested
 
 result = (a + b) * (c / d)
 complex = -(x * y) + (z && !flag)
-combined = func(a.field, [device, channel]) + value[i++]
+combined = func(a.field, [device, chan]) + value[i++]
 
 ---
 
@@ -493,13 +493,13 @@ Bitwise
 mask1 = value & $FF
 mask2 = value | $80
 flags = flag1 ^ flag2
-shifted_left = data << 4
-shifted_right = data >> 2
+shifted_left = data1 << 4
+shifted_right = data1 >> 2
 
 // Combined bitwise operations
 result = (value & $0F) | ($80 >> 1)
 combined = (flags & mask) ^ ~control
-complex = ((data & $FF) << 8) | (data2 & $FF)
+complex = ((data1 & $FF) << 8) | (data2 & $FF)
 
 ---
 
@@ -582,13 +582,13 @@ Bitwise Words
 mask1 = value band $FF
 mask2 = value bor $80
 flags = flag1 bxor flag2
-shifted_left = data lshift 4
-shifted_right = data rshift 2
+shifted_left = data1 lshift 4
+shifted_right = data1 rshift 2
 
 // Combined bitwise operations
 result = (value band $0F) bor ($80 rshift 1)
 combined = (flags band mask) bxor bnot control
-complex = ((data band $FF) lshift 8) bor (data2 band $FF)
+complex = ((data1 band $FF) lshift 8) bor (data2 band $FF)
 
 ---
 
@@ -2529,7 +2529,7 @@ nested2 = not (a or not (b and c))
 
 // Mixed with bitwise word operators
 mixed1 = (a band $0F) or (b band $F0)
-mixed2 = (flag1 and flag2) or (data bxor mask)
+mixed2 = (flag1 and flag2) or (data1 bxor mask)
 
 // With function calls
 func_test1 = TIMELINE_ACTIVE(1) and not TIMELINE_ACTIVE(2)

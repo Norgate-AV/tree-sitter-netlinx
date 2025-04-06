@@ -1563,16 +1563,15 @@ module.exports = grammar({
                 $.get_timer,
                 $.master_sn,
                 $.system_number,
+                $.dv_channel,
 
-                // Need to think about these
-                // These are only available in specific contexts
-                // $.button,
-                // $.dv_channel,
-                // $.data,
-                // $.level,
-                // $.timeline,
-                // $.channel,
-                // $.custom,
+                // Automatic Event Context Variables
+                $.button,
+                $.data,
+                $.level,
+                $.timeline,
+                $.channel,
+                $.custom,
             ),
 
         system_constant: ($) =>

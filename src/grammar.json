@@ -11288,6 +11288,34 @@
         {
           "type": "SYMBOL",
           "name": "system_number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dv_channel"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "button"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "data"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "level"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "timeline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "channel"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "custom"
         }
       ]
     },

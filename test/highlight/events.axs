@@ -113,7 +113,7 @@ DATA_EVENT[dvTP]
         //        ^ string
         //                ^ string
         //                     ^ punctuation.delimiter
-        //                       ^ constant
+        //                       ^ variable.builtin
         //                           ^ punctuation.delimiter
         //                             ^ property
         //                                ^ string
@@ -195,7 +195,7 @@ level_event[dvTP, 1]
     //                              ^ punctuation.delimiter
     //                                ^ function.builtin
     //                                    ^ punctuation.bracket
-    //                                      ^ variable
+    //                                      ^ variable.builtin
     //                                          ^ punctuation.delimiter
     //                                             ^ property
     //                                                ^ punctuation.bracket

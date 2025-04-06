@@ -1297,7 +1297,8 @@ DEFINE_FUNCTION INTEGER Process(INTEGER count)
                   (assignment_expression
                     (identifier)
                     (field_expression
-                      (identifier)
+                      (system_variable
+                        (data))
                       (field_identifier))))
                 (expression_statement
                   (call_expression
