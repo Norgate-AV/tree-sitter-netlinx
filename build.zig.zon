@@ -1,6 +1,6 @@
 .{
     .name = .tree_sitter_netlinx,
-    .version = "0.1.0",
+    .version = "1.0.0",
     .fingerprint = 0x96a6a67ea08b4900,
     .dependencies = .{ .tree_sitter = .{
         .url = "https://github.com/tree-sitter/zig-tree-sitter/archive/refs/heads/master.tar.gz",

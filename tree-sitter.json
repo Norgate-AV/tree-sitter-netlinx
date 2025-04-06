@@ -14,7 +14,7 @@
         }
     ],
     "metadata": {
-        "version": "0.1.0",
+        "version": "1.0.0",
         "license": "MIT",
         "description": "NetLinx grammar for tree-sitter",
         "links": {
