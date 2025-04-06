@@ -37,7 +37,6 @@ pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 // NOTE: uncomment these to include any queries that this grammar contains:
 
 pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
-// pub const HIGHLIGHTS_NETLINX_QUERY: &str = include_str!("../../queries/highlights-netlinx.scm");
 // pub const HIGHLIGHTS_SNAPI_QUERY: &str = include_str!("../../queries/highlights-snapi.scm");
 // pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
 pub const LOCALS_QUERY: &str = include_str!("../../queries/locals.scm");

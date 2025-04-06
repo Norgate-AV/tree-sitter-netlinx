@@ -16,8 +16,6 @@ def __getattr__(name):
 
     if name == "HIGHLIGHTS_QUERY":
         return _get_query("HIGHLIGHTS_QUERY", "highlights.scm")
-    # if name == "HIGHLIGHTS_NETLINX_QUERY":
-    #     return _get_query("HIGHLIGHTS_NETLINX_QUERY", "highlights-netlinx.scm")
     # if name == "HIGHLIGHTS_SNAPI_QUERY":
     #     return _get_query("HIGHLIGHTS_SNAPI_QUERY", "highlights-snapi.scm")
     # if name == "INJECTIONS_QUERY":
