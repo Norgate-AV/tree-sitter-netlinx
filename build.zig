@@ -44,14 +44,14 @@ pub fn build(b: *std.Build) !void {
     b.installFile("src/node-types.json", "node-types.json");
     b.installDirectory(.{ .source_dir = b.path("queries"), .install_dir = .prefix, .install_subdir = "queries", .include_extensions = &.{"scm"} });
 
-    const module = b.addModule("tree-sitter-netlinx", .{
+    const module = b.addModule("tree_sitter_netlinx", .{
         .root_source_file = b.path("bindings/zig/root.zig"),
         .target = target,
         .optimize = optimize,
     });
     module.linkLibrary(lib);
 
-    const ts_dep = b.dependency("tree-sitter", .{});
+    const ts_dep = b.dependency("tree_sitter", .{});
     const ts_mod = ts_dep.module("tree-sitter");
     module.addImport("tree-sitter", ts_mod);
 
@@ -65,7 +65,7 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
     tests.linkLibrary(lib);
-    tests.root_module.addImport("tree-sitter", ts_mod);
+    tests.root_module.addImport("tree_sitter", ts_mod);
 
     const run_tests = b.addRunArtifact(tests);
 

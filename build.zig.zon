@@ -2,12 +2,10 @@
     .name = .tree_sitter_netlinx,
     .version = "0.1.0",
     .fingerprint = 0x96a6a67ea08b4900,
-    .dependencies = .{
-        .tree_sitter = .{
-            .url = "https://github.com/tree-sitter/zig-tree-sitter/archive/refs/tags/v0.25.0.tar.gz",
-            .hash = "12201a8d5e840678bbbf5128e605519c4024af422295d68e2ba2090e675328e5811d",
-        }
-    },
+    .dependencies = .{ .tree_sitter = .{
+        .url = "https://github.com/tree-sitter/zig-tree-sitter/archive/refs/heads/master.tar.gz",
+        .hash = "1220a89ef54882f9bef665486ea87bc9a6d962a3d77cea52dd8a06bd2cf94a3e6a0c",
+    } },
     .paths = .{
         "build.zig",
         "build.zig.zon",
