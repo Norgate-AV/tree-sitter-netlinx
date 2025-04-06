@@ -1,6 +1,7 @@
 name: Publish package (npm)
 
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       package-name:
@@ -44,17 +45,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
       - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: ${{inputs.node-version}}
       - name: Set up Emscripten
         uses: mymindstorm/setup-emsdk@v14
         with:
           version: ${{inputs.emscripten-version}}
       - name: Install dependencies
-        run: npm i --omit peer --omit optional
+        run: pnpm install --omit peer --omit optional
       - name: Regenerate parser
         if: ${{inputs.generate}}
         shell: bash
@@ -62,7 +67,7 @@ jobs:
           while read -r grammar; do
             grammar_dir=$(dirname "$grammar")
             cd "$grammar_dir"
-            npm x -- tree-sitter generate
+            npm x -- tree-sitter generate --abi 14
             cd - > /dev/null
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
         env:
@@ -92,13 +97,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
       - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: ${{inputs.node-version}}
       - name: Install dependencies
-        run: npm i --omit peer --omit optional
+        run: pnpm install --omit peer --omit optional
       - name: Regenerate parser
         if: ${{inputs.generate}}
         shell: bash
@@ -106,9 +115,11 @@ jobs:
           while read -r grammar; do
             grammar_dir=$(dirname "$grammar")
             cd "$grammar_dir"
-            npm x -- tree-sitter generate
+            npm x -- tree-sitter generate --abi 14
             cd - > /dev/null
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
+        env:
+          TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
       - name: Build x64 binary
         run: npm x -- prebuildify --arch x64 -t 20.9.0
       - name: Set up cross-compilation
@@ -137,10 +148,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
       - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
-          cache: npm
+          cache: pnpm
           node-version: ${{inputs.node-version}}
           registry-url: https://registry.npmjs.org/
       - name: Download binaries
@@ -155,6 +170,6 @@ jobs:
         continue-on-error: true
         run: mv -v prebuilds/*.wasm .
       - name: Publish to npm
-        run: npm publish
+        run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
