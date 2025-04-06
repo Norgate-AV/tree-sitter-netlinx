@@ -1665,3 +1665,840 @@ system_number
   (expression_statement
     (system_variable
       (system_number))))
+
+===================================
+System Constants
+===================================
+
+// Boolean constants
+result1 = TRUE
+result2 = FALSE
+
+// Timeline constants
+timeline_create(1, 500, TIMELINE_ABSOLUTE, TIMELINE_REPEAT)
+timeline_create(2, 1000, TIMELINE_RELATIVE, TIMELINE_ONCE)
+
+// Network constants
+selector = IP_TCP
+connection_type = IP_UDP_2WAY
+flag = URL_FLG_TCP
+
+// File handling constants
+file_mode1 = FILE_READ_ONLY
+file_mode2 = FILE_RW_NEW
+file_mode3 = FILE_RW_APPEND
+
+// Device constants
+id = FIRST_VIRTUAL_DEVICE + 10
+port = FIRST_LOCAL_PORT
+dynamic_id = DYNAMIC_VIRTUAL_DEVICE
+
+// XML options
+xml_option = XML_ENCODE_CHAR_AS_LIST | XML_ENCODE_TYPES
+
+// Duet device types
+dev_type = DUET_DEV_TYPE_DISPLAY_DEVICE
+audio_type = DUET_DEV_TYPE_AUDIO_PROCESSOR
+
+// Clock manager constants
+mode = CLKMGR_MODE_NETWORK
+standby = NORMAL_STANDBY
+wake = NORMAL_WAKE
+
+// Network settings
+ttl = IP_TTL_SUBNET
+nodelay = IP_NODELAY_ON
+
+// Log levels
+log_level = AMX_DEBUG
+login_result = NETLINX_LOGIN_SUCCESS
+
+// Data constants
+data_format = DATA_FORMAT_ISO8601
+type = DATA_TYPE_DATETIME
+error = ERR_INVALID_PARAMETER
+
+---
+
+(source_file
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (true))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (false))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_create))
+      (argument_list
+        (number_literal)
+        (number_literal)
+        (system_constant
+          (timeline_absolute))
+        (system_constant
+          (timeline_repeat)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_create))
+      (argument_list
+        (number_literal)
+        (number_literal)
+        (system_constant
+          (timeline_relative))
+        (system_constant
+          (timeline_once)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (ip_tcp))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (ip_udp_2way))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (url_flg_tcp))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (file_read_only))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (file_rw_new))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (file_rw_append))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (system_constant
+          (first_virtual_device))
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (first_local_port))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (dynamic_virtual_device))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (binary_expression
+        (system_constant
+          (xml_encode_char_as_list))
+        (system_constant
+          (xml_encode_types)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (duet_dev_type_display_device))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (duet_dev_type_audio_processor))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (clkmgr_mode_network))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (normal_standby))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (normal_wake))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (ip_ttl_subnet))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (ip_nodelay_on))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (amx_debug))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (netlinx_login_success))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (data_format_iso8601))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (data_type_datetime))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (system_constant
+        (err_invalid_parameter)))))
+
+===================================
+System Built-in Functions
+===================================
+
+// String conversion functions
+value1 = ATOI('123')
+value2 = ATOL('1234567')
+value3 = ATOF('3.14159')
+str1 = ITOA(42)
+str2 = ITOHEX(255)
+num = HEXTOI('FF')
+str3 = FTOA(3.14159)
+
+// String manipulation
+pos = FIND_STRING('Hello World', 'World')
+left = LEFT_STRING('Hello World', 5)
+right = RIGHT_STRING('Hello World', 5)
+middle = MID_STRING('Hello World', 3, 5)
+removed = REMOVE_STRING('Hello World', 6, 5)
+len = LENGTH_STRING('Hello')
+max_len = MAX_LENGTH_STRING(str_var)
+SET_LENGTH_STRING(str_var, 10)
+cmp = COMPARE_STRING('Hello', 'World')
+upper = UPPER_STRING('Hello')
+lower = LOWER_STRING('HELLO')
+
+// Time and date
+day = DATE_TO_DAY(date)
+month = DATE_TO_MONTH(date)
+year = DATE_TO_YEAR(date)
+hour = TIME_TO_HOUR(time)
+minute = TIME_TO_MINUTE(time)
+second = TIME_TO_SECOND(time)
+weekday = DAY_OF_WEEK(date)
+SET_PULSE_TIME(dvTP, 1, 3000)
+SET_TIMER(timer_var, 5000)
+
+// Array functions
+arr_len = LENGTH_ARRAY(my_array)
+max_arr_len = MAX_LENGTH_ARRAY(my_array)
+SET_LENGTH_ARRAY(my_array, 10)
+
+// Device functions
+DO_PUSH(dvTP, 1)
+DO_PUSH_TIMED(dvTP, 2, 3000)
+DO_RELEASE(dvTP, 1)
+id = DEVICE_ID(dvTP)
+DEVICE_STANDBY(dvTP)
+DEVICE_WAKE(dvTP)
+
+// Timeline functions
+TIMELINE_CREATE(1, 500, TIMELINE_ABSOLUTE, TIMELINE_REPEAT)
+TIMELINE_KILL(1)
+TIMELINE_PAUSE(1)
+TIMELINE_RESTART(1)
+TIMELINE_SET(1, 5, 250)
+val = TIMELINE_GET(1, 5)
+running = TIMELINE_ACTIVE(1)
+
+// Network functions
+IP_CLIENT_OPEN(dvDevice, 1, '192.168.1.100', 23, IP_TCP)
+IP_CLIENT_CLOSE(dvDevice, 1)
+IP_SERVER_OPEN(dvDevice, 1, 23, IP_TCP)
+IP_SERVER_CLOSE(dvDevice, 1)
+TLS_CLIENT_OPEN(dvDevice, 2, '192.168.1.100', 443, TLS_VALIDATE_CERTIFICATE)
+TLS_CLIENT_CLOSE(dvDevice, 2)
+
+// Math functions
+abs = ABS_VALUE(-42)
+max = MAX_VALUE(10, 20)
+min = MIN_VALUE(10, 20)
+sqrt_val = SQRT_VALUE(16)
+pow_val = POWER_VALUE(2, 8)
+exp_val = EXP_VALUE(2)
+log_val = LOG_VALUE(100)
+log10_val = LOG10_VALUE(100)
+
+// System functions
+REBOOT()
+id = GET_UNIQUE_ID()
+sn = GET_SERIAL_NUMBER()
+sys_num = GET_SYSTEM_NUMBER()
+SET_SYSTEM_NUMBER(1)
+build = GET_MASTER_BUILD()
+
+---
+
+(source_file
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (atoi))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (atol))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (atof))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (itoa))
+        (argument_list
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (itohex))
+        (argument_list
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (hextoi))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (ftoa))
+        (argument_list
+          (number_literal)))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (find_string))
+        (argument_list
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (left_string))
+        (argument_list
+          (string_literal
+            (string_content))
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (right_string))
+        (argument_list
+          (string_literal
+            (string_content))
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (mid_string))
+        (argument_list
+          (string_literal
+            (string_content))
+          (number_literal)
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (remove_string))
+        (argument_list
+          (string_literal
+            (string_content))
+          (number_literal)
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (length_string))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (max_length_string))
+        (argument_list
+          (identifier)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (set_length_string))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (compare_string))
+        (argument_list
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (upper_string))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (lower_string))
+        (argument_list
+          (string_literal
+            (string_content))))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier
+        (day))
+      (call_expression
+        (system_function
+          (date_to_day))
+        (argument_list
+          (system_variable
+            (date))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (date_to_month))
+        (argument_list
+          (system_variable
+            (date))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (date_to_year))
+        (argument_list
+          (system_variable
+            (date))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (time_to_hour))
+        (argument_list
+          (system_variable
+            (time))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (time_to_minute))
+        (argument_list
+          (system_variable
+            (time))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (time_to_second))
+        (argument_list
+          (system_variable
+            (time))))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (day_of_week))
+        (argument_list
+          (system_variable
+            (date))))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (set_pulse_time))
+      (argument_list
+        (identifier)
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (set_timer))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (length_array))
+        (argument_list
+          (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (max_length_array))
+        (argument_list
+          (identifier)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (set_length_array))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (system_function
+        (do_push))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (do_push_timed))
+      (argument_list
+        (identifier)
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (do_release))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (device_id))
+        (argument_list
+          (identifier)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (device_standby))
+      (argument_list
+        (identifier))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (device_wake))
+      (argument_list
+        (identifier))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_create))
+      (argument_list
+        (number_literal)
+        (number_literal)
+        (system_constant
+          (timeline_absolute))
+        (system_constant
+          (timeline_repeat)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_kill))
+      (argument_list
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_pause))
+      (argument_list
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_restart))
+      (argument_list
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (timeline_set))
+      (argument_list
+        (number_literal)
+        (number_literal)
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (timeline_get))
+        (argument_list
+          (number_literal)
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (timeline_active))
+        (argument_list
+          (number_literal)))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (system_function
+        (ip_client_open))
+      (argument_list
+        (identifier)
+        (number_literal)
+        (string_literal
+          (string_content))
+        (number_literal)
+        (system_constant
+          (ip_tcp)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (ip_client_close))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (ip_server_open))
+      (argument_list
+        (identifier)
+        (number_literal)
+        (number_literal)
+        (system_constant
+          (ip_tcp)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (ip_server_close))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (tls_client_open))
+      (argument_list
+        (identifier)
+        (number_literal)
+        (string_literal
+          (string_content))
+        (number_literal)
+        (system_constant
+          (tls_validate_certificate)))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (tls_client_close))
+      (argument_list
+        (identifier)
+        (number_literal))))
+  (comment)
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (abs_value))
+        (argument_list
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (max_value))
+        (argument_list
+          (number_literal)
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (min_value))
+        (argument_list
+          (number_literal)
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (sqrt_value))
+        (argument_list
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (power_value))
+        (argument_list
+          (number_literal)
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (exp_value))
+        (argument_list
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (log_value))
+        (argument_list
+          (number_literal)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (log10_value))
+        (argument_list
+          (number_literal)))))
+  (comment)
+  (expression_statement
+    (call_expression
+      (system_function
+        (reboot))
+      (argument_list)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (get_unique_id))
+        (argument_list))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (get_serial_number))
+        (argument_list))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (get_system_number))
+        (argument_list))))
+  (expression_statement
+    (call_expression
+      (system_function
+        (set_system_number))
+      (argument_list
+        (number_literal))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (call_expression
+        (system_function
+          (get_master_build))
+        (argument_list)))))
