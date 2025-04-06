@@ -24,12 +24,6 @@ NetLinx grammar for [tree-sitter](https://tree-sitter.github.io).
 [crates]: https://img.shields.io/crates/v/tree-sitter-netlinx?logo=rust
 [pypi]: https://img.shields.io/pypi/v/tree-sitter-netlinx?logo=pypi&logoColor=ffd242
 
-**NOTE :warning: :construction:**
-
-This is a work in progress. Once the grammar is complete, a release will be made.
-
-At this point the grammar is mostly complete. Work is now focused on testing and fixing any bugs.
-
 ## Contents :book:
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
