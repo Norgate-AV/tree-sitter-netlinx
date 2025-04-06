@@ -17,7 +17,7 @@ DEFINE_FUNCTION INTEGER MyFunction(INTEGER param1, CHAR param2[])
 //  ^ keyword
 //         ^ parameter
 //                ^ operator
-//                  ^ function
+//                  ^ function.builtin
 //                              ^ punctuation.bracket
 //                               ^ parameter
 //                                     ^ punctuation.bracket

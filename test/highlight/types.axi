@@ -1,6 +1,6 @@
 STRUCTURE Person
 // <- keyword
-//        ^ type
+//        ^ type.custom
 {
 // <- punctuation.bracket
     char name[20];
@@ -18,7 +18,7 @@ STRUCTURE Person
 
 struct Company
 // <- keyword
-//     ^ type
+//     ^ type.custom
 {
 // <- punctuation.bracket
     char name[20];
@@ -29,7 +29,7 @@ struct Company
     //          ^ punctuation.bracket
 
     Person employees[10];
-    // <- type
+    // <- type.custom
     //     ^ property
     //              ^ punctuation.bracket
     //               ^ number

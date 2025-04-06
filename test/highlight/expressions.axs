@@ -39,15 +39,15 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
     // ^ variable
     //     ^ operator
     //       ^ string
-    //         ^ keyword
+    //         ^ variable.builtin
     //                ^ punctuation.delimiter
     //                  ^ string
     //                                 ^ punctuation.delimiter
-    //                                    ^ keyword
+    //                                    ^ variable.builtin
     //                                            ^ punctuation.delimiter
     //                                              ^ string
     //                                                    ^ punctuation.delimiter
-    //                                                      ^ keyword
+    //                                                      ^ variable.builtin
     //                                                              ^ string
 
     // System Variables
@@ -55,37 +55,37 @@ DEFINE_FUNCTION INTEGER calculateValue(INTEGER x, INTEGER y) {
     // ^ variable
     //     ^ operator
     //       ^ string
-    //         ^ keyword
+    //         ^ variable.builtin
     //                    ^ punctuation.delimiter
-    //                      ^ keyword
+    //                      ^ variable.builtin
     //                                 ^ punctuation.delimiter
-    //                                    ^ keyword
+    //                                    ^ variable.builtin
     //                                               ^ string
 
     result = "release_channel, release_device, release_devchan"
     // ^ variable
     //     ^ operator
     //       ^ string
-    //         ^ keyword
+    //         ^ variable.builtin
     //                       ^ punctuation.delimiter
-    //                         ^ keyword
+    //                         ^ variable.builtin
     //                                       ^ punctuation.delimiter
-    //                                         ^ keyword
+    //                                         ^ variable.builtin
     //                                                        ^ string
 
     result = "date, day, ldate, time, system_number"
     // ^ variable
     //     ^ operator
     //       ^ string
-    //         ^ keyword
+    //         ^ variable.builtin
     //            ^ punctuation.delimiter
-    //              ^ keyword
+    //              ^ variable.builtin
     //                 ^ punctuation.delimiter
-    //                   ^ keyword
+    //                   ^ variable.builtin
     //                        ^ punctuation.delimiter
-    //                          ^ keyword
+    //                          ^ variable.builtin
     //                              ^ punctuation.delimiter
-    //                                 ^ keyword
+    //                                 ^ variable.builtin
     //                                             ^ string
 
     result = x + y * 10

@@ -17,16 +17,15 @@
 ;; ============================================================================
 ;; (identifier) @identifier
 (identifier) @variable
+(system_variable) @variable.builtin
+(compiler_variable) @variable.builtin
 
 ;; Uppercase identifiers are probably constants
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_]*$"))
 
 ;; Constants
-[
-    (true)
-    (false)
-] @constant.builtin
+(system_constant) @constant.builtin
 
 (field_identifier) @property
 
@@ -122,9 +121,6 @@
     (bnot)
     (lshift)
     (rshift)
-
-    (compiler_variable)
-    (system_variable)
 ] @keyword
 
 ;; ============================================================================
@@ -146,6 +142,8 @@
     (variantarray_keyword)
 ] @type
 
+(system_type) @type.builtin
+
 (local_var_keyword) @type.storage
 (stack_var_keyword) @type.storage
 
@@ -157,21 +155,21 @@
 
 ;; Type definitions in struct declarations
 (struct_specifier
-  name: (type_identifier) @type)
+  name: (type_identifier) @type.custom)
 
 ;; Field types in struct declarations
 (field_declaration
   type: (type_specifier
-    (type_identifier) @type))
+    (type_identifier) @type.custom))
 
 ;; Custom types in local variable declarations with storage specifiers
 (declaration
   (storage_class_specifier)
-  type: (type_identifier) @type)
+  type: (type_identifier) @type.custom)
 
 ;; Structure field types that are custom types
 (field_declaration
-  type: (type_identifier) @type)
+  type: (type_identifier) @type.custom)
 
 ;; Custom types in local variable declarations - direct pattern
 (compound_statement
@@ -186,7 +184,7 @@
 (declaration
   (type_qualifier)
   .
-  (type_identifier) @type
+  (type_identifier) @type.custom
   .
   (identifier))
 
@@ -284,6 +282,8 @@
 ;; ============================================================================
 ;; Functions
 (call_expression
+  function: (system_function) @function.builtin)
+(call_expression
   function: (identifier) @function)
 (function_definition
   name: (identifier) @function)
@@ -322,6 +322,9 @@
 (call_expression
   arguments: (argument_list
     (identifier) @variable.parameter))
+(call_expression
+  arguments: (argument_list
+    (system_constant) @constant.builtin.parameter))
 
 ;; Array parameters in function definition
 (function_definition

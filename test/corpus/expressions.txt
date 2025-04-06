@@ -109,7 +109,8 @@ command = "'COMMAND-',CMD_TYPE,',',PARAM"
       (string_literal
         (string_content))
       (call_expression
-        function: (identifier)
+        function: (system_function
+          (itoa))
         arguments: (argument_list
           (field_expression
             argument: (identifier)
@@ -320,7 +321,8 @@ status = [dvTP, 1]
       (devchan_expression
         (identifier)
         (identifier))
-      (true)))
+      (system_constant
+        (true))))
   (expression_statement
     (assignment_expression
       (devchan_expression
@@ -344,11 +346,13 @@ result = (x > 5) == TRUE
   (expression_statement
     (assignment_expression
       (identifier)
-      (true)))
+      (system_constant
+        (true))))
   (expression_statement
     (assignment_expression
       (identifier)
-      (false)))
+      (system_constant
+        (false))))
   (expression_statement
     (assignment_expression
       (identifier)
@@ -357,7 +361,8 @@ result = (x > 5) == TRUE
           (binary_expression
             (identifier)
             (number_literal)))
-        (true)))))
+        (system_constant
+          (true))))))
 
 ==================
 Character and Hex Literals
@@ -857,7 +862,8 @@ Device Assignment
       (devchan_expression
         (identifier)
         (number_literal))
-      (true))))
+      (system_constant
+        (true)))))
 
 ==================
 Device Operations
@@ -981,13 +987,15 @@ dvPort.NUMBER:dvPort.PORT:dvPort.SYSTEM
   (expression_statement
     (device_literal
       (number_literal)
-      (identifier)
+      (system_constant
+        (first_local_port))
       (number_literal)))
   (expression_statement
     (device_literal
       (number_literal)
       (binary_expression
-        (identifier)
+        (system_constant
+          (first_local_port))
         (number_literal))
       (number_literal)))
   (expression_statement
@@ -1271,7 +1279,8 @@ UserInfo user = {'John O''Malley', 42, TRUE}
           (escape_sequence)
           (string_content))
         (number_literal)
-        (true)))))
+        (system_constant
+          (true))))))
 
 ===============================
 String Literals in Module and Program Names

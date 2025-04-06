@@ -193,7 +193,7 @@ level_event[dvTP, 1]
     //                 ^ string
     //                   ^ string
     //                              ^ punctuation.delimiter
-    //                                ^ function
+    //                                ^ function.builtin
     //                                    ^ punctuation.bracket
     //                                      ^ variable
     //                                          ^ punctuation.delimiter

@@ -26,7 +26,7 @@ DEFINE_FUNCTION INTEGER MyFunction(INTEGER param1)
     //       ^ string
     //        ^ string
     //                       ^ punctuation.delimiter
-    //                         ^ keyword
+    //                         ^ variable.builtin
     //                             ^ string
     result = "'The time is: ', time"
     // ^ variable
@@ -34,7 +34,7 @@ DEFINE_FUNCTION INTEGER MyFunction(INTEGER param1)
     //       ^ string
     //        ^ string
     //                       ^ punctuation.delimiter
-    //                         ^ keyword
+    //                         ^ variable.builtin
     //                             ^ string
     RETURN param1
 //  ^ keyword

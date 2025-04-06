@@ -26,7 +26,7 @@ DEFINE_TYPE
 // ^ keyword
 STRUCTURE MyStructure
 // ^ keyword
-//         ^ type
+//         ^ type.custom
 {
 // <- punctuation.bracket
     INTEGER id
@@ -43,7 +43,7 @@ VOLATILE INTEGER count
 //                 ^ variable
 persistent DeviceStatus status
 // ^ type.qualifier
-//             ^ type
+//             ^ type.custom
 //                      ^ variable
 
 DEFINE_START
