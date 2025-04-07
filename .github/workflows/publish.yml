@@ -111,7 +111,7 @@ jobs:
 
     uses: ./.github/workflows/package-npm.yml
     secrets:
-      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
     with:
       generate: true
       abi-version: "14"

@@ -14,26 +14,26 @@ on:
         type: string
       node-version:
         description: The NodeJS version
-        default: ${{vars.NODE_VERSION || '20'}}
+        default: "22"
         type: string
       emscripten-version:
         description: The Emscripten version
-        default: ${{vars.EMSCRIPTEN_VERSION || '3.1.64'}}
+        default: "3.1.64"
         type: string
       ubuntu-version:
         description: The version of the Ubuntu runner image
-        default: ${{vars.UBUNTU_VERSION || '22.04'}}
+        default: "latest"
         type: string
       generate:
         description: Generate the parser artifacts
-        default: false
+        default: true
         type: boolean
       abi-version:
         description: The tree-sitter ABI version
         default: "15"
         type: string
     secrets:
-      NODE_AUTH_TOKEN:
+      NPM_TOKEN:
         description: An authentication token for npm
         required: true
 
@@ -172,4 +172,4 @@ jobs:
       - name: Publish to npm
         run: pnpm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

@@ -17,7 +17,7 @@ on:
         type: string
       generate:
         description: Generate the parser artifacts
-        default: false
+        default: true
         type: boolean
       abi-version:
         description: The tree-sitter ABI version
