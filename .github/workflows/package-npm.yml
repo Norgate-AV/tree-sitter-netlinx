@@ -59,7 +59,7 @@ jobs:
         with:
           version: ${{inputs.emscripten-version}}
       - name: Install dependencies
-        run: pnpm install pnpm install --no-optional --ignore-peer-deps
+        run: pnpm install --no-optional
       - name: Regenerate parser
         if: ${{inputs.generate}}
         shell: bash
@@ -107,7 +107,7 @@ jobs:
           cache: pnpm
           node-version: ${{inputs.node-version}}
       - name: Install dependencies
-        run: pnpm install --no-optional --ignore-peer-deps
+        run: pnpm install --no-optional
       - name: Regenerate parser
         if: ${{inputs.generate}}
         shell: bash
