@@ -187,6 +187,8 @@ jobs:
           cache: pnpm
           node-version: ${{inputs.node-version}}
           registry-url: https://registry.npmjs.org/
+      - name: Install dependencies
+        run: pnpm install --no-optional
       - name: Download binaries
         uses: actions/download-artifact@v4
         with:
