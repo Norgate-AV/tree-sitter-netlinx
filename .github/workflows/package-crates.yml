@@ -2,6 +2,27 @@ name: Publish package (crates.io)
 
 on:
   workflow_dispatch:
+    inputs:
+      package-name:
+        description: The name of the package
+        default: tree-sitter-netlinx
+        type: string
+      environment-name:
+        description: The name of the environment
+        default: crates
+        type: string
+      rust-toolchain:
+        description: The Rust toolchain
+        default: "stable"
+        type: string
+      generate:
+        description: Generate the parser artifacts
+        default: true
+        type: boolean
+      abi-version:
+        description: The tree-sitter ABI version
+        default: "15"
+        type: string
   workflow_call:
     inputs:
       package-name:
