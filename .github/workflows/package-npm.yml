@@ -2,6 +2,35 @@ name: Publish package (npm)
 
 on:
   workflow_dispatch:
+    inputs:
+      package-name:
+        description: The name of the package
+        default: tree-sitter-netlinx
+        type: string
+      environment-name:
+        description: The name of the environment
+        default: npm
+        type: string
+      node-version:
+        description: The NodeJS version
+        default: "22"
+        type: string
+      emscripten-version:
+        description: The Emscripten version
+        default: "3.1.64"
+        type: string
+      ubuntu-version:
+        description: The version of the Ubuntu runner image
+        default: "latest"
+        type: string
+      generate:
+        description: Generate the parser artifacts
+        default: true
+        type: boolean
+      abi-version:
+        description: The tree-sitter ABI version
+        default: "15"
+        type: string
   workflow_call:
     inputs:
       package-name:
