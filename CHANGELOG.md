@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2](https://github.com/Norgate-AV/tree-sitter-netlinx/compare/v1.0.1..v1.0.2) - 2025-04-20
+
+
+### 🐛 Bug Fixes
+
+- Fix release/publish workflow - ([3a98134](https://github.com/Norgate-AV/tree-sitter-netlinx/commit/3a98134618e4b205b2c68dc307d2cc46d0a93d94))
+
+
+
+
+
+
+
+
+
 ## [1.0.1](https://github.com/Norgate-AV/tree-sitter-netlinx/compare/v1.0.0..v1.0.1) - 2025-04-20
 
 
