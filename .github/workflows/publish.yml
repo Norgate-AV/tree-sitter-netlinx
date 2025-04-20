@@ -100,7 +100,7 @@ jobs:
   commit_changelog:
     name: Commit Changelog
 
-    needs: [github]
+    needs: [github, generate_changelog]
 
     runs-on: ubuntu-latest
 
