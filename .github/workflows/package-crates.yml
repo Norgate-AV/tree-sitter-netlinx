@@ -53,26 +53,33 @@ on:
 jobs:
   package:
     name: Publish Rust package
+
     runs-on: ubuntu-latest
+
     environment:
       name: ${{inputs.environment-name}}
       url: https://crates.io/crates/${{inputs.package-name}}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           toolchain: ${{inputs.rust-toolchain}}
+
       - name: Set up tree-sitter CLI
         if: ${{inputs.generate}}
         uses: tree-sitter/setup-action/cli@v2
+
       - name: Install dependencies
         run: |-
           JQ_SCRIPT='.dependencies | del(."node-addon-api", ."node-gyp-build") | length > 0'
           if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
             pnpm install --no-optional --prod --ignore-scripts
           fi
+
       - name: Regenerate parser
         if: ${{inputs.generate}}
         run: |
@@ -84,6 +91,7 @@ jobs:
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
         # env:
         #   TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
+
       - name: Publish to crates.io
         run: cargo publish
         env:

@@ -69,26 +69,34 @@ on:
 jobs:
   build_wasm:
     name: Build Wasm binaries
+
     runs-on: ubuntu-${{inputs.ubuntu-version}}
+
     continue-on-error: true
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
           version: latest
+
       - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version: ${{inputs.node-version}}
+
       - name: Set up Emscripten
         uses: mymindstorm/setup-emsdk@v14
         with:
           version: ${{inputs.emscripten-version}}
+
       - name: Install dependencies
         run: pnpm install --no-optional
+
       - name: Regenerate parser
         if: ${{inputs.generate}}
         shell: bash
@@ -101,12 +109,14 @@ jobs:
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
         env:
           TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
+
       - name: Build Wasm binaries
         shell: bash
         run: |-
           while read -r grammar; do
             npm x -- tree-sitter build --wasm "${grammar%/grammar.js}"
           done < <(find . -name grammar.js -not -path './node_modules/*')
+
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
@@ -116,27 +126,34 @@ jobs:
 
   build_node:
     name: Build NodeJS binaries on ${{matrix.os}}
+
     runs-on: ${{matrix.os}}
+
     strategy:
       matrix:
         os:
           - "ubuntu-${{inputs.ubuntu-version}}"
           - windows-latest
           - macos-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
           version: latest
+
       - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version: ${{inputs.node-version}}
+
       - name: Install dependencies
         run: pnpm install --no-optional
+
       - name: Regenerate parser
         if: ${{inputs.generate}}
         shell: bash
@@ -149,8 +166,10 @@ jobs:
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
         env:
           TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
+
       - name: Build x64 binary
-        run: npm x -- prebuildify --arch x64 -t 20.9.0
+        run: npm x -- prebuildify --arch x64 -t ${{inputs.node-version}}
+
       - name: Set up cross-compilation
         if: runner.os == 'Linux'
         run: |-
@@ -158,8 +177,10 @@ jobs:
           sudo apt-get install g++-aarch64-linux-gnu
           printf '%s\n' >> "$GITHUB_ENV" \
             'CC=aarch64-linux-gnu-gcc' 'CXX=aarch64-linux-gnu-g++'
+
       - name: Build arm64 binary
-        run: npm x -- prebuildify --arch arm64 -t 20.9.0
+        run: npm x -- prebuildify --arch arm64 -t ${{inputs.node-version}}
+
       - name: Upload binaries
         uses: actions/upload-artifact@v4
         with:
@@ -169,37 +190,48 @@ jobs:
 
   package:
     name: Publish NodeJS package
+
     needs: [build_wasm, build_node]
+
     runs-on: ubuntu-${{inputs.ubuntu-version}}
+
     environment:
       name: ${{inputs.environment-name}}
       url: https://www.npmjs.com/package/${{inputs.package-name}}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
           version: latest
+
       - name: Set up NodeJS
         uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version: ${{inputs.node-version}}
           registry-url: https://registry.npmjs.org/
+
       - name: Install dependencies
         run: pnpm install --no-optional
+
       - name: Download binaries
         uses: actions/download-artifact@v4
         with:
           path: prebuilds
           pattern: prebuilds-*
           merge-multiple: true
+
       - name: Check binaries
         run: tree prebuilds
+
       - name: Move Wasm binaries to root
         continue-on-error: true
         run: mv -v prebuilds/*.wasm .
+
       - name: Publish to npm
         run: pnpm publish
         env:

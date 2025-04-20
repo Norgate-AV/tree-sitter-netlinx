@@ -32,14 +32,15 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: master
+          # ref: master
 
       - name: Extract version from tag
         id: get_version
         run: |
           VERSION=${GITHUB_REF_NAME#v}
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-          echo "Extracted version: $VERSION"
+          echo "TAG_NAME=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION from tag: ${GITHUB_REF_NAME}"
 
       - name: Install Tools
         run: |
@@ -54,13 +55,43 @@ jobs:
       - name: Generate changelog
         id: changelog
         run: |
+          # Generate the changelog using git-cliff
           CHANGELOG_CONTENT=$(git-cliff)
 
-          echo "$CHANGELOG_CONTENT" > CHANGELOG.md
+          # Verify the changelog is not empty
+          if [ -z "$CHANGELOG_CONTENT" ]; then
+            exit 1
+          fi
 
+          # Save the changelog to an output variable
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGELOG_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          # Read the generated release notes into an output variable
+          # Strip off everything before the first "###" header
+          RELEASE_NOTES=$(git-cliff --current | sed -n '/^###/,$p')
+
+          # Verify the release notes is not empty
+          if [ -z "$RELEASE_NOTES" ]; then
+            exit 1
+          fi
+
+          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$RELEASE_NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Switch to master and update CHANGELOG
+        run: |
+          # Switch to master (clean working tree, so this works)
+          git fetch origin master
+          git checkout master
+
+          # NOW write the CHANGELOG to disk on the master branch
+          echo '${{ steps.changelog.outputs.changelog }}' > CHANGELOG.md
 
       - name: Verify changelog generation
         run: |
@@ -81,21 +112,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create release notes
-        id: release_notes
-        run: |
-          # Read the generated release notes into an output variable
-          # Strip off everything before the first "###" header
-          RELEASE_NOTES=$(git-cliff --current | sed -n '/^###/,$p')
-
-          echo "release_notes<<EOF" >> $GITHUB_OUTPUT
-          echo "$RELEASE_NOTES" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
   github:
     name: Publish GitHub Release
 
-    needs: changelog
+    needs: [changelog]
 
     uses: ./.github/workflows/release.yml
     with:
@@ -107,7 +127,7 @@ jobs:
   npm:
     name: Publish NPM package
 
-    needs: changelog
+    needs: [changelog, github]
 
     uses: ./.github/workflows/package-npm.yml
     secrets:
@@ -119,7 +139,7 @@ jobs:
   crates:
     name: Publish Crates package
 
-    needs: changelog
+    needs: [changelog, github]
 
     uses: ./.github/workflows/package-crates.yml
     secrets:
@@ -131,7 +151,7 @@ jobs:
   pypi:
     name: Publish PyPI package
 
-    needs: changelog
+    needs: [changelog, github]
 
     uses: ./.github/workflows/package-pypi.yml
     secrets:
