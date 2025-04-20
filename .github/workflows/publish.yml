@@ -125,7 +125,7 @@ jobs:
     secrets:
       CARGO_REGISTRY_TOKEN: ${{secrets.CARGO_REGISTRY_TOKEN}}
     with:
-      generate: true
+      generate: false
       abi-version: "14"
 
   pypi:
