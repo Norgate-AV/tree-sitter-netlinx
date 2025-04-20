@@ -1823,7 +1823,7 @@
         ]
       },
       "type": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -1839,10 +1839,6 @@
       "types": [
         {
           "type": "storage_class_specifier",
-          "named": true
-        },
-        {
-          "type": "type_identifier",
           "named": true
         },
         {

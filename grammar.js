@@ -971,7 +971,10 @@ module.exports = grammar({
                             10,
                             seq(
                                 $._declaration_specifiers,
-                                alias($.identifier, $.type_identifier),
+                                field(
+                                    "type",
+                                    alias($.identifier, $.type_identifier),
+                                ),
                                 commaSep1(
                                     field(
                                         "declarator",
@@ -989,7 +992,10 @@ module.exports = grammar({
                             10,
                             seq(
                                 $.type_qualifier,
-                                alias($.identifier, $.type_identifier),
+                                field(
+                                    "type",
+                                    alias($.identifier, $.type_identifier),
+                                ),
                                 commaSep1(
                                     field(
                                         "declarator",
@@ -1007,7 +1013,10 @@ module.exports = grammar({
                             10,
                             seq(
                                 $.storage_class_specifier,
-                                alias($.identifier, $.type_identifier),
+                                field(
+                                    "type",
+                                    alias($.identifier, $.type_identifier),
+                                ),
                                 commaSep1(
                                     field(
                                         "declarator",

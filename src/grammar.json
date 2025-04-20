@@ -8995,13 +8995,17 @@
                       "name": "_declaration_specifiers"
                     },
                     {
-                      "type": "ALIAS",
+                      "type": "FIELD",
+                      "name": "type",
                       "content": {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      "named": true,
-                      "value": "type_identifier"
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        },
+                        "named": true,
+                        "value": "type_identifier"
+                      }
                     },
                     {
                       "type": "SEQ",
@@ -9078,13 +9082,17 @@
                       "name": "type_qualifier"
                     },
                     {
-                      "type": "ALIAS",
+                      "type": "FIELD",
+                      "name": "type",
                       "content": {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      "named": true,
-                      "value": "type_identifier"
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        },
+                        "named": true,
+                        "value": "type_identifier"
+                      }
                     },
                     {
                       "type": "SEQ",
@@ -9161,13 +9169,17 @@
                       "name": "storage_class_specifier"
                     },
                     {
-                      "type": "ALIAS",
+                      "type": "FIELD",
+                      "name": "type",
                       "content": {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      "named": true,
-                      "value": "type_identifier"
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "identifier"
+                        },
+                        "named": true,
+                        "value": "type_identifier"
+                      }
                     },
                     {
                       "type": "SEQ",
