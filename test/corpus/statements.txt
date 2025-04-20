@@ -123,9 +123,8 @@ case 0:
           (while_keyword)
           (parenthesized_expression
             (binary_expression
-              (unary_expression
-                (unary_expression
-                  (identifier)))
+              (update_expression
+                (identifier))
               (number_literal)))
           (compound_statement
             (expression_statement

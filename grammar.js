@@ -2142,7 +2142,13 @@ module.exports = grammar({
         update_expression: ($) => {
             const argument = field("argument", $.expression);
             const operator = field("operator", choice("--", "++"));
-            return prec.right(PREC.UNARY, seq(argument, operator));
+            return prec.right(
+                PREC.UNARY,
+                choice(
+                    seq(argument, operator), // Post-increment/decrement (valid in NetLinx)
+                    seq(operator, argument), // Pre-increment/decrement (parser support only)
+                ),
+            );
         },
 
         subscript_expression: ($) =>
