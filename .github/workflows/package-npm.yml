@@ -175,6 +175,7 @@ jobs:
           echo "version=$NODE_VERSION" >> $GITHUB_OUTPUT
 
       - name: Build x64 binary
+        shell: bash
         run: npm x -- prebuildify --arch x64 -t "${{ steps.node_version.outputs.version }}"
 
       - name: Set up cross-compilation
