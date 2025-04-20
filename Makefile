@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-netlinx
 HOMEPAGE_URL := https://github.com/norgate-av/tree-sitter-netlinx
-VERSION := 1.0.2
+VERSION := 1.0.3
 
 # repository
 SRC_DIR := src
