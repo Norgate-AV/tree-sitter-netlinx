@@ -1543,3 +1543,67 @@ DEFINE_MODULE 'RmsNetLinxAdapter' mdlRms(vdvRMS,
               (identifier)
               (argument_list)))
           (field_identifier))))))
+
+=============================
+Dynamic Array Declarations
+=============================
+
+USER[] = 'Alice'
+
+USERS[][50] = {
+    'Alice',
+    'Bob',
+    'Charlie'
+}
+
+MORE_USERS[][][50] = {
+    {
+        'Alice',
+        'Bob'
+    },
+    {
+        'Charlie',
+        'David'
+    }
+}
+
+---
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (subscript_expression
+        (identifier))
+      (string_literal
+        (string_content))))
+  (expression_statement
+    (assignment_expression
+      (subscript_expression
+        (subscript_expression
+          (identifier))
+        (number_literal))
+      (initializer_list
+        (string_literal
+          (string_content))
+        (string_literal
+          (string_content))
+        (string_literal
+          (string_content)))))
+  (expression_statement
+    (assignment_expression
+      (subscript_expression
+        (subscript_expression
+          (subscript_expression
+            (identifier)))
+        (number_literal))
+      (initializer_list
+        (initializer_list
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content)))
+        (initializer_list
+          (string_literal
+            (string_content))
+          (string_literal
+            (string_content)))))))

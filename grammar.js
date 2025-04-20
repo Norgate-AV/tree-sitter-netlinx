@@ -2065,7 +2065,7 @@ module.exports = grammar({
                 seq(
                     field("left", $._assignment_left_expression),
                     field("operator", "="),
-                    field("right", $.expression),
+                    field("right", choice($.initializer_list, $.expression)),
                 ),
             ),
 
@@ -2150,9 +2150,9 @@ module.exports = grammar({
                 PREC.SUBSCRIPT,
                 seq(
                     field("argument", $.expression),
-                    "[",
-                    field("index", $.expression),
-                    "]",
+                    repeat1(
+                        seq("[", field("index", optional($.expression)), "]"),
+                    ),
                 ),
             ),
 
