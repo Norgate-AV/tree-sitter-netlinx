@@ -167,8 +167,12 @@ jobs:
         env:
           TREE_SITTER_ABI_VERSION: ${{inputs.abi-version}}
 
+      - name: Get Node version
+        id: node_version
+        run: echo "version=$(node -v | sed 's/^v//')" >> $GITHUB_OUTPUT
+
       - name: Build x64 binary
-        run: npm x -- prebuildify --arch x64 -t ${{inputs.node-version}}
+        run: npm x -- prebuildify --arch x64 -t "${{ steps.node_version.outputs.version }}"
 
       - name: Set up cross-compilation
         if: runner.os == 'Linux'
@@ -179,7 +183,7 @@ jobs:
             'CC=aarch64-linux-gnu-gcc' 'CXX=aarch64-linux-gnu-g++'
 
       - name: Build arm64 binary
-        run: npm x -- prebuildify --arch arm64 -t ${{inputs.node-version}}
+        run: npm x -- prebuildify --arch arm64 -t "${{ steps.node_version.outputs.version }}"
 
       - name: Upload binaries
         uses: actions/upload-artifact@v4
