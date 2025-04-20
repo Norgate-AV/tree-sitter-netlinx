@@ -779,7 +779,7 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._declarator),
                     "[",
-                    field("size", optional(choice($.expression))),
+                    field("size", optional($.expression)),
                     "]",
                 ),
             ),
@@ -790,7 +790,7 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._field_declarator),
                     "[",
-                    field("size", optional(choice($.expression))),
+                    field("size", optional($.expression)),
                     "]",
                 ),
             ),
@@ -801,7 +801,7 @@ module.exports = grammar({
                 seq(
                     field("declarator", $._type_declarator),
                     "[",
-                    field("size", optional(choice($.expression))),
+                    field("size", optional($.expression)),
                     "]",
                 ),
             ),
@@ -812,7 +812,7 @@ module.exports = grammar({
                 seq(
                     field("declarator", optional($._abstract_declarator)),
                     "[",
-                    field("size", optional(choice($.expression))),
+                    field("size", optional($.expression)),
                     "]",
                 ),
             ),
