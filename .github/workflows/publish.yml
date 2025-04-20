@@ -16,7 +16,7 @@ jobs:
     name: Run Tests
     uses: ./.github/workflows/ci.yml
 
-  changelog:
+  generate_changelog:
     name: Generate Changelog
 
     needs: test
@@ -24,7 +24,9 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
+      changelog: ${{ steps.changelog.outputs.changelog }}
       release_notes: ${{ steps.release_notes.outputs.release_notes }}
+      version: ${{ steps.get_version.outputs.VERSION }}
 
     steps:
       - name: Checkout
@@ -32,7 +34,6 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          # ref: master
 
       - name: Extract version from tag
         id: get_version
@@ -84,18 +85,40 @@ jobs:
           echo "$RELEASE_NOTES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Switch to master and update CHANGELOG
-        run: |
-          # Switch to master (clean working tree, so this works)
-          git fetch origin master
-          git checkout master
+  github:
+    name: Publish GitHub Release
 
-          # NOW write the CHANGELOG to disk on the master branch
-          echo '${{ steps.changelog.outputs.changelog }}' > CHANGELOG.md
+    needs: [generate_changelog]
+
+    uses: ./.github/workflows/release.yml
+    with:
+      generate: true
+      abi-version: "14"
+      attestations: true
+      release-body: ${{ needs.generate_changelog.outputs.release_notes }}
+
+  commit_changelog:
+    name: Commit Changelog
+
+    needs: [github]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update CHANGELOG
+        run: |
+          echo '${{ needs.generate_changelog.outputs.changelog }}' > CHANGELOG.md
 
       - name: Verify changelog generation
         run: |
-          echo "Changelog output: ${{ steps.changelog.outputs.changelog }}"
+          echo "Changelog output: ${{ needs.generate_changelog.outputs.changelog }}"
           echo "Changelog file exists: $(ls -la CHANGELOG.md || echo 'File not found' && exit 1)"
           if [ -f "CHANGELOG.md" ]; then
             echo "Changelog content:"
@@ -107,27 +130,19 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
           git add CHANGELOG.md
-          git commit -m "chore(release): update version to ${{ steps.get_version.outputs.VERSION }} [skip ci]"
-          git push origin master
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(release): update version to ${{ needs.generate_changelog.outputs.version }} [skip ci]"
+            git push origin master
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  github:
-    name: Publish GitHub Release
-
-    needs: [changelog]
-
-    uses: ./.github/workflows/release.yml
-    with:
-      generate: true
-      abi-version: "14"
-      attestations: true
-      release-body: ${{ needs.changelog.outputs.release_notes }}
 
   npm:
     name: Publish NPM package
 
-    needs: [changelog, github]
+    needs: [commit_changelog]
 
     uses: ./.github/workflows/package-npm.yml
     secrets:
@@ -139,7 +154,7 @@ jobs:
   crates:
     name: Publish Crates package
 
-    needs: [changelog, github]
+    needs: [commit_changelog]
 
     uses: ./.github/workflows/package-crates.yml
     secrets:
@@ -151,7 +166,7 @@ jobs:
   pypi:
     name: Publish PyPI package
 
-    needs: [changelog, github]
+    needs: [commit_changelog]
 
     uses: ./.github/workflows/package-pypi.yml
     secrets:
