@@ -36,6 +36,7 @@
   - [Node.js (npm)](#nodejs-npm)
   - [Rust (Cargo)](#rust-cargo)
   - [Python (pip)](#python-pip)
+  - [Nix](#nix)
   - [Manual Installation](#manual-installation)
 - [Design :art:](#design-art)
   - [Permissive Parsing](#permissive-parsing)
@@ -228,6 +229,17 @@ For Python projects:
 
 ```sh
 pip install tree-sitter-netlinx
+```
+
+### Nix
+
+For Nix, NixOS and Home Manager reference:
+
+```nix
+pkgs.tree-sitter.withPlugins (plugins: with plugins; [
+  tree-sitter-netlinx
+  # ...
+])
 ```
 
 ### Manual Installation
