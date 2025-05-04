@@ -17,7 +17,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/Norgate-AV/tree-sitter-netlinx)](https://github.com/Norgate-AV/tree-sitter-netlinx/graphs/contributors)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-NetLinx grammar for [tree-sitter](https://tree-sitter.github.io).
+[NetLinx](https://pldb.io/concepts/netlinx.html) grammar for [tree-sitter](https://tree-sitter.github.io).
 
 [ci]: https://img.shields.io/github/actions/workflow/status/Norgate-AV/tree-sitter-netlinx/ci.yml?logo=github&label=CI
 [npm]: https://img.shields.io/npm/v/tree-sitter-netlinx?logo=npm
