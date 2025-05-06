@@ -6884,6 +6884,10 @@
       "required": true,
       "types": [
         {
+          "type": "long_while_keyword",
+          "named": true
+        },
+        {
           "type": "while_keyword",
           "named": true
         }
@@ -8293,6 +8297,10 @@
   },
   {
     "type": "long_keyword",
+    "named": true
+  },
+  {
+    "type": "long_while_keyword",
     "named": true
   },
   {

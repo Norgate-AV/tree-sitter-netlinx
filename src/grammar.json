@@ -352,6 +352,11 @@
       "value": "while",
       "flags": "i"
     },
+    "long_while_keyword": {
+      "type": "PATTERN",
+      "value": "long_while",
+      "flags": "i"
+    },
     "for_keyword": {
       "type": "PATTERN",
       "value": "for",
@@ -10372,8 +10377,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "while_keyword"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "while_keyword"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "long_while_keyword"
+            }
+          ]
         },
         {
           "type": "FIELD",
