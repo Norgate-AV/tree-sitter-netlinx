@@ -10,7 +10,7 @@
             "tags": "queries/tags.scm",
             "locals": "queries/locals.scm",
             "folds": "queries/folds.scm",
-            "injection-regex": "^(axs|axi|axb|lib)$"
+            "injection-regex": "^netlinx$"
         }
     ],
     "metadata": {
