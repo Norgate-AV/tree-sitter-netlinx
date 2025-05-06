@@ -69,6 +69,7 @@ module.exports = {
     case_keyword: (_) => keywords.case,
     default_keyword: (_) => keywords.default,
     while_keyword: (_) => keywords.while,
+    long_while_keyword: (_) => keywords.long_while,
     for_keyword: (_) => keywords.for,
     break_keyword: (_) => keywords.break,
     continue_keyword: (_) => keywords.continue,

@@ -56,6 +56,7 @@ module.exports = {
     case: /case/i,
     default: /default/i,
     while: /while/i,
+    long_while: /long_while/i,
     for: /for/i,
     break: /break/i,
     continue: /continue/i,

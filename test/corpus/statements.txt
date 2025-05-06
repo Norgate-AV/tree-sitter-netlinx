@@ -285,6 +285,26 @@ while (x)
             (string_content)))))))
 
 ==================
+Long_While loops
+==================
+
+long_while (x)
+{
+  // do the thing
+}
+
+---
+
+(source_file
+  (while_statement
+    (long_while_keyword)
+    condition: (parenthesized_expression
+      (identifier))
+    body: (compound_statement
+      (comment))))
+
+
+==================
 Select Statement
 ==================
 
