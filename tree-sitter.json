@@ -10,6 +10,8 @@
             "tags": "queries/tags.scm",
             "locals": "queries/locals.scm",
             "folds": "queries/folds.scm",
+            "first-line-regex": "^(PROGRAM|MODULE)_NAME\\s*=.*$",
+            "content-regex": "^DEFINE_(DEVICE|CONSTANT|TYPE|VARIABLE|START|EVENT|PROGRAM)$",
             "injection-regex": "^netlinx$"
         }
     ],
