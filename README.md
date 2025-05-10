@@ -17,7 +17,7 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/Norgate-AV/tree-sitter-netlinx)](https://github.com/Norgate-AV/tree-sitter-netlinx/graphs/contributors)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-NetLinx grammar for [tree-sitter](https://tree-sitter.github.io).
+[NetLinx](https://pldb.io/concepts/netlinx.html) grammar for [tree-sitter](https://tree-sitter.github.io).
 
 [ci]: https://img.shields.io/github/actions/workflow/status/Norgate-AV/tree-sitter-netlinx/ci.yml?logo=github&label=CI
 [npm]: https://img.shields.io/npm/v/tree-sitter-netlinx?logo=npm
@@ -31,17 +31,19 @@ NetLinx grammar for [tree-sitter](https://tree-sitter.github.io).
 
 - [What's Working :white_check_mark:](#whats-working-white_check_mark)
 - [Known Limitations :warning:](#known-limitations-warning)
-    - [Preprocessor Directives in Expressions](#preprocessor-directives-in-expressions)
+  - [Preprocessor Directives in Expressions](#preprocessor-directives-in-expressions)
 - [Install :zap:](#install-zap)
-    - [Node.js (npm)](#nodejs-npm)
-    - [Rust (Cargo)](#rust-cargo)
-    - [Python (pip)](#python-pip)
-    - [Manual Installation](#manual-installation)
+  - [Node.js (npm)](#nodejs-npm)
+  - [Rust (Cargo)](#rust-cargo)
+  - [Python (pip)](#python-pip)
+  - [Nix](#nix)
+  - [Manual Installation](#manual-installation)
 - [Design :art:](#design-art)
-    - [Permissive Parsing](#permissive-parsing)
-    - [Syntax vs. Semantics](#syntax-vs-semantics)
-    - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
-    - [Flexibility Over Semantic Correctness](#flexibility-over-semantic-correctness)
+  - [Permissive Parsing](#permissive-parsing)
+  - [Syntax vs. Semantics](#syntax-vs-semantics)
+  - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
+  - [Flexibility Over Semantic Correctness](#flexibility-over-semantic-correctness)
+- [References :book:](#references-book)
 - [Team :soccer:](#team-soccer)
 - [Contributors :sparkles:](#contributors-sparkles)
 - [LICENSE :balance_scale:](#license-balance_scale)
@@ -229,6 +231,17 @@ For Python projects:
 pip install tree-sitter-netlinx
 ```
 
+### Nix
+
+For Nix, NixOS and Home Manager reference:
+
+```nix
+pkgs.tree-sitter.withPlugins (plugins: with plugins; [
+  tree-sitter-netlinx
+  # ...
+])
+```
+
 ### Manual Installation
 
 If you want to install the grammar manually, you can clone the repository and build it yourself:
@@ -295,6 +308,11 @@ baz[10]  // Parsed as an identifier with subscript
 ```
 
 This approach enables more resilient parsing during code editing and provides better syntax highlighting and tooling support, even for incomplete or semantically imperfect code. Semantic validation is intentionally left to the NetLinx compiler or separate analysis tools.
+
+## References :book:
+
+- [NetLinx Language Reference Guide](https://www.amx.com/en/site_elements/amx-language-reference-guide-netlinx-programming-language)
+- [NetLinx Style Guide](https://www.amx.com/vn/site_elements/style-guide-netlinx-studio-v-4)
 
 ## Team :soccer:
 
