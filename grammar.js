@@ -42,6 +42,9 @@ module.exports = grammar({
 
     conflicts: ($) => [
         [$.type_specifier, $.expression],
+        [$.type_specifier, $._declarator],
+        [$._declaration_declarator, $.expression],
+        [$._declarator, $.expression],
         [$.string_expression],
         [$.type_specifier, $._top_level_expression_statement],
         [$.device_literal],
@@ -962,112 +965,145 @@ module.exports = grammar({
                 field("body", $.compound_statement),
             ),
 
+        // declaration: ($) =>
+        //     prec.right(
+        //         seq(
+        //             choice(
+        //                 // Regular declaration with custom type
+        //                 prec.right(
+        //                     10,
+        //                     seq(
+        //                         $._declaration_specifiers,
+        //                         field(
+        //                             "type",
+        //                             alias($.identifier, $.type_identifier),
+        //                         ),
+        //                         commaSep1(
+        //                             field(
+        //                                 "declarator",
+        //                                 choice(
+        //                                     seq($._declaration_declarator),
+        //                                     $.init_declarator,
+        //                                 ),
+        //                             ),
+        //                         ),
+        //                     ),
+        //                 ),
+
+        //                 // Custom type with qualifier only
+        //                 prec.right(
+        //                     10,
+        //                     seq(
+        //                         $.type_qualifier,
+        //                         field(
+        //                             "type",
+        //                             alias($.identifier, $.type_identifier),
+        //                         ),
+        //                         commaSep1(
+        //                             field(
+        //                                 "declarator",
+        //                                 choice(
+        //                                     seq($._declaration_declarator),
+        //                                     $.init_declarator,
+        //                                 ),
+        //                             ),
+        //                         ),
+        //                     ),
+        //                 ),
+
+        //                 // Custom type with storage class only
+        //                 prec.right(
+        //                     10,
+        //                     seq(
+        //                         $.storage_class_specifier,
+        //                         field(
+        //                             "type",
+        //                             alias($.identifier, $.type_identifier),
+        //                         ),
+        //                         commaSep1(
+        //                             field(
+        //                                 "declarator",
+        //                                 choice(
+        //                                     seq($._declaration_declarator),
+        //                                     $.init_declarator,
+        //                                 ),
+        //                             ),
+        //                         ),
+        //                     ),
+        //                 ),
+
+        //                 // Regular declaration
+        //                 prec.right(
+        //                     1,
+        //                     seq(
+        //                         $._declaration_specifiers,
+        //                         commaSep1(
+        //                             field(
+        //                                 "declarator",
+        //                                 choice(
+        //                                     seq($._declaration_declarator),
+        //                                     $.init_declarator,
+        //                                 ),
+        //                             ),
+        //                         ),
+        //                     ),
+        //                 ),
+
+        //                 // Qualifier only
+        //                 prec.right(
+        //                     2,
+        //                     seq(
+        //                         $.type_qualifier,
+        //                         commaSep1(
+        //                             field(
+        //                                 "declarator",
+        //                                 choice(
+        //                                     seq($._declaration_declarator),
+        //                                     $.init_declarator,
+        //                                 ),
+        //                             ),
+        //                         ),
+        //                     ),
+        //                 ),
+
+        //                 // Storage class only
+        //                 prec.right(
+        //                     3,
+        //                     seq(
+        //                         $.storage_class_specifier,
+        //                         commaSep1(
+        //                             field(
+        //                                 "declarator",
+        //                                 choice(
+        //                                     seq($._declaration_declarator),
+        //                                     $.init_declarator,
+        //                                 ),
+        //                             ),
+        //                         ),
+        //                     ),
+        //                 ),
+        //             ),
+        //             $._semicolon,
+        //         ),
+        //     ),
+
         declaration: ($) =>
             prec.right(
                 seq(
                     choice(
-                        // Regular declaration with custom type
                         prec.right(
                             10,
                             seq(
-                                $._declaration_specifiers,
-                                field(
-                                    "type",
-                                    alias($.identifier, $.type_identifier),
-                                ),
-                                commaSep1(
+                                // optional($.storage_class_specifier),
+                                // optional($.type_qualifier),
+                                repeat($._declaration_modifiers),
+                                optional(
                                     field(
-                                        "declarator",
-                                        choice(
-                                            seq($._declaration_declarator),
-                                            $.init_declarator,
-                                        ),
+                                        "type",
+                                        alias($.identifier, $.type_identifier),
                                     ),
                                 ),
-                            ),
-                        ),
-
-                        // Custom type with qualifier only
-                        prec.right(
-                            10,
-                            seq(
-                                $.type_qualifier,
-                                field(
-                                    "type",
-                                    alias($.identifier, $.type_identifier),
-                                ),
-                                commaSep1(
-                                    field(
-                                        "declarator",
-                                        choice(
-                                            seq($._declaration_declarator),
-                                            $.init_declarator,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-
-                        // Custom type with storage class only
-                        prec.right(
-                            10,
-                            seq(
-                                $.storage_class_specifier,
-                                field(
-                                    "type",
-                                    alias($.identifier, $.type_identifier),
-                                ),
-                                commaSep1(
-                                    field(
-                                        "declarator",
-                                        choice(
-                                            seq($._declaration_declarator),
-                                            $.init_declarator,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-
-                        // Regular declaration
-                        prec.right(
-                            1,
-                            seq(
-                                $._declaration_specifiers,
-                                commaSep1(
-                                    field(
-                                        "declarator",
-                                        choice(
-                                            seq($._declaration_declarator),
-                                            $.init_declarator,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-
-                        // Qualifier only
-                        prec.right(
-                            2,
-                            seq(
-                                $.type_qualifier,
-                                commaSep1(
-                                    field(
-                                        "declarator",
-                                        choice(
-                                            seq($._declaration_declarator),
-                                            $.init_declarator,
-                                        ),
-                                    ),
-                                ),
-                            ),
-                        ),
-
-                        // Storage class only
-                        prec.right(
-                            3,
-                            seq(
-                                $.storage_class_specifier,
+                                optional(field("type", $.type_specifier)),
                                 commaSep1(
                                     field(
                                         "declarator",
@@ -1080,6 +1116,119 @@ module.exports = grammar({
                             ),
                         ),
                     ),
+                    // // Regular declaration with custom type
+                    // prec.right(
+                    //     10,
+                    //     seq(
+                    //         $._declaration_specifiers,
+                    //         field(
+                    //             "type",
+                    //             alias($.identifier, $.type_identifier),
+                    //         ),
+                    //         commaSep1(
+                    //             field(
+                    //                 "declarator",
+                    //                 choice(
+                    //                     seq($._declaration_declarator),
+                    //                     $.init_declarator,
+                    //                 ),
+                    //             ),
+                    //         ),
+                    //     ),
+                    // ),
+
+                    // // Custom type with qualifier only
+                    // prec.right(
+                    //     10,
+                    //     seq(
+                    //         $.type_qualifier,
+                    //         field(
+                    //             "type",
+                    //             alias($.identifier, $.type_identifier),
+                    //         ),
+                    //         commaSep1(
+                    //             field(
+                    //                 "declarator",
+                    //                 choice(
+                    //                     seq($._declaration_declarator),
+                    //                     $.init_declarator,
+                    //                 ),
+                    //             ),
+                    //         ),
+                    //     ),
+                    // ),
+
+                    // // Custom type with storage class only
+                    // prec.right(
+                    //     10,
+                    //     seq(
+                    //         $.storage_class_specifier,
+                    //         field(
+                    //             "type",
+                    //             alias($.identifier, $.type_identifier),
+                    //         ),
+                    //         commaSep1(
+                    //             field(
+                    //                 "declarator",
+                    //                 choice(
+                    //                     seq($._declaration_declarator),
+                    //                     $.init_declarator,
+                    //                 ),
+                    //             ),
+                    //         ),
+                    //     ),
+                    // ),
+
+                    // // Regular declaration
+                    // prec.right(
+                    //     1,
+                    //     seq(
+                    //         $._declaration_specifiers,
+                    //         commaSep1(
+                    //             field(
+                    //                 "declarator",
+                    //                 choice(
+                    //                     seq($._declaration_declarator),
+                    //                     $.init_declarator,
+                    //                 ),
+                    //             ),
+                    //         ),
+                    //     ),
+                    // ),
+
+                    // // Qualifier only
+                    // prec.right(
+                    //     2,
+                    //     seq(
+                    //         $.type_qualifier,
+                    //         commaSep1(
+                    //             field(
+                    //                 "declarator",
+                    //                 choice(
+                    //                     seq($._declaration_declarator),
+                    //                     $.init_declarator,
+                    //                 ),
+                    //             ),
+                    //         ),
+                    //     ),
+                    // ),
+
+                    // // Storage class only
+                    // prec.right(
+                    //     3,
+                    //     seq(
+                    //         $.storage_class_specifier,
+                    //         commaSep1(
+                    //             field(
+                    //                 "declarator",
+                    //                 choice(
+                    //                     seq($._declaration_declarator),
+                    //                     $.init_declarator,
+                    //                 ),
+                    //             ),
+                    //         ),
+                    //     ),
+                    // ),
                     $._semicolon,
                 ),
             ),

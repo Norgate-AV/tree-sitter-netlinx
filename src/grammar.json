@@ -8991,417 +8991,48 @@
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "SYMBOL",
-                      "name": "_declaration_specifiers"
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "type",
+                      "type": "REPEAT",
                       "content": {
-                        "type": "ALIAS",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "identifier"
-                        },
-                        "named": true,
-                        "value": "type_identifier"
+                        "type": "SYMBOL",
+                        "name": "_declaration_modifiers"
                       }
                     },
                     {
-                      "type": "SEQ",
+                      "type": "CHOICE",
                       "members": [
                         {
                           "type": "FIELD",
-                          "name": "declarator",
+                          "name": "type",
                           "content": {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "SEQ",
-                                "members": [
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "_declaration_declarator"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "SYMBOL",
-                                "name": "init_declarator"
-                              }
-                            ]
+                            "type": "ALIAS",
+                            "content": {
+                              "type": "SYMBOL",
+                              "name": "identifier"
+                            },
+                            "named": true,
+                            "value": "type_identifier"
                           }
                         },
                         {
-                          "type": "REPEAT",
-                          "content": {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ","
-                              },
-                              {
-                                "type": "FIELD",
-                                "name": "declarator",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_declaration_declarator"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "init_declarator"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
+                          "type": "BLANK"
                         }
                       ]
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "PREC_RIGHT",
-                "value": 10,
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "type_qualifier"
                     },
                     {
-                      "type": "FIELD",
-                      "name": "type",
-                      "content": {
-                        "type": "ALIAS",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "identifier"
-                        },
-                        "named": true,
-                        "value": "type_identifier"
-                      }
-                    },
-                    {
-                      "type": "SEQ",
+                      "type": "CHOICE",
                       "members": [
                         {
                           "type": "FIELD",
-                          "name": "declarator",
+                          "name": "type",
                           "content": {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "SEQ",
-                                "members": [
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "_declaration_declarator"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "SYMBOL",
-                                "name": "init_declarator"
-                              }
-                            ]
+                            "type": "SYMBOL",
+                            "name": "type_specifier"
                           }
                         },
                         {
-                          "type": "REPEAT",
-                          "content": {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ","
-                              },
-                              {
-                                "type": "FIELD",
-                                "name": "declarator",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_declaration_declarator"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "init_declarator"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
+                          "type": "BLANK"
                         }
                       ]
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "PREC_RIGHT",
-                "value": 10,
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "storage_class_specifier"
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "type",
-                      "content": {
-                        "type": "ALIAS",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "identifier"
-                        },
-                        "named": true,
-                        "value": "type_identifier"
-                      }
-                    },
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "FIELD",
-                          "name": "declarator",
-                          "content": {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "SEQ",
-                                "members": [
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "_declaration_declarator"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "SYMBOL",
-                                "name": "init_declarator"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "type": "REPEAT",
-                          "content": {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ","
-                              },
-                              {
-                                "type": "FIELD",
-                                "name": "declarator",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_declaration_declarator"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "init_declarator"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "PREC_RIGHT",
-                "value": 1,
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "_declaration_specifiers"
-                    },
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "FIELD",
-                          "name": "declarator",
-                          "content": {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "SEQ",
-                                "members": [
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "_declaration_declarator"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "SYMBOL",
-                                "name": "init_declarator"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "type": "REPEAT",
-                          "content": {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ","
-                              },
-                              {
-                                "type": "FIELD",
-                                "name": "declarator",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_declaration_declarator"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "init_declarator"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "PREC_RIGHT",
-                "value": 2,
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "type_qualifier"
-                    },
-                    {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "FIELD",
-                          "name": "declarator",
-                          "content": {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "SEQ",
-                                "members": [
-                                  {
-                                    "type": "SYMBOL",
-                                    "name": "_declaration_declarator"
-                                  }
-                                ]
-                              },
-                              {
-                                "type": "SYMBOL",
-                                "name": "init_declarator"
-                              }
-                            ]
-                          }
-                        },
-                        {
-                          "type": "REPEAT",
-                          "content": {
-                            "type": "SEQ",
-                            "members": [
-                              {
-                                "type": "STRING",
-                                "value": ","
-                              },
-                              {
-                                "type": "FIELD",
-                                "name": "declarator",
-                                "content": {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "SEQ",
-                                      "members": [
-                                        {
-                                          "type": "SYMBOL",
-                                          "name": "_declaration_declarator"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "SYMBOL",
-                                      "name": "init_declarator"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      ]
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "PREC_RIGHT",
-                "value": 3,
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "storage_class_specifier"
                     },
                     {
                       "type": "SEQ",
@@ -14946,6 +14577,18 @@
   "conflicts": [
     [
       "type_specifier",
+      "expression"
+    ],
+    [
+      "type_specifier",
+      "_declarator"
+    ],
+    [
+      "_declaration_declarator",
+      "expression"
+    ],
+    [
+      "_declarator",
       "expression"
     ],
     [
