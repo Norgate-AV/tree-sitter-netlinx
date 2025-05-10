@@ -31,18 +31,18 @@
 
 - [What's Working :white_check_mark:](#whats-working-white_check_mark)
 - [Known Limitations :warning:](#known-limitations-warning)
-  - [Preprocessor Directives in Expressions](#preprocessor-directives-in-expressions)
+    - [Preprocessor Directives in Expressions](#preprocessor-directives-in-expressions)
 - [Install :zap:](#install-zap)
-  - [Node.js (npm)](#nodejs-npm)
-  - [Rust (Cargo)](#rust-cargo)
-  - [Python (pip)](#python-pip)
-  - [Nix](#nix)
-  - [Manual Installation](#manual-installation)
+    - [Node.js (npm)](#nodejs-npm)
+    - [Rust (Cargo)](#rust-cargo)
+    - [Python (pip)](#python-pip)
+    - [Nix](#nix)
+    - [Manual Installation](#manual-installation)
 - [Design :art:](#design-art)
-  - [Permissive Parsing](#permissive-parsing)
-  - [Syntax vs. Semantics](#syntax-vs-semantics)
-  - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
-  - [Flexibility Over Semantic Correctness](#flexibility-over-semantic-correctness)
+    - [Permissive Parsing](#permissive-parsing)
+    - [Syntax vs. Semantics](#syntax-vs-semantics)
+    - [Examples of Accepted Patterns](#examples-of-accepted-patterns)
+    - [Flexibility Over Semantic Correctness](#flexibility-over-semantic-correctness)
 - [References :book:](#references-book)
 - [Team :soccer:](#team-soccer)
 - [Contributors :sparkles:](#contributors-sparkles)
@@ -337,6 +337,13 @@ Thanks go to these awesome people ([emoji key](https://allcontributors.org/docs/
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://simple.industries/"><img src="https://avatars.githubusercontent.com/u/843652?v=4?s=100" width="100px;" alt="~kb"/><br /><sub><b>~kb</b></sub></a><br /><a href="https://github.com/Norgate-AV/tree-sitter-netlinx/commits?author=kimburgess" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

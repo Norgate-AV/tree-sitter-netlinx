@@ -1,13 +1,22 @@
 {
-    "projectName": "tree-sitter-netlinx",
-    "projectOwner": "Norgate-AV",
-    "repoType": "github",
-    "repoHost": "https://github.com",
-    "files": ["README.md"],
-    "imageSize": 100,
-    "commit": false,
-    "commitConvention": "angular",
-    "contributorsPerLine": 7,
-    "skipCi": true,
-    "contributors": []
+  "projectName": "tree-sitter-netlinx",
+  "projectOwner": "Norgate-AV",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "contributors": [
+    {
+      "login": "kimburgess",
+      "name": "~kb",
+      "avatar_url": "https://avatars.githubusercontent.com/u/843652?v=4",
+      "profile": "https://simple.industries/",
+      "contributions": ["doc"]
+    }
+  ]
 }
+
