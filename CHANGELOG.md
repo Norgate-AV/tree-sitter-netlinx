@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 - Revert binding changes from ec2c841 - ([2e22dd9](https://github.com/Norgate-AV/tree-sitter-netlinx/commit/2e22dd98f7187b96da87fe28e49ea3fbe2293929))
 - Add long_while statements - ([e106646](https://github.com/Norgate-AV/tree-sitter-netlinx/commit/e106646d0d880c34361ef4972f141891c95f2a4f))
 
+## New Contributors ❤️
+
+- @kimburgess made their first contribution in [#12](https://github.com/Norgate-AV/tree-sitter-netlinx/pull/12)
+
 ## [1.0.3](https://github.com/Norgate-AV/tree-sitter-netlinx/compare/v1.0.2..v1.0.3) - 2025-04-20
 
 ### 🐛 Bug Fixes
