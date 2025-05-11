@@ -340,7 +340,7 @@ Thanks go to these awesome people ([emoji key](https://allcontributors.org/docs/
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://simple.industries/"><img src="https://avatars.githubusercontent.com/u/843652?v=4?s=100" width="100px;" alt="~kb"/><br /><sub><b>~kb</b></sub></a><br /><a href="https://github.com/Norgate-AV/tree-sitter-netlinx/commits?author=kimburgess" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://simple.industries/"><img src="https://avatars.githubusercontent.com/u/843652?v=4?s=100" width="100px;" alt="~kb"/><br /><sub><b>~kb</b></sub></a><br /><a href="https://github.com/Norgate-AV/tree-sitter-netlinx/commits?author=kimburgess" title="Documentation">📖</a> <a href="https://github.com/Norgate-AV/tree-sitter-netlinx/issues?q=author%3Akimburgess" title="Bug reports">🐛</a> <a href="https://github.com/Norgate-AV/tree-sitter-netlinx/commits?author=kimburgess" title="Code">💻</a> <a href="https://github.com/Norgate-AV/tree-sitter-netlinx/commits?author=kimburgess" title="Tests">⚠️</a></td>
     </tr>
   </tbody>
 </table>

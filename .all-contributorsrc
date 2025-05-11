@@ -15,7 +15,7 @@
       "name": "~kb",
       "avatar_url": "https://avatars.githubusercontent.com/u/843652?v=4",
       "profile": "https://simple.industries/",
-      "contributions": ["doc"]
+      "contributions": ["doc", "bug", "code", "test"]
     }
   ]
 }
