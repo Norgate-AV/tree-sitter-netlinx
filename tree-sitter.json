@@ -10,7 +10,9 @@
             "tags": "queries/tags.scm",
             "locals": "queries/locals.scm",
             "folds": "queries/folds.scm",
-            "injection-regex": "^(axs|axi|axb|lib)$"
+            "first-line-regex": "(?i)^(program|module)_name\\s*=.*$",
+            "content-regex": "(?i)^define_(device|constant|type|variable|start|event|program)$",
+            "injection-regex": "^netlinx$"
         }
     ],
     "metadata": {
