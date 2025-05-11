@@ -1325,7 +1325,10 @@ module.exports = grammar({
 
         while_statement: ($) =>
             seq(
-                $.while_keyword,
+                choice(
+                  $.while_keyword,
+                  $.long_while_keyword,
+                ),
                 field("condition", $.parenthesized_expression),
                 field("body", $.statement),
             ),
