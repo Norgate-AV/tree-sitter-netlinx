@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-netlinx
-        VERSION "1.0.3"
+        VERSION "1.0.4"
         DESCRIPTION "NetLinx grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/norgate-av/tree-sitter-netlinx"
         LANGUAGES C)
