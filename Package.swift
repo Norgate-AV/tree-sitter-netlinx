@@ -31,7 +31,7 @@ let package = Package(
         .testTarget(
             name: "TreeSitterNetlinxTests",
             dependencies: [
-                .product(name: "SwiftTreeSitter", package: "swift-tree-sitter"),
+                "SwiftTreeSitter",
                 "TreeSitterNetlinx",
             ],
             path: "bindings/swift/TreeSitterNetlinxTests"
