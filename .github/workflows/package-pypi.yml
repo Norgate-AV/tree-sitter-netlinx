@@ -127,7 +127,7 @@ jobs:
           done < <(find . -name grammar.js -not -path './node_modules/*' -not -path './.build/*')
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.23
+        uses: pypa/cibuildwheel@v3.1
         with:
           output-dir: dist
         env:
