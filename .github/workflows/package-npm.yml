@@ -84,7 +84,7 @@ jobs:
           version: latest
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           cache: pnpm
           node-version: ${{inputs.node-version}}
@@ -146,7 +146,7 @@ jobs:
           version: latest
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           cache: pnpm
           node-version: ${{inputs.node-version}}
@@ -217,7 +217,7 @@ jobs:
           version: latest
 
       - name: Set up NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           cache: pnpm
           node-version: ${{inputs.node-version}}
