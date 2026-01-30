@@ -11,7 +11,6 @@
       "sources": [
         "bindings/node/binding.cc",
         "src/parser.c",
-        "src/scanner.c",
       ],
       "variables": {
         "has_scanner": "<!(node -p \"fs.existsSync('src/scanner.c')\")"
