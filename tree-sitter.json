@@ -1,4 +1,5 @@
 {
+    "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
     "grammars": [
         {
             "name": "netlinx",
@@ -9,7 +10,6 @@
             "highlights": ["queries/highlights.scm"],
             "tags": "queries/tags.scm",
             "locals": "queries/locals.scm",
-            "folds": "queries/folds.scm",
             "first-line-regex": "(?i)^(program|module)_name\\s*=.*$",
             "content-regex": "(?i)^define_(device|constant|type|variable|start|event|program)$",
             "injection-regex": "^netlinx$"
